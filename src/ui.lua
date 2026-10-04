@@ -6,10 +6,10 @@ return function(loader, platform, controls, report)
     local api = LLL_UI_CORE.new(nil, function(msg)
         report("LLL UI", msg)
     end)
-    controls.bind(api, "authors")
+    controls.bind(api, "origins")
     self.api = api
     api.author_navigation = true
-    api.loader_summary = controls.summary
+    api.loader_summary = controls.provenance_summary or controls.summary
     function self.open()
         if not menu and initialize then
             local ok, why = pcall(initialize)
@@ -24,7 +24,10 @@ return function(loader, platform, controls, report)
         end
         local mcm = rawget(_G, "DBFMCM")
         if mcm and type(mcm.close) == "function" then
-            mcm.close()
+            local ok, why = mcm.close()
+            if ok == false then
+                return false, why
+            end
         end
         self.open_pending = true
         menu.visible = true
@@ -35,12 +38,18 @@ return function(loader, platform, controls, report)
         if menu then
             menu.visible = false
         end
+        local ok, why = true, nil
         if capture then
-            capture.release()
+            ok, why = capture.release()
         end
         if view then
             view.release()
         end
+        return ok, why
+    end
+    loader.close_manager = self.close
+    loader.input_status = function()
+        return capture and capture.status() or { active = false }
     end
     loader.open_manager = function()
         local ok, why = self.open()
@@ -178,7 +187,11 @@ return function(loader, platform, controls, report)
                 if menu.visible and not was then
                     local mcm = rawget(_G, "DBFMCM")
                     if mcm and mcm.close then
-                        mcm.close()
+                        local released, why = mcm.close()
+                        if released == false then
+                            menu.visible = false
+                            report("LLL UI", "Handoff refused: " .. tostring(why))
+                        end
                     end
                 end
                 local mcm = rawget(_G, "DBFMCM")

@@ -3,22 +3,102 @@ local M = {}
 function M.new(native, window, log)
     local self = { active = false }
     local snapshot
-    function self.release()
-        native.mcm_release()
-        if snapshot then
-            pcall(window.set_mouse_focus, snapshot.focus)
-            pcall(window.set_show_cursor, snapshot.cursor)
-            pcall(window.set_clip_cursor, snapshot.clip)
-            snapshot = nil
+    local external
+    local function restore(saved)
+        if not saved then
+            return true
         end
+        local errors = {}
+        for _, field in ipairs({
+            { "set_mouse_focus", "focus" },
+            { "set_show_cursor", "cursor" },
+            { "set_clip_cursor", "clip" },
+        }) do
+            local ok, result = pcall(window[field[1]], saved[field[2]])
+            if not ok or result == false then
+                errors[#errors + 1] = field[1]
+                    .. ": "
+                    .. tostring(ok and "restoration refused" or result)
+            end
+        end
+        if #errors > 0 then
+            return false, table.concat(errors, "; ")
+        end
+        return true
+    end
+    function self.acquire(owner)
+        if type(owner) ~= "string" or owner == "" then
+            return nil, "Owner name required"
+        end
+        if self.active or snapshot or external then
+            return nil, "Input lease already owned"
+        end
+        local ok, saved = pcall(function()
+            return {
+                focus = window.mouse_focus(),
+                cursor = window.show_cursor(),
+                clip = window.clip_cursor(),
+            }
+        end)
+        if not ok then
+            return nil, tostring(saved)
+        end
+        local token = {}
+        external = { owner = owner, token = token, snapshot = saved }
+        return token
+    end
+    function self.owns(token)
+        return external ~= nil and external.token == token
+    end
+    function self.release(token)
+        if token ~= nil then
+            if not self.owns(token) then
+                return false, "Input lease not owned"
+            end
+            local ok, reason = restore(external.snapshot)
+            if not ok then
+                return false, reason
+            end
+            external = nil
+            return true
+        end
+        -- Menu cleanup cannot alter another owner's cursor or native gate.
+        if external then
+            return false, "Input lease belongs to another owner"
+        end
+        native.mcm_release()
         self.active = false
+        local ok, reason = restore(snapshot)
+        if not ok then
+            log("Menu cursor restoration pending: " .. tostring(reason))
+            return false, reason
+        end
+        if snapshot then
+            log("Menu cursor snapshot restored")
+        end
+        snapshot = nil
+        return true
+    end
+    function self.status()
+        return {
+            owner = external and external.owner
+                or (self.active and "mcm" or (snapshot and "mcm_restore" or nil)),
+            active = self.active,
+            pending_restore = snapshot ~= nil and not self.active,
+        }
     end
     function self.sync(visible, focused, hwnd)
+        if visible and external then
+            return false, "Input lease belongs to " .. external.owner
+        end
         if not visible or not focused then
             if self.active or snapshot then
-                self.release()
+                return self.release()
             end
             return true
+        end
+        if snapshot and not self.active then
+            return false, "Previous cursor restoration pending"
         end
         if not self.active then
             for _, name in ipairs({
@@ -62,6 +142,15 @@ function M.new(native, window, log)
             end
         end
         return true
+    end
+    function self.shutdown()
+        if external then
+            local ok, reason = self.release(external.token)
+            if not ok then
+                return false, reason
+            end
+        end
+        return self.release()
     end
     return self
 end

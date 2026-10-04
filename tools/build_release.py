@@ -71,7 +71,7 @@ def build(output):
     manifest = {
         "Version": 1,
         "Guid": "bb921b89-f8d0-4abc-9e93-f426a93fef51",
-        "Name": "Live Lua Loader 0.1.0 - R18",
+        "Name": "Live Lua Loader 0.1.2 - R20-grouping-candidate",
         "Description": "Independent loader and status manager. Archive discovery, loose-script reload, lifecycle cleanup and readable saved settings. Optional MCM integration.",
         "Options": [{"Name": "Loader", "Include": ["data"]}],
     }
@@ -88,14 +88,18 @@ def build(output):
     files["FILES-SHA256.txt"] = "".join(
         digest(data) + "  " + name + "\n" for name, data in sorted(files.items())
     ).encode()
-    target = output / "LiveLuaLoader-0.1.0-R18.zip"
+    target = output / "LiveLuaLoader-0.1.2-R20-grouping-candidate.zip"
     save_zip(target, files)
     save_zip(ROOT / "dist/LiveLuaLoader-private-candidate.zip", files)
-    save_zip(output / "LiveLuaLoader-0.1.0-R18-source.zip", source_files())
-    (output / "LiveLuaLoader-0.1.0-R18-SHA256.txt").write_text(
+    save_zip(
+        output / "LiveLuaLoader-0.1.2-R20-grouping-candidate-source.zip", source_files()
+    )
+    (output / "LiveLuaLoader-0.1.2-R20-grouping-candidate-SHA256.txt").write_text(
         digest(target.read_bytes()) + "  " + target.name + "\n", encoding="utf-8"
     )
-    (output / "LiveLuaLoader-0.1.0-R18-README.txt").write_bytes(files["README.txt"])
+    (output / "LiveLuaLoader-0.1.2-R20-grouping-candidate-README.txt").write_bytes(
+        files["README.txt"]
+    )
     print(target)
     print(digest(target.read_bytes()))
 

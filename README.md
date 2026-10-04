@@ -1,6 +1,15 @@
 # Live Lua Loader (LLL)
 
-## 0.1.0 / R18
+## R20 grouping candidate (0.1.2)
+
+This review branch adds runtime/source grouping to the independent manager and
+preserves the permanent input-restoration/handoff repair. Loaded status is
+separate from folder provenance; genuine external registries are read-only and
+LLL compatibility aliases are excluded. Offline checks pass. No live deployment
+or new release is included. This branch builds on R18; it does not merge the
+unpublished R19 update-compatibility candidate.
+
+## Published 0.1.0 / R18
 
 Independent Lua loader and F9 status manager for Helldivers 2. Discovers archive
 addons, loads loose scripts, watches completed edits and waits for owned cleanup

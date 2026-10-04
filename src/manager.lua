@@ -3,8 +3,15 @@ local queue_factory = LLL_CLEANUP_QUEUE or dofile("src/cleanup_queue.lua")
 return function(host, entries)
     assert(not rawget(_G, "CowboyBingusModLoader"), "Another Shared Loader is active")
     assert(not rawget(_G, "LiveLuaLoader"), "Live Lua Loader is already active")
-    local loader =
-        { api = 1, version = 1, modules = {}, records = {}, errors = {}, pending_cleanup = {} }
+    local loader = {
+        api = 1,
+        version = 1,
+        modules = {},
+        records = {},
+        errors = {},
+        pending_cleanup = {},
+        origins = {},
+    }
     local cleanup_queue = queue_factory()
     local compat =
         { api = 1, version = 18, modules = loader.modules, implementation = "Live Lua Loader" }
@@ -81,6 +88,7 @@ return function(host, entries)
         local other = rawget(_G, "HD2ModLoader")
         local previous = other and other.modules and other.modules[name]
         if previous == "loading" or previous == "loaded" then
+            loader.origins[name] = { owner = "mdl", registry = other }
             status(name, previous)
             return
         end
@@ -93,6 +101,12 @@ return function(host, entries)
             status(name, "not installed")
             return
         end
+        local can_live = false
+        if host.can_retry then
+            local ok, value = pcall(host.can_retry, name)
+            can_live = ok and value == true
+        end
+        loader.origins[name] = { owner = can_live and "lll_live" or "lll_archive" }
         status(name, "loading")
         local success, result = pcall(host.require, name)
         if not success then

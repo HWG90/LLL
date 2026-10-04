@@ -132,15 +132,27 @@ print(
 
 local native = dofile("tests/tmp/speed-native.lua")
 local folder = "tests/tmp/watch-fixture"
+local test_ffi = require("ffi")
+test_ffi.cdef([[void lll_test_sleep(unsigned long) __asm__("Sleep");]])
+local test_kernel = test_ffi.load("kernel32")
+local function notified()
+    for attempt = 1, 20 do
+        if native.changed(folder) then
+            return true
+        end
+        test_kernel.lll_test_sleep(5)
+    end
+    return false
+end
 assert(native.changed(folder))
 assert(not native.changed(folder))
 assert(native.write(folder .. "/probe.lua", "a"))
-assert(native.changed(folder), "Real file creation must notify watcher")
+assert(notified(), "Real file creation must notify watcher")
 assert(native.stat(folder .. "/probe.lua"))
 assert(native.write(folder .. "/probe.lua", "b"))
-assert(native.changed(folder), "Real replacement must notify watcher")
+assert(notified(), "Real replacement must notify watcher")
 assert(os.remove(folder .. "/probe.lua"))
-assert(native.changed(folder))
+assert(notified())
 assert(not native.stat(folder .. "/probe.lua"))
 native.close_watches()
 print("PASS real Windows create/replace/delete notifications, stat and watcher cleanup")
@@ -293,6 +305,15 @@ ui.open()
 foreground = false
 ui.tick()
 assert(not ui.open_pending and not ui.menu.visible, "Focus loss cancels queued open")
+local before_handoff = DBFMCM
+DBFMCM = {
+    close = function()
+        return false, "restore pending"
+    end,
+}
+local accepted, reason = ui.open()
+assert(accepted == false and reason == "restore pending" and not ui.open_pending)
+DBFMCM = before_handoff
 ffi.load = load
 LLL_UI_CORE, LLL_UI_CAPTURE, LLL_UI_VIEW, LLL_UI_MENU, LLL_NATIVE, stingray, DBFMCM =
     unpack(previous, 1, 7)

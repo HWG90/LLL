@@ -33,6 +33,7 @@ def source(stock, platform_source=None, native_bytes=None, native_name=None):
         ("LLL_DISCOVER", "discovery"),
         ("LLL_LIVE", "live"),
         ("LLL_STATUS", "status"),
+        ("LLL_PROVENANCE", "provenance"),
         ("LLL_CONTROLS", "controls"),
         ("LLL_UI_CORE", "ui/core"),
         ("LLL_UI_MENU", "ui/menu"),

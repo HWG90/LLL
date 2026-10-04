@@ -46,7 +46,7 @@ return function(loader, live, report)
                 name = "Overview",
                 dynamic = true,
                 controls = {
-                    { type = "section", label = "LIVE LUA LOADER R18" },
+                    { type = "section", label = "LIVE LUA LOADER R20" },
                     {
                         type = "button",
                         id = "open_manager",
@@ -153,7 +153,7 @@ return function(loader, live, report)
         return {
             id = "lll_management",
             name = "Live Lua Loader",
-            description = "R18 mod manager. F9 opens the independent window. All changes use shared loader state.",
+            description = "R20 mod manager. F9 opens the independent window. All changes use shared loader state.",
             categories = categories,
             pages = pages,
         }
@@ -196,6 +196,107 @@ return function(loader, live, report)
                 { id = "other_mods", name = "Other mods", dynamic = true, controls = other }
         end
         return { id = spec.id, name = spec.name, description = spec.description, pages = pages }
+    end
+    local function origin_pages(spec)
+        local snapshot = (LLL_PROVENANCE or dofile("src/provenance.lua"))(loader, live)
+        local pages, categories, by_name = { spec.pages[1] }, {}, {}
+        for index = 2, #spec.pages do
+            by_name[spec.pages[index].controls[1].description] = spec.pages[index]
+        end
+        local groups = {
+            { "lll_live", "LLL live scripts" },
+            { "lll_archive", "Archive addons via LLL" },
+            { "mdl", "MDL registry" },
+            { "bingus", "Bingus registry" },
+            { "unknown", "Unknown / conflicting owner" },
+        }
+        for _, group in ipairs(groups) do
+            local count, loaded = 0, 0
+            for _, row in ipairs(snapshot) do
+                if row.owner == group[1] then
+                    count = count + 1
+                    if row.loaded then
+                        loaded = loaded + 1
+                    end
+                end
+            end
+            if count > 0 then
+                categories[#categories + 1] = {
+                    id = "source_" .. group[1],
+                    name = group[2] .. " (" .. loaded .. " loaded / " .. count .. ")",
+                }
+            end
+        end
+        for index, row in ipairs(snapshot) do
+            local old = by_name[row.name]
+            self.external_ids = self.external_ids or {}
+            if not old and not self.external_ids[row.name] then
+                self.external_count = (self.external_count or 0) + 1
+                self.external_ids[row.name] = "external_" .. self.external_count
+            end
+            local details = "Runtime owner: "
+                .. row.owner
+                .. "\nSource: "
+                .. row.source
+                .. "\nResource: "
+                .. row.name
+            local controls = {
+                { type = "text", label = "Status: " .. row.state, description = details },
+                {
+                    type = "text",
+                    label = "Source: " .. row.source,
+                    description = "Discovery location is not evidence of which loader ran the mod.",
+                },
+            }
+            local managed = old and live.catalog[row.name] and (row.owner == "lll_live")
+            if old then
+                for position = 2, #old.controls do
+                    local copy = {}
+                    for key, value in pairs(old.controls[position]) do
+                        copy[key] = value
+                    end
+                    if copy.type == "toggle" then
+                        copy.default = row.loaded
+                    end
+                    if not managed then
+                        copy.disabled = true
+                    end
+                    controls[#controls + 1] = copy
+                end
+            end
+            local short = row.loaded and "Loaded"
+                or row.state == "loading" and "Loading"
+                or row.state == "disabled" and "Disabled"
+                or row.state == "not installed" and "Not installed"
+                or row.state == "discovered" and "Discovered"
+                or "Needs attention"
+            pages[#pages + 1] = {
+                id = old and old.id or self.external_ids[row.name],
+                name = "[" .. short .. "] " .. (old and old.name or readable(
+                    row.name:match("([^/]+)$") or row.name
+                )),
+                category = "source_" .. row.owner,
+                dynamic = true,
+                controls = controls,
+            }
+        end
+        return {
+            id = spec.id,
+            name = spec.name,
+            description = spec.description,
+            categories = categories,
+            pages = pages,
+        }
+    end
+    function self.provenance_summary()
+        local rows = (LLL_PROVENANCE or dofile("src/provenance.lua"))(loader, live)
+        local count = 0
+        for _, row in ipairs(rows) do
+            if row.loaded then
+                count = count + 1
+            end
+        end
+        return "Loaded: " .. count .. "   Listed: " .. #rows
     end
     function self.summary()
         local loaded, failed = 0, 0
@@ -356,10 +457,18 @@ return function(loader, live, report)
             local bound_spec = spec
             local bound_signature = signature
             if binding.inside then
-                bound_spec = binding.inside == "authors" and author_pages(spec) or enclosed(spec)
+                bound_spec = binding.inside == "origins" and origin_pages(spec)
+                    or binding.inside == "authors" and author_pages(spec)
+                    or enclosed(spec)
                 bound_signature = ""
+                for _, category in ipairs(bound_spec.categories or {}) do
+                    bound_signature = bound_signature .. category.id .. category.name
+                end
                 for _, page in ipairs(bound_spec.pages) do
-                    bound_signature = bound_signature .. page.id .. page.name
+                    bound_signature = bound_signature
+                        .. page.id
+                        .. page.name
+                        .. (page.category or "")
                     for _, control in ipairs(page.controls) do
                         bound_signature = bound_signature
                             .. (control.id or "")
