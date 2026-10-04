@@ -1,0 +1,8 @@
+R18 / 0.1.0
+First ready-made distribution package of Live Lua Loader.
+Includes its independent F9 manager and native input helper; MCM integration remains optional.
+Retains archive discovery, live loose-script reload, shared lifecycle state and deferred cleanup.
+Includes the R17 mouse-release fix for opening the manager from MCM.
+No additional gameplay mods or experimental camera feature are bundled.
+Saved settings use stable ordering, indentation and real newlines; existing settings remain compatible.
+Includes readable Lua, native helper source, development build tools and contract tests.

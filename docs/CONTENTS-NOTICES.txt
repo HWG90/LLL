@@ -1,0 +1,6 @@
+CONTENTS AND PROVENANCE
+LLL Lua implementation, archive writer and native input helper are original project code. UI primitives come from this project's own MCM implementation; an installed MCM is not required.
+The startup resource preserves 10,263 bytes of stock Wwise callback bytecode extracted locally from the supported game, SHA256 (with its resource envelope): 05bbf52978028758b39f5b91a30a695d20069ceabd774d88755f0582a296bec9. This required preservation is disclosed; no claim of a license grant over the game's code/assets is made.
+No Bingus/MDL loader implementation, third-party mod, game executable/DLL, font asset, log, personal setting or camera research file is included.
+The helper was built with MSVC and imports USER32.dll, KERNEL32.dll and bcrypt.dll from Windows. Game LuaJIT and font resources are referenced in place, not distributed.
+No repository-wide open-source license has been selected.

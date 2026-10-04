@@ -1,0 +1,13 @@
+Live Lua Loader 0.1.0 / R18
+
+- Ready-made loader with an independent F9 status manager; MCM integration is optional.
+- Archive addon discovery, loose-script loading and live reload with cleanup before replacement.
+- Readable saved settings with stable ordering and indentation; existing configs remain compatible.
+- Readable original Lua and native helper source, build tools and contract tests.
+- Retains archive caching, bounded reads, filesystem notifications, edit debounce, deferred cleanup and the manager mouse-release fix.
+
+Requires Windows x64 and Helldivers 2 Steam build 25480438. No recipient build step or separate shared loader is required. Individual mods may require additional dependencies.
+
+Offline contracts, native source/input tests and archive checks pass. The exact R18 package has not been live tested on a clean installation. Experimental camera code is excluded.
+
+Use the ready-made ZIP for installation; the source ZIP is for inspection and development. Installation instructions, SHA256 checksum and validation report are attached. Required stock callback bytecode is disclosed in the package notices.

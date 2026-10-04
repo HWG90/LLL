@@ -1,15 +1,39 @@
 # Live Lua Loader (LLL)
 
-Private development source for the Helldivers 2 Lua loader. This export contains the current lean loader with deferred cleanup, archive addon discovery, loose-script loading, lifecycle adapters, status integration and the independent manager.
+## 0.1.0 / R18
 
-Loose scripts live under `%LOCALAPPDATA%/LLL/Helldivers2/Mods`. Existing MDL and CowboyBingus locations are also scanned. Mods own their cleanup; failed restoration blocks replacement. Compatibility does not imply every third-party mod works, and offline checks do not prove live input or rendering.
+Independent Lua loader and F9 status manager for Helldivers 2. Discovers archive
+addons, loads loose scripts, watches completed edits and waits for owned cleanup
+before replacement. MCM integration is optional.
 
-## Build
+Download the ready-made R18 ZIP from Releases. Import it into a supported mod
+manager or follow README.txt for direct installation. No compiler, Python, MDL,
+MCM, Bingus loader or DBF HUD installation is required by LLL. Individual mods
+may have their own dependencies. Requires Windows x64 and Steam build 25480438.
 
-Windows x64, Python 3 and MSVC 2022 are required. Run `python tools/build_native_lean.py`, then `python tools/build.py --callbacks PATH_TO_LOCAL_STOCK_RESOURCE --game-root PATH_TO_GAME`. The stock callback resource must include its eight-byte Lua envelope and match the supported hash. Native helper binaries and original game callbacks are local build inputs, excluded from Git. Building does not deploy or launch the game.
+Loose scripts belong in `%LOCALAPPDATA%/LLL/Helldivers2/Mods`. Existing MDL and
+CowboyBingus locations are also scanned. Saved settings use indented Lua tables
+with stable ordering; older single-line settings remain compatible.
 
-`python tests/run.py` uses the installed game's LuaJIT DLL in an isolated Python process. Lua contract fixtures are in `tests/`; they use synthetic resources. Build-specific guards reject unsupported installations.
+## Source and development
 
-## Scope
+ARCHITECTURE.txt describes the modules and retained lean improvements. Original
+Lua, native helper C, build tools and contract tests are included in this repo.
+The source release ZIP additionally provides the pinned native helper, required
+stock callback bytecode and generated runtime source for the release build.
+These binary inputs are excluded from Git and disclosed in CONTENTS-NOTICES.txt.
 
-Includes original loader Lua, archive/build utilities, native input helper C source and contract fixtures. Excludes extracted game code/assets, compiled binaries, deployment packages, saved settings, logs, camera research and other mods. This is a source checkpoint, not a public release or a claim of complete live validation. No license has been selected for this private checkpoint.
+Development builds require Python 3 and the supported game's LuaJIT DLL. Extract
+the source ZIP, then run `python tools/build_release.py --output dist/release`.
+MSVC x64 is only required to rebuild the helper. `python tests/run.py` runs
+isolated LuaJIT contracts after packaging; it does not attach to the game.
+
+## Validation
+
+R18 passes offline discovery, config roundtrip, lifecycle, menu, watcher/cache,
+cleanup and package checks. The native source builds and its input tests pass.
+The exact R18 package has not been live tested on a clean installation.
+Compatibility adapters support a subset of third-party APIs; universal mod
+compatibility is not claimed. Experimental camera code is excluded.
+
+No repository-wide open-source license has been selected.

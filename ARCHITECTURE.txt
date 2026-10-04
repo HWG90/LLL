@@ -1,0 +1,40 @@
+Live Lua Loader 0.1.0 / R18
+
+src/start.lua initializes the loader after the original game callback runs.
+src/platform.lua owns guarded game access, paths, files and change notifications.
+src/discovery.lua discovers archive addons and validates resource identities.
+src/metadata.lua reads bounded addon declaration prefixes.
+src/manager.lua owns lifecycle state; cleanup_queue.lua retains asynchronous cleanup.
+src/live.lua catalogs loose scripts and adapts the MDL API 2 lifecycle subset.
+src/config.lua writes deterministic indented Lua settings without changing schemas.
+src/legacy.lua initializes compatibility entries; it does not contain Bingus source.
+src/status.lua and controls.lua expose shared status and controls to both menus.
+src/ui.lua and ui/ implement the independent manager and optional MCM integration.
+native/input_guard.c provides window input capture and ownership restoration.
+native/lean_runtime.c supplies the protected helper's minimal Windows runtime.
+tools/build.py assembles modules; build_lean.py compiles using the game's LuaJIT.
+tools/build_release.py creates the ready-made package. Recipients do not run it.
+tests/run.py executes isolated contracts and verifies the compiled archive payload.
+
+Included lean improvements
+Archive catalog caching with content/signature invalidation; bounded declaration
+reads and reused handles; filesystem notifications and absent-root caching;
+source/metadata caching; edit debounce and syntax preflight before cleanup;
+lazy manager creation; held-input/focus checks; mouse-release opening; deferred
+cleanup ownership and acknowledgment; guarded helper extraction and verification.
+
+Excluded experiments
+Free camera, protected callback mutation and startup compression are excluded.
+They are not required by the loader and have no completed release validation.
+
+Binary boundaries
+binary/stock_wwise.luac preserves the required stock game callback. It is game
+bytecode, not original LLL source. The native DLL is compiled from the included C.
+Generated runtime.lua contains decimal-escaped binary literals in clearly named
+sections; the original modules remain separately readable. No game DLL, fonts,
+third-party loader implementation, personal settings, logs or presets are bundled.
+
+Development only
+Python 3 and the supported game's lua51.dll compile/rebuild the Lua package.
+MSVC x64 can rebuild the native helper. Supplied binaries need neither tool.
+The pinned helper is reused unless intentionally rebuilt and revalidated.
