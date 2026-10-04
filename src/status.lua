@@ -32,7 +32,7 @@ return function(loader, discovery, report)
             rows[#rows + 1] = { type = "text", label = display("  " .. state) }
         end
         local summary = {
-            { type = "section", label = "LIVE LUA LOADER R18" },
+            { type = "section", label = "LIVE LUA LOADER R20" },
             {
                 type = "text",
                 label = "Loaded: "
@@ -83,7 +83,7 @@ return function(loader, discovery, report)
             handle = api.register({
                 id = "live_lua_loader",
                 name = "Live Lua Loader - Diagnostics",
-                description = "R18: loader status and addon discovery diagnostics.",
+                description = "R20: loader status and addon discovery diagnostics.",
                 pages = {
                     { id = "overview", name = "Overview", controls = summary },
                     { id = "mods", name = "Mod status", controls = rows },

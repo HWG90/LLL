@@ -1,0 +1,8 @@
+Independent manager source groups
+LLL live scripts: managed loose scripts; each row separately says loaded, disabled or discovered. MDL-folder discovery is shown as location, not MDL runtime ownership.
+Archive addons via LLL: archive modules actually attempted by LLL, including Bingus-compatible resource names.
+MDL registry / Bingus registry: genuine distinct runtime registries when available, never LLL's compatibility facade. External entries are read-only.
+Unknown / conflicting owner: unknown provenance, conflicting active loader reports or lost external-owner evidence. Shared external registry aliases remain one identity with unknown owner.
+Group counts include only exact loaded reports. Resource identities are deduplicated; source/status details remain explicit. Existing author metadata labels and MCM controls are retained. Status is a loader registry report, not proof that every gameplay effect works.
+Combined package includes cursor snapshot retention, retry and refused prior-menu handoff handling from the authoritative repair. No MCM-owned runtime files are bundled or changed.
+Preview is an offline synthetic fixture from the actual sidebar model/compose, not a game screenshot. Live visual/input validation is pending.

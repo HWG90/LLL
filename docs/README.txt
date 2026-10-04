@@ -1,11 +1,11 @@
-Live Lua Loader 0.1.0 — R18 (first-release test build)
+Live Lua Loader 0.1.2 — R20 grouping candidate (first-release test build)
 
 READY TO USE
 No build step, Python, compiler, MDL, MCM, Bingus, DBF HUD or developer checkout is required.
 Requires Windows x64 and Helldivers 2 Steam build 25480438. The game supplies LuaJIT, GUI APIs and its stock font. The original LLL native helper is embedded, verified and extracted automatically.
 
 INSTALL — MOD MANAGER (OPTIONAL)
-Import this ZIP into Arsenal/HD2MM, enable Live Lua Loader R18, and give it winning startup-loader priority. In Arsenal's default priority order, place it last. Disable other shared startup loaders (MDL/Bingus). Deploy while the game is closed, then launch normally.
+Import this ZIP into Arsenal/HD2MM, enable Live Lua Loader R20 grouping candidate, and give it winning startup-loader priority. In Arsenal's default priority order, place it last. Disable other shared startup loaders (MDL/Bingus). Deploy while the game is closed, then launch normally.
 Other gameplay/utility mods are installed separately; this ZIP contains no third-party mods.
 
 INSTALL — DIRECT COPY
@@ -20,13 +20,16 @@ Existing MDL/CowboyBingus folders are compatibility search locations only; they 
 Each mod is responsible for its own dependencies and cleanup. Archive-only addons without a reload contract require a new game session for changes. The MDL API adapter supports a subset, not universal compatibility.
 
 CHECK STARTUP
-Logs/LiveLuaLoader.log should identify 0.1.0 (R18). The manager should open without MCM/HUD installed. Check module counts and errors. Test a loose script edit and its cleanup on the recipient's machine.
+Logs/LiveLuaLoader.log should identify 0.1.2 (R20 grouping candidate). The manager should open without MCM/HUD installed. Check module counts and errors. Test a loose script edit and its cleanup on the recipient's machine.
 
 UNINSTALL
 Close the game. Remove/disable LLL through your manager and redeploy, or remove ONLY the three LLL .patch_N files copied for direct installation. Your other mod files and saves are retained.
 The Local AppData LLL folder can be retained for settings/mods or removed separately after backing up anything wanted. No existing MDL or Bingus folder is modified by uninstalling LLL.
 
 VALIDATION AND LIMITS
-Offline isolated LuaJIT lifecycle/discovery/menu/cleanup and package checks pass. Native helper uses Windows system DLLs only. This exact R18 package has not been live tested on a clean installation.
+Offline isolated LuaJIT lifecycle/discovery/menu/cleanup and package checks pass. Native helper uses Windows system DLLs only. This exact R20 grouping candidate package has not been live tested on a clean installation.
 Unsupported game builds are refused. Non-ASCII paths and the full range of third-party addons still need recipient testing.
 The experimental free camera is NOT included. Existing loose mods, loadouts, presets and personal settings are NOT bundled.
+
+LEFT MOD LIST
+Groups identify actual loader ownership reports separately from script location. Each mod shows Loaded, Loading, Disabled, Discovered, Not installed or Needs attention. A file in MDL Mods does not imply an MDL runtime instance. Genuine external loader registry entries are read-only; ambiguous/lost ownership is shown honestly. This candidate is based on R18 and retains its game-build/callback constraints.

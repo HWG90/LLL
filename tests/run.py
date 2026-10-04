@@ -90,7 +90,12 @@ if not status:
     status = dll.luaL_loadfile(s, b"tests/management_contracts.lua") or dll.lua_pcall(
         s, 0, 0, 0
     )
-for contract in (b"tests/speed_contracts.lua", b"tests/deferred_cleanup_contracts.lua"):
+for contract in (
+    b"tests/provenance_contracts.lua",
+    b"tests/input_restore_contracts.lua",
+    b"tests/speed_contracts.lua",
+    b"tests/deferred_cleanup_contracts.lua",
+):
     if not status:
         status = dll.luaL_loadfile(s, contract) or dll.lua_pcall(s, 0, 0, 0)
 if status:

@@ -38,3 +38,6 @@ Development only
 Python 3 and the supported game's lua51.dll compile/rebuild the Lua package.
 MSVC x64 can rebuild the native helper. Supplied binaries need neither tool.
 The pinned helper is reused unless intentionally rebuilt and revalidated.
+
+src/provenance.lua separates runtime loader reports from discovery locations.
+Independent sidebar uses source categories and per-mod status; external entries are read-only.

@@ -1,8 +1,7 @@
-R18 / 0.1.0
-First ready-made distribution package of Live Lua Loader.
-Includes its independent F9 manager and native input helper; MCM integration remains optional.
-Retains archive discovery, live loose-script reload, shared lifecycle state and deferred cleanup.
-Includes the R17 mouse-release fix for opening the manager from MCM.
-No additional gameplay mods or experimental camera feature are bundled.
-Saved settings use stable ordering, indentation and real newlines; existing settings remain compatible.
-Includes readable Lua, native helper source, development build tools and contract tests.
+R20 / 0.1.2 grouping candidate
+Groups the independent manager's left mod list by LLL live scripts, archive addons via LLL, genuine MDL/Bingus runtime registries and unknown/conflicting ownership.
+Each entry shows runtime status separately from its discovery source. Group headings count loaded reports. External loader entries are read-only and identities are deduplicated.
+LLL's Bingus-compatible facade is not counted as a separate loader. MDL folders do not prove MDL loaded a mod. Lost/conflicting ownership is reported explicitly.
+Based on published R18 plus documentation; does not include unpublished R19 update-compatibility changes. The original build/callback constraints remain.
+Offline tests and sidebar compose only; not deployed, input-captured, game-reloaded, live validated or published.
+Includes the completed cursor-restoration repair: failed restoration retains its snapshot for retry, and a refused prior-menu release prevents a new capture baseline.
