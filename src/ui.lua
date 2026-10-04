@@ -7,9 +7,10 @@ return function(loader,platform,controls,report)
   if not menu and initialize then local ok,why=pcall(initialize);if not ok then self.close();self.unavailable=tostring(why);return false,self.unavailable end end
   if not menu then return false,self.unavailable or 'Native manager unavailable'end
   local mcm=rawget(_G,'DBFMCM');if mcm and type(mcm.close)=='function'then mcm.close()end
-  menu.visible=true;return true
+  self.open_pending=true;menu.visible=true;return true
  end
  function self.close()
+  self.open_pending=false
   if menu then menu.visible=false end
   if capture then capture.release()end;if view then view.release()end
  end
@@ -64,6 +65,13 @@ return function(loader,platform,controls,report)
  function self.tick(dt)
   local ok,why=pcall(function()
    foreground=user.lll_ui_foreground();if foreground~=nil then user.lll_ui_window_process(foreground,foreground_pid);if foreground_pid[0]~=pid then foreground=nil end end
+   if self.open_pending then
+    if not foreground then self.open_pending=false;menu.visible=false
+    else
+     local held=false;for _,code in ipairs({1,2,4,5,6})do if bit.band(tonumber(user.lll_ui_key(code)),0x8000)~=0 then held=true;break end end
+     menu.visible=not held;if not held then self.open_pending=false end
+    end
+   end
    local was=menu.visible;menu.tick(input)
    if menu.visible and not was then local mcm=rawget(_G,'DBFMCM');if mcm and mcm.close then mcm.close()end end
    local mcm=rawget(_G,'DBFMCM');if mcm and mcm.is_open and mcm.is_open()then menu.visible=false end

@@ -34,9 +34,9 @@ assert(native.changed(folder));assert(not native.changed(folder));assert(native.
 assert(native.stat(folder..'/probe.lua'));assert(native.write(folder..'/probe.lua','b'));assert(native.changed(folder),'Real replacement must notify watcher')
 assert(os.remove(folder..'/probe.lua'));assert(native.changed(folder));assert(not native.stat(folder..'/probe.lua'));native.close_watches()
 print('PASS real Windows create/replace/delete notifications, stat and watcher cleanup')
-local ffi=require('ffi');local load=ffi.load;local key=false;local foreground=true;local extracts,loads,draws=0,0,0;local data={};local local_menu
+local ffi=require('ffi');local load=ffi.load;local key=false;local mouse_held=false;local foreground=true;local extracts,loads,draws=0,0,0;local data={};local local_menu
 ffi.load=function(name)
- if name=='user32' then return {lll_ui_key=function(code)return code==120 and key and 32768 or 0 end,lll_ui_foreground=function()return foreground and ffi.cast('void *',1)or nil end,
+ if name=='user32' then return {lll_ui_key=function(code)return ((code==120 and key) or (code==1 and mouse_held)) and 32768 or 0 end,lll_ui_foreground=function()return foreground and ffi.cast('void *',1)or nil end,
  lll_ui_window_process=function(window,out)out[0]=123;return 1 end}end
  if name=='kernel32' then return {lll_ui_process=function()return 123 end}end
  loads=loads+1;return {mcm_wheel=function()return 0 end}
@@ -51,5 +51,9 @@ ui.tick();assert(extracts==0 and loads==0 and not ui.menu,'Closed manager must n
 foreground=false;key=true;ui.tick();assert(loads==0,'F9 outside game must not initialize UI');key=false;ui.tick();foreground=true;key=true;ui.tick()
 assert(extracts==1 and loads==1 and ui.menu.visible);ui.tick();assert(ui.menu.visible,'Opening F9 press must not immediately close menu')
 key=false;ui.tick();key=true;ui.tick();assert(not ui.menu.visible);ui.open();assert(ui.menu.visible and loads==1);ui.close();assert(not ui.menu.visible)
+key=false;mouse_held=true;ui.open();ui.tick();assert(ui.open_pending and not ui.menu.visible,'Open Manager must wait for the activating mouse button release')
+ui.tick();assert(ui.open_pending and not ui.menu.visible)
+mouse_held=false;ui.tick();assert(not ui.open_pending and ui.menu.visible,'Released click must open the queued manager')
+ui.close();mouse_held=true;ui.open();foreground=false;ui.tick();assert(not ui.open_pending and not ui.menu.visible,'Focus loss cancels queued open')
 ffi.load=load;LLL_UI_CORE,LLL_UI_CAPTURE,LLL_UI_VIEW,LLL_UI_MENU,LLL_NATIVE,stingray,DBFMCM=unpack(previous,1,7)
 print('PASS lazy native/GUI initialization, foreground-gated F9, held-key suppression, reopen and close')
