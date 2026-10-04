@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.dll
+*.exe
+*.obj
+*.lib
+*.exp
+*.pdb
+*.zip
+*.luac
+dist/
+native/lean-build/
+native/library.txt
+tests/tmp/
