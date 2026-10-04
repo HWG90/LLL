@@ -26,7 +26,7 @@ return function(loader,live,report)
  local function definition()
   local categories={};local seen={}
   local pages={{id='overview',name='Overview',dynamic=true,controls={
-   {type='section',label='LIVE LUA LOADER R16'},
+   {type='section',label='LIVE LUA LOADER R17'},
    {type='button',id='open_manager',label='Loader window',button_label='Open manager',on_activate=function()assert(loader.open_manager,'Manager unavailable');loader.open_manager()end},
    {type='button',id='refresh',label='Refresh discovery',button_label='Refresh',on_activate=function()loader.refresh();self.refresh();return 'Discovery refreshed'end},
    {type='toggle',id='auto_reload',label='Auto-reload Lua changes',default=loader.auto_reload and loader.auto_reload()or false,disabled=not loader.set_auto_reload,
@@ -55,7 +55,7 @@ return function(loader,live,report)
     end}
    pages[#pages+1]={id=id,name=readable(child),category=category,dynamic=true,controls=controls}
   end
-  return {id='lll_management',name='Live Lua Loader',description='R16 mod manager. F9 opens the independent window. All changes use shared loader state.',categories=categories,pages=pages}
+  return {id='lll_management',name='Live Lua Loader',description='R17 mod manager. F9 opens the independent window. All changes use shared loader state.',categories=categories,pages=pages}
  end
  local function author_pages(spec)
   local pages={spec.pages[1]};local assigned={}

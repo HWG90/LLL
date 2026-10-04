@@ -32,8 +32,8 @@ def build(stock,game):
     archive=write({hash_name(CALLBACK):body})
     assert read(archive)[hash_name(CALLBACK)][1]==body
     out=ROOT/'dist';out.mkdir(exist_ok=True)
-    manifest={'Version':1,'Guid':'bb921b89-f8d0-4abc-9e93-f426a93fef51','Name':'Live Lua Loader - R16 private candidate',
-        'Description':'R16: author entries beneath the single Live Lua Loader root in MCM and the independent manager; persistent loader counts. Shared auto-reload and lifecycle state. Shared F9 manager/MCM state and helper initialization fix. Native window live validation pending.',
+    manifest={'Version':1,'Guid':'bb921b89-f8d0-4abc-9e93-f426a93fef51','Name':'Live Lua Loader - R17 private candidate',
+        'Description':'R17: author entries beneath the single Live Lua Loader root in MCM and the independent manager; persistent loader counts. Shared auto-reload and lifecycle state. Shared F9 manager/MCM state and helper initialization fix. Native window live validation pending.',
         'Options':[{'Name':'Loader','Include':['data']}]}
     files={'manifest.json':(json.dumps(manifest,indent=2)+'\n').encode(),'README.md':(ROOT/'README.md').read_bytes(),
            'data/9ba626afa44a3aa3.patch_0':archive,'data/9ba626afa44a3aa3.patch_0.stream':b'',

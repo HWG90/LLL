@@ -10,7 +10,7 @@ return function(loader,discovery,report)
    rows[#rows+1]={type='text',label=display(name),description=display(state..(loader.records[name] and '; managed live lifecycle' or '; restart required for reload'))}
    rows[#rows+1]={type='text',label=display('  '..state)}
   end
-  local summary={{type='section',label='LIVE LUA LOADER R16'},
+  local summary={{type='section',label='LIVE LUA LOADER R17'},
    {type='text',label='Loaded: '..loaded..'   Failed / pending: '..failed..'   Disabled: '..disabled..'   Not installed: '..skipped},
    {type='text',label='Discovered archive addons: '..discovery.count},
    {type='text',label='Source limit: 16 MB; live scans every 0.5 seconds'},
@@ -26,7 +26,7 @@ return function(loader,discovery,report)
   for _,list in ipairs({summary,rows}) do for _,row in ipairs(list) do signature=signature..row.label..(row.description or '') end end
   if signature==last and handle then return end
   if not handle then
-   handle=api.register({id='live_lua_loader',name='Live Lua Loader - Diagnostics',description='R16: loader status and addon discovery diagnostics.',pages={
+   handle=api.register({id='live_lua_loader',name='Live Lua Loader - Diagnostics',description='R17: loader status and addon discovery diagnostics.',pages={
     {id='overview',name='Overview',controls=summary},
     {id='mods',name='Mod status',controls=rows}}})
    report('LLL status','MCM status page registered')
