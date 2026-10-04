@@ -15,6 +15,10 @@ Loose scripts belong in `%LOCALAPPDATA%/LLL/Helldivers2/Mods`. Existing MDL and
 CowboyBingus locations are also scanned. Saved settings use indented Lua tables
 with stable ordering; older single-line settings remain compatible.
 
+## Mod author guide
+
+[Port a Bingus or archived Lua mod to live loading](docs/MOD-MIGRATION.md): lifecycle examples, settings, cleanup, asset limits and verification against R18.
+
 ## Source and development
 
 ARCHITECTURE.txt describes the modules and retained lean improvements. Original
