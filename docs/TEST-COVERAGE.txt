@@ -1,0 +1,41 @@
+R18 lean test inventory
+
+Reproducible coverage included in source ZIP and repository:
+- contracts.lua: synthetic stock startup and nil tuples, API 1, archive identity,
+  shadowing/hash/error isolation, reload/cleanup guards and runtime syntax.
+- live_contracts.lua: loose roots, MDL API 2 subset, enabled state, contexts,
+  persisted settings, reverse cleanup, owned globals, status and migration.
+- management_contracts.lua: shared controls, persistence rollback, refresh,
+  reload/syntax rollback, archive limits and author/category organization.
+- speed_contracts.lua: bounded reads/handle cleanup, cache persistence and
+  invalidation, forced refresh, zero-content-read idle watcher, completed edit
+  confirmation, real Windows create/replace/delete notifications and watcher
+  cleanup, lazy native/GUI initialization, foreground/held F9 and reopen/close.
+- deferred_cleanup_contracts.lua: acknowledgment-gated asynchronous cleanup,
+  retained ownership, replacement safety and compiled bootstrap detach/pump.
+- config_contracts.lua: formatted nested roundtrips, escaping/types, stable
+  ordering, legacy tables and rejection of cyclic/nonfinite/unsupported values.
+- tests/run.py: consolidated isolated LuaJIT runner; synthetic startup executes
+  compiled bytecode. Verifies exact release payload, CRC and sidecars.
+- native/test_input_guard.c and tools/build_native_lean.py: native input policy
+  and held-key/button release tests without attaching to a game window.
+- tools/build_release.py: stock hash, embedded native/stock bytes, compiled
+  resource envelope, archive roundtrip and ZIP CRC verification.
+
+Prototype runner mapping:
+run.py, run_lean.py, run_speed.py and run_deferred.py overlap the above contracts;
+R18 consolidates them in tests/run.py against the current bytecode package.
+Old output filenames, exact obsolete package inventories and private-source
+path identity checks are replaced by current exact-payload/source checks.
+run_lean_v2.py targets the excluded LZNT1 startup-compression experiment; that
+wrapper test is excluded because R18 does not use compression. Its common Lua
+contracts remain included. Camera/controller experiments are outside this release.
+
+Captured evidence is distinct from reproducible tests:
+Earlier startup timing, archive/ZIP sizes, live GUI/input observations and frame
+measurements were checkpoint results, not independent benchmark test programs.
+No comparative timing/speedup claim is made for R18. Live capture/session logs
+and private paths are excluded. The validation JSON reports this release's
+measured package size and offline checks. Exact R18 clean-install gameplay,
+visual/input behavior, performance and third-party compatibility remain live
+validation tasks; passing these contracts does not establish that proof.

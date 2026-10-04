@@ -40,6 +40,11 @@ assert (
     < generated.index(b"local LLL_UI=")
     < generated.index(b"LLL_NATIVE={name=")
 )
+from build_lean import compile_chunk
+
+# Exercise the same bytecode execution path used by the distributable.
+(tmp / "bootstrap.lua").write_bytes(compile_chunk(generated))
+
 native = (
     (ROOT / "src/platform.lua")
     .read_text(encoding="utf-8")
