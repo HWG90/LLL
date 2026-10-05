@@ -29,6 +29,28 @@ return function(host, entries)
             pcall(loader.changed)
         end
     end
+    local callbacks=(LLL_AFTER_STARTUP or dofile("src/after_startup.lua"))(function(name)return loader.modules[name]end,
+        function(name,message)pcall(host.report,name,message)end,function(name)return loader.records[name]end)
+    loader.after_startup=callbacks.register
+    compat.after_startup=loader.after_startup
+    loader.capabilities=(LLL_CAPABILITIES or dofile("src/capabilities.lua"))({logs=type(host.open_log)=="function",
+        discovery=host.discovery_supported==true,after_startup=true,health=host.health~=nil,jit_budget=host.jit_budget~=nil,
+        live_loading=true,deferred_cleanup=true,protected_runtime=host.protected_runtime==true,
+        diagnostics=host.diagnostics~=nil,author_groups=true,resizable_manager=true})
+    compat.capabilities=loader.capabilities
+    compat.discovery=host.discovery_state
+    compat.revision="LLL-R24"
+    loader.diagnostics=host.diagnostics
+    loader.health=host.health and host.health.public
+    compat.health=loader.health
+    compat.jit=host.jit_budget
+    local function lifecycle_call(fn,...)
+        if host.jit_budget and host.jit_budget.pause then host.jit_budget.pause() end
+        local function pack(...)return {n=select("#",...),...}end
+        local result=pack(pcall(fn,...))
+        if host.jit_budget and host.jit_budget.resume then host.jit_budget.resume() end
+        return unpack(result,1,result.n)
+    end
     -- Ownership stays with the old record until explicit async acknowledgement.
     local function cleanup(name, record, final_state, completed)
         if loader.pending_cleanup[name] then
@@ -48,7 +70,7 @@ return function(host, entries)
         end
         local ok, done, why = true, nil, nil
         if record.on_disable then
-            ok, done, why = pcall(record.on_disable)
+            ok, done, why = lifecycle_call(record.on_disable)
         end
         if loader.records[name] ~= record then
             return false, "Lifecycle ownership changed"
@@ -108,9 +130,17 @@ return function(host, entries)
         end
         loader.origins[name] = { owner = can_live and "lll_live" or "lll_archive" }
         status(name, "loading")
+        callbacks.begin(name)
+        local marker
+        if host.health then local ok,value=pcall(host.health.before);if ok then marker=value end end
+        local function finish_health()
+            if host.health and marker then local ok,why=pcall(host.health.after,name,marker);if not ok then pcall(host.report,name,"Health observer failed: "..tostring(why))end end
+            callbacks.ending()
+        end
         local success, result = pcall(host.require, name)
         if not success then
             status(name, "load failed: " .. tostring(result))
+            finish_health()
             return
         end
         if type(result) == "table" and result.live_lua_api == 1 then
@@ -119,11 +149,13 @@ return function(host, entries)
                 local enabled, why = pcall(result.on_enable)
                 if not enabled then
                     cleanup(name, result, "enable failed: " .. tostring(why))
+                    finish_health()
                     return
                 end
             end
         end
         status(name, "loaded")
+        finish_health()
     end
     function loader.retry(name)
         if not host.can_retry or not host.can_retry(name) then
@@ -256,6 +288,7 @@ return function(host, entries)
         end
     end
     function loader.shutdown()
+        callbacks.close()
         for i = #loader.order, 1, -1 do
             local name = loader.order[i]
             local record = loader.records[name]
@@ -275,6 +308,7 @@ return function(host, entries)
             load(name)
         end
     end
+    callbacks.finish()
     function loader.add(name, enabled)
         if seen[name] then
             return false
@@ -291,7 +325,7 @@ return function(host, entries)
     function loader.forget_removed()
         local retired, retained, order = {}, 0, {}
         for _, name in ipairs(loader.order) do
-            local missing = name:match("^live/") and loader.live_catalog
+            local missing = string.match(name, "^live/") and loader.live_catalog
                 and not loader.live_catalog[name]
             local state = loader.modules[name]
             local origin = loader.origins[name]

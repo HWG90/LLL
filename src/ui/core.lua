@@ -1,11 +1,11 @@
 -- Public, renderer-independent registration and persistence API.
 local M = {}
 local function id(s)
-    assert(type(s) == "string" and #s <= 80 and s:match("^[%w_-]+$"), "Invalid stable ID")
+    assert(type(s) == "string" and #s <= 80 and string.match(s, "^[%w_-]+$"), "Invalid stable ID")
     return s
 end
 local function plain(s)
-    assert(type(s) == "string" and #s <= 512 and not s:find("[%c]"), "Invalid display text")
+    assert(type(s) == "string" and #s <= 512 and not string.find(s, "[%c]"), "Invalid display text")
     return s
 end
 local function rich(s)
@@ -18,7 +18,7 @@ local function rich(s)
         s = table.concat(blocks, "\n\n")
     end
     assert(
-        type(s) == "string" and #s <= 65536 and not s:find("[%z\1-\8\11\12\14-\31]"),
+        type(s) == "string" and #s <= 65536 and not string.find(s, "[%z\1-\8\11\12\14-\31]"),
         "Invalid rich text"
     )
     return s
@@ -32,9 +32,9 @@ local function copy(t)
 end
 function M.color_hex(v)
     if type(v) == "string" then
-        local hex = v:gsub("^#", "")
-        assert(#hex == 6 and hex:match("^%x+$"), "Use six HEX digits")
-        return "#" .. hex:upper()
+        local hex = string.gsub(v, "^#", "")
+        assert(#hex == 6 and string.match(hex, "^%x+$"), "Use six HEX digits")
+        return "#" .. string.upper(hex)
     end
     assert(type(v) == "table", "Expected HEX or RGB table")
     local parts = { v.r or v[1], v.g or v[2], v.b or v[3] }
@@ -49,7 +49,7 @@ function M.color_hex(v)
 end
 function M.color_rgb(v)
     local hex = M.color_hex(v)
-    return { tonumber(hex:sub(2, 3), 16), tonumber(hex:sub(4, 5), 16), tonumber(hex:sub(6, 7), 16) }
+    return { tonumber(string.sub(hex, 2, 3), 16), tonumber(string.sub(hex, 4, 5), 16), tonumber(string.sub(hex, 6, 7), 16) }
 end
 function M.hsv_rgb(h, s, v)
     local sector = math.floor(h * 6) % 6
@@ -86,7 +86,7 @@ end
 local function normalize(c, v)
     if c.type == "input" then
         assert(
-            type(v) == "string" and #v <= 48 and v:match("^[%w _-]+$"),
+            type(v) == "string" and #v <= 48 and string.match(v, "^[%w _-]+$"),
             "Use letters, numbers, spaces, underscores or hyphens"
         )
         return v

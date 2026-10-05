@@ -1,13 +1,15 @@
 -- Independent manager frontend with optional MCM integration.
 return function(loader, platform, controls, report)
     local self = {}
-    local menu, view, capture, input
+    local menu, view, capture, input, console_surface
     local initialize
     local api = LLL_UI_CORE.new(nil, function(msg)
         report("LLL UI", msg)
     end)
     controls.bind(api, "origins")
     self.api = api
+    api.diagnostics = loader.diagnostics
+    api.diagnostics_surface = loader.diagnostics_surface
     api.author_navigation = true
     api.loader_summary = controls.provenance_summary or controls.summary
     function self.open()
@@ -34,6 +36,7 @@ return function(loader, platform, controls, report)
         return true
     end
     function self.close()
+        if console_surface then console_surface.release() end
         self.open_pending = false
         if menu then
             menu.visible = false
@@ -119,6 +122,18 @@ return function(loader, platform, controls, report)
         view = LLL_UI_VIEW.new(sr)
         menu = LLL_UI_MENU.new(api, view.measure)
         self.menu = menu
+        if loader.diagnostics and loader.diagnostics_surface then console_surface=loader.diagnostics_surface(loader.diagnostics) end
+        local saved = loader.get_loader_option and loader.get_loader_option("manager_window")
+        if type(saved)=="table" then
+            menu.window_width,menu.window_height,menu.window_x,menu.window_y=saved.width,saved.height,saved.x,saved.y
+        end
+        menu.on_geometry_changed=function(g)
+            if loader.save_loader_option and g then
+                local ok,why=loader.save_loader_option("manager_window",{width=g.width,height=g.height,x=g.x,y=g.y})
+                if not ok then report("LLL UI",why) end
+            end
+        end
+
         input = {}
         local suppress_toggle = bit.band(tonumber(user.lll_ui_key(120)), 0x8000) ~= 0
         function input.down(code)
@@ -182,8 +197,10 @@ return function(loader, platform, controls, report)
                         end
                     end
                 end
+                local provider=rawget(_G,"DBFMCM")
+                if not foreground or (provider and provider.is_open and provider.is_open()) then menu.visible=false end
                 local was = menu.visible
-                menu.tick(input)
+                menu.tick(console_surface and console_surface.filter(input,menu.visible) or input)
                 if menu.visible and not was then
                     local mcm = rawget(_G, "DBFMCM")
                     if mcm and mcm.close then
@@ -208,7 +225,13 @@ return function(loader, platform, controls, report)
                 end
                 menu.advance(dt)
                 local w, h = sr.Gui.resolution()
-                view.draw(menu.compose(w, h))
+                local commands=menu.compose(w,h)
+                if console_surface then
+                    local g=menu.parent_geometry
+                    local bounds=g and {x=g.x,y=g.y,w=g.width*g.scale,h=g.height*g.scale}
+                    for _,command in ipairs(console_surface.compose(w,h,bounds,menu.visible)) do commands[#commands+1]=command end
+                end
+                view.draw(commands)
             end)
             if not ok then
                 self.close()

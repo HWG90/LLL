@@ -3,8 +3,8 @@ return function(loader, live, report)
     local self = { bindings = {}, groups = {}, group_count = 0, expanded = {} }
     local syncing = false
     local function readable(value)
-        return value:gsub("[_-]+", " "):gsub("(%l)(%u)", "%1 %2"):gsub("(%a)([%w]*)", function(a, b)
-            return a:upper() .. b
+        return string.gsub(string.gsub(string.gsub(value, "[_-]+", " "), "(%l)(%u)", "%1 %2"), "(%a)([%w]*)", function(a, b)
+            return string.upper(a) .. b
         end)
     end
     local function folder(name)
@@ -20,20 +20,20 @@ return function(loader, live, report)
         if metadata and metadata.author then
             return "declared/" .. metadata.author,
                 metadata.author,
-                metadata.name or name:match("([^/]+)$")
+                metadata.name or string.match(name, "([^/]+)$")
         end
-        local author, child = name:match("^mods/([^/]+)/(.+)$")
+        local author, child = string.match(name, "^mods/([^/]+)/(.+)$")
         if author then
             return "mods/" .. author, author, metadata and metadata.name or child
         end
         local entry = live.catalog[name]
         if entry then
-            local root = (entry.source_root or entry.dir):gsub("\\", "/"):gsub("/+$", "")
-            return root, root:match("([^/]+)$") or root, metadata and metadata.name or entry.id
+            local root = string.gsub(string.gsub((entry.source_root or entry.dir), "\\", "/"), "/+$", "")
+            return root, string.match(root, "([^/]+)$") or root, metadata and metadata.name or entry.id
         end
-        local parent, leaf = name:match("^(.*)/([^/]+)$")
+        local parent, leaf = string.match(name, "^(.*)/([^/]+)$")
         if parent then
-            return parent, parent:match("([^/]+)$"), leaf
+            return parent, string.match(parent, "([^/]+)$"), leaf
         end
         return nil, nil, name
     end
@@ -246,6 +246,21 @@ return function(loader, live, report)
                 }
             end
         end
+        self.author_categories = self.author_categories or {}
+        local authors = {}
+        for _, row in ipairs(snapshot) do
+            local key = row.owner .. "/" .. row.author
+            if not authors[key] then
+                if not self.author_categories[key] then
+                    self.author_category_count = (self.author_category_count or 0) + 1
+                    self.author_categories[key] = "source_author_" .. self.author_category_count
+                end
+                authors[key] = self.author_categories[key]
+                categories[#categories + 1] = {
+                    id = authors[key], parent = "source_" .. row.owner, name = row.author,
+                }
+            end
+        end
         for index, row in ipairs(snapshot) do
             local old = by_name[row.name]
             self.external_ids = self.external_ids or {}
@@ -253,7 +268,7 @@ return function(loader, live, report)
                 self.external_count = (self.external_count or 0) + 1
                 self.external_ids[row.name] = "external_" .. self.external_count
             end
-            local details = "Runtime owner: "
+            local details = "Author: " .. row.author .. "\nRuntime owner: "
                 .. row.owner
                 .. "\nSource: "
                 .. row.source
@@ -292,9 +307,9 @@ return function(loader, live, report)
             pages[#pages + 1] = {
                 id = old and old.id or self.external_ids[row.name],
                 name = "[" .. short .. "] " .. (old and old.name or readable(
-                    row.name:match("([^/]+)$") or row.name
+                    string.match(row.name, "([^/]+)$") or row.name
                 )),
-                category = "source_" .. row.owner,
+                category = authors[row.owner .. "/" .. row.author],
                 dynamic = true,
                 controls = controls,
             }

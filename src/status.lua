@@ -2,7 +2,7 @@
 return function(loader, discovery, report)
     local owner, handle, last
     local function display(value)
-        return tostring(value or ""):gsub("[%c]", " "):sub(1, 500)
+        return string.sub(string.gsub(tostring(value or ""), "[%c]", " "), 1, 500)
     end
     local function controls()
         local loaded, failed, skipped, disabled = 0, 0, 0, 0

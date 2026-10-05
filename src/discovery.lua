@@ -43,6 +43,8 @@ end
 return function(platform, force)
     local files = {}
     local winners = {}
+    local copies = {}
+    local copy_report = {by_name={},notes={}}
     local identities = {}
     local warnings = {}
     local counters = { lua = 0, envelopes = 0, markers = 0, mismatches = 0 }
@@ -50,7 +52,7 @@ return function(platform, force)
     local listed, stamps = platform.files(platform.data, "9ba626afa44a3aa3.patch_*")
     local diagnostics = "Archive scan: " .. tostring(platform.data) .. "; files=" .. #listed
     for _, name in ipairs(listed) do
-        local index = name:match("^9ba626afa44a3aa3%.patch_(%d+)$")
+        local index = string.match(name, "^9ba626afa44a3aa3%.patch_(%d+)$")
         if index then
             files[#files + 1] = { name = name, index = tonumber(index) }
         end
@@ -63,41 +65,39 @@ return function(platform, force)
     end)
     local signature, cache_path
     if stamps and platform.settings then
-        local parts = { "LLL archive cache 1", platform.data }
+        local parts = { "LLL archive cache 2", platform.data }
         for _, file in ipairs(files) do
             parts[#parts + 1] = file.name .. ":" .. assert(stamps[file.name])
         end
         signature = table.concat(parts, "|")
-        cache_path = platform.settings .. "/archive_catalog_v1.txt"
+        cache_path = platform.settings .. "/archive_catalog_v2.txt"
         if not force then
             local cache = platform.read(cache_path, 1048576)
             if cache then
-                local split = cache:find("\n", 1, true)
-                if split and cache:sub(1, split - 1) == signature then
-                    local check_end = cache:find("\n", split + 1, true)
-                    local body = check_end and cache:sub(check_end + 1)
-                    local checksum = check_end and cache:sub(split + 1, check_end - 1)
-                    local names = {}
-                    local valid = true
-                    for name in (body or ""):gmatch("([^\n]+)\n") do
-                        if
-                            not name:match("^mods/[%w_/]+$")
-                            or name:find("//", 1, true)
-                            or name:sub(-1) == "/"
-                            or name == "mods/codex/loader"
-                        then
-                            valid = false
-                            break
+                local split = string.find(cache, "\n", 1, true)
+                if split and string.sub(cache, 1, split - 1) == signature then
+                    local check_end = string.find(cache, "\n", split + 1, true)
+                    local body = check_end and string.sub(cache, check_end + 1)
+                    local checksum = check_end and string.sub(cache, split + 1, check_end - 1)
+                    local names,records = {},{}
+                    local valid = body and checksum == hash(body)
+                    for line in string.gmatch(body or "", "([^\n]+)\n") do
+                        local tag,name,archive,hidden=string.match(line,"^([NH])\t([^\t]+)\t([^\t]+)\t(.*)$")
+                        if not tag or not string.match(name,"^mods/[%w_/]+$") or string.find(name,"//",1,true)
+                            or string.sub(name,-1)=="/" or name=="mods/codex/loader"
+                            or not string.match(archive,"^9ba626afa44a3aa3%.patch_%d+$") then valid=false;break end
+                        local duplicates={}
+                        for file in string.gmatch(hidden,"[^,]+") do
+                            if not string.match(file,"^9ba626afa44a3aa3%.patch_%d+$") then valid=false;break end
+                            duplicates[#duplicates+1]=file
                         end
-                        names[#names + 1] = name
+                        local description="Active archive: "..archive.."; hidden copies: "..(#duplicates>0 and table.concat(duplicates,", ") or "none")
+                        if tag=="N" then names[#names+1]=name;copy_report.by_name[name]=description
+                        else copy_report.notes[#copy_report.notes+1]=name..": declared copy hidden by undeclared/compiled resource in "..archive end
+                        records[#records+1]=line
                     end
-                    if
-                        valid
-                        and body
-                        and checksum == hash(body)
-                        and body == table.concat(names, "\n") .. "\n"
-                    then
-                        return names, {}, diagnostics .. "; cached catalog; candidates=" .. #files
+                    if valid and body==table.concat(records,"\n").."\n" then
+                        return names, {}, diagnostics .. "; cached catalog; candidates=" .. #files, copy_report
                     end
                 end
             end
@@ -138,7 +138,10 @@ return function(platform, force)
                     if winners[key] == nil then
                         identities[#identities + 1] = key
                     end
-                    winners[key] = { index = file.index, order = i }
+                    winners[key] = { index = file.index, order = i, archive = file.name }
+                    copies[key]=copies[key] or {files={}}
+                    local history=copies[key].files
+                    if history[#history]~=file.name then history[#history+1]=file.name end
                     local offset = tonumber(u64(at + 16))
                     local length = u32(at + 56)
                     assert(
@@ -150,15 +153,15 @@ return function(platform, force)
                                 reader.read(offset, math.min(length, 264)),
                                 "Unreadable resource prefix"
                             )
-                        or data:sub(offset + 1, math.min(offset + length, offset + 264))
+                        or string.sub(data, offset + 1, math.min(offset + length, offset + 264))
                     local q = ffi.cast("const uint8_t *", prefix)
                     if
                         tonumber(ffi.cast("const uint32_t *", q + 4)[0]) == 2
                         and tonumber(ffi.cast("const uint32_t *", q)[0]) == length - 8
                     then
                         counters.envelopes = counters.envelopes + 1
-                        local head = prefix:sub(9)
-                        local name = head:match("^%-%- HD2%-Addon: ([^\r\n]+)[\r\n]")
+                        local head = string.sub(prefix, 9)
+                        local name = string.match(head, "^%-%- HD2%-Addon: ([^\r\n]+)[\r\n]")
                         local computed
                         if name then
                             counters.markers = counters.markers + 1
@@ -169,11 +172,11 @@ return function(platform, force)
                                     or (name .. " computed=" .. computed .. " stored=" .. key)
                             end
                         end
-                        local valid = name and name:sub(1, 5) == "mods/" and name:sub(-1) ~= "/"
+                        local valid = name and string.sub(name, 1, 5) == "mods/" and string.sub(name, -1) ~= "/"
                         if valid then
                             local previous
                             for j = 1, #name do
-                                local b = name:byte(j)
+                                local b = string.byte(name, j)
                                 if
                                     not (
                                         (b >= 48 and b <= 57)
@@ -192,6 +195,7 @@ return function(platform, force)
                         end
                         if valid and name ~= "mods/codex/loader" and computed == key then
                             winners[key].name = name
+                            copies[key].name = name
                         end
                     end
                 end
@@ -230,13 +234,26 @@ return function(platform, force)
         end
         return a.index < b.index
     end)
+    local records = {}
+    for key, history in pairs(copies) do
+        if history.name then
+            local winner=winners[key];local hidden={}
+            for _, file in ipairs(history.files)do if file~=winner.archive then hidden[#hidden+1]=file end end
+            local tag=winner.name and "N" or "H"
+            records[#records+1]={index=winner.index,order=winner.order,text=tag.."\t"..history.name.."\t"..winner.archive.."\t"..table.concat(hidden,",")}
+            if winner.name then copy_report.by_name[history.name]="Active archive: "..winner.archive.."; hidden copies: "..(#hidden>0 and table.concat(hidden,", ") or "none")
+            else copy_report.notes[#copy_report.notes+1]=history.name..": declared copy hidden by undeclared/compiled resource in "..winner.archive end
+        end
+    end
+    table.sort(records,function(a,b)return a.index==b.index and a.order<b.order or a.index<b.index end)
+    for i,record in ipairs(records)do records[i]=record.text end
     local names = {}
     for _, entry in ipairs(entries) do
         names[#names + 1] = entry.name
     end
     if signature and #warnings == 0 and platform.write then
-        local body = table.concat(names, "\n") .. "\n"
+        local body = table.concat(records, "\n") .. "\n"
         pcall(platform.write, cache_path, signature .. "\n" .. hash(body) .. "\n" .. body)
     end
-    return names, warnings, diagnostics
+    return names, warnings, diagnostics, copy_report
 end

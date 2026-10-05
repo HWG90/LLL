@@ -1,0 +1,35 @@
+LLL R24 API / verified BSL v19 parity
+==================================
+Reference: https://github.com/CowboyBingus/BingusSharedLoader/tree/v19
+The loader remains Live Lua Loader, API 1. Its legacy-compatible surface retains implementation='Live Lua Loader'; it does not identify itself as Bingus v19.
+
+Covered runtime behavior:
+- Ordered startup, optional archive discovery, isolated failures and per-resource status: existing LLL, tested.
+- Logs and validated log names: existing private Win32 LLL writer; private signatures tested against conflicting Windows cdefs.
+- Captured builtins/libraries/FFI functions for loading, filesystem/discovery, logging and lifecycle: independently implemented; hostile replacement tests pass.
+- LuaJIT: 64 MiB total code capacity, bounded observed-flush growth to 256 MiB with 30-second debounce, 8000/16000 traces and 24 MiB heap growth guard. Existing trace owners are retained. Tested against actual installed LuaJIT in test process, not live game.
+- after_startup(fn): same true / false,reason registration contract, FIFO, once-only, late registration, nested registration, failure isolation, module ownership checks and 256-registration bound.
+- Read-only capability declarations: api, logs, discovery, jit_budget, health, after_startup; additional live_loading, deferred_cleanup, diagnostics, author_groups, resizable_manager, protected_runtime.
+- Health header/changes: startup build/session/crash summaries and per-load CPU/heap/shared-state diagnostics. The adapted health helper is from v19 under Zero-Clause BSD, with notice retained.
+- Active/hidden archive copies: cold discovery and persisted cached report. No second archive scan for a warm startup.
+- Development frame-probe utility: licensed source example, not enabled or embedded in ordinary runtime (same development-only distinction as upstream).
+
+LLL additions retained: loose-script discovery/edit reload, MDL lifecycle/configuration migration, error recovery, explicit deferred cleanup, standalone manager, optional MCM integration, shared authoritative controls and source/author grouping.
+
+Usage:
+local loader = LiveLuaLoader
+if loader and loader.capabilities.after_startup then
+    local ok, reason = loader.after_startup(function() -- all initial mods have started
+        -- register dependent menus here
+    end)
+end
+
+Ordinary writes to loader.capabilities are refused; rawset/debug/native tampering is not a security boundary. Unknown capabilities return nil. Declarations describe supported interfaces, not proof that every service succeeded this session: inspect loader.jit_budget.accepted/watching(), loader.health and module status for actual outcomes.
+
+JIT settings in LLL.cfg:
+["jit_code_cache"] = { ["start_kb"] = 65536, ["ceiling_kb"] = 262144, ["cooldown_seconds"] = 30 }
+No sizemcode override and no Lua heap initial-size setting. LLL runs in the game's pre-existing Lua VM. A true 64 MiB initial heap reserve would require host/state-creation allocator support; this Lua startup loader has no such supported control.
+
+Shared console implementation originates in DBF-MCM/src/console.lua; src/ui/diagnostics.lua is byte-for-byte the shared factory. One DBFDiagnostics/package.loaded['dbf.diagnostics.v1'] instance is used. LLL publishes real events/log paths and filters console interaction before parent hits without a second capture lease.
+
+Compatibility caveats: actual third-party behavior and visual input need live validation. No claim of universal addon compatibility, improved frame rate, or working screenshot free-camera movement follows from source/contract checks.

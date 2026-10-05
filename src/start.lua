@@ -1,7 +1,16 @@
 local platform = LLL_PLATFORM
+local previous_text
+local previous_path=platform.log_directory and platform.log_directory.."/LiveLuaLoader.log"
+if previous_path then
+    local file=io.open(previous_path,"rb")
+    if file then previous_text=file:read(65536);file:close() end
+end
 local log = platform.open_log("LiveLuaLoader.log")
+local diagnostic_service = LLL_DIAGNOSTICS and LLL_DIAGNOSTICS.shared()
+local diagnostic_path = platform.log_directory and platform.log_directory .. "/LiveLuaLoader.log"
+local diagnostic_owner = diagnostic_service and diagnostic_service.attach("LLL", diagnostic_path)
 if log then
-    log:write("Live Lua Loader 0.1.4 (R22 grouping candidate); API 1 compatibility\n")
+    log:write("Live Lua Loader 0.1.6 (R24 grouping candidate); API 1 compatibility\n")
 end
 local guarded, why = pcall(platform.guard)
 if not guarded then
@@ -9,11 +18,12 @@ if not guarded then
         log:write("Refused startup: " .. tostring(why) .. "\n")
         log:close()
     end
+    if diagnostic_service then diagnostic_service.detach(diagnostic_owner) end
     print("[LiveLuaLoader] Refused startup: " .. tostring(why))
     return
 end
 local entries = LLL_LEGACY
-local ok, discovered, warnings, diagnostics = pcall(LLL_DISCOVER, platform)
+local ok, discovered, warnings, diagnostics, archive_copies = pcall(LLL_DISCOVER, platform)
 if ok then
     for _, name in ipairs(discovered) do
         entries[#entries + 1] = name
@@ -34,6 +44,7 @@ else
     print("[LiveLuaLoader] Discovery failed: " .. tostring(discovered))
 end
 local function report(name, state)
+    if diagnostic_service then pcall(diagnostic_service.record,"LLL",name .. ": " .. state,nil,nil,diagnostic_path) end
     print("[LiveLuaLoader] " .. name .. ": " .. state)
     if log then
         log:write(name .. ": " .. state .. "\n")
@@ -49,6 +60,32 @@ if log then
     for _, root in ipairs(platform.roots or {}) do
         log:write("Search " .. root.kind .. ": " .. root.path .. "\n")
     end
+end
+local code_budget = LLL_JIT_BUDGET and LLL_JIT_BUDGET.start(LLL_TRUST.jit, live.loader_option("jit_code_cache"), report)
+local health
+if LLL_HEALTH then
+    local public={header={},changes={}}
+    local function note(message)public.header[#public.header+1]=message;report("Health",message)end
+    local observer
+    local ok,value=pcall(LLL_HEALTH.observer,_G,{collect=collectgarbage,jit=LLL_TRUST.jit,clock=os.clock,
+        flushes=code_budget and function()return code_budget.flushes end,watching=code_budget and code_budget.watching})
+    if ok then observer=value;note(LLL_HEALTH.describe_start(observer.initial))else note("Observer unavailable: "..tostring(value))end
+    local started="Started: "..os.date("%Y-%m-%d %H:%M:%S")
+    if log then log:write(started.."\n")end
+    note("Previous session: "..LLL_HEALTH.previous_session(previous_text))
+    if platform.health then
+        local ok,exe_stamp=pcall(LLL_HEALTH.image_stamp,platform.health.ffi,platform.health.kernel,nil)
+        local game_ok,game_stamp=pcall(LLL_HEALTH.image_stamp,platform.health.ffi,platform.health.kernel,"game.dll")
+        if ok and game_ok then note("Build stamps: "..LLL_HEALTH.hex(exe_stamp).." / "..LLL_HEALTH.hex(game_stamp))end
+        for _,folder in ipairs({(os.getenv("APPDATA") or "").."/Arrowhead/Helldivers2/dumps",(os.getenv("LOCALAPPDATA") or "").."/CrashDumps"})do
+            local ok,lines=pcall(LLL_HEALTH.crashes,platform.health.ffi,platform.health.kernel,folder,io.open,function(time)return os.date("%Y-%m-%d %H:%M:%S",time)end)
+            if ok then for _,line in ipairs(lines)do note(line)end else note("Crash summary unavailable")end
+        end
+    end
+    health={public=public,before=function()return observer and observer.mark()end,
+        after=function(name,mark)
+            if observer and mark then local result=observer.changes(mark);local text=LLL_HEALTH.describe(result);public.changes[name]=text;report(name,"Health: "..text)end
+        end}
 end
 local manager = LLL_MANAGER({
     available = function(name)
@@ -79,12 +116,26 @@ local manager = LLL_MANAGER({
     open_log = platform.open_log,
     log_directory = platform.log_directory,
     report = report,
+    health=health,jit_budget=code_budget,diagnostics=diagnostic_service,
+    discovery_supported=LLL_DISCOVER~=nil,discovery_state=ok and (#discovered .. " declared entries") or "failed",protected_runtime=LLL_TRUST~=nil,
 }, entries)
 if ok then
     manager.discovery_warnings = warnings
 end
+manager.diagnostics = diagnostic_service
+manager.diagnostics_surface = LLL_DIAGNOSTICS and LLL_DIAGNOSTICS.surface
+report("Startup","Startup finished; after-startup callbacks drained")
+if log then log:write("Startup finished\n")end
+manager.get_loader_option = live.loader_option
+manager.save_loader_option = live.save_loader_option
+manager.jit_budget = code_budget
 manager.live_catalog = live.catalog
 manager.discovery_diagnostics = diagnostics
+manager.discovery_copies = archive_copies
+if archive_copies then
+    for name,description in pairs(archive_copies.by_name)do report(name,description)end
+    for _,description in ipairs(archive_copies.notes)do report("Discovery",description)end
+end
 manager.auto_reload = live.auto_reload
 manager.set_auto_reload = live.set_auto_reload
 local controls = LLL_CONTROLS(manager, live, report)
@@ -204,6 +255,12 @@ if type(prior) == "function" then
     end
     update = wrapper
     finish_detach = function()
+        if ui then local ok,why=ui.close();if ok==false then report("LLL UI cleanup",why);return false end end
+        if code_budget then
+            local ok,why=code_budget.close()
+            if not ok then report("LLL JIT cleanup",why);return false end
+        end
+        if diagnostic_service and diagnostic_owner then diagnostic_service.detach(diagnostic_owner);diagnostic_owner=nil end
         if update == wrapper then
             update = prior
         end
@@ -211,10 +268,11 @@ if type(prior) == "function" then
             log:close()
             log = nil
         end
+        return true
     end
     manager.detach = function()
         if retiring then
-            return not next(manager.pending_cleanup), "pending"
+            return not next(manager.pending_cleanup) and (not code_budget or code_budget.closed), "pending"
         end
         retiring = true
         if ui then
@@ -223,14 +281,14 @@ if type(prior) == "function" then
         controls.close()
         status_page.close()
         manager.shutdown()
+        if code_budget then code_budget.close() end
         if platform.close_watches then
             platform.close_watches()
         end
         if next(manager.pending_cleanup) then
             return false, "pending"
         end
-        finish_detach()
-        return true
+        return finish_detach()
     end
 else
     manager.frame_hook = "No global update callback; explicit LiveLuaLoader.frame(dt) required"
@@ -244,6 +302,7 @@ if type(old_shutdown) == "function" then
         controls.close()
         status_page.close()
         manager.shutdown()
+        if code_budget then code_budget.close() end
         if platform.close_watches then
             platform.close_watches()
         end

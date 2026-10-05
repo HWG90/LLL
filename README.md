@@ -1,3 +1,9 @@
+## R24 source and local candidate
+
+The current source adds source/author grouping, a resizable standalone manager, bounded text and connector geometry, and the shared MCM/LLL diagnostics console. It also adds privately captured Lua dependencies and Windows signatures, capability queries, after-startup callbacks, startup health/copy diagnostics, and a 64 MiB shared LuaJIT code budget with bounded observed-flush growth.
+
+See [the R24 API and parity checklist](docs/R24-API-AND-PARITY.txt). The earlier R20 download links below remain historical published artifacts; R24 source does not imply that those ZIPs include these changes. Exact in-game visual/input acceptance remains a separate validation step. Experimental screenshot-camera motion is unresolved and is not bundled.
+
 # Live Lua Loader (LLL)
 
 Independent Lua loader and F9 mod manager for Helldivers 2. Discovers archive

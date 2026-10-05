@@ -73,7 +73,9 @@ dll.luaL_loadfile.argtypes = [ctypes.c_void_p, ctypes.c_char_p]
 dll.lua_pcall.argtypes = [ctypes.c_void_p, ctypes.c_int, ctypes.c_int, ctypes.c_int]
 dll.lua_tolstring.argtypes = [ctypes.c_void_p, ctypes.c_int, ctypes.c_void_p]
 dll.lua_tolstring.restype = ctypes.c_char_p
-status = dll.luaL_loadfile(s, b"tests/contracts.lua") or dll.lua_pcall(s, 0, 0, 0)
+status = dll.luaL_loadfile(s, b"tests/jit_native_contracts.lua") or dll.lua_pcall(s, 0, 0, 0)
+if not status:
+    status = dll.luaL_loadfile(s, b"tests/contracts.lua") or dll.lua_pcall(s, 0, 0, 0)
 if not status:
     status = dll.luaL_loadfile(s, b"tests/tmp/native-platform.lua") or dll.lua_pcall(
         s, 0, 0, 0
@@ -91,10 +93,16 @@ if not status:
         s, 0, 0, 0
     )
 for contract in (
+    b"tests/health_contracts.lua",
+    b"tests/after_startup_contracts.lua",
+    b"tests/jit_budget_contracts.lua",
+    b"tests/resize_contracts.lua",
+    b"tests/diagnostics_contracts.lua",
     b"tests/provenance_contracts.lua",
     b"tests/input_restore_contracts.lua",
     b"tests/speed_contracts.lua",
     b"tests/deferred_cleanup_contracts.lua",
+    b"tests/protected_runtime_contracts.lua",
 ):
     if not status:
         status = dll.luaL_loadfile(s, contract) or dll.lua_pcall(s, 0, 0, 0)

@@ -5,21 +5,21 @@ function M.decode(text)
     local at = 1
     local parse
     local function space()
-        local _, last = text:find("^%s*", at)
+        local _, last = string.find(text, "^%s*", at)
         at = (last or at - 1) + 1
     end
     local function string_value()
-        assert(text:sub(at, at) == '"')
+        assert(string.sub(text, at, at) == '"')
         at = at + 1
         local out = {}
         while at <= #text do
-            local ch = text:sub(at, at)
+            local ch = string.sub(text, at, at)
             at = at + 1
             if ch == '"' then
                 return table.concat(out)
             end
             if ch == "\\" then
-                ch = text:sub(at, at)
+                ch = string.sub(text, at, at)
                 at = at + 1
                 local escape = {
                     ['"'] = '"',
@@ -32,8 +32,8 @@ function M.decode(text)
                     t = "\t",
                 }
                 if ch == "u" then
-                    local hex = text:sub(at, at + 3)
-                    assert(hex:match("^%x%x%x%x$"), "Invalid unicode escape")
+                    local hex = string.sub(text, at, at + 3)
+                    assert(string.match(hex, "^%x%x%x%x$"), "Invalid unicode escape")
                     at = at + 4
                     local n = tonumber(hex, 16)
                     assert(n < 0xd800 or n > 0xdfff, "Unsupported surrogate escape")
@@ -52,7 +52,7 @@ function M.decode(text)
                     ch = assert(escape[ch], "Invalid JSON escape")
                 end
             else
-                assert(ch:byte() >= 32, "Control in JSON string")
+                assert(string.byte(ch) >= 32, "Control in JSON string")
             end
             out[#out + 1] = ch
         end
@@ -61,7 +61,7 @@ function M.decode(text)
     function parse(depth)
         assert(depth < 12, "Manifest nesting too deep")
         space()
-        local ch = text:sub(at, at)
+        local ch = string.sub(text, at, at)
         if ch == '"' then
             return string_value()
         end
@@ -71,7 +71,7 @@ function M.decode(text)
             at = at + 1
             space()
             local value = {}
-            if text:sub(at, at) == closing then
+            if string.sub(text, at, at) == closing then
                 at = at + 1
                 return value
             end
@@ -81,7 +81,7 @@ function M.decode(text)
                     space()
                     key = string_value()
                     space()
-                    assert(text:sub(at, at) == ":")
+                    assert(string.sub(text, at, at) == ":")
                     at = at + 1
                 end
                 local item = parse(depth + 1)
@@ -91,7 +91,7 @@ function M.decode(text)
                     value[#value + 1] = item
                 end
                 space()
-                ch = text:sub(at, at)
+                ch = string.sub(text, at, at)
                 at = at + 1
                 if ch == closing then
                     return value
@@ -100,12 +100,12 @@ function M.decode(text)
             end
         end
         for token, value in pairs({ ["true"] = true, ["false"] = false, ["null"] = M }) do
-            if text:sub(at, at + #token - 1) == token then
+            if string.sub(text, at, at + #token - 1) == token then
                 at = at + #token
                 return value
             end
         end
-        local token = text:match("^%-?%d+%.?%d*[eE]?[%+%-]?%d*", at)
+        local token = string.match(text, "^%-?%d+%.?%d*[eE]?[%+%-]?%d*", at)
         assert(token and tonumber(token), "Invalid JSON value")
         at = at + #token
         return tonumber(token)
@@ -122,7 +122,7 @@ local function label(value)
     return type(value) == "string"
             and #value > 0
             and #value <= 512
-            and not value:find("[%c]")
+            and not string.find(value, "[%c]")
             and value
         or nil
 end

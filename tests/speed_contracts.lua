@@ -43,12 +43,15 @@ local p = {
         }
     end,
 }
-local first, warnings = discovery(p)
+local first, warnings, _, copies = discovery(p)
+assert(copies.by_name["mods/test/accepted"]:find(names[1],1,true))
+assert(copies.notes[1]:find("mods/test/shadow",1,true) and copies.notes[1]:find(names[2],1,true))
 assert(#first == 1 and first[1] == "mods/test/accepted" and #warnings == 0)
 assert(opens == closes and writes == 1)
 local old = opens
 local fresh = dofile("src/discovery.lua")
-local cached, _, details = fresh(p)
+local cached, _, details, cached_copies = fresh(p)
+assert(cached_copies.by_name["mods/test/accepted"]==copies.by_name["mods/test/accepted"] and cached_copies.notes[1]==copies.notes[1])
 assert(
     #cached == 1 and opens == old and details:find("cached catalog", 1, true),
     "New loader must use persisted cache"

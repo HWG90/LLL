@@ -4,7 +4,7 @@ return function(platform, report)
     local sources, metadata_cache = {}, {}
     local last_names
     local function valid(id)
-        return type(id) == "string" and id:match("^[%w_-]+$")
+        return type(id) == "string" and string.match(id, "^[%w_-]+$")
     end
     local function config(path)
         local data = path and platform.read(path, 1048576)
@@ -27,6 +27,19 @@ return function(platform, report)
         mdl = config(platform.mdl_config)
     end
     local serialize = (LLL_CONFIG or dofile("src/config.lua")).serialize
+    function self.loader_option(name)
+        return mdl[name]
+    end
+    function self.save_loader_option(name, value)
+        local old = mdl[name]
+        mdl[name] = value
+        local ok, text = pcall(serialize, mdl)
+        if not ok or not platform.loader_config or not platform.write(platform.loader_config, "return " .. text .. "\n") then
+            mdl[name] = old
+            return false, "Could not save loader option"
+        end
+        return true
+    end
     function self.scan(force)
         if platform.changed then
             local changed = false
@@ -53,7 +66,7 @@ return function(platform, report)
                 local candidates = {}
                 local root_files, _, root_dirs = platform.files(root.path)
                 for _, file in ipairs(root_files) do
-                    local id = file:match("^([%w_-]+)%.lua$")
+                    local id = string.match(file, "^([%w_-]+)%.lua$")
                     if id then
                         candidates[#candidates + 1] = {
                             id = id,

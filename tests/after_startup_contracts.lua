@@ -1,0 +1,17 @@
+local state,seen,records={a='loading',b='loaded'},{},{}
+local factory=dofile('src/after_startup.lua')
+local queue=factory(function(name)return state[name]end,function(name,message)if name~='After startup'then seen[#seen+1]='error:'..name end end,function(name)return records[name]end)
+queue.begin('a');assert(queue.register(function()seen[#seen+1]='a';assert(queue.register(function()seen[#seen+1]='nested'end))end));queue.ending()
+queue.begin('b');assert(queue.register(function()error('test')end));queue.ending()
+assert(#seen==0);state.a='loaded';queue.finish();assert(seen[1]=='a' and seen[2]=='error:b' and seen[3]=='nested')
+assert(queue.register(function()seen[#seen+1]='late'end));assert(seen[4]=='late')
+assert(not queue.register(123));queue.close();assert(not queue.register(function()end))
+local stopped=factory(function()return 'failed'end,function()end,function()end)
+stopped.begin('bad');stopped.register(function()error('must skip')end);stopped.ending();stopped.finish()
+local bounded=factory(function()end,function()end,function()end)
+local runs=0;local loop;loop=function()runs=runs+1;bounded.register(loop)end
+bounded.register(loop);bounded.finish();assert(runs==256 and not bounded.register(loop))
+local capabilities=dofile('src/capabilities.lua')({after_startup=true,heap_reserve=false})
+assert(capabilities.api==1 and capabilities.after_startup and capabilities.heap_reserve==false and capabilities.unknown==nil)
+assert(not pcall(function()capabilities.after_startup=false end));assert(getmetatable(capabilities)==false)
+print('PASS after-startup FIFO/reentry/errors/late registration/ownership/limit and read-only honest capabilities')

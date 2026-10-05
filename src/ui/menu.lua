@@ -1,9 +1,10 @@
 -- MCM layout/controller. Drawing is isolated from registry and settings storage.
 local M = {}
+local geometry = LLL_UI_GEOMETRY or dofile("src/ui/geometry.lua")
 -- Whole-glyph viewport: never split UTF-8 or draw outside the allotted width.
 function M.flow(value, width, size, time, measure)
     local glyphs = {}
-    for glyph in tostring(value):gmatch("[%z\1-\127\194-\244][\128-\191]*") do
+    for glyph in string.gmatch(tostring(value), "[%z\1-\127\194-\244][\128-\191]*") do
         glyphs[#glyphs + 1] = glyph
     end
     local widths, total = {}, 0
@@ -42,12 +43,12 @@ end
 -- Renderer-independent lightweight rich text: paragraphs, lists, headings and emphasis.
 function M.rich(value, width, size, measure)
     local lines = {}
-    value = tostring(value or ""):gsub("\r\n", "\n")
-    for paragraph in (value .. "\n"):gmatch("(.-)\n") do
-        local heading, body = paragraph:match("^(#+)%s+(.+)$")
+    value = string.gsub(tostring(value or ""), "\r\n", "\n")
+    for paragraph in string.gmatch((value .. "\n"), "(.-)\n") do
+        local heading, body = string.match(paragraph, "^(#+)%s+(.+)$")
         local font = heading and size + 3 or size
         body = body or paragraph
-        body = body:gsub("^%s*[-*]%s+", "• ")
+        body = string.gsub(body, "^%s*[-*]%s+", "• ")
         local spans, line, used = {}, {}, 0
         local strong, emphasis = false, false
         local function flush()
@@ -57,7 +58,7 @@ function M.rich(value, width, size, measure)
         end
         local function add(word, style)
             local glyphs = {}
-            for glyph in word:gmatch("[%z\1-\127\194-\244][\128-\191]*") do
+            for glyph in string.gmatch(word, "[%z\1-\127\194-\244][\128-\191]*") do
                 glyphs[#glyphs + 1] = glyph
             end
             for _, glyph in ipairs(glyphs) do
@@ -79,18 +80,18 @@ function M.rich(value, width, size, measure)
         end
         local index = 1
         while index <= #body do
-            if body:sub(index, index + 1) == "**" then
+            if string.sub(body, index, index + 1) == "**" then
                 strong = not strong
                 index = index + 2
-            elseif body:sub(index, index) == "*" then
+            elseif string.sub(body, index, index) == "*" then
                 emphasis = not emphasis
                 index = index + 1
             else
-                local stop = body:find("*", index, true) or (#body + 1)
-                local chunk = body:sub(index, stop - 1)
-                for word in chunk:gmatch("%S+%s*") do
+                local stop = string.find(body, "*", index, true) or (#body + 1)
+                local chunk = string.sub(body, index, stop - 1)
+                for word in string.gmatch(chunk, "%S+%s*") do
                     local ww = 0
-                    for glyph in word:gmatch("[%z\1-\127\194-\244][\128-\191]*") do
+                    for glyph in string.gmatch(word, "[%z\1-\127\194-\244][\128-\191]*") do
                         ww = ww + ((measure and measure(glyph, font)) or font * 0.62)
                     end
                     if used + ww > width and #line > 0 then
@@ -134,7 +135,7 @@ function M.new(api, measure)
     local wheel_bounds
     local wheel_remainder = 0
     local manual_scroll = false
-    local drag, window_drag, color_drag, palette_drag, split_drag
+    local drag, window_drag, color_drag, palette_drag, split_drag, resize_drag
     self.sidebar_width = 330
     self.help_scroll = 0
     local help_bounds
@@ -151,6 +152,7 @@ function M.new(api, measure)
         self.mouse_held = false
         drag = nil
         window_drag = nil
+        resize_drag = nil
         color_drag = nil
         palette_drag = nil
         split_drag = nil
@@ -267,6 +269,7 @@ function M.new(api, measure)
         if code == 121 then
             drag = nil
             window_drag = nil
+        resize_drag = nil
             self.dropdown = nil
             self.text_edit = nil
             self.color_picker = nil
@@ -328,7 +331,7 @@ function M.new(api, measure)
                 if e.replace then
                     e.text = ""
                 else
-                    e.text = e.text:sub(1, -2)
+                    e.text = string.sub(e.text, 1, -2)
                 end
                 e.replace = false
                 return
@@ -594,7 +597,7 @@ function M.new(api, measure)
             tree_manual = true
         else
             self.scroll =
-                math.max(0, math.min(math.max(0, #page.controls - 12), self.scroll - steps * 3))
+                math.max(0, math.min(math.max(0, #page.controls - (self.visible_rows or 12)), self.scroll - steps * 3))
             manual_scroll = true
         end
     end
@@ -611,6 +614,7 @@ function M.new(api, measure)
             not self.color_picker
             and not drag
             and not window_drag
+            and not resize_drag
             and not self.text_edit
             and input.wheel
             and input.mouse
@@ -680,9 +684,20 @@ function M.new(api, measure)
                         math.max(250, math.min(650, (x - split_drag.ox) / split_drag.scale))
                 end
             end
+            if resize_drag then
+                if not input.down(1) then
+                    resize_drag = nil
+                    if self.on_geometry_changed then self.on_geometry_changed(self.parent_geometry) end
+                elseif x and y then
+                    local g = geometry.drag(resize_drag.geometry, resize_drag.edge, x-resize_drag.x, y-resize_drag.y)
+                    self.window_width,self.window_height,self.window_x,self.window_y = g.width,g.height,g.x,g.y
+                end
+            end
             if window_drag then
                 if not self.visible or not input.down(1) then
+                    if self.visible and self.on_geometry_changed then self.on_geometry_changed(self.parent_geometry) end
                     window_drag = nil
+        resize_drag = nil
                 elseif x and y then
                     self.window_x = math.max(0, math.min(window_drag.max_x, x - window_drag.dx))
                     self.window_y = math.max(0, math.min(window_drag.max_y, y - window_drag.dy))
@@ -726,6 +741,7 @@ function M.new(api, measure)
             hits = {}
             drag = nil
             window_drag = nil
+        resize_drag = nil
             self.dropdown = nil
             self.text_edit = nil
             self.color_picker = nil
@@ -733,10 +749,13 @@ function M.new(api, measure)
         end
         local commands = {}
         hits = {}
-        local s = math.min(w / 1920, h / 1080)
-        local ox, oy =
-            math.max(0, math.min(math.max(0, w - 1500 * s), self.window_x or (w - 1500 * s) / 2)),
-            math.max(0, math.min(math.max(0, h - 820 * s), self.window_y or (h - 820 * s) / 2))
+        local g = geometry.bounds(w,h,self.window_width,self.window_height,self.window_x,self.window_y)
+        self.window_width,self.window_height,self.window_x,self.window_y = g.width,g.height,g.x,g.y
+        self.parent_geometry = g
+        local W,H,s,ox,oy = g.width,g.height,g.scale,g.x,g.y
+        self.visible_rows = math.max(1,math.floor((H-350)/38))
+        local tree_visible = math.max(1,math.floor((H-250)/31))
+        self.sidebar_width = math.max(250,math.min(self.sidebar_width, W-800))
         local visible_text_age = {}
         self.window_x, self.window_y = ox, oy
         local white = { 224, 230, 234 }
@@ -755,11 +774,17 @@ function M.new(api, measure)
             }
         end
         local function text(x, y, value, size, color)
+            local full = tostring(value)
+            local width = math.max(0, (W-25) - x) * s
+            local single = string.gsub(full, "[\r\n]+", " ")
+            local visible = M.flow(single, width, (size or 20) * s, elapsed, measure)
             commands[#commands + 1] = {
                 type = "text",
                 x = ox + x * s,
                 y = oy + y * s,
-                text = tostring(value),
+                text = visible,
+                full_text = full,
+                text_width = width,
                 size = (size or 20) * s,
                 c = color or white,
                 a = 1,
@@ -771,7 +796,8 @@ function M.new(api, measure)
                 text_age[key] = elapsed
             end
             visible_text_age[key] = text_age[key]
-            local result = M.flow(value, width * s, size * s, elapsed - text_age[key], measure)
+            width = math.max(0, math.min(width, (W-25) - x))
+            local result = M.flow(string.gsub(tostring(value), "[\r\n]+", " "), width * s, size * s, elapsed - text_age[key], measure)
             text(x, y, result, size, color)
             commands[#commands].full_text = tostring(value)
             commands[#commands].text_width = width * s
@@ -791,52 +817,52 @@ function M.new(api, measure)
             rect(x - 1, y + travel * (1 - progress), 7, thumb, accent)
             commands[#commands].scrollbar = role
         end
-        rect(0, 0, 1500, 820, { 16, 20, 24 }, 0.98)
-        rect(0, 760, 1500, 60, { 28, 33, 38 })
-        rect(self.sidebar_width, 60, 2, 700, muted)
-        hit(0, 760, 1500, 60, function(mx, my)
+        rect(0, 0, W, H, { 16, 20, 24 }, 0.98)
+        rect(0, (H-60), W, 60, { 28, 33, 38 })
+        rect(self.sidebar_width, 60, 2, H-120, muted)
+        hit(0, (H-60), W, 60, function(mx, my)
             if drag or self.capture then
                 return
             end
             window_drag =
-                { dx = mx - ox, dy = my - oy, max_x = math.max(0, w - 1500 * s), max_y = math.max(
+                { dx = mx - ox, dy = my - oy, max_x = math.max(0, w - W * s), max_y = math.max(
                     0,
-                    h - 820 * s
+                    h - H * s
                 ) }
         end)
-        wheel_bounds = { x = ox, y = oy + 196 * s, w = 1500 * s, h = 504 * s, split = ox
+        wheel_bounds = { x = ox, y = oy + 196 * s, w = W * s, h = (H-316) * s, split = ox
             + self.sidebar_width * s }
-        text(30, 777, "LIVE LUA LOADER", 28, accent)
-        rect(1445, 775, 38, 30, { 65, 73, 80 })
-        text(1457, 782, "X", 20, white)
-        hit(1445, 775, 38, 30, function()
+        text(30, (H-43), "LIVE LUA LOADER", 28, accent)
+        rect((W-55), (H-45), 38, 30, { 65, 73, 80 })
+        text((W-43), (H-38), "X", 20, white)
+        hit((W-55), (H-45), 38, 30, function()
             self.visible = false
             self.capture = false
             self.dropdown = nil
             self.text_edit = nil
             self.color_picker = nil
         end)
-        text(25, 715, "MODS", 18, muted)
+        text(25, (H-105), "MODS", 18, muted)
         local mods = api.list()
         local mod, page = active()
         local sidebar = self.sidebar()
-        tree_max = math.max(0, #sidebar - 18)
+        tree_max = math.max(0, #sidebar - tree_visible)
         tree_scroll = math.max(0, math.min(tree_scroll, tree_max))
         if not tree_manual then
             for i, node in ipairs(sidebar) do
                 if node.kind == "mod" and node.index == self.selected then
                     if i <= tree_scroll then
                         tree_scroll = i - 1
-                    elseif i > tree_scroll + 18 then
-                        tree_scroll = i - 18
+                    elseif i > tree_scroll + tree_visible then
+                        tree_scroll = i - tree_visible
                     end
                 end
             end
         end
         self.mod_scroll = tree_scroll
-        for i = tree_scroll + 1, math.min(#sidebar, tree_scroll + 18) do
+        for i = tree_scroll + 1, math.min(#sidebar, tree_scroll + tree_visible) do
             local entry = sidebar[i]
-            local y = 671 - (i - tree_scroll - 1) * 31
+            local y = (H-149) - (i - tree_scroll - 1) * 31
             local x = 25 + entry.depth * 16
             if entry.kind == "mod" then
                 local selected = entry.index == self.selected
@@ -872,9 +898,13 @@ function M.new(api, measure)
                         break
                     end
                 end
-                rect(x - 10, last and y + 6 or y - 7, 1, last and 18 or 31, muted)
-                commands[#commands].tree_branch = { last = last, row_y = oy + y * s, junction = oy
-                    + (y + 6) * s }
+                local anchor = i-1
+                while anchor > 0 and sidebar[anchor].mod == entry.mod and sidebar[anchor].depth > entry.depth do anchor=anchor-1 end
+                local anchor_y = (H-149) - (anchor-tree_scroll-1)*31 + 6
+                local junction = y+6
+                local top = math.max(junction,math.min(H-137,anchor_y))
+                rect(x-10,junction,1,top-junction,muted)
+                commands[#commands].tree_branch = {last=last,row_y=oy+y*s,junction=oy+junction*s,top=oy+top*s}
                 rect(x - 10, y + 6, 9, 1, muted)
                 if entry.kind == "category" then
                     bounded(
@@ -914,12 +944,12 @@ function M.new(api, measure)
                 end
             end
         end
-        scrollbar("mods", self.sidebar_width - 10, 140, 558, #sidebar, 18, tree_scroll)
+        scrollbar("mods", self.sidebar_width - 10, 140, H-262, #sidebar, tree_visible, tree_scroll)
         if not mod then
-            text(365, 670, "No mods registered. See the author example.", 24)
+            text(365, (H-150), "No mods registered. See the author example.", 24)
         else
-            bounded(self.sidebar_width + 35, 712, mod.name, 28, accent, 1445 - self.sidebar_width)
-            bounded(self.sidebar_width + 35, 674, page.name, 22, white, 1445 - self.sidebar_width)
+            bounded(self.sidebar_width + 35, (H-108), mod.name, 28, accent, (W-55) - self.sidebar_width)
+            bounded(self.sidebar_width + 35, (H-146), page.name, 22, white, (W-55) - self.sidebar_width)
             text(
                 self.sidebar_width + 35,
                 90,
@@ -938,18 +968,18 @@ function M.new(api, measure)
                 for _ in pairs(page.actions) do
                     pending = pending + 1
                 end
-                text(850, 90, "CONFIRM REQUIRED (" .. pending .. ")", 16, accent)
-                rect(1160, 81, 135, 29, { 65, 73, 80 })
-                text(1170, 90, "APPLY", 18, accent)
-                rect(1310, 81, 135, 29, { 65, 73, 80 })
-                text(1320, 90, "DISCARD", 18, white)
-                hit(1160, 81, 135, 29, function()
+                text((W-650), 90, "CONFIRM REQUIRED (" .. pending .. ")", 16, accent)
+                rect((W-340), 81, 135, 29, { 65, 73, 80 })
+                text((W-330), 90, "APPLY", 18, accent)
+                rect((W-190), 81, 135, 29, { 65, 73, 80 })
+                text((W-180), 90, "DISCARD", 18, white)
+                hit((W-340), 81, 135, 29, function()
                     local ok, err = mod.handle.confirm(page.id)
                     self.notice = ok
                             and ("Confirmed and saved" .. (err and "; " .. tostring(err) or ""))
                         or tostring(err)
                 end)
-                hit(1310, 81, 135, 29, function()
+                hit((W-190), 81, 135, 29, function()
                     mod.handle.discard(page.id)
                     self.notice = "Pending edits discarded"
                 end)
@@ -967,10 +997,10 @@ function M.new(api, measure)
             if not manual_scroll and selected_at <= self.scroll then
                 self.scroll = selected_at - 1
             end
-            if not manual_scroll and selected_at > self.scroll + 12 then
-                self.scroll = selected_at - 12
+            if not manual_scroll and selected_at > self.scroll + self.visible_rows then
+                self.scroll = selected_at - self.visible_rows
             end
-            self.scroll = math.max(0, math.min(self.scroll, math.max(0, #page.controls - 12)))
+            self.scroll = math.max(0, math.min(self.scroll, math.max(0, #page.controls - self.visible_rows)))
             local selected_row = 0
             local columns = { 0, 0 }
             local wide = type(page.render_preview) ~= "function"
@@ -980,17 +1010,18 @@ function M.new(api, measure)
                 end
             end
             local settings_x = self.sidebar_width + 35
-            local available = 1475 - settings_x
+            local available = (W-25) - settings_x
             local row_width = wide and available or available / 2 - 30
+            if available < 1050 then wide = true end
             for i, c in ipairs(page.controls) do
                 if c.type ~= "text" and c.type ~= "section" then
                     selected_row = selected_row + 1
                 end
-                if i > self.scroll and i <= self.scroll + 12 then
-                    local col = c.column or 1
+                if i > self.scroll and i <= self.scroll + self.visible_rows then
+                    local col = wide and 1 or (c.column or 1)
                     columns[col] = columns[col] + 1
                     local x = settings_x + (col - 1) * (available / 2)
-                    local y = 623 - (columns[col] - 1) * 38
+                    local y = (H-197) - (columns[col] - 1) * 38
                     local row_index = selected_row
                     if c == selected then
                         rect(x - 5, y - 7, row_width + 5, 34, accent)
@@ -1046,7 +1077,7 @@ function M.new(api, measure)
                                     or (c == selected and accent or { 35, 42, 48 })
                             )
                             local display = editing and self.text_edit.text .. "|"
-                                or string.format("%.3f", value):gsub("0+$", ""):gsub("%.$", "")
+                                or string.gsub(string.gsub(string.format("%.3f", value), "0+$", ""), "%.$", "")
                             bounded(
                                 vx + 440,
                                 y,
@@ -1268,15 +1299,15 @@ function M.new(api, measure)
                     end
                 end
             end
-            scrollbar("settings", 1480, 196, 456, #page.controls, 12, self.scroll)
-            if #page.controls > 12 then
+            scrollbar("settings", (W-20), 196, H-364, #page.controls, self.visible_rows, self.scroll)
+            if #page.controls > self.visible_rows then
                 text(
                     365,
                     166,
                     "Rows "
                         .. (self.scroll + 1)
                         .. "-"
-                        .. math.min(self.scroll + 12, #page.controls)
+                        .. math.min(self.scroll + self.visible_rows, #page.controls)
                         .. " of "
                         .. #page.controls,
                     16,
@@ -1303,7 +1334,7 @@ function M.new(api, measure)
                 help_key = key
             end
             local hx = self.sidebar_width + 35
-            local hw = 1460 - hx
+            local hw = (W-40) - hx
             local lines = M.rich(help, hw * s, 18 * s, measure)
             local visible = 3
             self.help_scroll = math.min(self.help_scroll, math.max(0, #lines - visible))
@@ -1328,9 +1359,9 @@ function M.new(api, measure)
                     tx = tx + span.width / s
                 end
             end
-            scrollbar("help", 1470, 126, 64, #lines, visible, self.help_scroll)
+            scrollbar("help", (W-30), 126, 64, #lines, visible, self.help_scroll)
         end
-        hit(self.sidebar_width - 6, 196, 12, 510, function()
+        hit(self.sidebar_width - 6, 196, 12, H-310, function()
             split_drag = { ox = ox, scale = s }
         end)
         text(
@@ -1341,9 +1372,9 @@ function M.new(api, measure)
             muted
         )
         -- Show the actual status, not a fixed character slice of a Lua error.
-        local notice = self.notice:gsub("[%w_./\\-]+%.lua:%d+:%s*", "")
+        local notice = string.gsub(self.notice, "[%w_./\\-]+%.lua:%d+:%s*", "")
         local lines, line = {}, ""
-        for word in notice:gmatch("%S+") do
+        for word in string.gmatch(notice, "%S+") do
             if #line > 0 and #line + #word + 1 > 58 then
                 lines[#lines + 1] = line
                 line = word
@@ -1355,7 +1386,7 @@ function M.new(api, measure)
             lines[#lines + 1] = line
         end
         for i, message in ipairs(lines) do
-            text(900, 32 + (#lines - i) * 20, message, 15, accent)
+            text((W-600), 32 + (#lines - i) * 20, message, 15, accent)
         end
         if self.dropdown then
             local overlay_start = #commands + 1
@@ -1503,7 +1534,7 @@ function M.new(api, measure)
                 hit(px + 370, fy - 5, 210, 30, function()
                     self.text_edit = {
                         color_channel = field.key,
-                        text = tostring(field.value):gsub("^#", ""),
+                        text = string.gsub(tostring(field.value), "^#", ""),
                         replace = true,
                     }
                 end)
@@ -1560,6 +1591,17 @@ function M.new(api, measure)
                     command.layer = 200
                 end
             end
+        end
+        for _, edge in ipairs({
+            {"left",0,0,8,H},{"right",W-8,0,8,H},{"bottom",0,0,W,8},{"top",0,H-8,W,8},
+            {"left_bottom",0,0,14,14},{"right_bottom",W-14,0,14,14},
+            {"left_top",0,H-14,14,14},{"right_top",W-14,H-14,14,14},
+        }) do
+            local name=edge[1]
+            hit(edge[2],edge[3],edge[4],edge[5],function(mx,my)
+                if drag or self.capture then return end
+                resize_drag={edge=name,x=mx,y=my,geometry=g}
+            end)
         end
         text_age = visible_text_age
         return commands
