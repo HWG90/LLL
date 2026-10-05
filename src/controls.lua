@@ -246,6 +246,21 @@ return function(loader, live, report)
                 }
             end
         end
+        self.author_categories = self.author_categories or {}
+        local authors = {}
+        for _, row in ipairs(snapshot) do
+            local key = row.owner .. "/" .. row.author
+            if not authors[key] then
+                if not self.author_categories[key] then
+                    self.author_category_count = (self.author_category_count or 0) + 1
+                    self.author_categories[key] = "source_author_" .. self.author_category_count
+                end
+                authors[key] = self.author_categories[key]
+                categories[#categories + 1] = {
+                    id = authors[key], parent = "source_" .. row.owner, name = row.author,
+                }
+            end
+        end
         for index, row in ipairs(snapshot) do
             local old = by_name[row.name]
             self.external_ids = self.external_ids or {}
@@ -253,7 +268,7 @@ return function(loader, live, report)
                 self.external_count = (self.external_count or 0) + 1
                 self.external_ids[row.name] = "external_" .. self.external_count
             end
-            local details = "Runtime owner: "
+            local details = "Author: " .. row.author .. "\nRuntime owner: "
                 .. row.owner
                 .. "\nSource: "
                 .. row.source
@@ -294,7 +309,7 @@ return function(loader, live, report)
                 name = "[" .. short .. "] " .. (old and old.name or readable(
                     row.name:match("([^/]+)$") or row.name
                 )),
-                category = "source_" .. row.owner,
+                category = authors[row.owner .. "/" .. row.author],
                 dynamic = true,
                 controls = controls,
             }

@@ -27,7 +27,12 @@ local function find(rows, name)
         end
     end
 end
+live.catalog["live/demo"].metadata = { author = "  Nova  " }
+loader.records.archive = { Author = "Guest Author" }
 local rows = snapshot(loader, live, env)
+assert(find(rows, "live/demo").author == "Nova")
+assert(find(rows, "archive").author == "Guest Author")
+assert(find(rows, "live/new").author == "Unknown author")
 assert(
     #rows == 5
         and find(rows, "live/demo").owner == "lll_live"
@@ -118,6 +123,39 @@ for _, node in ipairs(menu.sidebar()) do
     preview:write(string.rep("  ", node.depth) .. title .. "\n")
 end
 preview:close()
+local author_ids = {}
+for _, category in ipairs(core.mods.lll_management.categories) do
+    if category.parent then
+        assert(category.parent:find("source_", 1, true) == 1)
+        author_ids[category.parent .. "/" .. category.name] = category.id
+    end
+end
+assert(author_ids["source_lll_live/Nova"] and author_ids["source_lll_archive/Guest Author"])
+assert(author_ids["source_lll_live/Unknown author"])
+controls.refresh()
+for _, category in ipairs(core.mods.lll_management.categories) do
+    if category.parent then assert(author_ids[category.parent .. "/" .. category.name] == category.id) end
+end
+local second = dofile("src/ui/core.lua").new()
+controls.bind(second, "origins_mcm")
+controls.refresh()
+for index, page in ipairs(core.mods.lll_management.pages) do
+    assert(second.mods.lll_management.pages[index].id == page.id)
+end
+menu.notice = string.rep("Very long status message ", 120)
+menu.sidebar_width = 650
+for _, dimensions in ipairs({{1920,1080},{640,360}}) do
+    for _, command in ipairs(menu.compose(dimensions[1], dimensions[2])) do
+        if command.type == "text" and command.text_width then
+            assert(command.x + command.text_width <= dimensions[1] + 0.01)
+            local glyphs = 0
+            for _ in command.text:gmatch("[%z\1-\127\194-\244][\128-\191]*") do glyphs = glyphs + 1 end
+            assert(glyphs * command.size * 0.62 <= command.text_width + 0.01)
+            assert(not command.text:find("\n", 1, true))
+        end
+    end
+end
+print("PASS source/author hierarchy, missing metadata, stable shared page/category IDs and bounded narrow-screen text")
 controls.close()
 HD2ModLoader = old_mdl
 CowboyBingusModLoader = old_bingus

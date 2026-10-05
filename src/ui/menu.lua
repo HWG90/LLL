@@ -755,11 +755,17 @@ function M.new(api, measure)
             }
         end
         local function text(x, y, value, size, color)
+            local full = tostring(value)
+            local width = math.max(0, 1475 - x) * s
+            local single = full:gsub("[\r\n]+", " ")
+            local visible = M.flow(single, width, (size or 20) * s, elapsed, measure)
             commands[#commands + 1] = {
                 type = "text",
                 x = ox + x * s,
                 y = oy + y * s,
-                text = tostring(value),
+                text = visible,
+                full_text = full,
+                text_width = width,
                 size = (size or 20) * s,
                 c = color or white,
                 a = 1,
@@ -771,7 +777,8 @@ function M.new(api, measure)
                 text_age[key] = elapsed
             end
             visible_text_age[key] = text_age[key]
-            local result = M.flow(value, width * s, size * s, elapsed - text_age[key], measure)
+            width = math.max(0, math.min(width, 1475 - x))
+            local result = M.flow(tostring(value):gsub("[\r\n]+", " "), width * s, size * s, elapsed - text_age[key], measure)
             text(x, y, result, size, color)
             commands[#commands].full_text = tostring(value)
             commands[#commands].text_width = width * s
