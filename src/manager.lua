@@ -30,7 +30,7 @@ return function(host, entries)
         end
     end
     local callbacks=(LLL_AFTER_STARTUP or dofile("src/after_startup.lua"))(function(name)return loader.modules[name]end,
-        function(name,message)pcall(host.report,name,message)end,function(name)return loader.records[name]end)
+        function(name,message)pcall(host.report,name,message)end,function(name)return loader.records[name]end,host.health)
     loader.after_startup=callbacks.register
     compat.after_startup=loader.after_startup
     loader.capabilities=(LLL_CAPABILITIES or dofile("src/capabilities.lua"))({logs=type(host.open_log)=="function",

@@ -83,8 +83,12 @@ if LLL_HEALTH then
         end
     end
     health={public=public,before=function()return observer and observer.mark()end,
-        after=function(name,mark)
-            if observer and mark then local result=observer.changes(mark);local text=LLL_HEALTH.describe(result);public.changes[name]=text;report(name,"Health: "..text)end
+        after=function(name,mark,stage)
+            if observer and mark then
+                local result=observer.changes(mark);local text=LLL_HEALTH.describe(result)
+                if stage then text=string.sub((public.changes[name] or "").."; "..stage..": "..text,1,4096) end
+                public.changes[name]=text;report(name,"Health: "..text)
+            end
         end}
 end
 local manager = LLL_MANAGER({
