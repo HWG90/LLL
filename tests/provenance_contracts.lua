@@ -70,6 +70,11 @@ controls.bind(core, "origins")
 controls.refresh()
 local spec = core.mods.lll_management
 assert(spec and #spec.categories >= 3)
+for _, control in ipairs(spec.pages[1].controls) do
+    assert(control.id ~= "open_manager", "Redundant manager button in own menu")
+end
+assert(loader.provenance_snapshot == controls.provenance_snapshot)
+assert(type(loader.provenance_snapshot()[1].loaded) == "boolean")
 local ids = {}
 for _, page in ipairs(spec.pages) do
     assert(not ids[page.id])

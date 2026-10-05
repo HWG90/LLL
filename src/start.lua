@@ -1,7 +1,7 @@
 local platform = LLL_PLATFORM
 local log = platform.open_log("LiveLuaLoader.log")
 if log then
-    log:write("Live Lua Loader 0.1.2 (R20 grouping candidate); API 1 compatibility\n")
+    log:write("Live Lua Loader 0.1.3 (R21 grouping candidate); API 1 compatibility\n")
 end
 local guarded, why = pcall(platform.guard)
 if not guarded then

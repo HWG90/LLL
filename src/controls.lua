@@ -46,7 +46,7 @@ return function(loader, live, report)
                 name = "Overview",
                 dynamic = true,
                 controls = {
-                    { type = "section", label = "LIVE LUA LOADER R20" },
+                    { type = "section", label = "LIVE LUA LOADER R21" },
                     {
                         type = "button",
                         id = "open_manager",
@@ -153,7 +153,7 @@ return function(loader, live, report)
         return {
             id = "lll_management",
             name = "Live Lua Loader",
-            description = "R20 mod manager. F9 opens the independent window. All changes use shared loader state.",
+            description = "R21 mod manager. F9 opens the independent window. All changes use shared loader state.",
             categories = categories,
             pages = pages,
         }
@@ -197,9 +197,17 @@ return function(loader, live, report)
         end
         return { id = spec.id, name = spec.name, description = spec.description, pages = pages }
     end
-    local function origin_pages(spec)
+    local function origin_pages(spec, keep_opener)
         local snapshot = (LLL_PROVENANCE or dofile("src/provenance.lua"))(loader, live)
-        local pages, categories, by_name = { spec.pages[1] }, {}, {}
+        local overview = {}
+        for key, value in pairs(spec.pages[1]) do overview[key] = value end
+        overview.controls = {}
+        for _, control in ipairs(spec.pages[1].controls) do
+            if keep_opener or control.id ~= "open_manager" then
+                overview.controls[#overview.controls + 1] = control
+            end
+        end
+        local pages, categories, by_name = { overview }, {}, {}
         for index = 2, #spec.pages do
             by_name[spec.pages[index].controls[1].description] = spec.pages[index]
         end
@@ -288,6 +296,11 @@ return function(loader, live, report)
             pages = pages,
         }
     end
+    function self.provenance_snapshot()
+        return (LLL_PROVENANCE or dofile("src/provenance.lua"))(loader, live)
+    end
+    -- Both frontends consume fresh rows from the same ownership/status model.
+    loader.provenance_snapshot = self.provenance_snapshot
     function self.provenance_summary()
         local rows = (LLL_PROVENANCE or dofile("src/provenance.lua"))(loader, live)
         local count = 0
@@ -441,7 +454,7 @@ return function(loader, live, report)
             end
         end
         self.provider = api
-        self.bind(api, "authors")
+        self.bind(api, "origins_mcm")
     end
     function self.refresh()
         local spec = definition()
@@ -457,7 +470,7 @@ return function(loader, live, report)
             local bound_spec = spec
             local bound_signature = signature
             if binding.inside then
-                bound_spec = binding.inside == "origins" and origin_pages(spec)
+                bound_spec = (binding.inside == "origins" or binding.inside == "origins_mcm") and origin_pages(spec, binding.inside == "origins_mcm")
                     or binding.inside == "authors" and author_pages(spec)
                     or enclosed(spec)
                 bound_signature = ""
