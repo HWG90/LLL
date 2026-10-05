@@ -12,3 +12,13 @@ dist/
 native/lean-build/
 native/library.txt
 tests/tmp/
+# Chat-generated review artifacts; runtime assets belong in explicit asset paths.
+/preview/
+/previews/
+/review/
+/review-artifacts/
+/scratch/
+/chat-artifacts/
+/codex-clipboard-*
+/LLL-*-Preview.html
+/LLL-*-Preview.png
