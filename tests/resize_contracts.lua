@@ -25,5 +25,6 @@ for _,c in ipairs(menu.compose(1920,1080))do
  if c.tree_branch then assert(c.y==c.tree_branch.junction and c.y+c.h<=menu.parent_geometry.y+(menu.parent_geometry.height-137)*menu.parent_geometry.scale+.01)end
  if c.type=='text' then assert(c.text_width and c.x+c.text_width<=menu.parent_geometry.x+(menu.parent_geometry.width-25)*menu.parent_geometry.scale+.01)end
 end
+assert(#menu.compose(0,0)==0)
 menu.recover();assert(not menu.visible and not menu.capture)
 print('PASS bounded edge/corner resize, actual mouse drag persistence, narrow rows, whole-text bounds and recovery')

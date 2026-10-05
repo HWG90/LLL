@@ -737,7 +737,7 @@ function M.new(api, measure)
         end
     end
     function self.compose(w, h)
-        if not self.visible then
+        if not self.visible or not w or not h or w<=0 or h<=0 then
             hits = {}
             drag = nil
             window_drag = nil

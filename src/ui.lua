@@ -218,13 +218,14 @@ return function(loader, platform, controls, report)
                 if not foreground then
                     menu.visible = false
                 end
+                local w,h=sr.Gui.resolution()
+                if type(w)~="number" or type(h)~="number" or w<=0 or h<=0 then self.close();menu.recover();return end
                 local acquired, reason = capture.sync(menu.visible, foreground ~= nil, foreground)
                 if not acquired then
                     menu.visible = false
                     report("LLL UI", reason)
                 end
                 menu.advance(dt)
-                local w, h = sr.Gui.resolution()
                 local commands=menu.compose(w,h)
                 if console_surface then
                     local g=menu.parent_geometry
