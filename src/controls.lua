@@ -46,7 +46,7 @@ return function(loader, live, report)
                 name = "Overview",
                 dynamic = true,
                 controls = {
-                    { type = "section", label = "LIVE LUA LOADER R21" },
+                    { type = "section", label = "LIVE LUA LOADER R22" },
                     {
                         type = "button",
                         id = "open_manager",
@@ -66,6 +66,17 @@ return function(loader, live, report)
                             loader.refresh()
                             self.refresh()
                             return "Discovery refreshed"
+                        end,
+                    },
+                    {
+                        type = "button", id = "clear_removed",
+                        label = "Clear removed entries", button_label = "Clear",
+                        disabled = not loader.clear_removed_entries,
+                        description = "Forget missing scripts only after lifecycle ownership is released. Active and pending cleanup records remain. Saved settings and logs are retained.",
+                        on_activate = function()
+                            local removed, retained = loader.clear_removed_entries()
+                            self.refresh()
+                            return string.format("Cleared %d entries; retained %d owned entries", removed, retained)
                         end,
                     },
                     {
@@ -153,7 +164,7 @@ return function(loader, live, report)
         return {
             id = "lll_management",
             name = "Live Lua Loader",
-            description = "R21 mod manager. F9 opens the independent window. All changes use shared loader state.",
+            description = "R22 mod manager. F9 opens the independent window. All changes use shared loader state.",
             categories = categories,
             pages = pages,
         }

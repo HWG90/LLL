@@ -126,6 +126,9 @@ return function(platform, report)
                 end
             end
         end
+        for name in pairs(self.catalog) do
+            if not seen[name] then self.catalog[name] = nil end
+        end
         last_names = names
         return names
     end
@@ -339,6 +342,10 @@ return function(platform, report)
             on_cleanup_poll = poll_cleanup,
             mdl_context = ctx,
         }
+    end
+    function self.forget_removed(name)
+        assert(not self.catalog[name], "Available script cannot be forgotten")
+        self.entries[name], sources[name] = nil, nil
     end
     return self
 end

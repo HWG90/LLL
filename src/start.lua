@@ -1,7 +1,7 @@
 local platform = LLL_PLATFORM
 local log = platform.open_log("LiveLuaLoader.log")
 if log then
-    log:write("Live Lua Loader 0.1.3 (R21 grouping candidate); API 1 compatibility\n")
+    log:write("Live Lua Loader 0.1.4 (R22 grouping candidate); API 1 compatibility\n")
 end
 local guarded, why = pcall(platform.guard)
 if not guarded then
@@ -113,6 +113,17 @@ local function refresh_catalog(force)
 end
 manager.refresh = function()
     return refresh_catalog(true)
+end
+manager.clear_removed_entries = function()
+    refresh_catalog(true)
+    local retired, retained = manager.forget_removed()
+    for _, name in ipairs(retired) do
+        live.forget_removed(name)
+        source_cache[name], pending_edits[name] = nil, nil
+        report(name, "Removed stale loader record; saved settings retained")
+    end
+    controls.refresh()
+    return #retired, retained
 end
 refresh_catalog()
 -- Diagnostics now live at the bottom of the one LLL Mods page.

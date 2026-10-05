@@ -288,5 +288,27 @@ return function(host, entries)
         end
         return loader.modules[name] == "loaded"
     end
+    function loader.forget_removed()
+        local retired, retained, order = {}, 0, {}
+        for _, name in ipairs(loader.order) do
+            local missing = name:match("^live/") and loader.live_catalog
+                and not loader.live_catalog[name]
+            local state = loader.modules[name]
+            local origin = loader.origins[name]
+            if missing and not loader.records[name] and not loader.pending_cleanup[name]
+                and state ~= "loaded" and state ~= "loading"
+                and not (origin and origin.registry) then
+                host.evict(name)
+                loader.modules[name], loader.errors[name], loader.origins[name] = nil, nil, nil
+                seen[name] = nil
+                retired[#retired + 1] = name
+            else
+                order[#order + 1] = name
+                if missing then retained = retained + 1 end
+            end
+        end
+        loader.order = order
+        return retired, retained
+    end
     return loader
 end

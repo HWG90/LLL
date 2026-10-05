@@ -269,3 +269,30 @@ reset()
 print(
     "PASS compiled bootstrap detach keeps cleanup pump alive and restores owned hook only after acknowledgement"
 )
+
+reset()
+do
+ local h=host_for({live_lua_api=1,on_disable=function()return true end})
+ local loader=factory(h,{})
+ loader.live_catalog={['live/available']={}}
+ for _,name in ipairs({'live/gone','live/pending','live/active','live/available'}) do
+  loader.order[#loader.order+1]=name;loader.modules[name]='enable failed'
+ end
+ loader.pending_cleanup['live/pending']={}
+ loader.modules['live/active']='loaded'
+ local names,retained=loader.forget_removed()
+ assert(#names==1 and names[1]=='live/gone' and retained==2)
+ assert(loader.modules['live/gone']==nil and loader.modules['live/available'])
+ assert(loader.pending_cleanup['live/pending'] and loader.modules['live/active']=='loaded')
+end
+reset()
+print('PASS missing failed rows retire; available, active and pending ownership remain')
+
+do
+ local present=true
+ local live=dofile('src/live.lua')({live='mock',read=function()return nil end,files=function()return present and {'gone.lua'} or {},nil,{} end},function()end)
+ live.scan(true);assert(live.catalog['live/gone'])
+ present=false;live.scan(true);assert(not live.catalog['live/gone'])
+ live.forget_removed('live/gone');assert(not live.entries['live/gone'])
+end
+print('PASS forced discovery removes vanished catalog rows before safe retirement')
