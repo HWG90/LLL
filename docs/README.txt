@@ -44,3 +44,6 @@ The shared LuaJIT machine-code limit starts at 64 MiB (65536 KiB), with 8000 tra
 Read-only feature declarations and bounded after_startup callbacks support mod-author detection. Startup health records build stamps, prior-session state, newest available crash summaries, and per-load CPU time, heap changes and shared-state changes. Archive diagnostics identify active and hidden copies and retain that metadata in the persisted cache. Private captured Lua dependencies and private Windows declarations protect loader operations from ordinary builtin/library replacements and conflicting external cdefs; intentional modifications of public loader/engine state and other hosts' internals are not isolated.
 
 Exact R24 package remains subject to fresh-launch visual, dragging, console handoff and input-restoration checks. It contains no experimental camera change: independent screenshot-camera movement is still unresolved.
+
+R25 METADATA
+Owned creation/package metadata defaults to Goose. Loose mods use per-ID JSON sidecars; unrelated shared-folder manifests are not inherited. Folder manifests retain their established conventions. See MOD-METADATA.txt.
