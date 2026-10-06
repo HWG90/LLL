@@ -10,7 +10,7 @@ local diagnostic_service = LLL_DIAGNOSTICS and LLL_DIAGNOSTICS.shared()
 local diagnostic_path = platform.log_directory and platform.log_directory .. "/LiveLuaLoader.log"
 local diagnostic_owner = diagnostic_service and diagnostic_service.attach("LLL", diagnostic_path)
 if log then
-    log:write("Live Lua Loader 0.1.6 (R24 grouping candidate); API 1 compatibility\n")
+    log:write("Live Lua Loader 0.1.7 (R25 grouping candidate); API 1 compatibility\n")
 end
 local guarded, why = pcall(platform.guard)
 if not guarded then

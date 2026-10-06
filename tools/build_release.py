@@ -29,6 +29,7 @@ def source_files():
         "build_lean.py",
         "build_release.py",
         "build_native_lean.py",
+        "create_mod.py",
     ):
         files["tools/" + name] = (ROOT / "tools" / name).read_bytes()
     for path in (ROOT / "tests").glob("*.lua"):
@@ -71,7 +72,8 @@ def build(output):
     manifest = {
         "Version": 1,
         "Guid": "bb921b89-f8d0-4abc-9e93-f426a93fef51",
-        "Name": "Live Lua Loader 0.1.6 - R24-grouping-candidate",
+        "Author": "Goose",
+        "Name": "Live Lua Loader 0.1.7 - R25-grouping-candidate",
         "Description": "Source/author groups, resizable manager, shared diagnostics, protected runtime, after-startup API and 64 MiB adaptive JIT code capacity. Optional MCM integration.",
         "Options": [{"Name": "Loader", "Include": ["data"]}],
     }
@@ -84,20 +86,21 @@ def build(output):
     for path in (ROOT / "docs").glob("*.txt"):
         files[path.name] = path.read_bytes()
     files["examples/heartbeat.lua"] = (ROOT / "examples/heartbeat.lua").read_bytes()
+    files["examples/heartbeat.json"] = (ROOT / "examples/heartbeat.json").read_bytes()
     files.update({"source/" + name: data for name, data in source_files().items()})
     files["FILES-SHA256.txt"] = "".join(
         digest(data) + "  " + name + "\n" for name, data in sorted(files.items())
     ).encode()
-    target = output / "LiveLuaLoader-0.1.6-R24-grouping-candidate.zip"
+    target = output / "LiveLuaLoader-0.1.7-R25-grouping-candidate.zip"
     save_zip(target, files)
     save_zip(ROOT / "dist/LiveLuaLoader-private-candidate.zip", files)
     save_zip(
-        output / "LiveLuaLoader-0.1.6-R24-grouping-candidate-source.zip", source_files()
+        output / "LiveLuaLoader-0.1.7-R25-grouping-candidate-source.zip", source_files()
     )
-    (output / "LiveLuaLoader-0.1.6-R24-grouping-candidate-SHA256.txt").write_text(
+    (output / "LiveLuaLoader-0.1.7-R25-grouping-candidate-SHA256.txt").write_text(
         digest(target.read_bytes()) + "  " + target.name + "\n", encoding="utf-8"
     )
-    (output / "LiveLuaLoader-0.1.6-R24-grouping-candidate-README.txt").write_bytes(
+    (output / "LiveLuaLoader-0.1.7-R25-grouping-candidate-README.txt").write_bytes(
         files["README.txt"]
     )
     print(target)

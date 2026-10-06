@@ -71,6 +71,7 @@ return function(platform, report)
                         candidates[#candidates + 1] = {
                             id = id,
                             path = root.path .. "/" .. file,
+                            metadata_id = id,
                             dir = root.path,
                             kind = root.kind,
                         }
@@ -103,20 +104,19 @@ return function(platform, report)
                 for _, entry in ipairs(candidates) do
                     entry.source_root = root.path
                     if LLL_METADATA then
+                        local key=entry.dir.."/"..(entry.metadata_id or "")
                         local signature
                         if platform.stat then
-                            signature = table.concat({
-                                platform.stat(entry.dir .. "/manifest.json") or "-",
-                                platform.stat(entry.dir .. "/mod.json") or "-",
-                                platform.stat(entry.dir .. "/metadata.json") or "-",
-                            }, "|")
+                            local stamps={}
+                            for _,file in ipairs(LLL_METADATA.files(entry.metadata_id))do stamps[#stamps+1]=platform.stat(entry.dir.."/"..file) or "-"end
+                            signature=table.concat(stamps,"|")
                         end
-                        local cached = metadata_cache[entry.dir]
+                        local cached = metadata_cache[key]
                         if signature and cached and cached.signature == signature then
                             entry.metadata = cached.value
                         else
-                            entry.metadata = LLL_METADATA.read(platform, entry.dir)
-                            metadata_cache[entry.dir] =
+                            entry.metadata = LLL_METADATA.read(platform, entry.dir, entry.metadata_id)
+                            metadata_cache[key] =
                                 { signature = signature, value = entry.metadata }
                         end
                     end

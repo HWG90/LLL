@@ -1,0 +1,11 @@
+PER-MOD AUTHOR METADATA
+
+Create an owned loose mod:
+python tools/create_mod.py my_mod --name "My Mod" --output PATH_TO_MODS
+This exclusively creates my_mod.lua and my_mod.json with name and author Goose. Existing files are never overwritten. --author supplies a different actual author when needed.
+
+A loose script ID reads only its matching <id>.json; it never inherits a shared Mods/manifest.json author. Folder mods merge fields from manifest.json, mod.json and metadata.json in that precedence. Existing author fields (author/Author, including named objects) remain supported. Do not generate Goose metadata for imported third-party mods: retain their author or leave it unknown.
+
+Release manifests and owned example JSON default to Goose. Library/helper source files are not separate runtime mods; third-party helper copyright and licensing remain unchanged.
+
+Installed owned-folder manifests can be discovered by existing loader Refresh. New per-file sidecar consumption requires R25 or later, activated on the next loader start. Existing grouping structure, enabled settings and Lua payloads are not changed by author JSON.

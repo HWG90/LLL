@@ -93,6 +93,7 @@ if not status:
         s, 0, 0, 0
     )
 for contract in (
+    b"tests/metadata_sidecar_contracts.lua",
     b"tests/health_contracts.lua",
     b"tests/after_startup_contracts.lua",
     b"tests/jit_budget_contracts.lua",

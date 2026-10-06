@@ -132,18 +132,29 @@ function M.fields(value)
     end
     return { author = label(value.author or value.Author), name = label(value.name or value.Name) }
 end
-function M.read(platform, dir)
-    for _, file in ipairs({ "manifest.json", "mod.json", "metadata.json" }) do
+function M.files(id)
+    if id~=nil then
+        if type(id)=="string" and string.match(id,"^[%w_-]+$") then return {id..".json"} end
+        return {}
+    end
+    return {"manifest.json","mod.json","metadata.json"}
+end
+function M.read(platform, dir, id)
+    local files=M.files(id)
+    local result={}
+    for _, file in ipairs(files) do
         local text = platform.read(dir .. "/" .. file, 65536)
         if text then
             local ok, value = pcall(M.decode, text)
             if ok then
                 local fields = M.fields(value)
-                fields.path = dir .. "/" .. file
-                return fields
+                result.author=result.author or fields.author
+                result.name=result.name or fields.name
+                if not result.path and (fields.author or fields.name) then result.path=dir.."/"..file end
+                if result.author and result.name then return result end
             end
         end
     end
-    return {}
+    return result
 end
 return M

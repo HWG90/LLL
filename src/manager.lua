@@ -39,7 +39,7 @@ return function(host, entries)
         diagnostics=host.diagnostics~=nil,author_groups=true,resizable_manager=true})
     compat.capabilities=loader.capabilities
     compat.discovery=host.discovery_state
-    compat.revision="LLL-R24"
+    compat.revision="LLL-R25"
     loader.diagnostics=host.diagnostics
     loader.health=host.health and host.health.public
     compat.health=loader.health

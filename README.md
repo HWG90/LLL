@@ -1,3 +1,7 @@
+## R25 metadata convention
+
+Owned-mod creation and release manifests default to author **Goose**. Loose scripts use matching `<id>.json` sidecars; folder mods retain `manifest.json`, `mod.json`, or `metadata.json`. Unknown/external authors are not replaced or inherited from the shared Mods directory. See [metadata usage](docs/MOD-METADATA.txt). R25 source/package is ready for a future loader update; this does not hot-replace an existing running VM.
+
 ## R24 source and local candidate
 
 The current source adds source/author grouping, a resizable standalone manager, bounded text and connector geometry, and the shared MCM/LLL diagnostics console. It also adds privately captured Lua dependencies and Windows signatures, capability queries, after-startup callbacks, startup health/copy diagnostics, and a 64 MiB shared LuaJIT code budget with bounded observed-flush growth.
