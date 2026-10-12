@@ -1,3 +1,28 @@
+Live Lua Loader 0.1.8 / R31 - Helldivers manager
+
+R31 brings the modular loader and redesigned manager into a full release.
+
+- Helldivers charcoal/yellow styling, procedural winged skull, header/footer hazard stripes, inset borders and panel depth.
+- Sliding On/Off switches; bounded label/control distances, consistent resize scaling and a selection details pane on wider layouts.
+- Main HUD font on the supported build, native font atlas/width handling and an explicit compatibility fallback.
+- Tab commits and applies text, numeric and color edits; existing key capture and console completion retain ownership.
+- Source-owned mod error logs, bounded incremental reads, append/rotation handling and a verbose_launch config switch. Dynamic/compiled log paths can be advertised explicitly.
+- Native modular folder projects, private imports, separate defaults/user settings, dependency-aware preflight and reload.
+- Typed console commands, completion, history, held-key repeat and source-attributed error review.
+- Retained input ownership/restoration safeguards, metadata drafts, external-loader provenance and per-mod author groups.
+
+Installation: import the ready-made ZIP with your mod manager, enable LLL and assign winning startup-loader priority. Disable competing shared startup loaders. See the attached README for direct-copy instructions, patch-number handling and removal. Existing configs are preserved. This release does not deploy itself or ship third-party mods.
+
+Verbose launch: add verbose_launch = true to the existing LLL.cfg return table, or enable Manager settings > Verbose launch logging before launching. Default is false. Normal mode forwards newly appended error lines; verbose mode includes additional detail and a bounded existing tail.
+
+Requires Windows x64 and Helldivers 2 Steam build 25480438. The default manager key is F8; Open/Close, Apply and Focus can be rebound. Main-font resources are referenced in place, not distributed. Required stock startup callback preservation is disclosed in CONTENTS-NOTICES.txt.
+
+Validation: full isolated LuaJIT suite passes, including packaged initialization with development source unavailable, native retained-layer/input safeguards, bounded responsive layout, Tab text/color acceptance, exact-build font resolution/atlas/native metrics/fallback, real Windows shared log reads/rotation and source-owned log ingestion. Package CRC, exact runtime payload and all internal SHA256 entries pass.
+
+The R31 UI/main-font appearance and end-to-end log capture have not been verified in-game. Offline previews use an approximate desktop font. No game installation, saved settings or unrelated Future Project research was changed or published.
+
+Prior release notes
+
 R20 / 0.1.2 grouping candidate
 Groups the independent manager's left mod list by LLL live scripts, archive addons via LLL, genuine MDL/Bingus runtime registries and unknown/conflicting ownership.
 Each entry shows runtime status separately from its discovery source. Group headings count loaded reports. External loader entries are read-only and identities are deduplicated.

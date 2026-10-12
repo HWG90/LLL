@@ -1,1 +1,5 @@
-The manager embeds the original ModConfigurationMenu core, menu, view and capture primitives. It runs independently of an installed MCM mod. The optional MCM adapter shares loader state. MDL and Bingus implementations and assets are not included.
+The manager embeds the original DBF ModConfigurationMenu core, controller, stock view and capture primitives. R26 ports the maintained MCM UI polish lessons and theme/key naming into LLL-owned modules, preserving LLL source/author navigation and external-owner restrictions. The original DBF-MCM theme is vendored locally; no installed MCM mod is required.
+
+`menu.lua` owns editing/navigation and one explicit per-instance context. `input.lua` owns pointer/wheel/drag interpretation; `render.lua` owns commands and their hit regions; `text.lua` owns UTF-8 layout; `theme.lua` owns palette and semantic depths; `preferences.lua` owns loader-config preferences. `geometry.lua`, `view.lua` and `capture.lua` keep physical bounds, stock primitives and verified cursor ownership separate.
+
+The optional MCM adapter shares authoritative loader state. MDL/Bingus assets and native implementations are not copied into the UI refresh. Stock GUI/font resources and the existing input DLL remain the runtime rendering/input route. Offline previews use approximate desktop fonts and do not establish live game appearance.

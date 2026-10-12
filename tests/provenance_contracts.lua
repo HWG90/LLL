@@ -107,6 +107,7 @@ HD2ModLoader.modules.external_mdl = "loaded"
 CowboyBingusModLoader = { modules = { external_bingus = "loaded" } }
 controls.refresh()
 local menu = dofile("src/ui/menu.lua").new(core)
+menu.expand_all()
 assert(#menu.sidebar() > #spec.pages)
 menu.visible = true
 assert(#menu.compose(1920, 1080) > 0)
@@ -149,7 +150,7 @@ for _, dimensions in ipairs({{1920,1080},{640,360}}) do
     for _, command in ipairs(menu.compose(dimensions[1], dimensions[2])) do
         if command.tree_branch then
             assert(command.y==command.tree_branch.junction)
-            assert(command.y+command.h<=menu.parent_geometry.y+(menu.parent_geometry.height-137)*menu.parent_geometry.scale+.01)
+            assert(command.y+command.h<=menu.parent_geometry.y+(menu.parent_geometry.height-118)*menu.parent_geometry.scale+.01)
         end
         if command.type == "text" and command.text_width then
             assert(command.x + command.text_width <= dimensions[1] + 0.01)

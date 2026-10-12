@@ -1,0 +1,65 @@
+R26 UI REFRESH REVIEW - OCTOBER 9, 2026
+
+UI lessons applied from the maintained DBF-MCM UI polish, layer contracts,
+two-column scrolling repair, settings organization and input ownership work.
+
+APPEARANCE
+Quiet charcoal/blue surfaces, restrained brass headings, white control labels,
+distinct selection/hover/focus and enabled states. Information wraps; bounded
+labels move only while hovered/focused. Button width includes scaled glyphs.
+Stock Stingray primitives/font remain the material path. No new shader archive,
+HUD resource, renderer-reuse assumption or native input DLL is introduced.
+
+LAYER AUDIT
+Old LLL used base + command index * .01. A changing sidebar shifted every later
+primitive's depth; enough commands could place ordinary rectangles above labels.
+The new depth is semantic, independent of command count and retention history:
+  90: shell and shell surfaces
+  95: row/selection backgrounds; 99: focused row rail
+  100: controls; 100.1/100.2: fill/knob/check detail; 101: ordinary text
+  110: optional preview band
+  189/190/195/200/201: dropdown frame/surface/selection/control/text
+  289/290/295/300/301: picker frame/surface/selection/control/text
+  390/400/401: diagnostic surface/control/text
+Native stale IDs are destroyed before replacement allocation. Unchanged fields
+and text stay retained when a row hover changes. Separate preview/popup GUI
+lifetimes are preserved. Layer contracts exercise retention, insertion, release
+and composed popup depths; fixtures do not prove engine font/material appearance.
+
+ORGANIZATION
+Source group -> author -> owned mod; loaded/disabled/discovered remains explicit.
+External registries remain read-only and unknown ownership stays unknown.
+Overview and Manager settings are root pages; the header Settings action selects
+the existing preferences page. IDs, loader enabled state and cleanup controls
+are preserved. Open/Close defaults to F8 and is rebindable; the newly bound key
+is suppressed until released. UI scale/font size save in LLL.cfg manager_ui;
+window dimensions/position remain manager_window. Defaults and confirmation
+are buttons. No F8/F9 confirmation or Home reset shortcut is assigned.
+Each instance owns an explicit shared context. Controller/editing, pointer input,
+render/hit regions, text, theme, preferences, geometry, native view and capture
+have separate modules. Builders bundle them without installed MCM dependency.
+
+SCROLLING AND RECOVERY
+Both columns retain independent row positions and clamp their offsets when one
+column is shorter. Compact windows flatten columns before width calculation.
+Sidebar/settings/help/dropdown thumbs drag and cancel on release/close/recovery.
+Acquisition refuses disabled baseline mouse focus or another native gate owner.
+An idle manager never releases the other frontend's gate. Release reads back
+focus/visibility/clipping and native gate; failed restoration retains ownership
+for retry. Existing loader-manager handoff and held-input suppression remain.
+
+VALIDATION AND INSTALLATION
+Run py -3 tests/run.py, then tools/ui_preview.py with a Python runtime containing
+Pillow for optional offline visuals. Pillow is a preview-tool dependency only.
+The runtime and release builder require no Pillow or installed MCM.
+Build with tools/build_release.py --output pointing to a review folder. ZIPs
+contain reproducible source and integrity hashes. Package build, test fixtures,
+installed bytes, loader acknowledgement and live appearance are distinct evidence.
+The exact R26 package has not been deployed or live-accepted by this work.
+
+After local deployment and a normal restart: verify startup R26 identity; open
+with F8; inspect compact/wide/scaled pages, long choices and dropdown/picker
+text; scroll uneven columns away from zero; drag thumbs; change/reset shortcut,
+font and scale; verify persistence after restart; use Apply/Discard/Reset buttons;
+then test MCM/Epic LUT handoff, Alt-Tab, close, error, reload and shutdown.
+Require camera movement, clicks and verified cursor restoration after each.

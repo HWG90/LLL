@@ -113,7 +113,12 @@ return function(loader, live, environment)
         end
         author = type(author) == "string" and string.gsub(string.gsub(author, "^%s+", ""), "%s+$", "") or nil
         if author == "" then author = nil end
+        local overrides=loader.get_loader_option and loader.get_loader_option("metadata_overrides") or {}
+        local override=type(overrides)=="table" and overrides[name] or nil
+        if type(override)=="table" and type(override.author)=="string" and override.author~="" then author=override.author end
         rows[#rows + 1] = {
+            display_name=type(override)=="table" and override.name or (metadata and (metadata.name or metadata.Name)),
+            description=type(override)=="table" and override.description or (metadata and metadata.description),
             name = name,
             author = author or "Unknown author",
             owner = owner,

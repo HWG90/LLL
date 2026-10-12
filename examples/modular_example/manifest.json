@@ -1,0 +1,13 @@
+{
+  "id": "sample_mod",
+  "name": "Modular example",
+  "author": "Goose",
+  "version": "0.1.0",
+  "lll": {
+    "entry": "main.lua",
+    "defaults": "config/defaults.cfg",
+    "modules": [
+      "src/runtime.lua"
+    ]
+  }
+}

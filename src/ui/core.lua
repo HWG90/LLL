@@ -85,6 +85,10 @@ function M.rgb_hsv(rgb)
 end
 local function normalize(c, v)
     if c.type == "input" then
+        if c.free_text then
+            assert(type(v)=="string" and #v<=(c.max_length or 512) and not string.find(v,"[%c]"),"Metadata text exceeds its limit or contains control characters")
+            return v
+        end
         assert(
             type(v) == "string" and #v <= 48 and string.match(v, "^[%w _-]+$"),
             "Use letters, numbers, spaces, underscores or hyphens"
@@ -242,6 +246,7 @@ function M.new(store, log)
             local page = {
                 category = definition.category,
                 id = definition.id,
+                resource_id = definition.resource_id,
                 name = plain(definition.name),
                 render_preview = definition.render_preview,
                 controls = {},

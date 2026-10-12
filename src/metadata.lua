@@ -130,7 +130,11 @@ function M.fields(value)
     if type(value) ~= "table" then
         return {}
     end
-    return { author = label(value.author or value.Author), name = label(value.name or value.Name) }
+    local logs={}
+    if type(value.log_files)=="table" then for _,name in ipairs(value.log_files)do
+        if type(name)=="string" and #logs<16 and name:match("^[%w_. -]+%.log$") then logs[#logs+1]=name end
+    end end
+    return { author=label(value.author or value.Author),name=label(value.name or value.Name),log_files=logs }
 end
 function M.files(id)
     if id~=nil then
@@ -150,8 +154,9 @@ function M.read(platform, dir, id)
                 local fields = M.fields(value)
                 result.author=result.author or fields.author
                 result.name=result.name or fields.name
+                if not result.log_files or #result.log_files==0 then result.log_files=fields.log_files end
                 if not result.path and (fields.author or fields.name) then result.path=dir.."/"..file end
-                if result.author and result.name then return result end
+                if result.author and result.name and result.log_files and #result.log_files>0 then return result end
             end
         end
     end

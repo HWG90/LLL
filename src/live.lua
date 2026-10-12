@@ -2,6 +2,8 @@
 return function(platform, report)
     local self = { entries = {}, catalog = {}, settings = {} }
     local sources, metadata_cache = {}, {}
+    local project=LLL_PROJECT or dofile("src/project.lua")
+    local prepared,instances,retained_instances={},{},{}
     local last_names
     local function valid(id)
         return type(id) == "string" and string.match(id, "^[%w_-]+$")
@@ -80,7 +82,17 @@ return function(platform, report)
                 if platform.directories then
                     for _, id in ipairs(root_dirs or platform.directories(root.path)) do
                         if valid(id) then
-                            local path = root.path .. "/" .. id .. "/mod.lua"
+                            local dir=root.path.."/"..id
+                            local declared
+                            if root.kind~="mdl" then
+                                local ok,value=pcall(project.descriptor,platform,dir)
+                                if ok then declared=value else report("live/"..id,"Manifest refused: "..tostring(value))end
+                            end
+                            if root.kind~="mdl" and not declared then
+                                local main=platform.stat and platform.stat(dir.."/main.lua") or platform.read(dir.."/main.lua",16777216)
+                                if main then declared={entry="main.lua",defaults="config/defaults.cfg",invalid=true}end
+                            end
+                            local path = dir .. "/" .. (declared and declared.entry or "mod.lua")
                             local exists
                             if platform.stat then
                                 exists = platform.stat(path)
@@ -93,12 +105,17 @@ return function(platform, report)
                                     path = path,
                                     dir = root.path .. "/" .. id,
                                     kind = root.kind,
+                                    project = declared,
                                 }
                             end
                         end
                     end
                 end
                 table.sort(candidates, function(a, b)
+                    if a.id==b.id then
+                        local af,bf=a.dir~=root.path,b.dir~=root.path
+                        if af~=bf then return af end
+                    end
                     return a.path < b.path
                 end)
                 for _, entry in ipairs(candidates) do
@@ -212,16 +229,55 @@ return function(platform, report)
         end
         return text
     end
+    function self.fingerprint(name,force)
+        local entry=assert(self.catalog[name] or self.entries[name],"Unknown live mod")
+        if not entry.project then return self.source(name,force)end
+        local spec=assert(project.descriptor(platform,entry.dir),"LLL project manifest missing")
+        return project.fingerprint(platform,entry,spec)
+    end
+    function self.restart_only(name)
+        local entry=self.catalog[name] or self.entries[name]
+        return entry and entry.project and entry.project.restart_only==true or false
+    end
     function self.preflight(name)
         local entry = assert(self.catalog[name] or self.entries[name], "Unknown live mod")
+        if entry.project then
+            local spec=assert(project.descriptor(platform,entry.dir),"LLL project manifest missing")
+            prepared[name]=project.snapshot(platform,entry,spec)
+            return prepared[name].chunks[spec.entry]
+        end
         return assert(loadstring(self.source(name, true), "@" .. entry.path))
     end
     function self.load(name)
         local entry = assert(self.catalog[name] or self.entries[name])
-        local definition = self.preflight(name)()
+        local definition
+        if entry.project then
+            if not prepared[name] then self.preflight(name)end
+            local snapshot=prepared[name];prepared[name]=nil
+            local value,context=project.instantiate(platform,entry,snapshot,report)
+            definition=value
+            if instances[name] and instances[name].retain_until_exit then retained_instances[#retained_instances+1]=instances[name]end
+            instances[name]=context
+        else definition = self.preflight(name)() end
         assert(type(definition) == "table", "Live mod must return a lifecycle table")
         if definition.live_lua_api == 1 then
             assert(type(definition.on_disable) == "function", "LLL live mod requires cleanup")
+            local context=instances[name]
+            if context then
+                local disable=definition.on_disable
+                definition.on_disable=function(...)
+                    context.console_active=false
+                    local done,why=disable(...)
+                    if done~=false then context.release_console()end
+                    return done,why
+                end
+                if definition.on_cleanup_poll then
+                    local poll=definition.on_cleanup_poll
+                    definition.on_cleanup_poll=function(...)
+                        local done,why=poll(...);if done==true then context.release_console()end;return done,why
+                    end
+                end
+            end
             return definition
         end
         assert(
@@ -246,6 +302,8 @@ return function(platform, report)
             id = entry.id,
             dir = entry.dir,
             settings = settings,
+            config_dir=instances[name] and instances[name].config_dir,
+            config=instances[name] and instances[name].config,
             loader = rawget(_G, "CowboyBingusModLoader"),
         }
         function ctx.log(...)
@@ -327,6 +385,7 @@ return function(platform, report)
                 return false, "pending"
             end
             cleanup_started = true
+            if instances[name] then instances[name].console_active=false end
             cleanup_index = #cleanups
             if definition.on_disable then
                 local ok, done, why = pcall(definition.on_disable, ctx)
@@ -341,6 +400,7 @@ return function(platform, report)
             end
             return finish_cleanup()
         end
+        if instances[name] then ctx.on_cleanup(instances[name].release_console)end
         return {
             live_lua_api = 1,
             name = definition.name or definition.Name,

@@ -63,3 +63,20 @@ assert(capture.shutdown())
 print(
     "PASS merged input repair: snapshot retained on failed restoration, safe retry, baseline acquisition blocked until restore, external ownership retained and repeated close"
 )
+
+captured = 1
+assert(capture.release() and captured == 1)
+assert(not capture.sync(true, true, {}))
+assert(captured == 1 and state.focus)
+captured = 0
+state.focus = false
+assert(not capture.sync(true, true, {}))
+assert(not capture.status().pending_restore)
+state.focus = true
+assert(capture.sync(true, true, {}))
+local setter = window.set_mouse_focus
+window.set_mouse_focus = function() end
+assert(not capture.release() and capture.status().pending_restore)
+window.set_mouse_focus = setter
+assert(capture.release() and state.focus)
+print("PASS competing frontend, disabled baseline, silent restoration failure")

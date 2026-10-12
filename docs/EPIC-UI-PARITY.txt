@@ -1,0 +1,61 @@
+Helldivers manager UI candidate - October 11, 2026
+
+Corrected scope: On/Off controls are sliding switches, with short transitions.
+Checkboxes are reserved for selection semantics rather than enable/disable.
+
+Layout: bounded automatic sidebar width; 800-unit maximum setting row; fixed
+value groups near labels; adjacent two-column stride; stable logical font/control
+sizes on window resize. Surplus single-column width shows a selection detail
+panel. Existing resize/drag, wheel ownership and popup layers remain intact.
+
+Theme: charcoal planes, Helldivers yellow accents, winged skull geometry at
+upper left, diagonal header hazard band and complementary footer strip,
+squared inset workspace borders, edge-only field borders and a shell shadow.
+The skull is a procedural emblem inspired by Helldivers, not a shipped game asset.
+Desktop references: Mod Organizer 2's source/list/detail organization and
+Vortex's quick actions and status-oriented management interface:
+https://github.com/ModOrganizer2/modorganizer
+https://www.nexusmods.com/site/about/vortex
+
+Font: loaded main HUD font is the default on the verified game build. Resolver
+ported from canonical Epic-LUT/src/platform/ui_font.lua retains PE/resource
+availability checks and frame-local IdString reconstruction. GUI material atlas
+binding and actual native text widths drive rendering. Compatibility fallback
+is explicit in the LLL log when main resources are unavailable. Offline previews
+use Bahnschrift as an approximation and are not in-game font evidence.
+
+Tab: default Confirm/Apply commits active text and numeric drafts and applies
+the page. It also commits an active RGB/HEX draft, saves the color and applies.
+Invalid drafts stay open. Key capture and console completion retain ownership.
+
+Mod logs: bounded incremental follower determines log names from literal
+*.log references in each loose/modular source tree, metadata log_files, and
+explicit diagnostics paths. It checks the source folder/Logs and LLL, Bingus,
+and MDL log roots. Dynamic names/compiled archive mods should advertise their
+path using DBFDiagnostics.attach(source,path), or
+LiveLuaLoader.register_log(resource_id,absolute_path) after registration.
+Declared paths override inferred ownership. Ambiguous inferred files are not
+misattributed. Missing files are retried; newly created source logs are read
+from the start. Registration before mod load preserves launch errors.
+
+Example mod.json field: "log_files": ["MyMod.log"]
+Normal mode forwards complete error/exception/failed/traceback lines and new
+content only. Verbose mode includes other lines and a bounded existing tail.
+The file is not replaced or intercepted. Partial lines, truncation/rotation and
+read-sharing with writer/rename/delete are handled. Poll budget: 64 files,
+8192 bytes/file/pass, 256 candidate paths, 16 log names/source. Discovery reads
+at most 96 source files and 2 MiB/source, at depth <=4, on initial load/reload.
+Runtime-computed paths require the explicit registration interface.
+
+In the existing LLL.cfg return table, add:
+    verbose_launch = true,
+Or use Manager settings > Verbose launch logging before launching. Defaults
+false; toggle applies during runtime, launch detail needs it enabled at startup.
+No saved settings or installed game files were changed by this candidate build.
+
+Validation: full isolated tests/run.py; main font exact-build resolver plus
+atlas/native metrics/fallback view contracts; fixed travel and size over logical
+1100/1500/1800/2200 widths; text/color Tab apply; source log append, split lines,
+rotation, late creation, idle no-content-read and verbosity. Native retained
+layer/ownership/startup/package tests remain passing. Offline previews checked.
+Deployment and live rendering/log acceptance remain unverified.

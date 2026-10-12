@@ -35,11 +35,11 @@ return function(host, entries)
     compat.after_startup=loader.after_startup
     loader.capabilities=(LLL_CAPABILITIES or dofile("src/capabilities.lua"))({logs=type(host.open_log)=="function",
         discovery=host.discovery_supported==true,after_startup=true,health=host.health~=nil,jit_budget=host.jit_budget~=nil,
-        live_loading=true,deferred_cleanup=true,protected_runtime=host.protected_runtime==true,
+        live_loading=true,deferred_cleanup=true,modular_projects=host.modular_projects==true,console_commands=host.console_commands==true,protected_runtime=host.protected_runtime==true,
         diagnostics=host.diagnostics~=nil,author_groups=true,resizable_manager=true})
     compat.capabilities=loader.capabilities
     compat.discovery=host.discovery_state
-    compat.revision="LLL-R25"
+    compat.revision="LLL-R31"
     loader.diagnostics=host.diagnostics
     loader.health=host.health and host.health.public
     compat.health=loader.health

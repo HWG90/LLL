@@ -2,11 +2,23 @@
 return function(loader, platform, controls, report)
     local self = {}
     local menu, view, capture, input, console_surface
+    local hotkey_held, suppress_toggle = false, false
+    local preferences=LLL_UI_PREFERENCES or dofile("src/ui/preferences.lua")
     local initialize
     local api = LLL_UI_CORE.new(nil, function(msg)
         report("LLL UI", msg)
     end)
     controls.bind(api, "origins")
+    loader.manager_preferences_changed=function(values)
+        if api.menu_toggle_key~=values.menu_toggle_key then hotkey_held,suppress_toggle=true,true end
+        api.menu_toggle_key=values.menu_toggle_key
+        api.apply_key,api.focus_key=values.apply_key,values.focus_key
+        if menu then menu.ui_scale,menu.font_scale=values.ui_scale,values.font_scale end
+    end
+    loader.manager_preferences_changed(preferences.get(loader))
+    loader.reset_manager_window=function()
+        if menu then menu.window_width,menu.window_height,menu.window_x,menu.window_y=nil,nil,nil,nil end
+    end
     self.api = api
     api.diagnostics = loader.diagnostics
     api.diagnostics_surface = loader.diagnostics_surface
@@ -80,12 +92,11 @@ return function(loader, platform, controls, report)
  ]]
     )
     local user = ffi.load("user32")
-    local hotkey_held = false
     local owner_kernel = ffi.load("kernel32")
     local owner_pid = owner_kernel.lll_ui_process()
     local owner_check = ffi.new("unsigned long[1]")
     function self.tick()
-        local down = bit.band(tonumber(user.lll_ui_key(120)), 0x8000) ~= 0
+        local down = bit.band(tonumber(user.lll_ui_key(api.menu_toggle_key or 119)), 0x8000) ~= 0
         if down and not hotkey_held then
             local window = user.lll_ui_foreground()
             if window ~= nil then
@@ -120,8 +131,14 @@ return function(loader, platform, controls, report)
             report("LLL UI", msg)
         end)
         view = LLL_UI_VIEW.new(sr)
+        if LLL_UI_FONT and platform.font_memory then
+            view.set_font_source(LLL_UI_FONT.new(platform.font_memory(),"game.dll"))
+        end
         menu = LLL_UI_MENU.new(api, view.measure)
         self.menu = menu
+        local metadata_editor=LLL_UI_METADATA_EDITOR or dofile("src/ui/metadata_editor.lua")
+        metadata_editor.install(api,loader,controls,function()return menu end)
+        loader.manager_preferences_changed(preferences.get(loader))
         if loader.diagnostics and loader.diagnostics_surface then console_surface=loader.diagnostics_surface(loader.diagnostics) end
         local saved = loader.get_loader_option and loader.get_loader_option("manager_window")
         if type(saved)=="table" then
@@ -135,19 +152,21 @@ return function(loader, platform, controls, report)
         end
 
         input = {}
-        local suppress_toggle = bit.band(tonumber(user.lll_ui_key(120)), 0x8000) ~= 0
+        suppress_toggle = bit.band(tonumber(user.lll_ui_key(api.menu_toggle_key or 119)), 0x8000) ~= 0
         function input.down(code)
-            if code == 120 then
+            -- A rebinding capture reads the real key before shortcut translation.
+            if menu.capture then return foreground and bit.band(tonumber(user.lll_ui_key(code)),0x8000)~=0 or false end
+            if code == (api.menu_toggle_key or 119) and code ~= 121 then
                 return false
-            end -- physical F9 is translated to the menu toggle
+            end -- Configured physical shortcut maps to the controller toggle.
             if code == 121 then
                 if suppress_toggle then
-                    if bit.band(tonumber(user.lll_ui_key(120)), 0x8000) == 0 then
+                    if bit.band(tonumber(user.lll_ui_key(api.menu_toggle_key or 119)), 0x8000) == 0 then
                         suppress_toggle = false
                     end
                     return false
                 end
-                code = 120
+                code = api.menu_toggle_key or 119
             end
             return foreground and bit.band(tonumber(user.lll_ui_key(code)), 0x8000) ~= 0 or false
         end
@@ -200,7 +219,7 @@ return function(loader, platform, controls, report)
                 local provider=rawget(_G,"DBFMCM")
                 if not foreground or (provider and provider.is_open and provider.is_open()) then menu.visible=false end
                 local was = menu.visible
-                menu.tick(console_surface and console_surface.filter(input,menu.visible) or input)
+                menu.tick(console_surface and console_surface.filter(input,menu.visible,dt) or input)
                 if menu.visible and not was then
                     local mcm = rawget(_G, "DBFMCM")
                     if mcm and mcm.close then
@@ -226,6 +245,13 @@ return function(loader, platform, controls, report)
                     report("LLL UI", reason)
                 end
                 menu.advance(dt)
+                if view.refresh_font then
+                    view.refresh_font()
+                    if view.font_name~=self.last_font_name then
+                        self.last_font_name=view.font_name
+                        report("LLL font",view.font_name=="Main HUD" and "Main HUD font active" or "Warning: main font unavailable; compatibility fallback active")
+                    end
+                end
                 local commands=menu.compose(w,h)
                 if console_surface then
                     local g=menu.parent_geometry
@@ -242,6 +268,6 @@ return function(loader, platform, controls, report)
         end
         report("LLL UI", "Independent manager initialized on demand")
     end
-    report("LLL UI", "F9 ready; manager initializes on first open")
+    report("LLL UI", "Manager ready on configured shortcut; initializes on first open")
     return self
 end

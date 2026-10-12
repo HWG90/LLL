@@ -4,6 +4,8 @@ import ctypes, os, struct, sys, zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+component_workspace = Path(os.environ.get("DBF_WORKSPACE", str(Path(__file__).absolute().parents[2])))
+os.environ["LLL_HUD_CONSOLE_SOURCE"] = str(component_workspace / "DBF-HUD/src/console.lua")
 sys.path.insert(0, str(ROOT / "tools"))
 from archive import hash_name, write, read
 from build import source
@@ -35,6 +37,14 @@ platform = 'return {data="tests/tmp",loader_config="mockconfig",write=function(p
     source(struct.pack("<II", len(stock), 2) + stock, platform)
 )
 generated = (tmp / "bootstrap.lua").read_bytes()
+assert generated.index(b"local LLL_UI_TEXT=") < generated.index(b"local LLL_DIAGNOSTICS="), "Console helper must be initialized before diagnostics"
+# Packaged initializers must work without the development src folder.
+initializer = generated[:generated.index(b"local platform = LLL_PLATFORM")]
+(tmp / "packaged-initializers.lua").write_bytes(
+    b'local dofile=function(path) error("Packaged initializer tried source fallback: "..path) end\n'
+    + initializer.replace(platform.encode(), b'return {}')
+    + b'\nend\nstart()\nprint("PASS packaged initializers without source files")\n'
+)
 assert (
     generated.index(b"local LLL_NATIVE\n")
     < generated.index(b"local LLL_UI=")
@@ -93,6 +103,7 @@ if not status:
         s, 0, 0, 0
     )
 for contract in (
+    b"tests/tmp/packaged-initializers.lua",
     b"tests/metadata_sidecar_contracts.lua",
     b"tests/health_contracts.lua",
     b"tests/after_startup_contracts.lua",
@@ -101,6 +112,15 @@ for contract in (
     b"tests/diagnostics_contracts.lua",
     b"tests/provenance_contracts.lua",
     b"tests/input_restore_contracts.lua",
+    b"tests/ui_refresh_contracts.lua",
+    b"tests/interaction_contracts.lua",
+    b"tests/layout_layer_contracts.lua",
+    b"tests/main_font_contracts.lua",
+    b"tests/log_reader_contracts.lua",
+    b"tests/native_log_reader_contracts.lua",
+    b"tests/desktop_layout_contracts.lua",
+    b"tests/project_contracts.lua",
+    b"tests/console_commands.lua",
     b"tests/speed_contracts.lua",
     b"tests/deferred_cleanup_contracts.lua",
     b"tests/protected_runtime_contracts.lua",

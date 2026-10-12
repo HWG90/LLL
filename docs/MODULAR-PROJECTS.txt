@@ -1,0 +1,76 @@
+LLL R30 - NATIVE FOLDER PROJECTS
+
+Recommended layout:
+  my_mod/manifest.json
+  my_mod/main.lua
+  my_mod/src/runtime.lua
+  my_mod/src/settings.lua
+  my_mod/config/defaults.cfg
+  my_mod/assets/...
+
+manifest.json contains name/author/version and an lll descriptor:
+  "lll": {"entry":"main.lua", "defaults":"config/defaults.cfg",
+          "modules":["src/runtime.lua","src/settings.lua"]}
+The entry can have any mod-relative .lua filename. No MDL installation or MDL
+folder structure is required. Legacy loose scripts and mod.lua folders remain
+supported. A folder project takes priority over a same-ID loose file.
+
+main.lua can be a single line:
+  return mod.require("src.runtime")
+
+mod.require("src.settings") and mod.require("src/settings.lua") address the same
+private module cache. Arguments can be passed to a module constructor. Each new
+load gets a fresh scope/cache, without changing global package.path/package.loaded.
+mod.scope holds intentional shared values between modules. Standard require
+still loads ordinary host libraries such as ffi and bit. Files retain their own
+source names and line numbers in errors.
+
+Declare modules for deterministic inventory/preflight. When modules is omitted,
+LLL discovers Lua helpers under src/ and vendor/. Dependencies, entry, defaults
+and manifest participate in edit detection. Syntax and constant missing imports
+are checked before cleanup. The compiled source snapshot stays fixed during
+cleanup/activation. Runtime-only errors are still reported at activation.
+Changes must stabilize across two watcher polls before automatic reload.
+
+CONFIG
+config/defaults.cfg contains a JSON object, for example:
+  {"enabled":true,"appearance":{"opacity":0.8}}
+Saved overrides live in LLL/Helldivers2/Settings/<mod-id>/config.cfg. Shipped files
+are never rewritten by mod.set. Nested defaults merge with saved values so new
+keys do not erase old choices. Invalid config data refuses preflight. Writes
+are atomic and failed writes preserve the current config.
+  mod.config.appearance.opacity
+  local ok,why=mod.set("appearance",{opacity=0.2})
+  mod.read("assets/file.dds")
+Config uses JSON data, not executable Lua. Standard legacy settings retain their
+existing adapters/locations where the owning mod requires them. MCM's modular
+provider writes under its LLL Settings folder and falls back to existing MDL INI
+files when a new file does not yet exist. HUD and Epic LUT retain their established
+user data roots; their public shipped defaults and source modules are editable.
+
+LIFECYCLE
+A new project returns an LLL API 1 lifecycle table with on_enable/on_update and
+on_disable. Existing API 2 callback modules also work through LLL's compatibility
+adapter; their cleanup, settings and registered globals retain their contract.
+DBF's stratagem addon is explicitly restart_only: it owns a startup update hook
+and does not advertise safe disable/reload. Native DLL changes need a restart.
+Native converted packages request retain_until_exit so a replaced module graph
+keeps resource backing references for the session. Cleanup/command ownership is
+released after acknowledgement; this retention does not claim GPU reclamation.
+Pure Lua projects can omit that flag.
+
+CREATE
+  py -3 tools/create_mod.py my_mod --name "My Mod" --output PATH_TO_MODS
+Folder projects are the default. --layout loose retains the old loose-template
+workflow. Existing folders/files are refused, never overwritten.
+
+MAINTAINED MOD PACKAGES
+DBF-MCM, DBF-HUD, Epic-LUT and DBF each have tools/build_lll.py in their owning
+repository. These produce separate source modules and a small main.lua under
+dist/releases/modular-20261010. Existing archive/BSL builders remain unchanged.
+They include reviewed native helper bytes/licenses where required; they do not
+include saved presets/settings, logs, captures or unrelated private research.
+Use exactly one provider for each mod; disable the prior archive/loose provider
+before a normal restart. HUD still needs its normal matching artwork assets.
+The native-context constructor and syntax tests are offline; active game behavior
+and menu/preview/native resource lifetime require live validation after deployment.

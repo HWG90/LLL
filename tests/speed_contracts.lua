@@ -171,7 +171,7 @@ ffi.load = function(name)
     if name == "user32" then
         return {
             lll_ui_key = function(code)
-                return ((code == 120 and key) or (code == 1 and mouse_held)) and 32768 or 0
+                return ((code == 119 and key) or (code == 1 and mouse_held)) and 32768 or 0
             end,
             lll_ui_foreground = function()
                 return foreground and ffi.cast("void *", 1) or nil
@@ -271,7 +271,7 @@ assert(
 foreground = false
 key = true
 ui.tick()
-assert(loads == 0, "F9 outside game must not initialize UI")
+assert(loads == 0, "F8 outside game must not initialize UI")
 key = false
 ui.tick()
 foreground = true
@@ -279,7 +279,7 @@ key = true
 ui.tick()
 assert(extracts == 1 and loads == 1 and ui.menu.visible)
 ui.tick()
-assert(ui.menu.visible, "Opening F9 press must not immediately close menu")
+assert(ui.menu.visible, "Opening F8 press must not immediately close menu")
 key = false
 ui.tick()
 key = true
@@ -321,5 +321,5 @@ ffi.load = load
 LLL_UI_CORE, LLL_UI_CAPTURE, LLL_UI_VIEW, LLL_UI_MENU, LLL_NATIVE, stingray, DBFMCM =
     unpack(previous, 1, 7)
 print(
-    "PASS lazy native/GUI initialization, foreground-gated F9, held-key suppression, reopen and close"
+    "PASS lazy native/GUI initialization, foreground-gated F8, held-key suppression, reopen and close"
 )

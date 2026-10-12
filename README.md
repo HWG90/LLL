@@ -1,3 +1,43 @@
+## Release 0.1.8 / R31
+
+[Download R31](https://github.com/HWG90/LLL/releases/tag/R31). Helldivers-styled manager with sliding switches, bounded layout, main HUD font, Tab acceptance, source-owned error logs and optional `verbose_launch` detail. Includes modular folder projects and typed console commands. See [release notes](docs/RELEASE-NOTES.txt), [UI/log configuration](docs/EPIC-UI-PARITY.txt) and [installation](docs/README.txt).
+
+The full isolated test suite and package integrity checks pass. R31 rendering and log behavior still need in-game validation; publishing this release does not deploy it.
+
+## R30 modular projects and console candidate
+
+Native folder projects use a small `main.lua`, a manifest-selected entry, separate `src/` modules and shipped JSON CFG defaults. User overrides live outside the mod folder. Private imports and dependency-aware preflight/reload are implemented; legacy mods remain supported. See [project layout](docs/MODULAR-PROJECTS.txt).
+
+The LLL console has command input, execution feedback and history. `dbfhud.global.opacity = 20` applies 20% to all weapon panel backgrounds through the HUD settings writer. Mods register typed command surfaces for menu and hidden settings; cleanup removes their commands after acknowledgement. See [console usage](docs/CONSOLE-COMMANDS.txt).
+
+Maintained MCM, HUD, Epic LUT and DBF have modular LLL review builders/packages. DBF remains restart-only. Packages and offline checks do not establish native/game acceptance; nothing is deployed by these builders.
+
+## R29 layout and layering candidate
+
+Adaptive navigation width, aligned geometric expanders, actual-parent connectors, status markers, separate counts and wrapped names. Content uses one page heading and compact rows. Control backgrounds, inner frames, fills, indicators and text have explicit separate depths; regression checks exercise recycled native IDs across changing states.
+
+Build into `dist/releases/layout-20261010`. Source, test receipt and approximate previews are review artifacts; this candidate is not deployed or live-accepted.
+
+## R28 interactions candidate
+
+Right-click actions, editable Open/Close/Apply/Focus bindings, Tab to confirm and collapsed startup trees. In-game metadata editing provides Name, Author and Description drafts, local persistence, Discard and a future lock flag (enabled by default). Local overrides update author grouping without changing runtime ownership or third-party manifests.
+
+Build: `py -3 tools/build_release.py --output dist/releases/interaction-20261010`. Offline interaction and persistence checks are separate from live acceptance. This candidate is not deployed.
+
+## R27 screenshot repair candidate
+
+Native glyph and whole-word widths retain the conservative font-width floor, preventing small native extents from admitting sidebar text beyond its allotted width. Tests exercise the native measurement path with deliberately underestimated metrics. All four resize corners now have visible grips with hover/drag feedback.
+
+Build into `dist/releases/text-bounds-20261010`. The supplied screenshot confirms the R26 overflow and missing grips; R27 is packaged for local validation, not yet live-proven. Approximate desktop-font previews cannot establish game clipping.
+
+## R26 UI review candidate
+
+LLL now uses the suite's quieter UI, stable background/control/text depths and separate text, theme, pointer and render modules. Source/author groups keep their existing runtime ownership and read-only external entries. Manager Settings provides a rebindable Open/Close key (F8 default), UI scale, font size and window reset. Apply, Discard and Reset Setting use buttons.
+
+Uneven columns keep their own viewport positions. Sidebar, settings, help and dropdown scrollbars support dragging. Long labels scroll only while hovered/focused; informational rows wrap. Cursor restoration is verified and idle LLL cannot release another frontend's native input gate.
+
+Build: `py -3 tools/build_release.py --output dist/releases/ui-refresh-20261009`. [Design and layer audit](docs/UI-REFRESH.txt). Offline checks and approximate compose previews are separate from in-game acceptance. This candidate is not installed or published.
+
 ## R25 metadata convention
 
 Owned-mod creation and release manifests default to author **Goose**. Loose scripts use matching `<id>.json` sidecars; folder mods retain `manifest.json`, `mod.json`, or `metadata.json`. Unknown/external authors are not replaced or inherited from the shared Mods directory. See [metadata usage](docs/MOD-METADATA.txt). R25 source/package is ready for a future loader update; this does not hot-replace an existing running VM.
@@ -10,7 +50,7 @@ See [the R24 API and parity checklist](docs/R24-API-AND-PARITY.txt). The earlier
 
 # Live Lua Loader (LLL)
 
-Independent Lua loader and F9 mod manager for Helldivers 2. Discovers archive
+Independent Lua loader and F8 mod manager for Helldivers 2. Discovers archive
 addons, loads loose scripts, watches completed edits and waits for owned cleanup
 before replacing a script. MCM integration is optional.
 

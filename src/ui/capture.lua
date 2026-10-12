@@ -21,6 +21,14 @@ function M.new(native, window, log)
                     .. tostring(ok and "restoration refused" or result)
             end
         end
+        for _, field in ipairs({
+            { "mouse_focus", "focus" }, { "show_cursor", "cursor" }, { "clip_cursor", "clip" },
+        }) do
+            local ok, value = pcall(window[field[1]])
+            if not ok or value ~= saved[field[2]] then
+                errors[#errors + 1] = field[1] .. ": restoration readback mismatch"
+            end
+        end
         if #errors > 0 then
             return false, table.concat(errors, "; ")
         end
@@ -66,8 +74,10 @@ function M.new(native, window, log)
         if external then
             return false, "Input lease belongs to another owner"
         end
+        if not self.active and not snapshot then return true end
         native.mcm_release()
         self.active = false
+        if tonumber(native.mcm_captured()) ~= 0 then return false, "Native input release readback failed" end
         local ok, reason = restore(snapshot)
         if not ok then
             log("Menu cursor restoration pending: " .. tostring(reason))
@@ -101,6 +111,7 @@ function M.new(native, window, log)
             return false, "Previous cursor restoration pending"
         end
         if not self.active then
+            if tonumber(native.mcm_captured()) ~= 0 then return false, "Native input capture belongs to another frontend" end
             for _, name in ipairs({
                 "mouse_focus",
                 "show_cursor",
@@ -113,17 +124,20 @@ function M.new(native, window, log)
                     return false, "Missing cursor API: " .. name
                 end
             end
-            snapshot = {
+            local saved = {
                 focus = window.mouse_focus(),
                 cursor = window.show_cursor(),
                 clip = window.clip_cursor(),
             }
+            if saved.focus ~= true then return false, "Game mouse focus is already disabled; close the other input owner first" end
+            snapshot = saved
             local ok, err = pcall(function()
                 assert(native.mcm_install(hwnd) ~= 0, "Native window capture unavailable")
                 assert(native.mcm_capture(1) ~= 0, "Cannot acquire input capture")
-                window.set_mouse_focus(false)
-                window.set_show_cursor(true)
-                window.set_clip_cursor(true)
+                assert(window.set_mouse_focus(false) ~= false, "Mouse focus acquisition refused")
+                assert(window.set_show_cursor(true) ~= false, "Cursor visibility acquisition refused")
+                assert(window.set_clip_cursor(true) ~= false, "Cursor clipping acquisition refused")
+                assert(window.mouse_focus() == false and window.show_cursor() == true and window.clip_cursor() == true, "Cursor acquisition readback failed")
             end)
             if not ok then
                 self.release()
@@ -133,9 +147,13 @@ function M.new(native, window, log)
             log("Menu input capture acquired")
         else
             -- The game may reset cursor flags during its own UI update.
-            window.set_mouse_focus(false)
-            window.set_show_cursor(true)
-            window.set_clip_cursor(true)
+            local ok, why = pcall(function()
+                assert(window.set_mouse_focus(false) ~= false, "Mouse focus maintenance refused")
+                assert(window.set_show_cursor(true) ~= false, "Cursor visibility maintenance refused")
+                assert(window.set_clip_cursor(true) ~= false, "Cursor clipping maintenance refused")
+                assert(window.mouse_focus() == false and window.show_cursor() == true and window.clip_cursor() == true, "Cursor maintenance readback failed")
+            end)
+            if not ok then self.release(); return false, tostring(why) end
             if native.mcm_captured() == 0 then
                 self.release()
                 return false, "Input capture lost"

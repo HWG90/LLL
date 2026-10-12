@@ -250,6 +250,9 @@ function P.directories(directory)
     k.LLLP_FindClose(f)
     return result
 end
+function P.mkdir(path)
+    return k.LLLP_CreateDirectoryA(path,nil)~=0 or k.LLLP_lll_error()==183
+end
 function P.write(path, value)
     local temporary = path .. ".tmp"
     local f = k.LLLP_CreateFileA(temporary, 0x40000000, 0, nil, 2, 128, nil)
@@ -304,4 +307,42 @@ end
 -- Health reader facade uses private, cached Windows signatures.
 P.health = {ffi=ffi,kernel={FindFirstFileA=find_first,FindNextFileA=find_next,
     FindClose=k.LLLP_FindClose,GetLastError=k.LLLP_lll_error,GetModuleHandleA=k.LLLP_GetModuleHandleA}}
+-- Read-only, bounded access for the build-gated main HUD font resolver.
+function P.font_memory()
+    ffi.cdef[[void *LLLP_font_process(void) __asm__("GetCurrentProcess");
+        int LLLP_font_read(void *,const void *,void *,size_t,size_t *) __asm__("ReadProcessMemory");]]
+    local kernel=ffi.load("kernel32")
+    local process=kernel.LLLP_font_process()
+    return {address=function(name)
+        local handle=k.LLLP_GetModuleHandleA(name)
+        if handle==nil then return nil end
+        return tonumber(ffi.cast("uintptr_t",handle))
+    end,read=function(address,count)
+        if type(address)~="number" or address<65536 or address>=0x800000000000 or count<1 or count>4096 then return nil end
+        local buffer=ffi.new("uint8_t[?]",count);local got=ffi.new("size_t[1]")
+        if kernel.LLLP_font_read(process,ffi.cast("const void *",address),buffer,count,got)==0 or got[0]~=count then return nil end
+        return ffi.string(buffer,count)
+    end}
+end
+-- Share read/write/delete so logs can rotate while the console follows them.
+function P.read_log(path,position,limit,changed)
+    local f=k.LLLP_CreateFileA(path,0x80000000,7,nil,3,128,nil)
+    if f==invalid then return nil end
+    local size=ffi.new("int64_t[1]")
+    if k.LLLP_GetFileSizeEx(f,size)==0 then k.LLLP_CloseHandle(f);return nil end
+    local total=tonumber(size[0]);local reset=false;local skipped=false
+    if total<0 or total>1099511627776 then k.LLLP_CloseHandle(f);return nil end
+    local start=position
+    if start==nil then start=total
+    elseif start<0 then start=math.max(0,total+start);skipped=start>0
+    elseif start>total or (changed and start==total) then start=0;reset=true end
+    local count=math.max(0,math.min(limit or 8192,total-start,8192))
+    local moved=ffi.new("int64_t[1]")
+    if k.LLLP_SetFilePointerEx(f,start,moved,0)==0 then k.LLLP_CloseHandle(f);return nil end
+    local buffer=ffi.new("uint8_t[?]",math.max(count,1));local got=ffi.new("uint32_t[1]")
+    local ok=count==0 or k.LLLP_ReadFile(f,buffer,count,got,nil)~=0
+    k.LLLP_CloseHandle(f)
+    if not ok then return nil end
+    return ffi.string(buffer,tonumber(got[0])),start+tonumber(got[0]),reset,skipped,total
+end
 return P

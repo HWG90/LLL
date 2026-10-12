@@ -126,7 +126,7 @@ assert(h1.activate("refresh"))
 h1 = standalone.mods.lll_management.handle
 h2 = native.mods.lll_management.handle
 assert(
-    m.modules["live/new"] == "loaded" and #native.mods.lll_management.pages == 5,
+    m.modules["live/new"] == "loaded" and #native.mods.lll_management.pages == 6,
     "Refresh adds new files to both menus"
 )
 assert(h2.get(key) == true, "Refresh preserves and synchronizes committed state")
@@ -224,6 +224,7 @@ assert(
     "duplicate child labels preserve separate identities"
 )
 local menu = dofile("src/ui/menu.lua").new(tree_api)
+menu.expand_all()
 local rows = menu.navigation(mod)
 local parents = 0
 for _, row in ipairs(rows) do
@@ -239,7 +240,8 @@ tree.refresh()
 mod = tree_api.mods.lll_management
 assert(
     mod.pages[2].category == category
-        and mod.pages[#mod.pages].category == category
+        and mod.pages[#mod.pages-1].category == category
+        and mod.pages[#mod.pages].id == "manager_settings"
         and #mod.categories == 3,
     "Refresh retains stable parent identity"
 )
@@ -305,7 +307,7 @@ author_controls.bind(author_api, "authors")
 author_controls.bind(mirror, true)
 author_controls.refresh()
 local authors = author_api.mods.lll_management
-assert(#author_api.list() == 1 and #authors.categories == 0 and #authors.pages == 4)
+assert(#author_api.list() == 1 and #authors.categories == 0 and #authors.pages == 5)
 assert(authors.pages[2].name == "cowboybingus" and authors.pages[3].name == "other_author")
 assert(
     authors.controls.entry_1_enabled and authors.controls.entry_5_enabled,
@@ -315,8 +317,9 @@ assert(#mirror.mods.lll_management.pages == 1, "MCM remains one Mods page")
 author_api.author_navigation = true
 author_api.loader_summary = author_controls.summary
 local author_menu = dofile("src/ui/menu.lua").new(author_api)
+author_menu.expand_all()
 assert(
-    #author_menu.sidebar() == 5,
+    #author_menu.sidebar() == 6,
     "authors appear under the single LLL entry without extra expansion"
 )
 author_menu.visible = true

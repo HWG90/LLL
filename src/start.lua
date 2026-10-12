@@ -10,7 +10,7 @@ local diagnostic_service = LLL_DIAGNOSTICS and LLL_DIAGNOSTICS.shared()
 local diagnostic_path = platform.log_directory and platform.log_directory .. "/LiveLuaLoader.log"
 local diagnostic_owner = diagnostic_service and diagnostic_service.attach("LLL", diagnostic_path)
 if log then
-    log:write("Live Lua Loader 0.1.7 (R25 grouping candidate); API 1 compatibility\n")
+    log:write("Live Lua Loader 0.1.8 (R31 Helldivers manager); API 1 compatibility\n")
 end
 local guarded, why = pcall(platform.guard)
 if not guarded then
@@ -44,13 +44,21 @@ else
     print("[LiveLuaLoader] Discovery failed: " .. tostring(discovered))
 end
 local function report(name, state)
-    if diagnostic_service then pcall(diagnostic_service.record,"LLL",name .. ": " .. state,nil,nil,diagnostic_path) end
+    if diagnostic_service then pcall(diagnostic_service.record,name,state,nil,nil,diagnostic_path) end
     print("[LiveLuaLoader] " .. name .. ": " .. state)
     if log then
         log:write(name .. ": " .. state .. "\n")
+        log:flush()
     end
 end
+local command_bus=LLL_COMMANDS.new()
+platform.command_bus=command_bus
+if diagnostic_service then diagnostic_service.commands=command_bus end
 local live = LLL_LIVE(platform, report)
+local log_reader
+if LLL_LOG_READER and diagnostic_service and platform.read_log then
+    log_reader=LLL_LOG_READER.new(platform,diagnostic_service,{own_log=diagnostic_path,verbose=live.loader_option("verbose_launch")==true})
+end
 local source_cache = {}
 local pending_edits = {}
 for _, name in ipairs(live.scan()) do
@@ -91,6 +99,7 @@ if LLL_HEALTH then
             end
         end}
 end
+if log_reader then for source,entry in pairs(live.catalog)do log_reader.discover(source,entry)end end
 local manager = LLL_MANAGER({
     available = function(name)
         if live.catalog[name] then
@@ -100,7 +109,8 @@ local manager = LLL_MANAGER({
     end,
     require = function(name)
         if live.catalog[name] then
-            source_cache[name] = live.source(name)
+            source_cache[name] = live.fingerprint(name)
+            if log_reader then log_reader.discover(name,live.catalog[name],true) end
             return live.load(name)
         end
         return require(name)
@@ -111,7 +121,7 @@ local manager = LLL_MANAGER({
         end
     end,
     can_retry = function(name)
-        return live.catalog[name] ~= nil
+        return live.catalog[name] ~= nil and not live.restart_only(name)
     end,
     save_enabled = live.set_enabled,
     evict = function(name)
@@ -121,14 +131,25 @@ local manager = LLL_MANAGER({
     log_directory = platform.log_directory,
     report = report,
     health=health,jit_budget=code_budget,diagnostics=diagnostic_service,
-    discovery_supported=LLL_DISCOVER~=nil,discovery_state=ok and (#discovered .. " declared entries") or "failed",protected_runtime=LLL_TRUST~=nil,
+    discovery_supported=LLL_DISCOVER~=nil,discovery_state=ok and (#discovered .. " declared entries") or "failed",protected_runtime=LLL_TRUST~=nil,modular_projects=true,console_commands=true,
 }, entries)
 if ok then
     manager.discovery_warnings = warnings
 end
+manager.console=command_bus
 manager.diagnostics = diagnostic_service
+manager.register_log=function(source,path)
+    if not log_reader then return false,"Log reader unavailable" end
+    if type(source)~="string" or not manager.modules[source] then return false,"Unknown mod source" end
+    return log_reader.register(source,path,nil,true)
+end
 manager.diagnostics_surface = LLL_DIAGNOSTICS and LLL_DIAGNOSTICS.surface
 report("Startup","Startup finished; after-startup callbacks drained")
+if log_reader then
+    for source,entry in pairs(live.catalog)do log_reader.discover(source,entry)end
+    if log_reader.verbose then report("Verbose launch","source-owned log paths="..log_reader.count.."; incremental read limit=8192 bytes per file") end
+    log_reader.poll()
+end
 if log then log:write("Startup finished\n")end
 manager.get_loader_option = live.loader_option
 manager.save_loader_option = live.save_loader_option
@@ -217,13 +238,19 @@ local function tick(dt)
         report("LLL status", tostring(problem))
     end
     local _, names = refresh_catalog()
+    if log_reader then
+        log_reader.verbose=live.loader_option("verbose_launch")==true
+        for source,entry in pairs(live.catalog)do log_reader.discover(source,entry)end
+        log_reader.poll()
+    end
     for _, name in ipairs(names) do
-        local valid, text = pcall(live.source, name, pending_edits[name] ~= nil)
+        local valid, text = pcall(live.fingerprint, name, pending_edits[name] ~= nil)
         if manager.modules[name] == nil then
             manager.add(name)
         elseif
             live.auto_reload()
             and live.enabled(name)
+            and not live.restart_only(name)
             and valid
             and text
             and source_cache[name]

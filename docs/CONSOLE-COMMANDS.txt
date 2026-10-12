@@ -1,0 +1,54 @@
+LLL R30 CONSOLE INPUT
+
+Open the LLL manager, toggle the console with grave/tilde (automatically focuses
+the input), or click the command
+field and type a command. A popup suggests registered paths, commands and
+boolean values. Tab fills the selected suggestion without executing; click a
+suggestion to fill it. Up/Down selects suggestions, or recalls history when
+the popup is closed. Escape dismisses suggestions first, then leaves input.
+Enter or RUN executes the line; Ctrl+A replaces it. Typing consumes parent
+menu actions while focused. The configured manager close key remains available.
+The console borrows the parent menu's input lease and releases focus on close
+or handoff. History is bounded to 50 commands.
+Held typing, Backspace and Up/Down repeat after 400 ms, every 40 ms, with
+bounded catch-up like Epic LUT. Enter, Tab and Escape remain single presses.
+
+Commands:
+  help
+  help dbfhud
+  get dbfhud.global.opacity
+  dbfhud.global.opacity = 20
+  dbfhud.settings.panel_opacity = 0.2
+  dbfhud.settings.debug_logging = true
+  dbfhud.settings.text_color = "#FFFFFF"
+  run dbfhud.reload_settings
+  mcm.settings.font_size = 22
+  epiclut.preferences.ui_scale = 110
+
+The global opacity alias uses percent 0..100. 20 becomes 0.20 for weapon panel
+backgrounds, including existing per-weapon opacity overrides and third-person
+panel opacity. Text opacity and colors remain unchanged. The existing HUD tuning
+writer persists the result; failures roll back the configuration. Other HUD
+settings use their normal native units and owning validators.
+
+MOD AUTHOR API
+Register a typed command surface from an enabled modular mod:
+  mod.expose("example",{
+    setting={type="number",min=0,max=100,
+      get=function()return value end,
+      set=function(next_value) value=next_value;return true end},
+    refresh={call=function()return refresh_owned_state()end}
+  })
+Getters, setters and actions may expose settings absent from a menu. Setters
+should validate, persist and refresh through the mod's own APIs. Each namespace
+has one owner. Commands pause when cleanup starts, and registration is removed
+only after cleanup acknowledges; a retiring instance cannot remain writable.
+Compatible external providers can use LiveLuaLoader.console.register(namespace,
+owner,fields) and keep the returned release function for their own cleanup.
+Assignments accept numbers, booleans and JSON-quoted values. Unknown paths,
+wrong types/ranges, invalid syntax and refused writes are reported in the stream.
+Console namespaces are registered APIs rather than evaluation of arbitrary Lua.
+
+Converted providers register dbfhud, mcm, epiclut and dbf. Available commands
+follow the currently enabled providers. Native/game behavior remains unverified
+until these packages and R30 are loaded in a normal game session.

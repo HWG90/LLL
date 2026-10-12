@@ -5,6 +5,14 @@ local a=Console.shared();local b=Console.shared();assert(a==b)
 local left=a.attach('LLL','loader.log');local right=b.attach('MCM','mcm.log')
 a.record('LLL','Loaded');b.record('MCM','Callback failed')
 assert(a.count==2 and b.read()[2].severity=='error')
+assert(a.window.visible and a.window.scroll==0,'mod errors must reveal the console')
+a.window.visible=false;a.window.scroll=4
+b.record('MCM','Callback failed')
+assert(not a.window.visible and a.read()[2].repeats==2,'duplicate errors must aggregate without reopening')
+a.window.command_text='unfinished';a.window.input_focused=false
+b.record('HUD','Update failed: example')
+assert(a.window.visible and a.window.scroll==0 and not a.window.input_focused and a.window.command_text=='unfinished','new errors must reveal latest without stealing input')
+a.window.visible=false
 local surface=Console.surface(a);local held=false
 local input={down=function(code)return code==192 and held end,mouse=function()return 0,0 end,wheel=function()return 0 end}
 surface.filter(input,false);held=true;surface.filter(input,true);assert(not a.window.visible)

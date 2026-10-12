@@ -1,6 +1,7 @@
 -- Both frontends bind this authoritative loader state; neither owns selection settings.
 return function(loader, live, report)
     local self = { bindings = {}, groups = {}, group_count = 0, expanded = {} }
+    local preferences=LLL_UI_PREFERENCES or dofile("src/ui/preferences.lua")
     local syncing = false
     local function readable(value)
         return string.gsub(string.gsub(string.gsub(value, "[_-]+", " "), "(%l)(%u)", "%1 %2"), "(%a)([%w]*)", function(a, b)
@@ -46,7 +47,7 @@ return function(loader, live, report)
                 name = "Overview",
                 dynamic = true,
                 controls = {
-                    { type = "section", label = "LIVE LUA LOADER R22" },
+                    { type = "section", label = "LIVE LUA LOADER R31" },
                     {
                         type = "button",
                         id = "open_manager",
@@ -115,7 +116,7 @@ return function(loader, live, report)
             end
             local target = name
             local id = "entry_" .. index
-            local managed = live.catalog[name] ~= nil
+            local managed = live.catalog[name] ~= nil and not (live.restart_only and live.restart_only(name))
             local controls =
                 { { type = "text", label = loader.modules[name] or "unknown", description = name } }
             controls[#controls + 1] = {
@@ -161,10 +162,11 @@ return function(loader, live, report)
                 controls = controls,
             }
         end
+        pages[#pages+1]=preferences.page(loader)
         return {
             id = "lll_management",
             name = "Live Lua Loader",
-            description = "R22 mod manager. F9 opens the independent window. All changes use shared loader state.",
+            description = "R30 mod manager. The configured shortcut opens the independent window (F8 by default). All changes use shared loader state.",
             categories = categories,
             pages = pages,
         }
@@ -194,7 +196,8 @@ return function(loader, live, report)
         end
         local other = {}
         for index = 2, #spec.pages do
-            if not assigned[index] then
+            if spec.pages[index].id=="manager_settings" then pages[#pages+1]=spec.pages[index]
+            elseif not assigned[index] then
                 local page = spec.pages[index]
                 other[#other + 1] = { type = "section", label = page.name }
                 for _, control in ipairs(page.controls) do
@@ -220,7 +223,8 @@ return function(loader, live, report)
         end
         local pages, categories, by_name = { overview }, {}, {}
         for index = 2, #spec.pages do
-            by_name[spec.pages[index].controls[1].description] = spec.pages[index]
+            if spec.pages[index].id=="manager_settings" then pages[#pages+1]=spec.pages[index]
+            else by_name[spec.pages[index].controls[1].description] = spec.pages[index] end
         end
         local groups = {
             { "lll_live", "LLL live scripts" },
@@ -272,7 +276,7 @@ return function(loader, live, report)
                 .. row.owner
                 .. "\nSource: "
                 .. row.source
-                .. "\nResource: "
+                .. "\nDescription: " .. (row.description or "") .. "\nResource: "
                 .. row.name
             local controls = {
                 { type = "text", label = "Status: " .. row.state, description = details },
@@ -282,7 +286,7 @@ return function(loader, live, report)
                     description = "Discovery location is not evidence of which loader ran the mod.",
                 },
             }
-            local managed = old and live.catalog[row.name] and (row.owner == "lll_live")
+            local managed = old and live.catalog[row.name] and (row.owner == "lll_live") and not (live.restart_only and live.restart_only(row.name))
             if old then
                 for position = 2, #old.controls do
                     local copy = {}
@@ -306,7 +310,8 @@ return function(loader, live, report)
                 or "Needs attention"
             pages[#pages + 1] = {
                 id = old and old.id or self.external_ids[row.name],
-                name = "[" .. short .. "] " .. (old and old.name or readable(
+                resource_id = row.name,
+                name = "[" .. short .. "] " .. (row.display_name or (old and old.name) or readable(
                     string.match(row.name, "([^/]+)$") or row.name
                 )),
                 category = authors[row.owner .. "/" .. row.author],
@@ -368,7 +373,7 @@ return function(loader, live, report)
                 id = "select_" .. target,
                 label = "    " .. page.name,
                 button_label = "Select",
-                description = page.controls[1].description .. "\n" .. page.controls[1].label,
+                description = (page.controls[1].description or "") .. "\n" .. page.controls[1].label,
                 on_activate = function()
                     self.selected = target
                     self.refresh()
@@ -535,6 +540,13 @@ return function(loader, live, report)
                 end
             end
             local mod = api.mods and api.mods.lll_management
+            if mod and binding.handle then
+                local values=preferences.get(loader)
+                for key,value in pairs(values) do
+                    local control=mod.controls["manager_"..key]
+                    if control then mod.values[control.id]=value end
+                end
+            end
             if mod and binding.handle and not binding.inside then
                 syncing = true
                 if mod.controls.auto_reload then
@@ -545,8 +557,8 @@ return function(loader, live, report)
                     local toggle = mod.controls["entry_" .. index .. "_enabled"]
                     local reload = mod.controls["entry_" .. index .. "_reload"]
                     page.controls[1].label = loader.modules[name] or "unknown"
-                    toggle.disabled = live.catalog[name] == nil
-                    reload.disabled = live.catalog[name] == nil or loader.modules[name] ~= "loaded"
+                    toggle.disabled = live.catalog[name] == nil or (live.restart_only and live.restart_only(name))
+                    reload.disabled = live.catalog[name] == nil or loader.modules[name] ~= "loaded" or (live.restart_only and live.restart_only(name))
                     -- Native core rejects writes to disabled controls; update read-only display directly.
                     mod.values[toggle.id] = loader.modules[name] == "loaded"
                 end

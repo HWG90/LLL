@@ -14,7 +14,13 @@ core.author_navigation=true
 core.register({id='sizing',name='Sizing',pages={{id='a',name='Page',controls={{type='text',label=string.rep('wide ',80),description=string.rep('paragraph words ',200)}}}}})
 local menu=dofile('src/ui/menu.lua').new(core)
 menu.visible=true;menu.window_width=1100;menu.window_height=660
+menu.expand_all()
 local commands=menu.compose(1920,1080);assert(menu.parent_geometry.width==1100 and menu.visible_rows<12)
+local handles={}
+for _,command in ipairs(commands)do
+ if command.resize_handle then handles[command.resize_handle]=(handles[command.resize_handle] or 0)+1 end
+end
+for _,corner in ipairs({'left_bottom','right_bottom','left_top','right_top'})do assert(handles[corner]==2,'visible two-stroke resize grip missing at '..corner)end
 local before=menu.parent_geometry;local held=false;local mx,my=before.x+before.width*before.scale-2,before.y+before.height*.5*before.scale
 local input={down=function(key)return key==1 and held end,mouse=function()return mx,my end}
 local saved=0;menu.on_geometry_changed=function()saved=saved+1 end
@@ -22,7 +28,7 @@ held=true;menu.tick(input);mx=mx+180;menu.tick(input);menu.compose(1920,1080)
 held=false;menu.tick(input)
 assert(menu.window_width>1100 and saved==1,'real pointer path resizes and persists on release')
 for _,c in ipairs(menu.compose(1920,1080))do
- if c.tree_branch then assert(c.y==c.tree_branch.junction and c.y+c.h<=menu.parent_geometry.y+(menu.parent_geometry.height-137)*menu.parent_geometry.scale+.01)end
+ if c.tree_branch then assert(c.y==c.tree_branch.junction and c.y+c.h<=menu.parent_geometry.y+(menu.parent_geometry.height-118)*menu.parent_geometry.scale+.01)end
  if c.type=='text' then assert(c.text_width and c.x+c.text_width<=menu.parent_geometry.x+(menu.parent_geometry.width-25)*menu.parent_geometry.scale+.01)end
 end
 assert(#menu.compose(0,0)==0)

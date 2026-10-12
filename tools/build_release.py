@@ -30,6 +30,8 @@ def source_files():
         "build_release.py",
         "build_native_lean.py",
         "create_mod.py",
+        "ui_preview.py",
+        "verify_modular.py",
     ):
         files["tools/" + name] = (ROOT / "tools" / name).read_bytes()
     for path in (ROOT / "tests").glob("*.lua"):
@@ -51,7 +53,9 @@ def save_zip(path, files):
         assert archive.testzip() is None
 
 
-def build(output):
+def build(output, label="release"):
+    assert label and all(ch.isalnum() or ch in "-_" for ch in label), "Invalid candidate label"
+    suffix = "" if label == "release" else "-" + label
     output.mkdir(parents=True, exist_ok=True)
     stock_bytes = (ROOT / "binary/stock_wwise.luac").read_bytes()
     stock = struct.pack("<II", len(stock_bytes), 2) + stock_bytes
@@ -73,8 +77,8 @@ def build(output):
         "Version": 1,
         "Guid": "bb921b89-f8d0-4abc-9e93-f426a93fef51",
         "Author": "Goose",
-        "Name": "Live Lua Loader 0.1.7 - R25-grouping-candidate",
-        "Description": "Source/author groups, resizable manager, shared diagnostics, protected runtime, after-startup API and 64 MiB adaptive JIT code capacity. Optional MCM integration.",
+        "Name": "Live Lua Loader 0.1.8 - R31" + suffix,
+        "Description": "R31: Helldivers manager UI, main HUD font, sliding switches, bounded layout, source-owned mod logs, verbose launch configuration, modular projects and typed console.",
         "Options": [{"Name": "Loader", "Include": ["data"]}],
     }
     files = {
@@ -87,20 +91,22 @@ def build(output):
         files[path.name] = path.read_bytes()
     files["examples/heartbeat.lua"] = (ROOT / "examples/heartbeat.lua").read_bytes()
     files["examples/heartbeat.json"] = (ROOT / "examples/heartbeat.json").read_bytes()
+    for path in (ROOT / "examples/modular_example").rglob("*"):
+        if path.is_file():files[path.relative_to(ROOT).as_posix()]=path.read_bytes()
     files.update({"source/" + name: data for name, data in source_files().items()})
     files["FILES-SHA256.txt"] = "".join(
         digest(data) + "  " + name + "\n" for name, data in sorted(files.items())
     ).encode()
-    target = output / "LiveLuaLoader-0.1.7-R25-grouping-candidate.zip"
+    target = output / f"LiveLuaLoader-0.1.8-R31{suffix}.zip"
     save_zip(target, files)
     save_zip(ROOT / "dist/LiveLuaLoader-private-candidate.zip", files)
     save_zip(
-        output / "LiveLuaLoader-0.1.7-R25-grouping-candidate-source.zip", source_files()
+        output / f"LiveLuaLoader-0.1.8-R31{suffix}-source.zip", source_files()
     )
-    (output / "LiveLuaLoader-0.1.7-R25-grouping-candidate-SHA256.txt").write_text(
+    (output / f"LiveLuaLoader-0.1.8-R31{suffix}-SHA256.txt").write_text(
         digest(target.read_bytes()) + "  " + target.name + "\n", encoding="utf-8"
     )
-    (output / "LiveLuaLoader-0.1.7-R25-grouping-candidate-README.txt").write_bytes(
+    (output / f"LiveLuaLoader-0.1.8-R31{suffix}-README.txt").write_bytes(
         files["README.txt"]
     )
     print(target)
@@ -110,4 +116,6 @@ def build(output):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, required=True)
-    build(parser.parse_args().output)
+    parser.add_argument("--label", default="release")
+    args=parser.parse_args()
+    build(args.output,args.label)
