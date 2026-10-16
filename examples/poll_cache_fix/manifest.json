@@ -1,0 +1,15 @@
+{
+  "id": "lll_poll_cache",
+  "name": "LLL Poll Cache",
+  "author": "Goose",
+  "version": "0.1.3",
+  "description": "Change-driven LLL script checks and output-only broad-root notification filtering. Automatic hot reload and full discovery remain enabled.",
+  "lll": {
+    "entry": "main.lua",
+    "defaults": "config/defaults.cfg",
+    "modules": [
+      "src/poll_cache.lua"
+    ],
+    "restart_only": true
+  }
+}
