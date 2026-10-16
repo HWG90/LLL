@@ -123,6 +123,23 @@ local function catalog_filter(platform,project,handle)
  end
  return original,wrapper
 end
+local function legacy_log_reader(manager)
+ -- The public registration closure owns this exact legacy reader. Unknown or
+ -- wrapped APIs remain untouched rather than searching arbitrary callbacks.
+ if type(manager.register_log)~='function'then return end
+ local source=debug.getinfo(manager.register_log,'S').source
+ local found
+ for i=1,80 do local name,value=debug.getupvalue(manager.register_log,i);if not name then break end
+  if type(value)=='table'and type(rawget(value,'poll'))=='function'and type(rawget(value,'discover'))=='function'and type(rawget(value,'register'))=='function'
+   and type(rawget(value,'paths'))=='table'and type(rawget(value,'candidates'))=='table'and type(rawget(value,'scanned'))=='table'
+   and type(rawget(value,'count'))=='number'and type(rawget(value,'candidate_count'))=='number'and type(rawget(value,'verbose'))=='boolean'
+   and debug.getinfo(value.poll,'S').source==source and debug.getinfo(value.discover,'S').source==source then
+    if found and found~=value then return end
+    found=value
+  end
+ end
+ return found
+end
 function M.install(manager)
  local live,controls,platform,project=M.interfaces(manager)
  local old_fingerprint,old_refresh=live.fingerprint,controls.refresh
@@ -168,17 +185,29 @@ function M.install(manager)
   return saved(old_refresh(...))
  end
  local old_changed,wrapped_changed=catalog_filter(platform,project,handle)
+ local reader=legacy_log_reader(manager)
+ local old_poll,old_discover,wrapped_poll,wrapped_discover
+ if reader then
+  old_poll,old_discover=reader.poll,reader.discover
+  wrapped_poll=function(...)if handle.active then handle.log_poll_skips=handle.log_poll_skips+1;return end;return old_poll(...)end
+  wrapped_discover=function(...)if handle.active then handle.log_discover_skips=handle.log_discover_skips+1;return end;return old_discover(...)end
+ end
+ handle.legacy_log_reader_suppressed=reader~=nil
+ handle.log_poll_skips,handle.log_discover_skips=0,0
  function handle.release()
   if not handle.active then return true end
   handle.active=false
   if live.fingerprint==wrapped_fingerprint then live.fingerprint=old_fingerprint end
   if controls.refresh==wrapped_refresh then controls.refresh=old_refresh end
   if wrapped_changed and platform.changed==wrapped_changed then platform.changed=old_changed end
+  if reader and reader.poll==wrapped_poll then reader.poll=old_poll end
+  if reader and reader.discover==wrapped_discover then reader.discover=old_discover end
   return true
  end
- function handle.owned()return handle.active and live.fingerprint==wrapped_fingerprint and controls.refresh==wrapped_refresh and(not wrapped_changed or platform.changed==wrapped_changed)end
+ function handle.owned()return handle.active and live.fingerprint==wrapped_fingerprint and controls.refresh==wrapped_refresh and(not wrapped_changed or platform.changed==wrapped_changed)and(not reader or(reader.poll==wrapped_poll and reader.discover==wrapped_discover))end
  live.fingerprint,controls.refresh=wrapped_fingerprint,wrapped_refresh
  if wrapped_changed then platform.changed=wrapped_changed end
+ if reader then reader.poll,reader.discover=wrapped_poll,wrapped_discover end
  handle.catalog_filtered=wrapped_changed~=nil
  return handle
 end

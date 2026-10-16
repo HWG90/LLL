@@ -122,6 +122,7 @@ for contract in (
     b"tests/project_contracts.lua",
     b"tests/poll_cache_contracts.lua",
     b"tests/poll_catalog_contracts.lua",
+    b"tests/poll_log_reader_contracts.lua",
     b"tests/console_commands.lua",
     b"tests/speed_contracts.lua",
     b"tests/deferred_cleanup_contracts.lua",
