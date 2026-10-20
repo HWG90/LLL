@@ -88,8 +88,43 @@ reached the game and whether the expected plugin name is listed, without dumping
 other command-line arguments. A guarded one-launch Steam invocation leaves
 persistent launch settings unchanged. The previous diagnostic copy must be
 removed before this test to avoid duplicate loads. The candidate does not query
-native engine APIs or alter input. Live argument receipt and plugin acceptance
-remain pending a cold launch.
+native engine APIs or alter input.
+
+The one-launch test reached a fresh game process. The first observer was rejected
+before activation because it omitted the host's required cleanup callback. A
+stateless cleanup callback was added, checked against the actual host assertion,
+and hot-reloaded in the same process. The corrected observation confirmed valid
+arguments containing the exact `--plugin-dir` directory and a valid plugin list,
+with the expected name still absent. This proves argument forwarding; it does
+not establish parser behavior, startup discovery or plugin acceptance. The Lua
+observer and diagnostic native DLLs were subsequently hash-checked, archived
+and removed. The option was not saved to Steam settings. A subsequent normal
+launch was verified with the production startup patch, helper and user settings
+unchanged, and neither diagnostic project present in its fresh loader log.
+
+A bounded check of Windows Code Integrity and relevant Application events for
+this launch found no matching loader rejection. The diagnostic DLL depends only
+on `KERNEL32.dll`, providing no evidence of a missing external CRT dependency.
+Neither negative check identifies the failing stage.
+
+## Native logging diagnostic failure
+
+A separate one-shot Lua diagnostic called the documented zero-argument
+[`Application.restart_file_log()`](https://help.autodesk.com/cloudhelp/ENU/Stingray-Help/lua_ref/ns_stingray_Application.html)
+to reopen the existing configured log destination. It changed no settings,
+loaded no plugin and installed no input callback. The game closed by itself
+while that diagnostic was loading, before its result file was written.
+
+The resulting minidump records exception `0xc0000005` at executable RVA
+`0x667e33`: a read from address `0x100` with a null base register. This establishes
+a native null dereference; timing alone does not identify the full call chain.
+The logging diagnostic was removed and the API will not be used again on this
+build. Its dump remains private. No native loader error was recovered through
+this test, and it provides no evidence of keyboard suppression.
+
+The dump's 165-entry module list contains the stock engine plugins and game
+DLL, with no diagnostic LLL native DLL present at the time of the crash. This
+does not establish whether an earlier load was attempted or why it failed.
 
 Further bridge work requires evidence for the actual Lua-to-native load route
 or a successfully accepted plugin and compatible engine API. Native input or
