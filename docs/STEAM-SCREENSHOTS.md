@@ -113,10 +113,30 @@ pipe I/O; helper-dependent UI/maintenance retires once while loaded module
 callbacks and the original shutdown callback remain available. Unconfirmed
 native retirement still prevents a false detach acknowledgement.
 
-The fixed candidate is packaged, not installed; live repeated-capture acceptance
-is still pending. The failed original candidate remains held. Capture/performance
-experiments are paused; HDR support and native player/input access remain
-unqualified.
+The fixed `R33-steam-screenshots-factoryfix-candidate` is now installed, with
+rollback and installed hashes verified. A fresh startup acknowledged that exact
+revision and Photo Mode. Fresh display metadata reported SDR/sRGB at 3840x2160.
+Two new PNGs and their `Screenshot saved` terminal acknowledgements were observed
+at 18:02:55 and 18:03:01 EDT. The same helper survived both jobs, including the
+second-worker boundary that crashed the previous candidate, with no new helper
+crash dump observed. The user reported three saves and successful camera/menu
+recovery; only two new files have been independently verified so far. The third
+action remains under reconciliation. This is bounded repeated-worker evidence,
+not a completed three-capture or full-feature acceptance claim. The failed
+original candidate remains held; HDR and native player/input access remain
+unqualified. There is no public screenshot release.
+
+One elevated 120-second sample of that exact helper measured 2,250 ms CPU total
+(18.75 ms CPU/s) across menu/input activity and the two captures. An 11.09-second
+window containing both capture jobs accounted for 1,796.875 ms CPU, including
+concurrent pipe/UI work. In the settled final 29.39 seconds, no additional CPU
+time was measurable at the process counter's 15.625 ms granularity, with about
+four pipe reads and writes per second. These are whole external-helper CPU
+measurements, not Lua callback times, encoding-only cost or game-frame stalls.
+Handle counts rose during graphics initialization/capture, then fell from the
+first post-job 284 to 278 after the second job. Source review found explicit
+per-job resource retirement and no concrete retention bug; aggregate counts
+cannot identify the remaining handles or establish a leak-free graphics driver.
 
 A separate elevated 45-second sample, taken before screenshot attempts with
 Photo open, measured the external helper at 4.17 ms CPU/s. It measures the whole
