@@ -73,9 +73,10 @@ test runner and is not represented as a fully passing native-game suite.
 The current local candidate also removes transient request/reply files from
 directory enumeration. Listing records use the existing wire format, Unicode
 names, attributes and timestamps in a reused memory buffer capped at 64 MiB and
-100,000 entries. A failed or partial enumeration reports an error. Discovery
-preserves its watches and caches on incomplete scans; missing directories remain
-valid empty results. Actual source writes still generate notifications.
+100,000 entries. A failed or partial enumeration reports an error. Incomplete
+scans cannot retire project watches or sweep stale discovery entries; missing
+directories remain valid empty results. Actual source writes still generate
+notifications.
 
 An isolated Windows helper comparison used the previous shared-input helper and
 400 requests per helper/fixture, in baseline/candidate/candidate/baseline order:
