@@ -119,6 +119,10 @@ if LLL_STEAM_INPUT_SERVICE and stingray.Window and type(platform.pointer_snapsho
     shared_input,input_driver=LLL_STEAM_INPUT_SERVICE.new(platform,stingray.Window,
         LLL_UI_CAPTURE.new(nil,stingray.Window,function(message)report('LLL input',message)end))
 end
+local shared_capture,capture_driver
+if LLL_STEAM_SCREENSHOT_SERVICE and type(platform.screenshot_request)=='function' then
+    shared_capture,capture_driver=LLL_STEAM_SCREENSHOT_SERVICE.new(platform)
+end
 local manager = LLL_MANAGER({
     available = function(name)
         if live.catalog[name] then
@@ -151,6 +155,7 @@ local manager = LLL_MANAGER({
     health=health,jit_budget=code_budget,diagnostics=diagnostic_service,
     build=build,build_allowed=function()return build_supported end,
     revision=platform.revision,runtime=platform.runtime,native_ffi=platform.native_ffi,input_service=shared_input,
+    capture_service=shared_capture,
     discovery_supported=LLL_DISCOVER~=nil,discovery_state=ok and (#discovered .. " declared entries") or "failed",protected_runtime=LLL_TRUST~=nil,modular_projects=true,console_commands=true,
 }, entries)
 if ok then
@@ -217,7 +222,8 @@ local status_page = { refresh = function() end, close = function() end }
 status_page.refresh()
 local clock = 0
 local last_poll = platform.now and platform.now()
-local retiring = false
+local retiring, detached = false, false
+local capture_cleanup_report
 local finish_detach
 local function tick(dt)
     if input_driver then input_driver.begin_frame() end
@@ -301,6 +307,18 @@ if type(prior) == "function" then
     finish_detach = function()
         if ui then local ok,why=ui.close();if ok==false then report("LLL UI cleanup",why);return false end end
         if input_driver then local ok,why=input_driver.close();if not ok then report('LLL input cleanup',why);return false end end
+        if capture_driver then
+            local ok,why=capture_driver.close()
+            if not ok then
+                local reason=why or 'Screenshot worker retirement pending'
+                if reason~=capture_cleanup_report then
+                    report('LLL screenshot cleanup',reason)
+                    capture_cleanup_report=reason
+                end
+                return false
+            end
+            capture_cleanup_report=nil
+        end
         if code_budget then
             local ok,why=code_budget.close()
             if not ok then report("LLL JIT cleanup",why);return false end
@@ -313,11 +331,13 @@ if type(prior) == "function" then
             log:close()
             log = nil
         end
+        detached = true
         return true
     end
     manager.detach = function()
         if retiring then
-            return not next(manager.pending_cleanup) and (not code_budget or code_budget.closed), "pending"
+            if detached then return true end
+            return false, "pending"
         end
         retiring = true
         if ui then
@@ -327,6 +347,7 @@ if type(prior) == "function" then
         status_page.close()
         manager.shutdown()
         if input_driver then input_driver.close() end
+        if capture_driver then capture_driver.close() end
         if code_budget then code_budget.close() end
         if platform.close_watches then
             platform.close_watches()
@@ -349,6 +370,7 @@ if type(old_shutdown) == "function" then
         status_page.close()
         manager.shutdown()
         if input_driver then input_driver.close() end
+        if capture_driver then capture_driver.close() end
         if code_budget then code_budget.close() end
         if platform.close_watches then
             platform.close_watches()

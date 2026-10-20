@@ -2,6 +2,7 @@
  * memory, hooks or changes to code-integrity policy. Local byte pipes only. */
 #include "steam_files.c"
 #include "steam_pointer.c"
+#include "steam_screenshot_jobs.c"
 #include <shellapi.h>
 #include <share.h>
 
@@ -127,6 +128,39 @@ header_only:
     return transfer(outgoing, &length, 4, 1) && transfer(outgoing, header, length, 1) ? 2 : 0;
 }
 
+static int send_screenshot(uint32_t nonce,uint32_t operation,const wchar_t *path,HANDLE outgoing) {
+    LLLScreenshotJobStatus status;
+    uint32_t fields[8]={nonce,ERROR_INVALID_DATA,0},length=8,path_size;
+    int encoded;
+    if (!path) goto header_only;
+    if (operation==13) {
+        /* Allocate and encode the exact immutable reply path BEFORE accepting
+         * a worker: a rejected request must never leave an unacknowledged job. */
+        encoded=WideCharToMultiByte(CP_UTF8,WC_ERR_INVALID_CHARS,path,-1,NULL,0,NULL,NULL);
+        if (encoded<=0) goto header_only;
+        path_size=(uint32_t)encoded-1;length=68+path_size;
+        fields[1]=listing_reserve(length+1);if (fields[1]) goto header_only;
+        if (WideCharToMultiByte(CP_UTF8,WC_ERR_INVALID_CHARS,path,-1,(char*)listing_bytes+68,encoded,NULL,NULL)!=encoded) { fields[1]=ERROR_INVALID_DATA;goto header_only; }
+        fields[1]=lll_screenshot_job_request(session_pid,executable,path,&status);
+        if (fields[1]) goto header_only;
+        if (strlen(status.id)!=32) return 0; /* Accepted: transport-uncertain, never a false rejection. */
+    } else {
+        fields[1]=operation==14?lll_screenshot_job_status(path,&status):lll_screenshot_job_cancel(path,&status);
+        if (fields[1]) goto header_only;
+        encoded=WideCharToMultiByte(CP_UTF8,WC_ERR_INVALID_CHARS,status.output_path,-1,NULL,0,NULL,NULL);
+        if (encoded<=0||strlen(status.id)!=32) { fields[1]=ERROR_INVALID_DATA;goto header_only; }
+        path_size=(uint32_t)encoded-1;length=68+path_size;
+        fields[1]=listing_reserve(length+1);if (fields[1]) goto header_only;
+        if (WideCharToMultiByte(CP_UTF8,WC_ERR_INVALID_CHARS,status.output_path,-1,(char*)listing_bytes+68,encoded,NULL,NULL)!=encoded) { fields[1]=ERROR_INVALID_DATA;goto header_only; }
+    }
+    fields[2]=status.state;fields[3]=status.error;fields[4]=status.width;fields[5]=status.height;fields[6]=status.elapsed_ms;fields[7]=32;
+    memcpy(listing_bytes,fields,sizeof(fields));memcpy(listing_bytes+32,status.id,32);memcpy(listing_bytes+64,&path_size,4);
+    return transfer(outgoing,&length,4,1)&&transfer(outgoing,listing_bytes,length,1)?2:0;
+header_only:
+    length=8;
+    return transfer(outgoing,&length,4,1)&&transfer(outgoing,fields,length,1)?2:0;
+}
+
 static int dispatch(const unsigned char *bytes, uint32_t size, HANDLE outgoing) {
     uint32_t nonce, operation, path_size;
     FILE *stream = NULL;
@@ -155,7 +189,7 @@ static int dispatch(const unsigned char *bytes, uint32_t size, HANDLE outgoing) 
     if (operation==8 || operation==9) {
         uint32_t reply[MAX_WATCHES+4],length;
         if (operation==8) lll_steam_poll(NULL);
-        else { lll_pointer_release();lll_steam_close(NULL); }
+        else { lll_screenshot_jobs_cancel_all();lll_pointer_release();lll_steam_close(NULL); }
         reply[0]=nonce;reply[1]=0;length=8;
         if (operation==8) {
             reply[2]=session_pid;reply[3]=watch_count;length=16+watch_count*4;
@@ -165,6 +199,10 @@ static int dispatch(const unsigned char *bytes, uint32_t size, HANDLE outgoing) 
         return transfer(outgoing,&length,4,1)&&transfer(outgoing,reply,length,1) ? 2 : 0;
     }
     if (!nonce || path_size>size-12) return 0;
+    if (operation==13||operation==14||operation==15) {
+        wchar_t path[32768];
+        return send_screenshot(nonce,operation,decode_path(bytes,size,path_size,path)?path:NULL,outgoing);
+    }
     if (operation==1) {
         wchar_t path[32768];
         return send_listing(nonce,decode_path(bytes,size,path_size,path)?path:NULL,outgoing);
@@ -252,6 +290,10 @@ int WINAPI wWinMain(HINSTANCE instance,HINSTANCE previous,PWSTR command,int show
     }
     note("Client disconnected; service stopped");result=0;
 done:
+    if (ready_event) ResetEvent(ready_event);
+    if (incoming!=INVALID_HANDLE_VALUE) { CloseHandle(incoming);incoming=INVALID_HANDLE_VALUE; }
+    if (outgoing!=INVALID_HANDLE_VALUE) { CloseHandle(outgoing);outgoing=INVALID_HANDLE_VALUE; }
+    lll_screenshot_jobs_shutdown();
     lll_pointer_release();
     free(listing_bytes);
     if (ready_event) { ResetEvent(ready_event);CloseHandle(ready_event); }

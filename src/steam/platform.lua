@@ -47,6 +47,23 @@ local function call(operation, path, bytes)
     assert(u32(reply, 1) == sequence, 'Stale filesystem response')
     return u32(reply, 5), reply
 end
+P.screenshot_directory=base..'/Screenshots'
+P.screenshot_session=LLL_STEAM_SERVICE.pipe
+local function screenshot_reply(status,reply)
+    if status~=0 then return nil,string.format('Screenshot request refused (0x%08x)',status)end
+    assert(#reply>=36,'Truncated screenshot reply')
+    local states={'pending','succeeded','failed','cancelled'}
+    local state=states[u32(reply,9)]
+    assert(state,'Invalid screenshot state')
+    local id,at=text(reply,29)
+    local path;path,at=text(reply,at)
+    assert(at==#reply+1,'Trailing screenshot reply bytes')
+    return {state=state,error=u32(reply,13),width=u32(reply,17),height=u32(reply,21),
+        elapsed_ms=u32(reply,25),id=id,output_path=path}
+end
+function P.screenshot_request(path)return screenshot_reply(call(13,path))end
+function P.screenshot_status(id)return screenshot_reply(call(14,id))end
+function P.screenshot_cancel(id)return screenshot_reply(call(15,id))end
 P.read = read
 function P.write(path, bytes) return call(5, path, bytes) == 0 end
 function P.mkdir(path) return call(3, path) == 0 end

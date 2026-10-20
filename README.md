@@ -54,6 +54,7 @@ yet had a separate clean-machine gameplay acceptance test. See
 
 - [Steam backend and build instructions](docs/STEAM-LUA51.md)
 - [Shared input API](docs/STEAM-INPUT-SERVICE.md)
+- [Shared screenshot API candidate and validation limits](docs/STEAM-SCREENSHOTS.md)
 - [Compatibility inventory](docs/STEAM-COMPATIBILITY.md)
 - [Modular projects](docs/MODULAR-PROJECTS.txt)
 - [Migration guide](docs/MOD-MIGRATION.md)

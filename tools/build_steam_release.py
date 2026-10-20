@@ -42,6 +42,7 @@ def source(stock, pipe, platform_source=None, developer=False, launcher=None, re
         + ',game_sha256=' + json.dumps(GAME['data/game/game.dll']) + '}',
         'local LLL_STEAM_INPUT=(function()\n' + (ROOT / 'src/steam/input.lua').read_text() + '\nend)()',
         'local LLL_STEAM_INPUT_SERVICE=(function()\n' + (ROOT / 'src/steam/input_service.lua').read_text() + '\nend)()',
+        'local LLL_STEAM_SCREENSHOT_SERVICE=(function()\n' + (ROOT / 'src/steam/screenshot_service.lua').read_text() + '\nend)()',
     ]
     for variable, name in MODULES:
         if variable in EXCLUDE:

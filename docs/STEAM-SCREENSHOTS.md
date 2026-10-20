@@ -1,0 +1,97 @@
+# Shared Steam screenshot service
+
+`LiveLuaLoader.capture_service` (also available through `compatibility`) is the
+version-1 asynchronous game-window PNG API. Its source and candidate are under
+validation; an installed build, loader acknowledgement and live screenshot are
+separate acceptance checks. This does not expose native player/input access.
+
+The existing content-addressed helper owns one capture worker at a time. WGC,
+D3D readback and PNG encoding run on that worker, outside the pipe exchange
+thread. The graphics DLLs load on demand. No worker, scanning or capture polling
+runs while idle. Only the authenticated connected game's exact process image,
+creation time and unique visible foreground window are eligible.
+
+`service.output_directory` is `%LOCALAPPDATA%/LLL/Helldivers2/Screenshots`.
+Outputs are direct PNG children of that directory, with at most 128 ASCII bytes
+in the filename. Letters, digits, spaces, `_`, `-` and `.` are accepted; the first
+character must be a letter, digit, `_` or `-`. Reserved DOS names, paths to other
+directories, alternate streams, reparse ancestors and existing files are refused.
+Publication uses a flushed, non-replacing atomic rename. The active job pins its
+directory ancestors against replacement until retirement.
+An owned temporary guard file keeps the output directory nonempty throughout
+the job and is deleted when the worker retires.
+
+## Caller contract
+
+All methods use dot calls. Obtain a fresh token for each attempt:
+
+```lua
+local capture = assert(LiveLuaLoader.capture_service)
+local job = assert(capture.new_job_token()) -- pure Lua; no helper I/O
+local intent = {
+    job_token = job,
+    output_token = job .. ':png',
+    output_path = capture.output_directory .. '/War Journalist-example.png',
+}
+-- Hide the overlay and wait for the intended clean rendered frames first.
+local reply, why = capture.request(intent)
+```
+
+- `new_job_token()` returns a session-qualified, increasing token. Only the
+  latest issued, unused token can start a request. State is bounded; there is no
+  token-history table or 1,024-job limit. A session refuses after 2^32-1 tokens.
+- `request(intent)` returns a matching record, or `nil, reason` for a confirmed
+  rejection. `output_token` is an immutable caller string of 1–256 printable
+  bytes. Copy the intent before using it asynchronously.
+- `status(job_token, output_token)` returns a matching record or `nil, reason`
+  for an unknown/stale identity. Pending native reads are limited to one every
+  100 ms. The caller should query only during active capture/cleanup, using the
+  unscaled application clock. Terminal queries use cached state and no I/O.
+- `cancel(job_token, output_token)` returns `true, terminal_record` only when
+  the worker has retired and future publication is fenced. Otherwise it returns
+  `false, pending_record`; continue bounded active cleanup through status/cancel.
+  A stale identity returns `false, nil, reason`.
+
+A record contains `job_token`, `output_token`, the exact requested `output_path`
+spelling, `state`, `width`, `height`, `elapsed_ms`, `reason`, `uncertain` and
+`cancel_requested`. States are `pending`, `succeeded`, `failed` and `cancelled`.
+Success requires a published PNG with positive client dimensions. All terminal
+states require worker exit, callback/resource cleanup and retired handles.
+
+Cancellation and publication race at one atomic decision. Cancellation that
+wins prevents publication. If publication already won, cancellation can resolve
+to success; it still cannot acknowledge completion until the worker has exited.
+Restore the overlay on cancellation, but keep capture ownership during pending
+cleanup so another request cannot overlap it.
+
+If a transport acknowledgement is lost, a request remains `pending` and
+`uncertain`; it is never reported as a confirmed rejection. Explicit bounded
+status/cancel calls can recover a known native job ID. If the initial request ID
+was never received, the facade refuses further captures for that session;
+reconnect/restart is required to re-establish retirement. Idle calls never retry.
+Loader detachment permanently closes new-job admission, including retained API
+references, while status and cancellation remain available for owned cleanup.
+
+The worker accepts fresh SDR BGRA8 client pixels only. It verifies physical
+window/DWM geometry, crop, monitor, focus and process identity through the job,
+and refuses unknown/HDR outputs. Its five-second budget bounds frame waiting
+and cooperative phase checkpoints; it cannot preempt a Windows/WIC/D3D call.
+The exchange thread remains responsive during those calls. No desktop fallback,
+game-loaded DLL, input changes or game-memory access is used.
+
+## Candidate validation, 2026-10-20
+
+The elevated Windows build passed the 91-test Steam suite. Final focused checks
+passed 12 facade tests, two assembled-loader lifecycle regressions and six
+runtime tests. The native fake-worker suite passed 941 checks, including both
+junction and symlink mutation refusal, full-path publication, cancellation races
+and retirement. Eight repeated privilege-only cycles stayed at 84 handles;
+eight full job cycles stayed at their warmed baseline of 87.
+Request/status/cancel maxima were 16/0/0 ms in
+that fixture; these are external helper timings, not measured game frame cost.
+
+The private R33 candidate is packaged and remains uninstalled. A fresh elevated
+metadata-only inspection of the current game window reported a 3840x2160,
+10-bit PQ/Rec2020 output. This SDR worker refuses that output. Actual capture,
+image acceptance, HDR handling and deployed transition/idle cost remain
+unqualified; no public screenshot release or restoration claim is made.

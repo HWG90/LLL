@@ -21,6 +21,8 @@ return function(host, entries)
     loader.compatibility = compat
     loader.input_service=host.input_service
     compat.input_service=host.input_service
+    loader.capture_service=host.capture_service
+    compat.capture_service=host.capture_service
     loader.build=host.build
     compat.build=host.build
     local function allowed()
@@ -50,6 +52,7 @@ return function(host, entries)
         build_gate=type(host.build_allowed)=='function',
         live_loading=true,deferred_cleanup=true,modular_projects=host.modular_projects==true,console_commands=host.console_commands==true,protected_runtime=host.protected_runtime==true,
         diagnostics=host.diagnostics~=nil,author_groups=true,resizable_manager=true,shared_input=host.input_service~=nil,
+        game_screenshots=host.capture_service~=nil,
         revision=host.revision or 'R31-bsl-v20',runtime=host.runtime or 'LuaJIT',native_ffi=host.native_ffi~=false})
     compat.capabilities=loader.capabilities
     compat.discovery=host.discovery_state
