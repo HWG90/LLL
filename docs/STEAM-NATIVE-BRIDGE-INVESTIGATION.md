@@ -161,9 +161,20 @@ absolute DLL filename. It returned nil, a normal missing-module error and the
 No DLL or returned function was executed by the query. Its temporary project was
 hash-checked and removed, with user settings and the startup patch unchanged.
 
-This opens a separate normal Lua C-module investigation. Actual DLL acceptance,
-an ABI-neutral callback and any resulting capture still require verification;
-the missing-file result alone does not establish them or an input gate.
+A subsequent elevated, hash-guarded live test attempted to load a small Lua C
+module through that same normal route. Its entry point ignores the Lua state,
+returns no Lua values, and dispatches a single background image-reading job.
+The production artifact passed an own-process Lua 5.1 refusal test and 21 native
+fixtures before deployment. A separate verifier passed nine synthetic tests.
+
+The game returned `system error 577` at `package.loadlib`, before the returned
+function could be invoked. Windows defines this as
+[`ERROR_INVALID_IMAGE_HASH`](https://learn.microsoft.com/en-us/windows/win32/debug/system-error-codes--500-999-),
+an image-signature verification failure. The available evidence does not identify
+the component enforcing that rejection. No capture job was created. The temporary
+Lua project was hash-checked and removed, settings and startup patch hashes stayed
+unchanged, and the same game process remained running. Elevation therefore did
+not establish native-module acceptance or recover an input API.
 
 Further bridge work requires evidence for the actual Lua-to-native load route
 or a successfully accepted plugin and compatible engine API. Native input or
