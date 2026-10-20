@@ -1,3 +1,28 @@
+R33 Steam Lua 5.1 preview.1 (build 25988413)
+
+This preview adds the shared asynchronous SDR game-window PNG service for
+cooperating mods and fixes the helper crash on a later capture job by retiring
+WinRT factory caches before worker COM teardown. A dead helper now closes the
+transport once and retires helper-dependent UI/maintenance without repeated
+pipe attempts. Loaded mod callbacks remain available.
+
+Fresh configurations now use Insert to open LLL. Valid saved bindings, including
+F8, are preserved. The native helper matches the repeated-capture-tested build;
+the startup/package is rebuilt to correct the fresh and invalid-setting defaults.
+The capture API retains its tested internal revision so existing Photo consumers
+can recognize it.
+
+Gameplay keyboard suppression remains unfinished: movement keys can still reach
+the diver while a menu or free camera is open. The new RPC metadata exposes no
+authoritative player/input gate, and settings reload is not an input gate. No
+native keyboard-suppression change is included. HDR capture, full old-mod parity
+and independent image colorimetry remain unqualified.
+
+Elevated tests and package validation are recorded in the attached VALIDATION
+file. The portable installer, settings preservation, build checks and rollback
+remain required; a generic mod-manager ZIP import does not install the helper.
+
+Historical preview notes:
 R32 Steam Lua 5.1 preview.1 (build 25988413)
 Prebuilt portable installation includes the current-Steam startup patch and
 content-addressed external helper. The installer checks exact game fingerprints,

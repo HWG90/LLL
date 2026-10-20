@@ -171,7 +171,7 @@ return function(loader, live, report)
         return {
             id = "lll_management",
             name = "Live Lua Loader",
-            description = "R30 mod manager. The configured shortcut opens the independent window (F8 by default). All changes use shared loader state.",
+            description = "R30 mod manager. The configured shortcut opens the independent window (Insert by default). All changes use shared loader state.",
             categories = categories,
             pages = pages,
         }

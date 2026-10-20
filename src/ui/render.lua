@@ -785,7 +785,7 @@ function MODULE.install(context)
         text(
             25,
             32,
-            theme.key_name(api.menu_toggle_key or 119).." Close   "..theme.key_name(api.apply_key or 9).." Apply   "..theme.key_name(api.focus_key or 117).." Focus   Right-click Actions",
+            theme.key_name(api.menu_toggle_key or 45).." Close   "..theme.key_name(api.apply_key or 9).." Apply   "..theme.key_name(api.focus_key or 117).." Focus   Right-click Actions",
             17,
             muted
         )

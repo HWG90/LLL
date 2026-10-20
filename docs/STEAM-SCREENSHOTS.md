@@ -94,8 +94,8 @@ The private R33 candidate was installed and its new startup/helper acknowledged.
 The first display inspection reported a 3840x2160, 10-bit PQ/Rec2020 output,
 which this SDR worker refuses. After Windows HDR was disabled, fresh metadata
 reported SDR/sRGB. One 3840x2160 PNG was published and acknowledged. The helper
-then crashed on a subsequent cached-factory access. That candidate is held;
-there is no public screenshot release or restoration claim.
+then crashed on a subsequent cached-factory access. That original candidate was
+held and was not released.
 
 The helper dump records an access violation at RVA `0xc3be`, in the cached
 `GraphicsCaptureSession::IsSupported()` dispatch. A relinked MAP was accepted
@@ -130,7 +130,18 @@ button/Pause and reopen paths; it does not retroactively prove an unobserved
 third capture in the earlier sequence. The earlier 120-second sample below
 contains only the first two jobs. Full-feature parity and independent colorimetry
 remain unqualified. The failed original candidate remains held; HDR and native
-player/input access remain unqualified. There is no public screenshot release.
+player/input access remain unqualified.
+
+The [R33 Steam prerelease](https://github.com/HWG90/LLL/releases/tag/R33-steam-lua51-preview.1)
+includes this fixed helper. Its startup was rebuilt with Insert as the default
+manager key for fresh or invalid configurations, while valid saved bindings
+remain unchanged. All 98 Steam tests and the focused legacy input contract pass;
+the portable ZIP CRC and internal payload checksums are verified. The native
+helper and internal capture revision are unchanged from the live-tested build.
+That rebuilt startup is not installed in the observed session, which already
+uses a saved Insert binding. The earlier live observations therefore qualify
+the shared helper/capture path, not a new-startup gameplay test or native
+keyboard-suppression fix.
 
 One elevated 120-second sample of that exact helper measured 2,250 ms CPU total
 (18.75 ms CPU/s) across menu/input activity and the two captures. An 11.09-second

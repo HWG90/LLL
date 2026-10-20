@@ -96,7 +96,7 @@ return function(loader, platform, controls, report)
     local owner_pid = owner_kernel.lll_ui_process()
     local owner_check = ffi.new("unsigned long[1]")
     function self.tick()
-        local down = bit.band(tonumber(user.lll_ui_key(api.menu_toggle_key or 119)), 0x8000) ~= 0
+        local down = bit.band(tonumber(user.lll_ui_key(api.menu_toggle_key or 45)), 0x8000) ~= 0
         if down and not hotkey_held then
             local window = user.lll_ui_foreground()
             if window ~= nil then
@@ -152,21 +152,21 @@ return function(loader, platform, controls, report)
         end
 
         input = {}
-        suppress_toggle = bit.band(tonumber(user.lll_ui_key(api.menu_toggle_key or 119)), 0x8000) ~= 0
+        suppress_toggle = bit.band(tonumber(user.lll_ui_key(api.menu_toggle_key or 45)), 0x8000) ~= 0
         function input.down(code)
             -- A rebinding capture reads the real key before shortcut translation.
             if menu.capture then return foreground and bit.band(tonumber(user.lll_ui_key(code)),0x8000)~=0 or false end
-            if code == (api.menu_toggle_key or 119) and code ~= 121 then
+            if code == (api.menu_toggle_key or 45) and code ~= 121 then
                 return false
             end -- Configured physical shortcut maps to the controller toggle.
             if code == 121 then
                 if suppress_toggle then
-                    if bit.band(tonumber(user.lll_ui_key(api.menu_toggle_key or 119)), 0x8000) == 0 then
+                    if bit.band(tonumber(user.lll_ui_key(api.menu_toggle_key or 45)), 0x8000) == 0 then
                         suppress_toggle = false
                     end
                     return false
                 end
-                code = api.menu_toggle_key or 119
+                code = api.menu_toggle_key or 45
             end
             return foreground and bit.band(tonumber(user.lll_ui_key(code)), 0x8000) ~= 0 or false
         end

@@ -4,7 +4,7 @@ Lua loader and in-game mod manager for Helldivers 2 on Windows x64.
 
 ## Current Steam preview
 
-[Download R32 Steam Lua 5.1 preview](https://github.com/HWG90/LLL/releases/tag/R32-steam-lua51-preview.1).
+[Download R33 Steam Lua 5.1 preview](https://github.com/HWG90/LLL/releases/tag/R33-steam-lua51-preview.1).
 This preview targets Steam build **25988413** and checks the exact game-file
 fingerprints. The older [R31 release](https://github.com/HWG90/LLL/releases/tag/R31)
 targets the previous build.
@@ -15,7 +15,7 @@ patch and external helper together, preserves existing settings and mods, and
 saves a rollback receipt. No compiler or Python is required. See the
 [installation and removal instructions](docs/STEAM-PREVIEW-INSTALL.txt).
 
-The manager defaults to **F8**. Its open/close binding is configurable; existing
+The manager defaults to **Insert**. Its open/close binding is configurable; existing
 saved bindings are preserved. Mouse click, drag and scroll work. Individual Lua
 mods belong in `%LOCALAPPDATA%/LLL/Helldivers2/Mods`.
 
@@ -31,6 +31,10 @@ deltas and cleanup; it must not be treated as a gameplay keyboard gate.
 
 ## Changes in this preview
 
+- Insert as the default manager key for fresh configurations; valid saved bindings stay unchanged.
+- Shared asynchronous SDR game-window screenshots for cooperating mods, with capture work in the external helper.
+- WinRT factory cleanup that fixes the helper crash on a later screenshot job.
+- Dead-helper transport failures retire helper-dependent UI and maintenance once, without repeated pipe attempts.
 - Startup support for the current Steam Lua 5.1 VM and automatic external-helper startup.
 - Working manager mouse input and shared menu/camera leases for cooperating mods.
 - Foreground-loss cleanup, token-checked restoration and registered MCM ownership.
@@ -45,6 +49,13 @@ measured **4.47 ms/s** aggregate and **1 ms** worst callback. These are earlier
 base-port measurements, not a fresh benchmark of every change in this release
 or whole-game frame time. The latest catalog/import changes have startup
 acknowledgement and offline checks; their final live cost remains unmeasured.
+
+The screenshot helper has survived repeated user-operated 3840x2160 SDR captures
+and Photo Mode close/reopen. The helper code is unchanged in this preview's
+rebuilt Insert-default startup package. The existing installation already uses
+a saved Insert binding; the new fresh-configuration default has offline checks.
+See [screenshot validation](docs/STEAM-SCREENSHOTS.md) for the bounded helper CPU
+sample and remaining HDR, colorimetry and gameplay-input limits.
 
 The portable installer is tested with isolated filesystem fixtures. It has not
 yet had a separate clean-machine gameplay acceptance test. See

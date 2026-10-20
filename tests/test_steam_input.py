@@ -76,10 +76,13 @@ class SteamInput(unittest.TestCase):
           input.release();assert(releases==2, 'Reopened pointer reader was not released')
           ''', (ROOT / 'src/steam/input.lua').read_bytes())
 
-    def start_manager(self, width=1920, height=1080):
+    def start_manager(self, width=1920, height=1080, saved_key=None):
         lua = self.lua
         lua.globals()[b'viewport_width'] = width
         lua.globals()[b'viewport_height'] = height
+        lua.globals()[b'fixture_loader_config'] = (
+            ('return {manager_ui={menu_toggle_key=%d}}' % saved_key).encode()
+            if saved_key is not None else None)
         lua.execute(b'''clock=0;f8=false;delete_down=false;insert_down=false;focused=true;mouse_focused=true;cursor=false;clipped=false
           draws=0;destroyed=0;next_id=0;key_reads=0;focus_reads=0;reports={}
           mouse_x=0;mouse_y=0;left_down=0;right_down=0;middle_down=0;wheel_y=0
@@ -125,7 +128,10 @@ class SteamInput(unittest.TestCase):
           hash=function()return "unused"end,now=function()return clock end,
           guard=function()return {supported=true,jit_supported=false}end,open_log=function()end,
           files=function()return fixture_mod_source and {'client.lua'} or {}end,
-          read=function(path)if path=='live/client.lua'then return fixture_mod_source end end,write=function()return true end,
+          read=function(path)
+            if path=='config'then return fixture_loader_config end
+            if path=='live/client.lua'then return fixture_mod_source end
+          end,write=function()return true end,
           pointer_snapshot=function()
             pointer_snapshots=pointer_snapshots+1
             return {valid=pointer_valid and focused,x=mouse_x*client_width/viewport_width,
@@ -218,10 +224,12 @@ class SteamInput(unittest.TestCase):
           assert(draws==before and binding_queries==4)
         ''')
 
-    def test_insert_loader_binding_is_independent_of_mcm_delete(self):
+    def test_default_insert_loader_binding_is_independent_of_mcm_delete(self):
         self.start_manager()
         self.publish_mcm()
-        self.lua.execute(b'''select_loader_key(45);update(.01)
+        self.lua.execute(b'''assert(LiveLuaLoader.get_loader_option('manager_ui')==nil,'Fresh startup wrote a shortcut migration')
+          assert(dofile('src/ui/preferences.lua').get(LiveLuaLoader).menu_toggle_key==45)
+          update(.01)
           for i=1,30 do update(.01)end
           assert(binding_queries==0)
           insert_down=true;update(.01);update(.01)
@@ -235,7 +243,7 @@ class SteamInput(unittest.TestCase):
         ''')
 
     def test_shared_hotkey_deference_lasts_until_release_when_binding_changes(self):
-        self.start_manager()
+        self.start_manager(saved_key=119)
         self.publish_mcm(119)
         self.lua.execute(b'''update(.01);f8=true;update(.01)
           assert(draws==0 and binding_queries==1)
@@ -250,7 +258,7 @@ class SteamInput(unittest.TestCase):
         for mode in ('throw', 'non-table', 'malformed-key', 'missing', 'foreign-provider'):
             with self.subTest(mode=mode):
                 self.lua = lua51.LuaRuntime(encoding=None)
-                self.start_manager()
+                self.start_manager(saved_key=119)
                 self.publish_mcm(119)
                 self.lua.globals()[b'binding_behavior'] = mode.encode()
                 self.lua.execute(b'''if binding_behavior=='missing'then DBFMCM.menu_binding_status=nil end
@@ -269,7 +277,7 @@ class SteamInput(unittest.TestCase):
                 ''')
 
     def test_binding_query_cannot_claim_for_a_replaced_provider_or_foreign_lease(self):
-        self.start_manager()
+        self.start_manager(saved_key=119)
         self.publish_mcm(46)
         self.lua.execute(b'''local service=LiveLuaLoader.input_service
           local token=assert(service.acquire('photo','menu'))
@@ -290,9 +298,10 @@ class SteamInput(unittest.TestCase):
         ''')
 
     def test_complete_manager_f8_hold_close_reopen_and_focus_restoration(self):
-        self.start_manager()
+        self.start_manager(saved_key=119)
         lua = self.lua
-        lua.execute(b'''update(.01);assert(draws==0 and not LiveLuaLoader.input_status().active)
+        lua.execute(b'''assert(LiveLuaLoader.get_loader_option('manager_ui').menu_toggle_key==119,'Saved F8 binding was migrated')
+          update(.01);assert(draws==0 and not LiveLuaLoader.input_status().active)
           local count=key_reads
           for frame=1,20 do update(.01)end
           assert(key_reads-count==20 and draws==0 and pointer_snapshots==0 and pointer_releases==0,
@@ -326,7 +335,7 @@ class SteamInput(unittest.TestCase):
 
     def test_shared_service_published_before_mod_enable_and_isolated_from_manager(self):
         self.lua.execute(b'''fixture_mod_source="return {live_lua_api=1,on_enable=function() assert(LiveLuaLoader.input_service==CowboyBingusModLoader.input_service);assert(LiveLuaLoader.input_service.version==1);service_seen_during_enable=true end,on_disable=function()return true end}"''')
-        self.start_manager()
+        self.start_manager(saved_key=119)
         self.lua.execute(b'''assert(service_seen_during_enable and LiveLuaLoader.capabilities.shared_input)
           local s=LiveLuaLoader.input_service
           local token=assert(s.acquire('photo','menu'))
@@ -352,7 +361,7 @@ class SteamInput(unittest.TestCase):
     def test_composed_menu_click_drag_wheel_and_reopened_pointer(self):
         # Non-unit scale catches tests that mistakenly feed logical menu coordinates.
         self.start_manager(3840, 2160)
-        self.lua.execute(b'''update(.01);f8=true;update(.01);update(.01);f8=false;update(.01)
+        self.lua.execute(b'''update(.01);insert_down=true;update(.01);update(.01);insert_down=false;update(.01)
           local function upvalue(fn,wanted)
             for index=1,100 do
               local name,value=debug.getupvalue(fn,index)
@@ -414,12 +423,12 @@ class SteamInput(unittest.TestCase):
           mouse_x,mouse_y=moved.x+(moved.width-200)*moved.scale,moved.y+300*moved.scale
           wheel_y=-1;update(.01);wheel_y=0;update(.01)
           assert(menu.scroll==3, 'Mouse wheel over the composed settings pane did not scroll')
-          f8=true;update(.01)
+          insert_down=true;update(.01)
           assert(not LiveLuaLoader.input_status().active and mouse_focused and not cursor and not clipped)
           local hidden_count=pointer_snapshots
           for frame=1,5 do update(.01)end
           assert(pointer_snapshots==hidden_count and pointer_releases==1)
-          f8=false;update(.01);f8=true;update(.01);f8=false;update(.01)
+          insert_down=false;update(.01);insert_down=true;update(.01);insert_down=false;update(.01)
           assert(LiveLuaLoader.input_status().active, 'Mouse manager did not reopen')
           wheel_y=1;update(.01);wheel_y=0;update(.01)
           assert(menu.scroll==0, 'Reopened manager did not accept mouse wheel input')
@@ -429,7 +438,7 @@ class SteamInput(unittest.TestCase):
           hidden_count=pointer_snapshots
           for frame=1,5 do update(.01)end
           assert(pointer_snapshots==hidden_count and pointer_releases==2)
-          focused=true;f8=false;update(.01);f8=true;update(.01);f8=false;update(.01)
+          focused=true;insert_down=false;update(.01);insert_down=true;update(.01);insert_down=false;update(.01)
           click_button(3)
           shutdown()
           assert(mouse_focused and not cursor and not clipped and pointer_releases==3 and engine_mouse_reads==0)

@@ -3,13 +3,25 @@ local Menu=dofile('src/ui/menu.lua')
 local Preferences=dofile('src/ui/preferences.lua')
 local config,fail={},false
 local loader={get_loader_option=function(key)return config[key]end,save_loader_option=function(key,value)if fail then return false,'write refused' end;config[key]=value;return true end}
-assert(Preferences.get(loader).apply_key==9 and Preferences.get(loader).focus_key==117)
-assert(not Preferences.set(loader,'apply_key',119),'conflicting bindings must be rejected')
+assert(Preferences.get(loader).menu_toggle_key==45 and Preferences.get(loader).apply_key==9 and Preferences.get(loader).focus_key==117)
+-- Reading missing/invalid preferences repairs only the result, never saved data.
+for _,invalid in ipairs({false,'119',0,6,16,17,18,27,256,45.5,math.huge,-math.huge,0/0}) do
+    local saved={menu_toggle_key=invalid};config.manager_ui=saved
+    assert(Preferences.get(loader).menu_toggle_key==45,'Invalid shortcut must fall back to Insert')
+    assert(config.manager_ui==saved and (saved.menu_toggle_key==invalid or invalid~=invalid),'Preference reads must not rewrite saved settings')
+end
+for _,key in ipairs({7,9,45,46,117,119,255}) do
+    config.manager_ui={menu_toggle_key=key}
+    assert(Preferences.get(loader).menu_toggle_key==key,'Valid custom shortcuts, including F8, must remain unchanged')
+end
+config.manager_ui=nil
+assert(not Preferences.set(loader,'apply_key',45),'conflicting bindings must be rejected')
 assert(Preferences.set(loader,'apply_key',116) and Preferences.get(loader).apply_key==116)
 assert(not Preferences.set(loader,'focus_key',116))
 local api=Core.new();api.author_navigation=true
 local handle=api.register({id='example',name='Example',categories={{id='author',name='Goose'}},pages={{id='main',name='Settings',category='author',controls={{id='enabled',type='toggle',label='Enabled',default=false},{id='key',type='keybind',label='Shortcut',default=70}}}}})
 local menu=Menu.new(api);menu.visible=true
+menu.recover();assert(menu.notice=='Menu closed after an error; Insert reopens it');menu.visible=true
 assert(#menu.sidebar()==1,'initial root must be closed even in author-navigation mode')
 menu.expand_all();assert(#menu.sidebar()==3)
 menu.collapse_all();assert(#menu.sidebar()==1)

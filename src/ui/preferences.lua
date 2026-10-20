@@ -1,12 +1,12 @@
 -- Loader-owned manager preferences, shared by each frontend registration.
 local M={}
-M.defaults={menu_toggle_key=119,apply_key=9,focus_key=117,ui_scale=1,font_scale=1}
+M.defaults={menu_toggle_key=45,apply_key=9,focus_key=117,ui_scale=1,font_scale=1}
 function M.get(loader)
     local saved=loader.get_loader_option and loader.get_loader_option("manager_ui") or {}
     if type(saved)~="table" then saved={} end
     local result={}
     for key,default in pairs(M.defaults) do result[key]=type(saved[key])=="number" and saved[key]==saved[key] and math.abs(saved[key])<math.huge and saved[key] or default end
-    if result.menu_toggle_key%1~=0 or result.menu_toggle_key<7 or result.menu_toggle_key>255 or result.menu_toggle_key==27 or (result.menu_toggle_key>=16 and result.menu_toggle_key<=18) then result.menu_toggle_key=119 end
+    if result.menu_toggle_key%1~=0 or result.menu_toggle_key<7 or result.menu_toggle_key>255 or result.menu_toggle_key==27 or (result.menu_toggle_key>=16 and result.menu_toggle_key<=18) then result.menu_toggle_key=M.defaults.menu_toggle_key end
     for _,key in ipairs({"apply_key","focus_key"}) do
         local value=result[key]
         if value%1~=0 or value<7 or value>255 or value==27 or (value>=16 and value<=18) then result[key]=M.defaults[key] end

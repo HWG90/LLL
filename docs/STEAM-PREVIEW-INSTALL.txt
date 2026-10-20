@@ -32,7 +32,7 @@ Only one game folder may be bound per Windows user; roll back the original
 installation before switching folders. A waiting LLL helper in another session
 can also cause a conservative refusal. Close it and retry.
 Your existing LLL.cfg, Settings and Mods remain in place. The default manager
-key is F8; an existing saved key is retained. LLL defers a shared key to MCM.
+key is Insert; an existing saved key is retained. LLL defers a shared key to MCM.
 Start the game and use your manager key to verify opening, mouse input and close.
 Installation/hash verification alone does not prove gameplay acceptance.
 

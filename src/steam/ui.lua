@@ -103,7 +103,7 @@ return function(loader, platform, controls, report, input_driver)
         end
     end
     local function shortcut_state(focused)
-        local shortcut = api.menu_toggle_key or 119
+        local shortcut = api.menu_toggle_key or 45
         local down = raw.down(shortcut)
         local edge = down and not hotkey_held
         if not down then
@@ -148,11 +148,11 @@ return function(loader, platform, controls, report, input_driver)
             end
         end
         input={mouse=raw.mouse,wheel=raw.wheel}
-        suppress_toggle=raw.down(api.menu_toggle_key or 119)
+        suppress_toggle=raw.down(api.menu_toggle_key or 45)
         function input.down(code)
             if not foreground then return false end
             if menu.capture then return raw.down(code) end
-            local shortcut=api.menu_toggle_key or 119
+            local shortcut=api.menu_toggle_key or 45
             if code==shortcut and code~=121 then return false end
             if code==121 then
                 if hotkey_deferred then return false end

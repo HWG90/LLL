@@ -117,6 +117,25 @@ Further bounded checks on October 20 did not establish another action gate:
 These checks changed no production input behavior. A callable current-build gate,
 its lifecycle order and exact restoration remain unverified.
 
+War Journalist's later finite metadata check successfully queried
+`Network.message_info` once for each of `rpc_set_player_info`,
+`rpc_sync_player_info`, `rpc_from_host_respawn` and
+`rpc_from_host_peer_added_to_session`. The results describe positional argument
+types, bit widths and ranges; they expose no object-field names or relationship
+to a local player Unit. An earlier read-only query found 292 locally owned
+network objects, but `GameSession.unit_synchronizer(session)` returned nil.
+Those owned IDs therefore cannot be treated as an authoritative player reference.
+
+A separate binding-settings lead found no input binding map in the current
+user-settings files. The documented
+[`Application.apply_user_settings()`](https://help.autodesk.com/cloudhelp/ENU/Stingray-Help/lua_ref/ns_stingray_Application.html)
+reloads the render configuration and reboots the renderer; it is not a documented
+action-binding apply operation. Likewise,
+[`Window.set_keystroke_enabled()`](https://help.autodesk.com/cloudhelp/2019/ENU/Max-Interactive-Help/lua_ref/obj_stingray_Window.html)
+controls the Windows, Alt-Tab, Alt-Enter and Alt-F4 combinations, not arbitrary
+gameplay keys. No guessed setting, event or player write was added from these
+leads. Native gameplay keyboard suppression remains unresolved.
+
 The subsequent user-supplied section dump exposed part of the native plugin
 loader, but did not recover the engine API getter or the Lua load bindings.
 See the [bounded dump investigation](STEAM-NATIVE-BRIDGE-INVESTIGATION.md) for

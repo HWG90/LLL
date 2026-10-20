@@ -75,7 +75,7 @@ function M.new(api, measure)
         state.color_drag = nil
         state.palette_drag = nil
         state.split_drag = nil
-        self.notice = "Menu closed after an error; "..theme.key_name(api.menu_toggle_key or 119).." reopens it"
+        self.notice = "Menu closed after an error; "..theme.key_name(api.menu_toggle_key or 45).." reopens it"
     end
     active=function()
         local mods = api.list()

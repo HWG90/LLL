@@ -26,6 +26,7 @@ menu.visible=true;menu.window_width=1800;menu.window_height=820
 menu.expand_all()
 local commands=menu.compose(1920,1080)
 assert(menu.display_total==30 and has(commands,'Left 01') and has(commands,'Right 01'))
+assert(has(commands,'Insert Close   Tab Apply   F6 Focus   Right-click Actions'),'Unconfigured manager hint must use Insert')
 local g=menu.parent_geometry
 menu.wheel(-240,g.x+(g.width-50)*g.scale,g.y+400*g.scale)
 commands=menu.compose(1920,1080)
@@ -127,6 +128,7 @@ editors.color_picker=nil;editors.key(36);assert(popup_handle.preview('enabled')=
 -- Failed preference writes cannot change runtime state; shared registrations agree.
 local config,fail,changed={},false,0
 local loader={get_loader_option=function(key)return config[key]end,save_loader_option=function(key,value)if fail then return false,'write failed' end;config[key]=value;return true end,manager_preferences_changed=function()changed=changed+1 end}
+assert(Preferences.page(loader).controls[2].default==45,'Manager key reset must offer Insert')
 assert(not Preferences.set(loader,'menu_toggle_key',27))
 assert(Preferences.set(loader,'menu_toggle_key',46) and Preferences.get(loader).menu_toggle_key==46)
 fail=true;assert(not Preferences.set(loader,'ui_scale',1.25) and Preferences.get(loader).ui_scale==1 and changed==1);fail=false
