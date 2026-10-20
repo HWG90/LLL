@@ -6,6 +6,8 @@ The shared input service gives mods exclusive menu/camera leases on the same hel
 
 See [Steam build/compatibility notes](docs/STEAM-LUA51.md) and the [shared input API](docs/STEAM-INPUT-SERVICE.md). The older R31 download below targets the previous game build; it does not contain this source update.
 
+Declared private-import preflight now streams through portable modules as well. An isolated 400 KB scanner case dropped from 845 to 71 ms and from about 64 MB to 1.4 KB of temporary allocation. Lua 5.1 and LuaJIT fixtures cover string/comment syntax, dependency refusal and bounded large-source allocation. See the [compatibility inventory and limits](docs/STEAM-COMPATIBILITY.md); this follow-up is source-tested and not yet deployed.
+
 ## Release 0.1.8 / R31 (previous game build)
 
 [Download R31](https://github.com/HWG90/LLL/releases/tag/R31). Helldivers-styled manager with sliding switches, bounded layout, main HUD font, Tab acceptance, direct diagnostics without external mod-log ingestion. Includes modular folder projects and typed console commands. See [release notes](docs/RELEASE-NOTES.txt), [UI/log configuration](docs/EPIC-UI-PARITY.txt) and [installation](docs/README.txt).

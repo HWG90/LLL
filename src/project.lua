@@ -14,52 +14,6 @@ local function module_path(name)
     if not name:match('%.lua$') then name=name..'.lua' end
     return relative(name)
 end
-local function imports(text)
-    -- Tokenize literals/comments so documentation examples cannot become imports.
-    local tokens,at={},1
-    while at<=#text do
-        local c=text:sub(at,at)
-        local comment=text:sub(at,at+1)=='--'
-        local start=comment and at+2 or at
-        local equals=text:match('^%[(=*)%[',start)
-        if equals then
-            local closing=']'..equals..']'
-            local finish=text:find(closing,start+#equals+2,true)
-            assert(finish,'Unterminated long literal')
-            if not comment then tokens[#tokens+1]={kind='string',value=text:sub(start+#equals+2,finish-1)}end
-            at=finish+#closing
-        elseif comment then at=(text:find('\n',at,true) or #text)+1
-        elseif c=='"' or c=="'" then
-            local finish=at+1
-            while finish<=#text do
-                if text:sub(finish,finish)=='\\'then finish=finish+2
-                elseif text:sub(finish,finish)==c then break else finish=finish+1 end
-            end
-            local literal=text:sub(at,finish);local chunk=assert(loadstring('return '..literal));setfenv(chunk,{})
-            tokens[#tokens+1]={kind='string',value=chunk()};at=finish+1
-        elseif c:match('[%a_]') then
-            local name=text:match('^[%w_]+',at);tokens[#tokens+1]={kind='name',value=name};at=at+#name
-        elseif c:match('%s')then at=at+1
-        else tokens[#tokens+1]={kind='symbol',value=c};at=at+1 end
-    end
-    local result,native={},{}
-    for index=1,#tokens-1 do
-        local token,previous=tokens[index],tokens[index-1]
-        local global=previous and previous.value=='.' and tokens[index-2] and tokens[index-2].value=='_G'
-        if token.kind=='name' and token.value=='require' and (global or not(previous and (previous.value=='.' or previous.value==':'))) then
-            local argument=tokens[index+1]
-            if argument.value=='(' then argument=tokens[index+2] end
-            if argument and argument.kind=='string' and
-                (argument.value=='ffi' or argument.value=='bit' or argument.value=='jit') then
-                native[argument.value]=true
-            end
-        end
-    end
-    for index=1,#tokens-4 do
-        if tokens[index].value=='mod' and tokens[index+1].value=='.' and tokens[index+2].value=='require' and tokens[index+3].value=='(' and tokens[index+4].kind=='string' then result[#result+1]=module_path(tokens[index+4].value)end
-    end
-    return result,native
-end
 -- Runtime checks must not retain a token per word of large generated modules.
 -- Keep only two token markers, and skip literal bodies with bounded searches.
 local function native_long_literal(text,at)
@@ -186,6 +140,111 @@ function M.check_runtime(platform,text,path)
     if platform.native_ffi~=false then return end
     local name=native_dependency(text)
     if name then error('Unsupported runtime: '..path..' requires LuaJIT '..name..'; script was not executed') end
+end
+-- LuaJIT accepts \z whitespace elision; Lua 5.1 decodes it as the letter z.
+-- Ask the already-used compiler once so removed/foreign jit globals cannot
+-- change literal interpretation. The probe chunk only returns a constant.
+local quoted_z=loadstring([[return '\z']])
+local has_quoted_z=quoted_z and quoted_z()==''
+-- LuaJIT also supports ten-byte \u{hhhhhh} spellings of one ASCII byte.
+local import_encoded_limit=has_quoted_z and 2400 or 960
+local function compact_import_literal(text,first,last)
+    local parts,size,at={},0,first
+    local function append(a,b)
+        if b<a then return end
+        size=size+b-a+1
+        assert(size<=import_encoded_limit,'Use a mod-relative path')
+        parts[#parts+1]=text:sub(a,b)
+    end
+    while at<=last do
+        local slash=text:find('\\',at,true)
+        if not slash or slash>last then append(at,last);break end
+        append(at,slash-1)
+        if text:byte(slash+1)==122 then
+            at=text:find('%S',slash+2) or last+1
+        else
+            append(slash,math.min(slash+1,last));at=slash+2
+        end
+    end
+    return table.concat(parts)
+end
+local function import_literal(text,first,last,quoted)
+    if quoted then
+        -- Existing paths are limited to 240 bytes. A Lua 5.1 decimal escape
+        -- needs at most four source bytes per decoded byte; reject giant
+        -- actual arguments before copying or compiling them.
+        if last-first+1>import_encoded_limit then
+            assert(has_quoted_z,'Use a mod-relative path')
+            local literal=compact_import_literal(text,first,last)
+            local quote=text:sub(first-1,first-1)
+            local chunk=assert(loadstring('return '..quote..literal..quote))
+            setfenv(chunk,{})
+            return module_path(chunk())
+        end
+        local escaped=text:find('\\',first,true)
+        if not escaped or escaped>last then
+            assert(last-first+1<=240,'Use a mod-relative path')
+            return module_path(text:sub(first,last))
+        end
+        local chunk=assert(loadstring('return '..text:sub(first-1,last+1)))
+        setfenv(chunk,{})
+        return module_path(chunk())
+    end
+    local newline=text:byte(first)
+    if newline==10 or newline==13 then
+        first=first+1
+        local next_byte=text:byte(first)
+        if (next_byte==10 or next_byte==13) and next_byte~=newline then first=first+1 end
+    end
+    assert(last-first+1<=240,'Use a mod-relative path')
+    return module_path(text:sub(first,last))
+end
+local function imports(text)
+    -- Retain only the mod.require prefix and unique dependencies. Unrelated
+    -- literals/comments are skipped without copying or compiling their bodies.
+    local result,seen,at,state={},{},1,0
+    local function add(first,last,quoted)
+        local path=import_literal(text,first,last,quoted)
+        if not seen[path] then
+            assert(#result<512,'Module count limit')
+            seen[path]=true;result[#result+1]=path
+        end
+    end
+    while true do
+        -- With no prefix pending, punctuation/numbers cannot begin an import.
+        -- Skip them in C rather than visiting every generated-code token.
+        at=text:find(state==0 and "[%a_'\"%[%-]" or '%S',at)
+        if not at then return result end
+        local byte=text:byte(at)
+        if byte==45 and text:byte(at+1)==45 then
+            local _,_,after
+            if text:byte(at+2)==91 then _,_,after=native_long_literal(text,at+2) end
+            at=after or ((text:find('[\r\n]',at+2) or #text)+1)
+        elseif byte==39 or byte==34 then
+            local finish=native_quoted_end(text,at,byte==39 and "'" or '"')
+            if state==3 or state==4 then add(at+1,finish-1,true) end
+            at,state=finish+1,0
+        elseif byte==91 then
+            local first,last,after=native_long_literal(text,at)
+            if after then
+                if state==3 or state==4 then add(first,last,false) end
+                at=after
+            else at=at+1 end
+            state=0
+        elseif (byte>=65 and byte<=90) or (byte>=97 and byte<=122) or byte==95 then
+            local _,finish=text:find('^[%w_]+',at)
+            local length=finish-at+1
+            if byte==109 and length==3 and text:byte(at+1)==111 and text:byte(at+2)==100 then state=1
+            elseif state==2 and byte==114 and length==7 and text:sub(at,finish)=='require' then state=3
+            else state=0 end
+            at=finish+1
+        else
+            if state==1 and byte==46 then state=2
+            elseif state==3 and byte==40 then state=4
+            else state=0 end
+            at=at+1
+        end
+    end
 end
 local function copy(value)
     if type(value)~='table' then return value end
