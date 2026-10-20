@@ -14,22 +14,7 @@ LUA_SHA = "2C8720C9F446C848436AD993B1A88099D76F0B0B09DF53689719B797C3039CE7"
 CALLBACK = "core/wwise/lua/wwise_flow_callbacks"
 
 
-def sha(data):
-    return hashlib.sha256(data).hexdigest()
-
-
-def source(stock, platform_source=None, native_bytes=None, native_name=None):
-    # UI closures must capture this local before their definitions are compiled.
-    protected = ["assert","error","pcall","xpcall","type","tostring","tonumber","rawget","rawset","rawequal","pairs","ipairs","next","select","unpack","loadstring","loadfile","dofile","setfenv","getfenv","setmetatable","getmetatable","collectgarbage","print","string","table","math","io","os","debug","coroutine","package","require"]
-    code = [
-        "local LLL_TRUST=(function()\n" + (ROOT / "src/trusted.lua").read_text(encoding="utf-8") + "\nend)().capture(_G)",
-        "local " + ",".join(protected) + "=" + ",".join("LLL_TRUST." + name for name in protected),
-        "local LLL_NATIVE",
-        "local LLL_METADATA=(function()\n"
-        + (ROOT / "src/metadata.lua").read_text(encoding="utf-8")
-        + "\nend)()",
-    ]
-    for variable, file in [
+MODULES = [
         ("LLL_RUNTIME", "vendor/bsl_bingus_runtime"),
         ("LLL_MEMORY", "vendor/bsl_bingus_memory"),
         ("LLL_BUILD_GATE", "build_gate"),
@@ -43,6 +28,7 @@ def source(stock, platform_source=None, native_bytes=None, native_name=None):
         ("LLL_HEALTH", "vendor/bsl_health"),
         ("LLL_MANAGER", "manager"),
         ("LLL_LEGACY", "legacy"),
+        ("LLL_DISCOVERY_HASH", "discovery_hash"),
         ("LLL_DISCOVER", "discovery"),
         ("LLL_COMMANDS", "commands"),
         ("LLL_PROJECT", "project"),
@@ -66,7 +52,24 @@ def source(stock, platform_source=None, native_bytes=None, native_name=None):
         ("LLL_UI_METADATA_EDITOR", "ui/metadata_editor"),
         ("LLL_UI", "ui"),
         ("LLL_PLATFORM", "platform"),
-    ]:
+    ]
+
+def sha(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def source(stock, platform_source=None, native_bytes=None, native_name=None):
+    # UI closures must capture this local before their definitions are compiled.
+    protected = ["assert","error","pcall","xpcall","type","tostring","tonumber","rawget","rawset","rawequal","pairs","ipairs","next","select","unpack","loadstring","loadfile","dofile","setfenv","getfenv","setmetatable","getmetatable","collectgarbage","print","string","table","math","io","os","debug","coroutine","package","require"]
+    code = [
+        "local LLL_TRUST=(function()\n" + (ROOT / "src/trusted.lua").read_text(encoding="utf-8") + "\nend)().capture(_G)",
+        "local " + ",".join(protected) + "=" + ",".join("LLL_TRUST." + name for name in protected),
+        "local LLL_NATIVE",
+        "local LLL_METADATA=(function()\n"
+        + (ROOT / "src/metadata.lua").read_text(encoding="utf-8")
+        + "\nend)()",
+    ]
+    for variable, file in MODULES:
         text = (
             platform_source
             if file == "platform" and platform_source is not None

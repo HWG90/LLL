@@ -59,6 +59,8 @@ assert (
     < generated.index(b"local LLL_UI=")
     < generated.index(b"LLL_NATIVE={name=")
 )
+import build_lean
+build_lean.DLL = Path(os.environ.get("LLL_TEST_LUA_DLL", str(build_lean.DLL)))
 from build_lean import compile_chunk
 (tmp / "refused-bootstrap.lua").write_bytes(compile_chunk((tmp / "refused-bootstrap.lua").read_bytes()))
 
@@ -83,7 +85,7 @@ native_test = (
 (tmp / "watch-fixture").mkdir(exist_ok=True)
 os.environ["LOCALAPPDATA"] = str(tmp)
 dll = ctypes.CDLL(
-    r"C:\Program Files (x86)\Steam\steamapps\common\Helldivers 2\bin\lua51.dll"
+    os.environ.get("LLL_TEST_LUA_DLL", r"C:\Program Files (x86)\Steam\steamapps\common\Helldivers 2\bin\lua51.dll")
 )
 dll.luaL_newstate.restype = ctypes.c_void_p
 s = dll.luaL_newstate()

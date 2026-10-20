@@ -335,5 +335,16 @@ for _, command in ipairs(commands) do
     end
 end
 assert(summary, "counts remain visible independently of selected author page")
+tree_loader.modules[tree_loader.order[1]] = "enable failed:\n\t" .. string.rep("missing ffi; ", 100)
+author_controls.refresh()
+local errors_api = core.new()
+author_controls.bind(errors_api, "origins")
+author_controls.refresh()
+assert(errors_api.mods.lll_management, "multiline runtime failures must not prevent manager registration")
+for _, page in ipairs(errors_api.mods.lll_management.pages) do
+    for _, control in ipairs(page.controls) do
+        assert(#control.label <= 512 and not control.label:find("[%c]"))
+    end
+end
 author_controls.close()
 print("PASS independent author pages, stable child IDs, one MCM Mods page and persistent counts")

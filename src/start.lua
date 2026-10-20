@@ -10,7 +10,7 @@ local diagnostic_service = LLL_DIAGNOSTICS and LLL_DIAGNOSTICS.shared()
 local diagnostic_path = platform.log_directory and platform.log_directory .. "/LiveLuaLoader.log"
 local diagnostic_owner = diagnostic_service and diagnostic_service.attach("LLL", diagnostic_path)
 if log then
-    log:write("Live Lua Loader 0.1.8 (R31-bsl-v20); API 1 compatibility\n")
+    log:write("Live Lua Loader 0.1.8 (" .. (platform.revision or 'R31-bsl-v20') .. "); API 1 compatibility\n")
 end
 local guarded, build = pcall(platform.guard)
 if not guarded or type(build)~='table' then
@@ -114,6 +114,11 @@ if LLL_HEALTH then
             end
         end}
 end
+local shared_input,input_driver
+if LLL_STEAM_INPUT_SERVICE and stingray.Window and type(platform.pointer_snapshot)=='function' then
+    shared_input,input_driver=LLL_STEAM_INPUT_SERVICE.new(platform,stingray.Window,
+        LLL_UI_CAPTURE.new(nil,stingray.Window,function(message)report('LLL input',message)end))
+end
 local manager = LLL_MANAGER({
     available = function(name)
         if live.catalog[name] then
@@ -145,6 +150,7 @@ local manager = LLL_MANAGER({
     report = report,
     health=health,jit_budget=code_budget,diagnostics=diagnostic_service,
     build=build,build_allowed=function()return build_supported end,
+    revision=platform.revision,runtime=platform.runtime,native_ffi=platform.native_ffi,input_service=shared_input,
     discovery_supported=LLL_DISCOVER~=nil,discovery_state=ok and (#discovered .. " declared entries") or "failed",protected_runtime=LLL_TRUST~=nil,modular_projects=true,console_commands=true,
 }, entries)
 if ok then
@@ -169,7 +175,7 @@ manager.auto_reload = live.auto_reload
 manager.set_auto_reload = live.set_auto_reload
 local controls = LLL_CONTROLS(manager, live, report)
 local ui
-local built, value = pcall(LLL_UI, manager, platform, controls, report)
+local built, value = pcall(LLL_UI, manager, platform, controls, report, input_driver)
 if built then
     ui = value
 else
@@ -214,6 +220,7 @@ local last_poll = platform.now and platform.now()
 local retiring = false
 local finish_detach
 local function tick(dt)
+    if input_driver then input_driver.begin_frame() end
     if retiring then
         manager.frame(dt)
         if not next(manager.pending_cleanup) and finish_detach then
@@ -236,6 +243,10 @@ local function tick(dt)
     clock = 0
     if now then
         last_poll = now
+    end
+    if platform.maintenance then
+        local maintained,problem=pcall(platform.maintenance)
+        if not maintained then report('LLL maintenance',tostring(problem)) end
     end
     local shown, problem = pcall(status_page.refresh)
     if not shown then
@@ -289,6 +300,7 @@ if type(prior) == "function" then
     update = wrapper
     finish_detach = function()
         if ui then local ok,why=ui.close();if ok==false then report("LLL UI cleanup",why);return false end end
+        if input_driver then local ok,why=input_driver.close();if not ok then report('LLL input cleanup',why);return false end end
         if code_budget then
             local ok,why=code_budget.close()
             if not ok then report("LLL JIT cleanup",why);return false end
@@ -314,6 +326,7 @@ if type(prior) == "function" then
         controls.close()
         status_page.close()
         manager.shutdown()
+        if input_driver then input_driver.close() end
         if code_budget then code_budget.close() end
         if platform.close_watches then
             platform.close_watches()
@@ -335,6 +348,7 @@ if type(old_shutdown) == "function" then
         controls.close()
         status_page.close()
         manager.shutdown()
+        if input_driver then input_driver.close() end
         if code_budget then code_budget.close() end
         if platform.close_watches then
             platform.close_watches()

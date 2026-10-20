@@ -1,3 +1,14 @@
+October 20 Steam Lua 5.1 source preview (build 25988413)
+Current source adds the Steam startup port, automatic external helper, working
+F8 mouse input, streaming native-dependency preflight, idle source caching,
+and an owner-aware shared menu/camera input service with true raw mouse deltas.
+The deployed base port has functional confirmation and a quiet 30-second
+4.47 ms/s loader sample (1 ms worst). Shared-service gameplay integration is
+pending; native/Lua/transport tests pass. Native LuaJIT mods need individual ports.
+See STEAM-LUA51.md and STEAM-INPUT-SERVICE.md. R31 assets are unchanged;
+local Steam build ZIPs embed their game path and are not portable installers.
+
+Historical notes:
 October 19 R31-bsl-v20 candidate: fail-closed SHA256 build gate, shared session hash cache, fingerprinted event-driven LuaJIT churn guard. Existing R31 working changes retained. See BSL-V20-ADAPTATION.txt. Offline validation only; live gameplay/performance pending.
 
 October 11 correction: automatic mod-log ingestion and its verbose toggle have been removed after runtime hitch investigation. Direct diagnostics remain. Historical validation below describes the original R31 release.

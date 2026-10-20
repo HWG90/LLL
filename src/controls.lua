@@ -3,6 +3,11 @@ return function(loader, live, report)
     local self = { bindings = {}, groups = {}, group_count = 0, expanded = {} }
     local preferences=LLL_UI_PREFERENCES or dofile("src/ui/preferences.lua")
     local syncing = false
+    local function status_label(value)
+        local text = tostring(value or "unknown"):gsub("[%c]", " ")
+        if #text > 512 then text = text:sub(1, 509) .. "..." end
+        return text
+    end
     local function readable(value)
         return string.gsub(string.gsub(string.gsub(value, "[_-]+", " "), "(%l)(%u)", "%1 %2"), "(%a)([%w]*)", function(a, b)
             return string.upper(a) .. b
@@ -118,7 +123,7 @@ return function(loader, live, report)
             local id = "entry_" .. index
             local managed = live.catalog[name] ~= nil and not (live.restart_only and live.restart_only(name))
             local controls =
-                { { type = "text", label = loader.modules[name] or "unknown", description = name } }
+                { { type = "text", label = status_label(loader.modules[name]), description = name } }
             controls[#controls + 1] = {
                 type = "toggle",
                 id = id .. "_enabled",
@@ -279,7 +284,8 @@ return function(loader, live, report)
                 .. "\nDescription: " .. (row.description or "") .. "\nResource: "
                 .. row.name
             local controls = {
-                { type = "text", label = "Status: " .. row.state, description = details },
+                { type = "text", label = status_label("Status: " .. row.state),
+                    description = details .. "\nStatus: " .. tostring(row.state):sub(1, 32000) },
                 {
                     type = "text",
                     label = "Source: " .. row.source,
@@ -580,7 +586,7 @@ return function(loader, live, report)
                     local page = mod.pages[index + 1]
                     local toggle = mod.controls["entry_" .. index .. "_enabled"]
                     local reload = mod.controls["entry_" .. index .. "_reload"]
-                    assign(page.controls[1],"label",loader.modules[name] or "unknown")
+                    assign(page.controls[1],"label",status_label(loader.modules[name]))
                     assign(toggle,"disabled",live.catalog[name] == nil or (live.restart_only and live.restart_only(name)))
                     assign(reload,"disabled",live.catalog[name] == nil or loader.modules[name] ~= "loaded" or (live.restart_only and live.restart_only(name)))
                     -- Native core rejects writes to disabled controls; update read-only display directly.

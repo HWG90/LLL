@@ -1,46 +1,12 @@
-local ffi = require("ffi")
-local bit = require("bit")
-ffi.cdef([[typedef union {uint64_t full;uint32_t half[2];} LLL_U64;]])
-local function identity(value)
-    local parts = ffi.new("LLL_U64")
-    parts.full = value
-    return string.format("%08x%08x", tonumber(parts.half[1]), tonumber(parts.half[0]))
-end
-local mix = ffi.new("uint64_t", 0xc6a4a793ULL) * 0x100000000ULL + 0x5bd1e995ULL
-local function xor(a, b)
-    local x, y = ffi.new("LLL_U64"), ffi.new("LLL_U64")
-    x.full = a
-    y.full = b
-    x.half[0] = bit.bxor(x.half[0], y.half[0])
-    x.half[1] = bit.bxor(x.half[1], y.half[1])
-    return x.full
-end
-local function hash(name)
-    local h = ffi.new("uint64_t", #name) * mix
-    local p = ffi.cast("const uint8_t *", name)
-    local stop = #name - #name % 8
-    for i = 0, stop - 1, 8 do
-        local word = ffi.new("uint64_t", 0)
-        for j = 7, 0, -1 do
-            word = word * 256 + p[i + j]
-        end
-        word = word * mix
-        word = xor(word, word / 0x800000000000ULL)
-        word = word * mix
-        h = xor(h, word) * mix
-    end
-    local tail = ffi.new("uint64_t", 0)
-    for j = #name - 1, stop, -1 do
-        tail = tail * 256 + p[j]
-    end
-    if stop < #name then
-        h = xor(h, tail) * mix
-    end
-    h = xor(h, h / 0x800000000000ULL) * mix
-    h = xor(h, h / 0x800000000000ULL)
-    return identity(h)
+-- Shared bounded archive catalog; transport supplies optional native hashing.
+local default_hash = LLL_DISCOVERY_HASH
+if not default_hash and type(jit)=='table' then
+    local chunk=assert(loadfile('src/discovery_hash.lua'))
+    setfenv(chunk,getfenv(1))
+    default_hash=chunk()
 end
 return function(platform, force)
+    local hash = assert(platform.hash or default_hash, 'Archive hash transport unavailable')
     local files = {}
     local winners = {}
     local copies = {}
@@ -112,14 +78,13 @@ return function(platform, force)
                 or (not platform.archive and platform.read(path))
             assert(data and #data >= 104, "Unreadable archive")
             local size = reader and reader.size or #data
-            local p = ffi.cast("const uint8_t *", data)
             local function u32(i)
-                assert(i + 4 <= #data)
-                return tonumber(ffi.cast("const uint32_t *", p + i)[0])
+                assert(i >= 0 and i + 4 <= #data, "Truncated archive integer")
+                local a,b,c,d = string.byte(data, i + 1, i + 4)
+                return a + b * 256 + c * 65536 + d * 16777216
             end
             local function u64(i)
-                assert(i + 8 <= #data)
-                return ffi.cast("const uint64_t *", p + i)[0]
+                return string.format("%08x%08x", u32(i + 4), u32(i))
             end
             assert(u32(0) == 0xf0000011, "Unsupported archive")
             local types, count = u32(4), u32(8)
@@ -129,14 +94,13 @@ return function(platform, force)
                 and table_end <= size, "Invalid resource table")
             if reader then
                 data = assert(reader.read(0, table_end), "Unreadable resource table")
-                p = ffi.cast("const uint8_t *", data)
             end
             for i = 0, count - 1 do
                 local at = table_start + i * 80
-                local key = identity(u64(at))
+                local key = u64(at)
                 local kind = u64(at + 8)
                 -- Every winner hides older declarations, including an unmarked override.
-                if kind == 0xa14e8dfa2cd117e2ULL then
+                if kind == "a14e8dfa2cd117e2" then
                     counters.lua = counters.lua + 1
                     if winners[key] == nil then
                         identities[#identities + 1] = key
@@ -145,7 +109,7 @@ return function(platform, force)
                     copies[key]=copies[key] or {files={}}
                     local history=copies[key].files
                     if history[#history]~=file.name then history[#history+1]=file.name end
-                    local offset = tonumber(u64(at + 16))
+                    local offset = u32(at + 16) + u32(at + 20) * 4294967296
                     local length = u32(at + 56)
                     assert(
                         offset >= table_end and length >= 8 and offset + length <= size,
@@ -157,10 +121,13 @@ return function(platform, force)
                                 "Unreadable resource prefix"
                             )
                         or string.sub(data, offset + 1, math.min(offset + length, offset + 264))
-                    local q = ffi.cast("const uint8_t *", prefix)
+                    local function prefix_u32(at)
+                        local a,b,c,d = string.byte(prefix, at + 1, at + 4)
+                        return a + b * 256 + c * 65536 + d * 16777216
+                    end
                     if
-                        tonumber(ffi.cast("const uint32_t *", q + 4)[0]) == 2
-                        and tonumber(ffi.cast("const uint32_t *", q)[0]) == length - 8
+                        (prefix_u32(4) == 1 or prefix_u32(4) == 2)
+                        and prefix_u32(0) == length - 8
                     then
                         counters.envelopes = counters.envelopes + 1
                         local head = string.sub(prefix, 9)

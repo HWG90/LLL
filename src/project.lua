@@ -42,11 +42,150 @@ local function imports(text)
         elseif c:match('%s')then at=at+1
         else tokens[#tokens+1]={kind='symbol',value=c};at=at+1 end
     end
-    local result={}
+    local result,native={},{}
+    for index=1,#tokens-1 do
+        local token,previous=tokens[index],tokens[index-1]
+        local global=previous and previous.value=='.' and tokens[index-2] and tokens[index-2].value=='_G'
+        if token.kind=='name' and token.value=='require' and (global or not(previous and (previous.value=='.' or previous.value==':'))) then
+            local argument=tokens[index+1]
+            if argument.value=='(' then argument=tokens[index+2] end
+            if argument and argument.kind=='string' and
+                (argument.value=='ffi' or argument.value=='bit' or argument.value=='jit') then
+                native[argument.value]=true
+            end
+        end
+    end
     for index=1,#tokens-4 do
         if tokens[index].value=='mod' and tokens[index+1].value=='.' and tokens[index+2].value=='require' and tokens[index+3].value=='(' and tokens[index+4].kind=='string' then result[#result+1]=module_path(tokens[index+4].value)end
     end
-    return result
+    return result,native
+end
+-- Runtime checks must not retain a token per word of large generated modules.
+-- Keep only two token markers, and skip literal bodies with bounded searches.
+local function native_long_literal(text,at)
+    local opening=text:find('[^=]',at+1)
+    if not opening or text:byte(opening)~=91 then return end
+    local equals=opening-at-1
+    if equals==0 then
+        local closing=assert(text:find(']]',opening+1,true),'Unterminated long literal')
+        return opening+1,closing-1,closing+2
+    end
+    local scan=opening+1
+    while true do
+        local closing=assert(text:find(']',scan,true),'Unterminated long literal')
+        local finish=assert(text:find('[^=]',closing+1),'Unterminated long literal')
+        if finish-closing-1==equals and text:byte(finish)==93 then
+            return opening+1,closing-1,finish+1
+        end
+        scan=finish
+    end
+end
+local function native_quoted_end(text,at,quote)
+    local scan=at+1
+    while true do
+        local finish=assert(text:find(quote,scan,true),'Unterminated short literal')
+        local back=finish-1
+        while text:byte(back)==92 do back=back-1 end
+        if (finish-back-1)%2==0 then return finish end
+        scan=finish+1
+    end
+end
+local function native_literal_name(text,first,last,quoted)
+    if not quoted then
+        -- Lua drops the first newline in a long literal, including CR/LF pairs.
+        local newline=text:byte(first)
+        if newline==10 or newline==13 then
+            first=first+1
+            local next_byte=text:byte(first)
+            if (next_byte==10 or next_byte==13) and next_byte~=newline then first=first+1 end
+        end
+    end
+    -- Three output bytes need at most three four-byte decimal escapes in 5.1.
+    if last-first+1<3 or last-first+1>(quoted and 12 or 3) then return end
+    local value=''
+    while first<=last do
+        local byte=text:byte(first);first=first+1
+        if quoted and byte==92 then
+            byte=text:byte(first);first=first+1
+            if not byte then return end
+            if byte>=48 and byte<=57 then
+                local number=byte-48
+                for _=1,2 do
+                    local digit=text:byte(first)
+                    if not digit or digit<48 or digit>57 then break end
+                    number=number*10+digit-48;first=first+1
+                end
+                byte=number
+            elseif byte==97 or byte==98 or byte==102 or byte==110 or byte==114 or byte==116 or byte==118
+                or byte==10 or byte==13 then
+                return -- A control-character escape cannot name these modules.
+            end
+        end
+        if byte~=102 and byte~=105 and byte~=98 and byte~=116 and byte~=106 then return end
+        value=value..string.char(byte)
+        if #value>3 then return end
+    end
+    if value=='ffi' or value=='bit' or value=='jit' then return value end
+end
+local function native_dependency(text)
+    -- Markers: 1 = _G, 2 = property dot, 3 = method colon; 0 = other.
+    local at,previous,before,argument=1,0,0,0
+    while true do
+        at=text:find('%S',at)
+        if not at then return end
+        local byte=text:byte(at)
+        if byte==45 and text:byte(at+1)==45 then
+            local _,_,after
+            if text:byte(at+2)==91 then _,_,after=native_long_literal(text,at+2) end
+            at=after or ((text:find('[\r\n]',at+2) or #text)+1)
+        elseif byte==39 or byte==34 then
+            local finish=native_quoted_end(text,at,byte==39 and "'" or '"')
+            if argument~=0 then
+                local name=native_literal_name(text,at+1,finish-1,true)
+                if name then return name end
+            end
+            at,previous,before,argument=finish+1,0,previous,0
+        elseif byte==91 then
+            local first,last,after=native_long_literal(text,at)
+            if after then
+                if argument~=0 then
+                    local name=native_literal_name(text,first,last,false)
+                    if name then return name end
+                end
+                at=after
+            else at=at+1 end
+            previous,before,argument=0,previous,0
+        elseif (byte>=65 and byte<=90) or (byte>=97 and byte<=122) or byte==95 then
+            local _,finish=text:find('^[%w_]+',at)
+            local length=finish-at+1
+            local marker=0
+            if length==7 and byte==114 then
+                local a,b,c,d,e,f,g=text:byte(at,finish)
+                if a==114 and b==101 and c==113 and d==117 and e==105 and f==114 and g==101
+                    and (previous~=2 and previous~=3 or previous==2 and before==1) then argument=1
+                else argument=0 end
+            else
+                argument=0
+                if length==2 and byte==95 and text:byte(at+1)==71 then marker=1 end
+            end
+            at,previous,before=finish+1,marker,previous
+        else
+            local marker=byte==46 and 2 or (byte==58 and 3 or 0)
+            if byte==40 and argument==1 then argument=2 else argument=0 end
+            at=at+1
+            if byte==46 and text:byte(at)==46 then
+                at=at+1
+                if text:byte(at)==46 then at=at+1 end
+                marker=0 -- Concatenation/varargs are not a property lookup.
+            end
+            previous,before=marker,previous
+        end
+    end
+end
+function M.check_runtime(platform,text,path)
+    if platform.native_ffi~=false then return end
+    local name=native_dependency(text)
+    if name then error('Unsupported runtime: '..path..' requires LuaJIT '..name..'; script was not executed') end
 end
 local function copy(value)
     if type(value)~='table' then return value end
@@ -128,6 +267,7 @@ function M.snapshot(platform,entry,spec)
     local result={spec=spec,code={},chunks={},paths=paths,config_path=platform.settings and platform.settings..'/'..entry.id..'/config.cfg'}
     for _,path in ipairs(paths)do
         local text=assert(platform.read(entry.dir..'/'..path,16777216),'Module unreadable: '..path)
+        M.check_runtime(platform,text,path)
         result.code[path]=text;result.chunks[path]=assert(loadstring(text,'@'..entry.dir..'/'..path))
     end
     for path,text in pairs(result.code)do

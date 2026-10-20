@@ -14,6 +14,7 @@ return function(platform, report)
     self.catalog_watch=watch_state
     local prepared,instances,retained_instances={},{},{}
     local last_names
+    local pending_root_change=false
     local fingerprints = {}
     local function valid(id)
         return type(id) == "string" and string.match(id, "^[%w_-]+$")
@@ -54,7 +55,8 @@ return function(platform, report)
     end
     function self.scan(force)
         if platform.changed then
-            local changed = false
+            local changed = pending_root_change
+            pending_root_change=false
             for _, root in ipairs(platform.roots or { { kind = "lll", path = platform.live } }) do
                 if root.path and platform.changed(root.path) then
                     changed = true
@@ -241,7 +243,20 @@ return function(platform, report)
     end
     function self.fingerprint(name,force)
         local entry=assert(self.catalog[name] or self.entries[name],"Unknown live mod")
-        if not entry.project then return self.source(name,force)end
+        if not entry.project then
+            -- Only backends guaranteeing source-write notifications may skip
+            -- stamp checks. Preserve a consumed root event for catalog discovery
+            -- if a fingerprint is requested before the next scan.
+            if platform.source_notifications and platform.changed then
+                if platform.changed(entry.source_root or entry.dir) then
+                    sources={}
+                    pending_root_change=true
+                end
+                local cached=sources[name]
+                if not force and cached and cached.path==entry.path then return cached.text end
+            end
+            return self.source(name,force)
+        end
         -- Each project has its own recursive watcher. Idle ticks must not walk
         -- every module or reopen manifests; forced reads still confirm edits.
         local changed = not platform.changed or platform.changed(entry.dir)
@@ -265,7 +280,9 @@ return function(platform, report)
             prepared[name]=project.snapshot(platform,entry,spec)
             return prepared[name].chunks[spec.entry]
         end
-        return assert(loadstring(self.source(name, true), "@" .. entry.path))
+        local text=self.source(name,true)
+        project.check_runtime(platform,text,entry.path)
+        return assert(loadstring(text, "@" .. entry.path))
     end
     function self.load(name)
         local entry = assert(self.catalog[name] or self.entries[name])

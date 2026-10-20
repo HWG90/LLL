@@ -1,3 +1,9 @@
+LEGACY R31 RELEASE INSTRUCTIONS
+These instructions target Steam build 25480438 and the old LuaJIT package.
+Current Steam build 25988413 source: see STEAM-LUA51.md.
+The Steam source preview needs its external helper installed separately; its
+local candidate ZIP is not a portable mod-manager or clean-install release.
+
 Live Lua Loader 0.1.8 — R31 Helldivers manager
 
 READY TO USE

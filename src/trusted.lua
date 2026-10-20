@@ -1,6 +1,6 @@
 -- Snapshot only loader dependencies; mod code still executes in its normal environment.
 local M = {}
-function M.capture(environment)
+function M.capture(environment, options)
     local snapshot = {}
     local next, type = next, type
     local function copy(value)
@@ -13,13 +13,14 @@ function M.capture(environment)
     end
     for _, name in ipairs({"string","table","math","io","os","debug","coroutine","package"}) do snapshot[name] = copy(environment[name]) end
     local original_require = environment.require
-    local ffi = copy(original_require("ffi"))
-    local bit = copy(original_require("bit"))
+    local portable = options and options.runtime == "lua51"
+    local ffi = not portable and copy(original_require("ffi"))
+    local bit = not portable and copy(original_require("bit"))
     snapshot.jit = copy(environment.jit)
     snapshot.jit.opt = copy(snapshot.jit.opt)
     snapshot.require = function(name)
-        if name == "ffi" then return ffi end
-        if name == "bit" then return bit end
+        if name == "ffi" and ffi then return ffi end
+        if name == "bit" and bit then return bit end
         if name == "jit" then return snapshot.jit end
         return original_require(name)
     end

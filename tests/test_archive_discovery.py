@@ -35,7 +35,7 @@ class ArchiveDiscovery(unittest.TestCase):
         for data in (bad_types, bad_range, truncated):
             with self.assertRaises(ValueError):
                 read(data)
-        dll = ctypes.CDLL(r"C:\Program Files (x86)\Steam\steamapps\common\Helldivers 2\bin\lua51.dll")
+        dll = ctypes.CDLL(os.environ.get("LLL_TEST_LUA_DLL", r"C:\Program Files (x86)\Steam\steamapps\common\Helldivers 2\bin\lua51.dll"))
         dll.luaL_newstate.restype = ctypes.c_void_p
         dll.luaL_openlibs.argtypes = [ctypes.c_void_p]
         dll.luaL_loadstring.argtypes = [ctypes.c_void_p, ctypes.c_char_p]
@@ -58,6 +58,7 @@ for _,stream in ipairs({false,true}) do
   if stream then assert(closed)end
  end
 end'''
+        script = 'LLL_DISCOVERY_HASH=dofile("' + (ROOT / "src/discovery_hash.lua").as_posix() + '")\n' + script
         old = Path.cwd()
         with tempfile.TemporaryDirectory() as folder:
             folder = Path(folder)
