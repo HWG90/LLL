@@ -2,7 +2,7 @@
 
 The source now supports Steam build **25988413** through its Lua 5.1 startup resource and an automatically started external filesystem/input helper. F8 keyboard and mouse interaction are working in the deployed port. A quiet 30-second loader sample measured 4.47 ms/s aggregate and 1 ms worst callback, with no source reads, stats, catalog scans or hidden pointer calls. This is loader time, not whole-game frame time.
 
-The new shared input service gives mods exclusive menu/camera leases on the same helper connection. It includes true relative mouse deltas, token-checked cleanup, foreground-loss revocation and manager/MCM arbitration. Its native and Lua contracts pass; the shared service's game integration is still being validated. Older LuaJIT/FFI mods need individual ports.
+The shared input service gives mods exclusive menu/camera leases on the same helper connection. It includes true relative mouse deltas, token-checked cleanup, foreground-loss revocation and manager/MCM arbitration. War Journalist's menu/camera transitions now work in-game: a bounded observer recorded 1,230 successful samples and a clean final release. **Gameplay keyboard isolation remains unfinished:** movement keys still reach the player during freecam. Older LuaJIT/FFI mods need individual ports.
 
 See [Steam build/compatibility notes](docs/STEAM-LUA51.md) and the [shared input API](docs/STEAM-INPUT-SERVICE.md). The older R31 download below targets the previous game build; it does not contain this source update.
 
