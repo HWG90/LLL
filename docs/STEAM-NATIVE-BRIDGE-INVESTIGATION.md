@@ -176,6 +176,27 @@ Lua project was hash-checked and removed, settings and startup patch hashes stay
 unchanged, and the same game process remained running. Elevation therefore did
 not establish native-module acceptance or recover an input API.
 
+## Windows dump API result
+
+A separate elevated helper then made one ordinary
+[`MiniDumpWriteDump`](https://learn.microsoft.com/en-us/windows/win32/api/minidumpapiset/nf-minidumpapiset-minidumpwritedump)
+call using the verified System32 DbgHelp library. It requested loaded code/data
+sections and diagnostic metadata rather than a full heap dump. A control against
+an owned Python child produced a valid 15 MB dump with 15 modules and 189 bounded
+memory ranges. Size-cap and deadline controls were checked before game use.
+
+Against the verified current game process, the API returned HRESULT `0x80070005`
+(access denied) in approximately 40 ms, before any dump writes. The output was
+zero bytes and provides no code coverage. The elevated caller had
+`SeDebugPrivilege` disabled and did not change privileges, access policy or game
+code. The helper exited and the same game process remained running.
+
+A read-only query of `ProcessSignaturePolicy` on that same process succeeded
+with raw flags zero: Microsoft-only, Store-only and mitigation-opt-in signing
+restrictions were all unset. Those particular flags therefore do not explain the
+earlier 577 result; its enforcing component is still unknown. No fuller capture
+was obtained through these elevated attempts.
+
 Further bridge work requires evidence for the actual Lua-to-native load route
 or a successfully accepted plugin and compatible engine API. Native input or
 player writes have not been added. Any eventual input gate must still be tested
