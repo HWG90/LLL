@@ -138,6 +138,33 @@ The dump's 165-entry module list contains the stock engine plugins and game
 DLL, with no diagnostic LLL native DLL present at the time of the crash. This
 does not establish whether an earlier load was attempted or why it failed.
 
+## Attempt to obtain a fuller capture
+
+A separate read-only image reader passed eight own-process fixtures, including
+identity mismatch rejection, unreadable-page accounting and bounded partial-read
+handling. It was then launched through normal Windows UAC elevation. The reader
+opened the current game with a requested `PROCESS_QUERY_INFORMATION |
+PROCESS_VM_READ` mask and verified its creation time, executable path and file
+fingerprint. `K32EnumProcessModulesEx` then failed with Windows error 5
+(access denied), before any image code was read. The same enumeration binding
+succeeded in an own-process control. The reader exited and the game remained
+running. No fuller capture was obtained through this attempt, and no debug
+privilege, protection or target-memory changes were made.
+
+## Lua native-module route
+
+The current VM exposes the standard Lua 5.1
+[`package.loadlib`](https://www.lua.org/manual/5.1/manual.html#pdf-package.loadlib)
+function. A guarded one-shot query used an independently verified nonexistent
+absolute DLL filename. It returned nil, a normal missing-module error and the
+`open` stage, establishing that this is not the disabled dynamic-loader stub.
+No DLL or returned function was executed by the query. Its temporary project was
+hash-checked and removed, with user settings and the startup patch unchanged.
+
+This opens a separate normal Lua C-module investigation. Actual DLL acceptance,
+an ABI-neutral callback and any resulting capture still require verification;
+the missing-file result alone does not establish them or an input gate.
+
 Further bridge work requires evidence for the actual Lua-to-native load route
 or a successfully accepted plugin and compatible engine API. Native input or
 player writes have not been added. Any eventual input gate must still be tested
