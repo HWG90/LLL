@@ -40,6 +40,13 @@ the generic plugin loader rejects the name-only diagnostic. Independent review
 found no concrete name-only table incompatibility in the captured generic path.
 This is partial layout evidence, not complete ABI verification or live acceptance.
 
+Captured startup code also checks the optional callback at offset 0x8 before
+calling it with the engine API getter in the first argument register. This
+matches the pinned `PluginApi.loaded(GetApiFunction)` contract. A successfully
+accepted plugin could therefore receive the getter through the normal callback;
+no address needs to be hard-coded. Actual acceptance and the returned service
+interfaces still require separate verification.
+
 The general path copies a bounded UTF-8 path, converts it to UTF-16 and invokes
 a module-load operation. No rejection of absolute paths or alternate DLL naming
 rule was established. Captured directory construction uses `plugins`, with a
@@ -64,6 +71,25 @@ lead. Its semantics were not established and it was not changed.
 [`Application.settings()`](https://help.autodesk.com/cloudhelp/ENU/Stingray-Help/lua_ref/ns_stingray_Application.html)
 returns `script_data`, so an absent key there cannot establish the value of a
 top-level engine setting. The corresponding read-only probe stayed offline.
+
+## Additional supported startup route
+
+The capture also contains the exact `--plugin-dir` option at executable RVA
+0x1702c10. Autodesk's [command-line reference](https://help.autodesk.com/cloudhelp/ENU/Stingray-Help/stingray_help/reference/engine_command_line.html)
+and [SDK loading guide](https://help.autodesk.com/cloudhelp/ENU/Stingray-SDK-Help/sdk_help/extend_engine.html)
+document this as an additional directory checked for plugin DLLs at startup.
+This gives a concrete normal startup test without changing the shipped
+`support_plugin_reload` setting. A retained option string alone does not prove
+that this game fork accepts or processes it.
+
+The private candidate uses the unchanged reviewed name-only DLL in an isolated
+directory and a one-shot observer. It checks whether the exact directory argument
+reached the game and whether the expected plugin name is listed, without dumping
+other command-line arguments. A guarded one-launch Steam invocation leaves
+persistent launch settings unchanged. The previous diagnostic copy must be
+removed before this test to avoid duplicate loads. The candidate does not query
+native engine APIs or alter input. Live argument receipt and plugin acceptance
+remain pending a cold launch.
 
 Further bridge work requires evidence for the actual Lua-to-native load route
 or a successfully accepted plugin and compatible engine API. Native input or
