@@ -61,6 +61,26 @@ constant tables and global references cover startup callbacks, animation helpers
 and Wwise audio/editor helpers; none supplies a gameplay input gate. This covers
 that bootstrap archive only, not every archive or native interface in the game.
 
+A subsequent metadata census examined all 3,522 base archive names in the
+current DSAA index. It validated 3,427 archive type tables; a focused header
+check confirmed that the remaining 95 archives declare zero types and zero
+resources. Five archives declare 11 Lua entries, comprising nine unique resource
+envelopes. This scope excludes patches, dynamically supplied code and native
+interfaces.
+
+The five Lua entries outside the bootstrap archive were structurally decoded
+without executing them. Two exactly duplicate known animation helpers; the other
+three implement editor-test/assertion UI, vector-field editing and reflection
+probe editing. Their constants and global/instruction references did not supply
+a stock Escape/menu input-context handler or an acquire/release contract. The
+editor-test UI reads Keyboard/Mouse and uses the existing cursor/focus APIs; it
+does not establish a gameplay keyboard gate.
+
+The census requested 22.2 MB of compressed-file reads and decoded 41.1 MB of
+blocks in 3.97 seconds. Selected Lua payloads totaled 20,058 bytes; their inspection
+and the focused empty-header check each completed in under 0.32 seconds.
+These are offline diagnostic costs, not LLL callback or gameplay frame timings.
+
 The retained Lua API inventories also expose no verified player input service.
 Generic script dispatch, Flow events and component setters do exist, but no
 current gameplay instance, event/property contract or restoration behavior
