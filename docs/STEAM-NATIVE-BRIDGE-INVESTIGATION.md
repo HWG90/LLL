@@ -55,6 +55,18 @@ treating that as proof of another installation location.
 
 ## What remains missing
 
+An offline review of the current stock bootstrap archive
+`9ba626afa44a3aa3` parsed all six Lua resources without executing them. Their
+constant tables and global references cover startup callbacks, animation helpers
+and Wwise audio/editor helpers; none supplies a gameplay input gate. This covers
+that bootstrap archive only, not every archive or native interface in the game.
+
+The retained Lua API inventories also expose no verified player input service.
+Generic script dispatch, Flow events and component setters do exist, but no
+current gameplay instance, event/property contract or restoration behavior
+connects them to keyboard suppression. They are not candidates for guessed live
+calls. Additional game-specific interface evidence is required for this route.
+
 The engine API getter passed to native plugin callbacks is referenced at
 executable RVA 0xa6f70. Its first 2,048 captured bytes are zero. No current
 ScriptApi/InputCApi table, callable action gate, or restoration contract was
