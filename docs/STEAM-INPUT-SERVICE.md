@@ -136,6 +136,16 @@ controls the Windows, Alt-Tab, Alt-Enter and Alt-F4 combinations, not arbitrary
 gameplay keys. No guessed setting, event or player write was added from these
 leads. Native gameplay keyboard suppression remains unresolved.
 
+A separate external-helper experiment tested physical W input in its own
+foreground window, with baseline, filtered and released phases. Each phase
+received three matching key-down/up pairs through both legacy messages and raw
+input. The intended filter blocked none. Its accepted low-level callback
+counters stayed zero in all three phases, but those counters followed several
+callback checks, so this does not establish whether delivery or a check failed.
+The test completed without focus loss or cleanup errors. Additional aggregate
+diagnostics are needed before this route can be assessed; no keyboard filter was
+added to the production helper or deployed to the game.
+
 The subsequent user-supplied section dump exposed part of the native plugin
 loader, but did not recover the engine API getter or the Lua load bindings.
 See the [bounded dump investigation](STEAM-NATIVE-BRIDGE-INVESTIGATION.md) for
