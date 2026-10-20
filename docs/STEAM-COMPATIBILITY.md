@@ -37,7 +37,7 @@ before execution. Existing qualified-receiver and first-literal expression
 handling is retained; aliases and arbitrary dynamic expressions are not fully
 established statically. The native `ffi`/`bit`/`jit` guard remains separate.
 
-This is source/test work and is not deployed. Tests measure
+This improvement is included in the installed review candidate. Tests measure
 scanner allocation separately from the unavoidable compilation/storage of full
 module source. No idle polling, game input behavior or Photo files are changed.
 
@@ -102,8 +102,10 @@ explicit MCM frontend registration. This lets MCM use the same service while
 truthfully reporting its menu open, retaining token ownership and foreign-owner
 exclusion. It does not add gameplay keyboard isolation.
 
-This follow-up is built/tested locally. Deployment and live transition/performance
-acceptance remain pending.
+The review candidate was installed on October 20, 2026, with patch/helper hashes
+verified and configuration preserved. Fresh startup logs acknowledge LLL and
+MCM 0.1.74-lua51.1, and the user reports the MCM menu open. Full transition
+acceptance and fresh performance measurements remain pending.
 
 ## Remaining limits
 
@@ -114,5 +116,5 @@ acceptance remain pending.
 * The helper/runtime are gated to the exact supported game hashes.
 * The current candidate ZIP embeds its build machine's resolved game path.
   Deployment tooling updates an existing reviewed patch, not a clean install.
-* Runtime performance and transition acceptance of this local scanner follow-up
-  require a separately authorized deployment. Offline results do not establish it.
+* Runtime performance and full transition acceptance of this scanner follow-up
+  need fresh deployed measurements. Offline results do not establish them.

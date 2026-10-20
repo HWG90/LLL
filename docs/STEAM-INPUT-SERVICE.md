@@ -17,8 +17,8 @@ Acquire only when opening the consuming UI/camera, sample only while it is activ
 ## MCM frontend registration
 
 The current source adds an optional registration extension to v1. Check for
-`service.register_frontend` before enabling the Steam MCM frontend; the installed
-build may predate it. This extension is locally tested and is not deployed yet.
+`service.register_frontend` before enabling the Steam MCM frontend; older builds
+may predate it. This extension is included in the installed review candidate.
 
 MCM must publish its actual API table as `_G.DBFMCM`, with callable `is_open()`
 and `input_status()` and a direct `shared_input_service` field referencing this
