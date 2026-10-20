@@ -142,8 +142,15 @@ received three matching key-down/up pairs through both legacy messages and raw
 input. The intended filter blocked none. Its accepted low-level callback
 counters stayed zero in all three phases, but those counters followed several
 callback checks, so this does not establish whether delivery or a check failed.
-The test completed without focus loss or cleanup errors. Additional aggregate
-diagnostics are needed before this route can be assessed; no keyboard filter was
+The test completed without focus loss or cleanup errors.
+
+A follow-up counted callback entries before every check. It observed zero
+callback entries while three physical W pairs still reached legacy messages and
+raw input. Registration succeeded, the installing thread acknowledged its message
+loop and remained alive, and removal and thread cleanup succeeded. The fixture
+stopped after the baseline phase. This isolates the missing observations from
+the fixture's checks; it does not establish why callbacks were not delivered or
+whether a functioning filter would suppress raw input. No keyboard filter was
 added to the production helper or deployed to the game.
 
 The subsequent user-supplied section dump exposed part of the native plugin
