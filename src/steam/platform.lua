@@ -1,6 +1,8 @@
 -- Steam Lua 5.1 transport. The native helper uses no Lua state layout or hooks.
 local P = {}
-P.revision, P.runtime, P.native_ffi = 'R31-steam-lua51-candidate', 'Lua 5.1', false
+local release=type(LLL_STEAM_SERVICE)=='table' and LLL_STEAM_SERVICE.release
+P.revision=type(release)=='string' and #release<=96 and release:match('^[%w][%w%._%-]*$') and release or 'R31-steam-lua51-candidate'
+P.runtime, P.native_ffi = 'Lua 5.1', false
 P.source_notifications=true
 local sr = assert(stingray, 'Stingray runtime unavailable')
 local base = assert(os.getenv('LOCALAPPDATA'), 'LOCALAPPDATA unavailable') .. '/LLL/Helldivers2'

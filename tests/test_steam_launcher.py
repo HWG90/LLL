@@ -84,7 +84,7 @@ class Launcher(unittest.TestCase):
         root = Path(temporary.name)
         home = root / 'LLL/Helldivers2/Service'; home.mkdir(parents=True)
         (home / self.service_name).write_bytes(self.exe.read_bytes())
-        game = root / (mode + " spaces and apostrophe's"); game.mkdir()
+        game = root / (mode + " spaces and apostrophe's \u0394\u8230"); game.mkdir()
         pipe = 'lll_steam_test_' + secrets.token_hex(12)
         env = os.environ.copy(); env['LOCALAPPDATA'] = str(root)
         self.addCleanup(self.stop, pipe, game)
@@ -106,9 +106,9 @@ class Launcher(unittest.TestCase):
                 if process:
                     self.kernel.WaitForSingleObject(process,3000);self.kernel.CloseHandle(process)
 
-    def launch(self, game, pipe, env, timeout_ms=8000):
+    def launch(self, game, pipe, env, timeout_ms=8000, portable=False):
         return subprocess.run(['powershell.exe','-NoLogo','-NoProfile','-NonInteractive','-WindowStyle','Hidden',
-                               '-EncodedCommand',steam_launcher.encoded_command(self.service_name,self.sha,str(game),pipe,timeout_ms)],
+                               '-EncodedCommand',steam_launcher.encoded_command(self.service_name,self.sha,None if portable else str(game),pipe,timeout_ms)],
                               env=env,capture_output=True,text=True,timeout=12,creationflags=subprocess.CREATE_NO_WINDOW)
 
     def test_encoded_literals_and_validation(self):
@@ -119,6 +119,19 @@ class Launcher(unittest.TestCase):
             with self.assertRaises(ValueError): steam_launcher.command(invalid,self.sha,'C:\\game','lll_steam_test_01234567')
         with self.assertRaises(ValueError): steam_launcher.command(self.service_name,self.sha,'C:\\game','bad;token')
         with self.assertRaises(ValueError): steam_launcher.command(self.service_name,self.sha,'C:\\game','lll_steam_test_01234567',8001)
+
+    def test_portable_release_label_reaches_platform_and_review_fallback_is_preserved(self):
+        from build_steam_release import source
+        from lupa import lua51
+        prefix=(ROOT/'src/steam/platform.lua').read_text().split('P.source_notifications',1)[0]
+        lua=lua51.LuaRuntime()
+        for label,expected in ((None,'R31-steam-lua51-candidate'),
+                               ('R32-steam-lua51-preview.1','R32-steam-lua51-preview.1'),
+                               ('invalid label','R31-steam-lua51-candidate')):
+            assembled=source(bytes(8)+b'fixture_stock','fixture_pipe',release_label=label).decode()
+            service=next(line for line in assembled.splitlines()if line.startswith('local LLL_STEAM_SERVICE='))
+            self.assertEqual(lua.execute(service+'\n'+prefix+'\nreturn P.revision'),expected)
+        self.assertEqual(lua.execute('local LLL_STEAM_SERVICE={release=true}\n'+prefix+'\nreturn P.revision'),'R31-steam-lua51-candidate')
 
     def test_hidden_start_and_existing_ready_reuse(self):
         root,game,pipe,env = self.fixture()
@@ -138,6 +151,28 @@ class Launcher(unittest.TestCase):
         self.assertNotEqual(result.returncode,0)
         self.assertIn('service changed',result.stdout)
         self.assertFalse((game/'started.txt').exists())
+
+    def test_portable_binding_launches_with_spaces_apostrophes_and_trailing_separator(self):
+        root,game,pipe,env=self.fixture()
+        (root/'LLL/Helldivers2/Service/game-root.txt').write_text(str(game)+'\\\n',encoding='utf-8')
+        script=steam_launcher.powershell(self.service_name,self.sha,None,pipe)
+        self.assertNotIn(str(game),script)
+        first=self.launch(game,pipe,env,portable=True)
+        self.assertEqual(first.returncode,0,first.stdout+first.stderr)
+        second=self.launch(game,pipe,env,portable=True)
+        self.assertEqual(second.returncode,0,second.stdout+second.stderr)
+        self.assertEqual(len((game/'started.txt').read_text().splitlines()),1)
+
+    def test_portable_missing_or_invalid_binding_refuses_startup(self):
+        for binding in (None,'relative/game','C:\\game\nother'):
+            with self.subTest(binding=binding):
+                root,game,pipe,env=self.fixture()
+                if binding is not None:
+                    (root/'LLL/Helldivers2/Service/game-root.txt').write_text(binding,encoding='utf-8')
+                result=self.launch(game,pipe,env,portable=True)
+                self.assertNotEqual(result.returncode,0)
+                self.assertIn('LLL_ERROR:',result.stdout)
+                self.assertFalse((game/'started.txt').exists())
 
     def test_early_exit_and_timeout_are_bounded(self):
         for mode,expected in [('exit_early','exited before readiness'),('no_signal','timed out')]:
@@ -180,10 +215,13 @@ class RealServiceStartup(unittest.TestCase):
             root = Path(temporary)
             installed = root/'LLL/Helldivers2/Service'/service.name
             installed.parent.mkdir(parents=True);installed.write_bytes(value)
+            # Exercise the exact consumer launch path: no build-machine game
+            # path in the command, only the installer's UTF-8 binding.
+            (installed.parent/'game-root.txt').write_text(str(game)+'\n',encoding='utf-8')
             fixture = root/'filesystem sample.txt';fixture.write_text('sample')
             environment = os.environ.copy()
             environment['LOCALAPPDATA'] = temporary
-            environment['LLL_LAUNCH_COMMAND'] = steam_launcher.command(service.name,sha,str(game),pipe)
+            environment['LLL_LAUNCH_COMMAND'] = steam_launcher.command(service.name,sha,None,pipe)
             environment['LLL_PIPE_TOKEN'] = pipe
             environment['LLL_TRANSPORT_SOURCE'] = str(ROOT/'src/steam/transport.lua')
             environment['LLL_SERVICE_EXE'] = str(installed)

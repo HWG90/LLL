@@ -1,3 +1,28 @@
+R32 Steam Lua 5.1 preview.1 (build 25988413)
+Prebuilt portable installation includes the current-Steam startup patch and
+content-addressed external helper. The installer checks exact game fingerprints,
+preserves settings/mods, refuses conflicting loader ownership, and creates an
+owned-file rollback receipt. Use the included README; a generic mod-manager ZIP
+import does not install the external service.
+
+This preview includes registered MCM shared-input ownership, manager shortcut
+deferral when MCM uses the same key, streaming import preflight, in-memory catalog
+listing, and cleanup of removed project watches after a completed discovery scan.
+Incomplete scans retain the existing catalog and watches for explicit recovery.
+The default manager key remains F8; existing configured bindings are preserved.
+
+Gameplay keyboard suppression remains unfinished in both menus and freecam:
+movement keys can still reach the native diver. Mouse-look capture and exclusive
+menu/camera leases are implemented. Older LuaJIT/FFI mods need individual ports.
+
+The deployed base runtime has user-confirmed manager/mouse and cooperating-camera
+transitions. The earlier quiet sample was 4.47 ms/s aggregate, 1 ms worst callback;
+these are not a fresh final-preview or whole-game benchmark. Current catalog and
+import changes have offline validation and fresh startup acknowledgement, with
+final live cost pending. Portable installation has isolated fixture validation;
+separate clean-machine gameplay acceptance remains pending.
+
+Historical source-preview notes:
 October 20 Steam Lua 5.1 source preview (build 25988413)
 Current source adds the Steam startup port, automatic external helper, working
 F8 mouse input, streaming native-dependency preflight, idle source caching,

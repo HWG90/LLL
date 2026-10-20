@@ -78,15 +78,21 @@ Camera `dx/dy` are signed raw relative counts, positive right/down. They are acc
 
 Menu mode uses `mouse_focus=false`, visible cursor and clipping. Camera mode uses `mouse_focus=false`, hidden cursor and clipping. The previous flags are recorded once and restored on release. Native input filtering and cursor state do not identify which camera drives rendering; camera/render ownership remains the consumer's responsibility.
 
-This lease currently suppresses gameplay mouse look, not gameplay keyboard actions. The deployed consumer's menu/camera transitions and release are user-confirmed, but W/A/S/D still move the native player during freecam. Keyboard/action isolation is under investigation; do not infer it from `capabilities.camera` or `relative_mouse`. No focus takeover, player-pose locking or disabled camera movement is used as a substitute.
+This lease currently suppresses gameplay mouse look, not gameplay keyboard actions. The deployed consumer's menu/camera transitions and release are user-confirmed, but W/A/S/D still move the native player during freecam and with MCM open. Keyboard/action isolation is under investigation; do not infer it from `capabilities.camera` or `relative_mouse`. No focus takeover, player-pose locking or disabled camera movement is used as a substitute.
 
 ## Keyboard action isolation investigation
 
 Current retained Lua inventories expose controller reads, thresholds and dead
 zones, without a verified gameplay enable/block API. The presence of
 `Keyboard.set_down_threshold` does not establish that it suppresses native action
-values. Replacing Lua readers would affect Lua consumers without proving that
-native gameplay stops receiving keys.
+values. A bounded live MCM trial on build 25988413 held the native threshold at
+1.0 over 516 successful snapshots while unchanged native button readers recorded
+W/A/S/D activity. The user still observed native player movement. MCM release
+restored the exact original 0.5 threshold, the observer removed its wrappers,
+and its temporary project was removed. This tested threshold route does not
+provide gameplay suppression and is not included in the release. Replacing Lua
+readers would affect Lua consumers without proving that native gameplay stops
+receiving keys.
 
 The published Autodesk native [InputCApi](https://help.autodesk.com/cloudhelp/ENU/Stingray-SDK-Help/engine_c/c__api__input_8h.html)
 does declare `void (*flush_controllers_state)()`. The engine supplies this

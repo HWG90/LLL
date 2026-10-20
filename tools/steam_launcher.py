@@ -25,7 +25,7 @@ def ready_event(pipe: str) -> str:
     return 'Local\\LLL_Steam_Ready_' + pipe
 
 
-def powershell(service_name: str, service_sha256: str, game_root: str,
+def powershell(service_name: str, service_sha256: str, game_root: str | None,
                pipe: str, timeout_ms: int = 8000) -> str:
     """Return a one-shot launcher. Its readiness wait is bounded and event based.
 
@@ -43,9 +43,17 @@ def powershell(service_name: str, service_sha256: str, game_root: str,
         raise ValueError('Startup timeout must be between 1 and 8000 milliseconds')
     # Windows paths cannot contain double quotes. list2cmdline also handles a
     # trailing backslash correctly when Start-Process joins ArgumentList again.
-    if not game_root or '"' in game_root:
+    if game_root is not None and (not game_root or '"' in game_root):
         raise ValueError('Invalid game root')
-    arguments = subprocess.list2cmdline(['--game', game_root, '--pipe', pipe])
+    arguments = subprocess.list2cmdline(['--game', game_root, '--pipe', pipe]) if game_root is not None else None
+    binding = '' if arguments is not None else r'''
+    $binding = [IO.Path]::Combine([IO.Path]::GetDirectoryName($service), 'game-root.txt')
+    $game = [IO.File]::ReadAllText($binding, [Text.Encoding]::UTF8).TrimEnd([char[]]"`r`n")
+    if (-not [IO.Path]::IsPathRooted($game) -or $game -match '[\x00-\x1f"]') { throw 'Invalid LLL game-root binding' }
+    $quotedGame = '"' + [Regex]::Replace($game, '(\\+)$', '$1$1') + '"'
+    $arguments = '--game ' + $quotedGame + ' --pipe ' + PIPE_LITERAL
+'''.replace('PIPE_LITERAL', _literal(pipe))
+    argument_expression = _literal(arguments) if arguments is not None else '$arguments'
     service_relative = 'LLL\\Helldivers2\\Service\\' + service_name
     return f"""$ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
@@ -62,6 +70,7 @@ try {{
     if ($actual -ne {_literal(service_sha256)}) {{
         throw 'Installed LLL filesystem service changed'
     }}
+{binding}
     $created = $false
     $ready = [Threading.EventWaitHandle]::new($false, [Threading.EventResetMode]::ManualReset, {_literal(event)}, [ref]$created)
     if ($ready.WaitOne(0)) {{
@@ -69,7 +78,7 @@ try {{
         exit 0
     }}
     if ($created) {{
-        $child = Start-Process -FilePath $service -ArgumentList {_literal(arguments)} -WindowStyle Hidden -PassThru
+        $child = Start-Process -FilePath $service -ArgumentList {argument_expression} -WindowStyle Hidden -PassThru
         $exited = [Threading.EventWaitHandle]::new($false, [Threading.EventResetMode]::AutoReset)
         $exited.SafeWaitHandle = [Microsoft.Win32.SafeHandles.SafeWaitHandle]::new($child.Handle, $false)
         $remaining = [Math]::Max(0, {timeout_ms} - [int]$timer.ElapsedMilliseconds)
@@ -92,13 +101,13 @@ try {{
 """
 
 
-def encoded_command(service_name: str, service_sha256: str, game_root: str,
+def encoded_command(service_name: str, service_sha256: str, game_root: str | None,
                     pipe: str, timeout_ms: int = 8000) -> str:
     return base64.b64encode(powershell(service_name, service_sha256, game_root,
                                      pipe, timeout_ms).encode('utf-16-le')).decode('ascii')
 
 
-def command(service_name: str, service_sha256: str, game_root: str,
+def command(service_name: str, service_sha256: str, game_root: str | None,
             pipe: str, timeout_ms: int = 8000) -> str:
     """Command for io.popen(..., 'r'): close it without an EOF read."""
     encoded = encoded_command(service_name, service_sha256, game_root, pipe, timeout_ms)

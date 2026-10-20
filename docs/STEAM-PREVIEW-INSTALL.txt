@@ -1,0 +1,60 @@
+Live Lua Loader - Current Steam Lua 5.1 preview
+
+Requires Windows x64 and Helldivers 2 Steam build 25988413. Exact executable
+and game.dll fingerprints are checked before installation and helper startup.
+No Python, compiler, MCM, MDL or Bingus loader is required to install this ZIP.
+Older LuaJIT/FFI mods need individual ports. Gameplay keyboard isolation remains
+unfinished: movement keys can still reach the player while LLL/MCM menus or a
+camera mod are open. Mouse input has a separate supported capture service.
+
+INSTALL
+1. Close Helldivers 2 and any waiting LLL Steam helper. Disable competing startup
+   loaders in your mod manager. The installer never stops processes for you.
+2. Extract this complete ZIP to a normal folder. Do not import it into a mod
+   manager: the external helper must also be installed outside the game folder.
+3. Open PowerShell in the extracted folder and run, using your actual game path:
+
+   powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\Install.ps1 -GamePath "D:\SteamLibrary\steamapps\common\Helldivers 2"
+
+The execution-policy option applies only to this installer process. It does not
+change a saved PowerShell policy. Installation does not start the game/helper.
+The installer accepts a clean startup slot, this same preview, a prior verified
+LLL installer receipt, or an explicitly reviewed LLL patch fingerprint bundled
+with this release. Unknown/conflicting startup bytes are refused. Do not rename
+another mod's patch to force a winning priority. Keep its manager ownership intact.
+Other slots in this startup archive family are checked for competing boot code.
+An unreadable/invalid slot is refused because its ownership cannot be verified.
+
+The installer writes the startup patch triplet into the selected game's data
+folder and the content-addressed helper plus game-root.txt binding into:
+  %LOCALAPPDATA%\LLL\Helldivers2\Service
+Only one game folder may be bound per Windows user; roll back the original
+installation before switching folders. A waiting LLL helper in another session
+can also cause a conservative refusal. Close it and retry.
+Your existing LLL.cfg, Settings and Mods remain in place. The default manager
+key is F8; an existing saved key is retained. LLL defers a shared key to MCM.
+Start the game and use your manager key to verify opening, mouse input and close.
+Installation/hash verification alone does not prove gameplay acceptance.
+
+ROLLBACK / REMOVE
+Every changed installation records its exact before/after hashes and original
+bytes in %LOCALAPPDATA%\LLL\Helldivers2\Backups\steam-preview-...\.
+Close the game, then use the receipt path printed by installation:
+
+   powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\Install.ps1 -Rollback "C:\path\to\Backups\steam-preview-...\receipt.json"
+
+Rollback restores the prior startup/helper/binding bytes or removes newly
+installed files. It refuses files changed since installation and retains your
+settings and mods. Exact-hash rollback remains available after Steam updates the
+stock game files; restored older loaders may still require a compatible release.
+Roll back updates in reverse order. If another mod manager
+has changed the startup files, restore that manager's installation first.
+
+STARTUP / SUPPORT
+The launcher verifies the helper hash; the helper verifies the supported game
+files, starts hidden, and signals readiness before Lua connects. Startup waits are bounded;
+there is no helper sampling while its input service is unused.
+Inspect %LOCALAPPDATA%\LLL\Helldivers2\Logs\LiveLuaLoader.log and
+SteamStartupError.log after a failed startup. Keep your installation receipt.
+Game updates require a newly verified release. Source/credits are provided at
+https://github.com/HWG90/LLL and in the included notices. This is a preview.
