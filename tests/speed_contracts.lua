@@ -165,6 +165,7 @@ local key = false
 local mouse_held = false
 local foreground = true
 local extracts, loads, draws = 0, 0, 0
+local resolutions, fonts, compositions, releases = 0, 0, 0, 0
 local data = {}
 local local_menu
 ffi.load = function(name)
@@ -206,7 +207,8 @@ LLL_UI_CORE = {
 LLL_UI_CAPTURE = {
     new = function()
         return {
-            release = function() end,
+            release = function() releases = releases + 1 end,
+            refresh_font = function() fonts = fonts + 1 end,
             sync = function()
                 return true
             end,
@@ -237,6 +239,7 @@ LLL_UI_MENU = {
             end,
             advance = function() end,
             compose = function()
+                compositions = compositions + 1
                 return {}
             end,
             recover = function() end,
@@ -247,6 +250,7 @@ LLL_UI_MENU = {
 LLL_NATIVE = { name = "helper.dll", bytes = "exact helper" }
 stingray = { Window = {}, Gui = {
     resolution = function()
+        resolutions = resolutions + 1
         return 1920, 1080
     end,
 } }
@@ -285,6 +289,18 @@ ui.tick()
 key = true
 ui.tick()
 assert(not ui.menu.visible)
+key = false
+ui.tick()
+local idle_before = { resolutions, fonts, compositions, draws, releases }
+for frame = 1, 6000 do ui.tick(1/120) end
+assert(resolutions == idle_before[1] and fonts == idle_before[2]
+    and compositions == idle_before[3] and draws == idle_before[4]
+    and releases == idle_before[5], "Closed initialized manager must do zero rendering work")
+key = false
+ui.tick()
+key = true
+ui.tick()
+assert(ui.menu.visible and draws > idle_before[4], "Idle shortcut must reopen and resume drawing")
 ui.open()
 assert(ui.menu.visible and loads == 1)
 ui.close()

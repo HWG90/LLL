@@ -1,0 +1,41 @@
+LLL R31-bsl-v20
+==============
+Adds the BSL v20 startup build gate, shared build-hash caching and LuaJIT churn
+handling while retaining the current R31 UI, lifecycle and watcher changes.
+
+Startup hashes the loaded executable and game.dll files against the exact
+supported pair embedded in tools/build.py. Unknown/missing/unreadable modules
+refuse all addon startup, including registry entries, loose projects and
+after_startup callbacks. Stock Wwise startup/results are preserved. No config,
+environment variable or public report edit can enable a refused loader.
+The refusal and hashes appear in LiveLuaLoader.log and LiveLuaLoader.build.
+CowboyBingusModLoader.build exposes the same result; capabilities.build_gate
+indicates enforcement. Native components must retain their own build checks.
+
+Bingus Shared Runtime v1 caches successful SHA256 reads in BingusRuntime.hashes
+by UTF-16 module path. Other compatible runtime copies reuse those values.
+Older independent memory helpers do not automatically gain cache reuse.
+No mod settings are migrated or rewritten by these features.
+
+The existing jit_budget observer now forwards start/abort events to the churn
+guard. One trace owner handles cache growth and churn; an existing peer observer
+is retained. Shutdown/detach removes only LLL's own observer. No added frame
+callback, timer or polling. Churn counters are in CowboyBingusModLoader.jit.churn
+and LiveLuaLoader.jit_budget.churn. Logs identify repeated failures and owners.
+
+Native JIT handling requires the pinned lua51.dll SHA256 in tools/build.py,
+non-GC64 x64 layout, matching live limits and jit_State offset validation.
+On mismatch it counts events without native access. The handler adjusts LuaJIT
+heap penalty/hot-counter data only; no executable patches, process detours or
+page-protection changes. Bookkeeping is capped at 8192 start records per session,
+64 named owners plus overflow, and 24 listed starts; diagnostic log work is
+throttled to trace events at 30-second intervals. Idle unchanged code does no work
+for these features. LLL's pre-existing manager/watch behavior is retained.
+
+Validation: game-DLL tests run in a separate development process, covering
+unknown builds/read failures, shared hash reuse, rejected load/reload/callback
+paths, trace ownership, detach, bounded tracking and real penalty-cache behavior.
+tests/jit_churn_benchmark.lua provides an optional controlled off/on/on/off
+stress comparison. These tests are not live-game performance or gameplay proof.
+
+Upstream provenance and 0BSD terms: BSL-V20-PROVENANCE.txt / BSL-V20-LICENSE.txt.

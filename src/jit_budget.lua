@@ -13,7 +13,7 @@ function M.start(library, settings, report, hooks)
     state.cooldown_seconds=type(settings.cooldown_seconds)=='number' and math.max(1,math.min(300,settings.cooldown_seconds)) or 30
     local opt=type(library)=='table' and type(library.opt)=='table' and library.opt.start
     local attach=type(library)=='table' and library.attach
-    local applying=false;local last_growth;local handler
+    local applying=false;local last_growth;local handler;local churn;local guard_event
     local suspended=0
     function state.pause()suspended=suspended+1 end
     function state.resume()suspended=math.max(0,suspended-1)end
@@ -44,7 +44,7 @@ function M.start(library, settings, report, hooks)
             local ok,why=pcall(attach,handler)
             if not ok then return false,tostring(why) end
         end
-        state.closed=true;state.watcher=false;return true
+        state.closed=true;state.watcher=false;guard_event=nil;return true
     end
     if type(opt)~='function' then state.error='jit.opt.start unavailable';emit(state.error);return state end
     if not apply(state.requested_kb,'startup') then return state end
@@ -57,8 +57,19 @@ function M.start(library, settings, report, hooks)
     if values and rawget(values,M.TRACE_KEY)~=nil then
         state.reason='Existing trace observer retained; adaptive growth unavailable while it owns the slot';emit(state.reason);return state
     end
-    handler=function(what)
-        if what~='flush' or state.closed or applying then return end
+    if type(hooks.guard)=='function' then
+        local ok,value=pcall(hooks.guard,state)
+        if ok and type(value)=='table' and type(value.event)=='function' then
+            churn=value;guard_event=value.event;state.churn=value.public
+        else state.churn_error=tostring(value);emit('Churn observer unavailable: '..tostring(value)) end
+    end
+    handler=function(what,tr,func,pc,otr,info)
+        if state.closed or applying then return end
+        if guard_event and (what=='start' or what=='abort') then
+            local ok,why=pcall(guard_event,what,tr,func,pc,otr,info)
+            if not ok then guard_event=nil;pcall(churn.failed,why) end
+        end
+        if what~='flush' then return end
         state.flushes=state.flushes+1
         if suspended>0 then state.skipped=state.skipped+1;return end
         local now=clock()
@@ -80,6 +91,7 @@ function M.start(library, settings, report, hooks)
         pcall(attach,handler);state.watcher=false;state.reason='Trace slot validation failed'
     end
     emit(state.watcher and ('Observed-flush growth enabled; ceiling '..state.ceiling_kb..' KiB; debounce '..state.cooldown_seconds..' s; no forced flush') or state.reason)
+    if state.watcher and churn and churn.describe then pcall(churn.describe) end
     return state
 end
 return M

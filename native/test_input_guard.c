@@ -2,6 +2,12 @@
 #include <assert.h>
 #include <stdio.h>
 int main(void) {
+    assert(mcm_cursor_mode()==2);
+    assert(!mcm_set_cursor_mode(0) && !mcm_set_cursor_mode(3));
+    assert(mcm_set_cursor_mode(1) && mcm_cursor_mode()==1);
+    assert(mcm_set_cursor_mode(2) && mcm_cursor_mode()==2);
+    mcm_set_cursor_mode(1);mcm_release();assert(mcm_cursor_mode()==2);
+
   assert(mcm_policy(WM_KEYDOWN, 0, 1));
   assert(mcm_policy(WM_KEYUP, 0, 1));
   assert(mcm_policy(WM_CHAR, 0, 1));

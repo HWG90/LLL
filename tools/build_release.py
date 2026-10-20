@@ -78,7 +78,7 @@ def build(output, label="release"):
         "Guid": "bb921b89-f8d0-4abc-9e93-f426a93fef51",
         "Author": "Goose",
         "Name": "Live Lua Loader 0.1.8 - R31" + suffix,
-        "Description": "R31: Helldivers manager UI, main HUD font, sliding switches, bounded layout, source-owned mod logs, verbose launch configuration, modular projects and typed console.",
+        "Description": "R31: Helldivers manager UI, lifecycle and watcher improvements; bsl-v20 candidate adds SHA256 build gate, shared hash cache and event-driven JIT churn guard.",
         "Options": [{"Name": "Loader", "Include": ["data"]}],
     }
     files = {

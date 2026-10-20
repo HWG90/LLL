@@ -49,11 +49,6 @@ function M.page(loader)
             description="Saved in LLL.cfg; shared by the independent manager and MCM registration.",
             validate=function(value)local ok,why=M.set(loader,key,value);assert(ok,why);return true end}
     end
-    controls[#controls+1]={id="manager_verbose_launch",type="toggle",label="Verbose launch logging",
-        default=loader.get_loader_option and loader.get_loader_option("verbose_launch")==true or false,
-        disabled=not loader.save_loader_option,
-        description="Include source-owned log detail in the console. Enable before launch for startup detail; saved in LLL.cfg.",
-        validate=function(value)local ok,why=loader.save_loader_option("verbose_launch",value);assert(ok,why);return true end}
     controls[#controls+1]={id="manager_metadata_editing",type="toggle",label="Allow metadata edits",default=not loader.get_loader_option or loader.get_loader_option("metadata_editing")~=false,disabled=not loader.save_loader_option,
         description="Controls local Name, Author and Description overrides. Runtime owner and resource identity stay fixed.",
         validate=function(value)local ok,why=loader.save_loader_option("metadata_editing",value);assert(ok,why);return true end,

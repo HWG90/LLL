@@ -487,7 +487,27 @@ return function(loader, live, report)
         self.provider = api
         self.bind(api, "origins_mcm")
     end
+    local last_refresh_mark
+    local function refresh_mark()
+        local parts={tostring(self.selected),tostring(loader.discovery_diagnostics)}
+        for key,value in pairs(self.expanded)do parts[#parts+1]="expanded:"..key.."="..tostring(value)end
+        for _,row in ipairs(self.provenance_snapshot() or {})do
+            for _,key in ipairs({"name","state","owner","source","author","display_name","description"})do
+                local value=tostring(row[key]);parts[#parts+1]=#value..":"..value
+            end
+        end
+        for key,value in pairs(preferences.get(loader))do parts[#parts+1]=key.."="..tostring(value)end
+        parts[#parts+1]="auto="..tostring(loader.auto_reload and loader.auto_reload())
+        for _,binding in ipairs(self.bindings)do
+            parts[#parts+1]=tostring(binding.api)..tostring(binding.handle)..tostring(binding.inside)
+            local mod=binding.api.mods and binding.api.mods.lll_management
+            parts[#parts+1]=tostring(mod)
+            for key,value in pairs(mod and mod.values or {})do parts[#parts+1]=key.."="..tostring(value)end
+        end
+        table.sort(parts);return table.concat(parts,"|")
+    end
     function self.refresh()
+        if last_refresh_mark==refresh_mark() then return end
         local spec = definition()
         local signature = ""
         for _, group in ipairs(spec.categories) do
@@ -540,32 +560,37 @@ return function(loader, live, report)
                 end
             end
             local mod = api.mods and api.mods.lll_management
+            local dirty = false
+            local function assign(target,key,value)
+                if target[key] ~= value then target[key]=value;dirty=true end
+            end
             if mod and binding.handle then
                 local values=preferences.get(loader)
                 for key,value in pairs(values) do
                     local control=mod.controls["manager_"..key]
-                    if control then mod.values[control.id]=value end
+                    if control then assign(mod.values,control.id,value) end
                 end
             end
             if mod and binding.handle and not binding.inside then
                 syncing = true
                 if mod.controls.auto_reload then
-                    mod.values.auto_reload = loader.auto_reload and loader.auto_reload() or false
+                    assign(mod.values,"auto_reload",loader.auto_reload and loader.auto_reload() or false)
                 end
                 for index, name in ipairs(loader.order) do
                     local page = mod.pages[index + 1]
                     local toggle = mod.controls["entry_" .. index .. "_enabled"]
                     local reload = mod.controls["entry_" .. index .. "_reload"]
-                    page.controls[1].label = loader.modules[name] or "unknown"
-                    toggle.disabled = live.catalog[name] == nil or (live.restart_only and live.restart_only(name))
-                    reload.disabled = live.catalog[name] == nil or loader.modules[name] ~= "loaded" or (live.restart_only and live.restart_only(name))
+                    assign(page.controls[1],"label",loader.modules[name] or "unknown")
+                    assign(toggle,"disabled",live.catalog[name] == nil or (live.restart_only and live.restart_only(name)))
+                    assign(reload,"disabled",live.catalog[name] == nil or loader.modules[name] ~= "loaded" or (live.restart_only and live.restart_only(name)))
                     -- Native core rejects writes to disabled controls; update read-only display directly.
-                    mod.values[toggle.id] = loader.modules[name] == "loaded"
+                    assign(mod.values,toggle.id,loader.modules[name] == "loaded")
                 end
                 syncing = false
-                api.revision = api.revision + 1
+                if dirty then api.revision = api.revision + 1 end
             end
         end
+        last_refresh_mark=refresh_mark()
     end
     function self.primary()
         local api = self.provider

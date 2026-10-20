@@ -135,7 +135,7 @@ _G.stingray = { Application = {
 } }
 local old_require = require
 _G.require = function(name)
-    if name == "ffi" or name == "bit" then
+    if name == "ffi" or name == "bit" or name == "jit.util" then
         return old_require(name)
     end
     loaded_names[#loaded_names + 1] = name

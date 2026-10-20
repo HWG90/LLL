@@ -198,16 +198,7 @@ P.exe = ffi.string(path, n)
 P.root = assert(string.match(P.exe, "^(.*)[/\\]bin[/\\][^/\\]+$"), "Unexpected game layout")
 P.data = P.root .. "/data"
 function P.guard()
-    local module = k.LLLP_GetModuleHandleA("game.dll")
-    assert(module ~= nil, "game.dll unavailable")
-    local b = ffi.cast("uint8_t *", module)
-    assert(b[0] == 77 and b[1] == 90, "Invalid game.dll PE")
-    local offset = tonumber(ffi.cast("uint32_t *", b + 60)[0])
-    assert(offset < 4096 and ffi.cast("uint32_t *", b + offset)[0] == 0x4550, "Invalid PE header")
-    assert(
-        tonumber(ffi.cast("uint32_t *", b + offset + 8)[0]) == 1790161983,
-        "Unsupported game build"
-    )
+    return LLL_BUILD_GATE.check(LLL_RUNTIME,LLL_MEMORY,LLL_BUILDS,LLL_LUA_SHA)
 end
 local base = os.getenv("LOCALAPPDATA")
 if base then
@@ -323,26 +314,5 @@ function P.font_memory()
         if kernel.LLLP_font_read(process,ffi.cast("const void *",address),buffer,count,got)==0 or got[0]~=count then return nil end
         return ffi.string(buffer,count)
     end}
-end
--- Share read/write/delete so logs can rotate while the console follows them.
-function P.read_log(path,position,limit,changed)
-    local f=k.LLLP_CreateFileA(path,0x80000000,7,nil,3,128,nil)
-    if f==invalid then return nil end
-    local size=ffi.new("int64_t[1]")
-    if k.LLLP_GetFileSizeEx(f,size)==0 then k.LLLP_CloseHandle(f);return nil end
-    local total=tonumber(size[0]);local reset=false;local skipped=false
-    if total<0 or total>1099511627776 then k.LLLP_CloseHandle(f);return nil end
-    local start=position
-    if start==nil then start=total
-    elseif start<0 then start=math.max(0,total+start);skipped=start>0
-    elseif start>total or (changed and start==total) then start=0;reset=true end
-    local count=math.max(0,math.min(limit or 8192,total-start,8192))
-    local moved=ffi.new("int64_t[1]")
-    if k.LLLP_SetFilePointerEx(f,start,moved,0)==0 then k.LLLP_CloseHandle(f);return nil end
-    local buffer=ffi.new("uint8_t[?]",math.max(count,1));local got=ffi.new("uint32_t[1]")
-    local ok=count==0 or k.LLLP_ReadFile(f,buffer,count,got,nil)~=0
-    k.LLLP_CloseHandle(f)
-    if not ok then return nil end
-    return ffi.string(buffer,tonumber(got[0])),start+tonumber(got[0]),reset,skipped,total
 end
 return P

@@ -65,12 +65,12 @@ return function(platform, force)
     end)
     local signature, cache_path
     if stamps and platform.settings then
-        local parts = { "LLL archive cache 2", platform.data }
+        local parts = { "LLL archive cache 3", platform.data }
         for _, file in ipairs(files) do
             parts[#parts + 1] = file.name .. ":" .. assert(stamps[file.name])
         end
         signature = table.concat(parts, "|")
-        cache_path = platform.settings .. "/archive_catalog_v2.txt"
+        cache_path = platform.settings .. "/archive_catalog_v3.txt"
         if not force then
             local cache = platform.read(cache_path, 1048576)
             if cache then
@@ -122,14 +122,17 @@ return function(platform, force)
                 return ffi.cast("const uint64_t *", p + i)[0]
             end
             assert(u32(0) == 0xf0000011, "Unsupported archive")
-            local count = u32(8)
-            assert(count <= 100000 and 104 + count * 80 <= size, "Invalid resource table")
+            local types, count = u32(4), u32(8)
+            local table_start = 72 + types * 32
+            local table_end = table_start + count * 80
+            assert(types > 0 and types <= 100000 and count <= 100000
+                and table_end <= size, "Invalid resource table")
             if reader then
-                data = assert(reader.read(0, 104 + count * 80), "Unreadable resource table")
+                data = assert(reader.read(0, table_end), "Unreadable resource table")
                 p = ffi.cast("const uint8_t *", data)
             end
             for i = 0, count - 1 do
-                local at = 104 + i * 80
+                local at = table_start + i * 80
                 local key = identity(u64(at))
                 local kind = u64(at + 8)
                 -- Every winner hides older declarations, including an unmarked override.
@@ -145,7 +148,7 @@ return function(platform, force)
                     local offset = tonumber(u64(at + 16))
                     local length = u32(at + 56)
                     assert(
-                        offset >= 104 + count * 80 and length >= 8 and offset + length <= size,
+                        offset >= table_end and length >= 8 and offset + length <= size,
                         "Invalid resource range"
                     )
                     local prefix = reader

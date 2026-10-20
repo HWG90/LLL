@@ -9,6 +9,10 @@ os.environ["LLL_HUD_CONSOLE_SOURCE"] = str(component_workspace / "DBF-HUD/src/co
 sys.path.insert(0, str(ROOT / "tools"))
 from archive import hash_name, write, read
 from build import source
+assert b"LLL_LOG_READER" not in (ROOT / "src/start.lua").read_bytes()
+assert b"log_reader" not in (ROOT / "tools/build.py").read_bytes()
+assert not (ROOT / "src/log_reader.lua").exists()
+assert b"function P.read_log" not in (ROOT / "src/platform.lua").read_bytes()
 
 os.chdir(ROOT)
 tmp = ROOT / "tests/tmp"
@@ -32,9 +36,14 @@ old.update(
 )
 (tmp / "9ba626afa44a3aa3.patch_12").write_bytes(b"bad")
 stock = b'assert(select("#",...)==3);local a,b,c=...;assert(a==17 and b==nil and c==29);_G.stock_calls=(_G.stock_calls or 0)+1;return "stock",nil,42,nil'
-platform = 'return {data="tests/tmp",loader_config="mockconfig",write=function(path,value) _G.mock_config=value;return true end,live="mock_live",files=function(dir) if dir=="mock_live" then if _G.new_live_source then return {"demo.lua","new.lua"} end;return {"demo.lua"} end;return {} end,read=function(path) if path=="mockconfig" then return _G.mock_config elseif path=="mock_live/demo.lua" then return _G.live_source elseif path=="mock_live/new.lua" then return _G.new_live_source end end,guard=function() end,open_log=function() end}'
+platform = 'return {data="tests/tmp",loader_config="mockconfig",write=function(path,value) _G.mock_config=value;return true end,live="mock_live",files=function(dir) if dir=="mock_live" then if _G.new_live_source then return {"demo.lua","new.lua"} end;return {"demo.lua"} end;return {} end,read=function(path) if path=="mockconfig" then return _G.mock_config elseif path=="mock_live/demo.lua" then return _G.live_source elseif path=="mock_live/new.lua" then return _G.new_live_source end end,guard=function() return {supported=true,exe_sha256="fixture",game_sha256="fixture"} end,open_log=function() end}'
 (tmp / "bootstrap.lua").write_bytes(
     source(struct.pack("<II", len(stock), 2) + stock, platform)
+)
+refused_stock = b'_G.refused_stock=(_G.refused_stock or 0)+1;return "stock",nil,42,nil'
+refused_platform = 'return {guard=function()return {supported=false,reason="fixture mismatch",exe_sha256="EXE",game_sha256="GAME"}end,open_log=function()end}'
+(tmp / "refused-bootstrap.lua").write_bytes(
+    source(struct.pack("<II", len(refused_stock), 2) + refused_stock, refused_platform)
 )
 generated = (tmp / "bootstrap.lua").read_bytes()
 assert generated.index(b"local LLL_UI_TEXT=") < generated.index(b"local LLL_DIAGNOSTICS="), "Console helper must be initialized before diagnostics"
@@ -51,6 +60,7 @@ assert (
     < generated.index(b"LLL_NATIVE={name=")
 )
 from build_lean import compile_chunk
+(tmp / "refused-bootstrap.lua").write_bytes(compile_chunk((tmp / "refused-bootstrap.lua").read_bytes()))
 
 # Exercise the same bytecode execution path used by the distributable.
 (tmp / "bootstrap.lua").write_bytes(compile_chunk(generated))
@@ -103,6 +113,8 @@ if not status:
         s, 0, 0, 0
     )
 for contract in (
+    b"tests/build_gate_contracts.lua",
+    b"tests/jit_churn_contracts.lua",
     b"tests/tmp/packaged-initializers.lua",
     b"tests/metadata_sidecar_contracts.lua",
     b"tests/health_contracts.lua",
@@ -116,13 +128,12 @@ for contract in (
     b"tests/interaction_contracts.lua",
     b"tests/layout_layer_contracts.lua",
     b"tests/main_font_contracts.lua",
-    b"tests/log_reader_contracts.lua",
-    b"tests/native_log_reader_contracts.lua",
     b"tests/desktop_layout_contracts.lua",
     b"tests/project_contracts.lua",
     b"tests/poll_cache_contracts.lua",
     b"tests/poll_catalog_contracts.lua",
     b"tests/poll_log_reader_contracts.lua",
+    b"tests/stutter_hotfix_contracts.lua",
     b"tests/console_commands.lua",
     b"tests/speed_contracts.lua",
     b"tests/deferred_cleanup_contracts.lua",

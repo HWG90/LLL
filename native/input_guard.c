@@ -9,6 +9,17 @@
 static HWND owner;
 static WNDPROC previous;
 static volatile LONG captured;
+/* Hardware cursor artwork: 1 Windows arrow, 2 engine-selected resource.
+ * This changes WM_SETCURSOR only; gameplay input gating is unchanged. */
+static volatile LONG cursor_mode = 2;
+__declspec(dllexport) int mcm_set_cursor_mode(int mode) {
+    if (mode != 1 && mode != 2) return 0;
+    InterlockedExchange(&cursor_mode, mode);return 1;
+}
+__declspec(dllexport) int mcm_cursor_mode(void) {
+    return (int)InterlockedCompareExchange(&cursor_mode,0,0);
+}
+
 static volatile LONG wheel;
 static volatile LONG keys[256];
 static volatile LONG buttons[5];
@@ -142,7 +153,7 @@ static LRESULT CALLBACK guarded_proc(HWND hwnd, UINT msg, WPARAM wp,
       return 0;
   } else if (mcm_policy(msg, 99, capture))
     return 0;
-  if (capture && msg == WM_SETCURSOR) {
+  if (capture && msg == WM_SETCURSOR && mcm_cursor_mode() == 1) {
     SetCursor(LoadCursorW(NULL, IDC_ARROW));
     return TRUE;
   }
@@ -207,6 +218,7 @@ __declspec(dllexport) int mcm_captured(void) {
          InterlockedCompareExchange(&captured, 0, 0);
 }
 __declspec(dllexport) void mcm_release(void) {
+    InterlockedExchange(&cursor_mode,2);
   InterlockedExchange(&captured, 0);
   InterlockedExchange(&wheel, 0);
   /* Keep an inert callback until held menu keys/buttons have released.

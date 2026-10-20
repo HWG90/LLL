@@ -26,14 +26,16 @@ def hash_name(name):
 def read(data):
     if len(data) < 104 or struct.unpack_from("<I", data)[0] != 0xF0000011:
         raise ValueError("Invalid archive")
-    count = struct.unpack_from("<I", data, 8)[0]
-    if count > 100000 or 104 + 80 * count > len(data):
+    types, count = struct.unpack_from("<II", data, 4)
+    table_start = 72 + 32 * types
+    table_end = table_start + 80 * count
+    if not 0 < types <= 100000 or count > 100000 or table_end > len(data):
         raise ValueError("Invalid table")
     result = {}
     for i in range(count):
-        name, kind, offset = struct.unpack_from("<3Q", data, 104 + i * 80)
-        size = struct.unpack_from("<I", data, 160 + i * 80)[0]
-        if offset < 104 + count * 80 or offset + size > len(data):
+        name, kind, offset = struct.unpack_from("<3Q", data, table_start + i * 80)
+        size = struct.unpack_from("<I", data, table_start + i * 80 + 56)[0]
+        if offset < table_end or offset + size > len(data):
             raise ValueError("Invalid range")
         result[name] = (kind, data[offset : offset + size])
     return result

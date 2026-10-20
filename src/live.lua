@@ -3,8 +3,18 @@ return function(platform, report)
     local self = { entries = {}, catalog = {}, settings = {} }
     local sources, metadata_cache = {}, {}
     local project=LLL_PROJECT or dofile("src/project.lua")
+    -- The broad Bingus compatibility root contains Logs as well as scripts.
+    -- Output writes must not invalidate every source/metadata cache.
+    local catalog_watch=LLL_CATALOG_WATCH or dofile("src/catalog_watch.lua")
+    local watch_state={active=true,catalog_ignored=0,catalog_passed=0,catalog_fallbacks=0}
+    if platform.changed and platform.stat then
+        local _,filtered=catalog_watch(platform,project,watch_state)
+        if filtered then platform.changed=filtered end
+    end
+    self.catalog_watch=watch_state
     local prepared,instances,retained_instances={},{},{}
     local last_names
+    local fingerprints = {}
     local function valid(id)
         return type(id) == "string" and string.match(id, "^[%w_-]+$")
     end
@@ -232,8 +242,17 @@ return function(platform, report)
     function self.fingerprint(name,force)
         local entry=assert(self.catalog[name] or self.entries[name],"Unknown live mod")
         if not entry.project then return self.source(name,force)end
+        -- Each project has its own recursive watcher. Idle ticks must not walk
+        -- every module or reopen manifests; forced reads still confirm edits.
+        local changed = not platform.changed or platform.changed(entry.dir)
+        local cached = fingerprints[name]
+        if not force and not changed and cached and cached.path == entry.path then
+            return cached.value
+        end
         local spec=assert(project.descriptor(platform,entry.dir),"LLL project manifest missing")
-        return project.fingerprint(platform,entry,spec)
+        local value=project.fingerprint(platform,entry,spec)
+        fingerprints[name]={path=entry.path,value=value}
+        return value
     end
     function self.restart_only(name)
         local entry=self.catalog[name] or self.entries[name]

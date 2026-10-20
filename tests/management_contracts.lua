@@ -72,6 +72,10 @@ local native = core.new()
 controls.bind(standalone)
 controls.bind(native)
 controls.refresh()
+local idle_revision1,idle_revision2=standalone.revision,native.revision
+controls.refresh()
+assert(standalone.revision==idle_revision1 and native.revision==idle_revision2,
+    "Idle loader refresh must not invalidate either frontend")
 local h1 = standalone.mods.lll_management.handle
 local h2 = native.mods.lll_management.handle
 local key = "entry_2_enabled"

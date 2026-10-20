@@ -85,4 +85,4 @@ an offline native API fixture; exact game appearance remains unverified.
 R30 MODULAR PROJECTS AND CONSOLE
 See MODULAR-PROJECTS.txt and CONSOLE-COMMANDS.txt. Folder templates are now the default. Console input supports registered typed setters/getters/actions. Review packages are undeployed; native activation and visual acceptance remain separate checks.
 
-Helldivers UI review candidate: see EPIC-UI-PARITY.txt for layout/font, sliding switches, source log ingestion and verbose_launch configuration.
+Helldivers UI review candidate: see EPIC-UI-PARITY.txt for layout/font, sliding switches, direct diagnostics; external mod-log ingestion is removed.

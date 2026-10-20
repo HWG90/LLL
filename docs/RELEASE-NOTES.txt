@@ -1,3 +1,7 @@
+October 19 R31-bsl-v20 candidate: fail-closed SHA256 build gate, shared session hash cache, fingerprinted event-driven LuaJIT churn guard. Existing R31 working changes retained. See BSL-V20-ADAPTATION.txt. Offline validation only; live gameplay/performance pending.
+
+October 11 correction: automatic mod-log ingestion and its verbose toggle have been removed after runtime hitch investigation. Direct diagnostics remain. Historical validation below describes the original R31 release.
+
 Live Lua Loader 0.1.8 / R31 - Helldivers manager
 
 R31 brings the modular loader and redesigned manager into a full release.

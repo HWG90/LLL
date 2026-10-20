@@ -10,10 +10,27 @@ local diagnostic_service = LLL_DIAGNOSTICS and LLL_DIAGNOSTICS.shared()
 local diagnostic_path = platform.log_directory and platform.log_directory .. "/LiveLuaLoader.log"
 local diagnostic_owner = diagnostic_service and diagnostic_service.attach("LLL", diagnostic_path)
 if log then
-    log:write("Live Lua Loader 0.1.8 (R31 Helldivers manager); API 1 compatibility\n")
+    log:write("Live Lua Loader 0.1.8 (R31-bsl-v20); API 1 compatibility\n")
 end
-local guarded, why = pcall(platform.guard)
-if not guarded then
+local guarded, build = pcall(platform.guard)
+if not guarded or type(build)~='table' then
+    build={supported=false,reason=guarded and 'build check unavailable' or tostring(build),
+        exe_sha256='unavailable',game_sha256='unavailable',lua_sha256='unavailable',jit_supported=false}
+end
+-- Capture the decision privately; changing the public report cannot enable loading.
+local build_supported=build.supported==true
+if not build_supported then
+    local why=(build.reason or 'unsupported game build')..'; executable '..tostring(build.exe_sha256)
+        ..'; game.dll '..tostring(build.game_sha256)
+    local caps=LLL_CAPABILITIES({build_gate=true})
+    local refused=function()return false,why end
+    local state={api=1,version=1,build=build,modules={},capabilities=caps,after_startup=refused,
+        add=refused,retry=refused,reload=refused,set_enabled=refused,refresh=refused}
+    if not rawget(_G,'LiveLuaLoader') and not rawget(_G,'CowboyBingusModLoader') then
+        rawset(_G,'LiveLuaLoader',state)
+        rawset(_G,'CowboyBingusModLoader',{api=1,version=18,implementation='Live Lua Loader',
+            revision='LLL-R31-bsl-v20',build=build,modules=state.modules,capabilities=caps,after_startup=refused})
+    end
     if log then
         log:write("Refused startup: " .. tostring(why) .. "\n")
         log:close()
@@ -22,6 +39,7 @@ if not guarded then
     print("[LiveLuaLoader] Refused startup: " .. tostring(why))
     return
 end
+if log then log:write('Build supported: executable '..build.exe_sha256..'; game.dll '..build.game_sha256..'\n') end
 local entries = LLL_LEGACY
 local ok, discovered, warnings, diagnostics, archive_copies = pcall(LLL_DISCOVER, platform)
 if ok then
@@ -55,10 +73,6 @@ local command_bus=LLL_COMMANDS.new()
 platform.command_bus=command_bus
 if diagnostic_service then diagnostic_service.commands=command_bus end
 local live = LLL_LIVE(platform, report)
-local log_reader
-if LLL_LOG_READER and diagnostic_service and platform.read_log then
-    log_reader=LLL_LOG_READER.new(platform,diagnostic_service,{own_log=diagnostic_path,verbose=live.loader_option("verbose_launch")==true})
-end
 local source_cache = {}
 local pending_edits = {}
 for _, name in ipairs(live.scan()) do
@@ -69,7 +83,8 @@ if log then
         log:write("Search " .. root.kind .. ": " .. root.path .. "\n")
     end
 end
-local code_budget = LLL_JIT_BUDGET and LLL_JIT_BUDGET.start(LLL_TRUST.jit, live.loader_option("jit_code_cache"), report)
+local code_budget = LLL_JIT_BUDGET and LLL_JIT_BUDGET.start(LLL_TRUST.jit, live.loader_option("jit_code_cache"), report,{
+    guard=function(cache)return LLL_JIT_CHURN.start(LLL_JIT_GUARD,LLL_TRUST.jit,cache,build,report)end})
 local health
 if LLL_HEALTH then
     local public={header={},changes={}}
@@ -99,7 +114,6 @@ if LLL_HEALTH then
             end
         end}
 end
-if log_reader then for source,entry in pairs(live.catalog)do log_reader.discover(source,entry)end end
 local manager = LLL_MANAGER({
     available = function(name)
         if live.catalog[name] then
@@ -110,7 +124,6 @@ local manager = LLL_MANAGER({
     require = function(name)
         if live.catalog[name] then
             source_cache[name] = live.fingerprint(name)
-            if log_reader then log_reader.discover(name,live.catalog[name],true) end
             return live.load(name)
         end
         return require(name)
@@ -131,6 +144,7 @@ local manager = LLL_MANAGER({
     log_directory = platform.log_directory,
     report = report,
     health=health,jit_budget=code_budget,diagnostics=diagnostic_service,
+    build=build,build_allowed=function()return build_supported end,
     discovery_supported=LLL_DISCOVER~=nil,discovery_state=ok and (#discovered .. " declared entries") or "failed",protected_runtime=LLL_TRUST~=nil,modular_projects=true,console_commands=true,
 }, entries)
 if ok then
@@ -138,18 +152,8 @@ if ok then
 end
 manager.console=command_bus
 manager.diagnostics = diagnostic_service
-manager.register_log=function(source,path)
-    if not log_reader then return false,"Log reader unavailable" end
-    if type(source)~="string" or not manager.modules[source] then return false,"Unknown mod source" end
-    return log_reader.register(source,path,nil,true)
-end
 manager.diagnostics_surface = LLL_DIAGNOSTICS and LLL_DIAGNOSTICS.surface
 report("Startup","Startup finished; after-startup callbacks drained")
-if log_reader then
-    for source,entry in pairs(live.catalog)do log_reader.discover(source,entry)end
-    if log_reader.verbose then report("Verbose launch","source-owned log paths="..log_reader.count.."; incremental read limit=8192 bytes per file") end
-    log_reader.poll()
-end
 if log then log:write("Startup finished\n")end
 manager.get_loader_option = live.loader_option
 manager.save_loader_option = live.save_loader_option
@@ -238,13 +242,11 @@ local function tick(dt)
         report("LLL status", tostring(problem))
     end
     local _, names = refresh_catalog()
-    if log_reader then
-        log_reader.verbose=live.loader_option("verbose_launch")==true
-        for source,entry in pairs(live.catalog)do log_reader.discover(source,entry)end
-        log_reader.poll()
-    end
     for _, name in ipairs(names) do
-        local valid, text = pcall(live.fingerprint, name, pending_edits[name] ~= nil)
+        local valid, text
+        if live.auto_reload() and live.enabled(name) and not live.restart_only(name) then
+            valid, text = pcall(live.fingerprint, name, pending_edits[name] ~= nil)
+        end
         if manager.modules[name] == nil then
             manager.add(name)
         elseif

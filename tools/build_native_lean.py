@@ -15,3 +15,10 @@ subprocess.run(cmd, shell=True, check=True, cwd=out)
 subprocess.run([str(out / "test.exe")], check=True)
 print(out / "mcm_input_lean_gs.dll")
 print((out / "mcm_input_lean_gs.dll").stat().st_size)
+
+# Publish a new content-addressed helper only after the native contracts pass.
+body=(out / "mcm_input_lean_gs.dll").read_bytes()
+name="mcm_input_"+hashlib.sha256(body).hexdigest()[:12]+".dll"
+(native/name).write_bytes(body)
+(native/"library.txt").write_text(name+"\n",encoding="utf-8")
+print(native/name)

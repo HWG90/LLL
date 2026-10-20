@@ -1,6 +1,6 @@
 ## Release 0.1.8 / R31
 
-[Download R31](https://github.com/HWG90/LLL/releases/tag/R31). Helldivers-styled manager with sliding switches, bounded layout, main HUD font, Tab acceptance, source-owned error logs and optional `verbose_launch` detail. Includes modular folder projects and typed console commands. See [release notes](docs/RELEASE-NOTES.txt), [UI/log configuration](docs/EPIC-UI-PARITY.txt) and [installation](docs/README.txt).
+[Download R31](https://github.com/HWG90/LLL/releases/tag/R31). Helldivers-styled manager with sliding switches, bounded layout, main HUD font, Tab acceptance, direct diagnostics without external mod-log ingestion. Includes modular folder projects and typed console commands. See [release notes](docs/RELEASE-NOTES.txt), [UI/log configuration](docs/EPIC-UI-PARITY.txt) and [installation](docs/README.txt).
 
 The full isolated test suite and package integrity checks pass. R31 rendering and log behavior still need in-game validation; publishing this release does not deploy it.
 

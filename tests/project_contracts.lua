@@ -69,4 +69,16 @@ assert(not platform.command_bus.execute('owned.value'),'retiring owner must not 
 owned_manager.frame(.016)
 assert(#platform.command_bus.list()==0,'acknowledged cleanup must remove the provider')
 owned_manager.shutdown();LiveLuaLoader,CowboyBingusModLoader=old_loader,old_compat
-print('PASS native folder discovery/priority, private imports/caches, nested config merge/atomic writes, escape/cycle rejection, helper fingerprint, syntax-safe reload and frozen preflight snapshot')
+local changed=true
+platform.changed=function()local value=changed;changed=false;return value end
+local cached_live=dofile('src/live.lua')(platform,function()end)
+cached_live.catalog['live/alpha']=live.catalog['live/alpha']
+local first=cached_live.fingerprint('live/alpha')
+local read_before=platform.read;local reads=0
+platform.read=function(...)reads=reads+1;return read_before(...)end
+assert(cached_live.fingerprint('live/alpha')==first and reads==0,'Idle project fingerprint must not read manifest or sources')
+files['mods/alpha/src/helper.lua']='return {value=4}';changed=true
+assert(cached_live.fingerprint('live/alpha')~=first and reads>0,'Watcher must detect helper edits')
+reads=0;cached_live.fingerprint('live/alpha',true);assert(reads>0,'Edit confirmation must bypass cache')
+platform.read=read_before;platform.changed=nil
+print('PASS native folder discovery/priority, private imports/caches, config, safe reload, frozen snapshot and change-driven fingerprints')

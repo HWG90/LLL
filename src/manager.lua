@@ -19,6 +19,13 @@ return function(host, entries)
     compat.log_directory = host.log_directory
     loader.log_directory = host.log_directory
     loader.compatibility = compat
+    loader.build=host.build
+    compat.build=host.build
+    local function allowed()
+        if not host.build_allowed then return true end
+        local ok,value=pcall(host.build_allowed)
+        return ok and value==true
+    end
     local function status(name, value)
         if loader.modules[name] == value then
             return
@@ -31,15 +38,19 @@ return function(host, entries)
     end
     local callbacks=(LLL_AFTER_STARTUP or dofile("src/after_startup.lua"))(function(name)return loader.modules[name]end,
         function(name,message)pcall(host.report,name,message)end,function(name)return loader.records[name]end,host.health)
-    loader.after_startup=callbacks.register
+    loader.after_startup=function(fn)
+        if not allowed() then return false,'Unsupported game build' end
+        return callbacks.register(fn)
+    end
     compat.after_startup=loader.after_startup
     loader.capabilities=(LLL_CAPABILITIES or dofile("src/capabilities.lua"))({logs=type(host.open_log)=="function",
         discovery=host.discovery_supported==true,after_startup=true,health=host.health~=nil,jit_budget=host.jit_budget~=nil,
+        build_gate=type(host.build_allowed)=='function',
         live_loading=true,deferred_cleanup=true,modular_projects=host.modular_projects==true,console_commands=host.console_commands==true,protected_runtime=host.protected_runtime==true,
         diagnostics=host.diagnostics~=nil,author_groups=true,resizable_manager=true})
     compat.capabilities=loader.capabilities
     compat.discovery=host.discovery_state
-    compat.revision="LLL-R31"
+    compat.revision="LLL-R31-bsl-v20"
     loader.diagnostics=host.diagnostics
     loader.health=host.health and host.health.public
     compat.health=loader.health
@@ -107,6 +118,7 @@ return function(host, entries)
         return false, problem
     end
     local function load(name)
+        if not allowed() then status(name,'build refused');return end
         local other = rawget(_G, "HD2ModLoader")
         local previous = other and other.modules and other.modules[name]
         if previous == "loading" or previous == "loaded" then
@@ -158,6 +170,7 @@ return function(host, entries)
         finish_health()
     end
     function loader.retry(name)
+        if not allowed() then return false,'Unsupported game build' end
         if not host.can_retry or not host.can_retry(name) then
             return false, "Retry is available only for managed live scripts"
         end
@@ -176,6 +189,7 @@ return function(host, entries)
         return loader.modules[name] == "loaded", loader.modules[name]
     end
     function loader.reload(name)
+        if not allowed() then return false,'Unsupported game build' end
         local record = loader.records[name]
         if
             loader.modules[name] ~= "loaded"
@@ -199,6 +213,7 @@ return function(host, entries)
         return loader.modules[name] == "loaded", loader.modules[name]
     end
     function loader.set_enabled(name, wanted)
+        if not allowed() then return false,'Unsupported game build' end
         wanted = wanted == true
         if not host.can_retry or not host.can_retry(name) then
             return false, "Archive addon has no managed live lifecycle; restart required"
@@ -310,6 +325,7 @@ return function(host, entries)
     end
     callbacks.finish()
     function loader.add(name, enabled)
+        if not allowed() then return false,'Unsupported game build' end
         if seen[name] then
             return false
         end

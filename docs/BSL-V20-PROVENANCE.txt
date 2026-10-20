@@ -1,0 +1,5 @@
+Bingus Shared Loader v20, tag 9471bcb, 0BSD.
+https://github.com/CowboyBingus/BingusSharedLoader/tree/v20
+src/vendor/bsl_bingus_runtime.lua and bsl_bingus_memory.lua are byte-identical upstream v1 shared runtime copies.
+src/vendor/bsl_jit_guard.lua is adapted with bounded bookkeeping and private LLL native names.
+See BSL-V20-LICENSE.txt. No live LLL performance claim follows from upstream measurements.

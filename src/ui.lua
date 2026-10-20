@@ -189,6 +189,7 @@ return function(loader, platform, controls, report)
         function input.wheel()
             return tonumber(native.mcm_wheel())
         end
+        local hidden_clean = false
         function self.tick(dt)
             local ok, why = pcall(function()
                 foreground = user.lll_ui_foreground()
@@ -237,13 +238,27 @@ return function(loader, platform, controls, report)
                 if not foreground then
                     menu.visible = false
                 end
-                local w,h=sr.Gui.resolution()
-                if type(w)~="number" or type(h)~="number" or w<=0 or h<=0 then self.close();menu.recover();return end
                 local acquired, reason = capture.sync(menu.visible, foreground ~= nil, foreground)
                 if not acquired then
                     menu.visible = false
                     report("LLL UI", reason)
                 end
+                -- Keep shortcut edges and restoration retries alive while closed,
+                -- but retire rendering once rather than probing game font resources
+                -- and submitting three empty GUI layers on every gameplay frame.
+                if not menu.visible then
+                    if not hidden_clean then
+                        menu.advance(dt)
+                        menu.compose() -- Clear editor, drag and hit-test state.
+                        if console_surface then console_surface.release() end
+                        view.release()
+                        hidden_clean = true
+                    end
+                    return
+                end
+                hidden_clean = false
+                local w,h=sr.Gui.resolution()
+                if type(w)~="number" or type(h)~="number" or w<=0 or h<=0 then self.close();menu.recover();return end
                 menu.advance(dt)
                 if view.refresh_font then
                     view.refresh_font()
