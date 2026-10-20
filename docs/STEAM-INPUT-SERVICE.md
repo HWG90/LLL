@@ -117,4 +117,9 @@ Further bounded checks on October 20 did not establish another action gate:
 These checks changed no production input behavior. A callable current-build gate,
 its lifecycle order and exact restoration remain unverified.
 
+The subsequent user-supplied section dump exposed part of the native plugin
+loader, but did not recover the engine API getter or the Lua load bindings.
+See the [bounded dump investigation](STEAM-NATIVE-BRIDGE-INVESTIGATION.md) for
+the verified layout evidence, missing pages and remaining requirements.
+
 The helper preserves legacy operation10's 36-byte response; operation12 returns 44 bytes with dx/dy appended. Lua clients should use this service instead of those internal wire operations.
