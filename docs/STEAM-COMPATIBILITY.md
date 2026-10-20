@@ -68,6 +68,42 @@ archive and real helper transport suites cover their separate contracts.
 `tests/run.py` targets the historical installed LuaJIT DLL; it is not the Steam
 test runner and is not represented as a fully passing native-game suite.
 
+## Local recovery follow-up
+
+The current local candidate also removes transient request/reply files from
+directory enumeration. Listing records use the existing wire format, Unicode
+names, attributes and timestamps in a reused memory buffer capped at 64 MiB and
+100,000 entries. A failed or partial enumeration reports an error. Discovery
+preserves its watches and caches on incomplete scans; missing directories remain
+valid empty results. Actual source writes still generate notifications.
+
+An isolated Windows helper comparison used the previous shared-input helper and
+400 requests per helper/fixture, in baseline/candidate/candidate/baseline order:
+
+| Directory fixture | Previous mean | Candidate mean | Candidate P95 |
+| --- | --- | --- | --- |
+| One file, one directory | 1.980 ms | 0.082 ms | 0.160 ms |
+| 96 files, 12 directories | 2.858 ms | 0.894 ms | 1.291 ms |
+
+Payloads matched byte for byte on the unchanged fixtures. These timings cover
+explicit listing requests in an isolated service, not game-frame cost.
+
+Completed catalog scans now release watches belonging to retired projects and
+prune stale source, fingerprint and metadata caches. Configured roots and
+same-directory successors keep their watches. Running instances, retained
+instances and frozen preflight snapshots preserve their existing lifecycle.
+A failed unwatch remains tracked for a later full scan; it creates no idle retry
+loop. A Lua 5.1 stress fixture completed 320 project removals under a two-watch
+limit, with no additional reads, stats or listings during unchanged idle scans.
+
+The [input service](STEAM-INPUT-SERVICE.md#mcm-frontend-registration) also adds
+explicit MCM frontend registration. This lets MCM use the same service while
+truthfully reporting its menu open, retaining token ownership and foreign-owner
+exclusion. It does not add gameplay keyboard isolation.
+
+This follow-up is built/tested locally. Deployment and live transition/performance
+acceptance remain pending.
+
 ## Remaining limits
 
 * Arbitrary native LuaJIT mods need individual ports; dynamic native imports can

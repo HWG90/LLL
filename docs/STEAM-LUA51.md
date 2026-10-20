@@ -21,6 +21,7 @@ py -3.14 tests/test_steam_runtime.py
 py -3.14 tests/test_steam_input.py
 py -3.14 tests/test_steam_capture_service.py
 py -3.14 tests/test_steam_input_service.py
+py -3.14 tests/test_steam_catalog_lifetime.py
 py -3.14 tests/test_steam_native_preflight.py
 py -3.14 tools/build_steam_release.py --game 'C:/path/to/Helldivers 2' --service dist/review/steam-service --output dist/review/steam-candidate
 ```

@@ -33,6 +33,16 @@ platform={
 }
 busy=false
 DBFMCM=nil
+function mcm_provider(opened)
+    mcm_open=opened==true
+    mcm_status={owner=nil,active=false,pending_restore=false}
+    mcm_status_error=false
+    local provider={shared_input_service=public,
+        is_open=function()return mcm_open end,
+        input_status=function()if mcm_status_error then error('MCM status unavailable')end;return mcm_status end}
+    DBFMCM=provider
+    return provider
+end
 '''
 
 
@@ -268,6 +278,146 @@ class InputService(unittest.TestCase):
             assert(not public.status().owner and not capture.status().owner)
             assert(state.focus and not state.cursor and not state.clip)
             assert(counts.pointer==0 and counts.camera==0 and counts.release==0,'Activation failure started input backend')
+        ''')
+
+    def test_mcm_registration_requires_exact_published_provider_and_is_idle(self):
+        self.check('''
+            local provider=mcm_provider(false)
+            assert(not public.register_frontend('other',provider),'Unknown frontend role registered')
+            assert(not public.register_frontend('mcm',{}),'Unpublished provider registered')
+            provider.shared_input_service={}
+            assert(not public.register_frontend('mcm',provider),'Foreign shared service registered')
+            provider.shared_input_service=nil
+            setmetatable(provider,{__index={shared_input_service=public}})
+            assert(not public.register_frontend('mcm',provider),'Inherited shared-service field registered')
+            setmetatable(provider,nil);provider.shared_input_service=public
+            local status=provider.input_status;provider.input_status=nil
+            assert(not public.register_frontend('mcm',provider),'Provider without status method registered')
+            provider.input_status=status
+            local opened=provider.is_open;provider.is_open=true
+            assert(not public.register_frontend('mcm',provider),'Provider without open method registered')
+            provider.is_open=opened
+            local registration=assert(public.register_frontend('mcm',provider))
+            assert(registration~=provider and registration~=public,'Registration token was not opaque')
+            assert(not public.register_frontend('mcm',provider),'Duplicate provider registration succeeded')
+            for i=1,100 do driver.begin_frame();public.status();driver.manager_available()end
+            assert(counts.pointer==0 and counts.camera==0 and counts.release==0,'Registered closed MCM polled helper')
+            assert(state.sets==0,'Registering closed MCM changed cursor flags')
+            assert(not public.unregister_frontend({}),'Wrong registration token unregistered frontend')
+            assert(public.unregister_frontend(registration))
+            assert(not public.unregister_frontend(registration),'Stale registration token remained valid')
+        ''')
+
+    def test_mcm_bound_acquire_bypasses_only_its_own_open_provider(self):
+        self.check('''
+            local provider=mcm_provider(true)
+            local registration=assert(public.register_frontend('mcm',provider))
+            mcm_status={owner='DBF MCM',active=true,pending_restore=false}
+            assert(not public.acquire('DBF MCM','menu'),'Owner name alone bypassed MCM exclusion')
+            assert(not public.acquire('Example','menu'),'Plain acquisition ignored open MCM')
+            assert(not public.acquire('DBF MCM','menu',{}),'Forged frontend token accepted')
+            assert(not public.acquire('Example','menu',registration),'Frontend token authorized foreign owner')
+            assert(not public.acquire('DBF MCM','camera',registration),'Frontend token authorized camera mode')
+            busy=true
+            assert(not public.acquire('DBF MCM','menu',registration),'Frontend bypassed manager busy')
+            busy=false;state.focused=false
+            assert(not public.acquire('DBF MCM','menu',registration),'Frontend bypassed game foreground')
+            state.focused=true
+            local token=assert(public.acquire('DBF MCM','menu',registration))
+            assert(public.owns(token) and public.status().frontend=='mcm')
+            assert(not public.unregister_frontend(registration),'Active bound lease was unregistered')
+            local sets=state.sets
+            for i=1,20 do driver.begin_frame()end
+            assert(public.owns(token) and state.sets==sets,'Active frontend reapplied cursor flags')
+            assert(counts.pointer==0 and counts.camera==0 and counts.release==0,'Active frontend polled without snapshots')
+            for i=1,10 do
+                driver.begin_frame()
+                assert(public.snapshot(token));assert(public.snapshot(token))
+            end
+            assert(counts.pointer==10 and counts.camera==0 and state.sets==sets,'Frontend repeated sampling or cursor writes')
+            assert(public.release(token))
+            assert(public.status().frontend==nil)
+            assert(public.unregister_frontend(registration))
+            assert(not public.acquire('DBF MCM','menu',registration),'Unregistered token acquired input')
+            assert(state.focus and not state.cursor and not state.clip)
+        ''')
+
+    def test_mcm_frontend_refuses_pending_foreign_unknown_or_malformed_status(self):
+        self.check('''
+            local provider=mcm_provider(true)
+            local registration=assert(public.register_frontend('mcm',provider))
+            local bad={
+                {owner='DBF MCM',active=false,pending_restore=true},
+                {owner='Photo Mode',active=false,pending_restore=false},
+                {owner='Photo Mode',active=true,pending_restore=false},
+                {owner=nil,active=true,pending_restore=false},
+                {owner='DBF MCM',active='yes',pending_restore=false},
+                {owner='DBF MCM',active=false,pending_restore='no'},
+                {},
+                false,'status'
+            }
+            for _,status in ipairs(bad)do
+                mcm_status=status
+                assert(not public.acquire('DBF MCM','menu',registration),'Malformed or conflicting MCM status bypassed exclusion')
+            end
+            mcm_status_error=true
+            assert(not public.acquire('DBF MCM','menu',registration),'Throwing status bypassed exclusion')
+            mcm_status_error=false;mcm_status={owner=nil,active=false,pending_restore=false}
+            mcm_open='yes'
+            assert(not public.acquire('DBF MCM','menu',registration),'Malformed open status bypassed exclusion')
+            assert(counts.pointer==0 and counts.camera==0 and counts.release==0 and state.sets==0,'Rejected frontend touched input')
+            mcm_open=true
+            local token=assert(public.acquire('DBF MCM','menu',registration))
+            assert(public.release(token));assert(public.unregister_frontend(registration))
+        ''')
+
+    def test_mcm_frontend_revokes_on_provider_replacement_or_shared_field_loss(self):
+        for trigger in ('snapshot', 'begin_frame'):
+            for replacement in ('provider', 'shared_field'):
+                with self.subTest(trigger=trigger, replacement=replacement):
+                    self.setUp()
+                    self.check('''
+                        local provider=mcm_provider(true)
+                        registration=assert(public.register_frontend('mcm',provider))
+                        token=assert(public.acquire('DBF MCM','menu',registration))
+                        assert(public.snapshot(token))
+                        reads=counts.pointer
+                    ''')
+                    self.check("mcm_provider(true)" if replacement=='provider'
+                               else "DBFMCM.shared_input_service=nil")
+                    self.check("assert(not public.snapshot(token))" if trigger=='snapshot'
+                               else "driver.begin_frame()")
+                    self.check('''
+                        assert(not public.owns(token) and not public.status().owner,'Stale frontend retained active input')
+                        assert(counts.pointer==reads and counts.release==1,'Stale frontend sampled or failed to release reader')
+                        assert(state.focus and not state.cursor and not state.clip,'Stale frontend did not restore cursor')
+                        assert(not public.acquire('DBF MCM','menu',registration),'Stale frontend registration reacquired input')
+                        assert(public.unregister_frontend(registration))
+                    ''')
+
+    def test_mcm_replacement_and_unregistration_wait_for_pending_release(self):
+        self.check('''
+            local old_provider=mcm_provider(true)
+            local old_registration=assert(public.register_frontend('mcm',old_provider))
+            local token=assert(public.acquire('DBF MCM','menu',old_registration))
+            assert(public.snapshot(token))
+            local replacement=mcm_provider(true)
+            assert(not public.register_frontend('mcm',replacement),'Replacement registered during active bound lease')
+            release_ok=false;driver.begin_frame()
+            local pending=public.status()
+            assert(not pending.active and pending.pending_restore and pending.frontend=='mcm')
+            assert(not public.unregister_frontend(old_registration),'Pending bound lease was unregistered')
+            assert(not public.register_frontend('mcm',replacement),'Replacement registered before pending release completed')
+            assert(not public.unregister_frontend({}),'Wrong token removed pending frontend')
+            release_ok=true
+            assert(public.release(token),'Pending frontend release retry failed')
+            local registration=assert(public.register_frontend('mcm',replacement))
+            assert(registration~=old_registration,'Replacement reused stale registration token')
+            assert(not public.acquire('DBF MCM','menu',old_registration),'Old registration acquired replacement provider')
+            assert(not public.unregister_frontend(old_registration),'Old registration removed replacement provider')
+            local replacement_token=assert(public.acquire('DBF MCM','menu',registration))
+            assert(public.release(replacement_token))
+            assert(public.unregister_frontend(registration))
         ''')
 
 

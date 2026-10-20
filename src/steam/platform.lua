@@ -65,7 +65,7 @@ end
 function P.files(directory, pattern)
     local status, reply = call(1, directory)
     local files, stamps, directories = {}, {}, {}
-    if status ~= 0 then return files, stamps, directories end
+    if status ~= 0 then return files, stamps, directories, status end
     local at = 9
     local match = pattern and ('^' .. pattern:gsub('([%^%$%(%)%%%.%[%]%+%-])', '%%%1'):gsub('%*', '.*'):gsub('%?', '.') .. '$')
     while at <= #reply do
@@ -74,7 +74,7 @@ function P.files(directory, pattern)
         if math.floor(attributes / 16) % 2 == 1 then directories[#directories + 1] = name
         elseif not match or name:match(match) then files[#files + 1] = name; stamps[name] = value end
     end
-    return files, stamps, directories
+    return files, stamps, directories, 0
 end
 function P.directories(directory) local _,_,directories = P.files(directory); return directories end
 local watches, generations, last_poll = {}, {}, -1

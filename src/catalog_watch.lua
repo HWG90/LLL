@@ -14,7 +14,8 @@ local function catalog_filter(platform,project,handle)
  if not separate then return end
  local descriptors={}
  local function listing(path)
-  local files,stamps,dirs=platform.files(path)
+  local files,stamps,dirs,status=platform.files(path)
+  if status~=nil and status~=0 and status~=2 and status~=3 then return end
   if type(files)~='table'or type(stamps)~='table'then return end
   if type(dirs)~='table'and platform.directories then dirs=platform.directories(path)end
   if type(dirs)~='table'then return end

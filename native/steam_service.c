@@ -7,6 +7,8 @@
 
 static HANDLE io_event;
 static FILE *service_log;
+static unsigned char *listing_bytes;
+static uint32_t listing_capacity;
 static void note(const char *message) {
     if (service_log) { fprintf(service_log, "%s\n", message); fflush(service_log); }
 }
@@ -55,6 +57,76 @@ static int send_file(HANDLE pipe) {
     if (ok) ok=transfer(pipe,&size,4,1) && transfer(pipe,bytes,size,1);
     free(bytes);return ok;
 }
+
+/* Reuse one bounded buffer across explicit discovery requests. Enumeration
+ * never creates transport files or wakes a watcher on the service directory. */
+static DWORD listing_reserve(uint32_t needed) {
+    uint32_t capacity;
+    unsigned char *larger;
+    if (needed > MAX_REQUEST) return ERROR_MORE_DATA;
+    if (needed <= listing_capacity) return 0;
+    capacity = listing_capacity ? listing_capacity : 4096;
+    while (capacity < needed) capacity = capacity > MAX_REQUEST / 2 ? MAX_REQUEST : capacity * 2;
+    larger = realloc(listing_bytes, capacity);
+    if (!larger) return ERROR_NOT_ENOUGH_MEMORY;
+    listing_bytes = larger;
+    listing_capacity = capacity;
+    return 0;
+}
+
+static int decode_path(const unsigned char *bytes, uint32_t size, uint32_t path_size, wchar_t path[32768]) {
+    int count = 0;
+    if (path_size && path_size <= 32760 && size == 12 + path_size && !memchr(bytes + 12, 0, path_size))
+        count = MultiByteToWideChar(CP_UTF8, MB_ERR_INVALID_CHARS, (const char *)bytes + 12, (int)path_size, path, 32767);
+    if (count <= 0) return 0;
+    path[count] = 0;
+    for (int index = 0; index < count; ++index) if (path[index] == L'/') path[index] = L'\\';
+    return 1;
+}
+
+static int send_listing(uint32_t nonce, const wchar_t *path, HANDLE outgoing) {
+    uint32_t header[2] = {nonce, ERROR_INVALID_DATA}, length = 8, count = 0;
+    WIN32_FIND_DATAW data;
+    HANDLE handle = INVALID_HANDLE_VALUE;
+    wchar_t pattern[32768];
+    DWORD status;
+    if (!path) goto header_only;
+    status = listing_reserve(length);
+    if (status) { header[1] = status; goto header_only; }
+    swprintf_s(pattern, 32768, L"%s\\*", path);
+    handle = FindFirstFileW(pattern, &data);
+    if (handle == INVALID_HANDLE_VALUE) { header[1] = GetLastError(); goto header_only; }
+    do {
+        uint32_t fields[6], name_size;
+        char name[4 * MAX_PATH];
+        int encoded;
+        if (!wcscmp(data.cFileName, L".") || !wcscmp(data.cFileName, L"..")) continue;
+        if (++count > 100000) { status = ERROR_MORE_DATA; goto finished; }
+        encoded = WideCharToMultiByte(CP_UTF8, WC_ERR_INVALID_CHARS, data.cFileName, -1,
+                                      name, (int)sizeof(name), NULL, NULL);
+        /* Match the legacy text serializer for an invalid UTF-16 name. */
+        name_size = encoded > 0 ? (uint32_t)encoded - 1 : 0;
+        status = listing_reserve(length + 24 + name_size);
+        if (status) goto finished;
+        fields[0] = data.dwFileAttributes;
+        fields[1] = data.nFileSizeHigh;
+        fields[2] = data.nFileSizeLow;
+        fields[3] = data.ftLastWriteTime.dwHighDateTime;
+        fields[4] = data.ftLastWriteTime.dwLowDateTime;
+        fields[5] = name_size;
+        memcpy(listing_bytes + length, fields, sizeof(fields)); length += 24;
+        memcpy(listing_bytes + length, name, name_size); length += name_size;
+    } while (FindNextFileW(handle, &data));
+    status = GetLastError() == ERROR_NO_MORE_FILES ? 0 : ERROR_MORE_DATA;
+finished:
+    FindClose(handle);
+    header[1] = status;
+    memcpy(listing_bytes, header, sizeof(header));
+    return transfer(outgoing, &length, 4, 1) && transfer(outgoing, listing_bytes, length, 1) ? 2 : 0;
+header_only:
+    return transfer(outgoing, &length, 4, 1) && transfer(outgoing, header, length, 1) ? 2 : 0;
+}
+
 static int dispatch(const unsigned char *bytes, uint32_t size, HANDLE outgoing) {
     uint32_t nonce, operation, path_size;
     FILE *stream = NULL;
@@ -93,17 +165,16 @@ static int dispatch(const unsigned char *bytes, uint32_t size, HANDLE outgoing) 
         return transfer(outgoing,&length,4,1)&&transfer(outgoing,reply,length,1) ? 2 : 0;
     }
     if (!nonce || path_size>size-12) return 0;
+    if (operation==1) {
+        wchar_t path[32768];
+        return send_listing(nonce,decode_path(bytes,size,path_size,path)?path:NULL,outgoing);
+    }
     if (operation==2) {
         uint32_t reply[7]={0},length=8;
         wchar_t path[32768];
         WIN32_FILE_ATTRIBUTE_DATA data;
-        int count=0;
         reply[0]=nonce;reply[1]=ERROR_INVALID_DATA;
-        if (path_size && path_size<=32760 && size==12+path_size && !memchr(bytes+12,0,path_size))
-            count=MultiByteToWideChar(CP_UTF8,MB_ERR_INVALID_CHARS,(const char *)bytes+12,(int)path_size,path,32767);
-        if (count>0) {
-            path[count]=0;
-            for (int index=0;index<count;++index) if (path[index]==L'/') path[index]=L'\\';
+        if (decode_path(bytes,size,path_size,path)) {
             if (GetFileAttributesExW(path,GetFileExInfoStandard,&data)) {
                 reply[1]=0;reply[2]=data.dwFileAttributes;
                 reply[3]=data.nFileSizeHigh;reply[4]=data.nFileSizeLow;
@@ -182,6 +253,7 @@ int WINAPI wWinMain(HINSTANCE instance,HINSTANCE previous,PWSTR command,int show
     note("Client disconnected; service stopped");result=0;
 done:
     lll_pointer_release();
+    free(listing_bytes);
     if (ready_event) { ResetEvent(ready_event);CloseHandle(ready_event); }
     lll_steam_close(NULL);
     if (incoming!=INVALID_HANDLE_VALUE) CloseHandle(incoming);

@@ -7,6 +7,7 @@ function M.new(platform,window,capture)
     service.capabilities=setmetatable({},{__index=capabilities,__metatable=false,
         __newindex=function()error('Input capabilities are read-only',2)end})
     local lease,manager_reader,manager_busy=nil,false,function()return false end
+    local mcm_frontend
     local sampled,sample_taken=false,false
     local manager_sample
     local sample={}
@@ -16,15 +17,30 @@ function M.new(platform,window,capture)
         local ok,value=pcall(window.has_focus)
         return ok and value==true
     end
-    local function mcm_busy()
+    local function valid_frontend(token)
+        return token~=nil and mcm_frontend~=nil and mcm_frontend.token==token
+            and rawget(_G,'DBFMCM')==mcm_frontend.provider
+            and rawget(mcm_frontend.provider,'shared_input_service')==service
+    end
+    local function mcm_busy(frontend)
+        if frontend and not valid_frontend(frontend) then return true end
         local provider=rawget(_G,'DBFMCM')
         if not provider then return false end
+        if type(provider)~='table' then return true end
         if type(provider.input_status)=='function' then
             local ok,value=pcall(provider.input_status)
-            if not ok or type(value)~='table' or value.owner or value.active or value.pending_restore then return true end
+            if not ok or type(value)~='table' or value.pending_restore then return true end
+            if frontend then
+                if type(value.active)~='boolean' or type(value.pending_restore)~='boolean' then return true end
+                if value.owner~=nil and value.owner~='DBF MCM' then return true end
+                if value.active and value.owner~='DBF MCM' then return true end
+            elseif value.owner or value.active then return true end
+        elseif frontend then
+            return true
         end
         if type(provider.is_open)~='function' then return true end
         local ok,value=pcall(provider.is_open)
+        if frontend then return not ok or type(value)~='boolean' end
         return not ok or value~=false
     end
     local function manager_is_busy()
@@ -53,20 +69,44 @@ function M.new(platform,window,capture)
         current.reason=pointer_why or why or 'Input restoration pending'
         return false,current.reason
     end
-    function service.acquire(owner,mode)
+    function service.register_frontend(role,provider)
+        if role~='mcm' or type(provider)~='table' or rawget(_G,'DBFMCM')~=provider
+            or rawget(provider,'shared_input_service')~=service
+            or type(provider.is_open)~='function' or type(provider.input_status)~='function' then
+            return nil,'Published MCM frontend for this service required'
+        end
+        if mcm_frontend and (mcm_frontend.provider==provider or (lease and lease.frontend)) then
+            return nil,'MCM frontend already registered or restoring'
+        end
+        local token={}
+        mcm_frontend={token=token,provider=provider}
+        return token
+    end
+    function service.unregister_frontend(token)
+        if token==nil or not mcm_frontend or mcm_frontend.token~=token then
+            return false,'MCM frontend registration not owned'
+        end
+        if lease and lease.frontend==token then return false,'Release MCM input before unregistering' end
+        mcm_frontend=nil
+        return true
+    end
+    function service.acquire(owner,mode,frontend)
         if type(owner)~='string' or owner=='' or #owner>128 or owner:find('%c') then
             return nil,'Owner name required (1-128 printable bytes)'
         end
         mode=mode or 'menu'
         if mode~='menu' and mode~='camera' then return nil,'Unsupported input mode' end
+        if frontend~=nil and (not valid_frontend(frontend) or owner~='DBF MCM' or mode~='menu') then
+            return nil,'MCM frontend registration not owned or mode unsupported'
+        end
         if mode=='camera' and not capabilities.camera then return nil,'Relative camera input unavailable' end
-        if lease or manager_reader or manager_is_busy() or mcm_busy() then return nil,'Input lease already owned' end
+        if lease or manager_reader or manager_is_busy() or mcm_busy(frontend) then return nil,'Input lease already owned' end
         if not foreground() then return nil,'Game is not foreground' end
         local status=capture.status()
         if status.owner or status.pending_restore then return nil,'Cursor lease already owned or restoring' end
         local token,why=capture.acquire(owner)
         if not token then return nil,why end
-        lease={token=token,owner=owner,mode=mode,active=false,capture=true,reader=false}
+        lease={token=token,owner=owner,mode=mode,frontend=frontend,active=false,capture=true,reader=false}
         local ok;ok,why=capture.activate(token,mode)
         if not ok then
             local restored=close_lease(why)
@@ -85,7 +125,7 @@ function M.new(platform,window,capture)
     end
     function service.snapshot(token)
         if not service.owns(token) then return nil,'Input lease inactive or not owned' end
-        if not foreground() or mcm_busy() then
+        if not foreground() or mcm_busy(lease.frontend) then
             close_lease('Input ownership lost')
             return nil,'Input ownership lost'
         end
@@ -108,6 +148,7 @@ function M.new(platform,window,capture)
     end
     function service.status()
         return {owner=lease and lease.owner or nil,mode=lease and lease.mode or nil,
+            frontend=lease and lease.frontend and 'mcm' or nil,
             active=lease~=nil and lease.active,pending_restore=lease~=nil and not lease.active,
             reason=lease and lease.reason or nil}
     end
@@ -115,7 +156,7 @@ function M.new(platform,window,capture)
     function driver.begin_frame()
         sampled,sample_taken=false,false
         manager_sample=nil
-        if lease and lease.active and (not foreground() or mcm_busy()) then close_lease('Input ownership lost') end
+        if lease and lease.active and (not foreground() or mcm_busy(lease.frontend)) then close_lease('Input ownership lost') end
     end
     function driver.manager_available()
         return lease==nil

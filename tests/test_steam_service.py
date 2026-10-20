@@ -86,9 +86,46 @@ class ServiceIntegration(unittest.TestCase):
                 self.assertIsInstance(unicode_stamp,bytes)
                 self.assertEqual(int(unicode_stamp.split(b':',1)[0],16),unicode_path.stat().st_size)
                 self.assertIsNone(lua.eval(b'P.stat(_missing_unicode_path)'))
+                # Enumeration uses the same wire records and Lua filtering,
+                # including Unicode names, directory flags and identity stamps.
+                listing_directory=root/'listing-\u03a9-\U0001f680';listing_directory.mkdir()
+                listing_name='file-\u03a9-\U0001f680.lua'
+                (listing_directory/listing_name).write_bytes(b'return "Unicode listing"')
+                (listing_directory/'note.txt').write_bytes(b'filtered')
+                empty_directory=listing_directory/'folder-\u03a9-\U0001f680';empty_directory.mkdir()
+                growth_directory=root/'larger-listing';growth_directory.mkdir()
+                for index in range(160):
+                    (growth_directory/f'entry-{index:03}-\u03a9.lua').write_bytes(b'return 1')
+                lua.globals()[b'_listing_directory']=str(listing_directory).encode('utf-8')
+                lua.globals()[b'_listing_name']=listing_name.encode('utf-8')
+                lua.globals()[b'_listing_file']=str(listing_directory/listing_name).encode('utf-8')
+                lua.globals()[b'_listing_folder']=empty_directory.name.encode('utf-8')
+                lua.globals()[b'_empty_directory']=str(empty_directory).encode('utf-8')
+                lua.globals()[b'_growth_directory']=str(growth_directory).encode('utf-8')
+                missing_directory=listing_directory/'missing-\u03a9-\U0001f680'
+                lua.globals()[b'_missing_directory']=str(missing_directory).encode('utf-8')
+                lua.execute(b'''local files,stamps,dirs=P.files(_listing_directory,'*.lua')
+                  assert(#files==1 and files[1]==_listing_name and stamps[_listing_name]==P.stat(_listing_file))
+                  assert(#dirs==1 and dirs[1]==_listing_folder)
+                  local all=P.files(_listing_directory);assert(#all==2)
+                  local files,stamps,dirs,status=P.files(_empty_directory)
+                  assert(#files==0 and next(stamps)==nil and #dirs==0 and status==0)
+                  local files,stamps,dirs,status=P.files(_missing_directory)
+                  assert(#files==0 and next(stamps)==nil and #dirs==0 and status==3)
+                  local files,stamps,dirs=P.files(_growth_directory,'*.lua')
+                  assert(#files==160 and stamps[files[1]] and #dirs==0)''')
+                for nonce,encoded_path,expected_status in (
+                    (0x60000001,str(empty_directory).encode('utf-8'),0),
+                    (0x60000002,str(missing_directory).encode('utf-8'),3),
+                    (0x60000003,b'\xff',13),
+                    (0x60000004,b'',13),
+                ):
+                    lua.globals()[b'_listing_packet']=struct.pack('<III',nonce,1,len(encoded_path))+encoded_path
+                    reply=lua.eval(b'_test_exchange(_listing_packet)')
+                    self.assertEqual(reply,struct.pack('<II',nonce,expected_status))
                 for protocol_path,before in protocol_before.items():
                     self.assertEqual((protocol_path.stat().st_mtime_ns,protocol_path.read_bytes()),before,
-                                     'Successful/missing Unicode stat must not rewrite protocol files')
+                                     'Stat and success/missing/Unicode/empty listing must not rewrite protocol files')
                 stamp=reply_path.stat().st_mtime_ns
                 for _ in range(100):
                     lua.execute(b'clock=clock+.5')
@@ -96,6 +133,17 @@ class ServiceIntegration(unittest.TestCase):
                 self.assertEqual(reply_path.stat().st_mtime_ns,stamp,
                                  'Idle pipe notifications must not rewrite protocol files')
                 self.assertFalse((root/'LLL/Helldivers2/Steam/events.bin').exists())
+                # Read-only listings stay quiet, but a real external write
+                # still invalidates the watched directory and updates listing.
+                (directory/'after-listing.lua').write_bytes(b'return 2')
+                deadline=time.monotonic()+2;changed=False
+                while time.monotonic()<deadline:
+                    lua.execute(b'clock=clock+.5')
+                    if lua.eval(b'P.changed(_directory)'): changed=True;break
+                    time.sleep(.01)
+                self.assertTrue(changed,'Real writes must still deliver directory notifications')
+                lua.execute(b'''local files,stamps=P.files(_directory,'*.lua')
+                  assert(#files==2 and stamps['after-listing.lua'])''')
                 foreground_pid=ctypes.c_ulong()
                 ctypes.windll.user32.GetForegroundWindow.restype=ctypes.c_void_p
                 foreground=ctypes.windll.user32.GetForegroundWindow()

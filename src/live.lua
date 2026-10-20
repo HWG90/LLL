@@ -16,6 +16,10 @@ return function(platform, report)
     local last_names
     local pending_root_change=false
     local fingerprints = {}
+    local project_watches = {}
+    local function watch_key(path)
+        return path:gsub('\\','/'):gsub('/+$',''):lower()
+    end
     local function valid(id)
         return type(id) == "string" and string.match(id, "^[%w_-]+$")
     end
@@ -78,7 +82,9 @@ return function(platform, report)
         for _, root in ipairs(platform.roots or { { kind = "lll", path = platform.live } }) do
             if root.path then
                 local candidates = {}
-                local root_files, _, root_dirs = platform.files(root.path)
+                local root_files, _, root_dirs, listing_status = platform.files(root.path)
+                assert(listing_status == nil or listing_status == 0 or listing_status == 2 or listing_status == 3,
+                    'Catalog listing incomplete: '..root.path..' (status '..tostring(listing_status)..')')
                 for _, file in ipairs(root_files) do
                     local id = string.match(file, "^([%w_-]+)%.lua$")
                     if id then
@@ -171,6 +177,36 @@ return function(platform, report)
         for name in pairs(self.catalog) do
             if not seen[name] then self.catalog[name] = nil end
         end
+        -- Discovery caches and recursive watches belong to the final catalog,
+        -- not to an instance's frozen modules or cleanup ownership. Sweep only
+        -- after a complete scan; unchanged idle scans return above.
+        local metadata_keys, watched_paths = {}, {}
+        for name, entry in pairs(self.catalog) do
+            metadata_keys[entry.dir..'/'..(entry.metadata_id or '')] = true
+            if entry.project then watched_paths[watch_key(entry.dir)] = true end
+        end
+        for _, root in ipairs(platform.roots or {{path=platform.live}}) do
+            if root.path then watched_paths[watch_key(root.path)] = true end
+        end
+        for name, cached in pairs(sources) do
+            local entry = self.catalog[name]
+            if not entry or cached.path ~= entry.path then sources[name] = nil end
+        end
+        for name, cached in pairs(fingerprints) do
+            local entry = self.catalog[name]
+            if not entry or not entry.project or cached.path ~= entry.path then fingerprints[name] = nil end
+        end
+        for key in pairs(metadata_cache) do
+            if not metadata_keys[key] then metadata_cache[key] = nil end
+        end
+        for path in pairs(project_watches) do
+            if not watched_paths[watch_key(path)] then
+                local ok, released = pcall(platform.unwatch, path)
+                -- A failed release remains owned for a later full scan. Never
+                -- add an idle retry or discard a potentially live backend watch.
+                if ok and released == true then project_watches[path] = nil end
+            end
+        end
         last_names = names
         return names
     end
@@ -260,6 +296,7 @@ return function(platform, report)
         -- Each project has its own recursive watcher. Idle ticks must not walk
         -- every module or reopen manifests; forced reads still confirm edits.
         local changed = not platform.changed or platform.changed(entry.dir)
+        if platform.changed and type(platform.unwatch) == 'function' then project_watches[entry.dir] = true end
         local cached = fingerprints[name]
         if not force and not changed and cached and cached.path == entry.path then
             return cached.value
