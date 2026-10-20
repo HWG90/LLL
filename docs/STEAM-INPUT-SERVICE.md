@@ -58,6 +58,16 @@ input is active or restoration is pending. Retry failed release explicitly at a
 bounded recovery point; the service adds no idle retry loop. Neither registration
 nor unchanged active snapshots reapplies cursor flags.
 
+## Shortcut ownership
+
+When the loader and MCM share a shortcut, the Steam frontend defers that whole
+key press to MCM. It queries the current published
+`DBFMCM.menu_binding_status().global_key` through a protected call on the press
+edge only. Closing MCM and releasing its lease earlier in that frame therefore
+cannot open the loader on the same key press. Held keys add no binding queries.
+Saved shortcuts remain unchanged; `loader.open_manager()` still explicitly opens
+the loader after the other frontend releases its input.
+
 ## Sample schema
 
 `valid`, `x`, `y`, `width`, `height`, `buttons`, `wheel`, `dx`, `dy`.

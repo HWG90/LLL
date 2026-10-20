@@ -2,7 +2,7 @@
 return function(loader, platform, controls, report, input_driver)
     local self = {}
     local menu, view, capture, input, console_surface, raw
-    local hotkey_held, suppress_toggle = false, false
+    local hotkey_held, suppress_toggle, hotkey_deferred = false, false, false
     local preferences=LLL_UI_PREFERENCES or dofile("src/ui/preferences.lua")
     local initialize
     local api = LLL_UI_CORE.new(nil, function(msg)
@@ -26,6 +26,8 @@ return function(loader, platform, controls, report, input_driver)
     api.loader_summary = controls.provenance_summary or controls.summary
     function self.open()
         if input_driver and not input_driver.manager_available() then return false,'Input lease belongs to another owner' end
+        local mcm = rawget(_G, 'DBFMCM')
+        if mcm and type(mcm) ~= 'table' then return false, 'MCM provider unavailable' end
         if not menu and initialize then
             local ok, why = pcall(initialize)
             if not ok then
@@ -37,7 +39,8 @@ return function(loader, platform, controls, report, input_driver)
         if not menu then
             return false, self.unavailable or "Native manager unavailable"
         end
-        local mcm = rawget(_G, "DBFMCM")
+        mcm = rawget(_G, "DBFMCM")
+        if mcm and type(mcm) ~= 'table' then return false, 'MCM provider unavailable' end
         if mcm and type(mcm.close) == "function" then
             local ok, why = mcm.close()
             if ok == false then
@@ -90,14 +93,40 @@ return function(loader, platform, controls, report, input_driver)
     end
     raw = LLL_STEAM_INPUT.new(sr,input_platform)
     local foreground = false
+    local function mcm_binding(provider)
+        if type(provider) ~= 'table' then return end
+        local query = rawget(provider, 'menu_binding_status')
+        if type(query) ~= 'function' then return end
+        local status = query()
+        if type(status) == 'table' and rawget(_G, 'DBFMCM') == provider then
+            return rawget(status, 'global_key')
+        end
+    end
+    local function shortcut_state(focused)
+        local shortcut = api.menu_toggle_key or 119
+        local down = raw.down(shortcut)
+        local edge = down and not hotkey_held
+        if not down then
+            hotkey_deferred = false
+        elseif edge then
+            if focused == nil then focused = sr.Window.has_focus() == true end
+            -- MCM runs before this frontend and may already have closed on this
+            -- edge. Its published binding owns the whole press, until release.
+            if focused then
+                local ok, binding = pcall(mcm_binding, rawget(_G, 'DBFMCM'))
+                hotkey_deferred = ok and binding == shortcut
+            end
+        end
+        hotkey_held = down
+        return down and not hotkey_deferred, edge, focused
+    end
     function self.tick()
         raw.frame()
-        local down=raw.down(api.menu_toggle_key or 119)
-        if down and not hotkey_held and sr.Window.has_focus() then
+        local down, edge, focused = shortcut_state()
+        if down and edge and focused then
             local ok,why=self.open()
             if not ok then report('LLL UI',why) end
         end
-        hotkey_held=down
     end
     initialize = function()
         capture=input_driver and input_driver.capture or LLL_UI_CAPTURE.new(nil,sr.Window,function(message)report('LLL UI',message)end)
@@ -126,6 +155,7 @@ return function(loader, platform, controls, report, input_driver)
             local shortcut=api.menu_toggle_key or 119
             if code==shortcut and code~=121 then return false end
             if code==121 then
+                if hotkey_deferred then return false end
                 if suppress_toggle then
                     if not raw.down(shortcut) then suppress_toggle=false end
                     return false
@@ -139,6 +169,8 @@ return function(loader, platform, controls, report, input_driver)
             raw.frame()
             local ok,why=pcall(function()
                 foreground=sr.Window.has_focus()==true
+                if foreground then shortcut_state(true)
+                else hotkey_held, hotkey_deferred = true, true end
                 raw.visible(foreground and (menu.visible or self.open_pending))
                 if self.open_pending then
                     if not foreground then self.open_pending=false;menu.visible=false

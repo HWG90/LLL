@@ -80,8 +80,8 @@ class SteamInput(unittest.TestCase):
         lua = self.lua
         lua.globals()[b'viewport_width'] = width
         lua.globals()[b'viewport_height'] = height
-        lua.execute(b'''clock=0;f8=false;focused=true;mouse_focused=true;cursor=false;clipped=false
-          draws=0;destroyed=0;next_id=0;key_reads=0;reports={}
+        lua.execute(b'''clock=0;f8=false;delete_down=false;insert_down=false;focused=true;mouse_focused=true;cursor=false;clipped=false
+          draws=0;destroyed=0;next_id=0;key_reads=0;focus_reads=0;reports={}
           mouse_x=0;mouse_y=0;left_down=0;right_down=0;middle_down=0;wheel_y=0
           pointer_valid=true;pointer_snapshots=0;pointer_releases=0;engine_mouse_reads=0
           client_width=viewport_width/2;client_height=viewport_height/2
@@ -89,8 +89,11 @@ class SteamInput(unittest.TestCase):
           stingray={
             Application={can_get=function()return false end,main_world=function()return 1 end,
               worlds=function()return {1}end},
-            Keyboard={button_id=function(name)return name=='f8' and 8119 or nil end,
-              button=function(id)assert(id==8119);key_reads=key_reads+1;return f8 and 1 or 0 end},
+            Keyboard={button_id=function(name)return ({f8=8119,delete=8046,insert=8045})[name]end,
+              button=function(id)
+                assert(id==8119 or id==8046 or id==8045);key_reads=key_reads+1
+                return ((id==8119 and f8)or(id==8046 and delete_down)or(id==8045 and insert_down))and 1 or 0
+              end},
             Mouse={RAW=7,button_id=function(name)return ({left=0,right=1,middle=2})[name]end,
               button=function(id)
                 engine_mouse_reads=engine_mouse_reads+1
@@ -105,7 +108,7 @@ class SteamInput(unittest.TestCase):
                 if id==2 then return {x=mouse_x,y=mouse_y}end
                 return {x=0,y=wheel_y}
               end},
-            Window={has_focus=function()return focused end,
+            Window={has_focus=function()focus_reads=focus_reads+1;return focused end,
               mouse_focus=function()return mouse_focused end,show_cursor=function()return cursor end,
               clip_cursor=function()return clipped end,set_mouse_focus=function(v)mouse_focused=v end,
               set_show_cursor=function(v)cursor=v end,set_clip_cursor=function(v)clipped=v end},
@@ -144,6 +147,148 @@ class SteamInput(unittest.TestCase):
             return unpack(result,1,result.n)
           end''')
 
+    def publish_mcm(self, global_key=46):
+        self.lua.globals()[b'mcm_binding_key'] = global_key
+        self.lua.execute(b'''binding_queries=0;mcm_close_calls=0;mcm_open=false;mcm_token=nil
+          local service=LiveLuaLoader.input_service
+          local provider={shared_input_service=service}
+          function provider.is_open()return mcm_open end
+          function provider.input_status()
+            return {active=mcm_token~=nil and service.owns(mcm_token),pending_restore=false,
+              owner=mcm_token and 'DBF MCM' or nil}
+          end
+          function provider.close()
+            mcm_close_calls=mcm_close_calls+1;mcm_open=false
+            if mcm_token then assert(service.release(mcm_token));mcm_token=nil end
+            return true
+          end
+          function provider.menu_binding_status()
+            binding_queries=binding_queries+1
+            if binding_behavior=='throw' then error('Status unavailable')end
+            if binding_behavior=='non-table' then return true end
+            if binding_behavior=='malformed-key' then return {global_key=tostring(mcm_binding_key)}end
+            return {focused=focused,editing=false,global_key=mcm_binding_key}
+          end
+          DBFMCM=provider
+          mcm_registration=assert(service.register_frontend('mcm',provider))
+          function select_loader_key(key)
+            assert(dofile('src/ui/preferences.lua').set(LiveLuaLoader,'menu_toggle_key',key))
+          end''')
+
+    def test_shared_delete_edge_closes_mcm_without_opening_loader_in_same_frame(self):
+        self.lua.execute(b'''fixture_mod_source="return {live_lua_api=1,on_update=function()if _G.mcm_frame then mcm_frame()end end,on_disable=function()return true end}"''')
+        self.start_manager()
+        self.publish_mcm()
+        self.lua.execute(b'''select_loader_key(46)
+          local service=LiveLuaLoader.input_service;local held=false
+          mcm_frame=function()
+            if delete_down and not held then
+              if mcm_open then assert(DBFMCM.close())
+              else
+                assert(LiveLuaLoader.close_manager());mcm_open=true
+                mcm_token=assert(service.acquire('DBF MCM','menu',mcm_registration))
+              end
+            end
+            held=delete_down
+          end
+          update(.01)
+          local focus_before=focus_reads
+          for i=1,40 do update(.01)end
+          assert(binding_queries==0 and focus_reads==focus_before,'Hidden idle added binding/focus reads')
+          delete_down=true;update(.01)
+          assert(mcm_open and service.status().frontend=='mcm' and draws==0 and binding_queries==1)
+          for i=1,20 do update(.01)end
+          assert(binding_queries==1 and draws==0,'Held MCM shortcut was queried or opened LLL')
+          delete_down=false;update(.01);delete_down=true;update(.01)
+          assert(not mcm_open and not service.status().owner and draws==0 and binding_queries==2,
+            'MCM closed and released, then LLL opened on the same Delete edge')
+          for i=1,20 do update(.01)end
+          assert(draws==0 and binding_queries==2)
+          -- Explicit opening is available even when the shared physical key is held.
+          LiveLuaLoader.open_manager();update(.01)
+          assert(draws>0 and LiveLuaLoader.input_status().active and binding_queries==2)
+          -- Repeat after initialization: the shared menu's internal toggle path must defer too.
+          delete_down=false;update(.01);delete_down=true;update(.01)
+          assert(mcm_open and service.status().frontend=='mcm' and binding_queries==3)
+          local before=draws
+          delete_down=false;update(.01);delete_down=true;update(.01)
+          assert(not mcm_open and not service.status().owner and draws==before and binding_queries==4,
+            'An initialized LLL menu reopened on MCM close')
+          for i=1,20 do update(.01)end
+          assert(draws==before and binding_queries==4)
+        ''')
+
+    def test_insert_loader_binding_is_independent_of_mcm_delete(self):
+        self.start_manager()
+        self.publish_mcm()
+        self.lua.execute(b'''select_loader_key(45);update(.01)
+          for i=1,30 do update(.01)end
+          assert(binding_queries==0)
+          insert_down=true;update(.01);update(.01)
+          assert(LiveLuaLoader.input_status().active and binding_queries==1 and not mcm_open)
+          for i=1,20 do update(.01)end
+          assert(binding_queries==1,'Held Insert repeatedly queried MCM binding')
+          insert_down=false;update(.01);insert_down=true;update(.01)
+          assert(not LiveLuaLoader.input_status().active and binding_queries==2)
+          for i=1,20 do update(.01)end
+          assert(binding_queries==2 and mouse_focused and not cursor and not clipped)
+        ''')
+
+    def test_shared_hotkey_deference_lasts_until_release_when_binding_changes(self):
+        self.start_manager()
+        self.publish_mcm(119)
+        self.lua.execute(b'''update(.01);f8=true;update(.01)
+          assert(draws==0 and binding_queries==1)
+          mcm_binding_key=46
+          for i=1,30 do update(.01)end
+          assert(draws==0 and binding_queries==1,'Binding change reinterpreted a held shared key')
+          f8=false;update(.01);f8=true;update(.01);update(.01)
+          assert(LiveLuaLoader.input_status().active and binding_queries==2)
+        ''')
+
+    def test_failing_or_malformed_binding_status_preserves_existing_owner_gates(self):
+        for mode in ('throw', 'non-table', 'malformed-key', 'missing', 'foreign-provider'):
+            with self.subTest(mode=mode):
+                self.lua = lua51.LuaRuntime(encoding=None)
+                self.start_manager()
+                self.publish_mcm(119)
+                self.lua.globals()[b'binding_behavior'] = mode.encode()
+                self.lua.execute(b'''if binding_behavior=='missing'then DBFMCM.menu_binding_status=nil end
+                  if binding_behavior=='foreign-provider'then DBFMCM=17 end
+                  update(.01);f8=true;update(.01);update(.01)
+                  if binding_behavior=='foreign-provider'then
+                    assert(draws==0 and not LiveLuaLoader.input_status().active and binding_queries==0,
+                      'Malformed provider bypassed the existing input ownership gate')
+                  else
+                    assert(LiveLuaLoader.input_status().active,'Failed binding query changed existing closed-MCM behavior')
+                    assert(binding_queries==(binding_behavior=='missing'and 0 or 1))
+                  end
+                  local before=binding_queries
+                  for i=1,20 do update(.01)end
+                  assert(binding_queries==before,'Failed status introduced held-key polling')
+                ''')
+
+    def test_binding_query_cannot_claim_for_a_replaced_provider_or_foreign_lease(self):
+        self.start_manager()
+        self.publish_mcm(46)
+        self.lua.execute(b'''local service=LiveLuaLoader.input_service
+          local token=assert(service.acquire('photo','menu'))
+          update(.01);f8=true;update(.01);f8=false;update(.01)
+          assert(service.owns(token)and draws==0 and pointer_releases==0 and binding_queries==1,
+            'Nonmatching MCM binding bypassed a foreign input lease')
+          assert(service.release(token))
+          local replacement={is_open=function()return false end,
+            input_status=function()return {active=false,pending_restore=false}end,
+            close=function()return true end}
+          DBFMCM.menu_binding_status=function()
+            binding_queries=binding_queries+1;DBFMCM=replacement
+            return {global_key=119}
+          end
+          f8=true;update(.01);update(.01)
+          assert(LiveLuaLoader.input_status().active and binding_queries==2,
+            'An unpublished provider claimed the hotkey after replacing itself')
+        ''')
+
     def test_complete_manager_f8_hold_close_reopen_and_focus_restoration(self):
         self.start_manager()
         lua = self.lua
@@ -165,9 +310,12 @@ class SteamInput(unittest.TestCase):
             'Hidden frames did not leave the pointer service idle')
           f8=false;update(.01);f8=true;update(.01);update(.01)
           assert(LiveLuaLoader.input_status().active)
+          local blur_key_reads=key_reads
           focused=false;update(.01)
           assert(not LiveLuaLoader.input_status().active and mouse_focused and not cursor and not clipped)
           assert(pointer_releases==2, 'Focus loss did not release the pointer reader once')
+          for frame=1,10 do update(.01)end
+          assert(key_reads==blur_key_reads,'Blurred manager added keyboard polling')
           focused=true;f8=false;update(.01)
           assert(not LiveLuaLoader.input_status().active, 'Refocusing reopened the manager')
           f8=true;update(.01);update(.01)
