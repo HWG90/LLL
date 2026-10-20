@@ -119,12 +119,18 @@ revision and Photo Mode. Fresh display metadata reported SDR/sRGB at 3840x2160.
 Two new PNGs and their `Screenshot saved` terminal acknowledgements were observed
 at 18:02:55 and 18:03:01 EDT. The same helper survived both jobs, including the
 second-worker boundary that crashed the previous candidate, with no new helper
-crash dump observed. The user reported three saves and successful camera/menu
-recovery; only two new files have been independently verified so far. The third
-action remains under reconciliation. This is bounded repeated-worker evidence,
-not a completed three-capture or full-feature acceptance claim. The failed
-original candidate remains held; HDR and native player/input access remain
-unqualified. There is no public screenshot release.
+crash dump observed. The user initially reported three saves and successful
+camera/menu recovery while only two files were independently visible. A later,
+explicit reopen/composition check published a third valid PNG at 18:10:56 EDT;
+its file hash and terminal acknowledgement were verified, and the same helper
+and game processes remained alive. This later capture used Pause after selecting
+grain, vignette and a logo; the user confirmed smooth effects and a saved image
+matching the game view. This establishes three observed SDR captures across the
+button/Pause and reopen paths; it does not retroactively prove an unobserved
+third capture in the earlier sequence. The earlier 120-second sample below
+contains only the first two jobs. Full-feature parity and independent colorimetry
+remain unqualified. The failed original candidate remains held; HDR and native
+player/input access remain unqualified. There is no public screenshot release.
 
 One elevated 120-second sample of that exact helper measured 2,250 ms CPU total
 (18.75 ms CPU/s) across menu/input activity and the two captures. An 11.09-second
