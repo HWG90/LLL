@@ -225,39 +225,45 @@ local last_poll = platform.now and platform.now()
 local retiring, detached = false, false
 local capture_cleanup_report
 local finish_detach
-local function tick(dt)
-    if input_driver then input_driver.begin_frame() end
-    if retiring then
-        manager.frame(dt)
-        if not next(manager.pending_cleanup) and finish_detach then
-            finish_detach()
+local maintenance_stopped,helper_reported,maintenance_report=false,false,nil
+local helper_cleanup_pending=false
+local function retire_helper(fn)
+    local ok,value=pcall(fn)
+    if not ok or value==false then helper_cleanup_pending=true end
+end
+local function maintenance_failure(problem)
+    local failure
+    if type(platform.transport_failure)=='function' then
+        local ok,value=pcall(platform.transport_failure)
+        if ok then failure=value end
+    end
+    if failure then
+        maintenance_stopped=true
+        if not helper_reported then
+            helper_reported=true
+            -- Retire the helper-dependent frontend once. Keep loaded module
+            -- frames and explicit ownership cleanup alive below.
+            if ui then retire_helper(ui.close) end
+            if input_driver then retire_helper(input_driver.close) end
+            if capture_driver then retire_helper(capture_driver.close) end
+            report('LLL helper',tostring(failure)..'; restart required to reconnect')
         end
-        return
+    elseif tostring(problem)~=maintenance_report then
+        maintenance_report=tostring(problem)
+        report('LLL maintenance',maintenance_report)
     end
-    manager.frame(dt)
-    if ui and ui.tick then
-        ui.tick(dt)
-    end
-    local now = platform.now and platform.now()
-    clock = now and (now - last_poll) or (clock + (tonumber(dt) or 1 / 60))
-    if now and now < last_poll then
-        clock = 0.5
-    end
-    if clock < 0.5 then
-        return
-    end
-    clock = 0
-    if now then
-        last_poll = now
-    end
-    if platform.maintenance then
-        local maintained,problem=pcall(platform.maintenance)
-        if not maintained then report('LLL maintenance',tostring(problem)) end
-    end
-    local shown, problem = pcall(status_page.refresh)
-    if not shown then
-        report("LLL status", tostring(problem))
-    end
+end
+if type(platform.on_transport_failure)=='function' then
+    platform.on_transport_failure(maintenance_failure)
+end
+local function close_watches()
+    if not platform.close_watches then return end
+    local ok,why=pcall(platform.close_watches)
+    if not ok then maintenance_failure(why) end
+end
+local function maintain()
+    if platform.maintenance then platform.maintenance() end
+    status_page.refresh()
     local _, names = refresh_catalog()
     for _, name in ipairs(names) do
         local valid, text
@@ -291,6 +297,31 @@ local function tick(dt)
         end
     end
 end
+local function tick(dt)
+    if not maintenance_stopped and input_driver then input_driver.begin_frame() end
+    if retiring then
+        manager.frame(dt)
+        if not next(manager.pending_cleanup) and finish_detach then
+            finish_detach()
+        end
+        return
+    end
+    manager.frame(dt)
+    if not maintenance_stopped and ui and ui.tick then
+        ui.tick(dt)
+    end
+    if maintenance_stopped then return end
+    local now = platform.now and platform.now()
+    clock = now and (now - last_poll) or (clock + (tonumber(dt) or 1 / 60))
+    if now and now < last_poll then
+        clock = 0.5
+    end
+    if clock < 0.5 then return end
+    clock = 0
+    if now then last_poll = now end
+    local ok,why=pcall(maintain)
+    if not ok then maintenance_failure(why) end
+end
 -- Preserve all prior callback results and trailing nils.
 local function pack(...)
     return { n = select("#", ...), ... }
@@ -305,19 +336,22 @@ if type(prior) == "function" then
     end
     update = wrapper
     finish_detach = function()
-        if ui then local ok,why=ui.close();if ok==false then report("LLL UI cleanup",why);return false end end
-        if input_driver then local ok,why=input_driver.close();if not ok then report('LLL input cleanup',why);return false end end
-        if capture_driver then
-            local ok,why=capture_driver.close()
-            if not ok then
-                local reason=why or 'Screenshot worker retirement pending'
-                if reason~=capture_cleanup_report then
-                    report('LLL screenshot cleanup',reason)
-                    capture_cleanup_report=reason
+        if maintenance_stopped and helper_cleanup_pending then return false end
+        if not maintenance_stopped then
+            if ui then local ok,why=ui.close();if ok==false then report("LLL UI cleanup",why);return false end end
+            if input_driver then local ok,why=input_driver.close();if not ok then report('LLL input cleanup',why);return false end end
+            if capture_driver then
+                local ok,why=capture_driver.close()
+                if not ok then
+                    local reason=why or 'Screenshot worker retirement pending'
+                    if reason~=capture_cleanup_report then
+                        report('LLL screenshot cleanup',reason)
+                        capture_cleanup_report=reason
+                    end
+                    return false
                 end
-                return false
+                capture_cleanup_report=nil
             end
-            capture_cleanup_report=nil
         end
         if code_budget then
             local ok,why=code_budget.close()
@@ -340,18 +374,16 @@ if type(prior) == "function" then
             return false, "pending"
         end
         retiring = true
-        if ui then
+        if not maintenance_stopped and ui then
             ui.close()
         end
         controls.close()
         status_page.close()
         manager.shutdown()
-        if input_driver then input_driver.close() end
-        if capture_driver then capture_driver.close() end
+        if not maintenance_stopped and input_driver then input_driver.close() end
+        if not maintenance_stopped and capture_driver then capture_driver.close() end
         if code_budget then code_budget.close() end
-        if platform.close_watches then
-            platform.close_watches()
-        end
+        close_watches()
         if next(manager.pending_cleanup) then
             return false, "pending"
         end
@@ -363,18 +395,16 @@ end
 local old_shutdown = shutdown
 if type(old_shutdown) == "function" then
     shutdown = function(...)
-        if ui then
+        if not maintenance_stopped and ui then
             ui.close()
         end
         controls.close()
         status_page.close()
         manager.shutdown()
-        if input_driver then input_driver.close() end
-        if capture_driver then capture_driver.close() end
+        if not maintenance_stopped and input_driver then input_driver.close() end
+        if not maintenance_stopped and capture_driver then capture_driver.close() end
         if code_budget then code_budget.close() end
-        if platform.close_watches then
-            platform.close_watches()
-        end
+        close_watches()
         if log then
             log:close()
             log = nil

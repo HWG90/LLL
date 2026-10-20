@@ -31,6 +31,8 @@ local function text(bytes, at)
     return bytes:sub(at + 4, at + 3 + length), at + 4 + length
 end
 local transport=LLL_STEAM_TRANSPORT(LLL_STEAM_SERVICE)
+P.transport_failure=transport.failure
+P.on_transport_failure=transport.on_failure
 local proof=transport.exchange(integer(0)..integer(0)..integer(0))
 assert(u32(proof, 1) == 0 and u32(proof, 5) == 0, 'Steam filesystem helper refused this game build')
 local pid = u32(proof, 9)

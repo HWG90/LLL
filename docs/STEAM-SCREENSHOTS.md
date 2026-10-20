@@ -90,8 +90,35 @@ eight full job cycles stayed at their warmed baseline of 87.
 Request/status/cancel maxima were 16/0/0 ms in
 that fixture; these are external helper timings, not measured game frame cost.
 
-The private R33 candidate is packaged and remains uninstalled. A fresh elevated
-metadata-only inspection of the current game window reported a 3840x2160,
-10-bit PQ/Rec2020 output. This SDR worker refuses that output. Actual capture,
-image acceptance, HDR handling and deployed transition/idle cost remain
-unqualified; no public screenshot release or restoration claim is made.
+The private R33 candidate was installed and its new startup/helper acknowledged.
+The first display inspection reported a 3840x2160, 10-bit PQ/Rec2020 output,
+which this SDR worker refuses. After Windows HDR was disabled, fresh metadata
+reported SDR/sRGB. One 3840x2160 PNG was published and acknowledged. The helper
+then crashed on a subsequent cached-factory access. That candidate is held;
+there is no public screenshot release or restoration claim.
+
+The helper dump records an access violation at RVA `0xc3be`, in the cached
+`GraphicsCaptureSession::IsSupported()` dispatch. A relinked MAP was accepted
+only after its `.text`, `.pdata` and section RVAs matched the original binary.
+The invalid vtable address lies inside `GraphicsCapture.dll` in the dump's
+unloaded-module list. Per-worker COM teardown had left the process-static
+C++/WinRT factory cache referring to unloaded code. The source fix clears that
+cache before COM teardown. An elevated same-source regression passes 16 normal
+and 16 exception-unwind fresh worker threads, exercising all three real capture
+factory caches without opening a process/window, creating a graphics device or
+session, or capturing pixels. The fixed candidate also passes all 98 Steam
+tests and the 941 native job checks in an elevated build, and its package hashes
+are verified. Dead transport failures now latch without reconnecting or further
+pipe I/O; helper-dependent UI/maintenance retires once while loaded module
+callbacks and the original shutdown callback remain available. Unconfirmed
+native retirement still prevents a false detach acknowledgement.
+
+The fixed candidate is packaged, not installed; live repeated-capture acceptance
+is still pending. The failed original candidate remains held. Capture/performance
+experiments are paused; HDR support and native player/input access remain
+unqualified.
+
+A separate elevated 45-second sample, taken before screenshot attempts with
+Photo open, measured the external helper at 4.17 ms CPU/s. It measures the whole
+helper during screenshot-idle operation, including input/pipe work; it is not
+Lua callback, game-frame or capture-transition cost.

@@ -35,6 +35,15 @@ def build(output):
            f'/Fe"{output / "test_steam_screenshot_jobs.exe"}" /link bcrypt.lib kernel32.lib shell32.lib user32.lib')
     subprocess.run(screenshot_tests,shell=True,check=True,cwd=output)
     subprocess.run([str(output/'test_steam_screenshot_jobs.exe')],check=True,cwd=output)
+    runtime_tests=(f'call "{vc}" >nul && cl /nologo /std:c++17 /EHsc /permissive- /Zc:__cplusplus '
+           f'/O2 /GS /W4 /WX /MT /utf-8 "{ROOT / "native/test_steam_screenshot_runtime.cpp"}" '
+           f'/Fo"{output / "test_steam_screenshot_runtime.obj"}" /Fe"{output / "test_steam_screenshot_runtime.exe"}" '
+           f'/link /DYNAMICBASE /NXCOMPAT /HIGHENTROPYVA '
+           f'/DELAYLOAD:d3d11.dll /DELAYLOAD:dxgi.dll /DELAYLOAD:dwmapi.dll delayimp.lib '
+           f'kernel32.lib user32.lib d3d11.lib dxgi.lib dwmapi.lib windowscodecs.lib '
+           f'windowsapp.lib runtimeobject.lib ole32.lib uuid.lib')
+    subprocess.run(runtime_tests,shell=True,check=True,cwd=output)
+    subprocess.run([str(output/'test_steam_screenshot_runtime.exe')],check=True,cwd=output,timeout=60)
     value=(output/'steam_service.exe').read_bytes()
     name='lll_steam_service_'+hashlib.sha256(value).hexdigest()[:16]+'.exe'
     (output/name).write_bytes(value);(output/'service.txt').write_text(name+'\n')

@@ -57,7 +57,13 @@ struct Operation {
 };
 struct Apartment {
     Apartment() { winrt::init_apartment(winrt::apartment_type::multi_threaded); }
-    ~Apartment() { winrt::uninit_apartment(); }
+    ~Apartment() {
+        // save_window has already destroyed every per-job WinRT/COM object.
+        // This helper has one WinRT worker at a time. Release its process-static
+        // factory references before CoUninitialize can unload GraphicsCapture.
+        winrt::clear_factory_cache();
+        winrt::uninit_apartment();
+    }
 };
 struct ThreadDpiContext {
     DPI_AWARENESS_CONTEXT previous = SetThreadDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
