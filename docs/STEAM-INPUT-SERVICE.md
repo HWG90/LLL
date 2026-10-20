@@ -107,4 +107,13 @@ callable action gate. Known live Lua method names are also absent from those
 string inventories, so a negative string search does not prove API absence.
 No threshold/reset experiment is enabled in this candidate.
 
+Further bounded checks on October 20 did not establish another action gate:
+
+- The public HD2Runtime input blocker uses a window-thread message hook and generated executable code. Its pinned build profile targets the older Steam build 25480438 and its adapter requires LuaJIT FFI; it is not a current Lua 5.1 bridge. See the [implementation](https://github.com/SkyeShade/HD2Runtime/blob/219d70864032150f4e4359281add5ead23cb86dc/runtime/mouse_wheel.lua#L222-L238) and [build profile](https://github.com/SkyeShade/HD2Runtime/blob/219d70864032150f4e4359281add5ead23cb86dc/schemas/build_profile.json#L4-L10).
+- The current `PluginManager` reports three existing engine plugins. Separate one-shot absolute-path and documented relative-path loads of a diagnostic DLL returned nil with unchanged plugin names. No native export-query log was observed. Logging can fail, so these results do not prove that native loading is disabled or that the export was never called. Both temporary DLL/project installations were hash-checked and removed.
+- The selected current `dl_library.dl_typelib` is 1,080,072 bytes, SHA256 `1bf51ab66c34ffab93f31480598e68832045a1641953fe7befb05847555957f6`, with leading bytes `96 7d 00 d7`. The [maintained reader](https://github.com/SkyeShade/HD2Runtime/blob/219d70864032150f4e4359281add5ead23cb86dc/scripts/reference_format.py#L56-L61) requires decoded `LTLD` format and rejects this stored file. An older embedded mirror cannot establish a current input schema. No property or dispatch name was inferred from it.
+
+These checks changed no production input behavior. A callable current-build gate,
+its lifecycle order and exact restoration remain unverified.
+
 The helper preserves legacy operation10's 36-byte response; operation12 returns 44 bytes with dx/dy appended. Lua clients should use this service instead of those internal wire operations.
