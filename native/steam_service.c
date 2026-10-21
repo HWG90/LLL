@@ -3,6 +3,7 @@
 #include "steam_files.c"
 #include "steam_pointer.c"
 #include "steam_screenshot_jobs.c"
+#include "steam_keyboard.c"
 #include <shellapi.h>
 #include <share.h>
 
@@ -161,6 +162,55 @@ header_only:
     return transfer(outgoing,&length,4,1)&&transfer(outgoing,fields,length,1)?2:0;
 }
 
+/* Keyboard v1 never uses filesystem transport files. Error replies contain
+ * only nonce/status; accepted replies have fixed 56/88/20-byte layouts. */
+static int send_keyboard(uint32_t nonce, uint32_t operation, const unsigned char *bytes,
+                         uint32_t size, uint32_t path_size, HANDLE outgoing) {
+    static const char path[] = "keyboard-v1";
+    uint32_t reply[22] = {0}, fields[10] = {0}, length = 8, extra;
+    reply[0] = nonce; reply[1] = ERROR_INVALID_DATA;
+    if (path_size != sizeof(path) - 1 || size < 12 + path_size ||
+        memcmp(bytes + 12, path, sizeof(path) - 1)) goto done;
+    extra = size - 12 - path_size;
+    if ((operation == 16 && extra != 40) || (operation == 17 && extra != 12) ||
+        (operation == 18 && extra != 8)) goto done;
+    memcpy(fields, bytes + 12 + path_size, extra);
+    if (operation == 16) {
+        LLLSteamKeyboardReply accepted;
+        if (fields[0] != LLL_KEYBOARD_VERSION) { reply[1] = ERROR_REVISION_MISMATCH; goto done; }
+        reply[1] = lll_keyboard_acquire(session_pid, executable, fields[1], fields + 2, &accepted);
+        if (!reply[1]) { memcpy(reply + 2, &accepted, sizeof(accepted)); length = 56; }
+    } else if (operation == 17) {
+        LLLSteamKeyboardSample keyboard;
+        LLLSteamPointerSample pointer;
+        if (fields[2] > 1) { reply[1] = ERROR_INVALID_PARAMETER; goto done; }
+        ZeroMemory(&pointer, sizeof(pointer));
+        reply[1] = lll_keyboard_snapshot(session_pid, fields[0], fields[1], &keyboard);
+        if (reply[1]) goto done;
+        if (keyboard.state == LLL_KEYBOARD_ACTIVE) {
+            if (!lll_pointer_start(session_pid) || !lll_pointer_snapshot_extended(&pointer)) {
+                reply[1] = ERROR_NOT_READY; goto done;
+            }
+            if (!fields[2]) { pointer.dx = 0; pointer.dy = 0; }
+            keyboard.state = lll_keyboard_confirm(session_pid, fields[0], fields[1]);
+            if (keyboard.state != LLL_KEYBOARD_ACTIVE) {
+                ZeroMemory(&pointer, sizeof(pointer)); ZeroMemory(keyboard.keys, sizeof(keyboard.keys));
+            }
+        }
+        memcpy(reply + 2, &pointer, sizeof(pointer));
+        memcpy(reply + 11, &keyboard, sizeof(keyboard));
+        length = 88;
+    } else {
+        uint32_t generation = 0;
+        reply[1] = lll_keyboard_release(session_pid, executable, fields[0], fields[1], &generation);
+        if (!reply[1]) {
+            reply[2] = LLL_KEYBOARD_VERSION; reply[3] = fields[0]; reply[4] = generation; length = 20;
+        }
+    }
+done:
+    return transfer(outgoing, &length, 4, 1) && transfer(outgoing, reply, length, 1) ? 2 : 0;
+}
+
 static int dispatch(const unsigned char *bytes, uint32_t size, HANDLE outgoing) {
     uint32_t nonce, operation, path_size;
     FILE *stream = NULL;
@@ -189,7 +239,7 @@ static int dispatch(const unsigned char *bytes, uint32_t size, HANDLE outgoing) 
     if (operation==8 || operation==9) {
         uint32_t reply[MAX_WATCHES+4],length;
         if (operation==8) lll_steam_poll(NULL);
-        else { lll_screenshot_jobs_cancel_all();lll_pointer_release();lll_steam_close(NULL); }
+        else { lll_keyboard_cancel_all();lll_screenshot_jobs_cancel_all();lll_pointer_release();lll_keyboard_shutdown();lll_steam_close(NULL); }
         reply[0]=nonce;reply[1]=0;length=8;
         if (operation==8) {
             reply[2]=session_pid;reply[3]=watch_count;length=16+watch_count*4;
@@ -199,6 +249,7 @@ static int dispatch(const unsigned char *bytes, uint32_t size, HANDLE outgoing) 
         return transfer(outgoing,&length,4,1)&&transfer(outgoing,reply,length,1) ? 2 : 0;
     }
     if (!nonce || path_size>size-12) return 0;
+    if (operation>=16 && operation<=18) return send_keyboard(nonce,operation,bytes,size,path_size,outgoing);
     if (operation==13||operation==14||operation==15) {
         wchar_t path[32768];
         return send_screenshot(nonce,operation,decode_path(bytes,size,path_size,path)?path:NULL,outgoing);
@@ -293,6 +344,8 @@ done:
     if (ready_event) ResetEvent(ready_event);
     if (incoming!=INVALID_HANDLE_VALUE) { CloseHandle(incoming);incoming=INVALID_HANDLE_VALUE; }
     if (outgoing!=INVALID_HANDLE_VALUE) { CloseHandle(outgoing);outgoing=INVALID_HANDLE_VALUE; }
+    lll_keyboard_cancel_all();
+    lll_keyboard_shutdown();
     lll_screenshot_jobs_shutdown();
     lll_pointer_release();
     free(listing_bytes);

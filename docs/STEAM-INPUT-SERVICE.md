@@ -6,13 +6,14 @@
 
 ## Lease operations
 
-* `token, reason, cleanup_token = service.acquire(owner, mode, frontend)` accepts a printable owner name (1-128 bytes), and `mode='menu'` or `'camera'`. Normal consumers omit `frontend`. It refuses while manager, MCM, another lease or pending restoration owns input. It never implicitly closes another UI. The game must be foreground. Failed activation normally rolls back immediately; if rollback fails, retain the third return value and retry `release(cleanup_token)` explicitly.
+* `token, reason, cleanup_token = service.acquire(owner, mode, frontend, options)` accepts a printable owner name (1-128 bytes), and `mode='menu'` or `'camera'`. Normal consumers omit `frontend`. Optional `{keyboard=true}` requires the candidate keyboard capability below. It refuses while manager, MCM, another lease or pending restoration owns input. It never implicitly closes another UI. The game must be foreground. Failed activation normally rolls back immediately; if rollback fails, retain the third return value and retry `release(cleanup_token)` explicitly.
 * `sample, reason = service.snapshot(token)` requires the active token and foreground ownership. It performs at most one helper exchange per game frame. The sample table is reused: read it immediately; do not retain or mutate it. Repeated calls in a frame return zero wheel/dx/dy so deltas are delivered once.
 * `service.owns(token)` indicates active read authority. It becomes false immediately on revocation or failed release, even when cleanup remains pending.
 * `ok, reason = service.release(token)` stops the owned reader and restores only the cursor flags changed by that lease. Wrong/stale tokens cannot release another owner. A failed release retains the token for explicit retry. No automatic retry loop runs while restoration is pending.
 * `service.status()` returns `owner`, `mode`, `active`, `pending_restore`, and `reason`, plus `frontend='mcm'` for a lease using the registration below. Loader `input_status()` also exposes the shared cursor owner so MCM can refuse conflicting capture.
+* The source candidate adds `ok, reason = service.set_mode(token, mode)`. Literal `true` means success. It preserves the token and keyboard generation, verifies cursor ownership before changing visibility, and makes no helper exchange to change mode. Unchanged mode performs no work. Failures close through the existing keyboard-first cleanup. Registered MCM leases remain menu-only. Check for this function before use on older helpers.
 
-Acquire only when opening the consuming UI/camera, sample only while it is active, and release on hide/disable/reload. Switching menu/camera mode requires release and reacquisition. Foreground loss or an MCM ownership conflict revokes the lease before mod update callbacks or sample delivery. The service does no helper sampling without an active consumer request.
+Acquire only when opening the consuming UI/camera, sample only while it is active, and release on hide/disable/reload. Prefer `set_mode` for menu/camera transitions when available; older versions require release and reacquisition. Foreground loss or an MCM ownership conflict revokes the lease before mod update callbacks or sample delivery. The service does no helper sampling without an active consumer request.
 
 ## MCM frontend registration
 
@@ -78,7 +79,7 @@ Camera `dx/dy` are signed raw relative counts, positive right/down. They are acc
 
 Menu mode uses `mouse_focus=false`, visible cursor and clipping. Camera mode uses `mouse_focus=false`, hidden cursor and clipping. The previous flags are recorded once and restored on release. Native input filtering and cursor state do not identify which camera drives rendering; camera/render ownership remains the consumer's responsibility.
 
-This lease currently suppresses gameplay mouse look, not gameplay keyboard actions. The deployed consumer's menu/camera transitions and release are user-confirmed, but W/A/S/D still move the native player during freecam and with MCM open. Keyboard/action isolation is under investigation; do not infer it from `capabilities.camera` or `relative_mouse`. No focus takeover, player-pose locking or disabled camera movement is used as a substitute.
+The R33 helper suppresses gameplay mouse look, but does not isolate gameplay keyboard actions. Its menu/camera transitions and release are user-confirmed. Keyboard capture is a separate opt-in capability in the source candidate described below; never infer it from `capabilities.camera` or `relative_mouse`.
 
 ## Keyboard action isolation investigation
 
@@ -170,13 +171,59 @@ while leaving physical key state readable. Key-up delivery continued. The trial
 completed without focus loss, made one successful registration and removal, and
 exited with no registered hotkey. It used no low-level hook or focus takeover.
 
-This is a candidate route, not gameplay suppression evidence. A bounded W-only
-game trial is being prepared with separate native movement observation and
-unchanged Lua keyboard reads. The owned-window result does not establish
-Shift/Ctrl/Alt combinations, other keys, engine polling behavior, full menu or
-freecam isolation, or deployed performance. Windows hotkey reservations are
-global, so foreground loss, conflicts and exact lease cleanup must be qualified
-before any production integration. The released helper remains unchanged.
+A subsequent bounded W-only trial on the current game kept the game focused and
+left the Lua keyboard reader unchanged. During registration, six physical W
+presses produced zero native button-down frames across 661 sampled frames. After
+release, five physical presses produced 116 button-down frames across 435 frames.
+The user confirmed that movement stopped during registration and returned on its
+own afterward. Registration and removal each occurred once, with clean shutdown.
+
+The later owned-window modifier trial exercised W alone, W with each left/right
+Shift, Ctrl and Alt key, Space, and the modifier keys themselves. Its registered
+phase delivered zero legacy key-downs and zero raw key-makes for those inputs;
+normal delivery returned after release. All 39 reservations were removed. The
+full multi-modifier matrix was registered, but multi-modifier gestures were not
+physically tested. These results support the route; full integrated menu/freecam
+acceptance and deployed performance remain pending.
+
+## Opt-in keyboard candidate
+
+The additive v1 extension accepts
+`service.acquire(owner, mode, frontend, {keyboard=true})` when
+`service.capabilities.keyboard == true`. Existing three-argument consumers keep
+their mouse-only behavior. A keyboard lease reserves a fixed gameplay-key list
+and reads physical state for the UI in the same helper exchange as the pointer.
+F12, Windows keys and reserved system combinations are excluded. The candidate
+uses an external helper message thread, with no game hook, injected input or
+focus takeover.
+
+An accepted lease can initially be ARMING. `service.owns(token)` remains true,
+and `snapshot` returns a truthy neutral sample with `valid=false` and
+`keyboard_state=1`. Wait for all captured keys to be released; do not read native
+game key state as a fallback while arming. Qualification lasts at most two
+seconds, and a press during registration causes rollback.
+
+An ACTIVE sample has `keyboard_active=true`, `keyboard_state=2`, a fixed positive
+u32 `keyboard_generation`, and binary strings `keyboard_keys` and
+`keyboard_mask`, each exactly 32 bytes. VK `k` uses byte `floor(k/8)+1`, bit
+`k%8`. Compare against the immutable binary string
+`service.capabilities.keyboard_mask`. The candidate mask includes 119 defined
+VKs (including six side-modifier aliases), with 880 unique hotkey reservations.
+Its little-endian bytes are
+`00331f08ffe1ff03feffff27fffffff7ff0003003f0000fc010000f804000000`.
+The mask identifies captured keys; a captured key must never fall back to
+the engine reader on an invalid, pending, revoked or malformed sample. Neutral
+ARMING samples carry no pointer deltas or key state. Consume at most one combined
+sample per frame; repeated consumers retain key state while relative deltas are
+drained once.
+
+Keyboard cleanup precedes cursor restoration. Lost acknowledgements retain
+private cleanup authority and block replacement leases. Foreground changes use
+an out-of-context Windows event to revoke the lease without rearming it; process
+exit and a two-second heartbeat timeout also stop the worker. These reservations
+are system-wide, and foreground event delivery is asynchronous. Registration
+conflicts fail the whole acquisition and roll back partial reservations. Hidden
+menus have no keyboard worker, sampling or registration loop.
 
 The subsequent user-supplied section dump exposed part of the native plugin
 loader, but did not recover the engine API getter or the Lua load bindings.

@@ -93,6 +93,44 @@ function M.new(_, window, log)
         external.active,external.mode=true,mode
         return true
     end
+    function self.set_mode(token,mode)
+        if not self.owns(token) then return false,'Input lease not owned' end
+        local target=modes[mode]
+        if not target then return false,'Unsupported input mode' end
+        if external.closing or not external.active then return false,'Input lease inactive or restoring' end
+        if external.mode==mode then return true end
+        local previous=modes[external.mode]
+        -- Unlike restoration, changing mode cannot adopt a field that another
+        -- owner has reset to our baseline. Check the whole active state first.
+        for _,field in ipairs(fields)do
+            local value,why=read_field(field)
+            if why then return closing(why) end
+            if value~=previous[field[3]] then return closing('Cursor state belongs to another owner: '..field[1]) end
+        end
+        for _,field in ipairs(fields)do
+            local key=field[3]
+            if previous[key]~=target[key] then
+                external.changed[key],external.expected[key]=true,previous[key]
+                local applied,result=pcall(window[field[2]],target[key])
+                if applied and result~=false then external.expected[key]=target[key] end
+                local value,why=read_field(field)
+                if not why then
+                    if value==external.saved[key] then external.changed[key]=nil
+                    elseif value==target[key] then external.expected[key]=target[key] end
+                end
+                if not applied or result==false then return closing('Cursor mode change refused: '..field[1]) end
+                if why then return closing(why) end
+                if value~=target[key] then return closing('Cursor mode change readback failed: '..field[1]) end
+            end
+        end
+        for _,field in ipairs(fields)do
+            local value,why=read_field(field)
+            if why then return closing(why) end
+            if value~=target[field[3]] then return closing('Cursor mode change readback failed: '..field[1]) end
+        end
+        external.mode=mode
+        return true
+    end
     function self.release(token)
         if token ~= nil then
             if not self.owns(token) then return false, 'Input lease not owned' end

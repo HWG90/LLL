@@ -30,6 +30,11 @@ def build(output):
            f'/Fe"{output / "test_steam_pointer.exe"}" /link kernel32.lib user32.lib')
     subprocess.run(pointer_tests,shell=True,check=True,cwd=output)
     subprocess.run([str(output/'test_steam_pointer.exe')],check=True,cwd=output)
+    keyboard_tests=(f'call "{vc}" >nul && cl /nologo /std:c11 /O2 /GS /W4 /WX /MT '
+           f'"{ROOT / "native/test_steam_keyboard.c"}" /Fo"{output / "test_steam_keyboard.obj"}" '
+           f'/Fe"{output / "test_steam_keyboard.exe"}" /link kernel32.lib user32.lib')
+    subprocess.run(keyboard_tests,shell=True,check=True,cwd=output)
+    subprocess.run([str(output/'test_steam_keyboard.exe')],check=True,cwd=output,timeout=30)
     screenshot_tests=(f'call "{vc}" >nul && cl /nologo /O2 /GS /W4 /WX /MT '
            f'"{ROOT / "native/test_steam_screenshot_jobs.c"}" /Fo"{output / "test_steam_screenshot_jobs.obj"}" '
            f'/Fe"{output / "test_steam_screenshot_jobs.exe"}" /link bcrypt.lib kernel32.lib shell32.lib user32.lib')

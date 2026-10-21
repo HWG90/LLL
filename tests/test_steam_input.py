@@ -76,6 +76,59 @@ class SteamInput(unittest.TestCase):
           input.release();assert(releases==2, 'Reopened pointer reader was not released')
           ''', (ROOT / 'src/steam/input.lua').read_bytes())
 
+    def test_keyboard_capture_uses_one_private_sample_and_never_engine_fallback(self):
+        self.lua.execute(b'''local function bits(codes)
+            local bytes={};for i=1,32 do bytes[i]=0 end
+            for _,code in ipairs(codes)do local at=math.floor(code/8)+1;bytes[at]=bytes[at]+2^(code%8)end
+            local text={};for i=1,32 do text[i]=string.char(bytes[i])end;return table.concat(text)
+          end
+          local mask=bits({16,45,87,160,161})
+          local engine_w,engine_reads,snapshots,releases=0,0,0,0
+          local sample={valid=true,x=10,y=20,width=100,height=100,buttons=0,wheel=0,
+            keyboard_active=true,keyboard_state=2,keyboard_mask=mask,keyboard_keys=bits({45,87,161})}
+          local sr={Keyboard={button_id=function(name)return ({w=87,f12=123})[name]end,
+              button=function(id)engine_reads=engine_reads+1;return id==87 and engine_w or id==123 and 1 or 0 end},
+            Mouse={button_id=function()end,axis_id=function()end},Gui={resolution=function()return 100,100 end}}
+          local platform={keyboard_capture_mask=mask,pointer_snapshot=function()snapshots=snapshots+1;return sample end,
+            release_pointer=function()releases=releases+1;return true end}
+          local input=assert(loadstring(...))().new(sr,platform)
+          input.visible(true);input.frame()
+          assert(input.down(87)and input.down(45)and input.down(161)and not input.down(160))
+          input.down(87);input.mouse();input.wheel()
+          assert(snapshots==1 and engine_reads==0,'Captured keys repeated IPC or read frozen engine state')
+          assert(input.down(123)and engine_reads==1,'Uncaptured OS key lost its legacy reader')
+          engine_w=1;sample.keyboard_keys=bits({});input.frame()
+          assert(not input.down(87)and snapshots==2 and engine_reads==1)
+          sample.valid=false;sample.keyboard_state=1;sample.keyboard_active=false;input.frame()
+          assert(not input.down(87)and snapshots==3 and engine_reads==1,'ARMING leaked engine input')
+          sample.valid=true;sample.keyboard_state=3;sample.keyboard_active=true;sample.keyboard_keys=bits({87});input.frame()
+          assert(not input.down(87)and engine_reads==1,'Revoked lease used old keys or engine fallback')
+          sample.keyboard_state=2;sample.keyboard_mask=bits({});input.frame()
+          assert(not input.down(87)and engine_reads==1,'Foreign mask supplied input')
+          input.visible(false);input.frame()
+          local before=snapshots
+          assert(input.down(87)and engine_reads==2 and snapshots==before and releases==1,
+            'Hidden frontend retained native capture or polled helper')
+          ''', (ROOT / 'src/steam/input.lua').read_bytes())
+
+    def test_failed_capture_release_stays_idle_until_explicit_cleanup(self):
+        self.lua.execute(b'''local reads,releases=0,0
+          local sr={Keyboard={button_id=function()end},Mouse={button_id=function()end,axis_id=function()end}}
+          local platform={pointer_snapshot=function()reads=reads+1;return {valid=true,buttons=0}end,
+            release_pointer=function()releases=releases+1;return releases>1 end}
+          local input=assert(loadstring(...))().new(sr,platform)
+          input.visible(true);input.frame();assert(not input.down(1)and reads==1)
+          assert(not pcall(input.visible,false)and releases==1)
+          input.release(false)
+          for i=1,30 do input.frame();input.visible(false)end
+          assert(releases==1 and reads==1,'Hidden failed capture repeatedly attempted backend cleanup')
+          input.release();assert(releases==2)
+          input.release();assert(releases==2,'Retired reader repeated explicit cleanup')
+          input.visible(true);input.frame();input.down(1)
+          input.release(true);input.release()
+          assert(releases==2,'Previously acknowledged release repeated backend I/O')
+          ''', (ROOT / 'src/steam/input.lua').read_bytes())
+
     def start_manager(self, width=1920, height=1080, saved_key=None):
         lua = self.lua
         lua.globals()[b'viewport_width'] = width
@@ -357,6 +410,86 @@ class SteamInput(unittest.TestCase):
           local calls=pointer_snapshots
           assert(s.snapshot(token)==nil and not s.release(token))
           update(.01);assert(pointer_snapshots==calls,'Revoked token queried the helper')''')
+
+    def test_keyboard_failure_closes_composed_ui_and_requires_explicit_acknowledged_recovery(self):
+        original_source = globals()['source']
+
+        def keyboard_source(stock, pipe, platform, *args, **kwargs):
+            platform = 'local P=' + platform.removeprefix('return ') + '''
+              local bytes={};for i=1,32 do bytes[i]=0 end
+              bytes[6]=32
+              local text={};for i=1,32 do text[i]=string.char(bytes[i])end
+              P.keyboard_capture_mask=table.concat(text)
+              keyboard_reads=0;keyboard_releases=0;keyboard_acquires=0
+              keyboard_fail=false;keyboard_release_ok=true
+              local owned
+              P.keyboard_prepare=function()assert(not owned);owned={};return owned end
+              P.keyboard_acquire=function(handle)
+                assert(handle==owned);keyboard_acquires=keyboard_acquires+1;return true
+              end
+              P.keyboard_snapshot=function(handle,mode)
+                assert(handle==owned and mode=='menu');keyboard_reads=keyboard_reads+1
+                if keyboard_fail then return nil,'Fixture keyboard connection lost'end
+                local value=P.pointer_snapshot()
+                local keys={};for i=1,32 do keys[i]=string.char(i==6 and insert_down and 32 or 0)end
+                value.keyboard_keys=table.concat(keys);value.keyboard_mask=P.keyboard_capture_mask
+                value.keyboard_state=2;value.keyboard_active=true;value.keyboard_generation=keyboard_acquires
+                return value
+              end
+              P.keyboard_release=function(handle)
+                assert(handle==owned);keyboard_releases=keyboard_releases+1
+                if not keyboard_release_ok then return false,'Fixture unregister acknowledgement lost'end
+                owned=nil;return true
+              end
+              return P'''
+            return original_source(stock, pipe, platform, *args, **kwargs)
+
+        globals()['source'] = keyboard_source
+        try:
+            self.start_manager()
+        finally:
+            globals()['source'] = original_source
+        self.lua.execute(b'''local function upvalue(fn,wanted)
+            for index=1,100 do
+              local name,value=debug.getupvalue(fn,index)
+              if name==wanted then return value end
+              if not name then break end
+            end
+            error('Missing integration observation point: '..wanted)
+          end
+          update(.01);left_down=1;insert_down=true;update(.01);update(.01)
+          for i=1,3 do update(.01)end
+          assert(keyboard_acquires==1 and keyboard_releases==0,
+            'Pending open repeatedly acquired/released native capture while waiting for a mouse release')
+          left_down=0;insert_down=false;update(.01)
+          local ui=upvalue(LiveLuaLoader.open_manager,'self')
+          local driver=upvalue(ui.close,'input_driver')
+          assert(ui.menu.visible and LiveLuaLoader.input_status().active and keyboard_acquires==1)
+          insert_down=true;keyboard_fail=true;keyboard_release_ok=false;update(.01)
+          assert(not ui.menu.visible and not ui.open_pending and driver.manager_failure(),
+            'Keyboard failure left an unresponsive visible manager')
+          assert(keyboard_releases==1,'One UI error attempted native keyboard retirement twice')
+          assert(LiveLuaLoader.input_status().owner=='lll'and not mouse_focused and cursor and clipped,
+            'Unacknowledged native keyboard retirement discarded cursor ownership')
+          local reads,releases,draw_count=keyboard_reads,keyboard_releases,draws
+          -- The engine can first report zero, then repeat a physically held key
+          -- after native unregister. Neither half may automatically reopen.
+          insert_down=false;for i=1,10 do update(.01)end
+          insert_down=true;for i=1,20 do update(.01)end
+          assert(keyboard_reads==reads and keyboard_releases==releases and draws==draw_count,
+            'Held shortcut reopened a failed manager or repeated hidden backend/rendering work')
+          insert_down=false;update(.01)
+          assert(not pcall(LiveLuaLoader.open_manager)and keyboard_releases==releases+1,
+            'Explicit reopen did not make exactly one acknowledged-cleanup attempt')
+          assert(not ui.menu.visible and driver.manager_failure())
+          keyboard_release_ok=true;keyboard_fail=false
+          LiveLuaLoader.open_manager();update(.01)
+          assert(not driver.manager_failure()and ui.menu.visible and LiveLuaLoader.input_status().active
+              and keyboard_acquires==2,'Manager did not recover after explicit retirement acknowledgement')
+          assert(LiveLuaLoader.close_manager())
+          assert(mouse_focused and not cursor and not clipped and not driver.manager_failure())
+          shutdown()
+          ''')
 
     def test_composed_menu_click_drag_wheel_and_reopened_pointer(self):
         # Non-unit scale catches tests that mistakenly feed logical menu coordinates.

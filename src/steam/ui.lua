@@ -3,6 +3,7 @@ return function(loader, platform, controls, report, input_driver)
     local self = {}
     local menu, view, capture, input, console_surface, raw
     local hotkey_held, suppress_toggle, hotkey_deferred = false, false, false
+    local failed_shortcut
     local preferences=LLL_UI_PREFERENCES or dofile("src/ui/preferences.lua")
     local initialize
     local api = LLL_UI_CORE.new(nil, function(msg)
@@ -24,7 +25,19 @@ return function(loader, platform, controls, report, input_driver)
     api.diagnostics_surface = loader.diagnostics_surface
     api.author_navigation = true
     api.loader_summary = controls.provenance_summary or controls.summary
+    local function manager_failure()
+        return input_driver and input_driver.manager_failure and input_driver.manager_failure()
+    end
+    local function require_manager_input()
+        local failure=manager_failure()
+        if failure then error(failure,2)end
+    end
     function self.open()
+        local recovering=manager_failure()
+        if recovering then
+            local released,why=input_driver.manager_release()
+            if not released then return false,why end
+        end
         if input_driver and not input_driver.manager_available() then return false,'Input lease belongs to another owner' end
         local mcm = rawget(_G, 'DBFMCM')
         if mcm and type(mcm) ~= 'table' then return false, 'MCM provider unavailable' end
@@ -47,11 +60,16 @@ return function(loader, platform, controls, report, input_driver)
                 return false, why
             end
         end
+        if failed_shortcut or recovering then
+            failed_shortcut=nil
+            hotkey_held,suppress_toggle=true,true
+        end
         self.open_pending = true
         menu.visible = true
         return true
     end
     function self.close()
+        local failed=manager_failure()
         if console_surface then console_surface.release() end
         self.open_pending = false
         if menu then
@@ -63,8 +81,11 @@ return function(loader, platform, controls, report, input_driver)
         elseif capture then
             ok, why = capture.release()
         end
+        if failed or manager_failure() then failed_shortcut='down' end
         if raw then
-            local released,problem=pcall(raw.release)
+            local released,problem
+            if input_driver then released,problem=pcall(raw.release,ok==true)
+            else released,problem=pcall(raw.release) end
             if not released then ok,why=false,tostring(problem);report('LLL UI',why) end
         end
         if view then
@@ -105,6 +126,16 @@ return function(loader, platform, controls, report, input_driver)
     local function shortcut_state(focused)
         local shortcut = api.menu_toggle_key or 45
         local down = raw.down(shortcut)
+        if failed_shortcut then
+            -- After native capture fails, the engine may report zero before a
+            -- still-held key repeats. Observe a whole hidden down/up cycle.
+            if not (menu and (menu.visible or self.open_pending)) then
+                if failed_shortcut=='down' and down then failed_shortcut='up'
+                elseif failed_shortcut=='up' and not down then failed_shortcut=nil end
+            end
+            hotkey_held,hotkey_deferred=down,failed_shortcut~=nil
+            return false,false,focused
+        end
         local edge = down and not hotkey_held
         if not down then
             hotkey_deferred = false
@@ -151,6 +182,7 @@ return function(loader, platform, controls, report, input_driver)
         suppress_toggle=raw.down(api.menu_toggle_key or 45)
         function input.down(code)
             if not foreground then return false end
+            if code==121 and failed_shortcut then return false end
             if menu.capture then return raw.down(code) end
             local shortcut=api.menu_toggle_key or 45
             if code==shortcut and code~=121 then return false end
@@ -168,10 +200,22 @@ return function(loader, platform, controls, report, input_driver)
         function self.tick(dt)
             raw.frame()
             local ok,why=pcall(function()
+                local showing=menu.visible or self.open_pending
                 foreground=sr.Window.has_focus()==true
-                if foreground then shortcut_state(true)
+                if not foreground and showing then
+                    local released,problem=self.close()
+                    if not released then report('LLL UI',tostring(problem))end
+                    showing=false
+                end
+                if foreground then
+                    local down,edge=shortcut_state(true)
+                    if down and edge and not showing and manager_failure() then
+                        local opened,problem=self.open()
+                        if not opened then failed_shortcut='up';report('LLL UI',tostring(problem))end
+                    end
                 else hotkey_held, hotkey_deferred = true, true end
                 raw.visible(foreground and (menu.visible or self.open_pending))
+                if menu.visible or self.open_pending then require_manager_input()end
                 if self.open_pending then
                     if not foreground then self.open_pending=false;menu.visible=false
                     else
@@ -185,14 +229,22 @@ return function(loader, platform, controls, report, input_driver)
                 if not foreground or (provider and provider.is_open and provider.is_open()) then menu.visible=false end
                 local was=menu.visible
                 menu.tick(console_surface and console_surface.filter(input,menu.visible,dt) or input)
+                if menu.visible then require_manager_input()end
                 if menu.visible and not was and provider and provider.close then
                     local released,problem=provider.close()
                     if released==false then menu.visible=false;report('LLL UI',tostring(problem)) end
                 end
-                local acquired,problem=capture.sync(menu.visible,foreground)
-                if not acquired then menu.visible=false;report('LLL UI',tostring(problem)) end
+                if showing and not menu.visible and not self.open_pending then
+                    local released,problem=self.close()
+                    if not released then report('LLL UI',tostring(problem))end
+                end
+                local acquired,problem=true,nil
+                -- Keyboard retirement must be acknowledged before the manager
+                -- cursor lease may restore; hidden frames never retry it.
+                if not manager_failure() then acquired,problem=capture.sync(menu.visible or self.open_pending,foreground) end
+                if not acquired then self.close();report('LLL UI',tostring(problem)) end
                 if not menu.visible then
-                    raw.visible(false)
+                    if not self.open_pending then raw.visible(false)end
                     if not hidden_clean then
                         menu.advance(dt);menu.compose()
                         if console_surface then console_surface.release() end

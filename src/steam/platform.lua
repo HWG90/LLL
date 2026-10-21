@@ -154,6 +154,89 @@ function P.camera_snapshot()
     camera_pointer.dx,camera_pointer.dy=signed(reply,37),signed(reply,41)
     return camera_pointer
 end
+-- Exact helper ABI 16-18. Preparing reserves cleanup authority before any I/O;
+-- only a matching release acknowledgement retires that private authority.
+local keyboard_mask=('00331f08ffe1ff03feffff27fffffff7ff0003003f0000fc010000f804000000'):gsub('%x%x',function(value)return string.char(tonumber(value,16))end)
+P.keyboard_capture_mask=keyboard_mask
+P.keyboard_scope='registered gameplay key whitelist; F12/Win/system shortcuts excluded'
+local keyboard_owner,keyboard_client=nil,0
+local function keyboard_owned(handle)
+    return handle~=nil and keyboard_owner and keyboard_owner.handle==handle and keyboard_owner
+end
+local function keyboard_error(status)
+    return string.format('Keyboard request refused (0x%08x)',status)
+end
+function P.keyboard_prepare()
+    if keyboard_owner then return nil,'Keyboard request already owned or restoring' end
+    if keyboard_client>=4294967295 then return nil,'Keyboard client IDs exhausted' end
+    keyboard_client=keyboard_client+1
+    local handle={}
+    keyboard_owner={handle=handle,client=keyboard_client,generation=0,attempted=false,sample={}}
+    return handle
+end
+function P.keyboard_acquire(handle)
+    local current=keyboard_owned(handle)
+    if not current then return false,'Keyboard request not owned' end
+    if current.attempted then return current.accepted==true,current.reason end
+    current.attempted=true -- An exchange failure may follow native registration.
+    local ok,accepted,why=pcall(function()
+        local status,reply=call(16,'keyboard-v1',integer(1)..integer(current.client)..keyboard_mask)
+        if status~=0 then return false,keyboard_error(status) end
+        assert(#reply==56 and u32(reply,9)==1 and u32(reply,13)==current.client,'Invalid keyboard acquisition acknowledgement')
+        local generation,state=u32(reply,17),u32(reply,21)
+        assert(generation>0 and state>=1 and state<=5,'Invalid keyboard generation or state')
+        assert(reply:sub(25,56)==keyboard_mask,'Keyboard capture mask changed')
+        current.generation=generation
+        if state~=1 and state~=2 then return false,'Keyboard acquisition inactive (state '..state..')' end
+        return true
+    end)
+    if not ok then why=tostring(accepted);accepted=false end
+    current.accepted,current.reason=accepted==true,why
+    return current.accepted,why
+end
+function P.keyboard_snapshot(handle,mode)
+    local current=keyboard_owned(handle)
+    if not current then return nil,'Keyboard request not owned' end
+    if not current.accepted or current.generation==0 then return nil,current.reason or 'Keyboard acquisition unacknowledged' end
+    local value=mode=='menu'and 0 or mode=='camera'and 1
+    if value==nil then return nil,'Unsupported keyboard pointer mode' end
+    local ok,result,why=pcall(function()
+        local status,reply=call(17,'keyboard-v1',integer(current.client)..integer(current.generation)..integer(value))
+        if status~=0 then return nil,keyboard_error(status) end
+        assert(#reply==88 and u32(reply,45)==1 and u32(reply,49)==current.generation,'Invalid keyboard snapshot acknowledgement')
+        local state=u32(reply,53)
+        assert(state>=1 and state<=5,'Invalid keyboard snapshot state')
+        local sample=current.sample
+        sample.valid=u32(reply,9)==1
+        sample.x,sample.y=signed(reply,13),signed(reply,17)
+        sample.width,sample.height=u32(reply,21),u32(reply,25)
+        sample.buttons,sample.wheel=u32(reply,29),signed(reply,33)
+        sample.dx,sample.dy=signed(reply,37),signed(reply,41)
+        sample.keyboard_active=state==2
+        sample.keyboard_state,sample.keyboard_generation=state,current.generation
+        sample.keyboard_keys,sample.keyboard_mask=reply:sub(57,88),keyboard_mask
+        if state>=3 then current.accepted=false;current.reason='Keyboard lease inactive (state '..state..')' end
+        return sample
+    end)
+    if not ok then return nil,tostring(result) end
+    return result,why
+end
+function P.keyboard_release(handle)
+    local current=keyboard_owned(handle)
+    if not current then return false,'Keyboard request not owned' end
+    local ok,released,why=pcall(function()
+        local status,reply=call(18,'keyboard-v1',integer(current.client)..integer(current.generation))
+        if status~=0 then return false,keyboard_error(status) end
+        assert(#reply==20 and u32(reply,9)==1 and u32(reply,13)==current.client,'Invalid keyboard release acknowledgement')
+        local generation=u32(reply,17)
+        assert(current.generation==0 or generation==current.generation,'Stale keyboard release generation')
+        return true
+    end)
+    if not ok then why=tostring(released);released=false end
+    if released==true then keyboard_owner=nil;return true end
+    current.reason=why or 'Keyboard restoration unacknowledged'
+    return false,current.reason
+end
 function P.hash(bytes)
     local status, reply = call(6, 'hash', bytes)
     assert(status == 0 and #reply == 16, 'Resource hashing failed')

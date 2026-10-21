@@ -2,14 +2,21 @@
 local M={}
 function M.new(platform,window,capture)
     local service,driver={version=1},{}
+    local keyboard_mask=platform.keyboard_capture_mask
+    local keyboard=type(platform.keyboard_prepare)=='function'and type(platform.keyboard_acquire)=='function'
+        and type(platform.keyboard_snapshot)=='function'and type(platform.keyboard_release)=='function'
+        and type(keyboard_mask)=='string'and #keyboard_mask==32
     local capabilities={menu=true,camera=type(platform.camera_snapshot)=='function',
-        relative_mouse=type(platform.camera_snapshot)=='function',coordinates='client-top-left'}
+        relative_mouse=type(platform.camera_snapshot)=='function',coordinates='client-top-left',
+        keyboard=keyboard,keyboard_mask=keyboard and keyboard_mask or nil,
+        keyboard_scope=keyboard and (platform.keyboard_scope or 'registered-keys') or nil}
     service.capabilities=setmetatable({},{__index=capabilities,__metatable=false,
         __newindex=function()error('Input capabilities are read-only',2)end})
     local lease,manager_reader,manager_busy=nil,false,function()return false end
     local mcm_frontend
     local sampled,sample_taken=false,false
     local manager_sample
+    local manager_keyboard,manager_failed
     local sample={}
     local sample_keys={'x','y','width','height','buttons','wheel','dx','dy'}
     local invalid={valid=false,x=0,y=0,width=0,height=0,buttons=0,wheel=0,dx=0,dy=0}
@@ -53,6 +60,16 @@ function M.new(platform,window,capture)
         current.active=false
         current.reason=reason or current.reason or 'Released'
         sampled,sample_taken=false,false
+        -- A request whose acknowledgement was lost may already own hotkeys.
+        -- Keep its private handle and cursor lease until exact release ACK.
+        if current.keyboard then
+            local ok,value,why=pcall(platform.keyboard_release,current.keyboard)
+            if not ok or value~=true then
+                current.reason=ok and (why or 'Keyboard release refused') or tostring(value)
+                return false,current.reason
+            end
+            current.keyboard=nil
+        end
         local pointer_ok,pointer_why=true,nil
         if current.reader then
             local ok,value=pcall(platform.release_pointer)
@@ -90,7 +107,7 @@ function M.new(platform,window,capture)
         mcm_frontend=nil
         return true
     end
-    function service.acquire(owner,mode,frontend)
+    function service.acquire(owner,mode,frontend,options)
         if type(owner)~='string' or owner=='' or #owner>128 or owner:find('%c') then
             return nil,'Owner name required (1-128 printable bytes)'
         end
@@ -100,14 +117,29 @@ function M.new(platform,window,capture)
             return nil,'MCM frontend registration not owned or mode unsupported'
         end
         if mode=='camera' and not capabilities.camera then return nil,'Relative camera input unavailable' end
-        if lease or manager_reader or manager_is_busy() or mcm_busy(frontend) then return nil,'Input lease already owned' end
+        if options~=nil and (type(options)~='table'or options.keyboard~=nil and type(options.keyboard)~='boolean') then
+            return nil,'Invalid input options'
+        end
+        local want_keyboard=options~=nil and options.keyboard==true
+        if want_keyboard and not keyboard then return nil,'Keyboard capture unavailable' end
+        if lease or manager_reader or manager_keyboard or manager_is_busy() or mcm_busy(frontend) then return nil,'Input lease already owned' end
         if not foreground() then return nil,'Game is not foreground' end
         local status=capture.status()
         if status.owner or status.pending_restore then return nil,'Cursor lease already owned or restoring' end
         local token,why=capture.acquire(owner)
         if not token then return nil,why end
         lease={token=token,owner=owner,mode=mode,frontend=frontend,active=false,capture=true,reader=false}
-        local ok;ok,why=capture.activate(token,mode)
+        local called,ok;called,ok,why=pcall(capture.activate,token,mode)
+        if not called then why=tostring(ok);ok=false end
+        if ok and want_keyboard then
+            called,lease.keyboard,why=pcall(platform.keyboard_prepare)
+            if not called then why=tostring(lease.keyboard);lease.keyboard=nil;ok=false
+            elseif not lease.keyboard then ok=false
+            else
+                called,ok,why=pcall(platform.keyboard_acquire,lease.keyboard)
+                if not called then why=tostring(ok);ok=false end
+            end
+        end
         if not ok then
             local restored=close_lease(why)
             return nil,why,not restored and token or nil
@@ -123,6 +155,41 @@ function M.new(platform,window,capture)
         if token==nil or not lease or lease.token~=token then return false,'Input lease not owned' end
         return close_lease('Released')
     end
+    function service.set_mode(token,mode)
+        if not service.owns(token) then return false,'Input lease inactive or not owned' end
+        if mode~='menu'and mode~='camera' then return false,'Unsupported input mode' end
+        if mode=='camera'and (not capabilities.camera or lease.frontend) then return false,'Camera mode unavailable for this lease' end
+        if lease.mode==mode then return true end
+        if not foreground() or mcm_busy(lease.frontend) then
+            close_lease('Input ownership lost')
+            return false,'Input ownership lost'
+        end
+        local called,ok,why=pcall(capture.set_mode,token,mode)
+        if not called then why=tostring(ok);ok=false end
+        if ok~=true then
+            why=why or 'Cursor mode change refused'
+            close_lease(why)
+            return false,why
+        end
+        lease.mode=mode
+        sampled,sample_taken=false,false
+        return true
+    end
+    local function keyboard_sample(value)
+        return type(value)=='table'and (value.keyboard_state==1 or value.keyboard_state==2)
+            and value.keyboard_active==(value.keyboard_state==2)
+            and type(value.keyboard_keys)=='string'and #value.keyboard_keys==32
+            and type(value.keyboard_mask)=='string'and #value.keyboard_mask==32
+    end
+    local function copy_sample(value)
+        sample.valid=value.valid==true
+        for _,key in ipairs(sample_keys)do sample[key]=value[key] or 0 end
+        sample.keyboard_active=value.keyboard_active
+        sample.keyboard_state=value.keyboard_state
+        sample.keyboard_generation=value.keyboard_generation
+        sample.keyboard_keys=value.keyboard_keys
+        sample.keyboard_mask=value.keyboard_mask
+    end
     function service.snapshot(token)
         if not service.owns(token) then return nil,'Input lease inactive or not owned' end
         if not foreground() or mcm_busy(lease.frontend) then
@@ -132,14 +199,15 @@ function M.new(platform,window,capture)
         if not sampled then
             local current=lease
             current.reader=true -- A failed request may still have started the reader.
-            local read=current.mode=='camera' and platform.camera_snapshot or platform.pointer_snapshot
-            local ok,value=pcall(read)
-            if not ok or type(value)~='table' or value.valid~=true then
+            local ok,value
+            if current.keyboard then ok,value=pcall(platform.keyboard_snapshot,current.keyboard,current.mode)
+            else ok,value=pcall(current.mode=='camera' and platform.camera_snapshot or platform.pointer_snapshot) end
+            local arming=current.keyboard and type(value)=='table'and value.keyboard_state==1
+            if not ok or type(value)~='table' or value.valid~=true and not arming or current.keyboard and not keyboard_sample(value) then
                 close_lease(ok and 'Pointer foreground unavailable' or tostring(value))
                 return nil,ok and 'Pointer foreground unavailable' or tostring(value)
             end
-            sample.valid=true
-            for _,key in ipairs(sample_keys)do sample[key]=value[key] or 0 end
+            copy_sample(value)
             sampled=true
         end
         if sample_taken then sample.wheel,sample.dx,sample.dy=0,0,0 end
@@ -150,27 +218,64 @@ function M.new(platform,window,capture)
         return {owner=lease and lease.owner or nil,mode=lease and lease.mode or nil,
             frontend=lease and lease.frontend and 'mcm' or nil,
             active=lease~=nil and lease.active,pending_restore=lease~=nil and not lease.active,
-            reason=lease and lease.reason or nil}
+            reason=lease and lease.reason or nil,keyboard=lease~=nil and lease.keyboard~=nil}
     end
     function driver.set_manager_busy(fn)manager_busy=assert(fn)end
     function driver.begin_frame()
         sampled,sample_taken=false,false
         manager_sample=nil
         if lease and lease.active and (not foreground() or mcm_busy(lease.frontend)) then close_lease('Input ownership lost') end
+        if manager_keyboard and not manager_failed and not foreground() then driver.manager_release() end
     end
     function driver.manager_available()
-        return lease==nil
+        return lease==nil and not manager_failed
     end
+    function driver.manager_failure()return manager_failed end
     function driver.manager_snapshot()
-        if lease or not foreground() then return invalid end
+        if lease then return invalid end
+        if not foreground() then
+            if not manager_failed and (manager_keyboard or manager_reader) then driver.manager_release() end
+            return invalid
+        end
         if manager_sample then return manager_sample end
+        if manager_failed then return invalid end
+        if keyboard and not manager_keyboard then
+            local called,handle,why=pcall(platform.keyboard_prepare)
+            if not called or not handle then
+                manager_failed=called and (why or 'Keyboard preparation refused') or tostring(handle)
+                return invalid
+            end
+            manager_keyboard=handle -- Store before the first native exchange.
+            local ok;called,ok,why=pcall(platform.keyboard_acquire,handle)
+            if not called or ok~=true then
+                manager_failed=called and (why or 'Keyboard acquisition refused') or tostring(ok)
+                return invalid
+            end
+        end
         manager_reader=true
-        manager_sample=platform.pointer_snapshot()
+        if manager_keyboard then
+            local ok,value=pcall(platform.keyboard_snapshot,manager_keyboard,'menu')
+            local arming=type(value)=='table'and value.keyboard_state==1
+            if not ok or type(value)~='table'or value.valid~=true and not arming or not keyboard_sample(value) then
+                manager_failed=ok and 'Keyboard foreground unavailable' or tostring(value)
+                return invalid
+            end
+            manager_sample=value
+        else manager_sample=platform.pointer_snapshot() end
         return manager_sample
     end
     function driver.manager_release()
         manager_sample=nil
+        if lease then return true end -- Never release a shared owner's backend.
         local ok,why=true,nil
+        if manager_keyboard then
+            local called,value,problem=pcall(platform.keyboard_release,manager_keyboard)
+            if not called or value~=true then
+                manager_failed=called and (problem or 'Manager keyboard release refused') or tostring(value)
+                return false,manager_failed
+            end
+            manager_keyboard=nil
+        end
         if manager_reader then
             local called,value=pcall(platform.release_pointer)
             ok=called and value==true
@@ -180,6 +285,7 @@ function M.new(platform,window,capture)
             local restored,problem=capture.release()
             if not restored then ok,why=false,problem end
         end
+        if ok then manager_failed=nil end
         return ok,why
     end
     function driver.close()

@@ -3,9 +3,11 @@ Live Lua Loader - Current Steam Lua 5.1 preview
 Requires Windows x64 and Helldivers 2 Steam build 25988413. Exact executable
 and game.dll fingerprints are checked before installation and helper startup.
 No Python, compiler, MCM, MDL or Bingus loader is required to install this ZIP.
-Older LuaJIT/FFI mods need individual ports. Gameplay keyboard isolation remains
-unfinished: movement keys can still reach the player while LLL/MCM menus or a
-camera mod are open. Mouse input has a separate supported capture service.
+Older LuaJIT/FFI mods need individual ports. Keyboard capture is available for
+LLL and consumers that explicitly request it. It reserves gameplay keys while
+active; Windows shortcuts and F12 remain outside capture. Other menus/camera
+mods need an updated adapter; existing mouse-only leases retain their behavior.
+Verify that movement stops while the menu is open and returns after closing.
 
 INSTALL
 1. Close Helldivers 2 and any waiting LLL Steam helper. Disable competing startup

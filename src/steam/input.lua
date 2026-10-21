@@ -3,6 +3,8 @@ local M = {}
 local names = {[8]='backspace',[9]='tab',[13]='enter',[16]='left shift',[17]='left ctrl',[18]='left alt',
     [20]='caps lock',[27]='esc',[32]='space',[33]='page up',[34]='page down',[35]='end',[36]='home',
     [37]='left',[38]='up',[39]='right',[40]='down',[45]='insert',[46]='delete',
+    [160]='left shift',[161]='right shift',[162]='left ctrl',[163]='right ctrl',
+    [164]='left alt',[165]='right alt',
     [186]='semicolon',[187]='equal',[188]='comma',[189]='minus',[190]='period',[191]='slash',
     [192]='backtick',[219]='open bracket',[220]='backslash',[221]='close bracket',[222]='quote'}
 for code=48,57 do names[code]=string.char(code) end
@@ -14,6 +16,16 @@ function M.new(sr,platform)
     local mouse_bits={[1]=1,[2]=2,[4]=4,[5]=8,[6]=16}
     local visible,leased,pointer,wheel_taken=false,false,nil,false
     local external=platform and type(platform.pointer_snapshot)=='function'
+    local keyboard_mask=platform and platform.keyboard_capture_mask
+    local captured={}
+    if external and type(keyboard_mask)=='string' and #keyboard_mask==32 then
+        for code=0,255 do
+            local at,power=math.floor(code/8)+1,2^(code%8)
+            if math.floor(keyboard_mask:byte(at)/power)%2==1 then
+                captured[code]={at=at,power=power}
+            end
+        end
+    end
     local function snapshot()
         if not external or not visible then return end
         if not pointer then
@@ -22,15 +34,27 @@ function M.new(sr,platform)
         end
         return pointer
     end
-    function self.visible(value)
-        visible=value==true
-        if not visible and leased then
+    local function release_reader()
+        if leased then
             assert(platform.release_pointer(),'Cannot release pointer reader')
             leased=false
         end
-        if not visible then pointer=nil end
     end
-    function self.release()self.visible(false)end
+    function self.visible(value)
+        local changed=visible~=(value==true)
+        visible=value==true
+        if not visible then
+            pointer=nil
+            if changed then release_reader()end
+        end
+    end
+    function self.release(prior_result)
+        visible,pointer=false,nil
+        if prior_result==true then leased=false
+        elseif prior_result==nil then release_reader()end
+        -- A failed prior attempt retains authority for explicit retry, without
+        -- repeating the same backend release during this close transition.
+    end
     local function resolve(code)
         if ids[code] ~= nil then return ids[code] end
         local device, name = mouse_names[code] and sr.Mouse or sr.Keyboard, mouse_names[code] or names[code]
@@ -48,6 +72,17 @@ function M.new(sr,platform)
     end
     function self.down(code)
         if cache[code] ~= nil then return cache[code] end
+        local keyboard=captured[code]
+        if visible and keyboard then
+            local value=snapshot()
+            -- Masked keys never fall back to a frozen or revoked engine reader.
+            -- ARMING is a retained lease with no input until held keys release.
+            cache[code]=value and value.valid==true and value.keyboard_active==true
+                and value.keyboard_state==2 and value.keyboard_mask==keyboard_mask
+                and type(value.keyboard_keys)=='string' and #value.keyboard_keys==32
+                and math.floor(value.keyboard_keys:byte(keyboard.at)/keyboard.power)%2==1 or false
+            return cache[code]
+        end
         if external and visible and mouse_bits[code] then
             local value=snapshot()
             cache[code]=value.valid and math.floor(value.buttons/mouse_bits[code])%2==1 or false

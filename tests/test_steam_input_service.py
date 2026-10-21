@@ -45,6 +45,38 @@ function mcm_provider(opened)
 end
 '''
 
+KEYBOARD_FIXTURE = b'''
+counts.prepare=0;counts.keyboard_acquire=0;counts.keyboard_snapshot=0;counts.keyboard_release=0
+local owned;local serial=0
+keyboard_release_ok=true;keyboard_acquire_error=false
+keyboard_value={valid=true,x=10,y=20,width=1920,height=1080,buttons=1,wheel=120,dx=7,dy=-4,
+    keyboard_active=true,keyboard_state=2,keyboard_generation=11,
+    keyboard_keys=string.rep('K',32),keyboard_mask=string.rep('M',32)}
+platform.keyboard_scope='fixture registered keys'
+platform.keyboard_capture_mask=keyboard_value.keyboard_mask
+platform.keyboard_prepare=function()
+    counts.prepare=counts.prepare+1;assert(not owned,'Private handle forgotten or another owner admitted')
+    serial=serial+1;owned={serial=serial};return owned
+end
+platform.keyboard_acquire=function(handle)
+    assert(handle==owned);counts.keyboard_acquire=counts.keyboard_acquire+1
+    if keyboard_acquire_error then error('Acquisition acknowledgement lost after native acceptance')end
+    return true
+end
+platform.keyboard_snapshot=function(handle,mode)
+    assert(handle==owned and (mode=='menu'or mode=='camera'))
+    keyboard_last_handle,keyboard_last_mode=handle,mode
+    counts.keyboard_snapshot=counts.keyboard_snapshot+1;return keyboard_value
+end
+platform.keyboard_release=function(handle)
+    assert(handle==owned);counts.keyboard_release=counts.keyboard_release+1
+    if not keyboard_release_ok then return false,'Unregister acknowledgement unavailable'end
+    owned=nil;return true
+end
+public,driver=Broker.new(platform,window,capture)
+driver.set_manager_busy(function()return busy end)
+'''
+
 
 class InputService(unittest.TestCase):
     def setUp(self):
@@ -58,6 +90,213 @@ class InputService(unittest.TestCase):
 
     def check(self, script):
         self.lua.execute(script.encode())
+
+    def keyboard(self):
+        self.lua.execute(KEYBOARD_FIXTURE)
+
+    def test_keyboard_opt_in_preserves_legacy_and_same_frame_immutable_key_snapshot(self):
+        self.keyboard()
+        self.check('''assert(public.version==1 and public.capabilities.keyboard and public.capabilities.keyboard_scope=='fixture registered keys')
+            local mask=platform.keyboard_capture_mask
+            assert(public.capabilities.keyboard_mask==mask and #mask==32)
+            assert(not pcall(function()public.capabilities.keyboard_mask=string.rep('X',32)end))
+            platform.keyboard_capture_mask=string.rep('X',32)
+            assert(public.capabilities.keyboard_mask==mask,'Capture mask was reread or overwritten')
+            local legacy=assert(public.acquire('Legacy','menu'));assert(public.snapshot(legacy))
+            assert(counts.prepare==0 and counts.keyboard_acquire==0 and counts.pointer==1)
+            assert(public.release(legacy))
+            local token=assert(public.acquire('Photo','camera',nil,{keyboard=true}))
+            assert(counts.prepare==1 and counts.keyboard_acquire==1 and counts.keyboard_snapshot==0)
+            local first=assert(public.snapshot(token));local keys,mask=first.keyboard_keys,first.keyboard_mask
+            assert(first.valid and first.keyboard_active and first.keyboard_state==2 and first.dx==7 and first.wheel==120)
+            local second=assert(public.snapshot(token))
+            assert(second.keyboard_keys==keys and second.keyboard_mask==mask and second.keyboard_generation==11)
+            assert(second.dx==0 and second.dy==0 and second.wheel==0 and counts.keyboard_snapshot==1)
+            driver.begin_frame();assert(public.snapshot(token));assert(counts.keyboard_snapshot==2 and counts.camera==0)
+            assert(public.release(token)and counts.keyboard_release==1)
+            local reads,releases=counts.keyboard_snapshot,counts.keyboard_release
+            for i=1,80 do driver.begin_frame();public.status();driver.manager_available()end
+            assert(counts.keyboard_snapshot==reads and counts.keyboard_release==releases,'Hidden broker used keyboard pipe')
+        ''')
+
+    def test_mode_switch_retains_keyboard_authority_and_invalidates_only_the_frame_sample(self):
+        self.keyboard()
+        self.check('''local reads=0
+            for _,name in ipairs({'mouse_focus','show_cursor','clip_cursor'})do
+                local read=window[name];window[name]=function()reads=reads+1;return read()end
+            end
+            local token=assert(public.acquire('Photo','menu',nil,{keyboard=true}))
+            local first=assert(public.snapshot(token));local handle,generation=keyboard_last_handle,first.keyboard_generation
+            local sets,read_count=state.sets,reads
+            assert(public.set_mode(token,'menu')==true and public.snapshot(token)==first)
+            assert(reads==read_count and state.sets==sets and counts.keyboard_snapshot==1,
+                'Unchanged mode did window or helper work')
+            assert(public.set_mode(token,'camera')==true)
+            assert(not state.cursor and not state.focus and state.clip and state.sets==sets+1)
+            assert(public.status().mode=='camera'and capture.status().mode=='camera'and public.owns(token))
+            assert(counts.prepare==1 and counts.keyboard_acquire==1 and counts.keyboard_release==0
+                and counts.keyboard_snapshot==1 and counts.release==0,'Mode switch exchanged or replaced the keyboard lease')
+            local camera=assert(public.snapshot(token))
+            assert(keyboard_last_mode=='camera'and keyboard_last_handle==handle and camera.keyboard_generation==generation
+                and counts.keyboard_snapshot==2,'Next combined sample kept the old mode or changed generation')
+            assert(public.set_mode(token,'menu')==true and state.cursor and state.sets==sets+2)
+            assert(public.snapshot(token)and keyboard_last_mode=='menu'and keyboard_last_handle==handle)
+            assert(counts.prepare==1 and counts.keyboard_acquire==1 and counts.keyboard_release==0)
+            assert(public.release(token)and counts.keyboard_release==1 and state.focus and not state.cursor and not state.clip)
+        ''')
+
+    def test_mode_switch_rejects_foreign_stale_modes_capabilities_and_mcm_camera_without_mutation(self):
+        self.check('''local token=assert(public.acquire('Photo','menu'))
+            local sets=state.sets
+            assert(not public.set_mode({},'camera')and not public.set_mode(nil,'camera'))
+            assert(not public.set_mode(token,'unknown')and not public.set_mode(token,nil))
+            assert(state.sets==sets and public.owns(token)and counts.release==0 and counts.pointer==0 and counts.camera==0)
+            assert(public.set_mode(token,'camera')==true and public.snapshot(token).dx==12)
+            assert(public.set_mode(token,'menu')==true and public.snapshot(token).x==123)
+            assert(public.release(token))
+            local next_token=assert(public.acquire('Successor','menu'));sets=state.sets
+            assert(not public.set_mode(token,'camera')and state.sets==sets and public.owns(next_token))
+            assert(public.release(next_token))
+            platform.camera_snapshot=nil;public,driver=Broker.new(platform,window,capture)
+            token=assert(public.acquire('Menu only','menu'));sets=state.sets
+            assert(not public.set_mode(token,'camera')and state.sets==sets and public.owns(token))
+            assert(public.release(token))
+            platform.camera_snapshot=function()return camera end;public,driver=Broker.new(platform,window,capture)
+            local provider=mcm_provider(true);local registration=assert(public.register_frontend('mcm',provider))
+            token=assert(public.acquire('DBF MCM','menu',registration));sets=state.sets
+            assert(not public.set_mode(token,'camera')and public.owns(token)and state.sets==sets)
+            assert(public.release(token)and public.unregister_frontend(registration))
+        ''')
+
+    def test_foreign_cursor_mode_state_closes_keyboard_first_and_retains_failed_cleanup(self):
+        self.keyboard()
+        self.check('''local token=assert(public.acquire('Photo','menu',nil,{keyboard=true}))
+            assert(public.snapshot(token));state.clip=false
+            local sets=state.sets;keyboard_release_ok=false
+            assert(not public.set_mode(token,'camera'))
+            assert(not public.owns(token)and public.status().pending_restore and capture.status().pending_restore)
+            assert(counts.keyboard_release==1 and counts.release==0 and state.sets==sets and state.cursor,
+                'Foreign mode state was overwritten or cursor restored before keyboard ACK')
+            assert(not public.set_mode(token,'menu')and not public.set_mode({},'camera'))
+            for i=1,30 do driver.begin_frame();public.status()end
+            assert(counts.keyboard_release==1 and counts.keyboard_snapshot==1 and state.sets==sets)
+            keyboard_release_ok=true;assert(public.release(token))
+            assert(counts.keyboard_release==2 and counts.release==1 and state.focus and not state.cursor and not state.clip)
+        ''')
+
+    def test_partial_mode_write_failure_keeps_original_baseline_for_acknowledged_restore(self):
+        self.keyboard()
+        self.check('''local token=assert(public.acquire('Photo','camera',nil,{keyboard=true}))
+            local setter=window.set_show_cursor
+            window.set_show_cursor=function(value)setter(value);return false end
+            keyboard_release_ok=false
+            assert(not public.set_mode(token,'menu')and state.cursor and public.status().pending_restore)
+            assert(capture.owns(token)and capture.status().pending_restore and counts.keyboard_release==1)
+            window.set_show_cursor=setter;keyboard_release_ok=true
+            assert(public.release(token)and state.focus and not state.cursor and not state.clip,
+                'Partial mode change replaced the original restore baseline')
+        ''')
+
+    def test_keyboard_acquire_ack_loss_keeps_cleanup_token_and_cursor_until_exact_release(self):
+        self.keyboard()
+        self.check('''keyboard_acquire_error=true;keyboard_release_ok=false
+            local token,why,cleanup=public.acquire('Photo','camera',nil,{keyboard=true})
+            assert(not token and type(why)=='string'and type(cleanup)=='table')
+            assert(public.status().pending_restore and public.status().keyboard and not public.owns(cleanup))
+            assert(not state.focus and not state.cursor and state.clip,'Cursor restored before keyboard retirement acknowledgement')
+            local releases,sets=counts.keyboard_release,state.sets
+            assert(not public.release({})and not public.snapshot(cleanup))
+            assert(driver.manager_release()and not public.acquire('Other','menu'))
+            for i=1,30 do driver.begin_frame();public.status()end
+            assert(counts.keyboard_release==releases and state.sets==sets,'Pending keyboard cleanup retried while idle')
+            keyboard_release_ok=true;assert(public.release(cleanup))
+            assert(not public.status().owner and state.focus and not state.cursor and not state.clip)
+            local count=counts.keyboard_release;assert(not public.release(cleanup)and counts.keyboard_release==count)
+            keyboard_acquire_error=false
+            local next_token=assert(public.acquire('Next','menu',nil,{keyboard=true}))
+            assert(public.release(next_token))
+        ''')
+
+    def test_keyboard_arming_keeps_lease_and_revocation_never_falls_back_to_pointer(self):
+        self.keyboard()
+        self.check('''local token=assert(public.acquire('Photo','menu',nil,{keyboard=true}))
+            keyboard_value.valid=false;keyboard_value.keyboard_state=1;keyboard_value.keyboard_active=false
+            local pending=assert(public.snapshot(token))
+            assert(not pending.valid and pending.keyboard_state==1 and public.owns(token)and counts.keyboard_release==0)
+            assert(public.snapshot(token)and counts.keyboard_snapshot==1)
+            driver.begin_frame();keyboard_value.valid=true;keyboard_value.keyboard_state=2;keyboard_value.keyboard_active=true
+            assert(public.snapshot(token).keyboard_active and counts.keyboard_snapshot==2)
+            driver.begin_frame();keyboard_value.valid=false;keyboard_value.keyboard_state=3;keyboard_value.keyboard_active=false
+            keyboard_release_ok=false
+            assert(not public.snapshot(token)and not public.owns(token)and public.status().pending_restore)
+            assert(counts.pointer==0 and counts.camera==0 and counts.release==0,'Revoked keyboard fell back or released cursor before ACK')
+            local reads=counts.keyboard_snapshot
+            for i=1,20 do driver.begin_frame();assert(not public.snapshot(token))end
+            assert(counts.keyboard_snapshot==reads)
+            keyboard_release_ok=true;assert(public.release(token)and counts.release==1)
+        ''')
+
+    def test_manager_keyboard_is_private_cached_and_cannot_release_foreign_owner(self):
+        self.keyboard()
+        self.check('''busy=true;local first=assert(driver.manager_snapshot());assert(first.keyboard_active)
+            assert(driver.manager_snapshot()==first and counts.keyboard_snapshot==1 and counts.pointer==0)
+            driver.begin_frame();driver.manager_snapshot();assert(counts.keyboard_snapshot==2)
+            assert(not public.acquire('Other','menu'))
+            assert(driver.manager_release()and counts.keyboard_release==1 and counts.release==1)
+            assert(driver.manager_release()and counts.keyboard_release==1)
+            busy=false
+            local token=assert(public.acquire('Photo','menu',nil,{keyboard=true}))
+            local acquire,release=counts.keyboard_acquire,counts.keyboard_release
+            assert(not driver.manager_snapshot().valid and driver.manager_release())
+            assert(public.owns(token)and counts.keyboard_acquire==acquire and counts.keyboard_release==release)
+            assert(public.release(token))
+        ''')
+
+    def test_manager_uncertain_prepare_and_blur_cleanup_do_not_retry_while_hidden(self):
+        self.keyboard()
+        self.check('''busy=true;keyboard_acquire_error=true;keyboard_release_ok=false
+            assert(not driver.manager_failure()and capture.sync(true,true))
+            assert(not driver.manager_snapshot().valid and not driver.manager_available())
+            local failure=driver.manager_failure();assert(type(failure)=='string'and failure:find('acknowledgement lost'))
+            assert(not driver.manager_snapshot().valid and counts.prepare==1 and counts.keyboard_acquire==1)
+            assert(driver.manager_failure()==failure,'Failed manager read discarded its failure latch')
+            assert(not driver.manager_release())
+            local count,sets=counts.keyboard_release,state.sets
+            local pending=driver.manager_failure();assert(type(pending)=='string'and pending:find('Unregister'))
+            assert(capture.status().owner=='lll'and not state.focus and state.cursor and state.clip,
+                'Pending keyboard retirement released the cursor owner')
+            for i=1,30 do driver.begin_frame();assert(driver.manager_failure()==pending)end
+            assert(counts.keyboard_release==count,'Uncertain manager cleanup retried without explicit action')
+            assert(state.sets==sets,'Pure manager failure status changed cursor state')
+            keyboard_release_ok=true;assert(driver.manager_release())
+            assert(not driver.manager_failure()and not capture.status().owner and state.focus and not state.cursor and not state.clip)
+            keyboard_acquire_error=false;assert(driver.manager_snapshot().valid)
+            state.focused=false;keyboard_release_ok=false;driver.begin_frame()
+            assert(counts.keyboard_release==count+2 and counts.release==0)
+            local reads,releases=counts.keyboard_snapshot,counts.keyboard_release
+            for i=1,30 do driver.begin_frame();assert(not driver.manager_snapshot().valid)end
+            assert(counts.keyboard_snapshot==reads and counts.keyboard_release==releases)
+            keyboard_release_ok=true;assert(driver.manager_release()and counts.release==1)
+            for i=1,30 do driver.begin_frame()end
+            assert(counts.keyboard_release==releases+1)
+        ''')
+
+    def test_keyboard_options_refuse_unsupported_or_malformed_requests_without_mutation(self):
+        self.check('''assert(not public.capabilities.keyboard and public.capabilities.keyboard_mask==nil)
+            assert(not public.acquire('Photo','menu',nil,{keyboard=true}))
+            assert(not public.acquire('Photo','menu',nil,{keyboard='yes'}))
+            assert(not public.acquire('Photo','menu',nil,true))
+            assert(state.sets==0 and counts.pointer==0 and counts.release==0)
+            local token=assert(public.acquire('Legacy','menu',nil,{keyboard=false}));assert(public.release(token))''')
+        self.keyboard()
+        self.check('''for _,value in ipairs({false,17,'',string.rep('M',31),string.rep('M',33)})do
+                platform.keyboard_capture_mask=value;public,driver=Broker.new(platform,window,capture)
+                assert(not public.capabilities.keyboard and public.capabilities.keyboard_mask==nil)
+                assert(not public.acquire('Photo','menu',nil,{keyboard=true}))
+            end
+            platform.keyboard_capture_mask=nil;public,driver=Broker.new(platform,window,capture)
+            assert(not public.capabilities.keyboard and public.capabilities.keyboard_mask==nil)
+            assert(counts.prepare==0 and counts.keyboard_acquire==0,'Invalid mask advertised native capture')''')
 
     def test_capability_and_status_queries_leave_hidden_input_idle(self):
         self.check('''
