@@ -80,10 +80,62 @@ integer object. An old `ffi.C`/DLL call still needs a real supported backend;
 this module does not implement it. Existing LLL input and screenshot services
 remain separate APIs with their own capabilities and ownership contracts.
 
-Floating-point packing, C declarations/layouts, casts, arbitrary native calls,
-raw pointers and mutable FFI-style arrays are not supplied. `float32`,
-`native_memory`, `native_calls`, `mutable_buffers` and `ffi` capabilities are
-explicitly false. Float codecs need separate IEEE rounding and edge-case work.
+The integer module's `float32`, `native_memory`, `native_calls`,
+`mutable_buffers` and `ffi` capabilities remain false. Float codecs and mutable
+Lua-owned float arrays are supplied separately by `lll_float32.lua`, below.
+C declarations/layouts, arbitrary native calls and raw pointers still require
+other providers.
+
+## Float32 codecs and mutable arrays
+
+Vendor `lll_float32.lua` alongside the integer module and import it explicitly:
+
+```lua
+local f32 = mod.require('vendor.lll_float32')
+local values = f32.array(4)
+values:set(0, 0.1)                  -- rounds once to IEEE754 binary32
+values:fill(1.0, 1, 3)
+local tail = values:view(1, 3)      -- checked, zero-based shared view
+local encoded = values:export(0, 4, 'le')
+values:release()                   -- invalidates tail and all nested views
+assert(not tail:alive())
+```
+
+The scalar API is `to_bits(number)`, `from_bits(u32)`, `round(number)`,
+`write(number, order)` and `read(bytes, offset, order)`. Byte order defaults to
+`'le'`; offsets are one-based. Reads return the number and next offset.
+Conversions use round-to-nearest, ties-to-even, including subnormals, the
+normal/subnormal boundary and overflow. Signed zero and infinities round trip.
+NaN writes/imports canonicalize to positive quiet NaN `0x7fc00000`; NaN payload
+bits are not preserved.
+
+`array(count, initial)` defaults to zero and permits 0 through 262144 elements
+(at most 1 MiB encoded; Lua table storage is larger). Methods use zero-based
+element indices: `get`, `set`, `fill(value, start, count)`,
+`copy(source, source_start, destination_start, count)`, `view(start, count)`,
+`export(start, count, order)`, `import(bytes, offset, start, count, order)`,
+`length`, `alive`, and owner-only `release`. Omitted ranges extend to the end;
+the copy count defaults to the source's remaining range. Import returns its
+next byte offset; other mutators return true. Copy handles overlapping views
+like `memmove`. Release is idempotent and invalidates every view.
+
+Storage keeps private 32-bit words. `get`/`set` are constant time; `fill`
+rounds the fill value once and `copy` copies words. Scalar edits do not
+re-encode the whole array. Export joins chunks of 256 words, rather than
+repeatedly appending to one growing string. There are no frame callbacks,
+watchers, helper requests or idle tasks. These are checked Lua data views;
+they do not contain C addresses and cannot be passed to an engine C function.
+
+The float module advertises `float32`, `round_to_nearest_even`,
+`mutable_arrays` and `views`. Its native-memory, native-pointer, native-call
+and FFI capabilities are false. Six focused tests compare Python `struct`
+and actual LuaJIT FFI conversions, test rounding midpoints and special values,
+exercise ownership/bounds/overlap, and verify that scalar edits do not encode
+the full array. Run them with:
+
+```powershell
+py -3.14 -m unittest discover -s tests -p test_steam_float32.py -v
+```
 
 The focused Python suite uses actual Lua 5.1, LuaJIT's bit library as the bit
 oracle, Python `struct` as the integer-codec oracle, seeded random cases and

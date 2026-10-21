@@ -11,6 +11,7 @@ needs through a documented provider, or use a portable data library.
 | Old dependency | Replacement | Current boundary |
 | --- | --- | --- |
 | C integer bit fields and byte conversions | `sdk/portable/lll_portable.lua` | Standalone Lua 5.1 source; its README defines supported types and validation. |
+| Float32 packing and mutable numeric arrays | `sdk/portable/lll_float32.lua` | IEEE754 ties-to-even conversion and bounded Lua-owned arrays/views; no native address or C-call compatibility. |
 | 64-bit IDs stored in C unions | Exact low/high 32-bit words or hexadecimal IDs | Do not convert an arbitrary u64 to one Lua double. Engine IdString64 values still need their native lifetime rules. |
 | `GetAsyncKeyState`, cursor reads and mouse capture | `LiveLuaLoader.input_service` | R34 opt-in keyboard and pointer leases; one combined sample per active frame, release on close. Ordinary closed-menu shortcuts can use the exposed engine keyboard API. |
 | Game-window PNG capture | `LiveLuaLoader.capture_service` | Asynchronous SDR capture and owned job cleanup already exist; HDR remains unqualified. |
@@ -26,9 +27,9 @@ IPC, frame callback, watcher or idle loop. Mods explicitly vendor/import it; it
 does not impersonate `ffi`, `bit` or `jit`, and does not relax native-import
 checks. Unsupported pointer/function operations remain unavailable.
 
-This recovers a reusable portion of data-processing code. It does not provide
-mutable native float arrays, C struct ABI layout, pointer dereferences or engine
-renderer calls. Large LUT/image transformations should use bulk operations;
+This recovers reusable data-processing code, including mutable float32 arrays
+with bounded shared views and owner release. C struct ABI layout, native pointer
+dereferences and engine renderer calls need other providers. Large LUT/image transformations should use bulk operations;
 one IPC call per pixel, scalar or draw would be an unsuitable replacement.
 
 The [SDK usage and qualification notes](../sdk/portable/README.md) include six
