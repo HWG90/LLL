@@ -153,6 +153,31 @@ the fixture's checks; it does not establish why callbacks were not delivered or
 whether a functioning filter would suppress raw input. No keyboard filter was
 added to the production helper or deployed to the game.
 
+An elevated owned-window trial then tested the documented Windows
+[`RegisterHotKey`](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerhotkey)
+API with `MOD_NOREPEAT` and unmodified W. Three physical taps were observed in
+each phase:
+
+| Observation | Baseline | W registered | Released |
+| --- | ---: | ---: | ---: |
+| Legacy key-down / key-up | 3 / 3 | 0 / 3 | 3 / 3 |
+| Raw key-make / key-break | 3 / 3 | 0 / 3 | 3 / 3 |
+| Hotkey notifications | 0 | 3 | 0 |
+| Physical async press/release transitions | 3 / 3 | 3 / 3 | 3 / 3 |
+
+The registered phase therefore blocked key-down delivery in that owned window
+while leaving physical key state readable. Key-up delivery continued. The trial
+completed without focus loss, made one successful registration and removal, and
+exited with no registered hotkey. It used no low-level hook or focus takeover.
+
+This is a candidate route, not gameplay suppression evidence. A bounded W-only
+game trial is being prepared with separate native movement observation and
+unchanged Lua keyboard reads. The owned-window result does not establish
+Shift/Ctrl/Alt combinations, other keys, engine polling behavior, full menu or
+freecam isolation, or deployed performance. Windows hotkey reservations are
+global, so foreground loss, conflicts and exact lease cleanup must be qualified
+before any production integration. The released helper remains unchanged.
+
 The subsequent user-supplied section dump exposed part of the native plugin
 loader, but did not recover the engine API getter or the Lua load bindings.
 See the [bounded dump investigation](STEAM-NATIVE-BRIDGE-INVESTIGATION.md) for
