@@ -4,7 +4,7 @@ Lua loader and in-game mod manager for Helldivers 2 on Windows x64.
 
 ## Current Steam preview
 
-[Download R33 Steam Lua 5.1 preview](https://github.com/HWG90/LLL/releases/tag/R33-steam-lua51-preview.1).
+[Download R34 Steam Lua 5.1 preview](https://github.com/HWG90/LLL/releases/tag/R34-steam-lua51-preview.1).
 This preview targets Steam build **25988413** and checks the exact game-file
 fingerprints. The older [R31 release](https://github.com/HWG90/LLL/releases/tag/R31)
 targets the previous build.
@@ -24,14 +24,21 @@ mods that depend on them need individual ports. LLL refuses declared incompatibl
 imports before execution. A discovered or enabled entry alone does not prove a
 working mod. MCM and third-party mods are not bundled.
 
-**Gameplay keyboard suppression remains unfinished.** Movement keys can still
-reach the diver while a menu or free camera is open. The shared input service
-provides exclusive menu/camera ownership, mouse-look capture, relative mouse
-deltas and cleanup; it must not be treated as a gameplay keyboard gate.
+LLL's manager now captures gameplay keyboard input. In the current game, the
+user confirmed that W/A/S/D, Shift, Ctrl and Space were blocked while the
+manager's keyboard and mouse controls worked; closing with Insert restored
+normal movement. Other menus and cameras must opt in to keyboard capture through
+the shared input service and read its key bitmap. Existing mouse-only consumers
+keep their previous behavior. Windows keys, F12 and reserved system shortcuts
+are excluded. The matching Photo adapter also passed human checks: freecam
+W/A/S/D, Shift and Ctrl moved the camera while the diver stayed still;
+menu/camera switching worked, and closing restored normal movement.
 
 ## Changes in this preview
 
 - Insert as the default manager key for fresh configurations; valid saved bindings stay unchanged.
+- Gameplay keyboard capture for LLL and opt-in consumers, with owned cleanup on close or foreground loss.
+- Menu/camera transitions retain the keyboard lease instead of releasing and reacquiring it.
 - Shared asynchronous SDR game-window screenshots for cooperating mods, with capture work in the external helper.
 - WinRT factory cleanup that fixes the helper crash on a later screenshot job.
 - Dead-helper transport failures retire helper-dependent UI and maintenance once, without repeated pipe attempts.
@@ -43,17 +50,21 @@ deltas and cleanup; it must not be treated as a gameplay keyboard gate.
 - In-memory catalog listings and retirement of watches for removed projects after a completed scan.
 - Portable installation, game-build checks, owned-file rollback and conflicting-loader refusal.
 
-The deployed base port has user-confirmed manager open/close/reopen, mouse
-interaction and normal controls after closing. A quiet 30-second loader sample
-measured **4.47 ms/s** aggregate and **1 ms** worst callback. These are earlier
-base-port measurements, not a fresh benchmark of every change in this release
-or whole-game frame time. The latest catalog/import changes have startup
-acknowledgement and offline checks; their final live cost remains unmeasured.
+The deployed R34 manager has user-confirmed keyboard capture, working menu
+keyboard/mouse input and restored movement after closing. A quiet 30-second
+sample measured **9.00 ms/s** inclusive loader time, **7 ms** worst tick and zero
+keyboard-helper calls. A 90-second mixed menu/camera/idle sample measured
+**14.15 ms/s**, with one **13 ms** close transition including **8 ms** in keyboard
+release; whole-helper CPU averaged **1.91 ms/s** over that mostly idle sample.
+Lua timings include observer overhead and child mod callbacks; these are not
+exclusive LLL CPU, pure active-capture cost or whole-game frame time. The older
+**4.47 ms/s** base-port result is historical and not directly comparable. See
+[input validation](docs/STEAM-INPUT-SERVICE.md) for the sample counts and limits.
 
-The screenshot helper has survived repeated user-operated 3840x2160 SDR captures
-and Photo Mode close/reopen. The helper code is unchanged in this preview's
-rebuilt Insert-default startup package. The existing installation already uses
-a saved Insert binding; the new fresh-configuration default has offline checks.
+The R33 screenshot implementation survived repeated user-operated 3840x2160 SDR
+captures and Photo Mode close/reopen. R34's native helper adds hotkey capture;
+its screenshot job and WinRT factory components are unchanged from that
+live-tested implementation, and their native fixtures pass.
 See [screenshot validation](docs/STEAM-SCREENSHOTS.md) for the bounded helper CPU
 sample and remaining HDR, colorimetry and gameplay-input limits.
 

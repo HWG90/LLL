@@ -173,6 +173,12 @@ privilege, protection or target-memory changes were made.
 
 ## Lua native-module route
 
+The [community boot investigation and corrections](https://github.com/CowboyBingus/BingusSharedLoader/issues/13)
+also report disk Lua loading, resource-before-file priority, and inherited search
+paths. Their corrected existence check is `can_get(type, name)`; one argument
+reportedly crashes. LLL already uses two arguments and controlled project paths.
+These reports do not establish native-module acceptance.
+
 The current VM exposes the standard Lua 5.1
 [`package.loadlib`](https://www.lua.org/manual/5.1/manual.html#pdf-package.loadlib)
 function. A guarded one-shot query used an independently verified nonexistent

@@ -2,7 +2,7 @@
 
 `LiveLuaLoader.input_service` and `CowboyBingusModLoader.input_service` reference the same object. It is published before mod enable/after-startup callbacks. Availability is declared by `loader.capabilities.shared_input`; check the service itself before use. It reuses LLL's one authenticated helper connection. A mod must not create a competing pipe client.
 
-`service.capabilities` is read-only: `menu`, `camera`, `relative_mouse`, and `coordinates='client-top-left'`. Camera capability requires the versioned extended helper operation. Older backends may provide only menu mode or no service.
+`service.capabilities` is read-only: `menu`, `camera`, `relative_mouse`, and `coordinates='client-top-left'`. The keyboard extension adds `keyboard`, `keyboard_scope`, and the immutable 32-byte `keyboard_mask`; missing or malformed platform masks disable that capability. Camera capability requires the versioned extended helper operation. Older backends may provide only menu mode or no service.
 
 ## Lease operations
 
@@ -11,7 +11,7 @@
 * `service.owns(token)` indicates active read authority. It becomes false immediately on revocation or failed release, even when cleanup remains pending.
 * `ok, reason = service.release(token)` stops the owned reader and restores only the cursor flags changed by that lease. Wrong/stale tokens cannot release another owner. A failed release retains the token for explicit retry. No automatic retry loop runs while restoration is pending.
 * `service.status()` returns `owner`, `mode`, `active`, `pending_restore`, and `reason`, plus `frontend='mcm'` for a lease using the registration below. Loader `input_status()` also exposes the shared cursor owner so MCM can refuse conflicting capture.
-* The source candidate adds `ok, reason = service.set_mode(token, mode)`. Literal `true` means success. It preserves the token and keyboard generation, verifies cursor ownership before changing visibility, and makes no helper exchange to change mode. Unchanged mode performs no work. Failures close through the existing keyboard-first cleanup. Registered MCM leases remain menu-only. Check for this function before use on older helpers.
+* R34 adds `ok, reason = service.set_mode(token, mode)`. Literal `true` means success. It preserves the token and keyboard generation, verifies cursor ownership before changing visibility, and makes no helper exchange to change mode. Unchanged mode performs no work. Failures close through the existing keyboard-first cleanup. Registered MCM leases remain menu-only. Check for this function before use on older helpers.
 
 Acquire only when opening the consuming UI/camera, sample only while it is active, and release on hide/disable/reload. Prefer `set_mode` for menu/camera transitions when available; older versions require release and reacquisition. Foreground loss or an MCM ownership conflict revokes the lease before mod update callbacks or sample delivery. The service does no helper sampling without an active consumer request.
 
@@ -79,7 +79,7 @@ Camera `dx/dy` are signed raw relative counts, positive right/down. They are acc
 
 Menu mode uses `mouse_focus=false`, visible cursor and clipping. Camera mode uses `mouse_focus=false`, hidden cursor and clipping. The previous flags are recorded once and restored on release. Native input filtering and cursor state do not identify which camera drives rendering; camera/render ownership remains the consumer's responsibility.
 
-The R33 helper suppresses gameplay mouse look, but does not isolate gameplay keyboard actions. Its menu/camera transitions and release are user-confirmed. Keyboard capture is a separate opt-in capability in the source candidate described below; never infer it from `capabilities.camera` or `relative_mouse`.
+The R33 helper suppresses gameplay mouse look, but does not isolate gameplay keyboard actions. Its menu/camera transitions and release are user-confirmed. Keyboard capture is a separate opt-in capability in R34, described below; never infer it from `capabilities.camera` or `relative_mouse`.
 
 ## Keyboard action isolation investigation
 
@@ -115,7 +115,7 @@ Further bounded checks on October 20 did not establish another action gate:
 - A subsequent name-only DLL used the exact [published SDK header](https://github.com/AutodeskGames/stingray-plugin-api-samples/blob/e9d937a013e4aa1f25b6f7d9bdee0ca985455cfd/stingray_sdk/engine_plugin_api/plugin_api.h), with only `get_name` implemented and every other callback NULL. Its native layout fixture and 11 Lua ownership fixtures passed. The live dynamic load still returned nil and the exact expected name was absent. It was hash-removed without unloading another plugin. No engine-provided pointer or input API was invoked, and current-fork SDK compatibility remains unverified.
 - The selected current `dl_library.dl_typelib` is 1,080,072 bytes, SHA256 `1bf51ab66c34ffab93f31480598e68832045a1641953fe7befb05847555957f6`, with leading bytes `96 7d 00 d7`. The [maintained reader](https://github.com/SkyeShade/HD2Runtime/blob/219d70864032150f4e4359281add5ead23cb86dc/scripts/reference_format.py#L56-L61) requires decoded `LTLD` format and rejects this stored file. An older embedded mirror cannot establish a current input schema. No property or dispatch name was inferred from it.
 
-These checks changed no production input behavior. A callable current-build gate,
+These checks changed no production input behavior. A callable current-build engine action gate,
 its lifecycle order and exact restoration remain unverified.
 
 War Journalist's later finite metadata check successfully queried
@@ -135,7 +135,8 @@ action-binding apply operation. Likewise,
 [`Window.set_keystroke_enabled()`](https://help.autodesk.com/cloudhelp/2019/ENU/Max-Interactive-Help/lua_ref/obj_stingray_Window.html)
 controls the Windows, Alt-Tab, Alt-Enter and Alt-F4 combinations, not arbitrary
 gameplay keys. No guessed setting, event or player write was added from these
-leads. Native gameplay keyboard suppression remains unresolved.
+leads. They did not establish an engine action gate; the separate external
+hotkey route below supplies R34's opt-in keyboard capture.
 
 A separate external-helper experiment tested physical W input in its own
 foreground window, with baseline, filtered and released phases. Each phase
@@ -183,10 +184,10 @@ Shift, Ctrl and Alt key, Space, and the modifier keys themselves. Its registered
 phase delivered zero legacy key-downs and zero raw key-makes for those inputs;
 normal delivery returned after release. All 39 reservations were removed. The
 full multi-modifier matrix was registered, but multi-modifier gestures were not
-physically tested. These results support the route; full integrated menu/freecam
-acceptance and deployed performance remain pending.
+physically tested. Integrated LLL and Photo/freecam acceptance and deployed
+measurements are recorded below.
 
-## Opt-in keyboard candidate
+## Opt-in keyboard capture (R34)
 
 The additive v1 extension accepts
 `service.acquire(owner, mode, frontend, {keyboard=true})` when
@@ -222,8 +223,58 @@ private cleanup authority and block replacement leases. Foreground changes use
 an out-of-context Windows event to revoke the lease without rearming it; process
 exit and a two-second heartbeat timeout also stop the worker. These reservations
 are system-wide, and foreground event delivery is asynchronous. Registration
-conflicts fail the whole acquisition and roll back partial reservations. Hidden
-menus have no keyboard worker, sampling or registration loop.
+conflicts fail the whole acquisition and roll back partial reservations. After
+successful release, hidden menus have no keyboard worker, sampling or
+registration loop. Failed cleanup retains ownership for explicit retry.
+
+### Validation recorded October 20, 2026
+
+The R34 native fixture passed 91,180 offline checks. The Lua 5.1 broker suite
+passed 28 tests, and the composed frontend suite passed 13 tests. A separate
+real Windows registration check acquired and removed all 880 reservations for
+the 119-key mask. Registration success establishes OS availability; it does not
+prove physical suppression of every key or modifier combination.
+
+The installed R34 manager then passed a human gameplay check: W worked with
+the manager closed; Insert opened it; W/A/S/D, Shift, Ctrl and Space were blocked
+from native gameplay while manager keyboard navigation and mouse input worked.
+Closing with Insert restored normal movement. This confirms the tested LLL
+manager transitions and inputs in that session, not every consumer or key.
+
+The matching Photo adapter also passed human gameplay checks: W/A/S/D, Shift
+and Ctrl moved the free camera while the diver stayed still; menu/camera mode
+changes worked; closing restored normal movement. A bounded Alt-Tab/typing
+cleanup check was reported working. This does not qualify every OS shortcut or
+every possible key combination.
+
+### Deployed timing samples
+
+| Observation | Quiet sample | Mixed menu/camera/idle sample |
+| --- | ---: | ---: |
+| Elapsed time | 30.0022 s | 90.0048 s |
+| Loader ticks | 3,378 | 10,282 |
+| Inclusive loader tick time | 270 ms total; 9.00 ms/s | 1,274 ms total; 14.15 ms/s |
+| Worst tick | 7 ms | 13 ms, one close transition |
+| Combined keyboard snapshots | 0 | 1,777: 1,156 menu; 621 camera |
+| Keyboard acquires / releases | 0 / 0 | 3 / 3 |
+| Idle frames without keyboard-helper calls | 3,378 | 8,505 |
+
+The 13 ms close tick included 8 ms in `keyboard_release`; no other tick in the
+mixed sample reached 10 ms. The acquire API calls took at most 1 ms, which
+measures request acknowledgement rather than completion of the asynchronous
+arming worker. The samples recorded zero helper errors or restoration conflicts.
+
+Whole-helper CPU showed no measurable increase over a separate 30.017-second
+quiet interval, using a process CPU counter with 15.625 ms granularity. Over
+90.0238 seconds around the mixed sample, it used 171.875 ms CPU, or 1.91 ms CPU/s.
+That interval was mostly idle; it is not a pure active-capture CPU benchmark.
+
+Inclusive Lua tick timing includes the protected observer overhead and child
+callbacks from other mods. It is neither exclusive LLL CPU nor whole-game frame
+time. The observer's `ui.menu.visible` counter stayed zero, so the mixed result
+does not establish an LLL-only visible-manager benchmark. The earlier base-port
+4.47 ms/s result used a different sample and is not directly comparable. Temporary
+observers were removed afterward, and saved settings remained unchanged.
 
 The subsequent user-supplied section dump exposed part of the native plugin
 loader, but did not recover the engine API getter or the Lua load bindings.

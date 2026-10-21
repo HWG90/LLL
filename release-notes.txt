@@ -1,3 +1,54 @@
+R34 Steam Lua 5.1 preview.1 (build 25988413)
+
+LLL now captures gameplay keyboard input while its manager is open. The additive
+shared input service supports opt-in keyboard capture and physical key snapshots
+in the same exchange as pointer input. Menu/camera mode changes preserve the
+token and keyboard generation. Existing mouse-only consumers retain their prior
+behavior; other menus/cameras must opt in and consume the helper key bitmap.
+Windows keys, F12 and reserved system combinations remain excluded.
+
+The 119-key mask uses 880 hotkey reservations. Real Windows registration/removal
+passed; native fixtures passed 91,180 offline checks, with 28 Lua 5.1 broker and
+13 composed frontend tests. These do not prove every physical key combination.
+
+Human gameplay acceptance passed for LLL: W worked while closed; Insert opened
+the manager; W/A/S/D, Shift, Ctrl and Space were blocked from the diver while
+menu keyboard/mouse input worked; Insert close restored movement. The matching
+Photo adapter passed freecam W/A/S/D, Shift and Ctrl movement with the diver
+still, menu/camera switches, and restored normal movement after close. A bounded
+Alt-Tab/typing cleanup check was reported working; not every OS chord was tested.
+
+Deployed samples:
+- Quiet: 30.0022 seconds, 3,378 ticks, 270 ms inclusive loader time (9.00 ms/s),
+  worst tick 7 ms, zero keyboard-helper calls.
+- Mixed menu/camera/idle: 90.0048 seconds, 10,282 ticks, 1,274 ms inclusive loader
+  time (14.15 ms/s). One close tick took 13 ms, including 8 ms keyboard release;
+  no other tick reached 10 ms. Acquire API acknowledgement took at most 1 ms.
+- Mixed input: 1,156 menu and 621 camera combined snapshots, 3 acquires and
+  3 releases; no idle keyboard calls across 8,505 idle frames; zero helper errors
+  or restoration conflicts.
+- Whole-helper CPU: no measurable increase in a 30.017-second quiet interval
+  (15.625 ms CPU-counter granularity); 171.875 ms over 90.0238 seconds around the
+  mostly idle mixed interval, averaging 1.91 ms CPU/s.
+
+Inclusive tick timing includes protected observer overhead and other mod child
+callbacks. It is not exclusive LLL CPU or whole-game frame time. The mixed
+sample is not a pure active-capture or LLL-only visible-manager benchmark; the
+observer's ui.menu.visible counter stayed zero. The earlier 4.47 ms/s base-port
+sample is historical and not directly comparable. Observers were removed and
+saved settings were unchanged.
+
+The new helper adds hotkey capture. Its screenshot job and WinRT factory
+components are unchanged from live-tested R33 and their native fixtures pass;
+this is not a new R34 screenshot gameplay acceptance claim. HDR capture, full
+old-mod parity and independent image colorimetry remain unqualified.
+
+Use the portable installer and retain its rollback receipt. Exact game-build
+checks, settings preservation and conflicting-loader refusal remain required;
+a generic mod-manager ZIP import does not install the helper. See the attached
+VALIDATION file and docs/STEAM-INPUT-SERVICE.md for scope and evidence.
+
+Historical preview notes:
 R33 Steam Lua 5.1 preview.1 (build 25988413)
 
 This preview adds the shared asynchronous SDR game-window PNG service for
