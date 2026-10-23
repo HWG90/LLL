@@ -1,0 +1,9 @@
+{
+  "build_id": "26088801",
+  "status": "development candidate; live validation pending",
+  "game": {
+    "bin/helldivers2.exe": "0acc07debe04714ae04281e1a66bd2eb9d3d85232953e32a93c8a3dd0874eabe",
+    "data/game/game.dll": "6d1d4d3bc6fc84801d9f8f1b310e13a603d07409f3d9495d74b42e1d0bb1c08f"
+  },
+  "stock_startup_sha256": "e0c2f6b48225c07cc612d9f412c9b050abcf5c04093dd5f2b9b425d8878d0841"
+}

@@ -26,7 +26,7 @@ function Assert-Closed {
     if (@(Get-Process -Name helldivers2 -ErrorAction SilentlyContinue).Count) { throw 'Close Helldivers 2 before installing or rolling back.' }
     # A waiting helper owns the same per-user service mutex even without a
     # game. Do not replace its binding/startup with a different pipe token.
-    $helpers=@(Get-Process -Name 'lll_steam_service_*','steam_service' -ErrorAction SilentlyContinue|Where-Object { $_.Name -match '^(lll_steam_service_[0-9a-f]{16}|steam_service)$' })
+    $helpers=@(Get-Process -Name 'lll_steam_service_*','steam_service','lll_steam_launcher_*' -ErrorAction SilentlyContinue|Where-Object { $_.Name -match '^(lll_steam_(service|launcher)_[0-9a-f]{16}|steam_service)$' })
     if ($helpers.Count) {
         throw ('Exit the waiting LLL Steam helper before installing or rolling back: '+(($helpers|ForEach-Object {$_.Name}) -join ', ')+'. No process was stopped.')
     }
@@ -73,7 +73,7 @@ function Target-Path([string]$Root,[string]$Group,[string]$Name) {
     if ($Group -eq 'data' -and $Name -in @('9ba626afa44a3aa3.patch_0','9ba626afa44a3aa3.patch_0.stream','9ba626afa44a3aa3.patch_0.gpu_resources')) {
         return [IO.Path]::Combine($Root,'data',$Name)
     }
-    if ($Group -eq 'service' -and ($Name -match '^lll_steam_service_[0-9a-f]{16}\.exe$' -or $Name -in @('game-root.txt','installed-steam-preview.json'))) {
+    if ($Group -eq 'service' -and ($Name -match '^lll_steam_(service|launcher)_[0-9a-f]{16}\.exe$' -or $Name -in @('game-root.txt','installed-steam-preview.json'))) {
         return [IO.Path]::Combine($servicePath,$Name)
     }
     throw 'Unexpected installation target.'
@@ -150,12 +150,15 @@ if ([IO.File]::Exists($bindingPath)) {
     if (-not [String]::Equals((Full-Root $binding),$GamePath,[StringComparison]::OrdinalIgnoreCase)) { throw 'LLL is bound to another game folder. Restore/remove that installation before switching game folders.' }
 }
 $desired=@{};$payloads=@($package.payloads.PSObject.Properties)
-if ($payloads.Count -ne 4) { throw 'Incomplete payload manifest.' }
+$hasLauncher=$package.PSObject.Properties.Name -contains 'launcher'
+if ($hasLauncher -and $package.launcher -notmatch '^lll_steam_launcher_[0-9a-f]{16}\.exe$') { throw 'Invalid launcher name.' }
+$expectedPayloads=4;if ($hasLauncher) { $expectedPayloads++ }
+if ($payloads.Count -ne $expectedPayloads) { throw 'Incomplete payload manifest.' }
 foreach ($item in $payloads) {
     $parts=$item.Name.Split('/')
     if ($parts.Count -ne 2 -or $parts[0] -notin @('data','service')) { throw 'Invalid package payload path.' }
     $null=Target-Path $GamePath $parts[0] $parts[1]
-    if ($parts[0] -eq 'service' -and $parts[1] -ne $package.service) { throw 'Unexpected helper payload.' }
+    if ($parts[0] -eq 'service' -and $parts[1] -ne $package.service -and (-not $hasLauncher -or $parts[1] -ne $package.launcher)) { throw 'Unexpected helper payload.' }
     if ($item.Value -notmatch '^[0-9a-f]{64}$') { throw 'Invalid payload checksum.' }
     $path=[IO.Path]::Combine($PSScriptRoot,$parts[0],$parts[1]);$bytes=[IO.File]::ReadAllBytes($path)
     if ((Hash-Bytes $bytes) -ne $item.Value) { throw ('Package payload changed: '+$item.Name) }
@@ -163,6 +166,10 @@ foreach ($item in $payloads) {
 }
 $helperKey='service/'+$package.service
 if (-not $desired.ContainsKey($helperKey) -or $package.service -ne ('lll_steam_service_'+(Hash-Bytes $desired[$helperKey]).Substring(0,16)+'.exe')) { throw 'Helper content address mismatch.' }
+if ($hasLauncher) {
+    $launcherKey='service/'+$package.launcher
+    if (-not $desired.ContainsKey($launcherKey) -or $package.launcher -ne ('lll_steam_launcher_'+(Hash-Bytes $desired[$launcherKey]).Substring(0,16)+'.exe')) { throw 'Launcher content address mismatch.' }
+}
 $patchName='9ba626afa44a3aa3.patch_0';$patchKey='data/'+$patchName
 foreach ($suffix in @('','.stream','.gpu_resources')) {
     if (-not $desired.ContainsKey($patchKey+$suffix)) { throw 'Startup payload missing.' }
@@ -185,7 +192,7 @@ if (-not $oldPatch) {
 $helperTarget=Target-Path $GamePath 'service' $package.service
 if ([IO.File]::Exists($helperTarget) -and (Hash-File $helperTarget) -ne (Hash-Bytes $desired[$helperKey])) { throw 'Installed content-addressed helper changed.' }
 $desired['service/game-root.txt']=$utf8.GetBytes($GamePath+"`n")
-$owner=@{format='LLL-Steam-preview-owner-v1';release=$package.release;game_root=$GamePath;patch_sha256=(Hash-Bytes $desired[$patchKey]);helper=$package.service}
+$owner=[ordered]@{format='LLL-Steam-preview-owner-v1';release=$package.release;game_root=$GamePath;patch_sha256=(Hash-Bytes $desired[$patchKey]);helper=$package.service}
 $desired['service/installed-steam-preview.json']=$utf8.GetBytes(($owner|ConvertTo-Json -Depth 5)+"`n")
 $rows=@()
 foreach ($name in ($desired.Keys|Sort-Object)) {

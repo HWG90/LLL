@@ -60,9 +60,9 @@ class Installer(unittest.TestCase):
         script+='return'
         script+=' }; & '+quote(self.package/'Install.ps1')
         script+=(' -Rollback '+quote(receipt))if receipt else(' -GamePath '+quote(self.game))
-        return subprocess.run(['powershell.exe','-NoLogo','-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass',
+        return subprocess.run([os.environ.get('LLL_TEST_POWERSHELL','powershell.exe'),'-NoLogo','-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass',
           '-EncodedCommand',base64.b64encode(script.encode('utf-16-le')).decode()],
-          env=self.env,capture_output=True,text=True,timeout=20,creationflags=subprocess.CREATE_NO_WINDOW)
+          env=self.env,capture_output=True,text=True,timeout=20,creationflags=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0)
 
     def receipts(self):return sorted((self.base/'Backups').glob('*/receipt.json'))
 
@@ -146,6 +146,7 @@ class Installer(unittest.TestCase):
         self.assertEqual(path.read_bytes(),b'foreign later update')
         self.assertEqual(before,{p.name:p.read_bytes()for p in (self.base/'Service').iterdir()});self.assert_saved()
 
+    @unittest.skipUnless(os.name=='nt','Windows exclusive file-lock fixture')
     def test_partial_update_failure_rolls_back_already_replaced_startup(self):
         original=self.make_package(1);result=self.run_installer()
         self.assertEqual(result.returncode,0,result.stdout+result.stderr)
@@ -214,5 +215,22 @@ class Installer(unittest.TestCase):
         result=self.run_installer();self.assertEqual(result.returncode,0,result.stdout+result.stderr)
         self.assertEqual((self.base/'Service/game-root.txt').read_bytes(),(str(self.game)+'\n').encode());self.assert_saved()
 
+
+    def test_optional_native_launcher_install_and_rollback(self):
+        payloads=self.make_package()
+        for field,folder,prefix,suffix,body in (
+            ('launcher','service','lll_steam_launcher_','.exe',b'fixture launcher'),):
+            name=prefix+SHA(body)[:16]+suffix
+            (self.package/folder).mkdir(exist_ok=True)
+            (self.package/folder/name).write_bytes(body)
+            self.manifest[field]=name
+            self.manifest['payloads'][folder+'/'+name]=SHA(body)
+        (self.package/'package.json').write_text(json.dumps(self.manifest))
+        result=self.run_installer();self.assertEqual(result.returncode,0,result.stdout+result.stderr)
+        self.assertEqual((self.base/'Service'/self.manifest['launcher']).read_bytes(),b'fixture launcher')
+        self.assert_saved()
+        result=self.run_installer(self.receipts()[0]);self.assertEqual(result.returncode,0,result.stdout+result.stderr)
+        self.assertFalse((self.base/'Service'/self.manifest['launcher']).exists())
+        self.assert_saved()
 
 if __name__=='__main__':unittest.main()

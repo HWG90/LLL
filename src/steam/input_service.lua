@@ -239,7 +239,7 @@ function M.new(platform,window,capture)
         end
         if manager_sample then return manager_sample end
         if manager_failed then return invalid end
-        if keyboard and not manager_keyboard then
+        if keyboard and platform.manager_engine_keyboard~=true and not manager_keyboard then
             local called,handle,why=pcall(platform.keyboard_prepare)
             if not called or not handle then
                 manager_failed=called and (why or 'Keyboard preparation refused') or tostring(handle)

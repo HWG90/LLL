@@ -236,6 +236,18 @@ class InputService(unittest.TestCase):
             keyboard_release_ok=true;assert(public.release(token)and counts.release==1)
         ''')
 
+    def test_engine_keyboard_manager_skips_native_capture_but_preserves_mod_opt_in(self):
+        self.keyboard()
+        self.check("""platform.manager_engine_keyboard=true;busy=true
+            keyboard_acquire_error=true
+            assert(driver.manager_snapshot().valid)
+            assert(counts.prepare==0 and counts.keyboard_acquire==0 and counts.pointer==1)
+            assert(not driver.manager_failure() and driver.manager_release())
+            busy=false;keyboard_acquire_error=false
+            local token=assert(public.acquire('Photo','menu',nil,{keyboard=true}))
+            assert(counts.keyboard_acquire==1 and public.release(token))
+        """)
+
     def test_manager_keyboard_is_private_cached_and_cannot_release_foreign_owner(self):
         self.keyboard()
         self.check('''busy=true;local first=assert(driver.manager_snapshot());assert(first.keyboard_active)

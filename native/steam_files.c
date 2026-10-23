@@ -14,8 +14,8 @@
 
 #define MAX_WATCHES 256
 #define MAX_REQUEST (64u * 1024u * 1024u)
-static const char EXE_SHA[] = "2ce8b3d74c5573088e4211b060ced0963f1fc1e74526e2645399780b8fb13ff7";
-static const char GAME_SHA[] = "a457433f0eb766fbe15a6de5a16f0fbbb1fd3c840c5607a5f0b2ebf53b112949";
+static const char EXE_SHA[] = "0acc07debe04714ae04281e1a66bd2eb9d3d85232953e32a93c8a3dd0874eabe";
+static const char GAME_SHA[] = "6d1d4d3bc6fc84801d9f8f1b310e13a603d07409f3d9495d74b42e1d0bb1c08f";
 static wchar_t home[MAX_PATH], request_file[MAX_PATH], response_file[MAX_PATH], events_file[MAX_PATH];
 static wchar_t executable[32768], game_root[32768];
 static int initialized, supported;

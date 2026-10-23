@@ -13,10 +13,9 @@ from lua51_chunk import convert
 from steam_resources import SteamResources
 
 ROOT = Path(__file__).resolve().parents[1]
-GAME = {
-    'bin/helldivers2.exe': '2ce8b3d74c5573088e4211b060ced0963f1fc1e74526e2645399780b8fb13ff7',
-    'data/game/game.dll': 'a457433f0eb766fbe15a6de5a16f0fbbb1fd3c840c5607a5f0b2ebf53b112949',
-}
+PROFILE = json.loads((ROOT / 'steam-build.json').read_text())
+GAME = PROFILE['game']
+STOCK_STARTUP_SHA256 = PROFILE['stock_startup_sha256']
 ENTRY = 0xf476df93691895fa
 
 

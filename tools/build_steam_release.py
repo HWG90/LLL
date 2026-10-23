@@ -13,7 +13,7 @@ import re
 
 from archive import LUA_TYPE, write
 from build import MODULES
-from build_steam_probe import ENTRY, GAME, digest
+from build_steam_probe import ENTRY, GAME, STOCK_STARTUP_SHA256, digest
 from lua51_chunk import convert
 from steam_resources import SteamResources
 from steam_launcher import command as launcher_command
@@ -30,12 +30,15 @@ def literal(data):
     return '"' + ''.join('\\%03d' % value for value in data) + '"'
 
 
-def source(stock, pipe, platform_source=None, developer=False, launcher=None, release_label=None):
+def source(stock, pipe, platform_source=None, developer=False, launcher=None, release_label=None, launcher_name=None):
+    launcher_code=('nil' if launcher is None else literal(launcher.encode()))
+    if launcher_name is not None:
+        launcher_code='(function()\n'+(ROOT/'src/steam/launcher.lua').read_text()+'\nend)()('+json.dumps(launcher_name)+','+json.dumps(pipe)+')'
     code = [
         'local LLL_TRUST=(function()\n' + (ROOT / 'src/trusted.lua').read_text() + '\nend)().capture(_G,{runtime="lua51"})',
         'local ' + ','.join(PROTECTED) + '=' + ','.join('LLL_TRUST.' + name for name in PROTECTED),
         'local LLL_METADATA=(function()\n' + (ROOT / 'src/metadata.lua').read_text() + '\nend)()',
-        'local LLL_STEAM_SERVICE={pipe='+json.dumps(pipe)+',launcher='+('nil' if launcher is None else literal(launcher.encode()))
+        'local LLL_STEAM_SERVICE={pipe='+json.dumps(pipe)+',launcher='+launcher_code
         +('' if release_label is None else ',release='+json.dumps(release_label))+'}',
         'local LLL_STEAM_TRANSPORT=(function()\n'+(ROOT/'src/steam/transport.lua').read_text()+'\nend)()',
         'local LLL_STEAM_BUILDS=' + '{exe_sha256=' + json.dumps(GAME['bin/helldivers2.exe'])
@@ -62,7 +65,7 @@ def source(stock, pipe, platform_source=None, developer=False, launcher=None, re
 
 
 def build(game, service, output, developer=False, portable=False,
-          release_label='R32-steam-lua51-preview.1', known_lll_patches=()):
+          release_label='R32-steam-lua51-preview.1', known_lll_patches=(), launcher_exe=None):
     from lupa import lua51
     game, service, output = Path(game).resolve(), Path(service).resolve(), Path(output).resolve()
     if portable and (developer or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]{0,95}',release_label)):
@@ -76,14 +79,21 @@ def build(game, service, output, developer=False, portable=False,
     service_bytes = (service / service_name).read_bytes()
     if service_name != 'lll_steam_service_' + digest(service_bytes)[:16] + '.exe':
         raise ValueError('Service content address mismatch')
+    launcher_bytes=None if launcher_exe is None else Path(launcher_exe).read_bytes()
+    if launcher_bytes is not None and (not portable or len(launcher_bytes)<64 or launcher_bytes[:2]!=b'MZ'):
+        raise ValueError('Native launcher requires a portable package and Windows executable')
+    launcher_name=None if launcher_bytes is None else 'lll_steam_launcher_'+digest(launcher_bytes)[:16]+'.exe'
     pipe = 'lll_steam_' + secrets.token_hex(16)
     files = SteamResources(game / 'data')
     entry = next(row for row in files.resources('9ba626afa44a3aa3') if row[0] == ENTRY)
     stock = files.read('9ba626afa44a3aa3', entry[2], entry[3])
     if entry[1] != LUA_TYPE or struct.unpack_from('<II', stock) != (len(stock)-8,1):
         raise ValueError('Unsupported stock startup script')
+    if digest(stock) != STOCK_STARTUP_SHA256:
+        raise ValueError('Unsupported stock startup fingerprint')
+    convert(stock[8:],4)  # Validate the entire stock chunk before wrapping.
     launcher=launcher_command(service_name,digest(service_bytes),None if portable else str(game),pipe)
-    runtime = source(stock, pipe, developer=developer,launcher=launcher,release_label=release_label if portable else None)
+    runtime = source(stock, pipe, developer=developer,launcher=launcher,release_label=release_label if portable else None,launcher_name=launcher_name)
     compiler = lua51.LuaRuntime(encoding=None)
     compiled = compiler.eval(b'string.dump(assert(loadstring(...,"@LLL-Steam")))', runtime)
     chunk = convert(compiled, 4)
@@ -96,10 +106,12 @@ def build(game, service, output, developer=False, portable=False,
         package[name] = value
         path = output / name; path.parent.mkdir(parents=True, exist_ok=True); path.write_bytes(value)
     package['service/' + service_name] = service_bytes
+    if launcher_name is not None: package['service/'+launcher_name]=launcher_bytes
     if portable:
         portable_info={'format':'LLL-Steam-portable-v1','release':release_label,'game':GAME,
                       'service':service_name,'known_lll_patch_sha256':sorted(set(known_lll_patches)),
                       'payloads':{name:digest(value) for name,value in sorted(package.items())}}
+        if launcher_name is not None: portable_info['launcher']=launcher_name
         package['package.json']=(json.dumps(portable_info,indent=2)+'\n').encode()
         package['Install.ps1']=(ROOT/'tools/install_steam_preview.ps1').read_bytes()
         package['README.txt']=(ROOT/'docs/STEAM-PREVIEW-INSTALL.txt').read_bytes()
@@ -125,7 +137,7 @@ def build(game, service, output, developer=False, portable=False,
         (output/'SHA256SUMS.txt').write_text(digest((output/package_name).read_bytes())+'  '+package_name+'\n')
     receipt = {'runtime':'Lua 5.1','game':GAME,'stock_sha256':digest(stock),'service':service_name,'pipe':pipe,
                'service_sha256':digest(service_bytes),'patch_sha256':digest(payload),'runtime_sha256':digest(chunk),
-               'deployment':'not deployed','live_validation':'pending','portable':portable,'package':package_name,
+               'native_launcher':launcher_name,'deployment':'not deployed','live_validation':'pending','portable':portable,'package':package_name,
                'release_label':release_label if portable else None,
                'developer_relay':'temporary; closes after 30 minutes or explicit close()' if developer else 'not included',
                'install_note':'External service belongs in LOCALAPPDATA/LLL/Helldivers2/Service; starts automatically on game launch.'}
@@ -142,5 +154,6 @@ if __name__ == '__main__':
     parser.add_argument('--portable',action='store_true',help='Build the public prebuilt installer using a per-install game-path binding')
     parser.add_argument('--release-label',default='R32-steam-lua51-preview.1')
     parser.add_argument('--known-lll-patch',action='append',default=[],help='Reviewed LLL-owned startup patch SHA256 allowed for migration')
+    parser.add_argument('--launcher-exe',type=Path,help='Optional native launcher for Windows and Proton without PowerShell')
     args = parser.parse_args()
-    print(json.dumps(build(args.game,args.service,args.output,args.developer_relay,args.portable,args.release_label,args.known_lll_patch),indent=2))
+    print(json.dumps(build(args.game,args.service,args.output,args.developer_relay,args.portable,args.release_label,args.known_lll_patch,args.launcher_exe),indent=2))

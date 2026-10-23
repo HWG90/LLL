@@ -115,6 +115,8 @@ if LLL_HEALTH then
         end}
 end
 local shared_input,input_driver
+-- Proton manager uses engine keys; native keyboard leases remain available to opt-in mods.
+platform.manager_engine_keyboard = live.loader_option("manager_native_keyboard") ~= true
 if LLL_STEAM_INPUT_SERVICE and stingray.Window and type(platform.pointer_snapshot)=='function' then
     shared_input,input_driver=LLL_STEAM_INPUT_SERVICE.new(platform,stingray.Window,
         LLL_UI_CAPTURE.new(nil,stingray.Window,function(message)report('LLL input',message)end))
