@@ -1,62 +1,54 @@
-Live Lua Loader - Current Steam Lua 5.1 preview
+Live Lua Loader R35 - Linux/Proton + CFFI - Steam build 26088801
 
-Requires Windows x64 and Helldivers 2 Steam build 25988413. Exact executable
-and game.dll fingerprints are checked before installation and helper startup.
-No Python, compiler, MCM, MDL or Bingus loader is required to install this ZIP.
-Older LuaJIT/FFI mods need individual ports. Keyboard capture is available for
-LLL and consumers that explicitly request it. It reserves gameplay keys while
-active; Windows shortcuts and F12 remain outside capture. Other menus/camera
-mods need an updated adapter; existing mouse-only leases retain their behavior.
-Verify that movement stops while the menu is open and returns after closing.
+NOT FOR THE LIVE GAME UNLESS YOU ARE ON LINUX. IT WILL NOT WORK ON WINDOWS.
+
+Requires Linux, Steam Proton, Python 3, and the exact supported game build.
+Native Windows loading fails with system error 577. The DLLs are Windows-format
+modules because Proton runs the Windows game; that does not imply native
+Windows support. No compiler, MCM, MDL or Bingus loader is required.
+Older LuaJIT/FFI mods need individual ports. This release provides require('cffi').
 
 INSTALL
-1. Close Helldivers 2 and any waiting LLL Steam helper. Disable competing startup
-   loaders in your mod manager. The installer never stops processes for you.
-2. Extract this complete ZIP to a normal folder. Do not import it into a mod
-   manager: the external helper must also be installed outside the game folder.
-3. Open PowerShell in the extracted folder and run, using your actual game path:
+1. Close Helldivers 2 and the LLL service/launcher. Disable and undeploy competing
+   startup loaders in your mod manager before using the portable installer.
+2. Extract this complete ZIP into a normal folder. Do not import the portable
+   ZIP into Arsenal: the helper and native DLLs must be installed outside data/.
+3. Find the Steam library containing appmanifest_553850.acf. Use the game folder
+   and the existing Proton prefix for that installation, not another game's prefix.
+4. From the extracted directory, substitute your actual paths and run:
 
-   powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\Install.ps1 -GamePath "D:\SteamLibrary\steamapps\common\Helldivers 2"
+   python3 install_proton.py --package . --game "/path/to/SteamLibrary/steamapps/common/Helldivers 2" --prefix "/path/to/SteamLibrary/steamapps/compatdata/553850/pfx"
 
-The execution-policy option applies only to this installer process. It does not
-change a saved PowerShell policy. Installation does not start the game/helper.
-The installer accepts a clean startup slot, this same preview, a prior verified
-LLL installer receipt, or an explicitly reviewed LLL patch fingerprint bundled
-with this release. Unknown/conflicting startup bytes are refused. Do not rename
-another mod's patch to force a winning priority. Keep its manager ownership intact.
-Other slots in this startup archive family are checked for competing boot code.
-An unreadable/invalid slot is refused because its ownership cannot be verified.
+The installer verifies the executable, game.dll, payload checksums, startup
+ownership and all competing startup slots. Unknown/conflicting bytes are refused.
+It does not stop processes or start the game. Do not rename another mod's patch
+to force priority. If the prefix is already bound to another game, restore that
+installation first. Existing valid Proton drive mappings are used for the helper.
 
-The installer writes the startup patch triplet into the selected game's data
-folder and the content-addressed helper plus game-root.txt binding into:
-  %LOCALAPPDATA%\LLL\Helldivers2\Service
-Only one game folder may be bound per Windows user; roll back the original
-installation before switching folders. A waiting LLL helper in another session
-can also cause a conservative refusal. Close it and retry.
-Your existing LLL.cfg, Settings and Mods remain in place. The default manager
-key is Insert; an existing saved key is retained. LLL defers a shared key to MCM.
-Start the game and use your manager key to verify opening, mouse input and close.
-Installation/hash verification alone does not prove gameplay acceptance.
+The startup patch triplet goes into game/data. The service, launcher and binding
+are installed beneath drive_c/users/steamuser/AppData/Local/LLL/Helldivers2/Service.
+CFFI and the font helper go into the sibling Native directory. LLL.cfg, Settings
+and Mods are preserved. Insert is the default open/close key; saved keys remain.
+Start the game and verify opening, mouse input and closing. Installation checks
+alone do not establish gameplay acceptance for this exact release archive.
 
-ROLLBACK / REMOVE
-Every changed installation records its exact before/after hashes and original
-bytes in %LOCALAPPDATA%\LLL\Helldivers2\Backups\steam-preview-...\.
-Close the game, then use the receipt path printed by installation:
+ROLLBACK
+Close the game/helper and pass the receipt path printed by installation:
 
-   powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\Install.ps1 -Rollback "C:\path\to\Backups\steam-preview-...\receipt.json"
+   python3 install_proton.py --rollback "/path/to/receipt.json"
 
-Rollback restores the prior startup/helper/binding bytes or removes newly
-installed files. It refuses files changed since installation and retains your
-settings and mods. Exact-hash rollback remains available after Steam updates the
-stock game files; restored older loaders may still require a compatible release.
-Roll back updates in reverse order. If another mod manager
-has changed the startup files, restore that manager's installation first.
+Rollback verifies current hashes, restores prior bytes or removes newly installed
+files, and preserves settings/mods. It refuses files changed after installation.
+Roll back updates in reverse order. If another mod manager has changed startup
+files, restore that manager's installation first.
 
-STARTUP / SUPPORT
-The launcher verifies the helper hash; the helper verifies the supported game
-files, starts hidden, and signals readiness before Lua connects. Startup waits are bounded;
-there is no helper sampling while its input service is unused.
-Inspect %LOCALAPPDATA%\LLL\Helldivers2\Logs\LiveLuaLoader.log and
-SteamStartupError.log after a failed startup. Keep your installation receipt.
-Game updates require a newly verified release. Source/credits are provided at
-https://github.com/HWG90/LLL and in the included notices. This is a preview.
+SUPPORT AND VALIDATION
+Inspect Logs/LiveLuaLoader.log and Logs/SteamStartupError.log under the LLL home.
+CFFI should report ready. Keep the installation receipt. Fingerprint checks are
+specific to build 26088801; updates require a newly verified release.
+Prior Proton sessions validated the CFFI bridge, corrected pointer subtraction,
+and Insert opening/closing. This newly assembled release has offline tests and
+package validation; its exact archive has not been launched during publication.
+Native Windows is unsupported and does not work. Wine harness tests are not
+native Windows game validation. See the release validation report for details.
+Source and credits: https://github.com/HWG90/LLL

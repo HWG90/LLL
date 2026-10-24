@@ -1,0 +1,97 @@
+name: CI
+
+on: push
+
+jobs:
+  linux:
+    name: Linux
+    runs-on: ubuntu-22.04
+
+    env:
+      TARGET: '${{ matrix.config.target }}'
+      LUA_VERSIONS: '5.5.0 5.4.4 5.3.6 5.2.4 5.1.5'
+      CC: '${{ matrix.config.cc }}'
+      BUILDTYPE: '${{ matrix.config.buildtype }}'
+      SANITIZE: '${{ matrix.config.sanitize }}'
+
+    strategy:
+      matrix:
+        config:
+          # x86_64: test gcc, clang, + release mode to catch assert bugs
+          - { target: x86_64-linux-gnu, cc: gcc, buildtype: debugoptimized }
+          - { target: x86_64-linux-gnu, cc: gcc, buildtype: release }
+          - { target: x86_64-linux-gnu, cc: clang, buildtype: debugoptimized }
+          - { target: x86_64-linux-gnu, cc: clang, buildtype: debugoptimized, sanitize: 1 }
+          # 32-bit x86
+          - { target: i686-linux-gnu, cc: gcc, buildtype: debugoptimized }
+          # all powerpc
+          - { target: powerpc64le-linux-gnu, cc: gcc, buildtype: debugoptimized }
+          - { target: powerpc64-linux-gnu, cc: gcc, buildtype: debugoptimized }
+          - { target: powerpc-linux-gnu, cc: gcc, buildtype: debugoptimized }
+          # aarch64 and arm
+          - { target: aarch64-linux-gnu, cc: gcc, buildtype: debugoptimized }
+          - { target: arm-linux-gnueabi, cc: gcc, buildtype: debugoptimized }
+          # riscv64 and s390x
+          - { target: riscv64-linux-gnu, cc: gcc, buildtype: debugoptimized }
+          - { target: s390x-linux-gnu, cc: gcc, buildtype: debugoptimized }
+          # mips, m68k
+          # on m68k, building with optimizations results in some broken tests,
+          # notably returning a struct with a single float inside by value
+          # this is not our bug, a standalone testcase reproduces it
+          - { target: mips-linux-gnu, cc: gcc, buildtype: debugoptimized }
+          # m68k qemu segfaults on 22.04
+          #- { target: m68k-linux-gnu, cc: gcc, buildtype: debug }
+          # x86_64 windows cross, release mode
+          - { target: x86_64-w64-mingw32, cc: gcc, buildtype: release }
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - name: Prepare environment
+        run: sh ./.ci/install-env
+
+      - name: Build and test cffi
+        run: sh ./.ci/build-cffi
+
+  windows:
+    name: Windows
+    runs-on: windows-2019
+
+    env:
+      LUA_VERSIONS: '5.4.2 5.3.6 5.2.4 5.1.5'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - name: Prepare environment
+        run: bash ./.ci/install-env-windows
+
+      - name: Build and test cffi
+        run: bash ./.ci/build-cffi-windows
+
+  mac:
+    name: MacOS
+    runs-on: macos-latest
+
+    env:
+      TARGET: 'darwin'
+      LUA_VERSIONS: '5.4.2 5.3.6 5.2.4 5.1.5'
+      CC: 'clang'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - name: Prepare environment
+        run: sh ./.ci/install-env
+
+      - name: Build and test cffi
+        run: sh ./.ci/build-cffi

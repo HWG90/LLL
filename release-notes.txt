@@ -1,3 +1,13 @@
+R35-26088801-linux-cffi.1 - Linux/Proton + CFFI
+NOT FOR THE LIVE GAME UNLESS YOU ARE ON LINUX. IT WILL NOT WORK ON WINDOWS.
+
+Current Steam build 26088801 only. Includes CFFI with corrected pointer
+subtraction, Insert open/close repair, native HUD font helper, native launcher,
+Proton installer drive mapping support, rollback receipts and checksums.
+CFFI, Lua 5.1.4 and libffi source and licenses are in native/cffi.
+Native Windows fails with system error 577. CFFI does not restore LuaJIT.
+Exact release archive has offline validation; no fresh gameplay acceptance.
+
 R34 Steam Lua 5.1 preview.1 (build 25988413)
 
 LLL now captures gameplay keyboard input while its manager is open. The additive

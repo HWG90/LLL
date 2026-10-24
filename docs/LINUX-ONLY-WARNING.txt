@@ -1,0 +1,7 @@
+NOT FOR THE LIVE GAME UNLESS YOU ARE ON LINUX. IT WILL NOT WORK ON WINDOWS.
+
+This CFFI release targets Helldivers 2 Steam build 26088801 on Linux with Proton.
+Native Windows loading fails with system error 577. The PE DLL format and the
+legacy PowerShell installer do not establish Windows compatibility.
+The game remains Lua 5.1; this does not restore LuaJIT or make old FFI mods
+automatically compatible. Mods must explicitly support this CFFI runtime.

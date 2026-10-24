@@ -216,10 +216,12 @@ class Installer(unittest.TestCase):
         self.assertEqual((self.base/'Service/game-root.txt').read_bytes(),(str(self.game)+'\n').encode());self.assert_saved()
 
 
-    def test_optional_native_launcher_install_and_rollback(self):
+    def test_optional_cffi_and_native_launcher_install_and_rollback(self):
         payloads=self.make_package()
         for field,folder,prefix,suffix,body in (
-            ('launcher','service','lll_steam_launcher_','.exe',b'fixture launcher'),):
+            ('cffi','native','hd2_cffi_','.dll',b'fixture cffi'),
+            ('nativeinfo','native','hd2_nativeinfo_','.dll',b'fixture nativeinfo'),
+            ('launcher','service','lll_steam_launcher_','.exe',b'fixture launcher')):
             name=prefix+SHA(body)[:16]+suffix
             (self.package/folder).mkdir(exist_ok=True)
             (self.package/folder/name).write_bytes(body)
@@ -227,10 +229,24 @@ class Installer(unittest.TestCase):
             self.manifest['payloads'][folder+'/'+name]=SHA(body)
         (self.package/'package.json').write_text(json.dumps(self.manifest))
         result=self.run_installer();self.assertEqual(result.returncode,0,result.stdout+result.stderr)
+        self.assertEqual((self.base/'Native'/self.manifest['cffi']).read_bytes(),b'fixture cffi')
+        self.assertEqual((self.base/'Native'/self.manifest['nativeinfo']).read_bytes(),b'fixture nativeinfo')
         self.assertEqual((self.base/'Service'/self.manifest['launcher']).read_bytes(),b'fixture launcher')
         self.assert_saved()
         result=self.run_installer(self.receipts()[0]);self.assertEqual(result.returncode,0,result.stdout+result.stderr)
+        self.assertFalse((self.base/'Native'/self.manifest['cffi']).exists())
+        self.assertFalse((self.base/'Native'/self.manifest['nativeinfo']).exists())
         self.assertFalse((self.base/'Service'/self.manifest['launcher']).exists())
+        self.assert_saved()
+
+    def test_optional_cffi_checksum_name_mismatch_refuses_before_writes(self):
+        body=b'fixture cffi';name='hd2_cffi_'+'0'*16+'.dll'
+        (self.package/'native').mkdir();(self.package/'native'/name).write_bytes(body)
+        self.manifest['cffi']=name;self.manifest['payloads']['native/'+name]=SHA(body)
+        (self.package/'package.json').write_text(json.dumps(self.manifest))
+        result=self.run_installer();self.assertNotEqual(result.returncode,0)
+        self.assertIn('cffi content address mismatch',result.stdout+result.stderr)
+        self.assertFalse((self.game/'data'/PATCH).exists());self.assertFalse((self.base/'Native').exists())
         self.assert_saved()
 
 if __name__=='__main__':unittest.main()

@@ -39,4 +39,26 @@ class ProtonInstaller(unittest.TestCase):
  def test_wrong_game_refuses(self):
   (self.game/'bin/helldivers2.exe').write_bytes(b'other build')
   with self.assertRaisesRegex(ValueError,'Unsupported game'):m.validate(self.package,self.game,self.home)
+ def test_native_payloads_install_and_rollback_preserve_settings(self):
+  for field in ['cffi','nativeinfo']:
+   data=(field+' fixture').encode();name='hd2_'+field+'_'+m.SHA(data)[:16]+'.dll'
+   p=self.package/'native'/name;p.parent.mkdir(exist_ok=True);p.write_bytes(data)
+   self.info[field]=name;self.info['payloads']['native/'+name]=m.SHA(data)
+  (self.package/'package.json').write_text(json.dumps(self.info))
+  self.home.mkdir(parents=True);config=self.home/'LLL.cfg';config.write_bytes(b'keep config')
+  with patch.object(m,'assert_closed'):
+   result=m.install(self.package,self.game,self.prefix)
+   for field in ['cffi','nativeinfo']:self.assertTrue((self.home/'Native'/self.info[field]).is_file())
+   m.rollback(result['receipt'])
+  self.assertEqual(config.read_bytes(),b'keep config')
+  for field in ['cffi','nativeinfo']:self.assertFalse((self.home/'Native'/self.info[field]).exists())
+ def test_mapped_game_drive_and_existing_binding(self):
+  (self.prefix/'dosdevices/s:').symlink_to(self.game.parent)
+  with patch.object(m,'assert_closed'):
+   result=m.install(self.package,self.game,self.prefix)
+   self.assertEqual((self.home/'Service/game-root.txt').read_text(),'S:\\game\n')
+   self.assertIn('already installed',m.install(self.package,self.game,self.prefix)['state'])
+   m.rollback(result['receipt'])
+  self.assertEqual(m.windows_root(self.game,self.prefix,'Z:'+str(self.game).replace('/','\\')),'Z:'+str(self.game).replace('/','\\'))
+  with self.assertRaisesRegex(ValueError,'binding differs'):m.windows_root(self.game,self.prefix,'S:\\other-game')
 if __name__=='__main__':unittest.main()

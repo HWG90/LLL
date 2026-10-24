@@ -110,7 +110,14 @@ return function(loader, platform, controls, report, input_driver)
     local input_platform=platform
     if input_driver then
         input_driver.set_manager_busy(function()return self.open_pending or (menu and menu.visible) or false end)
-        input_platform=setmetatable({pointer_snapshot=input_driver.manager_snapshot,release_pointer=input_driver.manager_release},{__index=platform})
+        -- The manager's engine-keyboard mode receives pointer-only samples.
+        -- Advertise captured keys only when this reader owns a keyboard lease.
+        local manager_keyboard_mask=false
+        if platform.manager_engine_keyboard~=true then manager_keyboard_mask=platform.keyboard_capture_mask end
+        input_platform=setmetatable({pointer_snapshot=input_driver.manager_snapshot,
+            release_pointer=input_driver.manager_release,
+            keyboard_capture_mask=manager_keyboard_mask},
+            {__index=platform})
     end
     raw = LLL_STEAM_INPUT.new(sr,input_platform)
     local foreground = false
@@ -162,6 +169,7 @@ return function(loader, platform, controls, report, input_driver)
     initialize = function()
         capture=input_driver and input_driver.capture or LLL_UI_CAPTURE.new(nil,sr.Window,function(message)report('LLL UI',message)end)
         view=LLL_UI_VIEW.new(sr)
+        view.set_font_source(LLL_UI_FONT.new())
         menu=LLL_UI_MENU.new(api,view.measure)
         self.menu=menu
         LLL_UI_METADATA_EDITOR.install(api,loader,controls,function()return menu end)
@@ -262,6 +270,7 @@ return function(loader, platform, controls, report, input_driver)
                     local bounds=g and {x=g.x,y=g.y,w=g.width*g.scale,h=g.height*g.scale}
                     for _,command in ipairs(console_surface.compose(width,height,bounds,menu.visible)) do commands[#commands+1]=command end
                 end
+                view.refresh_font()
                 view.draw(commands)
             end)
             if not ok then self.close();menu.recover();report('LLL UI',tostring(why)) end

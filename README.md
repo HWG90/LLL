@@ -1,25 +1,31 @@
 # Live Lua Loader (LLL)
 
-Lua loader and in-game mod manager for Helldivers 2 on Windows x64.
+Lua loader and in-game mod manager for Helldivers 2.
+
+> **NOT FOR THE LIVE GAME UNLESS YOU ARE ON LINUX. IT WILL NOT WORK ON WINDOWS.**
+>
+> The current CFFI release is for **Linux with Proton only**, on Steam build
+> **26088801**. Native Windows CFFI loading fails with system error 577.
 
 ## Current Steam preview
 
-[Download R34 Steam Lua 5.1 preview](https://github.com/HWG90/LLL/releases/tag/R34-steam-lua51-preview.1).
-This preview targets Steam build **25988413** and checks the exact game-file
-fingerprints. The older [R31 release](https://github.com/HWG90/LLL/releases/tag/R31)
-targets the previous build.
+[Download R35 Linux/Proton + CFFI](https://github.com/HWG90/LLL/releases/tag/R35-26088801-linux-cffi.1).
+This includes the corrected CFFI pointer arithmetic, Insert open/close fix,
+native HUD font helper, external input service, and native launcher.
+Exact game-file fingerprints are checked before installation and startup.
 
-Extract the preview ZIP and follow its `README.txt`. With the game closed, run
-the included PowerShell installer with your game folder. It installs the startup
-patch and external helper together, preserves existing settings and mods, and
-saves a rollback receipt. No compiler or Python is required. See the
-[installation and removal instructions](docs/STEAM-PREVIEW-INSTALL.txt).
+Extract the complete ZIP, close the game, and follow `README.txt`. The included
+`install_proton.py` installs the startup patch, service, launcher and native
+modules together, preserves settings and mods, and saves a rollback receipt.
+Python 3 is required on Linux; no compiler is needed to install the prebuilt ZIP.
+See the [installation and removal instructions](docs/STEAM-PREVIEW-INSTALL.txt).
 
 The manager defaults to **Insert**. Its open/close binding is configurable; existing
 saved bindings are preserved. Mouse click, drag and scroll work. Individual Lua
 mods belong in `%LOCALAPPDATA%/LLL/Helldivers2/Mods`.
 
-The game now uses Lua 5.1. LuaJIT `ffi`, `bit` and `jit` are unavailable; older
+The game uses Lua 5.1. This release exposes `require("cffi")`; it does not alias
+LuaJIT `ffi`, `bit` or `jit`. Older
 mods that depend on them need individual ports. LLL refuses declared incompatible
 imports before execution. A discovered or enabled entry alone does not prove a
 working mod. MCM and third-party mods are not bundled.

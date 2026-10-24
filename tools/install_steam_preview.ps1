@@ -76,6 +76,9 @@ function Target-Path([string]$Root,[string]$Group,[string]$Name) {
     if ($Group -eq 'service' -and ($Name -match '^lll_steam_(service|launcher)_[0-9a-f]{16}\.exe$' -or $Name -in @('game-root.txt','installed-steam-preview.json'))) {
         return [IO.Path]::Combine($servicePath,$Name)
     }
+    if ($Group -eq 'native' -and $Name -match '^hd2_(cffi|nativeinfo)_[0-9a-f]{16}\.dll$') {
+        return [IO.Path]::Combine($homePath,'Native',$Name)
+    }
     throw 'Unexpected installation target.'
 }
 function Write-Atomic([string]$Path,[byte[]]$Bytes) {
@@ -150,15 +153,20 @@ if ([IO.File]::Exists($bindingPath)) {
     if (-not [String]::Equals((Full-Root $binding),$GamePath,[StringComparison]::OrdinalIgnoreCase)) { throw 'LLL is bound to another game folder. Restore/remove that installation before switching game folders.' }
 }
 $desired=@{};$payloads=@($package.payloads.PSObject.Properties)
+$hasCffi=$package.PSObject.Properties.Name -contains 'cffi'
+if ($hasCffi -and $package.cffi -notmatch '^hd2_cffi_[0-9a-f]{16}\.dll$') { throw 'Invalid cffi payload name.' }
+$hasNativeInfo=$package.PSObject.Properties.Name -contains 'nativeinfo'
+if ($hasNativeInfo -and $package.nativeinfo -notmatch '^hd2_nativeinfo_[0-9a-f]{16}\.dll$') { throw 'Invalid nativeinfo payload name.' }
 $hasLauncher=$package.PSObject.Properties.Name -contains 'launcher'
 if ($hasLauncher -and $package.launcher -notmatch '^lll_steam_launcher_[0-9a-f]{16}\.exe$') { throw 'Invalid launcher name.' }
-$expectedPayloads=4;if ($hasLauncher) { $expectedPayloads++ }
+$expectedPayloads=4;if ($hasNativeInfo) { $expectedPayloads++ };if ($hasCffi) { $expectedPayloads++ };if ($hasLauncher) { $expectedPayloads++ }
 if ($payloads.Count -ne $expectedPayloads) { throw 'Incomplete payload manifest.' }
 foreach ($item in $payloads) {
     $parts=$item.Name.Split('/')
-    if ($parts.Count -ne 2 -or $parts[0] -notin @('data','service')) { throw 'Invalid package payload path.' }
+    if ($parts.Count -ne 2 -or $parts[0] -notin @('data','service','native')) { throw 'Invalid package payload path.' }
     $null=Target-Path $GamePath $parts[0] $parts[1]
     if ($parts[0] -eq 'service' -and $parts[1] -ne $package.service -and (-not $hasLauncher -or $parts[1] -ne $package.launcher)) { throw 'Unexpected helper payload.' }
+    if ($parts[0] -eq 'native' -and (-not $hasCffi -or $parts[1] -ne $package.cffi) -and (-not $hasNativeInfo -or $parts[1] -ne $package.nativeinfo)) { throw 'Unexpected native payload.' }
     if ($item.Value -notmatch '^[0-9a-f]{64}$') { throw 'Invalid payload checksum.' }
     $path=[IO.Path]::Combine($PSScriptRoot,$parts[0],$parts[1]);$bytes=[IO.File]::ReadAllBytes($path)
     if ((Hash-Bytes $bytes) -ne $item.Value) { throw ('Package payload changed: '+$item.Name) }
@@ -169,6 +177,14 @@ if (-not $desired.ContainsKey($helperKey) -or $package.service -ne ('lll_steam_s
 if ($hasLauncher) {
     $launcherKey='service/'+$package.launcher
     if (-not $desired.ContainsKey($launcherKey) -or $package.launcher -ne ('lll_steam_launcher_'+(Hash-Bytes $desired[$launcherKey]).Substring(0,16)+'.exe')) { throw 'Launcher content address mismatch.' }
+}
+if ($hasCffi) {
+    $cffiKey='native/'+$package.cffi
+    if (-not $desired.ContainsKey($cffiKey) -or $package.cffi -ne ('hd2_cffi_'+(Hash-Bytes $desired[$cffiKey]).Substring(0,16)+'.dll')) { throw 'cffi content address mismatch.' }
+}
+if ($hasNativeInfo) {
+    $nativeKey='native/'+$package.nativeinfo
+    if (-not $desired.ContainsKey($nativeKey) -or $package.nativeinfo -ne ('hd2_nativeinfo_'+(Hash-Bytes $desired[$nativeKey]).Substring(0,16)+'.dll')) { throw 'nativeinfo content address mismatch.' }
 }
 $patchName='9ba626afa44a3aa3.patch_0';$patchKey='data/'+$patchName
 foreach ($suffix in @('','.stream','.gpu_resources')) {
@@ -204,6 +220,7 @@ if (-not $rows.Count) { Write-Output 'This preview is already installed; no file
 $configPath=[IO.Path]::Combine($homePath,'LLL.cfg');$configBefore=Hash-File $configPath
 $backupPath=[IO.Path]::Combine($homePath,'Backups',('steam-preview-'+[DateTime]::UtcNow.ToString('yyyyMMdd-HHmmss')+'-'+[Guid]::NewGuid().ToString('N')))
 $null=[IO.Directory]::CreateDirectory($backupPath);$null=[IO.Directory]::CreateDirectory($servicePath)
+if ($hasCffi -or $hasNativeInfo) { $null=[IO.Directory]::CreateDirectory([IO.Path]::Combine($homePath,'Native')) }
 # First-launch failures happen before platform initialization creates its logs.
 $null=[IO.Directory]::CreateDirectory([IO.Path]::Combine($homePath,'Logs'))
 $archive=[IO.Compression.ZipFile]::Open([IO.Path]::Combine($backupPath,'rollback.zip'),[IO.Compression.ZipArchiveMode]::Create)

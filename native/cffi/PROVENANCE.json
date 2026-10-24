@@ -1,0 +1,20 @@
+{
+  "steam_build": "26088801",
+  "live_game_platform": "Linux/Proton only",
+  "windows": "WILL NOT WORK; module load error 577",
+  "prebuilt_modules": {
+    "hd2_cffi_2e4bcd2f8d3df404.dll": "2e4bcd2f8d3df404b577597270eaf85eae2ae22b1011d8b6d90e4a55ff3145e2",
+    "hd2_nativeinfo_f6d3465944c1aea1.dll": "f6d3465944c1aea170c3f1f9d0b8ad8a57d68dc1a3c35d2bf06fed06af862547"
+  },
+  "source_files": {
+    "src/bootstrap_windows.cc": "175430113ff90b410fa6cfcb6b347bda9e1bbf07a845fce8c382857c5953c1f9",
+    "src/bridge.cc": "41a7daab2c4f3910c76b661a84b947c8da0c94ab98684dd29135f642273ce5c9",
+    "src/host_api.hh": "f7fdab53807fd633fee2dde331d3e64e458496d0977dd2d341e68381a01b8678",
+    "src/nativeinfo.cc": "9d1e56ef0265cab70bc458855a5b565a0709a19e32be86f242b8a6aa571637c7",
+    "vendor/cffi-lua/src/ffilib.cc": "17df52353e1676a58b3778b990c41f857b7a9dfc928cc56dea8e132f61bebad1",
+    "tests/smoke.lua": "2cb67d24b1bc10a472bf9726e5d6c7990c13f206a412f39f8ee5ff7de98d2729"
+  },
+  "source_rebuild": "Zig 0.14.1; both DLLs and standalone Windows-format harness build successfully; Wine smoke tests pass. Binary hashes can differ with build paths/link metadata.",
+  "tested_prebuilt": "Standalone Linux and Wine tests pass, including signed pointer offsets, element strides and array subtraction. Earlier Proton game sessions validated CFFI and corrected pointer subtraction.",
+  "not_tested": "Exact new release archive has not been launched in game; native Windows game is unsupported."
+}

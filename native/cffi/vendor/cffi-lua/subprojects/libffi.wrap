@@ -1,0 +1,7 @@
+[wrap-git]
+directory = libffi
+url = https://github.com/xclaesse/libffi.git
+revision = meson-port
+
+[provide]
+libffi = ffi_dep

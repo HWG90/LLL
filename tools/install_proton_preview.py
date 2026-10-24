@@ -33,6 +33,7 @@ def target(game,home,key):
     group,name=parts
     if group=='data' and name in [PATCH,PATCH+'.stream',PATCH+'.gpu_resources']:return game/'data'/name
     if group=='service' and (re.fullmatch(r'lll_steam_(service|launcher)_[0-9a-f]{16}\.exe',name) or name in ['game-root.txt','installed-steam-preview.json']):return home/'Service'/name
+    if group=='native' and re.fullmatch(r'hd2_(?:cffi|nativeinfo)_[0-9a-f]{16}\.dll',name):return home/'Native'/name
     raise ValueError('Unexpected installation target: '+key)
 
 def atomic(path,data):
@@ -56,7 +57,25 @@ def check_slots(game):
             name,kind=struct.unpack_from('<QQ',data,start+80*i)
             if name==ENTRY and kind==LUA_TYPE:raise ValueError('Competing startup resource: '+p.name)
 
-def validate(package,game,home):
+def windows_root(game,prefix,existing=None):
+    if prefix is None:return 'Z:'+str(game).replace('/','\\')
+    devices=Path(prefix)/'dosdevices'
+    if existing:
+        if not re.fullmatch(r'[A-Za-z]:[\\/].*',existing):raise ValueError('Invalid existing game binding')
+        resolved=(devices/existing[:2].lower()/existing[3:].replace('\\','/')).resolve()
+        if resolved!=game:raise ValueError('Existing game binding differs')
+        return existing.rstrip('\\/')
+    choices=[]
+    for drive in devices.iterdir():
+        if not re.fullmatch('[a-z]:',drive.name) or not drive.is_dir():continue
+        try:relative=game.relative_to(drive.resolve())
+        except ValueError:continue
+        value=drive.name.upper()+'\\'+str(relative).replace('/','\\')
+        choices.append((drive.name=='z:',len(value),value))
+    if not choices:raise ValueError('No Proton drive mapping for game folder')
+    return min(choices)[2]
+
+def validate(package,game,home,prefix=None):
     info=json.loads((package/'package.json').read_text())
     if info.get('format')!='LLL-Steam-portable-v1':raise ValueError('Unsupported package format')
     if set(info.get('game',{}))!={'bin/helldivers2.exe','data/game/game.dll'}:raise ValueError('Incomplete game identity')
@@ -64,10 +83,10 @@ def validate(package,game,home):
         if not re.fullmatch('[0-9a-f]{64}',sha) or digest(game/key)!=sha:raise ValueError('Unsupported game file: '+key)
     check_slots(game)
     expected={'data/'+PATCH,'data/'+PATCH+'.stream','data/'+PATCH+'.gpu_resources'}
-    for field,group,prefix,suffix in [('service','service','lll_steam_service_','.exe'),('launcher','service','lll_steam_launcher_','.exe')]:
+    for field,group,file_prefix,suffix in [('service','service','lll_steam_service_','.exe'),('launcher','service','lll_steam_launcher_','.exe'),('cffi','native','hd2_cffi_','.dll'),('nativeinfo','native','hd2_nativeinfo_','.dll')]:
         name=info.get(field)
         if name is None and field!='service':continue
-        if not isinstance(name,str) or not re.fullmatch(re.escape(prefix)+'[0-9a-f]{16}'+re.escape(suffix),name):raise ValueError('Invalid '+field+' name')
+        if not isinstance(name,str) or not re.fullmatch(re.escape(file_prefix)+'[0-9a-f]{16}'+re.escape(suffix),name):raise ValueError('Invalid '+field+' name')
         expected.add(group+'/'+name)
     if set(info.get('payloads',{}))!=expected:raise ValueError('Unexpected or incomplete payload manifest')
     desired={}
@@ -75,9 +94,9 @@ def validate(package,game,home):
         target(game,home,key)
         value=(package/key).read_bytes()
         if not re.fullmatch('[0-9a-f]{64}',sha) or SHA(value)!=sha:raise ValueError('Changed payload: '+key)
-        if key.startswith('service/') and sha[:16] not in key:raise ValueError('Content-address mismatch: '+key)
+        if key.startswith(('service/','native/')) and sha[:16] not in key:raise ValueError('Content-address mismatch: '+key)
         installed=target(game,home,key)
-        if key.startswith('service/') and installed.exists() and digest(installed)!=sha:
+        if key.startswith(('service/','native/')) and installed.exists() and digest(installed)!=sha:
             raise ValueError('Existing content-addressed payload differs: '+key)
         desired[key]=value
     for suffix in ['.stream','.gpu_resources']:
@@ -88,11 +107,11 @@ def validate(package,game,home):
     known=info.get('known_lll_patch_sha256',[])
     if not isinstance(known,list) or any(not isinstance(h,str) or not re.fullmatch('[0-9a-f]{64}',h) for h in known):raise ValueError('Invalid owned-patch manifest')
     state=home/'Service/installed-steam-preview.json'
-    winroot='Z:'+str(game).replace('/','\\')
+    binding=home/'Service/game-root.txt'
+    winroot=windows_root(game,prefix,binding.read_text().strip() if binding.exists() else None)
     owner=json.loads(state.read_text()) if state.exists() else None
     if owner and (owner.get('format')!='LLL-Steam-preview-owner-v1' or owner.get('game_root','').lower().rstrip('\\/')!=winroot.lower()):raise ValueError('LLL prefix is bound to another game root')
     if patch and patch!=SHA(desired['data/'+PATCH]) and patch not in known and not (owner and owner.get('patch_sha256')==patch):raise ValueError('Unknown startup patch ownership')
-    binding=home/'Service/game-root.txt'
     if binding.exists() and binding.read_text().strip().lower().rstrip('\\/')!=winroot.lower():raise ValueError('Existing game binding differs')
     if not patch and any((game/'data'/(PATCH+s)).exists() for s in ['.stream','.gpu_resources']):raise ValueError('Orphan startup sidecars')
     desired['service/game-root.txt']=(winroot+'\n').encode()
@@ -102,7 +121,7 @@ def validate(package,game,home):
 
 def install(package,game,prefix):
     package,game,prefix=Path(package).resolve(),Path(game).resolve(),Path(prefix).resolve()
-    assert_closed();home=local_home(prefix);info,desired=validate(package,game,home)
+    assert_closed();home=local_home(prefix);info,desired=validate(package,game,home,prefix)
     rows=[];preimages={}
     for key,data in sorted(desired.items()):
         path=target(game,home,key);before=digest(path);after=SHA(data)

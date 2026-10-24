@@ -40,6 +40,10 @@ if not build_supported then
     return
 end
 if log then log:write('Build supported: executable '..build.exe_sha256..'; game.dll '..build.game_sha256..'\n') end
+if log and platform.cffi_status then
+    log:write('cffi: '..(platform.cffi_status.available and 'ready (require cffi; no LuaJIT alias)' or ('unavailable: '..tostring(platform.cffi_status.reason)))..'\n')
+    log:flush()
+end
 local entries = LLL_LEGACY
 local ok, discovered, warnings, diagnostics, archive_copies = pcall(LLL_DISCOVER, platform)
 if ok then
@@ -156,7 +160,7 @@ local manager = LLL_MANAGER({
     report = report,
     health=health,jit_budget=code_budget,diagnostics=diagnostic_service,
     build=build,build_allowed=function()return build_supported end,
-    revision=platform.revision,runtime=platform.runtime,native_ffi=platform.native_ffi,input_service=shared_input,
+    revision=platform.revision,runtime=platform.runtime,native_ffi=platform.native_ffi,native_cffi=platform.native_cffi==true,cffi_status=platform.cffi_status,input_service=shared_input,
     capture_service=shared_capture,
     discovery_supported=LLL_DISCOVER~=nil,discovery_state=ok and (#discovered .. " declared entries") or "failed",protected_runtime=LLL_TRUST~=nil,modular_projects=true,console_commands=true,
 }, entries)

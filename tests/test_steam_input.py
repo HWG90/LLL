@@ -129,13 +129,13 @@ class SteamInput(unittest.TestCase):
           assert(releases==2,'Previously acknowledged release repeated backend I/O')
           ''', (ROOT / 'src/steam/input.lua').read_bytes())
 
-    def start_manager(self, width=1920, height=1080, saved_key=None):
+    def start_manager(self, width=1920, height=1080, saved_key=None, native_keyboard=False):
         lua = self.lua
         lua.globals()[b'viewport_width'] = width
         lua.globals()[b'viewport_height'] = height
         lua.globals()[b'fixture_loader_config'] = (
             ('return {manager_ui={menu_toggle_key=%d}}' % saved_key).encode()
-            if saved_key is not None else None)
+            if saved_key is not None else (b'return {manager_native_keyboard=true}' if native_keyboard else None))
         lua.execute(b'''clock=0;f8=false;delete_down=false;insert_down=false;focused=true;mouse_focused=true;cursor=false;clipped=false
           draws=0;destroyed=0;next_id=0;key_reads=0;focus_reads=0;reports={}
           mouse_x=0;mouse_y=0;left_down=0;right_down=0;middle_down=0;wheel_y=0
@@ -275,6 +275,33 @@ class SteamInput(unittest.TestCase):
             'An initialized LLL menu reopened on MCM close')
           for i=1,20 do update(.01)end
           assert(draws==before and binding_queries==4)
+        ''')
+
+    def test_engine_keyboard_manager_ignores_unused_native_capture_mask(self):
+        original_source = globals()['source']
+        def masked_source(stock, pipe, platform, *args, **kwargs):
+            platform = 'local P=' + platform.removeprefix('return ') + """
+              P.keyboard_capture_mask=string.rep(string.char(255),32)
+              P.keyboard_prepare=function()error('Engine manager must not acquire keyboard')end
+              P.keyboard_acquire=function()error('Unexpected keyboard acquire')end
+              P.keyboard_snapshot=function()error('Unexpected keyboard sample')end
+              P.keyboard_release=function()error('Unexpected keyboard release')end
+              return P"""
+            return original_source(stock,pipe,platform,*args,**kwargs)
+        globals()['source']=masked_source
+        try:
+            self.start_manager()
+        finally:
+            globals()['source']=original_source
+        self.lua.execute(b'''update(.01);insert_down=true;update(.01);update(.01)
+          assert(LiveLuaLoader.input_status().active)
+          insert_down=false;update(.01);insert_down=true;update(.01)
+          assert(not LiveLuaLoader.input_status().active,
+            'Pointer-only manager sample masked the engine close key')
+          for i=1,10 do update(.01)end
+          assert(not LiveLuaLoader.input_status().active,'Held close key reopened manager')
+          insert_down=false;update(.01);insert_down=true;update(.01);update(.01)
+          assert(LiveLuaLoader.input_status().active,'Manager failed to reopen')
         ''')
 
     def test_default_insert_loader_binding_is_independent_of_mcm_delete(self):
@@ -446,7 +473,7 @@ class SteamInput(unittest.TestCase):
 
         globals()['source'] = keyboard_source
         try:
-            self.start_manager()
+            self.start_manager(native_keyboard=True)
         finally:
             globals()['source'] = original_source
         self.lua.execute(b'''local function upvalue(fn,wanted)
