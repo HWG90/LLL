@@ -45,11 +45,8 @@ if log and platform.cffi_status then
     log:flush()
 end
 local entries = LLL_LEGACY
-local ok, discovered, warnings, diagnostics, archive_copies = pcall(LLL_DISCOVER, platform)
+local ok, discovered, warnings, diagnostics, archive_copies, discovery_details, discovery_extras = pcall(LLL_DISCOVER, platform)
 if ok then
-    for _, name in ipairs(discovered) do
-        entries[#entries + 1] = name
-    end
     if log then
         if diagnostics then
             log:write(diagnostics .. "\n")
@@ -72,6 +69,27 @@ local function report(name, state)
         log:write(name .. ": " .. state .. "\n")
         log:flush()
     end
+end
+-- Mods written for Chef Shared Loader and Boot Mod Loader: requirements first, then discovery order.
+local compat
+if LLL_COMPAT then
+    local made, value = pcall(LLL_COMPAT.new, { platform = platform, report = report, details = ok and discovery_details or {},
+        extras = ok and discovery_extras or {}, checked = true, engine = function() return stingray end,
+        modules = function() local L = rawget(_G, "LiveLuaLoader"); return L and L.modules or {} end,
+        view = function()
+            local view = LLL_UI_VIEW and LLL_UI_VIEW.new(stingray, true)
+            if view and LLL_UI_FONT then
+                pcall(function() view.set_font_source(platform.font_memory and LLL_UI_FONT.new(platform.font_memory(), "game.dll") or LLL_UI_FONT.new()) end)
+            end
+            return view
+        end })
+    if made then compat = value else report("Compatibility", "unavailable: " .. tostring(value)) end
+end
+if ok then
+    local ordered, refused = discovered, {}
+    if compat then ordered, refused = compat.order(discovered) end
+    for _, name in ipairs(ordered) do entries[#entries + 1] = name end
+    for _, item in ipairs(refused) do report(item.name, "not started: " .. item.reason) end
 end
 local command_bus=LLL_COMMANDS.new()
 platform.command_bus=command_bus
@@ -141,8 +159,10 @@ local manager = LLL_MANAGER({
             source_cache[name] = live.fingerprint(name)
             return live.load(name)
         end
+        if compat and compat.handles(name) then return compat.require(name) end
         return require(name)
     end,
+    compat = compat,
     preflight = function(name)
         if live.catalog[name] then
             live.preflight(name)
@@ -415,6 +435,9 @@ if type(old_shutdown) == "function" then
             log:close()
             log = nil
         end
-        return old_shutdown(...)
+        local results = pack(pcall(old_shutdown, ...))
+        if compat then pcall(compat.after_shutdown) end
+        if not results[1] then error(results[2], 0) end
+        return unpack(results, 2, results.n)
     end
 end
