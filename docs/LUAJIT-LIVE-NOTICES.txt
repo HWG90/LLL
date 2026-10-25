@@ -1,0 +1,18 @@
+LUAJIT LIVE - CONTENTS AND PROVENANCE
+
+The LuaJIT VM runtime (hd2_luajit_runtime_<hash>.dll, a release file) statically links LuaJIT 2.1
+(commit a4c064539ea931274d407e1249b4bb575424a0f4), MIT licence: see LUAJIT-COPYRIGHT.txt. Its own C
+source is not part of this repository.
+
+For exact-byte translation of the game's stock Lua 5.1 bytecode into LuaJIT, the runtime embeds nine
+stock startup chunks of Steam build 26088801 (original bytecode plus recovered Lua source) and the
+LLL LuaJIT build composed by tools/build_luajit_live.py. The drop-in boot patch preserves the stock
+startup script (resource f476df93691895fa, SHA256 with its envelope
+e0c2f6b48225c07cc612d9f412c9b050abcf5c04093dd5f2b9b425d8878d0841) as LLL's Steam builds already do,
+and carries the runtime inside its boot chunk. This required preservation is disclosed; no claim of
+a licence grant over the game's code or assets is made.
+
+ports/ModOptionsMenu and ports/MatchYourColors are CowboyBingus mods (Zero-Clause BSD, see each
+LICENSE) with only build data remapped for Steam build 26088801.
+
+LLL itself: see CONTENTS-NOTICES.txt. No repository-wide open-source licence has been selected.

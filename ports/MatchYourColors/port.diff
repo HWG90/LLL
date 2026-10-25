@@ -1,0 +1,274 @@
+diff -ruN a/src/addon.lua b/src/addon.lua
+--- a/src/addon.lua	2026-10-18 15:45:20.000000000 -0400
++++ b/src/addon.lua	2026-10-24 23:27:24.086397604 -0400
+@@ -65,8 +65,8 @@
+ Addon.CLOSES_PER_CHECK = 4 -- queued game-file handles closed per binding check (close_kept: about 0.09 ms each in game)
+ Addon.FAILURE_LIMIT = 3
+ Addon.REGISTER_FRAMES = {1, 60, 180, 420, 900, 1800}
+-Addon.GAME_SHA256 = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'
+-Addon.EXE_SHA256 = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'
++Addon.GAME_SHA256 = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'
++Addon.EXE_SHA256 = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'
+ Addon.MODE_NAMES = {'off', 'helmet matches armor', 'armor matches helmet', 'helmet and armor match the cape'}
+ 
+ -- Whether two identities name the same Helldiver with the same kits and records (the cape aside: it matters only
+@@ -1230,7 +1230,7 @@
+         local game, exe = memory.module('game.dll'), memory.module(nil)
+         require_that(game ~= nil and exe ~= nil, 'game modules unavailable')
+         local ok, why = memory.verify_build({exe_sha256 = Addon.EXE_SHA256, game_sha256 = Addon.GAME_SHA256})
+-        require_that(ok, why == 'unsupported game build' and 'unsupported game build (needs Steam build 25480438)'
++        require_that(ok, why == 'unsupported game build' and 'unsupported game build (needs Steam build 26088801)'
+                      or tostring(why))
+         local native, problem = m.Engine.open(memory, memory.address(game), memory.address(exe), m.get_engine_api)
+         require_that(native, tostring(problem))
+diff -ruN a/src/avatar.lua b/src/avatar.lua
+--- a/src/avatar.lua	2026-10-18 15:45:20.000000000 -0400
++++ b/src/avatar.lua	2026-10-24 23:27:24.086577586 -0400
+@@ -23,11 +23,11 @@
+ local Avatar = {}
+ 
+ Avatar.PLAYERS, Avatar.CUSTOMIZATION, Avatar.ENTITIES, Avatar.AVATARS, Avatar.PREVIEWS =
+-    0x3326468, 0x33264F8, 0x346BF98, 0x3326D20, 0x346D580
++    0x2CE1618, 0x2CE16A8, 0x2CE41B8, 0x2CE1EE0, 0x2E287E0
+ local P_COUNT, P_ENTITIES, P_MAP, P_PEERS, P_UNITS, P_UI_SLOT = 132, 232, 208, 712, 936, 948
+-local C_MAP, C_APPLIED, C_APPLIED_SIZE, C_DESIRED, C_DESIRED_SIZE = 2352, 2412, 68, 2684, 64
+-local E_MAP, E_RECORDS = 0xF22EC8, 0xF32F18
+-local A_MAP, A_COUNT, A_RECORDS, A_RECORD_SIZE, A_UNITS = 248, 0x6c, 5532272, 440, 220
++local C_MAP, C_APPLIED, C_APPLIED_SIZE, C_DESIRED, C_DESIRED_SIZE = 2360, 2420, 68, 2692, 64
++local E_MAP, E_RECORDS = 0xF24990, 0xF349E0
++local A_MAP, A_COUNT, A_RECORDS, A_RECORD_SIZE, A_UNITS = 248, 0x6c, 5532336, 440, 220
+ local V_SLOTS, V_SLOT_SIZE, V_SLOT_COUNT, V_COUNT, V_ENTRIES, V_ENTRY_SIZE, V_UNITS = 2080, 2184, 5, 64, 68, 132, 12
+ Avatar.UNIT_BYTES = 120 -- three arrays of 10 unit refs
+ Avatar.MAX_PREVIEWS = 16
+diff -ruN a/src/bingus_text.lua b/src/bingus_text.lua
+--- a/src/bingus_text.lua	2026-10-18 15:45:20.000000000 -0400
++++ b/src/bingus_text.lua	2026-10-24 23:27:24.086623006 -0400
+@@ -354,7 +354,7 @@
+ -- settings save 0x102f7a0 writes) holds at +212 an index into the table of
+ -- 15 language records at game.dll+0x37C5650; each record has its code string
+ -- at +8. Unreadable or implausible values mean "unknown", never a guess.
+-M.GAME = {settings = 0x3326340, index = 705500 + 212, table = 0x37C5650, count = 15}
++M.GAME = {settings = 0x2CE1508, index = 705628 + 212, table = 0x3180DE0, count = 15}
+ -- Record codes to BCP 47 tags. Only 'us' is confirmed (English); the others
+ -- are the spellings the game's code tables use. An unlisted code is kept
+ -- as its own tag, so no translation matches it and English shows.
+diff -ruN a/src/engine.lua b/src/engine.lua
+--- a/src/engine.lua	2026-10-18 15:45:20.000000000 -0400
++++ b/src/engine.lua	2026-10-24 23:27:24.086689256 -0400
+@@ -44,8 +44,8 @@
+     typedef uint64_t (*myc1_resource_get)(uint64_t type, uint64_t name);
+ ]]
+ 
+-Engine.SCRIPT_API_RVA = 0x3326308
+-Engine.GET_ENGINE_API_RVA = 0xa4e50
++Engine.SCRIPT_API_RVA = 0x2CE14C8
++Engine.GET_ENGINE_API_RVA = 0xa6f70
+ Engine.GET_ENGINE_API_PREFIX = '\72\131\236\40\131\249\1\15\133' -- sub rsp, 28h; cmp ecx, 1; jnz
+ Engine.LUT_SLOT = 0x7e662968
+ Engine.PATTERN_SLOT = 0x81d4c49d
+@@ -67,13 +67,13 @@
+ Engine.UPDATABLE = 1 -- create_buffer's validity: the texture takes update_buffer
+ -- {table, slot offset, expected executable offset} for every function the mod calls.
+ Engine.FUNCTIONS = {
+-    alive = {'unit', 1824, 0x1feeb0}, meshes = {'unit', 424, 0x200cd0}, mesh = {'unit', 440, 0x200d20},
+-    visibility = {'unit', 1624, 0x205680}, -- set_unit_visibility: queues the change for the world's update (Hide Cape)
+-    materials = {'mesh', 8, 0x344300}, material = {'mesh', 24, 0x344350}, commit = {'mesh', 32, 0x344360},
+-    set_resource = {'material', 128, 0x30f2b0}, -- a jump to 0x4f3230
+-    create = {'buffers', 0x60, 0x1c7cc0}, update = {'buffers', 0x68, 0x1c8090}, destroy = {'buffers', 0x70, 0x1c81a0},
+-    resource = {'buffers', 0x78, 0x1c8670},
+-    can_get = {'resources', 0x30, 0xa0d30}, get = {'resources', 0x40, 0xa0df0},
++    alive = {'unit', 1824, 0x1f4d50}, meshes = {'unit', 424, 0x1f6b70}, mesh = {'unit', 440, 0x1f6bc0},
++    visibility = {'unit', 1624, 0x1fb520}, -- set_unit_visibility: queues the change for the world's update (Hide Cape)
++    materials = {'mesh', 8, 0x313760}, material = {'mesh', 24, 0x3137b0}, commit = {'mesh', 32, 0x3137c0},
++    set_resource = {'material', 128, 0x2de990}, -- a jump to 0x4f3230
++    create = {'buffers', 0x60, 0x1bd850}, update = {'buffers', 0x68, 0x1bdc20}, destroy = {'buffers', 0x70, 0x1bdd30},
++    resource = {'buffers', 0x78, 0x1be200},
++    can_get = {'resources', 0x30, 0xa2e50}, get = {'resources', 0x40, 0xa2f10},
+ }
+ local TYPES = {alive = 'myc1_unit_alive', meshes = 'myc1_unit_meshes', mesh = 'myc1_unit_mesh',
+                visibility = 'myc1_unit_visibility',
+@@ -102,25 +102,58 @@
+         local high = cell[4] + cell[5] * 256 + cell[6] * 65536 + cell[7] * 16777216
+         return low + high * HIGH
+     end
+-    if memory.read(at(exe + Engine.GET_ENGINE_API_RVA), #Engine.GET_ENGINE_API_PREFIX) ~= Engine.GET_ENGINE_API_PREFIX then
+-        return nil, 'get_engine_api changed'
+-    end
++    -- Build 26088801: a code page can be unreadable (PAGE_NOACCESS) until the game first runs it. The prefix is read
++    -- with memory.read (nil when unreadable): one that reads otherwise disables the mod as before; an unreadable one
++    -- defers get_engine_api (never called unverified) and the buffers/resources functions to their first call.
++    local prefix = memory.read(at(exe + Engine.GET_ENGINE_API_RVA), #Engine.GET_ENGINE_API_PREFIX)
++    if prefix ~= nil and prefix ~= Engine.GET_ENGINE_API_PREFIX then return nil, 'get_engine_api changed' end
+     local tables = {}
+     local script = u64(game + Engine.SCRIPT_API_RVA)
+     if not script or script < 0x10000 then return nil, 'script API unavailable' end
+     for name, offset in pairs(SCRIPT_TABLES) do tables[name] = u64(script + offset) end
+-    get_api = get_api or ffi.cast('myc1_get_engine_api', exe + Engine.GET_ENGINE_API_RVA)
+-    for name, id in pairs(ENGINE_APIS) do
+-        local found = get_api(id)
+-        tables[name] = found ~= 0 and tonumber(found) or nil
++    local function engine_apis()
++        get_api = get_api or ffi.cast('myc1_get_engine_api', exe + Engine.GET_ENGINE_API_RVA)
++        for name, id in pairs(ENGINE_APIS) do
++            local found = get_api(id)
++            tables[name] = found ~= 0 and tonumber(found) or nil
++        end
+     end
++    if prefix then engine_apis() end
+     local self = {calls = 0}
+-    for name, spec in pairs(Engine.FUNCTIONS) do
++    local function bind(name, spec)
+         local base = tables[spec[1]]
+         local address = base and u64(base + spec[2])
+-        if address ~= exe + spec[3] then return nil, 'engine function changed: ' .. name end
++        if address ~= exe + spec[3] then return 'engine function changed: ' .. name end
+         self[name] = ffi.cast(TYPES[name], address)
+     end
++    local deferred = {}
++    for name, spec in pairs(Engine.FUNCTIONS) do
++        if prefix or not ENGINE_APIS[spec[1]] then
++            local why = bind(name, spec)
++            if why then return nil, why end
++        else
++            deferred[name] = spec
++        end
++    end
++    -- First call of a deferred function: the prefix read again, then get_engine_api's tables checked and bound; an
++    -- error (unreadable, changed) fails that call only (the runtime guard pauses the action) and is tried again later.
++    local function resolve()
++        local now = memory.read(at(exe + Engine.GET_ENGINE_API_RVA), #Engine.GET_ENGINE_API_PREFIX)
++        if now == nil then error('get_engine_api unreadable', 0) end
++        if now ~= Engine.GET_ENGINE_API_PREFIX then error('get_engine_api changed', 0) end
++        engine_apis()
++        for name, spec in pairs(deferred) do
++            local why = bind(name, spec)
++            if why then error(why, 0) end
++        end
++        deferred = {}
++    end
++    for name in pairs(deferred) do
++        self[name] = function(...)
++            resolve()
++            return self[name](...)
++        end
++    end
+     return self
+ end
+ 
+diff -ruN a/src/kits.lua b/src/kits.lua
+--- a/src/kits.lua	2026-10-18 15:45:20.000000000 -0400
++++ b/src/kits.lua	2026-10-24 23:27:24.086715527 -0400
+@@ -604,7 +604,7 @@
+ -- every job.
+ Kits.KIT_ID, Kits.KIT_NAME_UPPER, Kits.KIT_ARCHIVE, Kits.KIT_TYPE = 0, 12, 32, 40
+ Kits.KIT_BODIES, Kits.KIT_BODY_COUNT = 48, 56
+-Kits.BODY_RECORD, Kits.PIECE_RECORD = 24, 96
++Kits.BODY_RECORD, Kits.PIECE_RECORD = 24, 112
+ local KIT_TYPES = {[0] = Kits.ARMOR, Kits.HELMET, 'Cape'}
+ 
+ -- One piece record (at buffer[o]) of a body: {path, slot, type, body, lut, pattern, tone} and, for a cape, its cape
+@@ -683,7 +683,7 @@
+ 
+     local function scan()
+         addresses = {}
+-        if not read(game + 0x33264F8, 8, buffer) then error('kit catalogue unreadable', 0) end
++        if not read(game + 0x2CE16A8, 8, buffer) then error('kit catalogue unreadable', 0) end
+         local manager = u64(buffer, 0)
+         if not read(manager, 16, buffer) then error('kit catalogue unreadable', 0) end
+         local pointers = u64(buffer, 0)
+diff -ruN a/src/lineup.lua b/src/lineup.lua
+--- a/src/lineup.lua	2026-10-18 15:45:20.000000000 -0400
++++ b/src/lineup.lua	2026-10-24 23:27:24.086728567 -0400
+@@ -21,7 +21,7 @@
+ local Lineup = {}
+ 
+ Lineup.FAILURE_LIMIT = 3
+-Lineup.CONTEXT = 0x347CEF0
++Lineup.CONTEXT = 0x2E38228
+ local SESSION, SESSION_BYTES, ENTRY_BYTES, ENTRY_SLOT, MAX_ENTRIES, LOCAL_PEER = 0x16390, 136, 32, 20, 4, 0xB398
+ local SLOTS = 4
+ local HIGH = 4294967296
+diff -ruN a/src/preview.lua b/src/preview.lua
+--- a/src/preview.lua	2026-10-18 15:45:20.000000000 -0400
++++ b/src/preview.lua	2026-10-24 23:27:24.086794527 -0400
+@@ -14,7 +14,7 @@
+ 
+ local Preview = {}
+ 
+-Preview.SYSTEM = 0x347CE60
++Preview.SYSTEM = 0x2E38190
+ Preview.MAX_SLOT = 3
+ Preview.RECORD_BYTES = 160
+ local SLOTS, GATE, UNITS = 49160, 50440, 12
+diff -ruN a/src/recolor.lua b/src/recolor.lua
+--- a/src/recolor.lua	2026-10-18 15:45:20.000000000 -0400
++++ b/src/recolor.lua	2026-10-24 23:27:24.086810297 -0400
+@@ -982,7 +982,7 @@
+     local deps, p = ctx.deps, ctx.p
+     p.weapon_packages = p.weapon_packages or {}
+     if p.weapon_packages[w.name] == nil then
+-        p.catalogue_buffer = p.catalogue_buffer or ffi.new('uint8_t[?]', 17280)
++        p.catalogue_buffer = p.catalogue_buffer or ffi.new('uint8_t[?]', 17600)
+         local read = deps.Avatar.reader(deps.memory)
+         p.weapon_packages[w.name] = deps.Weapons.package(deps.memory, read, deps.game, w.name, p.catalogue_buffer)
+             or false
+diff -ruN a/src/sync.lua b/src/sync.lua
+--- a/src/sync.lua	2026-10-18 15:45:20.000000000 -0400
++++ b/src/sync.lua	2026-10-24 23:27:24.086871048 -0400
+@@ -37,7 +37,7 @@
+ Sync.DLL = 'PlayFabMultiplayerWin.dll'
+ Sync.TEXT_MAX = 127 -- the longest value read or posted
+ Sync.POLL_FRAMES, Sync.POST_DELAY_FRAMES, Sync.RETRY_FRAMES, Sync.STEADY_FRAMES = 120, 300, 1800, 600
+-Sync.CONTEXT, Sync.LOBBY, Sync.PLAYFAB = 0x347CEF0, 0x1D470, 0x10
++Sync.CONTEXT, Sync.LOBBY, Sync.PLAYFAB = 0x2E38228, 0x1D478, 0x10
+ Sync.PL_MEMBERS, Sync.PL_STATE, Sync.PL_HANDLE, Sync.PL_USER = 0x100, 0x118, 0x120, 0x130
+ Sync.JOINED, Sync.MAX_MEMBERS = 3, 16
+ local HIGH = 4294967296
+diff -ruN a/src/weapons.lua b/src/weapons.lua
+--- a/src/weapons.lua	2026-10-18 15:45:20.000000000 -0400
++++ b/src/weapons.lua	2026-10-24 23:27:24.086952938 -0400
+@@ -26,14 +26,14 @@
+ 
+ local Weapons = {}
+ 
+-Weapons.INVENTORY, Weapons.ENTITIES, Weapons.CUSTOMIZATION = 0x3326738, 0x346BF98, 0x3326A38
++Weapons.INVENTORY, Weapons.ENTITIES, Weapons.CUSTOMIZATION = 0x2CE18E8, 0x2CE41B8, 0x2CE1BF8
+ local I_MAP, I_OWNERS, I_ROWS, ROW_BYTES, CURRENT = 40, 64, 80, 48, 28
+ local I_HEAD, I_COUNT = 16, 20 -- Weapons.owned's read: the row count to the row array
+ local HEAD_BYTES = I_ROWS + 8 - I_HEAD
+ Weapons.ROW_BYTES = ROW_BYTES
+-local E_MAP, E_RECORDS, E_CATALOGUE = 0xF1AEB0, 0xF32F18, 0xF12558
++local E_MAP, E_RECORDS, E_CATALOGUE = 0xF1C978, 0xF349E0, 0xF14008
+ local C_MAP, C_RECORDS, C_RECORD_BYTES, C_INSTANCES, C_COPIES, COPY_BYTES = 632, 672, 128, 696, 760, 4872
+-local CATALOGUE_BUCKETS, CATALOGUE_RECORDS = 1080, 17280
++local CATALOGUE_BUCKETS, CATALOGUE_RECORDS = 1100, 17600
+ -- What a weapon's copy of its customization holds, read in one span from ATTACHMENTS: the attachments' unit names
+ -- and the MaterialOverride (+200: 400 bytes for the weapon unit, then 10 entries of 408).
+ local ATTACHMENTS, OVERRIDE, KIND_ENTRY, KINDS = 0x78, 200, 408, 10
+@@ -209,7 +209,7 @@
+         if buffer[i * 16] ~= 0 or buffer[i * 16 + 7] ~= 0 then
+             if hex64(buffer, i * 16) == name then
+                 local index = u32(buffer, i * 16 + 8)
+-                local r = index < 540 and read(table_at + CATALOGUE_RECORDS + 32 * index, 32)
++                local r = index < 550 and read(table_at + CATALOGUE_RECORDS + 32 * index, 32)
+                 local package = r and hex64(r, 8)
+                 return package ~= NO and package or nil
+             end
+@@ -288,7 +288,7 @@
+ -- +128 the weapon id, +144 its customization ids (count, then up to 10 u64 at +152: attachments and paint scheme, in
+ -- the order applied). The ring head (+50448) moves when the game spawned or updated a preview weapon: src/preview.lua
+ -- reads it with the UI gate. The slot keeps no paint: Weapons.compose builds it as the game does.
+-Weapons.UPS, Weapons.PREVIEW_SLOT = 0x347CE60, 3
++Weapons.UPS, Weapons.PREVIEW_SLOT = 0x2E38190, 3
+ local UPS_WEAPONS, UPS_WEAPON_BYTES, SLOT_READ = 76056, 1560, 232
+ local CONFIG_COUNT, CONFIG_IDS, MAX_IDS = 144, 152, 10
+ 
+@@ -359,7 +359,7 @@
+ -- components [+0xF12CF0] (382 buckets, each component at +0x17E0 + 4872 index); the customization deltas [+0xF12E98]:
+ -- buckets [+0] (count [+8]), deltas [+16] {u32 op count, u32 first op}, ops [+32] {u32 type, u32 first patch, u32
+ -- count}, patches [+48] {u32 destination, u32 size, u32 source}, data [+64]. Runs in a job (a few reads per id).
+-local TYPE_BUCKETS, TYPES, TYPE_BASE, DELTAS, PAINT_TYPE = 382, 0xF12CF0, 0x17E0, 0xF12E98, 271
++local TYPE_BUCKETS, TYPES, TYPE_BASE, DELTAS, PAINT_TYPE = 392, 0xF147B8, 0x1880, 0xF14960, 274
+ -- The customization deltas' tables ({buckets, count, starts, ops, patches, data}), or nil.
+ local function delta_tables(read, entities)
+     local deltas = pointer(read, entities + DELTAS)
