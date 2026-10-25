@@ -1,4 +1,4 @@
-# Match Your Colors v1.5 → Steam build 26088801 (offline port)
+# Match Your Colors v1.5 → Steam build 26088801 (offline port, with the weapon source lease)
 
 Source: `upstream-bingus/MatchYourColors` (v1.5, clean). Old build 25480438, new build 26088801
 (game.dll `6D1D4D3B…C08F`, helldivers2.exe `0ACC07DE…EABE`, both re-hashed from the install).
@@ -11,8 +11,9 @@ upstream checkouts, or the running game.
 |---|---|
 | `MAP.json` | 158 rows, one per build-specific constant or constant group, with the re-checked evidence and confidence, plus `code_addresses` |
 | `build_myc_port.py` | `python3 -I -B build_myc_port.py [--tests]`: copies `src/` and `locales/` to `work/`, applies the changes, runs the upstream `assemble(False)`, then writes `out/entry.lua` and `out/9ba626afa44a3aa3.patch_0` (plus empty `.stream`/`.gpu_resources`) and `out/build-receipt.json` |
-| `out/entry.lua` | sha256 `a77a9b125c9df9e3403357006e4360cfa4d814795fcc3d1f145dc5f027d171c7` |
-| `out/9ba626afa44a3aa3.patch_0` | sha256 `283cb4954249d1cba434f9b0ff25a14a002283c11bee932ad7fb435ce898ed5d`, made by `make_archive`; one resource `mods/cowboybingus/match_your_colors` (key `7e3a7752c14b6c38`, type `a14e8dfa2cd117e2`) |
+| `out/entry.lua` | sha256 `55b4f78ab623cdfb0d8c51b99cae7c550de49d72e194021e37e5703a5fc5d7a1` (1,308,269 bytes; before the lease, 2026-10-24: `a77a9b12…d171c7`) |
+| `out/9ba626afa44a3aa3.patch_0` | sha256 `e590fc2f8e99c6f8c6855222d5b22b2e869bd8fabba7fb2c3e785f9594d776f2`, made by `make_archive`; one resource `mods/cowboybingus/match_your_colors` (key `7e3a7752c14b6c38`, type `a14e8dfa2cd117e2`) |
+| `lease/` | The weapon source lease (2026-10-25, below): `src/weapon_source.lua` (new), `src/weapons.lua` and `src/loadout.lua` (the ported files edited), `tests/test_weapon_source.lua`, `README.md`, `lease.diff` (written by the build) |
 | `tools/` | The read-only analysis: `map_globals.py`, `map_fields.py`, `map_exe.py`, `field_scan.py`, `palign.py`/`ctx.py`/`fdiff*.py` (alignment views), `build_map.py` (writes MAP.json), `check_data.lua`, `check_patches.lua`, `check_engine_lazy.lua`, `posix_files.lua` (Linux test shim), `port_tests.py` |
 | `evidence/` | `globals.json`, `field-pairs.json`, `exe.json`, `scans.json`, `old-global-xrefs.json` |
 
@@ -21,7 +22,7 @@ entry is exactly the shipped entry with the listed changes applied. Third, there
 upstream forbidden-name rule holds, every module and the entry compile in LuaJIT (`loadstring`), and
 `check_engine_lazy.lua` passes.
 
-## What changed (everything else is byte-identical to v1.5)
+## What changed (everything else is byte-identical to v1.5, the weapon source lease below aside)
 
 **29 data replacements** (`REPLACEMENTS` in the build script; the comments in `src/` still describe build 25480438):
 
@@ -71,6 +72,27 @@ PAGE_NOACCESS until first executed:
   - While the prefix stays unreadable, that call raises `get_engine_api unreadable`. Only that action fails; the runtime guard pauses it, and it is retried on the next call.
 - The unit/mesh/material tables are pointer-value checks, so they are still checked at startup.
 - `tools/check_engine_lazy.lua` simulates every branch (6 checks, PASS).
+
+## Weapon source lease (2026-10-25; `lease/README.md`)
+
+Goose's (HWG90) suggestion, CowboyBingus/MatchYourColors#2, after Epic LUT R6. The game binds a weapon's paint again on
+every reload; v1.5 read one LUT binding of the weapon in hand every frame and bound the recolor again the next frame
+(one frame of the weapon's own colors). The port clears the role selector of each bound material's row in the weapon's
+PRIVATE customization copy instead (the 36 payload bytes kept, journaled, put back on release while the row is still as
+suppressed and the copy still the weapon's), making the copy with the game's own allocator where a weapon has none
+(`game.dll + 0x75CA50`, its code and its helper's compared first, the copy compared with the type byte for byte after),
+and watches the weapon in hand's customization record (96 bytes per frame) for the reload's new magazine unit instead
+of the binding. New module `src/weapon_source.lua`; `src/loadout.lua` and `src/weapons.lua` edited (the old watch
+commented out); five text patches to `src/addon.lua`. `MAP.json` is unchanged: the manager, entities and weapon types
+are the port's own rows; the manager's `+0x278/+0x290/+0x2B8/+0x2F0/+0x25C/+0x2F8`, the mesh's `+0x58/+0x60` and the
+two code signatures come from the Epic LUT R6 CFFI port installed here (`~/.config/hd2arsenal/mods/Epic-LUT-R6-CFFI-
+26088801/Payload/src/weapons/`). Offline: `lease/tests/test_weapon_source.lua` (12 checks, run by the build) and the
+upstream tests with `tools/port_tests.py`'s lease edits (`loadout.record` for `loadout.entry`; a squadmate's simulated
+reload spawns a magazine unit; `Weapons.watch` `follow`/`units_changed` for `bound`; `tests/reference/weapons.lua` is
+the lease's). **Not run in the game yet**: the live checks are in `lease/README.md`. Installed into the Arsenal
+Megapack's MatchYourColors option by `port-tools/sync_myc_megapack.py` (backups under `~/.config/hd2arsenal/repair-
+backups/myc-bundled-<stamp>/`); its deployed copy (`data/9ba626afa44a3aa3.patch_58`) needs `--apply --deploy` with the
+game closed.
 
 ## Verified statically (MAP.json: 141 high, 17 medium, 0 low, 0 unmapped)
 

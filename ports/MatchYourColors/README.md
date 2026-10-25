@@ -5,7 +5,7 @@ remapped for Steam build 26088801. Upstream v1.5 assembles byte for byte into th
 resource, so this is that code with build data changed. It needs the LuaJIT VM (see
 `docs/LUAJIT-LIVE.md`).
 
-## Changes (`port.diff`, against upstream v1.5 `0341f6d`)
+## Changes (`port.diff`, against upstream v1.5 `0341f6d`; build data, the code-page patch and the weapon source lease)
 
 - **Build data.** `MAP.json` lists 158 build-specific constants (141 high, 17 medium confidence,
   none unmapped). All 12 game.dll globals moved. Several layouts changed:
@@ -19,6 +19,15 @@ resource, so this is that code with build data changed. It needs the LuaJIT VM (
 - **Code pages.** `Engine.open` reads `get_engine_api`'s prefix through the memory API. If its page
   is not resident yet, the buffers/resources functions are checked and bound right before their
   first call instead of at startup; a prefix that reads but differs still disables the mod.
+- **Weapon source lease (2026-10-25).** Goose's suggestion (CowboyBingus/MatchYourColors#2, after
+  Epic LUT R6): a reload binds a weapon's paint again, which v1.5 repaired a frame later (one frame
+  of the weapon's own colors). The port takes the reset rows of the bound materials out of the
+  weapon's private customization copy while the recolor is bound (the game's allocator makes a copy
+  where a weapon has none, verified against the type byte for byte), and watches the weapon in
+  hand's customization record for the reload's new magazine unit. New `src/weapon_source.lua`;
+  `src/loadout.lua` and `src/weapons.lua` edited, the old watch commented out; `src/addon.lua`
+  patched. Details, coordinates and the live checks still to run:
+  `native-work/myc-port/lease/README.md`.
 
 ## Verified
 
@@ -29,6 +38,8 @@ resource, so this is that code with build data changed. It needs the LuaJIT VM (
   weapon catalogue all match.
 - In game, installed (2026-10-24, Proton): "initialized", 81 materials recolored with a paint
   scheme chosen in Mod Options Menu, weapons recolored (29 materials).
+- Not in game yet: the weapon source lease build (`entry.lua` sha256 `55b4f78a…5fc5d7a1`, 2026-10-25).
+  Offline: 12 lease checks and the upstream tests (with the port's fixture edits) pass.
 
 ## Files
 
