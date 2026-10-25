@@ -1,0 +1,2850 @@
+{
+ "mod": "Foliage Pass-Through v1.0 (upstream-bingus/FoliagePassThrough, git v1.0 = lock pin)",
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "old_image": "<workspace>/native-work/evidence/game-pre1020.dll",
+ "new_image": "<workspace>/native-work/evidence/game-26088801.dll",
+ "live_capture": "<workspace>/native-work/megapack-projectile-tail-output.txt",
+ "counts": {
+  "high": 107,
+  "medium": 3,
+  "low": 1
+ },
+ "rows_total": 111,
+ "rows_feeding_write": 111,
+ "targets": {
+  "old": 99,
+  "shipped": 95,
+  "excluded_medium": [
+   "Orbital_illumination_shot {190, 0x00000000, 390}",
+   "Missile_SAM {203, 0x00000000, 334}",
+   "Orbital_Smoke {247, 0x00000000, 75}"
+  ],
+  "removed": [
+   "200kg Bomb {192, 0x1CB4F094, 182}"
+  ]
+ },
+ "changed": [
+  "pin.EXE_SHA256",
+  "pin.GAME_SHA256",
+  "layout.buffer_rva",
+  "layout.index_rva",
+  "layout.slots",
+  "field.TEMPLATE",
+  "enum.NO_FOLIAGE"
+ ],
+ "witness_check_failures": [],
+ "rows": [
+  {
+   "id": "pin.EXE_SHA256",
+   "file": "src/foliage_pass_through.lua",
+   "line": 17,
+   "symbol": "Mod.EXE_SHA256",
+   "old": "F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06",
+   "new": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "method": "SHA-256 of the installed bin/helldivers2.exe (read only); equals the brief",
+   "witnesses": [
+    "<game>/bin/helldivers2.exe"
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L0"
+  },
+  {
+   "id": "pin.GAME_SHA256",
+   "file": "src/foliage_pass_through.lua",
+   "line": 18,
+   "symbol": "Mod.GAME_SHA256",
+   "old": "2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E",
+   "new": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "method": "SHA-256 of the installed data/game/game.dll (read only); equals the brief and the capture manifest",
+   "witnesses": [
+    "<game>/data/game/game.dll"
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L0"
+  },
+  {
+   "id": "layout.buffer_rva",
+   "file": "src/foliage_pass_through.lua",
+   "line": 22,
+   "symbol": "Mod.LAYOUT.buffer_rva",
+   "old": "0x348e2f8",
+   "new": "0x2e49c28",
+   "method": "the settings loader (old 0x11EC5A0 -> new 0x107DDC0; 121 = 121 instructions, same shapes apart from RIP/branch targets, same resource type 0xbad81ad3f33c4af4) stores the loaded buffer here",
+   "witnesses": [
+    "0x11ec607 mov qword ptr [rip + 0x22a1cea], rbx",
+    "0x107de27 mov qword ptr [rip + 0x1dcbdfa], rbx"
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L1"
+  },
+  {
+   "id": "layout.index_rva",
+   "file": "src/foliage_pass_through.lua",
+   "line": 23,
+   "symbol": "Mod.LAYOUT.index_rva",
+   "old": "0x37c7670",
+   "new": "0x3182e70",
+   "method": "loader LEA r12 of the index it fills, and the projectile ray step loads its row from the same table",
+   "witnesses": [
+    "0x11ec5fb lea r12, [rip + 0x25db06e]",
+    "0x107de1b lea r12, [rip + 0x210504e]",
+    "0x13abccc mov r15, qword ptr [rcx + rax*8 + 0x37c7670]",
+    "0x1242ae0 mov r15, qword ptr [rcx + rax*8 + 0x3182e70]"
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L1"
+  },
+  {
+   "id": "layout.slots",
+   "file": "src/foliage_pass_through.lua",
+   "line": 24,
+   "symbol": "Mod.LAYOUT.slots",
+   "old": "351",
+   "new": "356",
+   "method": "loader clears the index with memset(index, 0, slots*8)",
+   "witnesses": [
+    "0x11ec61e mov r8d, 0xaf8",
+    "0x107de3e mov r8d, 0xb20"
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L1"
+  },
+  {
+   "id": "layout.row_size",
+   "file": "src/foliage_pass_through.lua",
+   "line": 25,
+   "symbol": "Mod.LAYOUT.row_size",
+   "old": "0x110",
+   "new": "0x110",
+   "method": "loader row stride",
+   "witnesses": [
+    "0x11ec716 imul rdx, rax, 0x110",
+    "0x107df36 imul rdx, rax, 0x110"
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false,
+   "live_check": "L1"
+  },
+  {
+   "id": "field.TYPE",
+   "file": "src/foliage_pass_through.lua",
+   "line": 27,
+   "symbol": "TYPE",
+   "old": "0x00",
+   "new": "0x00",
+   "method": "loader indexes the table by the row's first dword (index[row.type] = row); the read-only live capture found u32(row,0) == slot for all 355 rows",
+   "witnesses": [
+    "0x11ec722 mov qword ptr [r12 + rax*8], rdx",
+    "0x107df42 mov qword ptr [r12 + rax*8], rdx",
+    "native-work/megapack-projectile-tail-output.txt"
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false,
+   "live_check": "L1"
+  },
+  {
+   "id": "field.NAME",
+   "file": "src/foliage_pass_through.lua",
+   "line": 27,
+   "symbol": "NAME",
+   "old": "0x08",
+   "new": "0x08",
+   "method": "data: 47 targets whose name hash is unique among the 355 live rows have it at +0x08 with the old impact explosion at +0x90 (identity guard only)",
+   "witnesses": [
+    "tools/target-map.json anchors"
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false,
+   "live_check": "L1"
+  },
+  {
+   "id": "field.EXPLOSION",
+   "file": "src/foliage_pass_through.lua",
+   "line": 27,
+   "symbol": "EXPLOSION",
+   "old": "0x90",
+   "new": "0x90",
+   "method": "data, as NAME; the derived old->new explosion map is a function and order preserving",
+   "witnesses": [
+    "tools/target-map.json explosion_map"
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false,
+   "live_check": "L1"
+  },
+  {
+   "id": "field.TEMPLATE",
+   "file": "src/foliage_pass_through.lua",
+   "line": 27,
+   "symbol": "TEMPLATE",
+   "old": "0xf4",
+   "new": "0xf8",
+   "method": "the projectile ray step reads the row's raycast template and indexes the query handle table with it; the unique matching instruction pair moved +0xF4 -> +0xF8 (the climbable slot moved 0xAC -> 0xB4 in the same pair); the live capture shows +0xF8 in {0,2,3} and a new non-template field at +0xF4",
+   "witnesses": [
+    "0x13abdad mov edx, dword ptr [r15 + 0xf4]",
+    "0x13abdb4 mov edx, dword ptr [rcx + rdx*4 + 8]",
+    "0x1242bb6 mov edx, dword ptr [r15 + 0xf8]",
+    "0x1242bbd mov edx, dword ptr [rcx + rdx*4 + 8]",
+    "0x13abda5 mov edx, dword ptr [rcx + 0xac]",
+    "0x1242bae mov edx, dword ptr [rcx + 0xb4]"
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L2"
+  },
+  {
+   "id": "enum.VANILLA",
+   "file": "src/foliage_pass_through.lua",
+   "line": 28,
+   "symbol": "Mod.VANILLA",
+   "old": "0",
+   "new": "0",
+   "method": "template 0 = query slot 0x8 = damage_query (murmur 0x393d9518) flags 0x80000009 in both builds",
+   "witnesses": [
+    {
+     "template": 0,
+     "slot": "0x8",
+     "hash": "0x393d9518",
+     "name": "damage_query",
+     "flags": "0x80000009"
+    },
+    {
+     "template": 0,
+     "slot": "0x8",
+     "hash": "0x393d9518",
+     "name": "damage_query",
+     "flags": "0x80000009"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false,
+   "live_check": "L2"
+  },
+  {
+   "id": "enum.NO_FOLIAGE",
+   "file": "src/foliage_pass_through.lua",
+   "line": 28,
+   "symbol": "Mod.NO_FOLIAGE",
+   "old": "2",
+   "new": "3",
+   "method": "the query table gained a slot at template 1 (damage_query flags 0x80000001); every old slot 1..33 equals new slot 2..34, so damage_no_foliage_query (murmur 0xeaf0a29f) moved from template 2 to 3; new template 2 is the back-face damage_query (old 1). Keeping 2 would have given the targets back-face damage_query",
+   "witnesses": [
+    {
+     "template": 2,
+     "slot": "0x10",
+     "hash": "0xeaf0a29f",
+     "name": "damage_no_foliage_query",
+     "flags": "0x80000009"
+    },
+    {
+     "template": 2,
+     "slot": "0x10",
+     "hash": "0x393d9518",
+     "name": "damage_query",
+     "flags": "0x80000008"
+    },
+    {
+     "template": 3,
+     "slot": "0x14",
+     "hash": "0xeaf0a29f",
+     "name": "damage_no_foliage_query",
+     "flags": "0x80000009"
+    },
+    {
+     "old_1_to_end_equal_new_2_to_end": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L2"
+  },
+  {
+   "id": "target.6",
+   "file": "src/foliage_targets.lua",
+   "line": 6,
+   "symbol": "110mm Standard Rocket Mk2",
+   "old": "{6, 0x84F1CDC4, 229}",
+   "new": "{6, 0x84F1CDC4, 229}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      0,
+      11
+     ],
+     "candidates": [
+      6
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.10",
+   "file": "src/foliage_targets.lua",
+   "line": 7,
+   "symbol": "SEAF Artillery: Smoke",
+   "old": "{10, 0xF73287FE, 261}",
+   "new": "{11, 0xF73287FE, 261}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      6,
+      27
+     ],
+     "candidates": [
+      11
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.11",
+   "file": "src/foliage_targets.lua",
+   "line": 8,
+   "symbol": "Shrapnel",
+   "old": "{11, 0x6B55E559, 106}",
+   "new": "{12, 0x6B55E559, 106}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      11,
+      27
+     ],
+     "candidates": [
+      12
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.13",
+   "file": "src/foliage_targets.lua",
+   "line": 9,
+   "symbol": "120mm HE Cannon Round",
+   "old": "{13, 0xF516C1C8, 267}",
+   "new": "{14, 0xF516C1C8, 267}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      11,
+      27
+     ],
+     "candidates": [
+      14
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.16",
+   "file": "src/foliage_targets.lua",
+   "line": 10,
+   "symbol": "23mm HE Cannon",
+   "old": "{16, 0xA1701744, 50}",
+   "new": "{17, 0xA1701744, 50}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      11,
+      27
+     ],
+     "candidates": [
+      17
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.17",
+   "file": "src/foliage_targets.lua",
+   "line": 11,
+   "symbol": "Large Plasma Bolt",
+   "old": "{17, 0xFD691A89, 279}",
+   "new": "{18, 0xFD691A89, 279}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      11,
+      27
+     ],
+     "candidates": [
+      18
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.26",
+   "file": "src/foliage_targets.lua",
+   "line": 12,
+   "symbol": "110mm Airburst Cannon Round Mk2",
+   "old": "{26, 0xF796A3E6, 222}",
+   "new": "{27, 0xF796A3E6, 222}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      11,
+      30
+     ],
+     "candidates": [
+      27
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.29",
+   "file": "src/foliage_targets.lua",
+   "line": 13,
+   "symbol": "110mm E.M.S. Cannon Round Mk2",
+   "old": "{29, 0xE3FF617D, 23}",
+   "new": "{30, 0xE3FF617D, 23}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      27,
+      37
+     ],
+     "candidates": [
+      30
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.31",
+   "file": "src/foliage_targets.lua",
+   "line": 14,
+   "symbol": "75mm HEAT Grenade",
+   "old": "{31, 0x0B3CE509, 46}",
+   "new": "{32, 0x0B3CE509, 46}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      30,
+      37
+     ],
+     "candidates": [
+      32
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.36",
+   "file": "src/foliage_targets.lua",
+   "line": 15,
+   "symbol": "85mm High-Explosive Grenade",
+   "old": "{36, 0xCB119C6D, 294}",
+   "new": "{37, 0xCB119C6D, 294}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      30,
+      44
+     ],
+     "candidates": [
+      37
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.40",
+   "file": "src/foliage_targets.lua",
+   "line": 16,
+   "symbol": "15x100mm High Explosive",
+   "old": "{40, 0x8800F269, 158}",
+   "new": "{41, 0x8800F269, 158}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      37,
+      44
+     ],
+     "candidates": [
+      41
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.43",
+   "file": "src/foliage_targets.lua",
+   "line": 17,
+   "symbol": "Burst",
+   "old": "{43, 0x6D4E9963, 373}",
+   "new": "{44, 0x6D4E9963, 374}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      37,
+      67
+     ],
+     "candidates": [
+      44
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.66",
+   "file": "src/foliage_targets.lua",
+   "line": 18,
+   "symbol": "Nuke",
+   "old": "{66, 0xD0E7BB89, 92}",
+   "new": "{67, 0xD0E7BB89, 92}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      44,
+      69
+     ],
+     "candidates": [
+      67
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.67",
+   "file": "src/foliage_targets.lua",
+   "line": 19,
+   "symbol": "STUN",
+   "old": "{67, 0x84135F91, 164}",
+   "new": "{69, 0x84135F91, 164}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      67,
+      73
+     ],
+     "candidates": [
+      69
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.70",
+   "file": "src/foliage_targets.lua",
+   "line": 20,
+   "symbol": "Small Plasma Bolt",
+   "old": "{70, 0x91C46E0F, 197}",
+   "new": "{72, 0x91C46E0F, 197}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      69,
+      73
+     ],
+     "candidates": [
+      72
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.71",
+   "file": "src/foliage_targets.lua",
+   "line": 21,
+   "symbol": "SEAF Artillery: Explosive",
+   "old": "{71, 0x02694B60, 42}",
+   "new": "{73, 0x02694B60, 42}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      69,
+      76
+     ],
+     "candidates": [
+      73
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.72",
+   "file": "src/foliage_targets.lua",
+   "line": 22,
+   "symbol": "23mm HE Cannon",
+   "old": "{72, 0xA1701744, 108}",
+   "new": "{74, 0xA1701744, 108}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      73,
+      76
+     ],
+     "candidates": [
+      74
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.74",
+   "file": "src/foliage_targets.lua",
+   "line": 23,
+   "symbol": "110mm E.M.S. Cannon Round",
+   "old": "{74, 0x7E66B2AD, 188}",
+   "new": "{76, 0x7E66B2AD, 188}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      73,
+      94
+     ],
+     "candidates": [
+      76
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.75",
+   "file": "src/foliage_targets.lua",
+   "line": 24,
+   "symbol": "23mm HE Cannon",
+   "old": "{75, 0xA1701744, 374}",
+   "new": "{77, 0xA1701744, 375}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      76,
+      94
+     ],
+     "candidates": [
+      77
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.77",
+   "file": "src/foliage_targets.lua",
+   "line": 25,
+   "symbol": "23mm HE Cannon",
+   "old": "{77, 0xA1701744, 266}",
+   "new": "{79, 0xA1701744, 266}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      76,
+      94
+     ],
+     "candidates": [
+      79
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.78",
+   "file": "src/foliage_targets.lua",
+   "line": 26,
+   "symbol": "Cluster Bomb",
+   "old": "{78, 0x72EDB2F8, 7}",
+   "new": "{80, 0x72EDB2F8, 7}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      76,
+      94
+     ],
+     "candidates": [
+      80
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.80",
+   "file": "src/foliage_targets.lua",
+   "line": 27,
+   "symbol": "380mm HE Cannon Round",
+   "old": "{80, 0x12416AAE, 301}",
+   "new": "{82, 0x12416AAE, 301}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      76,
+      94
+     ],
+     "candidates": [
+      82
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.82",
+   "file": "src/foliage_targets.lua",
+   "line": 28,
+   "symbol": "110mm Standard Rocket",
+   "old": "{82, 0x8E7C4D62, 229}",
+   "new": "{84, 0x8E7C4D62, 229}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      76,
+      94
+     ],
+     "candidates": [
+      84
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.84",
+   "file": "src/foliage_targets.lua",
+   "line": 29,
+   "symbol": "380mm HE Cannon Round",
+   "old": "{84, 0x12416AAE, 5}",
+   "new": "{86, 0x12416AAE, 5}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      76,
+      94
+     ],
+     "candidates": [
+      86
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.85",
+   "file": "src/foliage_targets.lua",
+   "line": 30,
+   "symbol": "40mm HEAT Grenade",
+   "old": "{85, 0xF62F1CD1, 199}",
+   "new": "{87, 0xF62F1CD1, 199}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      76,
+      94
+     ],
+     "candidates": [
+      87
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.90",
+   "file": "src/foliage_targets.lua",
+   "line": 31,
+   "symbol": "Grenade_40mm_Incendiary",
+   "old": "{90, 0xDB3C0FF3, 252}",
+   "new": "{92, 0xDB3C0FF3, 252}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      76,
+      94
+     ],
+     "candidates": [
+      92
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.92",
+   "file": "src/foliage_targets.lua",
+   "line": 32,
+   "symbol": "SEAF Artillery: Static Field",
+   "old": "{92, 0x5D4CBC38, 55}",
+   "new": "{94, 0x5D4CBC38, 55}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      76,
+      98
+     ],
+     "candidates": [
+      94
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.93",
+   "file": "src/foliage_targets.lua",
+   "line": 33,
+   "symbol": "380mm HE Cannon Round",
+   "old": "{93, 0x12416AAE, 77}",
+   "new": "{95, 0x12416AAE, 77}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      94,
+      98
+     ],
+     "candidates": [
+      95
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.96",
+   "file": "src/foliage_targets.lua",
+   "line": 34,
+   "symbol": "CLUSTER BOMB",
+   "old": "{96, 0x844732B0, 300}",
+   "new": "{98, 0x844732B0, 300}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      94,
+      101
+     ],
+     "candidates": [
+      98
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.99",
+   "file": "src/foliage_targets.lua",
+   "line": 35,
+   "symbol": "SEAF Artillery: Mini Nuke",
+   "old": "{99, 0xD84656B7, 288}",
+   "new": "{101, 0xD84656B7, 288}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      98,
+      117
+     ],
+     "candidates": [
+      101
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.100",
+   "file": "src/foliage_targets.lua",
+   "line": 36,
+   "symbol": "380mm HE Cannon Round",
+   "old": "{100, 0x12416AAE, 343}",
+   "new": "{102, 0x12416AAE, 343}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      101,
+      117
+     ],
+     "candidates": [
+      102
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.110",
+   "file": "src/foliage_targets.lua",
+   "line": 37,
+   "symbol": "75mm HEAT Grenade",
+   "old": "{110, 0x0B3CE509, 46}",
+   "new": "{112, 0x0B3CE509, 46}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      101,
+      117
+     ],
+     "candidates": [
+      112
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.115",
+   "file": "src/foliage_targets.lua",
+   "line": 38,
+   "symbol": "20mm APHET Rounds",
+   "old": "{115, 0x122274B8, 404}",
+   "new": "{117, 0x122274B8, 406}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      101,
+      118
+     ],
+     "candidates": [
+      117
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.116",
+   "file": "src/foliage_targets.lua",
+   "line": 39,
+   "symbol": "100kg Bomb Mk3",
+   "old": "{116, 0x0DF27E48, 249}",
+   "new": "{118, 0x0DF27E48, 249}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      117,
+      122
+     ],
+     "candidates": [
+      118
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.120",
+   "file": "src/foliage_targets.lua",
+   "line": 40,
+   "symbol": "40mm APHE Cannon",
+   "old": "{120, 0x943BD4B3, 234}",
+   "new": "{122, 0x943BD4B3, 234}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      118,
+      130
+     ],
+     "candidates": [
+      122
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.127",
+   "file": "src/foliage_targets.lua",
+   "line": 41,
+   "symbol": "Non-Guided",
+   "old": "{127, 0x9D946B50, 154}",
+   "new": "{129, 0x9D946B50, 154}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      122,
+      130
+     ],
+     "candidates": [
+      129
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.128",
+   "file": "src/foliage_targets.lua",
+   "line": 42,
+   "symbol": "70mm Laser-Guided Missile",
+   "old": "{128, 0x49B9185E, 416}",
+   "new": "{130, 0x49B9185E, 418}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      122,
+      143
+     ],
+     "candidates": [
+      130
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.130",
+   "file": "src/foliage_targets.lua",
+   "line": 43,
+   "symbol": "100kg Bomb",
+   "old": "{130, 0x5E95C9E2, 75}",
+   "new": "{132, 0x5E95C9E2, 75}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      130,
+      143
+     ],
+     "candidates": [
+      132
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.131",
+   "file": "src/foliage_targets.lua",
+   "line": 44,
+   "symbol": "Cluster Bomb",
+   "old": "{131, 0x72EDB2F8, 162}",
+   "new": "{133, 0x72EDB2F8, 162}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      130,
+      143
+     ],
+     "candidates": [
+      133
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.132",
+   "file": "src/foliage_targets.lua",
+   "line": 45,
+   "symbol": "75mm HEAT Grenade",
+   "old": "{132, 0x0B3CE509, 376}",
+   "new": "{134, 0x0B3CE509, 377}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      130,
+      143
+     ],
+     "candidates": [
+      134
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.137",
+   "file": "src/foliage_targets.lua",
+   "line": 46,
+   "symbol": "120mm HE Cannon Round",
+   "old": "{137, 0xF516C1C8, 176}",
+   "new": "{139, 0xF516C1C8, 177}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      130,
+      143
+     ],
+     "candidates": [
+      139
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.141",
+   "file": "src/foliage_targets.lua",
+   "line": 47,
+   "symbol": "Napalm Bomb Mk2",
+   "old": "{141, 0xEDD7AD4C, 359}",
+   "new": "{143, 0xEDD7AD4C, 360}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      130,
+      147
+     ],
+     "candidates": [
+      143
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.145",
+   "file": "src/foliage_targets.lua",
+   "line": 48,
+   "symbol": "SEAF Artillery: Napalm",
+   "old": "{145, 0x780FF8A9, 20}",
+   "new": "{147, 0x780FF8A9, 20}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      143,
+      153
+     ],
+     "candidates": [
+      147
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.146",
+   "file": "src/foliage_targets.lua",
+   "line": 49,
+   "symbol": "110mm Standard Rocket",
+   "old": "{146, 0x8E7C4D62, 109}",
+   "new": "{148, 0x8E7C4D62, 109}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      147,
+      153
+     ],
+     "candidates": [
+      148
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.151",
+   "file": "src/foliage_targets.lua",
+   "line": 50,
+   "symbol": "500kg Bomb Mk2",
+   "old": "{151, 0x045580C1, 354}",
+   "new": "{153, 0x045580C1, 354}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      147,
+      155
+     ],
+     "candidates": [
+      153
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.152",
+   "file": "src/foliage_targets.lua",
+   "line": 51,
+   "symbol": "Guided",
+   "old": "{152, 0x9D946B50, 154}",
+   "new": "{154, 0x9D946B50, 154}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      153,
+      155
+     ],
+     "candidates": [
+      154
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.153",
+   "file": "src/foliage_targets.lua",
+   "line": 52,
+   "symbol": "85mm HEAT Grenade",
+   "old": "{153, 0x8C935D03, 248}",
+   "new": "{155, 0x8C935D03, 248}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      153,
+      160
+     ],
+     "candidates": [
+      155
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.158",
+   "file": "src/foliage_targets.lua",
+   "line": 53,
+   "symbol": "110mm Airburst Cannon Round",
+   "old": "{158, 0x4211411F, 379}",
+   "new": "{160, 0x4211411F, 380}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      155,
+      163
+     ],
+     "candidates": [
+      160
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.161",
+   "file": "src/foliage_targets.lua",
+   "line": 54,
+   "symbol": "40mm Proximity Grenade",
+   "old": "{161, 0x9A056E06, 347}",
+   "new": "{163, 0x9A056E06, 347}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      160,
+      164
+     ],
+     "candidates": [
+      163
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.162",
+   "file": "src/foliage_targets.lua",
+   "line": 55,
+   "symbol": "Napalm Bomb Mk3",
+   "old": "{162, 0x6BD146D6, 389}",
+   "new": "{164, 0x6BD146D6, 390}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      163,
+      178
+     ],
+     "candidates": [
+      164
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.170",
+   "file": "src/foliage_targets.lua",
+   "line": 56,
+   "symbol": "100kg Bomb",
+   "old": "{170, 0x5E95C9E2, 194}",
+   "new": "{173, 0x5E95C9E2, 194}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      164,
+      178
+     ],
+     "candidates": [
+      173
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.175",
+   "file": "src/foliage_targets.lua",
+   "line": 57,
+   "symbol": "20mm HE Cannon",
+   "old": "{175, 0xF3B7C565, 128}",
+   "new": "{178, 0xF3B7C565, 128}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      164,
+      200
+     ],
+     "candidates": [
+      178
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.182",
+   "file": "src/foliage_targets.lua",
+   "line": 58,
+   "symbol": "Orbital_Cannon_380mm_HE_MK2",
+   "old": "{182, 0xE441DAF0, 282}",
+   "new": "{186, 0xE441DAF0, 282}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      178,
+      200
+     ],
+     "candidates": [
+      186
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.187",
+   "file": "src/foliage_targets.lua",
+   "line": 59,
+   "symbol": "Shrapnel",
+   "old": "{187, 0x6B55E559, 79}",
+   "new": "{191, 0x6B55E559, 79}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      178,
+      200
+     ],
+     "candidates": [
+      191
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.190",
+   "file": "src/foliage_targets.lua",
+   "line": 60,
+   "symbol": "Orbital_illumination_shot",
+   "old": "{190, 0x00000000, 390}",
+   "new": "{194, 0x00000000, 391}",
+   "method": "no name hash (0): only the type window and the impact explosion (exactly the value the neighbouring explosion shift predicts) identify it; nothing checks it is the same projectile",
+   "witnesses": [
+    {
+     "window": [
+      178,
+      200
+     ],
+     "candidates": [
+      194
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "medium",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": false
+  },
+  {
+   "id": "target.192",
+   "file": "src/foliage_targets.lua",
+   "line": 61,
+   "symbol": "200kg Bomb",
+   "old": "{192, 0x1CB4F094, 182}",
+   "new": null,
+   "method": "no live row has this name hash; no row in its type window has an impact explosion; its explosion (182) is the one the explosion map shows removed between old 176 and 187 - removed in this build",
+   "witnesses": [
+    {
+     "window": [
+      178,
+      200
+     ]
+    }
+   ],
+   "confidence": "low",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": false
+  },
+  {
+   "id": "target.194",
+   "file": "src/foliage_targets.lua",
+   "line": 62,
+   "symbol": "120mm HE Cannon Round",
+   "old": "{194, 0xF516C1C8, 213}",
+   "new": "{197, 0xF516C1C8, 213}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      178,
+      200
+     ],
+     "candidates": [
+      197
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.197",
+   "file": "src/foliage_targets.lua",
+   "line": 63,
+   "symbol": "110mm Gas Cannon Round",
+   "old": "{197, 0xC4AE97A6, 82}",
+   "new": "{200, 0xC4AE97A6, 82}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      178,
+      211
+     ],
+     "candidates": [
+      200
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.202",
+   "file": "src/foliage_targets.lua",
+   "line": 64,
+   "symbol": "15x100mm Standard Rocket",
+   "old": "{202, 0x203BCD08, 388}",
+   "new": "{205, 0x203BCD08, 389}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      200,
+      211
+     ],
+     "candidates": [
+      205
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.203",
+   "file": "src/foliage_targets.lua",
+   "line": 65,
+   "symbol": "Missile_SAM",
+   "old": "{203, 0x00000000, 334}",
+   "new": "{206, 0x00000000, 334}",
+   "method": "no name hash (0): only the type window and the impact explosion (exactly the value the neighbouring explosion shift predicts) identify it; nothing checks it is the same projectile",
+   "witnesses": [
+    {
+     "window": [
+      200,
+      211
+     ],
+     "candidates": [
+      206
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "medium",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": false
+  },
+  {
+   "id": "target.206",
+   "file": "src/foliage_targets.lua",
+   "line": 66,
+   "symbol": "15x100mm High Explosive",
+   "old": "{206, 0x8800F269, 380}",
+   "new": "{209, 0x8800F269, 381}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      200,
+      211
+     ],
+     "candidates": [
+      209
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.208",
+   "file": "src/foliage_targets.lua",
+   "line": 67,
+   "symbol": "110mm E.M.S. Cannon Round Mk3",
+   "old": "{208, 0x89C98FA5, 25}",
+   "new": "{211, 0x89C98FA5, 25}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      200,
+      217
+     ],
+     "candidates": [
+      211
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.210",
+   "file": "src/foliage_targets.lua",
+   "line": 68,
+   "symbol": "Cluster Bomb",
+   "old": "{210, 0x72EDB2F8, 44}",
+   "new": "{213, 0x72EDB2F8, 44}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      211,
+      217
+     ],
+     "candidates": [
+      213
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.214",
+   "file": "src/foliage_targets.lua",
+   "line": 69,
+   "symbol": "HE MK2",
+   "old": "{214, 0x17D7C9B0, 199}",
+   "new": "{217, 0x17D7C9B0, 199}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      211,
+      223
+     ],
+     "candidates": [
+      217
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.216",
+   "file": "src/foliage_targets.lua",
+   "line": 70,
+   "symbol": "380mm HE Cannon Round",
+   "old": "{216, 0x12416AAE, 301}",
+   "new": "{219, 0x12416AAE, 301}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      217,
+      223
+     ],
+     "candidates": [
+      219
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.220",
+   "file": "src/foliage_targets.lua",
+   "line": 71,
+   "symbol": "Homing Ground Missile Mk2",
+   "old": "{220, 0xAE182F69, 304}",
+   "new": "{223, 0xAE182F69, 304}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      217,
+      229
+     ],
+     "candidates": [
+      223
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.224",
+   "file": "src/foliage_targets.lua",
+   "line": 72,
+   "symbol": "20mm Flak Rounds",
+   "old": "{224, 0x74AD0033, 26}",
+   "new": "{227, 0x74AD0033, 26}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      223,
+      229
+     ],
+     "candidates": [
+      227
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.225",
+   "file": "src/foliage_targets.lua",
+   "line": 73,
+   "symbol": "Homing Ground Missile",
+   "old": "{225, 0xE4F875DB, 304}",
+   "new": "{229, 0xE4F875DB, 304}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      223,
+      235
+     ],
+     "candidates": [
+      229
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.231",
+   "file": "src/foliage_targets.lua",
+   "line": 74,
+   "symbol": "85mm HEAT Grenade Mk2",
+   "old": "{231, 0x345DDEE2, 236}",
+   "new": "{235, 0x345DDEE2, 236}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      229,
+      243
+     ],
+     "candidates": [
+      235
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.233",
+   "file": "src/foliage_targets.lua",
+   "line": 75,
+   "symbol": "Cluster Bomb",
+   "old": "{233, 0x72EDB2F8, 7}",
+   "new": "{237, 0x72EDB2F8, 7}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      235,
+      243
+     ],
+     "candidates": [
+      237
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.234",
+   "file": "src/foliage_targets.lua",
+   "line": 76,
+   "symbol": "120mm HE Cannon Round",
+   "old": "{234, 0xF516C1C8, 63}",
+   "new": "{238, 0xF516C1C8, 63}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets (two same-name targets, two candidates: order-preserving assignment)",
+   "witnesses": [
+    {
+     "window": [
+      235,
+      243
+     ],
+     "candidates": [
+      238
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.238",
+   "file": "src/foliage_targets.lua",
+   "line": 77,
+   "symbol": "120mm HE Cannon Round",
+   "old": "{238, 0xF516C1C8, 74}",
+   "new": "{242, 0xF516C1C8, 74}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets (two same-name targets, two candidates: order-preserving assignment)",
+   "witnesses": [
+    {
+     "window": [
+      235,
+      243
+     ],
+     "candidates": [
+      242
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.239",
+   "file": "src/foliage_targets.lua",
+   "line": 78,
+   "symbol": "500kg Bomb",
+   "old": "{239, 0xE6C09ED9, 193}",
+   "new": "{243, 0xE6C09ED9, 193}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      235,
+      249
+     ],
+     "candidates": [
+      243
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.245",
+   "file": "src/foliage_targets.lua",
+   "line": 79,
+   "symbol": "66mm Missile",
+   "old": "{245, 0x65466EE5, 148}",
+   "new": "{249, 0x65466EE5, 148}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      243,
+      253
+     ],
+     "candidates": [
+      249
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.247",
+   "file": "src/foliage_targets.lua",
+   "line": 80,
+   "symbol": "Orbital_Smoke",
+   "old": "{247, 0x00000000, 75}",
+   "new": "{251, 0x00000000, 75}",
+   "method": "no name hash (0): only the type window and the impact explosion (exactly the value the neighbouring explosion shift predicts) identify it; nothing checks it is the same projectile",
+   "witnesses": [
+    {
+     "window": [
+      249,
+      253
+     ],
+     "candidates": [
+      251
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "medium",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": false
+  },
+  {
+   "id": "target.249",
+   "file": "src/foliage_targets.lua",
+   "line": 81,
+   "symbol": "Crossbow_Bolt_exp",
+   "old": "{249, 0xAFD4B511, 59}",
+   "new": "{253, 0xAFD4B511, 59}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      249,
+      265
+     ],
+     "candidates": [
+      253
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.261",
+   "file": "src/foliage_targets.lua",
+   "line": 82,
+   "symbol": "30mm APHE Cannon",
+   "old": "{261, 0x1666BC52, 235}",
+   "new": "{265, 0x1666BC52, 235}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      253,
+      276
+     ],
+     "candidates": [
+      265
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.263",
+   "file": "src/foliage_targets.lua",
+   "line": 83,
+   "symbol": "40mm HEAT Grenade",
+   "old": "{263, 0xF62F1CD1, 327}",
+   "new": "{267, 0xF62F1CD1, 327}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      265,
+      276
+     ],
+     "candidates": [
+      267
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.266",
+   "file": "src/foliage_targets.lua",
+   "line": 84,
+   "symbol": "380mm HE Cannon Round",
+   "old": "{266, 0x12416AAE, 94}",
+   "new": "{270, 0x12416AAE, 94}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      265,
+      276
+     ],
+     "candidates": [
+      270
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.272",
+   "file": "src/foliage_targets.lua",
+   "line": 85,
+   "symbol": "66mm Missile Mk2",
+   "old": "{272, 0xAA1001AC, 170}",
+   "new": "{276, 0xAA1001AC, 171}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      265,
+      298
+     ],
+     "candidates": [
+      276
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.280",
+   "file": "src/foliage_targets.lua",
+   "line": 86,
+   "symbol": "40mm HE Grenade",
+   "old": "{280, 0x61BA34A9, 361}",
+   "new": "{285, 0x61BA34A9, 362}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      276,
+      298
+     ],
+     "candidates": [
+      285
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.284",
+   "file": "src/foliage_targets.lua",
+   "line": 87,
+   "symbol": "20mm Flak Rounds",
+   "old": "{284, 0x74AD0033, 380}",
+   "new": "{289, 0x74AD0033, 381}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      276,
+      298
+     ],
+     "candidates": [
+      289
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.293",
+   "file": "src/foliage_targets.lua",
+   "line": 88,
+   "symbol": "500kg Bomb Mk3",
+   "old": "{293, 0x0651CEF6, 354}",
+   "new": "{298, 0x0651CEF6, 354}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      276,
+      299
+     ],
+     "candidates": [
+      298
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.294",
+   "file": "src/foliage_targets.lua",
+   "line": 89,
+   "symbol": "40mm Flak Cannon",
+   "old": "{294, 0xA2CD0019, 36}",
+   "new": "{299, 0xA2CD0019, 36}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      298,
+      303
+     ],
+     "candidates": [
+      299
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.297",
+   "file": "src/foliage_targets.lua",
+   "line": 90,
+   "symbol": "40mm HE Grenade",
+   "old": "{297, 0x61BA34A9, 268}",
+   "new": "{302, 0x61BA34A9, 268}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      299,
+      303
+     ],
+     "candidates": [
+      302
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.298",
+   "file": "src/foliage_targets.lua",
+   "line": 91,
+   "symbol": "Anti-Air Missile",
+   "old": "{298, 0xBFCC6788, 232}",
+   "new": "{303, 0xBFCC6788, 232}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      299,
+      318
+     ],
+     "candidates": [
+      303
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.304",
+   "file": "src/foliage_targets.lua",
+   "line": 92,
+   "symbol": "70mm Standard Rocket",
+   "old": "{304, 0x573CAE11, 187}",
+   "new": "{309, 0x573CAE11, 187}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      303,
+      318
+     ],
+     "candidates": [
+      309
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.312",
+   "file": "src/foliage_targets.lua",
+   "line": 93,
+   "symbol": "20mm Flak Rounds",
+   "old": "{312, 0x74AD0033, 325}",
+   "new": "{317, 0x74AD0033, 325}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      303,
+      318
+     ],
+     "candidates": [
+      317
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.313",
+   "file": "src/foliage_targets.lua",
+   "line": 94,
+   "symbol": "Napalm Bomb",
+   "old": "{313, 0x3D489B66, 14}",
+   "new": "{318, 0x3D489B66, 14}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      303,
+      327
+     ],
+     "candidates": [
+      318
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.320",
+   "file": "src/foliage_targets.lua",
+   "line": 95,
+   "symbol": "70mm Standard Rocket",
+   "old": "{320, 0x573CAE11, 315}",
+   "new": "{325, 0x573CAE11, 315}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      318,
+      327
+     ],
+     "candidates": [
+      325
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.322",
+   "file": "src/foliage_targets.lua",
+   "line": 96,
+   "symbol": "10g Fragmentation",
+   "old": "{322, 0x14AAD316, 45}",
+   "new": "{327, 0x14AAD316, 45}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      318,
+      335
+     ],
+     "candidates": [
+      327
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.330",
+   "file": "src/foliage_targets.lua",
+   "line": 97,
+   "symbol": "Artillery",
+   "old": "{330, 0xCB392DF4, 87}",
+   "new": "{335, 0xCB392DF4, 87}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      327,
+      341
+     ],
+     "candidates": [
+      335
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.336",
+   "file": "src/foliage_targets.lua",
+   "line": 98,
+   "symbol": "Homing Anti-Air Missile",
+   "old": "{336, 0xA31CB0BA, 115}",
+   "new": "{341, 0xA31CB0BA, 115}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      335,
+      343
+     ],
+     "candidates": [
+      341
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.338",
+   "file": "src/foliage_targets.lua",
+   "line": 99,
+   "symbol": "100kg Bomb Mk2",
+   "old": "{338, 0x8A2E7689, 421}",
+   "new": "{343, 0x8A2E7689, 423}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      341,
+      344
+     ],
+     "candidates": [
+      343
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.339",
+   "file": "src/foliage_targets.lua",
+   "line": 100,
+   "symbol": "SEAF Artillery: HIGH-YIELD EXPLOSIVE",
+   "old": "{339, 0x1E12F273, 278}",
+   "new": "{344, 0x1E12F273, 278}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      343,
+      354
+     ],
+     "candidates": [
+      344
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.341",
+   "file": "src/foliage_targets.lua",
+   "line": 101,
+   "symbol": "Small Plasma Bolt",
+   "old": "{341, 0x91C46E0F, 126}",
+   "new": "{346, 0x91C46E0F, 126}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      344,
+      354
+     ],
+     "candidates": [
+      346
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.346",
+   "file": "src/foliage_targets.lua",
+   "line": 102,
+   "symbol": "40mm HE Mortar",
+   "old": "{346, 0x9FBB83F9, 360}",
+   "new": "{351, 0x9FBB83F9, 361}",
+   "method": "same name hash; the only such row inside the type window of the nearest unique-name targets",
+   "witnesses": [
+    {
+     "window": [
+      344,
+      354
+     ],
+     "candidates": [
+      351
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.349",
+   "file": "src/foliage_targets.lua",
+   "line": 103,
+   "symbol": "70mm Laser-Guided Missile Mk2",
+   "old": "{349, 0xD45518B3, 303}",
+   "new": "{354, 0xD45518B3, 303}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      344,
+      355
+     ],
+     "candidates": [
+      354
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  },
+  {
+   "id": "target.350",
+   "file": "src/foliage_targets.lua",
+   "line": 104,
+   "symbol": "85mm High-Explosive Grenade Mk2",
+   "old": "{350, 0x07734A24, 110}",
+   "new": "{355, 0x07734A24, 110}",
+   "method": "unique name hash among the 355 live rows",
+   "witnesses": [
+    {
+     "window": [
+      354,
+      356
+     ],
+     "candidates": [
+      355
+     ],
+     "new_template_0xF8": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L3",
+   "shipped": true
+  }
+ ]
+}

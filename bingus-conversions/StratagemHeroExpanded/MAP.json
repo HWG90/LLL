@@ -1,0 +1,656 @@
+{
+ "mod": "Stratagem Hero Expanded v1.0 (Vanilla Plus Megapack option)",
+ "source": {
+  "used": "upstream-bingus/StratagemHeroExpanded",
+  "why": "checkout is at tag v1.0 (commit 381f9a1) and every file in components.lock.json source_sha256 matches it (the pinned copy in VanillaPlusMegapack/components/StratagemHeroExpanded is identical)",
+  "lock_revision": "v1.0",
+  "module": "mods/cowboybingus/stratagem_hero_expanded"
+ },
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "old_image": "<workspace>/native-work/evidence/game-pre1020.dll",
+ "new_image": "<workspace>/native-work/evidence/game-26088801.dll",
+ "capture": {
+  "settings": "<workspace>/native-work/evidence/stratagem-settings-26088801.json",
+  "catalog": "<workspace>/native-work/stratagem-catalog-live.json"
+ },
+ "counts": {
+  "high": 14
+ },
+ "rows_total": 14,
+ "rows_feeding_write": 11,
+ "changed": [
+  "hero.EXE_SHA256",
+  "hero.GAME_SHA256",
+  "hero.tiers_rva",
+  "hero.groups_rva",
+  "hero.VANILLA_GROUPS",
+  "hero.GROUPS",
+  "hero.settings_rva",
+  "hero.TYPES",
+  "hero.PROBE",
+  "hero.comment_picker",
+  "hero.build_text"
+ ],
+ "non_data_edits": [
+  {
+   "id": "hero.region_type_mapped",
+   "file": "src/stratagem_hero_expanded.lua",
+   "line": 242,
+   "change_kind": "environment (Proton/Wine), not build data",
+   "old": "local MEM_COMMIT, MEM_IMAGE = 0x1000, 0x1000000 ... region.type ~= MEM_IMAGE",
+   "new": "local MEM_COMMIT, MEM_IMAGE, MEM_MAPPED = 0x1000, 0x1000000, 0x40000 ... (region.type ~= MEM_IMAGE and region.type ~= MEM_MAPPED)",
+   "why": "Mod.image_writable refuses any page whose VirtualQuery type is not MEM_IMAGE. Under the Proton build this game runs on, VirtualQuery reports game.dll's own image pages as MEM_MAPPED (0x40000), so the unmodified check would refuse the arcade tables and the mod could never apply on this machine.",
+   "evidence": [
+    {
+     "live_log": "<workspace>/native-work/mom-port/live/mom_page_region.live.log",
+     "observation": "five game.dll image regions (rva 0x167F000..0x168C000, prot 0x1/0x20) report type 0x40000 MEM_MAPPED, state MEM_COMMIT, in the running game",
+     "rows": [
+      [
+       "0x1682280",
+       "0x1682000",
+       "0x3000",
+       "0x1",
+       "0x40000",
+       "0x1000"
+      ],
+      [
+       "0x1681000",
+       "0x1681000",
+       "0x1000",
+       "0x20",
+       "0x40000",
+       "0x1000"
+      ],
+      [
+       "0x1683000",
+       "0x1683000",
+       "0x2000",
+       "0x1",
+       "0x40000",
+       "0x1000"
+      ],
+      [
+       "0x1688300",
+       "0x1688000",
+       "0x4000",
+       "0x20",
+       "0x40000",
+       "0x1000"
+      ],
+      [
+       "0x167FB70",
+       "0x167F000",
+       "0x3000",
+       "0x20",
+       "0x40000",
+       "0x1000"
+      ]
+     ],
+     "verified": true
+    },
+    {
+     "installed_log": "<prefix-user>/AppData/Local/LLL/Helldivers2/Logs/StratagemHeroExpanded.log",
+     "text": [
+      "applied (108 stratagems in 8 groups; pages 0x08, 0x08), at load."
+     ],
+     "note": "the installed copy (PORT51 port carrying this same edit) applied on the tables' pages, which reported PAGE_WRITECOPY (0x08), i.e. section-backed image data, and held to shutdown"
+    },
+    {
+     "offline": "under the workspace Wine (build.py --tests, out/TESTS.json wine_host_region_types) a normally loaded image (the test luajit.exe) reports MEM_IMAGE (0x1000000) for every section, and the unmodified upstream \"page check\" test passes there. So MEM_MAPPED is not generic Wine behaviour: it is how game.dll is mapped in this game under Proton, observed live only. The edit therefore adds MEM_MAPPED instead of replacing MEM_IMAGE, and live check H5 must confirm it on the tables' own pages."
+    }
+   ],
+   "kept": "MEM_COMMIT state, writable protection set {0x04,0x08,0x40,0x80}, region allocation base == game.dll base, exact vanilla bytes of both tables, every pool identity; MEM_PRIVATE and foreign-module pages still refused",
+   "confidence": "medium: observed live on other game.dll pages (same mapping), not yet on the tables' own pages (H5)",
+   "feeds_write": true,
+   "live_check": "H5"
+  }
+ ],
+ "writes": [
+  {
+   "what": "tier table: 612 bytes at game.dll+0x24B5CC0 (tables.expanded.tiers)",
+   "how": "WriteProcessMemory (native.write) after Mod.image_writable on the whole range, exact vanilla bytes of both tables, settings loaded (PROBE) and the full pool check; read back and compared (arcade_state == expanded)",
+   "evidence": [
+    "hero.tiers_rva",
+    "hero.table_layout",
+    "hero.VANILLA_TIERS",
+    "hero.region_type_mapped"
+   ]
+  },
+  {
+   "what": "group table: 640 bytes at game.dll+0x24B5F70 (tables.expanded.groups: group 0 empty, groups 1-8 the 108-stratagem pool, group 9 empty)",
+   "how": "same as above, the second WriteProcessMemory",
+   "evidence": [
+    "hero.groups_rva",
+    "hero.table_layout",
+    "hero.VANILLA_GROUPS",
+    "hero.GROUPS",
+    "hero.TYPES",
+    "hero.settings_rva",
+    "hero.INFO_layout"
+   ]
+  },
+  {
+   "what": "the 76 bytes between the tables (game.dll+0x24B5F24..0x24B5F70)",
+   "how": "never written (separate writes)"
+  },
+  {
+   "what": "restore",
+   "how": "upstream v1.0 has no restore: the game reloads game.dll .data each launch; the shutdown hook only reads both tables once and logs whether they still hold the pool"
+  }
+ ],
+ "added_stratagems_26088801": [
+  {
+   "kind": 28,
+   "name": "SniperRifleDuo",
+   "class": 20,
+   "category": 2,
+   "code_count": 6,
+   "hud": 2
+  },
+  {
+   "kind": 50,
+   "name": "EagleFlyBy",
+   "class": 7,
+   "category": 0,
+   "code_count": 9,
+   "hud": 0
+  },
+  {
+   "kind": 66,
+   "name": "LaserRifleIon",
+   "class": 14,
+   "category": 2,
+   "code_count": 5,
+   "hud": 2
+  },
+  {
+   "kind": 145,
+   "name": "OrbitalConfetti",
+   "class": 2,
+   "category": 0,
+   "code_count": 9,
+   "hud": 0
+  }
+ ],
+ "witness_check_failures": [],
+ "rows": [
+  {
+   "id": "hero.EXE_SHA256",
+   "line": 18,
+   "symbol": "Mod.EXE_SHA256",
+   "kind": "SHA-256 pin (api.verify_build gate)",
+   "old": "F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06",
+   "new": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "method": "SHA-256 of the installed file (read-only), equal to the hash in BRIEF.md",
+   "witnesses": [
+    {
+     "file": "<game>/bin/helldivers2.exe",
+     "sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "live_check": "H0",
+   "changed": true,
+   "file": "src/stratagem_hero_expanded.lua"
+  },
+  {
+   "id": "hero.GAME_SHA256",
+   "line": 19,
+   "symbol": "Mod.GAME_SHA256",
+   "kind": "SHA-256 pin (api.verify_build gate)",
+   "old": "2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E",
+   "new": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "method": "SHA-256 of the installed file (read-only), equal to the hash in BRIEF.md",
+   "witnesses": [
+    {
+     "file": "<game>/data/game/game.dll",
+     "sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "live_check": "H0",
+   "changed": true,
+   "file": "src/stratagem_hero_expanded.lua"
+  },
+  {
+   "id": "hero.tiers_rva",
+   "line": 23,
+   "symbol": "Mod.LAYOUT.tiers_rva",
+   "kind": "game.dll .data: 9 tiers x 68 bytes (written)",
+   "old": "0x263CCC0",
+   "new": "0x24B5CC0",
+   "method": "the picker's own lea of the tier table, in an instruction-identical picker; the 612 old bytes occur once in the new image, at the new address",
+   "witnesses": [
+    {
+     "old_insn_rva": "0x598389",
+     "new_insn_rva": "0x5A0F49",
+     "old_insn": "lea rax, [rip + 0x20a4930]",
+     "new_insn": "lea rax, [rip + 0x1f14d70]",
+     "old_value": "0x263CCC0",
+     "new_value": "0x24B5CC0",
+     "verified": true
+    },
+    {
+     "note": "picker old 0x598370..0x5984B0 and new 0x5A0F30..0x5A1070: 88 instructions, identical with RIP displacements and branch targets blanked (imul r10,rax,0x44; 8 tier entries {u32 group, f32 weight} from +4; group*64 (shl r8,6); up to 16 u32 slots, 0 ends)",
+     "verified": true
+    },
+    {
+     "note": "old tier bytes (612) found exactly once in the new image, at 0x24B5CC0 (new .data starts 0x24B5000)",
+     "verified": true
+    },
+    {
+     "note": "round logic calls the picker twice: old 0x597670/0x5976D1 -> new 0x5A0230/0x5A0291",
+     "verified": true
+    }
+   ],
+   "agreeing": 4,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "live_check": "H2",
+   "changed": true,
+   "file": "src/stratagem_hero_expanded.lua"
+  },
+  {
+   "id": "hero.groups_rva",
+   "line": 24,
+   "symbol": "Mod.LAYOUT.groups_rva",
+   "kind": "game.dll .data: 10 groups x 64 bytes (written)",
+   "old": "0x263CF70",
+   "new": "0x24B5F70",
+   "method": "the picker's own lea of the group table; the old 640 bytes with every stratagem number migrated by enum name occur once in the new image, at the new address; the 76-byte gap between the tables is unchanged",
+   "witnesses": [
+    {
+     "old_insn_rva": "0x59841B",
+     "new_insn_rva": "0x5A0FDB",
+     "old_insn": "lea rax, [rip + 0x20a4b4e]",
+     "new_insn": "lea rax, [rip + 0x1f14f8e]",
+     "old_value": "0x263CF70",
+     "new_value": "0x24B5F70",
+     "verified": true
+    },
+    {
+     "note": "migrated vanilla groups (640 bytes) found exactly once in the new image, at 0x24B5F70",
+     "verified": true
+    },
+    {
+     "note": "groups_rva - tiers_rva = 0x2B0 (612 + 76) in both builds",
+     "verified": true
+    }
+   ],
+   "agreeing": 3,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "live_check": "H2",
+   "changed": true,
+   "file": "src/stratagem_hero_expanded.lua"
+  },
+  {
+   "id": "hero.table_layout",
+   "line": 27,
+   "symbol": "TIERS, TIER_SIZE, TIER_ENTRIES / GROUPS, GROUP_SIZE, GROUP_SLOTS",
+   "kind": "arcade table layout",
+   "old": "9, 68, 8 / 10, 64, 16",
+   "new": "9, 68, 8 / 10, 64, 16",
+   "method": "instruction-identical picker (stride 0x44, 8 entries, group*64, 16 slots); the whole 612-byte tier block and 640-byte group block each match as one unit at the new addresses",
+   "witnesses": [
+    {
+     "note": "picker old 0x598370..0x5984B0 and new 0x5A0F30..0x5A1070: 88 instructions, identical with RIP displacements and branch targets blanked (imul r10,rax,0x44; 8 tier entries {u32 group, f32 weight} from +4; group*64 (shl r8,6); up to 16 u32 slots, 0 ends)",
+     "verified": true
+    }
+   ],
+   "agreeing": 2,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "live_check": "H2",
+   "changed": false,
+   "file": "src/stratagem_hero_expanded.lua"
+  },
+  {
+   "id": "hero.VANILLA_TIERS",
+   "line": 42,
+   "symbol": "Mod.VANILLA_TIERS",
+   "kind": "expected vanilla tier bytes (banners, group indices, weights; no stratagem numbers)",
+   "old": "unchanged",
+   "new": "unchanged",
+   "method": "old image bytes at 0x263CCC0 equal new image bytes at 0x24B5CC0 (612 bytes); build.py also checks the mod's own encode_tiers(VANILLA_TIERS) against the new image",
+   "witnesses": [
+    {
+     "verified": true
+    }
+   ],
+   "agreeing": 1,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "live_check": "H2",
+   "changed": false,
+   "file": "src/stratagem_hero_expanded.lua"
+  },
+  {
+   "id": "hero.VANILLA_GROUPS",
+   "line": 53,
+   "symbol": "Mod.VANILLA_GROUPS",
+   "kind": "expected vanilla group lists (StratagemType numbers)",
+   "old": "[[83, 136, 33, 30, 119, 66], [3, 140, 125, 107, 92, 130, 42, 147, 53, 117], [43, 73, 134, 25, 141, 144], [30, 3, 140, 18], [137, 66, 117, 53], [43, 73, 134], [83, 136, 125, 107], [124], [56, 13, 63]]",
+   "new": "[[86, 139, 34, 31, 122, 69], [3, 143, 128, 110, 95, 133, 43, 151, 55, 120], [44, 76, 137, 25, 144, 148], [31, 3, 143, 18], [140, 69, 120, 55], [44, 76, 137], [86, 139, 128, 110], [127], [58, 13, 65]]",
+   "method": "each number migrated by its StratagemType name (enum registration decoded in both images); the migrated lists encode byte for byte to the new image's table at 0x24B5F70; the upstream lists encode to the old image's table",
+   "witnesses": [
+    {
+     "old_enum_function": "0x1567D74",
+     "new_enum_function": "0x1408097",
+     "old_kinds": 150,
+     "new_kinds": 154,
+     "verified": true
+    },
+    {
+     "note": "upstream VANILLA_GROUPS == old image 0x263CF70 bytes",
+     "verified": true
+    },
+    {
+     "note": "migrated VANILLA_GROUPS == new image 0x24B5F70 bytes",
+     "verified": true
+    }
+   ],
+   "agreeing": 3,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "live_check": "H2",
+   "changed": true,
+   "file": "src/stratagem_hero_expanded.lua"
+  },
+  {
+   "id": "hero.GROUPS",
+   "line": 71,
+   "symbol": "Mod.GROUPS",
+   "kind": "the expanded pool (108 StratagemType numbers, written into the group table)",
+   "old": "[[101, 120, 14, 134, 55, 24, 96, 67, 43, 73, 115, 142, 57, 2], [30, 3, 49, 140, 18, 133, 65, 126, 38], [118, 83, 4, 136, 106, 125, 21, 62, 107, 58, 41, 74, 34], [114, 51, 100, 92, 32, 13, 56, 113, 141, 80, 131, 45, 81, 112, 61, 63], [149, 68, 147, 39, 16, 6, 99, 89, 25, 127, 130, 54, 75, 97, 110, 87], [121, 66, 8, 23, 53, 137, 117, 44, 52, 59, 22, 144, 9, 104], [105, 26, 135, 1, 50, 27, 10, 91, 88, 119, 139, 12, 46], [124, 33, 145, 42, 28, 11, 128, 19, 70, 5, 148, 116, 132]]",
+   "new": "[[104, 123, 14, 137, 57, 24, 99, 70, 44, 76, 118, 146, 59, 2], [31, 3, 51, 143, 18, 136, 68, 129, 39], [121, 86, 4, 139, 109, 128, 21, 64, 110, 60, 42, 77, 35], [117, 53, 103, 95, 33, 13, 58, 116, 144, 83, 134, 46, 84, 115, 63, 65], [153, 71, 151, 40, 16, 6, 102, 92, 25, 130, 133, 56, 78, 100, 113, 90], [124, 69, 8, 23, 55, 140, 120, 45, 54, 61, 22, 148, 9, 107], [108, 26, 138, 1, 52, 27, 10, 94, 91, 122, 142, 12, 47], [127, 34, 149, 43, 29, 11, 131, 19, 73, 5, 152, 119, 135]]",
+   "method": "each number migrated by its StratagemType name; in the read-only settings capture every new number has its own StratagemInfo (type == number, 1..10 code arrows, HUD type <= 4) and the same class (+0x188) the upstream test fixture gives the old number, so every group still holds one family",
+   "witnesses": [
+    {
+     "note": "108 entries, unique, all valid and class-preserving (evidence/pool.json)",
+     "verified": true
+    },
+    {
+     "capture": "<workspace>/native-work/evidence/stratagem-settings-26088801.json",
+     "records": 153,
+     "verified": true
+    }
+   ],
+   "agreeing": 2,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "live_check": "H3",
+   "changed": true,
+   "file": "src/stratagem_hero_expanded.lua"
+  },
+  {
+   "id": "hero.settings_rva",
+   "line": 25,
+   "symbol": "Mod.LAYOUT.settings_rva",
+   "kind": "game.dll .data: StratagemInfo pointer by StratagemType (read only)",
+   "old": "0x37CB600",
+   "new": "0x31870E0",
+   "method": "paired instruction witnesses in the table builder, unload, and the arcade's own input check and round widget",
+   "witnesses": [
+    {
+     "old_insn_rva": "0x11F20DB",
+     "new_insn_rva": "0x10838FB",
+     "old_insn": "lea r13, [rip + 0x25d951e]",
+     "new_insn": "lea r13, [rip + 0x21037de]",
+     "old_value": "0x37CB600",
+     "new_value": "0x31870E0",
+     "note": "table builder: lea r13, table",
+     "verified": true
+    },
+    {
+     "old_insn_rva": "0x11F22B7",
+     "new_insn_rva": "0x1083AD7",
+     "old_insn": "lea rcx, [rip + 0x25d9342]",
+     "new_insn": "lea rcx, [rip + 0x2103602]",
+     "old_value": "0x37CB600",
+     "new_value": "0x31870E0",
+     "note": "unload: lea rcx, table",
+     "verified": true
+    },
+    {
+     "old_insn_rva": "0x598074",
+     "new_insn_rva": "0x5A0C34",
+     "old_insn": "lea r8, [rip + 0x3233585]",
+     "new_insn": "lea r8, [rip + 0x2be64a5]",
+     "old_value": "0x37CB600",
+     "new_value": "0x31870E0",
+     "note": "arcade input check: lea r8, table; then [r8+0x48] count, [r8+0x40] code",
+     "verified": true
+    },
+    {
+     "old_insn_rva": "0x5979C7",
+     "new_insn_rva": "0x5A0587",
+     "old_insn": "lea r11, [rip + 0x3233c32]",
+     "new_insn": "lea r11, [rip + 0x2be6b52]",
+     "old_value": "0x37CB600",
+     "new_value": "0x31870E0",
+     "note": "arcade round widget: lea r11, table; mov r11,[r11+rax*8]",
+     "verified": true
+    },
+    {
+     "live_capture": "<workspace>/native-work/evidence/stratagem-settings-26088801.json",
+     "read": "[game.dll+0x31870E0 + 8*kind] -> StratagemInfo of kind, kinds 1..153 (capture table address 0x6ffff39f70e0)",
+     "verified": true
+    },
+    {
+     "cross_check": "BetterStratagemBounce sibling MAP row patch.table_rva: 126/126 masked-window votes for 0x31870E0",
+     "verified": true
+    }
+   ],
+   "agreeing": 6,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "live_check": "H3",
+   "changed": true,
+   "file": "src/stratagem_hero_expanded.lua"
+  },
+  {
+   "id": "hero.TYPES",
+   "line": 29,
+   "symbol": "TYPES",
+   "kind": "StratagemType count (table read size TYPES*8, and the bound on pool numbers)",
+   "old": "150",
+   "new": "154",
+   "method": "the game clears exactly TYPES*8 bytes of the table (memset size 0x4B0 -> 0x4D0) in the builder and unload; the enum registration has 150 -> 154 names",
+   "witnesses": [
+    {
+     "old_insn_rva": "0x11F20FE",
+     "new_insn_rva": "0x108391E",
+     "old_insn": "mov r8d, 0x4b0",
+     "new_insn": "mov r8d, 0x4d0",
+     "verified": true
+    },
+    {
+     "old_insn_rva": "0x11F22B1",
+     "new_insn_rva": "0x1083AD1",
+     "old_insn": "mov r8d, 0x4b0",
+     "new_insn": "mov r8d, 0x4d0",
+     "verified": true
+    },
+    {
+     "old_kinds": 150,
+     "new_kinds": 154,
+     "verified": true
+    }
+   ],
+   "agreeing": 3,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "live_check": "H3",
+   "changed": true,
+   "file": "src/stratagem_hero_expanded.lua"
+  },
+  {
+   "id": "hero.PROBE",
+   "line": 39,
+   "symbol": "Mod.PROBE",
+   "kind": "StratagemType whose settings pointer marks the settings as loaded (Reinforce)",
+   "old": "124",
+   "new": "127",
+   "method": "enum name ReinforcementBeacon: 124 in the old registration, 127 in the new; the capture holds kind 127's own StratagemInfo; also in the pool (mission group)",
+   "witnesses": [
+    {
+     "old_registration_rva": "0x15687A3",
+     "new_registration_rva": "0x1408B06",
+     "name": "ReinforcementBeacon",
+     "verified": true
+    }
+   ],
+   "agreeing": 1,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "H3",
+   "changed": true,
+   "file": "src/stratagem_hero_expanded.lua"
+  },
+  {
+   "id": "hero.INFO_layout",
+   "line": 32,
+   "symbol": "INFO_SIZE, INFO_TYPE, INFO_CODE, INFO_CODE_LENGTH, INFO_HUD; MAX_CODE, MAX_HUD",
+   "kind": "StratagemInfo fields the pool check reads (guards the write)",
+   "old": "0xC0, 0x00, 0x40, 0x48, 0xB8; 10, 4",
+   "new": "0xC0, 0x00, 0x40, 0x48, 0xB8; 10, 4",
+   "method": "the arcade input check reads count [info+0x48] and code [info+0x40] in both builds; nine paired sites read [info+0xB8] right after a table load in both builds; the capture (153 records) and the old build's definitions log (77 records, 400 bytes each) hold type at +0, a code pointer/count at +0x40/+0x48 and a HUD type <= 4 at +0xB8",
+   "witnesses": [
+    {
+     "old_insn_rva": "0x598083",
+     "new_insn_rva": "0x5A0C43",
+     "insn": "mov edx, dword ptr [r8 + 0x48]",
+     "verified": true
+    },
+    {
+     "old_insn_rva": "0x59808D",
+     "new_insn_rva": "0x5A0C4D",
+     "insn": "mov rax, qword ptr [r8 + 0x40]",
+     "verified": true
+    },
+    {
+     "hud_reads_old_new": [
+      [
+       "0x670CA7",
+       "0x67A807",
+       "cmp dword ptr [rcx + 0xb8], 0"
+      ],
+      [
+       "0x183A76F",
+       "0x16BB66F",
+       "mov eax, dword ptr [rbx + 0xb8]"
+      ],
+      [
+       "0x183B484",
+       "0x16BC384",
+       "mov eax, dword ptr [rbx + 0xb8]"
+      ],
+      [
+       "0x1893669",
+       "0x1714889",
+       "mov r8d, dword ptr [rdi + 0xb8]"
+      ],
+      [
+       "0x18CECA4",
+       "0x174FF04",
+       "mov eax, dword ptr [r13 + 0xb8]"
+      ],
+      [
+       "0x191D569",
+       "0x179E739",
+       "mov eax, dword ptr [rax + 0xb8]"
+      ],
+      [
+       "0x191EEB7",
+       "0x17A0087",
+       "mov eax, dword ptr [rax + 0xb8]"
+      ],
+      [
+       "0x1922F66",
+       "0x17A4136",
+       "mov r8d, dword ptr [rsi + 0xb8]"
+      ],
+      [
+       "0x19B9795",
+       "0x183ACD5",
+       "mov r8d, dword ptr [rdi + 0xb8]"
+      ]
+     ],
+     "verified": true
+    },
+    {
+     "capture_records": 153,
+     "max_code_count": 9,
+     "max_hud": 4,
+     "verified": true
+    },
+    {
+     "old_definitions_log": 77,
+     "verified": true
+    }
+   ],
+   "agreeing": 5,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "live_check": "H3",
+   "changed": false,
+   "file": "src/stratagem_hero_expanded.lua"
+  },
+  {
+   "id": "hero.comment_picker",
+   "line": 5,
+   "symbol": "comment: picker / round logic RVAs",
+   "kind": "comment only",
+   "old": "0x598370, 0x5970D0",
+   "new": "0x5A0F30, 0x59FC90",
+   "method": "instruction-identical picker (see hero.tiers_rva); round logic old 0x5970D0 -> new 0x59FC90 calls it twice",
+   "witnesses": [
+    {
+     "verified": true
+    }
+   ],
+   "agreeing": 1,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "-",
+   "changed": true,
+   "file": "src/stratagem_hero_expanded.lua"
+  },
+  {
+   "id": "hero.build_text",
+   "line": 414,
+   "symbol": "build number in comments and the refusal message",
+   "kind": "text only",
+   "old": "25480438",
+   "new": "26088801",
+   "method": "the pins are the gate; the text names the build they pin",
+   "witnesses": [
+    {
+     "verified": true
+    }
+   ],
+   "agreeing": 1,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "H0",
+   "changed": true,
+   "file": "src/stratagem_hero_expanded.lua"
+  }
+ ]
+}

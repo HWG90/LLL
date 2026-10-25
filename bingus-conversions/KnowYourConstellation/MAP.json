@@ -1,0 +1,4679 @@
+{
+ "option": "KnowYourConstellation",
+ "revision": "v4.1.1",
+ "module": "mods/cowboybingus/enemy_intelligence",
+ "source": "upstream-bingus/KnowYourConstellation (tag v4.1.1, lock hashes match; components.lock.json source_sha256: 53 of 53 equal)",
+ "old_build": {
+  "steam": 25480438,
+  "game_dll": "2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E",
+  "exe": "F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06"
+ },
+ "new_build": {
+  "steam": 26088801,
+  "game_dll": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+  "exe": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE"
+ },
+ "writes": "none: KYC reads through ReadProcessMemory only (src/read_api.lua) and its build forbids write APIs",
+ "rows": [
+  {
+   "id": "mission.ui_state",
+   "file": "src/mission.lua",
+   "name": "UI state (PresenterManager owner)",
+   "kind": "game.dll global",
+   "old": "0x347ce28",
+   "new": "0x2e38160",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated old -> new; every witness agrees",
+   "witnesses": [
+    {
+     "kind": "global (RIP-relative windows)",
+     "old": "0x347ce28",
+     "new": "0x2e38160",
+     "old_sites": 569,
+     "sampled": 48,
+     "agreeing": 17,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x5c08cb",
+       "new": "0x5c970b",
+       "instruction_old": "mov rdx, qword ptr [rip + 0x2ebc556]",
+       "instruction_new": "mov rdx, qword ptr [rip + 0x286ea4e]"
+      },
+      {
+       "old": "0xa610b3",
+       "new": "0xa7ca93",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2a1bd6e]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x23bb6c6]"
+      },
+      {
+       "old": "0xadaf61",
+       "new": "0xaf6cd1",
+       "instruction_old": "mov rax, qword ptr [rip + 0x29a1ec0]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2341488]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K1",
+   "replace": {
+    "old_text": "read(game + 0x347ce28, 8)",
+    "new_text": "read(game + 0x2E38160, 8)"
+   },
+   "note": null,
+   "line": 151
+  },
+  {
+   "id": "mission.session_fallback_global",
+   "file": "src/mission.lua",
+   "name": "session object (joinable fallback)",
+   "kind": "game.dll global",
+   "old": "0x3326aa0",
+   "new": "0x2ce1c68",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated old -> new; every witness agrees",
+   "witnesses": [
+    {
+     "kind": "global (RIP-relative windows)",
+     "old": "0x3326aa0",
+     "new": "0x2ce1c68",
+     "old_sites": 347,
+     "sampled": 48,
+     "agreeing": 10,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x9fbacc",
+       "new": "0xa0e40f",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x292afcd]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x22d3852]"
+      },
+      {
+       "old": "0x1265493",
+       "new": "0x10f7003",
+       "instruction_old": "mov rax, qword ptr [rip + 0x20c1606]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x1beac5e]"
+      },
+      {
+       "old": "0x140a326",
+       "new": "0x12a1e36",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x1f1c773]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x1a3fe2b]"
+      }
+     ]
+    },
+    {
+     "kind": "instruction pair",
+     "old": "0x12d7e15",
+     "old_insn": "mov edx, dword ptr [rax + 0x55f640]",
+     "new": "0x116a925",
+     "new_insn": "mov edx, dword ptr [rax + 0x55e978]",
+     "proves": "the session object read through this global keeps the fallback field",
+     "checked": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K6",
+   "replace": {
+    "old_text": "ptr(game + 0x3326aa0)",
+    "new_text": "ptr(game + 0x2CE1C68)"
+   },
+   "note": null,
+   "line": 207
+  },
+  {
+   "id": "mission.matchmaking",
+   "file": "src/mission.lua",
+   "name": "matchmaking manager (joinable records)",
+   "kind": "game.dll global",
+   "old": "0x347ce80",
+   "new": "0x2e381b8",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated old -> new; every witness agrees",
+   "witnesses": [
+    {
+     "kind": "global (RIP-relative windows)",
+     "old": "0x347ce80",
+     "new": "0x2e381b8",
+     "old_sites": 106,
+     "sampled": 48,
+     "agreeing": 34,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x72a695",
+       "new": "0x735d36",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2d527e4]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x270247b]"
+      },
+      {
+       "old": "0x73838e",
+       "new": "0x743ace",
+       "instruction_old": "mov rdx, qword ptr [rip + 0x2d44aeb]",
+       "instruction_new": "mov rdx, qword ptr [rip + 0x26f46e3]"
+      },
+      {
+       "old": "0x7383cc",
+       "new": "0x743b0c",
+       "instruction_old": "mov rdx, qword ptr [rip + 0x2d44aad]",
+       "instruction_new": "mov rdx, qword ptr [rip + 0x26f46a5]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K6",
+   "replace": {
+    "old_text": "ptr(game + 0x347ce80)",
+    "new_text": "ptr(game + 0x2E381B8)"
+   },
+   "note": null,
+   "line": 236
+  },
+  {
+   "id": "mission.briefing_manager",
+   "file": "src/mission.lua",
+   "name": "UI event manager (briefing descriptor list)",
+   "kind": "game.dll global",
+   "old": "0x3326e68",
+   "new": "0x2ce2040",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated old -> new; every witness agrees",
+   "witnesses": [
+    {
+     "kind": "global (RIP-relative windows)",
+     "old": "0x3326e68",
+     "new": "0x2ce2040",
+     "old_sites": 2265,
+     "sampled": 48,
+     "agreeing": 10,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x55efa2",
+       "new": "0x567e6d",
+       "instruction_old": "mov r8, qword ptr [rip + 0x2dc7ebf]",
+       "instruction_new": "mov r8, qword ptr [rip + 0x277a1cc]"
+      },
+      {
+       "old": "0xb0b225",
+       "new": "0xb27325",
+       "instruction_old": "mov rsi, qword ptr [rip + 0x281bc3c]",
+       "instruction_new": "mov rsi, qword ptr [rip + 0x21bad14]"
+      },
+      {
+       "old": "0xb25148",
+       "new": "0xb41248",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2801d19]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x21a0df1]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K4",
+   "replace": {
+    "old_text": "local manager = ptr(game + 0x3326e68)",
+    "new_text": "local manager = ptr(game + 0x2CE2040)"
+   },
+   "note": null,
+   "line": 261
+  },
+  {
+   "id": "mission.root",
+   "file": "src/mission.lua",
+   "name": "game state root",
+   "kind": "game.dll global",
+   "old": "0x3326340",
+   "new": "0x2ce1508",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated old -> new; every witness agrees",
+   "witnesses": [
+    {
+     "kind": "global (RIP-relative windows)",
+     "old": "0x3326340",
+     "new": "0x2ce1508",
+     "old_sites": 2624,
+     "sampled": 48,
+     "agreeing": 4,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x7f724e",
+       "new": "0x803b6e",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2b2f0eb]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x24dd993]"
+      },
+      {
+       "old": "0x8d1cd7",
+       "new": "0x8e2017",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2a54662]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x23ff4ea]"
+      },
+      {
+       "old": "0x11ed0de",
+       "new": "0x107e8fe",
+       "instruction_old": "mov rdi, qword ptr [rip + 0x213925b]",
+       "instruction_new": "mov rdi, qword ptr [rip + 0x1c62c03]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K2",
+   "replace": {
+    "old_text": "ptr(game + 0x3326340)",
+    "new_text": "ptr(game + 0x2CE1508)"
+   },
+   "note": null,
+   "line": 280
+  },
+  {
+   "id": "mission.board",
+   "file": "src/mission.lua",
+   "name": "galactic war board",
+   "kind": "game.dll global",
+   "old": "0x347cee8",
+   "new": "0x2e38220",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated old -> new; every witness agrees",
+   "witnesses": [
+    {
+     "kind": "global (RIP-relative windows)",
+     "old": "0x347cee8",
+     "new": "0x2e38220",
+     "old_sites": 825,
+     "sampled": 48,
+     "agreeing": 33,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x5ba8f4",
+       "new": "0x5c3734",
+       "instruction_old": "mov r9, qword ptr [rip + 0x2ec25ed]",
+       "instruction_new": "mov r9, qword ptr [rip + 0x2874ae5]"
+      },
+      {
+       "old": "0x67563a",
+       "new": "0x67f20a",
+       "instruction_old": "mov rbx, qword ptr [rip + 0x2e078a7]",
+       "instruction_new": "mov rbx, qword ptr [rip + 0x27b900f]"
+      },
+      {
+       "old": "0x725c8a",
+       "new": "0x7311d5",
+       "instruction_old": "mov rbx, qword ptr [rip + 0x2d57257]",
+       "instruction_new": "mov rbx, qword ptr [rip + 0x2707044]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K2",
+   "replace": {
+    "old_text": "ptr(game + 0x347cee8)",
+    "new_text": "ptr(game + 0x2E38220)"
+   },
+   "note": null,
+   "line": 282
+  },
+  {
+   "id": "mission.difficulty_settings",
+   "file": "src/mission.lua",
+   "name": "difficulty settings table (10 x 816)",
+   "kind": "game.dll global",
+   "old": "0x328d2a0",
+   "new": "0x2c44280",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated old -> new; every witness agrees",
+   "witnesses": [
+    {
+     "kind": "global (RIP-relative windows)",
+     "old": "0x328d2a0",
+     "new": "0x2c44280",
+     "old_sites": 9,
+     "sampled": 9,
+     "agreeing": 7,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x94c4d9",
+       "new": "0x95da79",
+       "instruction_old": "lea rcx, [rip + 0x2940dc0]",
+       "instruction_new": "lea rcx, [rip + 0x22e6800]"
+      },
+      {
+       "old": "0x11e2be9",
+       "new": "0x1074249",
+       "instruction_old": "lea rcx, [rip + 0x20aa6b0]",
+       "instruction_new": "lea rcx, [rip + 0x1bd0030]"
+      },
+      {
+       "old": "0x11e3511",
+       "new": "0x1074b71",
+       "instruction_old": "lea rcx, [rip + 0x20a9d88]",
+       "instruction_new": "lea rcx, [rip + 0x1bcf708]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K8",
+   "replace": {
+    "old_text": "game + 0x328d2a0 + ",
+    "new_text": "game + 0x2C44280 + "
+   },
+   "note": null,
+   "line": 305
+  },
+  {
+   "id": "mission.definitions",
+   "file": "src/mission.lua",
+   "name": "modifier definitions",
+   "kind": "game.dll global",
+   "old": "0x347cd98",
+   "new": "0x2e380d0",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated old -> new; every witness agrees",
+   "witnesses": [
+    {
+     "kind": "global (RIP-relative windows)",
+     "old": "0x347cd98",
+     "new": "0x2e380d0",
+     "old_sites": 66,
+     "sampled": 48,
+     "agreeing": 42,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x6fde8c",
+       "new": "0x708fdc",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2d7ef05]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x272f0ed]"
+      },
+      {
+       "old": "0x757eac",
+       "new": "0x76323c",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2d24ee5]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x26d4e8d]"
+      },
+      {
+       "old": "0x856c5f",
+       "new": "0x863d4f",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2c26132]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x25d437a]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K7",
+   "replace": {
+    "old_text": "ptr(game + 0x347cd98)",
+    "new_text": "ptr(game + 0x2E380D0)"
+   },
+   "note": null,
+   "line": 323
+  },
+  {
+   "id": "mission.categories",
+   "file": "src/mission.lua",
+   "name": "operation category table (14 x 168)",
+   "kind": "game.dll global",
+   "old": "0x32e98e0",
+   "new": "0x2ca1f40",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated old -> new; every witness agrees",
+   "witnesses": [
+    {
+     "kind": "global (RIP-relative windows)",
+     "old": "0x32e98e0",
+     "new": "0x2ca1f40",
+     "old_sites": 33,
+     "sampled": 33,
+     "agreeing": 29,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x731f3d",
+       "new": "0x73d7dd",
+       "instruction_old": "lea rbx, [rip + 0x2bb799c]",
+       "instruction_new": "lea rbx, [rip + 0x256475c]"
+      },
+      {
+       "old": "0x732179",
+       "new": "0x73da19",
+       "instruction_old": "lea rbx, [rip + 0x2bb7760]",
+       "instruction_new": "lea rbx, [rip + 0x2564520]"
+      },
+      {
+       "old": "0x734ff0",
+       "new": "0x7407c0",
+       "instruction_old": "lea rdi, [rip + 0x2bb48e9]",
+       "instruction_new": "lea rdi, [rip + 0x2561779]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K7",
+   "replace": {
+    "old_text": "game + 0x32e98e0 + 168",
+    "new_text": "game + 0x2CA1F40 + 168"
+   },
+   "note": null,
+   "line": 408
+  },
+  {
+   "id": "mission.war_effects",
+   "file": "src/mission.lua",
+   "name": "global war effects (32 x 356)",
+   "kind": "game.dll global",
+   "old": "0x346d518",
+   "new": "0x2e38278",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated old -> new; every witness agrees",
+   "witnesses": [
+    {
+     "kind": "global (RIP-relative windows)",
+     "old": "0x346d518",
+     "new": "0x2e38278",
+     "old_sites": 33,
+     "sampled": 33,
+     "agreeing": 29,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x8f3a3f",
+       "new": "0x9042bf",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2b79ad2]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2533fb2]"
+      },
+      {
+       "old": "0x11de0da",
+       "new": "0x106f68a",
+       "instruction_old": "mov rax, qword ptr [rip + 0x228f437]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x1dc8be7]"
+      },
+      {
+       "old": "0x11de749",
+       "new": "0x106fcf9",
+       "instruction_old": "mov rax, qword ptr [rip + 0x228edc8]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x1dc8578]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K7",
+   "replace": {
+    "old_text": "ptr(game + 0x346d518)",
+    "new_text": "ptr(game + 0x2E38278)"
+   },
+   "note": null,
+   "line": 444
+  },
+  {
+   "id": "mission.session",
+   "file": "src/mission.lua",
+   "name": "session / network context",
+   "kind": "game.dll global",
+   "old": "0x347cef0",
+   "new": "0x2e38228",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated old -> new; every witness agrees",
+   "witnesses": [
+    {
+     "kind": "global (RIP-relative windows)",
+     "old": "0x347cef0",
+     "new": "0x2e38228",
+     "old_sites": 1136,
+     "sampled": 48,
+     "agreeing": 24,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x4c375b",
+       "new": "0x4ca39b",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2fb978e]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x296de86]"
+      },
+      {
+       "old": "0x60909a",
+       "new": "0x61226a",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2e73e4f]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2825fb7]"
+      },
+      {
+       "old": "0x66ce7d",
+       "new": "0x67697d",
+       "instruction_old": "mov rsi, qword ptr [rip + 0x2e1006c]",
+       "instruction_new": "mov rsi, qword ptr [rip + 0x27c18a4]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K5",
+   "replace": {
+    "old_text": "ptr(game + 0x347cef0)",
+    "new_text": "ptr(game + 0x2E38228)"
+   },
+   "note": null,
+   "line": 476
+  },
+  {
+   "id": "mission.override_config",
+   "file": "src/mission.lua",
+   "name": "override configuration manager",
+   "kind": "game.dll global",
+   "old": "0x347cdf8",
+   "new": "0x2e38128",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated old -> new; every witness agrees",
+   "witnesses": [
+    {
+     "kind": "global (RIP-relative windows)",
+     "old": "0x347cdf8",
+     "new": "0x2e38128",
+     "old_sites": 251,
+     "sampled": 48,
+     "agreeing": 32,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x63d013",
+       "new": "0x646713",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2e3fdde]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x27f1a0e]"
+      },
+      {
+       "old": "0x997b0d",
+       "new": "0x9a975d",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2ae52e4]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x248e9c4]"
+      },
+      {
+       "old": "0xa54673",
+       "new": "0xa6ee83",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2a2877e]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x23c929e]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K9",
+   "replace": {
+    "old_text": "ptr(game + 0x347cdf8)",
+    "new_text": "ptr(game + 0x2E38128)"
+   },
+   "note": null,
+   "line": 533
+  },
+  {
+   "id": "mission.mission_configs",
+   "file": "src/mission.lua",
+   "name": "mission config table (896 stride)",
+   "kind": "game.dll global",
+   "old": "0x3773420",
+   "new": "0x312eb50",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated old -> new; every witness agrees",
+   "witnesses": [
+    {
+     "kind": "global (RIP-relative windows)",
+     "old": "0x3773420",
+     "new": "0x312eb50",
+     "old_sites": 34,
+     "sampled": 34,
+     "agreeing": 25,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0xad0dd3",
+       "new": "0xaece43",
+       "instruction_old": "lea rdx, [rip + 0x2ca2646]",
+       "instruction_new": "lea rdx, [rip + 0x2641d06]"
+      },
+      {
+       "old": "0xf67ab1",
+       "new": "0xdf8521",
+       "instruction_old": "lea rax, [rip + 0x280b968]",
+       "instruction_new": "lea rax, [rip + 0x2336628]"
+      },
+      {
+       "old": "0xf67b1b",
+       "new": "0xdf858b",
+       "instruction_old": "lea rdx, [rip + 0x280b8fe]",
+       "instruction_new": "lea rdx, [rip + 0x23365be]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K9",
+   "replace": {
+    "old_text": "game + 0x3773420 + 896",
+    "new_text": "game + 0x312EB50 + 896"
+   },
+   "note": null,
+   "line": 626
+  },
+  {
+   "id": "presentation.manager",
+   "file": "src/presentation.lua",
+   "name": "UI event manager (panel registries)",
+   "kind": "game.dll global",
+   "old": "0x3326e68",
+   "new": "0x2ce2040",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated old -> new; every witness agrees",
+   "witnesses": [
+    {
+     "kind": "global (RIP-relative windows)",
+     "old": "0x3326e68",
+     "new": "0x2ce2040",
+     "old_sites": 2265,
+     "sampled": 48,
+     "agreeing": 10,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x55efa2",
+       "new": "0x567e6d",
+       "instruction_old": "mov r8, qword ptr [rip + 0x2dc7ebf]",
+       "instruction_new": "mov r8, qword ptr [rip + 0x277a1cc]"
+      },
+      {
+       "old": "0xb0b225",
+       "new": "0xb27325",
+       "instruction_old": "mov rsi, qword ptr [rip + 0x281bc3c]",
+       "instruction_new": "mov rsi, qword ptr [rip + 0x21bad14]"
+      },
+      {
+       "old": "0xb25148",
+       "new": "0xb41248",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2801d19]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x21a0df1]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K10",
+   "replace": {
+    "old_text": "pointer(game+0x3326e68)",
+    "new_text": "pointer(game+0x2CE2040)"
+   },
+   "note": null,
+   "line": 112
+  },
+  {
+   "id": "presentation.font",
+   "file": "src/presentation.lua",
+   "name": "active body font resource hash",
+   "kind": "game.dll global",
+   "old": "0x3772268",
+   "new": "0x312d998",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated old -> new; every witness agrees",
+   "witnesses": [
+    {
+     "kind": "global (RIP-relative windows)",
+     "old": "0x3772268",
+     "new": "0x312d998",
+     "old_sites": 6,
+     "sampled": 6,
+     "agreeing": 1,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x1388044",
+       "new": "0x121e994",
+       "instruction_old": "mov rdi, qword ptr [rip + 0x23ea21d]",
+       "instruction_new": "mov rdi, qword ptr [rip + 0x1f0effd]"
+      }
+     ]
+    },
+    {
+     "kind": "native aligned old -> new",
+     "old": "0xf553c0",
+     "new": "0xde5de0",
+     "name": "font initializer (presentation.lua)",
+     "aligned": 1707,
+     "old_insns": 1707,
+     "new_insns": 1707,
+     "operand_differences": []
+    },
+    {
+     "kind": "data comparison",
+     "what": "font and atlas keep their distance",
+     "detail": {
+      "old": "0x3772ee8 - 0x3772268 = 0xc80",
+      "new": "0x312e618 - 0x312d998 = 0xc80"
+     },
+     "ok": true
+    },
+    {
+     "kind": "other work",
+     "detail": "native-work/global-3772268.json: 5 agreeing windows to 0x312d998; global-3772ee8.json: 1 window to 0x312e618 (the same font-initializer block)"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K10",
+   "replace": {
+    "old_text": "font_hash(game+0x3772268)",
+    "new_text": "font_hash(game+0x312D998)"
+   },
+   "note": null,
+   "line": 126
+  },
+  {
+   "id": "presentation.material",
+   "file": "src/presentation.lua",
+   "name": "font material owner (+24 hash)",
+   "kind": "game.dll global",
+   "old": "0x37c5478",
+   "new": "0x3180c08",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated old -> new; every witness agrees",
+   "witnesses": [
+    {
+     "kind": "global (RIP-relative windows)",
+     "old": "0x37c5478",
+     "new": "0x3180c08",
+     "old_sites": 28,
+     "sampled": 28,
+     "agreeing": 24,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x1388030",
+       "new": "0x121e980",
+       "instruction_old": "mov rbx, qword ptr [rip + 0x243d441]",
+       "instruction_new": "mov rbx, qword ptr [rip + 0x1f62281]"
+      },
+      {
+       "old": "0x17d4fa1",
+       "new": "0x1656241",
+       "instruction_old": "mov rdx, qword ptr [rip + 0x1ff04d0]",
+       "instruction_new": "mov rdx, qword ptr [rip + 0x1b2a9c0]"
+      },
+      {
+       "old": "0x17d5b62",
+       "new": "0x1656e02",
+       "instruction_old": "mov rdx, qword ptr [rip + 0x1fef90f]",
+       "instruction_new": "mov rdx, qword ptr [rip + 0x1b29dff]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K10",
+   "replace": {
+    "old_text": "pointer(game+0x37c5478)",
+    "new_text": "pointer(game+0x3180C08)"
+   },
+   "note": null,
+   "line": 127
+  },
+  {
+   "id": "presentation.atlas",
+   "file": "src/presentation.lua",
+   "name": "font atlas hash",
+   "kind": "game.dll global",
+   "old": "0x3772ee8",
+   "new": "0x312e618",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated old -> new; every witness agrees",
+   "witnesses": [
+    {
+     "kind": "global (RIP-relative windows)",
+     "old": "0x3772ee8",
+     "new": "0x312e618",
+     "old_sites": 1,
+     "sampled": 1,
+     "agreeing": 1,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x1388054",
+       "new": "0x121e9a4",
+       "instruction_old": "mov rsi, qword ptr [rip + 0x23eae8d]",
+       "instruction_new": "mov rsi, qword ptr [rip + 0x1f0fc6d]"
+      }
+     ]
+    },
+    {
+     "kind": "native aligned old -> new",
+     "old": "0xf553c0",
+     "new": "0xde5de0",
+     "name": "font initializer (presentation.lua)",
+     "aligned": 1707,
+     "old_insns": 1707,
+     "new_insns": 1707,
+     "operand_differences": []
+    },
+    {
+     "kind": "data comparison",
+     "what": "font and atlas keep their distance",
+     "detail": {
+      "old": "0x3772ee8 - 0x3772268 = 0xc80",
+      "new": "0x312e618 - 0x312d998 = 0xc80"
+     },
+     "ok": true
+    },
+    {
+     "kind": "other work",
+     "detail": "native-work/global-3772268.json: 5 agreeing windows to 0x312d998; global-3772ee8.json: 1 window to 0x312e618 (the same font-initializer block)"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K10",
+   "replace": {
+    "old_text": "atlas_hash(game+0x3772ee8)",
+    "new_text": "atlas_hash(game+0x312E618)"
+   },
+   "note": null,
+   "line": 128
+  },
+  {
+   "id": "mission.session_fallback",
+   "file": "src/mission.lua",
+   "name": "session +5633600 joinable fallback (id, -, group)",
+   "kind": "struct offset",
+   "old": 5633600,
+   "new": 5630328,
+   "changed": true,
+   "method": "image-wide scan and aligned functions of the session global",
+   "witnesses": [
+    {
+     "kind": "image-wide scan of the value",
+     "value": "session2.fallback 5633600",
+     "old_sites": 11,
+     "considered": 11,
+     "unmapped": 5,
+     "new_values": [
+      {
+       "kind": "disp",
+       "value": 5630328,
+       "count": 6,
+       "example": {
+        "old": "0x7307b4",
+        "new": "0x73bfd4",
+        "old_insn": "mov dword ptr [r8 + rdi + 0x55f640], 0xffffffff",
+        "new_insn": "mov dword ptr [r8 + rdi + 0x55e978], 0xffffffff",
+        "window_bytes": 160,
+        "field_displacements_masked": true
+       }
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x3326aa0",
+     "functions": 240,
+     "value": 5633600,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 5630328,
+       "count": 5,
+       "example": [
+        "0x7307b4",
+        "0x73bfd4",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x3326aa0",
+     "functions": 240,
+     "value": 5633608,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 5630336,
+       "count": 24,
+       "example": [
+        "0x730816",
+        "0x73c036",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "instruction pair",
+     "old": "0x7307b4",
+     "old_insn": "mov dword ptr [r8 + rdi + 0x55f640], 0xffffffff",
+     "new": "0x73bfd4",
+     "new_insn": "mov dword ptr [r8 + rdi + 0x55e978], 0xffffffff",
+     "proves": "writer of the same record",
+     "checked": true
+    },
+    {
+     "kind": "instruction pair",
+     "old": "0x739585",
+     "old_insn": "cmp eax, dword ptr [rdx + 0x55f648]",
+     "new": "0x744b75",
+     "new_insn": "cmp eax, dword ptr [rdx + 0x55e980]",
+     "proves": "group word +8 moved the same",
+     "checked": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K6",
+   "replace": {
+    "old_text": "read(session + 5633600, 12)",
+    "new_text": "read(session + 5630328, 12)"
+   },
+   "note": null,
+   "line": 208
+  },
+  {
+   "id": "mission.root_packet",
+   "file": "src/mission.lua",
+   "name": "root +713400 loaded preview packet",
+   "kind": "struct offset",
+   "old": 713400,
+   "new": 713528,
+   "changed": true,
+   "method": "game state root grew by 0x80 below 0x106c (0xb70 unchanged); direct witness and its neighbours",
+   "witnesses": [
+    {
+     "kind": "image-wide scan of the value",
+     "value": "root.packet 713400",
+     "old_sites": 1,
+     "considered": 1,
+     "unmapped": 0,
+     "new_values": [
+      {
+       "kind": "disp",
+       "value": 713528,
+       "count": 1,
+       "example": {
+        "old": "0x12d7ff1",
+        "new": "0x116ab01",
+        "old_insn": "lea rax, [r11 + 0xae2b8]",
+        "new_insn": "lea rax, [r11 + 0xae338]",
+        "window_bytes": 64,
+        "field_displacements_masked": true
+       }
+      }
+     ]
+    },
+    {
+     "kind": "instruction pair",
+     "old": "0x12d7ff1",
+     "old_insn": "lea rax, [r11 + 0xae2b8]",
+     "new": "0x116ab01",
+     "new_insn": "lea rax, [r11 + 0xae338]",
+     "proves": "lea of the packet",
+     "checked": true
+    },
+    {
+     "kind": "instruction pair",
+     "old": "0x5d2f2f",
+     "old_insn": "mov rdx, qword ptr [rcx + 0xae288]",
+     "new": "0x5dc46b",
+     "new_insn": "mov rdx, qword ptr [rcx + 0xae308]",
+     "proves": "neighbour 0xae288 +0x80",
+     "checked": true
+    },
+    {
+     "kind": "instruction pair",
+     "old": "0xac1218",
+     "old_insn": "cmp byte ptr [rbp + 0xae291], 1",
+     "new": "0xadd738",
+     "new_insn": "cmp byte ptr [rbp + 0xae311], 1",
+     "proves": "neighbour 0xae291 +0x80",
+     "checked": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K3",
+   "replace": {
+    "old_text": "read(root + 713400, 512, packet_bytes)",
+    "new_text": "read(root + 713528, 512, packet_bytes)"
+   },
+   "note": null,
+   "line": 244
+  },
+  {
+   "id": "mission.controller",
+   "file": "src/mission.lua",
+   "name": "root +0xae288 mission controller",
+   "kind": "struct offset",
+   "old": "0xae288",
+   "new": "0xae308",
+   "changed": true,
+   "method": "image-wide scan (17 agreeing) and taint-paired root fields (52 agreeing)",
+   "witnesses": [
+    {
+     "kind": "image-wide scan of the value",
+     "value": "root.controller 0xae288",
+     "old_sites": 472,
+     "considered": 40,
+     "unmapped": 23,
+     "new_values": [
+      {
+       "kind": "disp",
+       "value": 713480,
+       "count": 17,
+       "example": {
+        "old": "0x270afb",
+        "new": "0x2777eb",
+        "old_insn": "mov rcx, qword ptr [rax + 0xae288]",
+        "new_insn": "mov rcx, qword ptr [rax + 0xae308]",
+        "window_bytes": 160,
+        "field_displacements_masked": true
+       }
+      }
+     ]
+    },
+    {
+     "kind": "instruction pair",
+     "old": "0x541409",
+     "old_insn": "cmp dword ptr [rax + 0xac21c], 4",
+     "new": "0x54a239",
+     "new_insn": "cmp dword ptr [rax + 0xac29c], 4",
+     "proves": "the same +0x80 at the game mode (brief: verified live)",
+     "checked": true
+    },
+    {
+     "kind": "instruction pair",
+     "old": "0xad4ce1",
+     "old_insn": "mov rcx, qword ptr [rax + 0xae288]",
+     "new": "0xaf0e01",
+     "new_insn": "mov rcx, qword ptr [rax + 0xae308]",
+     "proves": "controller load beside the explicit-tag read",
+     "checked": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K3",
+   "replace": {
+    "old_text": "ptr(root + 0xae288)",
+    "new_text": "ptr(root + 0xae308)"
+   },
+   "note": null,
+   "line": 281
+  },
+  {
+   "id": "mission.session_gate",
+   "file": "src/mission.lua",
+   "name": "session +92134 campaign gate flag",
+   "kind": "struct offset",
+   "old": 92134,
+   "new": 92142,
+   "changed": true,
+   "method": "all 4 old readers migrate to +0x167ee (the brief: hotjoin flag 92135 -> 92143, same +8)",
+   "witnesses": [
+    {
+     "kind": "image-wide scan of the value",
+     "value": "session.flag 92134",
+     "old_sites": 4,
+     "considered": 4,
+     "unmapped": 0,
+     "new_values": [
+      {
+       "kind": "disp",
+       "value": 92142,
+       "count": 4,
+       "example": {
+        "old": "0x660a21",
+        "new": "0x66a201",
+        "old_insn": "cmp byte ptr [rax + 0x167e6], 0",
+        "new_insn": "cmp byte ptr [rax + 0x167ee], 0",
+        "window_bytes": 32,
+        "field_displacements_masked": true
+       }
+      }
+     ]
+    },
+    {
+     "kind": "instruction pair",
+     "old": "0x12df14a",
+     "old_insn": "cmp byte ptr [rax + 0x167e6], 0",
+     "new": "0x1171c9a",
+     "new_insn": "cmp byte ptr [rax + 0x167ee], 0",
+     "proves": "definition lookup gate",
+     "checked": true
+    },
+    {
+     "kind": "instruction pair",
+     "old": "0x660a21",
+     "old_insn": "cmp byte ptr [rax + 0x167e6], 0",
+     "new": "0x66a201",
+     "new_insn": "cmp byte ptr [rax + 0x167ee], 0",
+     "proves": "another reader",
+     "checked": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K5",
+   "replace": {
+    "old_text": "read(session + 92134, 1)",
+    "new_text": "read(session + 92142, 1)"
+   },
+   "note": null,
+   "line": 480
+  },
+  {
+   "id": "mission.root_gate_4205",
+   "file": "src/mission.lua",
+   "name": "root +4205 campaign gate flag",
+   "kind": "struct offset",
+   "old": 4205,
+   "new": 4333,
+   "changed": true,
+   "method": "direct witness in the campaign gate (0x1342cba); root fields 0x1069..0x1148 all moved +0x80, 0xb70 did not",
+   "witnesses": [
+    {
+     "kind": "instruction pair",
+     "old": "0x1342cba",
+     "old_insn": "cmp byte ptr [rax + 0x106d], 0",
+     "new": "0x11d82aa",
+     "new_insn": "cmp byte ptr [rax + 0x10ed], 0",
+     "proves": "the same gate, aligned",
+     "checked": true
+    },
+    {
+     "kind": "instruction pair",
+     "old": "0x1342cb1",
+     "old_insn": "cmp byte ptr [rax + 0x106c], 0",
+     "new": "0x11d82a1",
+     "new_insn": "cmp byte ptr [rax + 0x10ec], 0",
+     "proves": "neighbour",
+     "checked": true
+    },
+    {
+     "kind": "instruction pair",
+     "old": "0x1342cd5",
+     "old_insn": "cmp byte ptr [rax + 0xb70], 0",
+     "new": "0x11d82c5",
+     "new_insn": "cmp byte ptr [rax + 0xb70], 0",
+     "proves": "below the insertion: unchanged",
+     "checked": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K5",
+   "replace": {
+    "old_text": "read(root + 4205, 1)",
+    "new_text": "read(root + 4333, 1)"
+   },
+   "note": null,
+   "line": 480
+  },
+  {
+   "id": "mission.root_gate_4217",
+   "file": "src/mission.lua",
+   "name": "root +4217 campaign gate flag",
+   "kind": "struct offset",
+   "old": 4217,
+   "new": 4345,
+   "changed": true,
+   "method": "as root +4205",
+   "witnesses": [
+    {
+     "kind": "instruction pair",
+     "old": "0x1342cf0",
+     "old_insn": "cmp byte ptr [rax + 0x1079], 0",
+     "new": "0x11d82e0",
+     "new_insn": "cmp byte ptr [rax + 0x10f9], 0",
+     "proves": "the same gate, aligned",
+     "checked": true
+    },
+    {
+     "kind": "instruction pair",
+     "old": "0x1342ce7",
+     "old_insn": "cmp byte ptr [rax + 0x1078], 0",
+     "new": "0x11d82d7",
+     "new_insn": "cmp byte ptr [rax + 0x10f8], 0",
+     "proves": "neighbour",
+     "checked": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K5",
+   "replace": {
+    "old_text": "read(root + 4217, 1)",
+    "new_text": "read(root + 4345, 1)"
+   },
+   "note": null,
+   "line": 481
+  },
+  {
+   "id": "mission.level",
+   "file": "src/mission.lua",
+   "name": "controller +648 level pointer",
+   "kind": "struct offset",
+   "old": 648,
+   "new": 664,
+   "changed": true,
+   "method": "no reader of controller+0x288 exists in code (v4.1.1 measured it); the controller object grew: +0xf0..+0x10a moved +8, +0x1a0..+0x2d8 moved +0x10 (0x270 -> 0x280, 0x2a8 -> 0x2b8, 0x2c8 -> 0x2d8); the struct copy that fills +0x280/+0x288/+0x2a0 writes +0x298 in the new build",
+   "witnesses": [
+    {
+     "kind": "instruction pair",
+     "old": "0xf6e7ff",
+     "old_insn": "mov qword ptr [rdi + 0x288], rax",
+     "new": "0xdff23f",
+     "new_insn": "mov qword ptr [rdi + 0x298], rax",
+     "proves": "copy into the record",
+     "checked": true
+    },
+    {
+     "kind": "instruction pair",
+     "old": "0xf71a08",
+     "old_insn": "mov rax, qword ptr [r13 + 0x288]",
+     "new": "0xe025d1",
+     "new_insn": "mov rax, qword ptr [r13 + 0x298]",
+     "proves": "copy out of the record",
+     "checked": true
+    },
+    {
+     "kind": "instruction pair",
+     "old": "0xad4ce8",
+     "old_insn": "mov r8, qword ptr [rcx + 0x2c8]",
+     "new": "0xaf0e08",
+     "new_insn": "mov r8, qword ptr [rcx + 0x2d8]",
+     "proves": "controller +0x2c8 -> +0x2d8 (its level-like object, read at +0x8bc654 as KYC reads level +9160276)",
+     "checked": true
+    }
+   ],
+   "confidence": "medium",
+   "feeds_write": false,
+   "live_check": "K3",
+   "replace": {
+    "old_text": "ptr(controller + 648)",
+    "new_text": "ptr(controller + 664)"
+   },
+   "note": "Not proven that the copied record is the controller; the live check K3 settles it (the pointer at +664 must reach an explicit-tag count <= 3 at +9160288).",
+   "line": 505
+  },
+  {
+   "id": "mission.briefing_count",
+   "file": "src/mission.lua",
+   "name": "UI event manager +26184 briefing-descriptor list count",
+   "kind": "struct offset",
+   "old": 26184,
+   "new": 26424,
+   "changed": true,
+   "method": "the kind-235 registration (old 0xb2abd0, 40 lists) is the kind-237 registration (new 0xb46da0, 40 lists, same order); list 33 moved 0x6648 -> 0x6738 like every list from 0x63c0 on (+0xf0); its consumer aligned",
+   "witnesses": [
+    {
+     "kind": "instruction pair",
+     "old": "0xb92f04",
+     "old_insn": "cmp dword ptr [rbp + 0x6648], esi",
+     "new": "0xbb13b4",
+     "new_insn": "cmp dword ptr [rbp + 0x6738], esi",
+     "proves": "consumer loop bound",
+     "checked": true
+    },
+    {
+     "kind": "instruction pair",
+     "old": "0xb92f20",
+     "old_insn": "cmp dword ptr [rbp + rax*8 + 8], 0xeb",
+     "new": "0xbb13d0",
+     "new_insn": "cmp dword ptr [rbp + rax*8 + 8], 0xed",
+     "proves": "kind check on the rows (0x665 -> 0x674 row base)",
+     "checked": true
+    },
+    {
+     "kind": "instruction pair",
+     "old": "0xb92fca",
+     "old_insn": "lea rcx, [rbx + 0x430]",
+     "new": "0xbb147a",
+     "new_insn": "lea rcx, [rbx + 0x430]",
+     "proves": "the owner +0x430 descriptor the consumer fills",
+     "checked": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K4",
+   "replace": {
+    "old_text": "count(manager + 26184, 1024)",
+    "new_text": "count(manager + 26424, 1024)"
+   },
+   "note": null,
+   "line": 262
+  },
+  {
+   "id": "mission.briefing_rows",
+   "file": "src/mission.lua",
+   "name": "UI event manager +26192 briefing-descriptor rows (16 bytes)",
+   "kind": "struct offset",
+   "old": 26192,
+   "new": 26432,
+   "changed": true,
+   "method": "as the count (rows follow it at +8)",
+   "witnesses": [
+    {
+     "kind": "instruction pair",
+     "old": "0xb92f17",
+     "old_insn": "add rax, 0x665",
+     "new": "0xbb13c7",
+     "new_insn": "add rax, 0x674",
+     "proves": "row index base",
+     "checked": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K4",
+   "replace": {
+    "old_text": "read(manager + 26192, n * 16, bulk)",
+    "new_text": "read(manager + 26432, n * 16, bulk)"
+   },
+   "note": null,
+   "line": 264
+  },
+  {
+   "id": "mission.briefing_kind",
+   "file": "src/mission.lua",
+   "name": "briefing-descriptor event kind 235",
+   "kind": "enum",
+   "old": 235,
+   "new": 237,
+   "changed": true,
+   "method": "event kinds above 0xe1 moved +2 (two kinds inserted): 0xe2 -> 0xe4, 0xe5 -> 0xe7, 0xeb -> 0xed",
+   "witnesses": [
+    {
+     "kind": "instruction pair",
+     "old": "0xb92f20",
+     "old_insn": "cmp dword ptr [rbp + rax*8 + 8], 0xeb",
+     "new": "0xbb13d0",
+     "new_insn": "cmp dword ptr [rbp + rax*8 + 8], 0xed",
+     "proves": "consumer kind check",
+     "checked": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K4",
+   "replace": {
+    "old_text": "u32(rows, 16 * i + 8) == 235",
+    "new_text": "u32(rows, 16 * i + 8) == 237"
+   },
+   "note": null,
+   "line": 267
+  },
+  {
+   "id": "presentation.registry_map",
+   "file": "src/presentation.lua",
+   "name": "UI event manager +25224 war-table panel registry (count, owner, kind)",
+   "kind": "struct offset",
+   "old": 25224,
+   "new": 25464,
+   "changed": true,
+   "method": "kind-226 registration (old 0xb2a710: 6 lists) = kind-228 registration (new 0xb468d0: 6 lists); its last list 0x6288 -> 0x6378; the dispatcher checks the same list",
+   "witnesses": [
+    {
+     "kind": "instruction pair",
+     "old": "0xb8fd2b",
+     "old_insn": "cmp dword ptr [r14 + 0x6288], edi",
+     "new": "0xbc9abf",
+     "new_insn": "cmp dword ptr [r14 + 0x6378], edi",
+     "proves": "dispatcher loop bound",
+     "checked": true
+    },
+    {
+     "kind": "instruction pair",
+     "old": "0xb8fd45",
+     "old_insn": "cmp dword ptr [r14 + rax*8 + 0x6298], 0xe2",
+     "new": "0xbc9ad8",
+     "new_insn": "cmp dword ptr [rsi + rax*8 + 0x6388], 0xe4",
+     "proves": "dispatcher kind check",
+     "checked": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K10",
+   "replace": {
+    "old_text": "screen == 'map' and 25224 or 25272",
+    "new_text": "screen == 'map' and 25464 or 25512"
+   },
+   "note": null,
+   "line": 113
+  },
+  {
+   "id": "presentation.registry_briefing",
+   "file": "src/presentation.lua",
+   "name": "UI event manager +25272 briefing panel registry",
+   "kind": "struct offset",
+   "old": 25272,
+   "new": 25512,
+   "changed": true,
+   "method": "kind-229 registration (old 0xb2a870: 11 lists) = kind-231 (new 0xb46a40: 11 lists, same order); list 2: 0x62b8 -> 0x63a8",
+   "witnesses": [
+    {
+     "kind": "instruction pair",
+     "old": "0xb2a8b5",
+     "old_insn": "mov eax, dword ptr [rcx + 0x62b8]",
+     "new": "0xb46a85",
+     "new_insn": "mov eax, dword ptr [rcx + 0x63a8]",
+     "proves": "registration",
+     "checked": true
+    },
+    {
+     "kind": "instruction pair",
+     "old": "0xb8ff70",
+     "old_insn": "cmp esi, dword ptr [rbp + 0x62b8]",
+     "new": "0xbc3f00",
+     "new_insn": "cmp esi, dword ptr [rbp + 0x63a8]",
+     "proves": "consumer loop bound",
+     "checked": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K10",
+   "replace": null,
+   "note": "edited together with presentation.registry_map (one line)",
+   "line": 113
+  },
+  {
+   "id": "presentation.kinds",
+   "file": "src/presentation.lua",
+   "name": "panel owner event kinds 226 (map) / 229 (briefing)",
+   "kind": "enum",
+   "old": "226/229",
+   "new": "228/231",
+   "changed": true,
+   "method": "as briefing_kind: +2 above 0xe1",
+   "witnesses": [
+    {
+     "kind": "instruction pair",
+     "old": "0xb8fd45",
+     "old_insn": "cmp dword ptr [r14 + rax*8 + 0x6298], 0xe2",
+     "new": "0xbc9ad8",
+     "new_insn": "cmp dword ptr [rsi + rax*8 + 0x6388], 0xe4",
+     "proves": "map kind",
+     "checked": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K10",
+   "replace": {
+    "old_text": "screen == 'map' and 226 or 229",
+    "new_text": "screen == 'map' and 228 or 231"
+   },
+   "note": null,
+   "line": 114
+  },
+  {
+   "id": "mission.tag_table",
+   "file": "src/mission.lua",
+   "name": "enemy tag hash table (native tag index -> name hash)",
+   "kind": "game.dll table",
+   "old": "0x21e1920 x 32",
+   "new": "0x2069d50 x 33",
+   "changed": true,
+   "method": "RIP windows to the table, then its content compared",
+   "witnesses": [
+    {
+     "kind": "global (RIP-relative windows)",
+     "old": "0x21e1920",
+     "new": "0x2069d50",
+     "old_sites": 4,
+     "sampled": 4,
+     "agreeing": 3,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x11dee46",
+       "new": "0x1070406",
+       "instruction_old": "lea r13, [rip + 0x1002ad3]",
+       "instruction_new": "lea r13, [rip + 0xff9943]"
+      },
+      {
+       "old": "0x17585d6",
+       "new": "0x15cc696",
+       "instruction_old": "lea r10, [rip + 0xa89342]",
+       "instruction_new": "lea r10, [rip + 0xa9d6b2]"
+      },
+      {
+       "old": "0x177dec6",
+       "new": "0x15f21c6",
+       "instruction_old": "lea rsi, [rip + 0xa63a53]",
+       "instruction_new": "lea rsi, [rip + 0xa77b83]"
+      }
+     ]
+    },
+    {
+     "kind": "data comparison",
+     "what": "tag tables",
+     "detail": {
+      "old_count": 32,
+      "new_count": 33,
+      "old_index_2": "BugAcid 0xdf4cb4e5",
+      "new_index_2": "GM_BugAcid 0x22e4fcac (renamed in place)",
+      "new_index_12": "GM_BugDefiler 0x35e13f9e (inserted)",
+      "shift": "old natives 12..31 are new 13..32",
+      "enum_end": "Count (0xe09ad33d) follows the last tag in both builds: old index 32, new index 33",
+      "names": "tag hashes are the high 32 bits of MurmurHash64A(name); names found as strings in game.dll"
+     },
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K11",
+   "replace": {
+    "old_text": "read(game + 0x21e1920, 32 * 4, hash_bytes)",
+    "new_text": "read(game + 0x2069D50, 33 * 4, hash_bytes)"
+   },
+   "note": null,
+   "line": 542
+  },
+  {
+   "id": "mission.tag_loop",
+   "file": "src/mission.lua",
+   "name": "tag_hashes loop over the native tags",
+   "kind": "table size",
+   "old": "i = 0..31",
+   "new": "i = 0..32",
+   "changed": true,
+   "method": "one native tag more (GM_BugDefiler)",
+   "witnesses": [
+    {
+     "kind": "data comparison",
+     "what": "tag tables",
+     "detail": {
+      "old_count": 32,
+      "new_count": 33,
+      "old_index_2": "BugAcid 0xdf4cb4e5",
+      "new_index_2": "GM_BugAcid 0x22e4fcac (renamed in place)",
+      "new_index_12": "GM_BugDefiler 0x35e13f9e (inserted)",
+      "shift": "old natives 12..31 are new 13..32",
+      "enum_end": "Count (0xe09ad33d) follows the last tag in both builds: old index 32, new index 33",
+      "names": "tag hashes are the high 32 bits of MurmurHash64A(name); names found as strings in game.dll"
+     },
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K11",
+   "replace": {
+    "old_text": "        clear(hashes)\n        for i = 0, 31 do",
+    "new_text": "        clear(hashes)\n        for i = 0, 32 do"
+   },
+   "note": null,
+   "line": 543
+  },
+  {
+   "id": "mission.hash_buffer",
+   "file": "src/mission.lua",
+   "name": "hash_bytes buffer size",
+   "kind": "buffer size",
+   "old": 128,
+   "new": 132,
+   "changed": true,
+   "method": "holds 33 u32 now",
+   "witnesses": [
+    {
+     "kind": "data comparison",
+     "what": "tag tables",
+     "detail": {
+      "old_count": 32,
+      "new_count": 33,
+      "old_index_2": "BugAcid 0xdf4cb4e5",
+      "new_index_2": "GM_BugAcid 0x22e4fcac (renamed in place)",
+      "new_index_12": "GM_BugDefiler 0x35e13f9e (inserted)",
+      "shift": "old natives 12..31 are new 13..32",
+      "enum_end": "Count (0xe09ad33d) follows the last tag in both builds: old index 32, new index 33",
+      "names": "tag hashes are the high 32 bits of MurmurHash64A(name); names found as strings in game.dll"
+     },
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": null,
+   "replace": {
+    "old_text": "buffer(816), buffer(896), buffer(128)",
+    "new_text": "buffer(816), buffer(896), buffer(132)"
+   },
+   "note": null,
+   "line": 107
+  },
+  {
+   "id": "resolve.from_native",
+   "file": "src/resolve.lua",
+   "name": "native tag -> authored id",
+   "kind": "enum mapping",
+   "old": "n=1 -> 31, n>1 -> n-1 (n <= 31)",
+   "new": "n=1 -> 31, 2..11 -> n-1, 12 (GM_BugDefiler) -> 32, 13..32 -> n-2",
+   "changed": true,
+   "method": "every authored id 1..31 keeps naming the same tag hash (id 1: BugAcid renamed GM_BugAcid in place); the new tag gets the next free id",
+   "witnesses": [
+    {
+     "kind": "data comparison",
+     "what": "tag tables",
+     "detail": {
+      "old_count": 32,
+      "new_count": 33,
+      "old_index_2": "BugAcid 0xdf4cb4e5",
+      "new_index_2": "GM_BugAcid 0x22e4fcac (renamed in place)",
+      "new_index_12": "GM_BugDefiler 0x35e13f9e (inserted)",
+      "shift": "old natives 12..31 are new 13..32",
+      "enum_end": "Count (0xe09ad33d) follows the last tag in both builds: old index 32, new index 33",
+      "names": "tag hashes are the high 32 bits of MurmurHash64A(name); names found as strings in game.dll"
+     },
+     "ok": true
+    },
+    {
+     "kind": "data comparison",
+     "what": "difficulty settings decode the same through the new mapping",
+     "detail": {
+      "decoded_with": "old ids through from_native (v4.1.1), new ids through the port from_native",
+      "rows_equal": [
+       1
+      ],
+      "rows_changed": [
+       2,
+       3,
+       4,
+       5,
+       6,
+       7,
+       8,
+       9,
+       10
+      ],
+      "change": "Terminid base draw no longer offers tag 1 (Bile Bugs): BugAcid became the GM_BugAcid subfaction; every other candidate, weight, blocker and fallback is equal"
+     },
+     "ok": true
+    },
+    {
+     "kind": "data comparison",
+     "what": "mission configs decode the same through the new mapping",
+     "detail": {
+      "records": 120,
+      "equal_after_tag_mapping": true,
+      "horde_missions": [
+       17,
+       18,
+       74,
+       109
+      ]
+     },
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K11",
+   "replace": {
+    "old_text": "function M.from_native(tag)\n    assert(tag >= 0 and tag <= 31, 'Unknown native enemy tag')\n    if tag == 1 then return 31 end\n    return tag > 1 and tag - 1 or 0\nend",
+    "new_text": "function M.from_native(tag)\n    assert(tag >= 0 and tag <= 32, 'Unknown native enemy tag')\n    if tag == 1 then return 31 end\n    if tag == 12 then return 32 end\n    return tag > 12 and tag - 2 or tag > 1 and tag - 1 or 0\nend"
+   },
+   "note": "Build 26088801 inserted GM_BugDefiler at native 12. Authored id 32 has no title in model.lua, so the headline omits it (no new text added).",
+   "line": 141
+  },
+  {
+   "id": "resolve.add_bound",
+   "file": "src/resolve.lua",
+   "name": "authored tag id bound",
+   "kind": "enum bound",
+   "old": 31,
+   "new": 32,
+   "changed": true,
+   "method": "authored ids now run 1..32",
+   "witnesses": [
+    {
+     "kind": "data comparison",
+     "what": "tag tables",
+     "detail": {
+      "old_count": 32,
+      "new_count": 33,
+      "old_index_2": "BugAcid 0xdf4cb4e5",
+      "new_index_2": "GM_BugAcid 0x22e4fcac (renamed in place)",
+      "new_index_12": "GM_BugDefiler 0x35e13f9e (inserted)",
+      "shift": "old natives 12..31 are new 13..32",
+      "enum_end": "Count (0xe09ad33d) follows the last tag in both builds: old index 32, new index 33",
+      "names": "tag hashes are the high 32 bits of MurmurHash64A(name); names found as strings in game.dll"
+     },
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": null,
+   "replace": {
+    "old_text": "assert(tag >= 1 and tag <= 31, 'Unknown enemy tag')",
+    "new_text": "assert(tag >= 1 and tag <= 32, 'Unknown enemy tag')"
+   },
+   "note": null,
+   "line": 24
+  },
+  {
+   "id": "roster_data",
+   "file": "src/roster_data.lua",
+   "name": "faction spawn tables (units, swaps, groups, families, resources)",
+   "kind": "generated data",
+   "old": "build 25480438 tables",
+   "new": "build 26088801 tables (regenerated)",
+   "changed": true,
+   "method": "tools/gen_roster.py decodes the native faction descriptors (11 {pointer, count} spans each: units 128 B, swaps 48 B, groups 280 B in pools 2/4/5/6/9) with the layouts the identical natives read; from the old capture it reproduces upstream roster_data.lua byte for byte; display names, size classes, commanders, hidden, hive lord, travel and summoned are carried over by unit resource hash, tag hash and family hash",
+   "witnesses": [
+    {
+     "kind": "native aligned old -> new",
+     "old": "0x94be10",
+     "new": "0x95d3b0",
+     "name": "group builder (roster.lua)",
+     "aligned": 359,
+     "old_insns": 359,
+     "new_insns": 359,
+     "operand_differences": []
+    },
+    {
+     "kind": "native aligned old -> new",
+     "old": "0x177e3c0",
+     "new": "0x15f26b4",
+     "name": "tag predicate (roster.lua accepts)",
+     "aligned": 0,
+     "old_insns": 55,
+     "new_insns": 3,
+     "operand_differences": []
+    },
+    {
+     "kind": "native aligned old -> new",
+     "old": "0x949b80",
+     "new": "0x95b0fc",
+     "name": "replacement chain (roster.lua replace)",
+     "aligned": 166,
+     "old_insns": 166,
+     "new_insns": 169,
+     "operand_differences": [
+      {
+       "old": "0x949bd6",
+       "new": "0x95b156",
+       "old_insn": "mov esi, dword ptr [rax + 0x518c4]",
+       "new_insn": "mov esi, dword ptr [rax + 0x536c4]"
+      },
+      {
+       "old": "0x949bf2",
+       "new": "0x95b172",
+       "old_insn": "lea rdi, [rax + 0x518d4]",
+       "new_insn": "lea rdi, [rax + 0x536d4]"
+      }
+     ]
+    },
+    {
+     "kind": "native aligned old -> new",
+     "old": "0x94a0a0",
+     "new": "0x95b619",
+     "name": "group weight (roster.lua, mission.lua category 72)",
+     "aligned": 106,
+     "old_insns": 106,
+     "new_insns": 112,
+     "operand_differences": [
+      {
+       "old": "0x94a0e8",
+       "new": "0x95b668",
+       "old_insn": "mov r8d, dword ptr [rax + 0x518c4]",
+       "new_insn": "mov r8d, dword ptr [rax + 0x536c4]"
+      }
+     ]
+    },
+    {
+     "kind": "data comparison",
+     "what": "regeneration",
+     "detail": {
+      "descriptors": {
+       "2": "0x1fec7b0",
+       "3": "0x1fec700",
+       "4": "0x1fef380"
+      },
+      "factions": {
+       "2": {
+        "spans": [
+         [
+          "0x2c6e530",
+          47
+         ],
+         [
+          "0x2cb1650",
+          26
+         ],
+         [
+          "0x2c79250",
+          42
+         ],
+         [
+          "0x312d630",
+          1
+         ],
+         [
+          "0x2c6c780",
+          27
+         ],
+         [
+          "0x2c85e70",
+          52
+         ],
+         [
+          "0x2c98910",
+          6
+         ],
+         [
+          "0x2c9b5a0",
+          8
+         ],
+         [
+          "0x312e2b0",
+          1
+         ],
+         [
+          "0x312e900",
+          1
+         ],
+         [
+          "0x1fe9658",
+          14
+         ]
+        ],
+        "raw_units": 47,
+        "units": [
+         45,
+         47
+        ],
+        "swaps": [
+         21,
+         26
+        ],
+        "groups": [
+         122,
+         127
+        ],
+        "families": [
+         33,
+         35
+        ],
+        "new_families": [
+         "0xaf38488d",
+         "0x24dc6d4b"
+        ],
+        "resources": [
+         40,
+         42
+        ],
+        "new_resources_not_displayed": [
+         "0x8ab62629db3d6ac8",
+         "0x662a7907531b45e5"
+        ],
+        "resources_gone": [],
+        "summoned_family": "0x8f7704f8"
+       },
+       "3": {
+        "spans": [
+         [
+          "0x2c71330",
+          61
+         ],
+         [
+          "0x2cb0f00",
+          39
+         ],
+         [
+          "0x2c76230",
+          44
+         ],
+         [
+          "0x312d510",
+          1
+         ],
+         [
+          "0x2c731b0",
+          32
+         ],
+         [
+          "0x2c827c0",
+          50
+         ],
+         [
+          "0x2c984b0",
+          4
+         ],
+         [
+          "0x2c9ace0",
+          8
+         ],
+         [
+          "0x2ca3680",
+          5
+         ],
+         [
+          "0x312e7e0",
+          1
+         ],
+         [
+          "0x1fe9548",
+          13
+         ]
+        ],
+        "raw_units": 61,
+        "units": [
+         60,
+         60
+        ],
+        "swaps": [
+         39,
+         39
+        ],
+        "groups": [
+         130,
+         130
+        ],
+        "families": [
+         29,
+         29
+        ],
+        "new_families": [],
+        "resources": [
+         53,
+         53
+        ],
+        "new_resources_not_displayed": [],
+        "resources_gone": []
+       },
+       "4": {
+        "spans": [
+         [
+          "0x2c6fcb0",
+          45
+         ],
+         [
+          "0x2cb1b30",
+          3
+         ],
+         [
+          "0x2c7c040",
+          81
+         ],
+         [
+          "0x312d750",
+          1
+         ],
+         [
+          "0x2c69b50",
+          18
+         ],
+         [
+          "0x2c89750",
+          53
+         ],
+         [
+          "0x2c98fa0",
+          1
+         ],
+         [
+          "0x2c9be60",
+          21
+         ],
+         [
+          "0x312e3d0",
+          1
+         ],
+         [
+          "0x2cae080",
+          3
+         ],
+         [
+          "0x1fe9ff8",
+          9
+         ]
+        ],
+        "raw_units": 45,
+        "units": [
+         44,
+         45
+        ],
+        "swaps": [
+         3,
+         3
+        ],
+        "groups": [
+         151,
+         156
+        ],
+        "families": [
+         20,
+         21
+        ],
+        "new_families": [
+         "0xa3decc72"
+        ],
+        "resources": [
+         16,
+         16
+        ],
+        "new_resources_not_displayed": [],
+        "resources_gone": []
+       }
+      }
+     },
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K12",
+   "replace": null,
+   "note": "Terminids: +2 units, +2 swaps sets, +5 groups for GM_BugDefiler (tag 32) and changed swaps/garrisons; Illuminate: +1 unit (new family 0xa3decc72), +5 groups, changed weights. Two new Terminid unit resources (0x8ab62629db3d6ac8, 0x662a7907531b45e5) have no wiki name offline: names index 0, which the roster already uses for \"not displayed\".",
+   "line": 3
+  },
+  {
+   "id": "bingus_text.GAME",
+   "file": "src/bingus_text.lua",
+   "name": "Text Language: settings global, index, language table",
+   "kind": "game.dll globals",
+   "old": "0x3326340, 705500 + 212, 0x37C5650",
+   "new": "0x2CE1508, 705628 + 212, 0x3180DE0",
+   "changed": true,
+   "method": "reused from native-work/myc-port MAP.json rows bingus_text.GAME.* (the vendored file is byte-identical); re-witnessed here",
+   "witnesses": [
+    {
+     "kind": "global (RIP-relative windows)",
+     "old": "0x3326340",
+     "new": "0x2ce1508",
+     "old_sites": 2624,
+     "sampled": 48,
+     "agreeing": 4,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x7f724e",
+       "new": "0x803b6e",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2b2f0eb]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x24dd993]"
+      },
+      {
+       "old": "0x8d1cd7",
+       "new": "0x8e2017",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2a54662]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x23ff4ea]"
+      },
+      {
+       "old": "0x11ed0de",
+       "new": "0x107e8fe",
+       "instruction_old": "mov rdi, qword ptr [rip + 0x213925b]",
+       "instruction_new": "mov rdi, qword ptr [rip + 0x1c62c03]"
+      }
+     ]
+    },
+    {
+     "kind": "global (RIP-relative windows)",
+     "old": "0x37c5650",
+     "new": "0x3180de0",
+     "old_sites": 34,
+     "sampled": 34,
+     "agreeing": 19,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x11e754e",
+       "new": "0x1078cde",
+       "instruction_old": "lea rcx, [rip + 0x25de0fb]",
+       "instruction_new": "lea rcx, [rip + 0x21080fb]"
+      },
+      {
+       "old": "0x11e75c7",
+       "new": "0x1078d57",
+       "instruction_old": "lea rbx, [rip + 0x25de082]",
+       "instruction_new": "lea rbx, [rip + 0x2108082]"
+      },
+      {
+       "old": "0x11e775c",
+       "new": "0x1078eec",
+       "instruction_old": "lea rcx, [rip + 0x25ddeed]",
+       "instruction_new": "lea rcx, [rip + 0x2107eed]"
+      }
+     ]
+    },
+    {
+     "kind": "image-wide scan of the value",
+     "value": "lang 705500",
+     "old_sites": 64,
+     "considered": 40,
+     "unmapped": 26,
+     "new_values": [
+      {
+       "kind": "disp",
+       "value": 705628,
+       "count": 14,
+       "example": {
+        "old": "0xab10eb",
+        "new": "0xaccdbb",
+        "old_insn": "lea rcx, [rsi + 0xac3dc]",
+        "new_insn": "lea rcx, [rsi + 0xac45c]",
+        "window_bytes": 160,
+        "field_displacements_masked": true
+       }
+      }
+     ]
+    },
+    {
+     "kind": "image-wide scan of the value",
+     "value": "lang +212 705712",
+     "old_sites": 6,
+     "considered": 6,
+     "unmapped": 3,
+     "new_values": [
+      {
+       "kind": "disp",
+       "value": 705840,
+       "count": 2,
+       "example": {
+        "old": "0xadfe96",
+        "new": "0xafbb26",
+        "old_insn": "mov edx, dword ptr [rax + 0xac4b0]",
+        "new_insn": "mov edx, dword ptr [rax + 0xac530]",
+        "window_bytes": 64,
+        "field_displacements_masked": true
+       }
+      },
+      {
+       "kind": "disp",
+       "value": 212,
+       "count": 1,
+       "example": {
+        "old": "0x1998309",
+        "new": "0xb81b12",
+        "old_insn": "cmp dword ptr [r15 + 0xac4b0], eax",
+        "new_insn": "cmp dword ptr [r15 + 0xd4], eax",
+        "window_bytes": 32,
+        "field_displacements_masked": true
+       }
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K13",
+   "replace": {
+    "old_text": "M.GAME = {settings = 0x3326340, index = 705500 + 212, table = 0x37C5650, count = 15}",
+    "new_text": "M.GAME = {settings = 0x2CE1508, index = 705628 + 212, table = 0x3180DE0, count = 15}"
+   },
+   "note": null,
+   "line": 357
+  },
+  {
+   "id": "mission.ui_stack",
+   "file": "src/mission.lua",
+   "name": "UI manager +0x429c stack (5 ids, depth +20)",
+   "kind": "unchanged",
+   "old": "0x429c",
+   "new": "0x429c",
+   "changed": false,
+   "method": "old value kept; witnesses show it unchanged",
+   "witnesses": [
+    {
+     "kind": "other port",
+     "detail": "native-work/hdh-port MAP.json hold.stack_offset/presenters_offset: 39 + 40 agreeing witnesses, live-verified"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K1",
+   "replace": null,
+   "note": null,
+   "line": 154
+  },
+  {
+   "id": "mission.screen_ids",
+   "file": "src/mission.lua",
+   "name": "top screen 15 = map (Hologram), 14 = briefing (Loadout)",
+   "kind": "unchanged",
+   "old": "15/14",
+   "new": "15/14",
+   "changed": false,
+   "method": "old value kept; witnesses show it unchanged",
+   "witnesses": [
+    {
+     "kind": "data comparison",
+     "what": "menu presenter name tables",
+     "detail": {
+      "old": "0x21dc810",
+      "new": "0x2065380",
+      "ids_0_29_equal": true,
+      "14": "Loadout",
+      "15": "Hologram"
+     },
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K1",
+   "replace": null,
+   "note": null,
+   "line": 143
+  },
+  {
+   "id": "mission.board_offsets",
+   "file": "src/mission.lua",
+   "name": "board +1548952/+1548956/+1548960/+1548964, +1012352 (92 x 110 ops), +1053752 data, +1197132, +2044424 rows (20 B) / +2053224 count (<= 440), +2064401, +4286668, +0x4168d0, +0x1f8908",
+   "kind": "unchanged",
+   "old": "unchanged",
+   "new": "unchanged",
+   "changed": false,
+   "method": "old value kept; witnesses show it unchanged",
+   "witnesses": [
+    {
+     "kind": "aligned functions referencing 0x347cee8",
+     "functions": 290,
+     "value": 1548952,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 1548952,
+       "count": 66,
+       "example": [
+        "0x5baa28",
+        "0x5c3868",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cee8",
+     "functions": 290,
+     "value": 1548956,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 1548956,
+       "count": 15,
+       "example": [
+        "0x5baa1e",
+        "0x5c385e",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cee8",
+     "functions": 290,
+     "value": 1548960,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 1548960,
+       "count": 52,
+       "example": [
+        "0x723ba6",
+        "0x72f436",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cee8",
+     "functions": 290,
+     "value": 1548964,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 1548964,
+       "count": 8,
+       "example": [
+        "0x5c0913",
+        "0x5c9753",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cee8",
+     "functions": 290,
+     "value": 1012352,
+     "pairs": [
+      {
+       "kind": "imm",
+       "new": 1012352,
+       "count": 44,
+       "example": [
+        "0x732e71",
+        "0x73e711",
+        "add"
+       ]
+      },
+      {
+       "kind": "disp",
+       "new": 1012352,
+       "count": 13,
+       "example": [
+        "0x723d65",
+        "0x72f5f5",
+        "lea"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cee8",
+     "functions": 290,
+     "value": 1053752,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 1053752,
+       "count": 56,
+       "example": [
+        "0x732c12",
+        "0x73e4b2",
+        "lea"
+       ]
+      },
+      {
+       "kind": "imm",
+       "new": 1053752,
+       "count": 30,
+       "example": [
+        "0x5ba8fe",
+        "0x5c373e",
+        "add"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cee8",
+     "functions": 290,
+     "value": 1197132,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 1197132,
+       "count": 7,
+       "example": [
+        "0x6615bc",
+        "0x66ae8c",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cee8",
+     "functions": 290,
+     "value": 2044424,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 2044424,
+       "count": 1,
+       "example": [
+        "0x72c22a",
+        "0x73791a",
+        "lea"
+       ]
+      },
+      {
+       "kind": "imm",
+       "new": 2044424,
+       "count": 1,
+       "example": [
+        "0x7389d8",
+        "0x744118",
+        "add"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cee8",
+     "functions": 290,
+     "value": 2064401,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 2064401,
+       "count": 34,
+       "example": [
+        "0x675787",
+        "0x67f357",
+        "cmp"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cee8",
+     "functions": 290,
+     "value": 2066696,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 2066696,
+       "count": 5,
+       "example": [
+        "0x7320ea",
+        "0x73d98a",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cee8",
+     "functions": 290,
+     "value": 92,
+     "pairs": [
+      {
+       "kind": "imm",
+       "new": 92,
+       "count": 72,
+       "example": [
+        "0x723bcc",
+        "0x72f45c",
+        "imul"
+       ]
+      },
+      {
+       "kind": "disp",
+       "new": 92,
+       "count": 59,
+       "example": [
+        "0x5babf2",
+        "0x5c3a32",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cee8",
+     "functions": 290,
+     "value": 110,
+     "pairs": [
+      {
+       "kind": "imm",
+       "new": 110,
+       "count": 63,
+       "example": [
+        "0x723bc6",
+        "0x72f456",
+        "cmp"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cee8",
+     "functions": 290,
+     "value": 440,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 440,
+       "count": 24,
+       "example": [
+        "0x79511e",
+        "0x7a09be",
+        "mov"
+       ]
+      },
+      {
+       "kind": "imm",
+       "new": 440,
+       "count": 3,
+       "example": [
+        "0x794fdf",
+        "0x7a087f",
+        "imul"
+       ]
+      },
+      {
+       "kind": "disp",
+       "new": 296,
+       "count": 2,
+       "example": [
+        "0x1297acd",
+        "0x112999d",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "image-wide scan of the value",
+     "value": "board.preview_slot 4286668",
+     "old_sites": 30,
+     "considered": 30,
+     "unmapped": 23,
+     "new_values": [
+      {
+       "kind": "disp",
+       "value": 4286668,
+       "count": 7,
+       "example": {
+        "old": "0x12d80aa",
+        "new": "0x116abba",
+        "old_insn": "mov dword ptr [rdi + 0x4168cc], esi",
+        "new_insn": "mov dword ptr [rdi + 0x4168cc], esi",
+        "window_bytes": 64,
+        "field_displacements_masked": false
+       }
+      }
+     ]
+    },
+    {
+     "kind": "image-wide scan of the value",
+     "value": "board.descriptor 0x4168d0",
+     "old_sites": 2,
+     "considered": 2,
+     "unmapped": 1,
+     "new_values": [
+      {
+       "kind": "disp",
+       "value": 4286672,
+       "count": 1,
+       "example": {
+        "old": "0x12d803a",
+        "new": "0x116ab4a",
+        "old_insn": "lea rcx, [rdi + 0x4168d0]",
+        "new_insn": "lea rcx, [rdi + 0x4168d0]",
+        "window_bytes": 32,
+        "field_displacements_masked": false
+       }
+      }
+     ]
+    },
+    {
+     "kind": "native aligned old -> new",
+     "old": "0x94a0a0",
+     "new": "0x95b619",
+     "name": "group weight (roster.lua, mission.lua category 72)",
+     "aligned": 106,
+     "old_insns": 106,
+     "new_insns": 112,
+     "operand_differences": [
+      {
+       "old": "0x94a0e8",
+       "new": "0x95b668",
+       "old_insn": "mov r8d, dword ptr [rax + 0x518c4]",
+       "new_insn": "mov r8d, dword ptr [rax + 0x536c4]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K2",
+   "replace": null,
+   "note": null,
+   "line": 252
+  },
+  {
+   "id": "mission.campaign_offsets",
+   "file": "src/mission.lua",
+   "name": "data +280*p static, +304*p+286752 dynamic, +286952 planet mods (132), +470104 events (2496: +2336/+2348/+2352/+2480), +490072, +494696 env (44), +494868, +143384 ops (24) / +155672, +495200",
+   "kind": "unchanged",
+   "old": "unchanged",
+   "new": "unchanged",
+   "changed": false,
+   "method": "old value kept; witnesses show it unchanged",
+   "witnesses": [
+    {
+     "kind": "aligned functions referencing 0x347cee8",
+     "functions": 290,
+     "value": 280,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 280,
+       "count": 57,
+       "example": [
+        "0x72bb2b",
+        "0x73721b",
+        "mov"
+       ]
+      },
+      {
+       "kind": "imm",
+       "new": 280,
+       "count": 31,
+       "example": [
+        "0x5ba92e",
+        "0x5c376e",
+        "imul"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cee8",
+     "functions": 290,
+     "value": 304,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 304,
+       "count": 33,
+       "example": [
+        "0x723b8f",
+        "0x72f41f",
+        "mov"
+       ]
+      },
+      {
+       "kind": "imm",
+       "new": 304,
+       "count": 27,
+       "example": [
+        "0x5baa44",
+        "0x5c3884",
+        "imul"
+       ]
+      },
+      {
+       "kind": "disp",
+       "new": 296,
+       "count": 1,
+       "example": [
+        "0x12c87bb",
+        "0x115aacb",
+        "lea"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cee8",
+     "functions": 290,
+     "value": 286752,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 286752,
+       "count": 23,
+       "example": [
+        "0x11e3c3c",
+        "0x107529c",
+        "lea"
+       ]
+      },
+      {
+       "kind": "imm",
+       "new": 286752,
+       "count": 2,
+       "example": [
+        "0x12b68ef",
+        "0x1148992",
+        "add"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cee8",
+     "functions": 290,
+     "value": 2496,
+     "pairs": [
+      {
+       "kind": "imm",
+       "new": 2496,
+       "count": 20,
+       "example": [
+        "0x6722fd",
+        "0x67be6b",
+        "add"
+       ]
+      },
+      {
+       "kind": "disp",
+       "new": 2496,
+       "count": 6,
+       "example": [
+        "0x920276",
+        "0x930fe6",
+        "movaps"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cee8",
+     "functions": 290,
+     "value": 2336,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 2336,
+       "count": 11,
+       "example": [
+        "0xb4f14a",
+        "0xb6b90a",
+        "movzx"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cee8",
+     "functions": 290,
+     "value": 2352,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 2352,
+       "count": 9,
+       "example": [
+        "0x72ffe4",
+        "0x73b7f4",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cee8",
+     "functions": 290,
+     "value": 2480,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 2480,
+       "count": 3,
+       "example": [
+        "0x72ffc0",
+        "0x73b7d0",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cee8",
+     "functions": 290,
+     "value": 44,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 44,
+       "count": 69,
+       "example": [
+        "0x5c0a04",
+        "0x5c9844",
+        "movss"
+       ]
+      },
+      {
+       "kind": "imm",
+       "new": 44,
+       "count": 2,
+       "example": [
+        "0x1274f6a",
+        "0x1106cca",
+        "add"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cee8",
+     "functions": 290,
+     "value": 143384,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 143384,
+       "count": 7,
+       "example": [
+        "0x72c018",
+        "0x737708",
+        "lea"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cee8",
+     "functions": 290,
+     "value": 155672,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 155672,
+       "count": 7,
+       "example": [
+        "0x72c00a",
+        "0x7376fa",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cee8",
+     "functions": 290,
+     "value": 495200,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 495200,
+       "count": 55,
+       "example": [
+        "0x5ba910",
+        "0x5c3750",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "image-wide scan of the value",
+     "value": "data.planet_mods 286952",
+     "old_sites": 4,
+     "considered": 3,
+     "unmapped": 1,
+     "new_values": [
+      {
+       "kind": "disp",
+       "value": 286952,
+       "count": 2,
+       "example": {
+        "old": "0x12deacc",
+        "new": "0x117161c",
+        "old_insn": "mov r8d, dword ptr [r11 + rax*4 + 0x460e8]",
+        "new_insn": "mov r8d, dword ptr [r11 + rax*4 + 0x460e8]",
+        "window_bytes": 160,
+        "field_displacements_masked": false
+       }
+      }
+     ]
+    },
+    {
+     "kind": "image-wide scan of the value",
+     "value": "data.env 494696",
+     "old_sites": 2,
+     "considered": 2,
+     "unmapped": 1,
+     "new_values": [
+      {
+       "kind": "disp",
+       "value": 494696,
+       "count": 1,
+       "example": {
+        "old": "0x12df1b9",
+        "new": "0x1171d09",
+        "old_insn": "cmp dword ptr [rdi + 0x78c68], ebp",
+        "new_insn": "cmp dword ptr [rdi + 0x78c68], ebp",
+        "window_bytes": 160,
+        "field_displacements_masked": false
+       }
+      }
+     ]
+    },
+    {
+     "kind": "image-wide scan of the value",
+     "value": "data.env_count 494868",
+     "old_sites": 12,
+     "considered": 12,
+     "unmapped": 3,
+     "new_values": [
+      {
+       "kind": "disp",
+       "value": 494868,
+       "count": 9,
+       "example": {
+        "old": "0xb66055",
+        "new": "0xb82b05",
+        "old_insn": "cmp dword ptr [r8 + 0x78d14], r12d",
+        "new_insn": "cmp dword ptr [r8 + 0x78d14], r12d",
+        "window_bytes": 160,
+        "field_displacements_masked": false
+       }
+      }
+     ]
+    },
+    {
+     "kind": "image-wide scan of the value",
+     "value": "data.event_count 490072",
+     "old_sites": 8,
+     "considered": 8,
+     "unmapped": 2,
+     "new_values": [
+      {
+       "kind": "disp",
+       "value": 490072,
+       "count": 6,
+       "example": {
+        "old": "0x12d4971",
+        "new": "0x11673c1",
+        "old_insn": "cmp dword ptr [rcx + 0x77a58], ebp",
+        "new_insn": "cmp dword ptr [rcx + 0x77a58], ebp",
+        "window_bytes": 64,
+        "field_displacements_masked": false
+       }
+      }
+     ]
+    },
+    {
+     "kind": "image-wide scan of the value",
+     "value": "event.mods_n 2348",
+     "old_sites": 39,
+     "considered": 35,
+     "unmapped": 15,
+     "new_values": [
+      {
+       "kind": "disp",
+       "value": 2348,
+       "count": 17,
+       "example": {
+        "old": "0x53bb3c",
+        "new": "0x54496c",
+        "old_insn": "mov eax, dword ptr [rdi + 0x92c]",
+        "new_insn": "mov eax, dword ptr [rdi + 0x92c]",
+        "window_bytes": 160,
+        "field_displacements_masked": false
+       }
+      },
+      {
+       "kind": "disp",
+       "value": 2356,
+       "count": 2,
+       "example": {
+        "old": "0x801b61",
+        "new": "0x80e548",
+        "old_insn": "mov qword ptr [rbp + 0x92c], rax",
+        "new_insn": "mov qword ptr [rbp + 0x934], rax",
+        "window_bytes": 128,
+        "field_displacements_masked": true
+       }
+      },
+      {
+       "kind": "disp",
+       "value": 2364,
+       "count": 1,
+       "example": {
+        "old": "0x954a76",
+        "new": "0x966015",
+        "old_insn": "mov qword ptr [rbp + 0x92c], rax",
+        "new_insn": "mov qword ptr [rbp + 0x93c], rax",
+        "window_bytes": 96,
+        "field_displacements_masked": true
+       }
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K7",
+   "replace": null,
+   "note": null,
+   "line": 471
+  },
+  {
+   "id": "mission.matchmaking_layouts",
+   "file": "src/mission.lua",
+   "name": "LAYOUTS {1097440,1253440,100},{1253448,1409448,100},{1409456,1487456,50}; record 1560, +1456 flag, +944 advertisement",
+   "kind": "unchanged",
+   "old": "unchanged",
+   "new": "unchanged",
+   "changed": false,
+   "method": "old value kept; witnesses show it unchanged",
+   "witnesses": [
+    {
+     "kind": "aligned functions referencing 0x347ce80",
+     "functions": 67,
+     "value": 1097440,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 1097440,
+       "count": 13,
+       "example": [
+        "0x7383e2",
+        "0x743b22",
+        "lea"
+       ]
+      },
+      {
+       "kind": "imm",
+       "new": 1097440,
+       "count": 1,
+       "example": [
+        "0x73894f",
+        "0x74408f",
+        "add"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347ce80",
+     "functions": 67,
+     "value": 1253440,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 1253440,
+       "count": 17,
+       "example": [
+        "0x7383d6",
+        "0x743b16",
+        "cmp"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347ce80",
+     "functions": 67,
+     "value": 1253448,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 1253448,
+       "count": 12,
+       "example": [
+        "0x7383c3",
+        "0x743b03",
+        "lea"
+       ]
+      },
+      {
+       "kind": "imm",
+       "new": 1253448,
+       "count": 1,
+       "example": [
+        "0x73892e",
+        "0x74406e",
+        "add"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347ce80",
+     "functions": 67,
+     "value": 1409448,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 1409448,
+       "count": 14,
+       "example": [
+        "0x7383b7",
+        "0x743af7",
+        "cmp"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347ce80",
+     "functions": 67,
+     "value": 1409456,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 1409456,
+       "count": 13,
+       "example": [
+        "0x7383a4",
+        "0x743ae4",
+        "lea"
+       ]
+      },
+      {
+       "kind": "imm",
+       "new": 1409456,
+       "count": 1,
+       "example": [
+        "0x73890d",
+        "0x74404d",
+        "add"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347ce80",
+     "functions": 67,
+     "value": 1487456,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 1487456,
+       "count": 15,
+       "example": [
+        "0x738398",
+        "0x743ad8",
+        "cmp"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347ce80",
+     "functions": 67,
+     "value": 1560,
+     "pairs": [
+      {
+       "kind": "imm",
+       "new": 1560,
+       "count": 22,
+       "example": [
+        "0x7383e9",
+        "0x743b29",
+        "imul"
+       ]
+      },
+      {
+       "kind": "disp",
+       "new": 1560,
+       "count": 2,
+       "example": [
+        "0xfefdb4",
+        "0xe80194",
+        "call"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347ce80",
+     "functions": 67,
+     "value": 1456,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 1456,
+       "count": 4,
+       "example": [
+        "0x12d3114",
+        "0x1165b64",
+        "cmp"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347ce80",
+     "functions": 67,
+     "value": 944,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 944,
+       "count": 3,
+       "example": [
+        "0xfed6f3",
+        "0xe7dad3",
+        "mov"
+       ]
+      },
+      {
+       "kind": "imm",
+       "new": 944,
+       "count": 1,
+       "example": [
+        "0x12d4811",
+        "0x1167261",
+        "add"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347ce80",
+     "functions": 67,
+     "value": 100,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 100,
+       "count": 8,
+       "example": [
+        "0x187677e",
+        "0x16f7bee",
+        "mov"
+       ]
+      },
+      {
+       "kind": "imm",
+       "new": 100,
+       "count": 1,
+       "example": [
+        "0x12d453c",
+        "0x1166f8c",
+        "cmp"
+       ]
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K6",
+   "replace": null,
+   "note": null,
+   "line": 55
+  },
+  {
+   "id": "mission.settings_layout",
+   "file": "src/mission.lua",
+   "name": "difficulty settings: 816 B rows, draws +272, CANDIDATES 276/372/468 (8 x 12 B), FALLBACKS 564/600/636 (+32 fallback)",
+   "kind": "unchanged",
+   "old": "unchanged",
+   "new": "unchanged",
+   "changed": false,
+   "method": "old value kept; witnesses show it unchanged",
+   "witnesses": [
+    {
+     "kind": "aligned functions referencing 0x328d2a0",
+     "functions": 8,
+     "value": 816,
+     "pairs": [
+      {
+       "kind": "imm",
+       "new": 816,
+       "count": 7,
+       "example": [
+        "0x94c4d2",
+        "0x95da72",
+        "imul"
+       ]
+      },
+      {
+       "kind": "disp",
+       "new": 816,
+       "count": 1,
+       "example": [
+        "0x1756c65",
+        "0x15cac95",
+        "movups"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x328d2a0",
+     "functions": 8,
+     "value": 468,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 468,
+       "count": 3,
+       "example": [
+        "0x11e2ed6",
+        "0x1074536",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x328d2a0",
+     "functions": 8,
+     "value": 564,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 564,
+       "count": 2,
+       "example": [
+        "0x94c8c7",
+        "0x95de67",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x328d2a0",
+     "functions": 8,
+     "value": 636,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 636,
+       "count": 4,
+       "example": [
+        "0x11e33e6",
+        "0x1074a46",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "native aligned old -> new",
+     "old": "0x94c4d2",
+     "new": "0x95da6f",
+     "name": "constellation draw over the difficulty settings table (resolve.lua base)",
+     "aligned": 345,
+     "old_insns": 346,
+     "new_insns": 348,
+     "operand_differences": [
+      {
+       "old": "0x94c49a",
+       "new": "0x95da3a",
+       "old_insn": "mov dword ptr [rcx + 0x518c8], edx",
+       "new_insn": "mov dword ptr [rcx + 0x536c8], edx"
+      },
+      {
+       "old": "0x94c4a2",
+       "new": "0x95da42",
+       "old_insn": "mov byte ptr [rcx + 0x518cc], r8b",
+       "new_insn": "mov byte ptr [rcx + 0x536cc], r8b"
+      },
+      {
+       "old": "0x94c4ac",
+       "new": "0x95da4c",
+       "old_insn": "movzx r15d, byte ptr [rax + 0xf8]",
+       "new_insn": "movzx r15d, byte ptr [rax + 0x100]"
+      },
+      {
+       "old": "0x94c921",
+       "new": "0x95dec1",
+       "old_insn": "lea rdx, [r13 + 0x3a538]",
+       "new_insn": "lea rdx, [r13 + 0x3a838]"
+      }
+     ]
+    },
+    {
+     "kind": "data comparison",
+     "what": "difficulty settings decode the same through the new mapping",
+     "detail": {
+      "decoded_with": "old ids through from_native (v4.1.1), new ids through the port from_native",
+      "rows_equal": [
+       1
+      ],
+      "rows_changed": [
+       2,
+       3,
+       4,
+       5,
+       6,
+       7,
+       8,
+       9,
+       10
+      ],
+      "change": "Terminid base draw no longer offers tag 1 (Bile Bugs): BugAcid became the GM_BugAcid subfaction; every other candidate, weight, blocker and fallback is equal"
+     },
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K8",
+   "replace": null,
+   "note": null,
+   "line": 56
+  },
+  {
+   "id": "mission.definitions_layout",
+   "file": "src/mission.lua",
+   "name": "definitions: 52 B rows, count +53248, category 40/72, kind 13, +24/+28/+36/+44",
+   "kind": "unchanged",
+   "old": "unchanged",
+   "new": "unchanged",
+   "changed": false,
+   "method": "old value kept; witnesses show it unchanged",
+   "witnesses": [
+    {
+     "kind": "aligned functions referencing 0x347cd98",
+     "functions": 62,
+     "value": 52,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 52,
+       "count": 57,
+       "example": [
+        "0x757e83",
+        "0x763213",
+        "cmp"
+       ]
+      },
+      {
+       "kind": "imm",
+       "new": 52,
+       "count": 2,
+       "example": [
+        "0xabd0ea",
+        "0xad960a",
+        "add"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cd98",
+     "functions": 62,
+     "value": 72,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 72,
+       "count": 47,
+       "example": [
+        "0x9208d3",
+        "0x931643",
+        "mov"
+       ]
+      },
+      {
+       "kind": "imm",
+       "new": 72,
+       "count": 2,
+       "example": [
+        "0x94a17d",
+        "0x95b6fd",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cd98",
+     "functions": 62,
+     "value": 40,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 40,
+       "count": 102,
+       "example": [
+        "0x757eb6",
+        "0x763246",
+        "mov"
+       ]
+      },
+      {
+       "kind": "imm",
+       "new": 40,
+       "count": 3,
+       "example": [
+        "0x11dee2e",
+        "0x10703ee",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cd98",
+     "functions": 62,
+     "value": 13,
+     "pairs": [
+      {
+       "kind": "imm",
+       "new": 13,
+       "count": 18,
+       "example": [
+        "0x94a1c3",
+        "0x95b743",
+        "cmp"
+       ]
+      },
+      {
+       "kind": "imm",
+       "new": 14,
+       "count": 7,
+       "example": [
+        "0x12b667c",
+        "0x11486fc",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cd98",
+     "functions": 62,
+     "value": 24,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 24,
+       "count": 93,
+       "example": [
+        "0x757e30",
+        "0x7631c0",
+        "mov"
+       ]
+      },
+      {
+       "kind": "imm",
+       "new": 24,
+       "count": 11,
+       "example": [
+        "0x757ee7",
+        "0x763277",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cd98",
+     "functions": 62,
+     "value": 28,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 28,
+       "count": 47,
+       "example": [
+        "0x856ca6",
+        "0x863d96",
+        "mov"
+       ]
+      },
+      {
+       "kind": "imm",
+       "new": 28,
+       "count": 1,
+       "example": [
+        "0x920398",
+        "0x931108",
+        "imul"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cd98",
+     "functions": 62,
+     "value": 36,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 36,
+       "count": 35,
+       "example": [
+        "0x9205d7",
+        "0x931347",
+        "mulss"
+       ]
+      },
+      {
+       "kind": "imm",
+       "new": 36,
+       "count": 3,
+       "example": [
+        "0x757edd",
+        "0x76326d",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cd98",
+     "functions": 62,
+     "value": 44,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 44,
+       "count": 12,
+       "example": [
+        "0x94a1d5",
+        "0x95b755",
+        "mulss"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "image-wide scan of the value",
+     "value": "defs.count 53248",
+     "old_sites": 19,
+     "considered": 19,
+     "unmapped": 4,
+     "new_values": [
+      {
+       "kind": "disp",
+       "value": 53248,
+       "count": 15,
+       "example": {
+        "old": "0x10376d2",
+        "new": "0xec7d82",
+        "old_insn": "mov dword ptr [r8 + 0xd000], r12d",
+        "new_insn": "mov dword ptr [r8 + 0xd000], r12d",
+        "window_bytes": 160,
+        "field_displacements_masked": false
+       }
+      }
+     ]
+    },
+    {
+     "kind": "native aligned old -> new",
+     "old": "0x12df110",
+     "new": "0x1171c60",
+     "name": "modifier definition lookup by category (mission.lua definitions; called with 0x48 by group weight)",
+     "aligned": 243,
+     "old_insns": 243,
+     "new_insns": 243,
+     "operand_differences": [
+      {
+       "old": "0x12df14a",
+       "new": "0x1171c9a",
+       "old_insn": "cmp byte ptr [rax + 0x167e6], 0",
+       "new_insn": "cmp byte ptr [rax + 0x167ee], 0"
+      },
+      {
+       "old": "0x12df15e",
+       "new": "0x1171cae",
+       "old_insn": "cmp byte ptr [rax + 0x108d], 0",
+       "new_insn": "cmp byte ptr [rax + 0x110d], 0"
+      },
+      {
+       "old": "0x12df16b",
+       "new": "0x1171cbb",
+       "old_insn": "cmp byte ptr [rax + 0x1099], 0",
+       "new_insn": "cmp byte ptr [rax + 0x1119], 0"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K7",
+   "replace": null,
+   "note": null,
+   "line": 324
+  },
+  {
+   "id": "mission.categories_layout",
+   "file": "src/mission.lua",
+   "name": "category table 168 B, < 14, +9 flag",
+   "kind": "unchanged",
+   "old": "unchanged",
+   "new": "unchanged",
+   "changed": false,
+   "method": "old value kept; witnesses show it unchanged",
+   "witnesses": [
+    {
+     "kind": "aligned functions referencing 0x32e98e0",
+     "functions": 25,
+     "value": 168,
+     "pairs": [
+      {
+       "kind": "imm",
+       "new": 168,
+       "count": 39,
+       "example": [
+        "0x732015",
+        "0x73d8b5",
+        "imul"
+       ]
+      },
+      {
+       "kind": "disp",
+       "new": 168,
+       "count": 5,
+       "example": [
+        "0x12d196c",
+        "0x11643ac",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x32e98e0",
+     "functions": 25,
+     "value": 14,
+     "pairs": [
+      {
+       "kind": "imm",
+       "new": 14,
+       "count": 39,
+       "example": [
+        "0x73200c",
+        "0x73d8ac",
+        "cmp"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x32e98e0",
+     "functions": 25,
+     "value": 9,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 9,
+       "count": 13,
+       "example": [
+        "0x732054",
+        "0x73d8ee",
+        "cmp"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "data comparison",
+     "what": "table bytes",
+     "detail": {
+      "old_vs_new_14_records": "identical"
+     },
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K7",
+   "replace": null,
+   "note": null,
+   "line": 408
+  },
+  {
+   "id": "mission.war_effects_layout",
+   "file": "src/mission.lua",
+   "name": "war effects: 32 x 356 B, +80 count, +84 scope, +88 value, +92 filter, 16 B entries (type 17 tag, type 15 family scale)",
+   "kind": "unchanged",
+   "old": "unchanged",
+   "new": "unchanged",
+   "changed": false,
+   "method": "old value kept; witnesses show it unchanged",
+   "witnesses": [
+    {
+     "kind": "aligned functions referencing 0x346d518",
+     "functions": 33,
+     "value": 356,
+     "pairs": [
+      {
+       "kind": "imm",
+       "new": 356,
+       "count": 29,
+       "example": [
+        "0x8f3ad6",
+        "0x904356",
+        "add"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x346d518",
+     "functions": 33,
+     "value": 80,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 80,
+       "count": 22,
+       "example": [
+        "0x11def3d",
+        "0x10704fd",
+        "mov"
+       ]
+      },
+      {
+       "kind": "imm",
+       "new": 80,
+       "count": 1,
+       "example": [
+        "0x11e03c5",
+        "0x1071985",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x346d518",
+     "functions": 33,
+     "value": 88,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 88,
+       "count": 3,
+       "example": [
+        "0x8f3a31",
+        "0x9042b1",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x346d518",
+     "functions": 33,
+     "value": 32,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 32,
+       "count": 38,
+       "example": [
+        "0x11ddf77",
+        "0x106f527",
+        "mov"
+       ]
+      },
+      {
+       "kind": "imm",
+       "new": 32,
+       "count": 26,
+       "example": [
+        "0x8f3a26",
+        "0x9042a6",
+        "sub"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "native aligned old -> new",
+     "old": "0x12e3c00",
+     "new": "0x1176780",
+     "name": "war-effect clamp (roster.lua clamp)",
+     "aligned": 89,
+     "old_insns": 89,
+     "new_insns": 89,
+     "operand_differences": []
+    }
+   ],
+   "confidence": "medium",
+   "feeds_write": false,
+   "live_check": "K7",
+   "replace": null,
+   "note": null,
+   "line": 446
+  },
+  {
+   "id": "mission.override_maps",
+   "file": "src/mission.lua",
+   "name": "CONFIG_MAPS 73848 (peer-synced) / 49232; 48 B entries",
+   "kind": "unchanged",
+   "old": "unchanged",
+   "new": "unchanged",
+   "changed": false,
+   "method": "old value kept; witnesses show it unchanged",
+   "witnesses": [
+    {
+     "kind": "aligned functions referencing 0x347cdf8",
+     "functions": 240,
+     "value": 73848,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 73848,
+       "count": 5,
+       "example": [
+        "0xfc26c4",
+        "0xe530b4",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cdf8",
+     "functions": 240,
+     "value": 49232,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 49232,
+       "count": 2,
+       "example": [
+        "0xfc272c",
+        "0xe5311c",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x347cdf8",
+     "functions": 240,
+     "value": 48,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 48,
+       "count": 340,
+       "example": [
+        "0x6e6b8d",
+        "0x6f183d",
+        "mov"
+       ]
+      },
+      {
+       "kind": "imm",
+       "new": 48,
+       "count": 46,
+       "example": [
+        "0x9aa628",
+        "0x9bc248",
+        "mov"
+       ]
+      },
+      {
+       "kind": "disp",
+       "new": 64,
+       "count": 4,
+       "example": [
+        "0xab5aac",
+        "0xad1d5e",
+        "mov"
+       ]
+      },
+      {
+       "kind": "disp",
+       "new": 32,
+       "count": 2,
+       "example": [
+        "0xc010a9",
+        "0xc1ae7d",
+        "mov"
+       ]
+      },
+      {
+       "kind": "imm",
+       "new": 64,
+       "count": 2,
+       "example": [
+        "0x12e6cf4",
+        "0x110519b",
+        "sub"
+       ]
+      },
+      {
+       "kind": "disp",
+       "new": 40,
+       "count": 2,
+       "example": [
+        "0x14c0703",
+        "0x135ba36",
+        "mov"
+       ]
+      },
+      {
+       "kind": "disp",
+       "new": 208,
+       "count": 1,
+       "example": [
+        "0x12c6743",
+        "0x115897a",
+        "movaps"
+       ]
+      },
+      {
+       "kind": "disp",
+       "new": 16,
+       "count": 1,
+       "example": [
+        "0x1346dd1",
+        "0x135b2a0",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "native aligned old -> new",
+     "old": "0x177e100",
+     "new": "0x15f2400",
+     "name": "configuration exclusion key (resolve.lua exclusion_key / mission.lua excluded_in)",
+     "aligned": 77,
+     "old_insns": 77,
+     "new_insns": 77,
+     "operand_differences": []
+    },
+    {
+     "kind": "native aligned old -> new",
+     "old": "0x177dd80",
+     "new": "0x15f2080",
+     "name": "configuration exclusion key, second user",
+     "aligned": 82,
+     "old_insns": 82,
+     "new_insns": 82,
+     "operand_differences": []
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K9",
+   "replace": null,
+   "note": null,
+   "line": 58
+  },
+  {
+   "id": "mission.mission_config_layout",
+   "file": "src/mission.lua",
+   "name": "mission configs 896 B, +0x34 mode, HordeOnly marker +0x360, exclusions +0x14 (8 x u32)",
+   "kind": "unchanged",
+   "old": "unchanged",
+   "new": "unchanged",
+   "changed": false,
+   "method": "old value kept; witnesses show it unchanged",
+   "witnesses": [
+    {
+     "kind": "aligned functions referencing 0x3773420",
+     "functions": 23,
+     "value": 896,
+     "pairs": [
+      {
+       "kind": "imm",
+       "new": 896,
+       "count": 26,
+       "example": [
+        "0xf67aaa",
+        "0xdf851a",
+        "imul"
+       ]
+      },
+      {
+       "kind": "disp",
+       "new": 896,
+       "count": 1,
+       "example": [
+        "0x1026bbb",
+        "0xeb6ede",
+        "movsd"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x3773420",
+     "functions": 23,
+     "value": 52,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 52,
+       "count": 23,
+       "example": [
+        "0xf67ab8",
+        "0xdf8528",
+        "movzx"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x3773420",
+     "functions": 23,
+     "value": 864,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 864,
+       "count": 5,
+       "example": [
+        "0xf67b22",
+        "0xdf8592",
+        "mov"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "aligned functions referencing 0x3773420",
+     "functions": 23,
+     "value": 20,
+     "pairs": [
+      {
+       "kind": "disp",
+       "new": 20,
+       "count": 7,
+       "example": [
+        "0xfc3426",
+        "0xe53e26",
+        "lea"
+       ]
+      },
+      {
+       "kind": "disp",
+       "new": 36,
+       "count": 4,
+       "example": [
+        "0x1024e60",
+        "0xeb5189",
+        "movss"
+       ]
+      },
+      {
+       "kind": "imm",
+       "new": 20,
+       "count": 1,
+       "example": [
+        "0x177e096",
+        "0x15f2396",
+        "add"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "data comparison",
+     "what": "mission configs decode the same through the new mapping",
+     "detail": {
+      "records": 120,
+      "equal_after_tag_mapping": true,
+      "horde_missions": [
+       17,
+       18,
+       74,
+       109
+      ]
+     },
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K9",
+   "replace": null,
+   "note": null,
+   "line": 584
+  },
+  {
+   "id": "mission.stamp_layout",
+   "file": "src/mission.lua",
+   "name": "level +9160276 explicit tags (count +12 <= 3), +18510124 count, +9017008 selection (168 B: +0 owner, +8 type 2915250090, [161] variant, [162] index), owner +40 table 24 B +8, 456 B entries, +208 tag",
+   "kind": "unchanged",
+   "old": "unchanged",
+   "new": "unchanged",
+   "changed": false,
+   "method": "old value kept; witnesses show it unchanged",
+   "witnesses": [
+    {
+     "kind": "image-wide scan of the value",
+     "value": "level.explicit 9160276",
+     "old_sites": 2,
+     "considered": 2,
+     "unmapped": 0,
+     "new_values": [
+      {
+       "kind": "disp",
+       "value": 9160276,
+       "count": 1,
+       "example": {
+        "old": "0xad4d0a",
+        "new": "0xaf0e2a",
+        "old_insn": "mov eax, dword ptr [r8 + rax*4 + 0x8bc654]",
+        "new_insn": "mov eax, dword ptr [r8 + rax*4 + 0x8bc654]",
+        "window_bytes": 128,
+        "field_displacements_masked": true
+       }
+      },
+      {
+       "kind": "imm",
+       "value": 9160276,
+       "count": 1,
+       "example": {
+        "old": "0xf70ff4",
+        "new": "0xe01bb4",
+        "old_insn": "mov r8d, 0x8bc654",
+        "new_insn": "mov r8d, 0x8bc654",
+        "window_bytes": 160,
+        "field_displacements_masked": true
+       }
+      }
+     ]
+    },
+    {
+     "kind": "image-wide scan of the value",
+     "value": "level.count 18510124",
+     "old_sites": 6,
+     "considered": 6,
+     "unmapped": 3,
+     "new_values": [
+      {
+       "kind": "disp",
+       "value": 18510124,
+       "count": 3,
+       "example": {
+        "old": "0xc25410",
+        "new": "0xc4433a",
+        "old_insn": "lea rax, [r13 + 0x11a712c]",
+        "new_insn": "lea rax, [r13 + 0x11a712c]",
+        "window_bytes": 160,
+        "field_displacements_masked": false
+       }
+      }
+     ]
+    },
+    {
+     "kind": "image-wide scan of the value",
+     "value": "level.selection 9017008",
+     "old_sites": 79,
+     "considered": 40,
+     "unmapped": 28,
+     "new_values": [
+      {
+       "kind": "disp",
+       "value": 9017008,
+       "count": 12,
+       "example": {
+        "old": "0x90cd47",
+        "new": "0x91d967",
+        "old_insn": "lea r10, [rax + 0x8996b0]",
+        "new_insn": "lea r10, [rax + 0x8996b0]",
+        "window_bytes": 128,
+        "field_displacements_masked": false
+       }
+      }
+     ]
+    },
+    {
+     "kind": "image-wide scan of the value",
+     "value": "stamp.type 2915250090",
+     "old_sites": 104,
+     "considered": 40,
+     "unmapped": 3,
+     "new_values": [
+      {
+       "kind": "imm",
+       "value": 2915250090,
+       "count": 37,
+       "example": {
+        "old": "0xf2baac",
+        "new": "0xdbc00c",
+        "old_insn": "cmp dword ptr [rsi + 8], 0xadc32faa",
+        "new_insn": "cmp dword ptr [rsi + 8], 0xadc32faa",
+        "window_bytes": 160,
+        "field_displacements_masked": false
+       }
+      }
+     ]
+    },
+    {
+     "kind": "image-wide scan of the value",
+     "value": "stamp.stride 456",
+     "old_sites": 1222,
+     "considered": 40,
+     "unmapped": 10,
+     "new_values": [
+      {
+       "kind": "disp",
+       "value": 456,
+       "count": 25,
+       "example": {
+        "old": "0x7e929",
+        "new": "0x80af9",
+        "old_insn": "sar byte ptr [rcx + 0x1c8], 0xf3",
+        "new_insn": "sar byte ptr [rcx + 0x1c8], 0xf3",
+        "window_bytes": 128,
+        "field_displacements_masked": false
+       }
+      },
+      {
+       "kind": "disp",
+       "value": 312,
+       "count": 3,
+       "example": {
+        "old": "0x1d146d",
+        "new": "0x2f931d",
+        "old_insn": "mov dword ptr [rbp + 0x1c8], 0x42c80000",
+        "new_insn": "mov dword ptr [rbp + 0x138], 0x42c80000",
+        "window_bytes": 64,
+        "field_displacements_masked": true
+       }
+      },
+      {
+       "kind": "disp",
+       "value": 392,
+       "count": 2,
+       "example": {
+        "old": "0x19424b",
+        "new": "0x195aa9",
+        "old_insn": "mov qword ptr [rsp + 0x1c8], r12",
+        "new_insn": "mov qword ptr [rsp + 0x188], r12",
+        "window_bytes": 48,
+        "field_displacements_masked": true
+       }
+      }
+     ]
+    },
+    {
+     "kind": "instruction pair",
+     "old": "0xad4d0a",
+     "old_insn": "mov eax, dword ptr [r8 + rax*4 + 0x8bc654]",
+     "new": "0xaf0e2a",
+     "new_insn": "mov eax, dword ptr [r8 + rax*4 + 0x8bc654]",
+     "proves": "explicit tag list read by the game",
+     "checked": true
+    }
+   ],
+   "confidence": "medium",
+   "feeds_write": false,
+   "live_check": "K3",
+   "replace": null,
+   "note": null,
+   "line": 506
+  },
+  {
+   "id": "mission.descriptor_layout",
+   "file": "src/mission.lua",
+   "name": "mission descriptor (200 B): seed +0, +4, faction [8], difficulty [9], planet +12, type +26; controller +8 copy; briefing owner +1072",
+   "kind": "unchanged",
+   "old": "unchanged",
+   "new": "unchanged",
+   "changed": false,
+   "method": "old value kept; witnesses show it unchanged",
+   "witnesses": [
+    {
+     "kind": "instruction pair",
+     "old": "0xb92fca",
+     "old_insn": "lea rcx, [rbx + 0x430]",
+     "new": "0xbb147a",
+     "new_insn": "lea rcx, [rbx + 0x430]",
+     "proves": "the owner descriptor at +0x430",
+     "checked": true
+    },
+    {
+     "kind": "image-wide scan of the value",
+     "value": "board.descriptor 0x4168d0",
+     "old_sites": 2,
+     "considered": 2,
+     "unmapped": 1,
+     "new_values": [
+      {
+       "kind": "disp",
+       "value": 4286672,
+       "count": 1,
+       "example": {
+        "old": "0x12d803a",
+        "new": "0x116ab4a",
+        "old_insn": "lea rcx, [rdi + 0x4168d0]",
+        "new_insn": "lea rcx, [rdi + 0x4168d0]",
+        "window_bytes": 32,
+        "field_displacements_masked": false
+       }
+      }
+     ]
+    }
+   ],
+   "confidence": "medium",
+   "feeds_write": false,
+   "live_check": "K2",
+   "replace": null,
+   "note": null,
+   "line": 274
+  },
+  {
+   "id": "resolve.natives",
+   "file": "src/resolve.lua",
+   "name": "constellation draw LCG (0x5851F42D4C957F2D, 0x14057B7EF767814F), exclusion key words (3781555287, 3964548889), murmur 0x5bd1e995",
+   "kind": "unchanged",
+   "old": "unchanged",
+   "new": "unchanged",
+   "changed": false,
+   "method": "old value kept; witnesses show it unchanged",
+   "witnesses": [
+    {
+     "kind": "native aligned old -> new",
+     "old": "0x94c4d2",
+     "new": "0x95da6f",
+     "name": "constellation draw over the difficulty settings table (resolve.lua base)",
+     "aligned": 345,
+     "old_insns": 346,
+     "new_insns": 348,
+     "operand_differences": [
+      {
+       "old": "0x94c49a",
+       "new": "0x95da3a",
+       "old_insn": "mov dword ptr [rcx + 0x518c8], edx",
+       "new_insn": "mov dword ptr [rcx + 0x536c8], edx"
+      },
+      {
+       "old": "0x94c4a2",
+       "new": "0x95da42",
+       "old_insn": "mov byte ptr [rcx + 0x518cc], r8b",
+       "new_insn": "mov byte ptr [rcx + 0x536cc], r8b"
+      },
+      {
+       "old": "0x94c4ac",
+       "new": "0x95da4c",
+       "old_insn": "movzx r15d, byte ptr [rax + 0xf8]",
+       "new_insn": "movzx r15d, byte ptr [rax + 0x100]"
+      },
+      {
+       "old": "0x94c921",
+       "new": "0x95dec1",
+       "old_insn": "lea rdx, [r13 + 0x3a538]",
+       "new_insn": "lea rdx, [r13 + 0x3a838]"
+      }
+     ]
+    },
+    {
+     "kind": "native aligned old -> new",
+     "old": "0x177e100",
+     "new": "0x15f2400",
+     "name": "configuration exclusion key (resolve.lua exclusion_key / mission.lua excluded_in)",
+     "aligned": 77,
+     "old_insns": 77,
+     "new_insns": 77,
+     "operand_differences": []
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": null,
+   "replace": null,
+   "note": null,
+   "line": 14
+  },
+  {
+   "id": "roster.natives",
+   "file": "src/roster.lua",
+   "name": "natives roster.lua mirrors: group builder 0x94be10 -> 0x95d3b0, group weight 0x94a0a0 -> 0x95b620, clamp 0x12e3c00 -> 0x1176780, tag predicate 0x177e3c0 -> 0x15f26c0, replacement chain 0x949b80 -> 0x95b100 (comments only)",
+   "kind": "unchanged",
+   "old": "logic unchanged",
+   "new": "logic unchanged",
+   "changed": false,
+   "method": "old value kept; witnesses show it unchanged",
+   "witnesses": [
+    {
+     "kind": "native aligned old -> new",
+     "old": "0x94be10",
+     "new": "0x95d3b0",
+     "name": "group builder (roster.lua)",
+     "aligned": 359,
+     "old_insns": 359,
+     "new_insns": 359,
+     "operand_differences": []
+    },
+    {
+     "kind": "native aligned old -> new",
+     "old": "0x94a0a0",
+     "new": "0x95b619",
+     "name": "group weight (roster.lua, mission.lua category 72)",
+     "aligned": 106,
+     "old_insns": 106,
+     "new_insns": 112,
+     "operand_differences": [
+      {
+       "old": "0x94a0e8",
+       "new": "0x95b668",
+       "old_insn": "mov r8d, dword ptr [rax + 0x518c4]",
+       "new_insn": "mov r8d, dword ptr [rax + 0x536c4]"
+      }
+     ]
+    },
+    {
+     "kind": "native aligned old -> new",
+     "old": "0x12e3c00",
+     "new": "0x1176780",
+     "name": "war-effect clamp (roster.lua clamp)",
+     "aligned": 89,
+     "old_insns": 89,
+     "new_insns": 89,
+     "operand_differences": []
+    },
+    {
+     "kind": "native aligned old -> new",
+     "old": "0x949b80",
+     "new": "0x95b0fc",
+     "name": "replacement chain (roster.lua replace)",
+     "aligned": 166,
+     "old_insns": 166,
+     "new_insns": 169,
+     "operand_differences": [
+      {
+       "old": "0x949bd6",
+       "new": "0x95b156",
+       "old_insn": "mov esi, dword ptr [rax + 0x518c4]",
+       "new_insn": "mov esi, dword ptr [rax + 0x536c4]"
+      },
+      {
+       "old": "0x949bf2",
+       "new": "0x95b172",
+       "old_insn": "lea rdi, [rax + 0x518d4]",
+       "new_insn": "lea rdi, [rax + 0x536d4]"
+      }
+     ]
+    },
+    {
+     "kind": "data comparison",
+     "what": "tag predicate bytes",
+     "detail": {
+      "old": "0x177e3c0",
+      "new": "0x15f26c0",
+      "bytes_equal_0x9c": true,
+      "called_from_builder": "0x94c1d6 -> 0x95d776"
+     },
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": null,
+   "replace": null,
+   "note": null,
+   "line": 2
+  },
+  {
+   "id": "presentation.widget_layout",
+   "file": "src/presentation.lua",
+   "name": "widget record (164 B): +0 flags 0x10, +84 inherited opacity, +100/+140 scale, +148/+156 position, +36/+40 size",
+   "kind": "unchanged",
+   "old": "unchanged",
+   "new": "unchanged",
+   "changed": false,
+   "method": "old value kept; witnesses show it unchanged",
+   "witnesses": [
+    {
+     "kind": "UI library functions aligned",
+     "detail": "text layout 0x143bb20 -> 0x12d3830 (138/138), marquee 0x143c400 -> 0x12d410a, set_enabled 0x14508e0 -> 0x12e85ef, 0x143c5a0 -> 0x12d42ab: no operand differences"
+    }
+   ],
+   "confidence": "medium",
+   "feeds_write": false,
+   "live_check": "K10",
+   "replace": null,
+   "note": null,
+   "line": 83
+  },
+  {
+   "id": "presentation.font_material_field",
+   "file": "src/presentation.lua",
+   "name": "font material owner +24 hash",
+   "kind": "unchanged",
+   "old": "unchanged",
+   "new": "unchanged",
+   "changed": false,
+   "method": "old value kept; witnesses show it unchanged",
+   "witnesses": [
+    {
+     "kind": "native aligned old -> new",
+     "old": "0xf553c0",
+     "new": "0xde5de0",
+     "name": "font initializer (presentation.lua)",
+     "aligned": 1707,
+     "old_insns": 1707,
+     "new_insns": 1707,
+     "operand_differences": []
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "K10",
+   "replace": null,
+   "note": null,
+   "line": 127
+  },
+  {
+   "id": "presentation.panel_widgets",
+   "file": "src/presentation.lua",
+   "name": "panel owner widgets: map 349072, briefing 31232, planet 280528, preview 526048; briefing owner +8",
+   "kind": "struct offset (unverified)",
+   "old": "349072/31232/280528/526048/+8",
+   "new": "349072/31232/280528/526048/+8 (kept)",
+   "changed": true,
+   "method": "no static witness: no game.dll instruction carries these displacements (v4.1.1 measured them in memory); the owners are the subscribers of the moved registries above, objects whose class layout code does not reveal",
+   "witnesses": [
+    {
+     "kind": "search",
+     "detail": "tools/range_scan.py over each widget span (+0..+164) in the old image found no real code reference; the event registrations that store the owners have no static callers"
+    }
+   ],
+   "confidence": "low",
+   "feeds_write": false,
+   "live_check": "K10",
+   "replace": null,
+   "note": "Read-only and fail-safe: a wrong offset fails the rectangle checks (visible flag, opacity, scale, size) and the panel stays hidden. K10 settles it.",
+   "line": 100
+  }
+ ],
+ "summary": {
+  "rows": 55,
+  "by_confidence": {
+   "high": 49,
+   "medium": 5,
+   "low": 1
+  },
+  "changed": 38,
+  "feeds_write": 0,
+  "unmapped": []
+ },
+ "witness_check_failures": []
+}

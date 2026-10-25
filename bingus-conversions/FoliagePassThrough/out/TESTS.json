@@ -1,0 +1,83 @@
+{
+ "port": {
+  "runs": [
+   {
+    "command": "wine luajit.exe tests/test_mod.lua .",
+    "exit": 0,
+    "pass_lines": [
+     "PASS: 10 foliage pass-through tests (LuaJIT 2.1.ROLLING)"
+    ],
+    "tail": [
+     "PASS: 10 foliage pass-through tests (LuaJIT 2.1.ROLLING)"
+    ]
+   },
+   {
+    "command": "linux luajit (GC64) tests/test_mod.lua .",
+    "exit": 1,
+    "pass_lines": [],
+    "tail": [
+     "\t[C]: in function 'assert'",
+     "\ttests/test_mod.lua:123: in function 'silent'",
+     "\ttests/test_mod.lua:152: in main chunk",
+     "\t[C]: at 0x55fb3f6d6480"
+    ]
+   }
+  ],
+  "fixture_changes": {
+   "slots = 351 -> slots = 356": 1,
+   "t[1] < 351 -> t[1] < 356": 1,
+   "put(row, 0xF4, -> put(row, 0xF8,": 1,
+   "get32(w.rows[ptype], 0xF4) -> get32(w.rows[ptype], 0xF8)": 1,
+   "field = 0xF4 -> field = 0xF8": 1,
+   "w.count(2) -> w.count(3)": 7,
+   "{template = 2} -> {template = 3}": 1,
+   "#TARGETS == 99, 'expected 99 targets -> #TARGETS == 95, 'expected 95 targets": 1,
+   "applied: 99 projectile types use the no-foliage query (99 changed now -> applied: 95 projectile types use the no-foliage query (95 changed now": 1,
+   "changed == 99 and #rows.list == 99 -> changed == 95 and #rows.list == 95": 1,
+   "read = 200, pointer = 100, address = 199 -> read = 192, pointer = 96, address = 191": 1,
+   "Mod.VANILLA) == 99 and w.count(0) == 99 -> Mod.VANILLA) == 95 and w.count(0) == 95": 1,
+   "Mod.NO_FOLIAGE) == 99 and w.count(3) == 99 -> Mod.NO_FOLIAGE) == 95 and w.count(3) == 95": 1,
+   "changed == 99 and vanilla == 0 -> changed == 95 and vanilla == 0": 1,
+   "At shutdown: 99 of 99 -> At shutdown: 95 of 95": 1,
+   "w.count(0) == 99 and not control -> w.count(0) == 95 and not control": 1,
+   "control.set(true) and w.count(3) == 99 -> control.set(true) and w.count(3) == 95": 1,
+   "{239, 151, 293, 110, 132, 31} -> {243, 153, 298, 112, 134, 32}": 1,
+   "{112, 9, 87, 88, 316} -> {114, 9, 10, 89, 90, 321}": 1,
+   "{mismatch = {type = 110, field = 0x08} -> {mismatch = {type = 112, field = 0x08}": 1,
+   "{mismatch = {type = 239, field = 0x90} -> {mismatch = {type = 243, field = 0x90}": 1,
+   "{mismatch = {type = 239, field = 0x00, value = 238} -> {mismatch = {type = 243, field = 0x00, value = 242}": 1,
+   "{mismatch = {type = 151, field = 0xF8, value = 1} -> {mismatch = {type = 153, field = 0xF8, value = 1}": 1,
+   "{missing = 293, -> {missing = 298,": 1
+  }
+ },
+ "upstream": {
+  "runs": [
+   {
+    "command": "wine luajit.exe tests/test_mod.lua .",
+    "exit": 0,
+    "pass_lines": [
+     "PASS: 10 foliage pass-through tests (LuaJIT 2.1.ROLLING)"
+    ],
+    "tail": [
+     "PASS: 10 foliage pass-through tests (LuaJIT 2.1.ROLLING)"
+    ]
+   },
+   {
+    "command": "linux luajit (GC64) tests/test_mod.lua .",
+    "exit": 1,
+    "pass_lines": [],
+    "tail": [
+     "\t[C]: in function 'assert'",
+     "\ttests/test_mod.lua:123: in function 'silent'",
+     "\ttests/test_mod.lua:152: in main chunk",
+     "\t[C]: at 0x56048b7a8480"
+    ]
+   }
+  ],
+  "fixture_changes": {}
+ },
+ "not_run": {
+  "tests/game_lua.py": "runs the suites inside the game's old lua51.dll via Windows ctypes (not the GC64 VM the game now uses); Windows only",
+  "tests/frame_budget.lua, tests/hostile_vm.lua": "helpers loaded by test_mod.lua"
+ }
+}

@@ -1,0 +1,665 @@
+{
+ "mod": "Sticky Grenade Handles v1.0.1 (upstream-bingus/StickyGrenadeHandles, git tag v1.0.1, commit dc8efe4)",
+ "source_choice": "upstream-bingus/StickyGrenadeHandles: tag v1.0.1 at HEAD and every components.lock.json source_sha256 matches it (identical to VanillaPlusMegapack/components/StickyGrenadeHandles)",
+ "lock_revision": "v1.0.1",
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "images": {
+  "old_dll": "<workspace>/native-work/evidence/game-pre1020.dll",
+  "new_dll": "<workspace>/native-work/evidence/game-26088801.dll",
+  "old_exe": "<hellforge>/mods-retired/localappdata-1019/LocalAppData/LinksLinkToMemory/r6_reload_exe_20261017.bin",
+  "new_exe": "<workspace>/native-work/evidence/exe-26088801.bin"
+ },
+ "counts": {
+  "high": 18
+ },
+ "rows_total": 18,
+ "rows_feeding_write": 15,
+ "changed": [
+  "sticky.EXE_SHA256",
+  "sticky.GAME_SHA256",
+  "sticky.settings_rva",
+  "sticky.throwable_table",
+  "sticky.library_rva",
+  "sticky.library_vtable_rva",
+  "sticky.comment_getter",
+  "sticky.build_text"
+ ],
+ "witness_check_failures": [],
+ "rows": [
+  {
+   "id": "sticky.EXE_SHA256",
+   "line": 16,
+   "symbol": "Mod.EXE_SHA256",
+   "kind": "SHA-256 pin (api.verify_build gate)",
+   "old": "F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06",
+   "new": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "method": "SHA-256 of the installed file (read-only), equal to the brief's hash",
+   "witnesses": [
+    {
+     "file": "<game>/bin/helldivers2.exe",
+     "sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+     "equal": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "gate",
+   "file": "src/sticky_grenade_handles.lua",
+   "changed": true
+  },
+  {
+   "id": "sticky.GAME_SHA256",
+   "line": 17,
+   "symbol": "Mod.GAME_SHA256",
+   "kind": "SHA-256 pin (api.verify_build gate)",
+   "old": "2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E",
+   "new": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "method": "SHA-256 of the installed file (read-only), equal to the brief's hash",
+   "witnesses": [
+    {
+     "file": "<game>/data/game/game.dll",
+     "sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+     "equal": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "gate",
+   "file": "src/sticky_grenade_handles.lua",
+   "changed": true
+  },
+  {
+   "id": "sticky.settings_rva",
+   "line": 24,
+   "symbol": "Mod.LAYOUT.settings_rva",
+   "kind": "game.dll global: entity settings root",
+   "old": "0x346BF98",
+   "new": "0x2CE41B8",
+   "method": "rip-relative load at the first instruction pair of the ThrowableComponent getter, identical function",
+   "witnesses": [
+    {
+     "old_function": "0x50cd90",
+     "new_function": "0x515370",
+     "instructions": 41,
+     "same_instruction_shapes": true,
+     "listing": "evidence/throwable-getter.json",
+     "old_instruction": "mov rax, qword ptr [rip + 0x2f5f1fc]",
+     "new_instruction": "mov rax, qword ptr [rip + 0x27cee3c]",
+     "old_target": "0x346bf98",
+     "new_target": "0x2ce41b8"
+    },
+    {
+     "brief": "entities 0x346BF98->0x2CE41B8 live-verified on 26088801"
+    },
+    {
+     "live": "megapack-validation-state.json sticky_grenades: independent header/grenade/material checks PASS batch113, production apply/restore PASS batch273 (same value)"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "locates the settings checked before the write",
+   "file": "src/sticky_grenade_handles.lua",
+   "changed": true
+  },
+  {
+   "id": "sticky.throwable_table",
+   "line": 25,
+   "symbol": "Mod.LAYOUT.throwable_table",
+   "kind": "entity settings root field: ThrowableComponentData table pointer",
+   "old": "0xF12C90",
+   "new": "0xF14758",
+   "method": "field displacement of the getter's table load (entities fields reorder in this build; this one moved +0x1AC8, like 0xF12C90->0xF14758 in the brief)",
+   "witnesses": [
+    {
+     "old_function": "0x50cd90",
+     "new_function": "0x515370",
+     "instructions": 41,
+     "same_instruction_shapes": true,
+     "listing": "evidence/throwable-getter.json",
+     "old_instruction": [
+      "r10, qword ptr [rax + 0xf12c90]"
+     ],
+     "new_instruction": [
+      "r10, qword ptr [rax + 0xf14758]"
+     ]
+    },
+    {
+     "file": "native-work/field-f12c90.json",
+     "new_field": "0xf14758"
+    },
+    {
+     "brief": "entities internal field 0xF12C90->0xF14758"
+    },
+    {
+     "neighbour": "the next getter reads +0xF12C98 -> +0xF14760 (same shift), not used by the mod"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "locates the settings checked before the write",
+   "file": "src/sticky_grenade_handles.lua",
+   "changed": true
+  },
+  {
+   "id": "sticky.throwable_slots",
+   "line": 26,
+   "symbol": "Mod.LAYOUT.throwable_slots",
+   "kind": "hash-table slot count",
+   "old": "92",
+   "new": "92",
+   "method": "getter: index = hash % 0x5C (imul 0x5c), probe loop bound cmp r9d,0x5c, wrap at 0x5b",
+   "witnesses": [
+    {
+     "old_function": "0x50cd90",
+     "new_function": "0x515370",
+     "instructions": 41,
+     "same_instruction_shapes": true,
+     "listing": "evidence/throwable-getter.json",
+     "old": [
+      "eax, eax, 0x5c",
+      "r9d, 0x5c"
+     ],
+     "new": [
+      "eax, eax, 0x5c",
+      "r9d, 0x5c"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "check before the write",
+   "file": "src/sticky_grenade_handles.lua",
+   "changed": false
+  },
+  {
+   "id": "sticky.throwable_records",
+   "line": 27,
+   "symbol": "Mod.LAYOUT.throwable_records",
+   "kind": "byte offset of the first record (after 92 16-byte slots)",
+   "old": "1472",
+   "new": "1472",
+   "method": "getter: record = table + 0x5C0 + index * 0x168; slot stride shl 4; index at slot +8",
+   "witnesses": [
+    {
+     "old_function": "0x50cd90",
+     "new_function": "0x515370",
+     "instructions": 41,
+     "same_instruction_shapes": true,
+     "listing": "evidence/throwable-getter.json",
+     "old": [
+      "rax, 0x5c0",
+      "rax, 4",
+      "ecx, dword ptr [rax + 8]"
+     ],
+     "new": [
+      "rax, 0x5c0",
+      "rax, 4",
+      "ecx, dword ptr [rax + 8]"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "check before the write",
+   "file": "src/sticky_grenade_handles.lua",
+   "changed": false
+  },
+  {
+   "id": "sticky.throwable_size",
+   "line": 28,
+   "symbol": "Mod.LAYOUT.throwable_size",
+   "kind": "ThrowableComponentData record size",
+   "old": "360",
+   "new": "360",
+   "method": "getter: imul rax, rcx, 0x168",
+   "witnesses": [
+    {
+     "old_function": "0x50cd90",
+     "new_function": "0x515370",
+     "instructions": 41,
+     "same_instruction_shapes": true,
+     "listing": "evidence/throwable-getter.json",
+     "old": [
+      "rax, rcx, 0x168"
+     ],
+     "new": [
+      "rax, rcx, 0x168"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "check before the write",
+   "file": "src/sticky_grenade_handles.lua",
+   "changed": false
+  },
+  {
+   "id": "sticky.STICKY",
+   "line": 34,
+   "symbol": "STICKY",
+   "kind": "ThrowableComponentData field: sticky (u8)",
+   "old": "0x54",
+   "new": "0x54",
+   "method": "every getter caller that tests the record byte right after the call: cmp byte [rax+0x54]",
+   "witnesses": [
+    {
+     "getter_callers_old": 37,
+     "getter_callers_new": 37,
+     "old": [
+      {
+       "call": "0x544e95",
+       "at": "0x544e9a",
+       "instruction": "cmp byte ptr [rax + 0x54], bl"
+      },
+      {
+       "call": "0x6c35e1",
+       "at": "0x6c35e9",
+       "instruction": "cmp byte ptr [rax + 0x54], bl"
+      },
+      {
+       "call": "0x6c5155",
+       "at": "0x6c515a",
+       "instruction": "cmp byte ptr [rax + 0x54], bl"
+      }
+     ],
+     "new": [
+      {
+       "call": "0x54dce5",
+       "at": "0x54dcea",
+       "instruction": "cmp byte ptr [rax + 0x54], bl"
+      },
+      {
+       "call": "0x6cdd21",
+       "at": "0x6cdd29",
+       "instruction": "cmp byte ptr [rax + 0x54], bl"
+      },
+      {
+       "call": "0x6cf8a5",
+       "at": "0x6cf8aa",
+       "instruction": "cmp byte ptr [rax + 0x54], bl"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "check before the write",
+   "file": "src/sticky_grenade_handles.lua",
+   "changed": false
+  },
+  {
+   "id": "sticky.STICKY_MATERIAL",
+   "line": 34,
+   "symbol": "STICKY_MATERIAL",
+   "kind": "ThrowableComponentData field: sticky material thin hash (u32)",
+   "old": "0x164",
+   "new": "0x164",
+   "method": "the one getter caller that reads a dword at +0x164 of the record (kept in r13 after the call)",
+   "witnesses": [
+    {
+     "old": [
+      {
+       "call": "0x6c7de0",
+       "at": "0x6c7ef5",
+       "instruction": "mov eax, dword ptr [r13 + 0x164]"
+      }
+     ],
+     "new": [
+      {
+       "call": "0x6d2530",
+       "at": "0x6d2645",
+       "instruction": "mov eax, dword ptr [r13 + 0x164]"
+      }
+     ],
+     "record_register": "r13 (mov r13, rax after the call, both builds)"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "check before the write",
+   "file": "src/sticky_grenade_handles.lua",
+   "changed": false
+  },
+  {
+   "id": "sticky.library_rva",
+   "line": 21,
+   "symbol": "Mod.LAYOUT.library_rva",
+   "kind": "helldivers2.exe global: hknpMaterialLibrary pointer",
+   "old": "0x27C5CF0",
+   "new": "0x286D1D8",
+   "method": "every old rip-relative reference migrated by an unmasked-field instruction window (bindiff.migrate on the exe captures); each new instruction decoded to the same new global",
+   "witnesses": [
+    {
+     "old": "0x77fd3a",
+     "new": "0x806fda",
+     "window_bytes": 128,
+     "old_instruction": "mov rbx, qword ptr [rip + 0x2045faf]",
+     "new_instruction": "mov rbx, qword ptr [rip + 0x20661f7]",
+     "new_target": "0x286d1d8"
+    },
+    {
+     "old": "0x77fdef",
+     "new": "0x80708f",
+     "window_bytes": 160,
+     "old_instruction": "mov rsi, qword ptr [rip + 0x2045efa]",
+     "new_instruction": "mov rsi, qword ptr [rip + 0x2066142]",
+     "new_target": "0x286d1d8"
+    },
+    {
+     "old": "0x786260",
+     "new": "0x80d560",
+     "window_bytes": 160,
+     "old_instruction": "mov rdx, qword ptr [rip + 0x203fa89]",
+     "new_instruction": "mov rdx, qword ptr [rip + 0x205fc71]",
+     "new_target": "0x286d1d8"
+    },
+    {
+     "old": "0x78b546",
+     "new": "0x812846",
+     "window_bytes": 96,
+     "old_instruction": "mov rcx, qword ptr [rip + 0x203a7a3]",
+     "new_instruction": "mov rcx, qword ptr [rip + 0x205a98b]",
+     "new_target": "0x286d1d8"
+    },
+    {
+     "old": "0x78b559",
+     "new": "0x812859",
+     "window_bytes": 160,
+     "old_instruction": "mov rcx, qword ptr [rip + 0x203a790]",
+     "new_instruction": "mov rcx, qword ptr [rip + 0x205a978]",
+     "new_target": "0x286d1d8"
+    },
+    {
+     "old": "0x78b56f",
+     "new": "0x81286f",
+     "window_bytes": 160,
+     "old_instruction": "mov qword ptr [rip + 0x203a77a], rdi",
+     "new_instruction": "mov qword ptr [rip + 0x205a962], rdi",
+     "new_target": "0x286d1d8"
+    },
+    {
+     "old": "0x78b9a0",
+     "new": "0x812ca0",
+     "window_bytes": 32,
+     "old_instruction": "mov rax, qword ptr [rip + 0x203a349]",
+     "new_instruction": "mov rax, qword ptr [rip + 0x205a531]",
+     "new_target": "0x286d1d8"
+    },
+    {
+     "old": "0x78bd2c",
+     "new": "0x81302c",
+     "window_bytes": 160,
+     "old_instruction": "mov rax, qword ptr [rip + 0x2039fbd]",
+     "new_instruction": "mov rax, qword ptr [rip + 0x205a1a5]",
+     "new_target": "0x286d1d8"
+    },
+    {
+     "old": "0x78bdb5",
+     "new": "0x8130b5",
+     "window_bytes": 160,
+     "old_instruction": "mov rax, qword ptr [rip + 0x2039f34]",
+     "new_instruction": "mov rax, qword ptr [rip + 0x205a11c]",
+     "new_target": "0x286d1d8"
+    },
+    {
+     "old": "0x78c3d0",
+     "new": "0x8136d0",
+     "window_bytes": 160,
+     "old_instruction": "mov rax, qword ptr [rip + 0x2039919]",
+     "new_instruction": "mov rax, qword ptr [rip + 0x2059b01]",
+     "new_target": "0x286d1d8"
+    },
+    {
+     "old": "0x78c60f",
+     "new": "0x81390f",
+     "window_bytes": 160,
+     "old_instruction": "mov rax, qword ptr [rip + 0x20396da]",
+     "new_instruction": "mov rax, qword ptr [rip + 0x20598c2]",
+     "new_target": "0x286d1d8"
+    },
+    {
+     "old": "0x78d5f1",
+     "new": "0x8148f1",
+     "window_bytes": 160,
+     "old_instruction": "mov rbx, qword ptr [rip + 0x20386f8]",
+     "new_instruction": "mov rbx, qword ptr [rip + 0x20588e0]",
+     "new_target": "0x286d1d8"
+    },
+    {
+     "file": "native-work/megapack-exe-candidates.json",
+     "new_global": "0x286d1d8"
+    },
+    {
+     "live": "Mod.library() passed with this value (vtable distance, entry count) in batch113 and batch273"
+    }
+   ],
+   "agreeing": 12,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "write target base",
+   "file": "src/sticky_grenade_handles.lua",
+   "changed": true
+  },
+  {
+   "id": "sticky.library_vtable_rva",
+   "line": 23,
+   "symbol": "Mod.LAYOUT.library_vtable_rva",
+   "kind": "helldivers2.exe: hknpMaterialLibrary vtable (identity check)",
+   "old": "0x148BA78",
+   "new": "0x1521A98",
+   "method": "every old rip-relative reference (constructor/destructor vtable stores) migrated by instruction window; old vtable RTTI decoded",
+   "witnesses": [
+    {
+     "old": "0xce6458",
+     "new": "0xd3ed88",
+     "window_bytes": 160,
+     "old_instruction": "lea rax, [rip + 0x7a5619]",
+     "new_instruction": "lea rax, [rip + 0x7e2d09]",
+     "new_target": "0x1521a98"
+    },
+    {
+     "old": "0xce667e",
+     "new": "0xd3efae",
+     "window_bytes": 160,
+     "old_instruction": "lea rax, [rip + 0x7a53f3]",
+     "new_instruction": "lea rax, [rip + 0x7e2ae3]",
+     "new_target": "0x1521a98"
+    },
+    {
+     "old": "0xce848b",
+     "new": "0xd40dbb",
+     "window_bytes": 128,
+     "old_instruction": "lea r12, [rip + 0x7a35e6]",
+     "new_instruction": "lea r12, [rip + 0x7e0cd6]",
+     "new_target": "0x1521a98"
+    },
+    {
+     "old": "0xce920d",
+     "new": "0xd41b3d",
+     "window_bytes": 96,
+     "old_instruction": "lea r14, [rip + 0x7a2864]",
+     "new_instruction": "lea r14, [rip + 0x7dff54]",
+     "new_target": "0x1521a98"
+    },
+    {
+     "old": "0xcff4a7",
+     "new": "0xd57dd7",
+     "window_bytes": 64,
+     "old_instruction": "lea rax, [rip + 0x78c5ca]",
+     "new_instruction": "lea rax, [rip + 0x7c9cba]",
+     "new_target": "0x1521a98"
+    },
+    {
+     "rtti": {
+      "old_vtable_minus_8_col_rva": "0x16ccbe0",
+      "old_col_signature": 1,
+      "old_col_self_rva_ok": true,
+      "old_type_descriptor": "0x191e3c0",
+      "old_type_name": ".?AVhknpMaterialLibrary@@",
+      "type_name_occurrences": {
+       "old": 1,
+       "new": 1
+      },
+      "new_type_name_rva": "0x19c9180"
+     }
+    },
+    {
+     "live": "Mod.library() vtable identity passed with this value in batch113/273"
+    }
+   ],
+   "agreeing": 5,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "identity check before the write",
+   "file": "src/sticky_grenade_handles.lua",
+   "changed": true
+  },
+  {
+   "id": "sticky.material_layout",
+   "line": 30,
+   "symbol": "ENTRY_SIZE, NAME, TAG / ENTRIES, COUNT, CAPACITY / HEADER_SIZE",
+   "kind": "hknpMaterial (80 bytes: name hkStringPtr +0, userData +0x48) and hknpMaterialLibrary (hkArray at +0x48: data, size +0x50, capacity|flags +0x54)",
+   "old": "80, 0x00, 0x48 / 0x48, 0x50, 0x54 / 0x58",
+   "new": "80, 0x00, 0x48 / 0x48, 0x50, 0x54 / 0x58",
+   "method": "exe material lookup (witness window of library_rva) indexes entries as base[+0x48] + i*80 in both builds; names, tags and count read correctly live with these values",
+   "witnesses": [
+    {
+     "old": [
+      "0x77fd6b lea rcx, [rax + rax*4]",
+      "0x77fd6f shl rcx, 4",
+      "0x77fd73 add rcx, qword ptr [rbx + 0x48]"
+     ],
+     "new": [
+      "0x80700b lea rcx, [rax + rax*4]",
+      "0x80700f shl rcx, 4",
+      "0x807013 add rcx, qword ptr [rbx + 0x48]"
+     ]
+    },
+    {
+     "live": "find_materials() found both names at entry+0 with tags at entry+0x48 (batch113); the production attempt wrote entry+0x48 and the full 80-byte entry was restored (batch273)"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "write address = entries + handle*80 + 0x48",
+   "file": "src/sticky_grenade_handles.lua",
+   "changed": false
+  },
+  {
+   "id": "sticky.BLOCK_HEADER",
+   "line": 33,
+   "symbol": "BLOCK_HEADER, BLOCK_MAGIC",
+   "kind": "settings block header: 'LDLD', 1, ...",
+   "old": "24, 0x444C444C",
+   "new": "24, 0x444C444C",
+   "method": "the mod checks only header +0 ('LDLD') and +4 (== 1) and reads the block size at +12; it does not read +16..+23 (the bytes Better Stratagem Bounce found to vary per session)",
+   "witnesses": [
+    {
+     "live": "throwable_settings() header check passed on 26088801 (batch113, batch273)"
+    },
+    {
+     "evidence": "native-work/evidence/stratagem-settings-26088801.json: all 12 stratagem LDLD headers keep +0 LDLD, +4 1, +8 type hash; only +16..+23 vary"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "check before the write",
+   "file": "src/sticky_grenade_handles.lua",
+   "changed": false
+  },
+  {
+   "id": "sticky.thin_hashes",
+   "line": 37,
+   "symbol": "Mod.THROWABLE, Mod.HANDLE",
+   "kind": "material name thin hashes (data identities)",
+   "old": "0xC4692706, 0x9A056E1C",
+   "new": "0xC4692706, 0x9A056E1C",
+   "method": "hashes of fixed names; found live as the tags of the materials named \"throwable\" and \"sticky_grenade_handle\"",
+   "witnesses": [
+    {
+     "live": "find_materials() PASS batch113/273: handle=66 (log), throwable present, names verified by string read"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "written value (THROWABLE) and identity",
+   "file": "src/sticky_grenade_handles.lua",
+   "changed": false
+  },
+  {
+   "id": "sticky.GRENADES",
+   "line": 41,
+   "symbol": "Mod.GRENADES",
+   "kind": "throwable resource hashes (data identities)",
+   "old": "0x5747C799/0xC5C05FCB, 0xF596BC0B/0x3FA94F58",
+   "new": "0x5747C799/0xC5C05FCB, 0xF596BC0B/0x3FA94F58",
+   "method": "resource name hashes; found live in the ThrowableComponent table with sticky=1 and material=throwable",
+   "witnesses": [
+    {
+     "live": "check_grenades() PASS batch113 and batch273 on 26088801"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "check before the write",
+   "file": "src/sticky_grenade_handles.lua",
+   "changed": false
+  },
+  {
+   "id": "sticky.comment_contact_poster",
+   "line": 22,
+   "symbol": "comment",
+   "kind": "comment only (not data)",
+   "old": "0x78BFC0",
+   "new": "0x78BFC0",
+   "method": "left as written: it names the old build's exe function; the line is a comment and is not used. The library_rva witnesses include the new exe material lookup at 0x806FDA.",
+   "witnesses": [],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "comment",
+   "file": "src/sticky_grenade_handles.lua",
+   "changed": false
+  },
+  {
+   "id": "sticky.comment_getter",
+   "line": 24,
+   "symbol": "comment",
+   "kind": "comment only (not data)",
+   "old": "0x50CD90",
+   "new": "0x515370",
+   "method": "the ThrowableComponent getter located above (same function); comment updated",
+   "witnesses": [
+    {
+     "old_function": "0x50cd90",
+     "new_function": "0x515370",
+     "instructions": 41,
+     "same_instruction_shapes": true,
+     "listing": "evidence/throwable-getter.json"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "comment",
+   "file": "src/sticky_grenade_handles.lua",
+   "changed": true
+  },
+  {
+   "id": "sticky.build_text",
+   "line": 2,
+   "symbol": "header comments / refusal message",
+   "kind": "text naming the supported Steam build",
+   "old": "25480438",
+   "new": "26088801",
+   "method": "message/comment text; the verify_build pins are the real gate",
+   "witnesses": [],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "text",
+   "file": "src/sticky_grenade_handles.lua",
+   "changed": true
+  }
+ ]
+}

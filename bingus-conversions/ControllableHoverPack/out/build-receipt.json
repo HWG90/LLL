@@ -1,0 +1,344 @@
+{
+ "option": "ControllableHoverPack",
+ "mod": "Controllable Hover Pack v1.8.1",
+ "module": "mods/cowboybingus/hover_pack_cancel",
+ "revision": "v1.8.1-26088801",
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "game_sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+ "exe_sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+ "status": "BLOCKED",
+ "blocked_rows": [
+  "settings.duration"
+ ],
+ "archive": "<workspace>/native-work/megapack-port/ControllableHoverPack/out/BLOCKED/9ba626afa44a3aa3.patch_0",
+ "source": {
+  "pinned": "<workspace>/upstream-bingus/VanillaPlusMegapack/components/ControllableHoverPack",
+  "lock_revision": "v1.8.1"
+ },
+ "map": {
+  "path": "<workspace>/native-work/megapack-port/ControllableHoverPack/MAP.json",
+  "sha256": "3f99fb949e9224e27fdf98d64674c871bd1a2b9dc40afa09f8115d6088a4b577",
+  "counts": {
+   "high": 25,
+   "medium": 5
+  }
+ },
+ "replacements": [
+  {
+   "file": "scripts/archive.py",
+   "line": 9,
+   "old": "EXE_SHA = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+   "new": "EXE_SHA = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'",
+   "map_rows": [
+    "archive.EXE_SHA"
+   ]
+  },
+  {
+   "file": "scripts/archive.py",
+   "line": 10,
+   "old": "GAME_DLL_SHA = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+   "new": "GAME_DLL_SHA = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'",
+   "map_rows": [
+    "archive.GAME_DLL_SHA"
+   ]
+  },
+  {
+   "file": "components.lock.json",
+   "line": 257,
+   "old": "\"revision\": \"v1.8.1\",",
+   "new": "\"revision\": \"v1.8.1-26088801\",",
+   "map_rows": [
+    "lock.revision"
+   ]
+  },
+  {
+   "file": "components/ControllableHoverPack/src/hover_data.lua",
+   "line": 102,
+   "old": "local mode=read(global(0x33266a0),0x44)",
+   "new": "local mode=read(global(0x2ce1850),0x44)",
+   "map_rows": [
+    "hover.mission_rva"
+   ]
+  },
+  {
+   "file": "components/ControllableHoverPack/src/hover_data.lua",
+   "line": 111,
+   "old": "local pm=global(0x3326468);",
+   "new": "local pm=global(0x2ce1618);",
+   "map_rows": [
+    "hover.player_manager_rva"
+   ]
+  },
+  {
+   "file": "components/ControllableHoverPack/src/hover_data.lua",
+   "line": 123,
+   "old": "local owner=global(0x346bf98)",
+   "new": "local owner=global(0x2ce41b8)",
+   "map_rows": [
+    "hover.entities_rva"
+   ]
+  },
+  {
+   "file": "components/ControllableHoverPack/src/hover_data.lua",
+   "line": 124,
+   "old": "local ei=lookup(read(owner+0xf22ec8,20),unit,1048576)",
+   "new": "local ei=lookup(read(owner+0xf24990,20),unit,1048576)",
+   "map_rows": [
+    "hover.entity_map"
+   ]
+  },
+  {
+   "file": "components/ControllableHoverPack/src/hover_data.lua",
+   "line": 127,
+   "old": "L.avatar=owner+0xf32f18+ei*24",
+   "new": "L.avatar=owner+0xf349e0+ei*24",
+   "map_rows": [
+    "hover.entity_records"
+   ]
+  },
+  {
+   "file": "components/ControllableHoverPack/src/hover_data.lua",
+   "line": 136,
+   "old": "local am=global(0x3326d20)",
+   "new": "local am=global(0x2ce1ee0)",
+   "map_rows": [
+    "hover.avatar_manager_rva"
+   ]
+  },
+  {
+   "file": "components/ControllableHoverPack/src/hover_data.lua",
+   "line": 149,
+   "old": "local equipment=global(0x3326738)",
+   "new": "local equipment=global(0x2ce18e8)",
+   "map_rows": [
+    "hover.equipment_rva"
+   ]
+  },
+  {
+   "file": "components/ControllableHoverPack/src/hover_data.lua",
+   "line": 164,
+   "old": "local jm=global(0x3326bb8)",
+   "new": "local jm=global(0x2ce1d78)",
+   "map_rows": [
+    "hover.jump_pack_rva"
+   ]
+  },
+  {
+   "file": "components/ControllableHoverPack/src/hover_data.lua",
+   "line": 183,
+   "old": "local attach=global(0x3326dc0)",
+   "new": "local attach=global(0x2ce1f88)",
+   "map_rows": [
+    "hover.attachment_rva"
+   ]
+  },
+  {
+   "file": "components/ControllableHoverPack/src/hover_data.lua",
+   "line": 195,
+   "old": "local flags=read(am+0x53d900+ai*0x1238+0xf80,24)",
+   "new": "local flags=read(am+0x53d900+ai*0x1240+0xf88,24)",
+   "map_rows": [
+    "hover.movement_flags"
+   ]
+  },
+  {
+   "file": "components/ControllableHoverPack/src/settings.lua",
+   "line": 18,
+   "old": "if api.pointer(read(game+0x3326bb8,8))~=target.manager then return nil end",
+   "new": "if api.pointer(read(game+0x2ce1d78,8))~=target.manager then return nil end",
+   "map_rows": [
+    "hover.jump_pack_rva"
+   ]
+  },
+  {
+   "file": "components/ControllableHoverPack/src/settings.lua",
+   "line": 57,
+   "old": "local owner=ptr(read(game+0x346bf98,8))",
+   "new": "local owner=ptr(read(game+0x2ce41b8,8))",
+   "map_rows": [
+    "hover.entities_rva"
+   ]
+  },
+  {
+   "file": "components/ControllableHoverPack/src/settings.lua",
+   "line": 58,
+   "old": "local resources=ptr(read(owner+0xf12cb8,8))",
+   "new": "local resources=ptr(read(owner+0xf14780,8))",
+   "map_rows": [
+    "settings.resource_table"
+   ]
+  }
+ ],
+ "source_changes_vs_upstream_assembly": [
+  {
+   "line": 786,
+   "what": "replacement",
+   "old": "if api.pointer(read(game+0x3326bb8,8))~=target.manager then return nil end",
+   "new": "if api.pointer(read(game+0x2ce1d78,8))~=target.manager then return nil end"
+  },
+  {
+   "line": 825,
+   "what": "replacement",
+   "old": "local owner=ptr(read(game+0x346bf98,8))",
+   "new": "local owner=ptr(read(game+0x2ce41b8,8))"
+  },
+  {
+   "line": 826,
+   "what": "replacement",
+   "old": "local resources=ptr(read(owner+0xf12cb8,8));local headers=read(resources,96)",
+   "new": "local resources=ptr(read(owner+0xf14780,8));local headers=read(resources,96)"
+  },
+  {
+   "line": 1018,
+   "what": "replacement",
+   "old": "local mode=read(global(0x33266a0),0x44)",
+   "new": "local mode=read(global(0x2ce1850),0x44)"
+  },
+  {
+   "line": 1027,
+   "what": "replacement",
+   "old": "local pm=global(0x3326468);local counts=read(pm+0x84,8)",
+   "new": "local pm=global(0x2ce1618);local counts=read(pm+0x84,8)"
+  },
+  {
+   "line": 1039,
+   "what": "replacement",
+   "old": "local owner=global(0x346bf98)",
+   "new": "local owner=global(0x2ce41b8)"
+  },
+  {
+   "line": 1040,
+   "what": "replacement",
+   "old": "local ei=lookup(read(owner+0xf22ec8,20),unit,1048576)",
+   "new": "local ei=lookup(read(owner+0xf24990,20),unit,1048576)"
+  },
+  {
+   "line": 1043,
+   "what": "replacement",
+   "old": "L.avatar=owner+0xf32f18+ei*24",
+   "new": "L.avatar=owner+0xf349e0+ei*24"
+  },
+  {
+   "line": 1052,
+   "what": "replacement",
+   "old": "local am=global(0x3326d20)",
+   "new": "local am=global(0x2ce1ee0)"
+  },
+  {
+   "line": 1065,
+   "what": "replacement",
+   "old": "local equipment=global(0x3326738)",
+   "new": "local equipment=global(0x2ce18e8)"
+  },
+  {
+   "line": 1080,
+   "what": "replacement",
+   "old": "local jm=global(0x3326bb8)",
+   "new": "local jm=global(0x2ce1d78)"
+  },
+  {
+   "line": 1099,
+   "what": "replacement",
+   "old": "local attach=global(0x3326dc0)",
+   "new": "local attach=global(0x2ce1f88)"
+  },
+  {
+   "line": 1111,
+   "what": "replacement",
+   "old": "local flags=read(am+0x53d900+ai*0x1238+0xf80,24)",
+   "new": "local flags=read(am+0x53d900+ai*0x1240+0xf88,24)"
+  },
+  {
+   "line": 1503,
+   "what": "install call (revision, exe/game SHA-256 pins)"
+  }
+ ],
+ "upstream_reproduction": {
+  "lock_resource_sha256": "3EA557109C4919866782F20EB360B1AF4F5836B2602AC9A383BD5A614E53ABCF",
+  "reproduced": true,
+  "compiler": "<workspace>/runtime-modules/vm-poc/work/runtime/linux/LuaJIT/src/luajit -bsdW (LuaJIT 2.1 ROLLING, non-GC64)",
+  "shipped_archive": "<hellforge>/mods/Vanilla Plus Megapack - v26/options/ControllableHoverPack/9ba626afa44a3aa3.patch_0",
+  "shipped_resource": "f58c6742a5198ab4",
+  "shipped_resource_sha256": "109e90bf08b8dfebc80b7dc839d6d16af1ec3fa2112f9fca2c10a09871b1f797",
+  "discoverable_resource_equal": true
+ },
+ "resource_format": "plaintext hover_source() as a discoverable entry (BingusSharedLoader build_addon.entry_source: declaration line + source) in the version-2 Lua envelope; the pack instead compiled it to non-GC64 bytecode wrapped in loadstring(\"\\027LJ...\"), which the GC64 game VM cannot load",
+ "resources": {
+  "mods/cowboybingus/hover_pack_cancel": {
+   "hash": "f58c6742a5198ab4",
+   "bytes": 75893,
+   "sha256": "4bcc3abe38441f0d772379e0c131d3ef6f008566cee8a7063416d084f6a0df25"
+  }
+ },
+ "archive_holds_only_option_resource": true,
+ "outputs": {
+  "BLOCKED/9ba626afa44a3aa3.patch_0": "a32f42905026141e7833058ce3fd380cd498917e47438df9d78d6dcb24674260",
+  "BLOCKED/9ba626afa44a3aa3.patch_0.gpu_resources": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "BLOCKED/9ba626afa44a3aa3.patch_0.stream": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "BLOCKED/DO-NOT-INSTALL.txt": "f39afaa116160c3674d90da8aaeb305265f7c0d3251781397188ac5bfbc1e73f",
+  "entry.lua": "57bd15ff76fd45242ebbf10915a75f78af3e1fcd011e7e5128b64fa30e4eb74c",
+  "wrapper.diff": "b1bca96da08e7e68c421e5186d713b314563a95bc62e76646509d58ec3b76597",
+  "wrapper.lua": "fe169c6b4277dd22984b8c95f6f5f952d2823e4edeaa2826d5a4f75ce7f951b5"
+ },
+ "luajit_check": {
+  "luajit": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit",
+  "string_dump_flags": 8,
+  "gc64_fr2": true,
+  "output": [
+   "compile: ok\tLuaJIT 2.1.ROLLING\t8",
+   "entry run: true",
+   "status: mods/cowboybingus/hover_pack_cancel:358: libkernel32.so: cannot open shared object file: No such file or directory",
+   "revision: v1.8.1-26088801",
+   "installed: false"
+  ]
+ },
+ "forbidden_text_absent": [
+  "PORT51",
+  "compat51",
+  "require('cffi')",
+  "require(\"cffi\")"
+ ],
+ "inputs": {
+  "components/ControllableHoverPack/src/archive_loader.lua": "dca6e7171fc47aa9d020feb4d53e04f07d2a9fbafa00659d4b2f86e07f00eabd",
+  "components/ControllableHoverPack/src/bingus_memory.lua": "3973924b1c009cc4e6c863a4eaf87f166899a16ddcb579c3d77ab5465172b416",
+  "components/ControllableHoverPack/src/bingus_runtime.lua": "c4450f555f697e583916d18f876412ca96f6963eb1bf4cdad451ebb906c2f988",
+  "components/ControllableHoverPack/src/bingus_write.lua": "9a0a217811d109418faebb2af8804bfb8301b0eeeb1e6b5bc020fdacbd596160",
+  "components/ControllableHoverPack/src/cancel.lua": "472a2a0256dc3e202cc74791dd954a68c3dc18b26e4064a7d5f9e8d2bf77b6ed",
+  "components/ControllableHoverPack/src/hover_data.lua": "0ce863365b9263e5bd8acb30f68dd3d45a0e05cf67d494541336ddc76cf611c8",
+  "components/ControllableHoverPack/src/settings.lua": "28bb702eba2cb66b9664024f145eeddfaa94fb7cb20d13c6840c13898892c75b",
+  "components/ControllableHoverPack/src/windows_api.lua": "44a48bc685c6a9c73157f673d642dbedb0078379cc2fd4c6cea7280bd1895a1e"
+ },
+ "tests": {
+  "port": {
+   "cancel": 0,
+   "snapshot": 1,
+   "settings": "1 (fault/traceback)",
+   "loader": 0,
+   "replay": 0,
+   "windows_api": "1 (fault/traceback)",
+   "idle_gate": "1 (fault/traceback)",
+   "module": 0
+  },
+  "upstream": {
+   "cancel": 0,
+   "snapshot": 0,
+   "settings": 0,
+   "loader": 0,
+   "replay": 0,
+   "windows_api": 0,
+   "idle_gate": 0,
+   "module": 0
+  },
+  "port_fixtures_remapped": {
+   "cancel": 0,
+   "snapshot": 0,
+   "settings": 0,
+   "loader": 0,
+   "replay": 0,
+   "windows_api": 0,
+   "idle_gate": 0,
+   "module": 0
+  }
+ }
+}

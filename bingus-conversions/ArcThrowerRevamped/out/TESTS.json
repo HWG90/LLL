@@ -1,0 +1,1513 @@
+{
+ "port": {
+  "runs": [
+   {
+    "test": "test_bindings.lua",
+    "args": [
+     "clean"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: arc thrower native bindings (clean), callbacks and duplicate guard"
+    ]
+   },
+   {
+    "test": "test_bindings.lua",
+    "args": [
+     "predeclared"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: arc thrower native bindings (predeclared), callbacks and duplicate guard"
+    ]
+   },
+   {
+    "test": "test_bindings.lua",
+    "args": [
+     "game-present"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: arc thrower native bindings (game-present), callbacks and duplicate guard"
+    ]
+   },
+   {
+    "test": "test_bindings.lua",
+    "args": [
+     "sdk-declared"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: arc thrower native bindings (sdk-declared), callbacks and duplicate guard"
+    ]
+   },
+   {
+    "test": "test_bindings.lua",
+    "args": [
+     "other-build"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: arc thrower native bindings (other-build), callbacks and duplicate guard"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: native Fire action without mouse polling, local index one, charge relocation, missing-input recovery, bounded scanning, continuous firing, second weapon, release, no render duplication or routine log IO"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: native Fire action without mouse polling, local index one, charge relocation, missing-input recovery, bounded scanning, continuous firing, second weapon, release, no render duplication or routine log IO"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "stale"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: stale scan snapshot revalidated before writing"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "budget"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: per-frame Windows calls pinned in 37 scenarios"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "budget",
+     "unsupported-build"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: build gate (unsupported-build): load GetCurrentProcess=1 GetModuleFileNameW=2 GetModuleHandleA=2 QueryPerformanceFrequency=1; then 0 game calls in 100 updates and the shutdown"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "budget",
+     "hash-unreadable"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: build gate (hash-unreadable): load CreateFileW=1 GetCurrentProcess=1 GetModuleFileNameW=1 GetModuleHandleA=2 QueryPerformanceFrequency=1; then 0 game calls in 100 updates and the shutdown"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "patch-reset"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery patch-reset (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "patch-replaced"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery patch-replaced (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "patch-shadow-copy"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery patch-shadow-copy (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "input-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery input-gap (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "identity-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery identity-gap (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "holder-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery holder-gap (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "charge-binding-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery charge-binding-gap (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "large-trigger-table"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery large-trigger-table (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "sparse-trigger-table"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery sparse-trigger-table (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "dense-trigger-table"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery dense-trigger-table (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "input-expired"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery input-expired (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "release-during-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery release-during-gap (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "identity-change-during-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery identity-change-during-gap (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "holder-change-during-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery holder-change-during-gap (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "diagnostic-recovery"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery diagnostic-recovery (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "entry-refused"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery entry-refused (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "record-protection-refused"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery record-protection-refused (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "record-not-private"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery record-not-private (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "record-restore-failed"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery record-restore-failed (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "update-error-pause"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery update-error-pause (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "update-errors-stop"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery update-errors-stop (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "own-errors"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery own-errors (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "shutdown-restore"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery shutdown-restore (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "entry-query-failed"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery entry-query-failed (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "patch-reset"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery patch-reset (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "patch-replaced"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery patch-replaced (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "patch-shadow-copy"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery patch-shadow-copy (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "input-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery input-gap (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "identity-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery identity-gap (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "holder-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery holder-gap (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "charge-binding-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery charge-binding-gap (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "large-trigger-table"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery large-trigger-table (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "sparse-trigger-table"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery sparse-trigger-table (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "dense-trigger-table"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery dense-trigger-table (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "input-expired"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery input-expired (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "release-during-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery release-during-gap (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "identity-change-during-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery identity-change-during-gap (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "holder-change-during-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery holder-change-during-gap (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "diagnostic-recovery"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery diagnostic-recovery (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "entry-refused"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery entry-refused (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "record-protection-refused"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery record-protection-refused (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "record-not-private"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery record-not-private (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "record-restore-failed"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery record-restore-failed (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "update-error-pause"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery update-error-pause (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "update-errors-stop"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery update-errors-stop (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "own-errors"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery own-errors (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "shutdown-restore"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery shutdown-restore (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "entry-query-failed"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery entry-query-failed (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_equivalence.lua",
+    "args": [
+     "build/reference_entry.lua"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: equivalence over 12683 updates (11523 compared frame by frame; 10143 in missions, 2540 outside), 151 presses, 1068 frames with charging-flag writes, 15 record writes, 11 log lines"
+    ]
+   },
+   {
+    "test": "test_equivalence.lua",
+    "args": [
+     "build/reference_entry.lua",
+     "traces"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: no trace aborts in the addon over 3,900 updates, 1 at the guard boundary (v1.7.1: 44: 16x error 5 nil @630; 4x error 16 nil @1635; 4x error 5 nil @1173; 5x error 12 nil @808; 7x error 12 nil @1156; 8x error 12 nil @714)"
+    ]
+   },
+   {
+    "test": "test_signature_pending.lua",
+    "args": [
+     "normal"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: native Fire action without mouse polling, local index one, charge relocation, missing-input recovery, bounded scanning, continuous firing, second weapon, release, no render duplication or routine log IO"
+    ]
+   },
+   {
+    "test": "test_signature_pending.lua",
+    "args": [
+     "slow"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: native Fire action without mouse polling, local index one, charge relocation, missing-input recovery, bounded scanning, continuous firing, second weapon, release, no render duplication or routine log IO"
+    ]
+   }
+  ],
+  "passed": 63,
+  "total": 63
+ },
+ "upstream": {
+  "runs": [
+   {
+    "test": "test_bindings.lua",
+    "args": [
+     "clean"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: arc thrower native bindings (clean), callbacks and duplicate guard"
+    ]
+   },
+   {
+    "test": "test_bindings.lua",
+    "args": [
+     "predeclared"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: arc thrower native bindings (predeclared), callbacks and duplicate guard"
+    ]
+   },
+   {
+    "test": "test_bindings.lua",
+    "args": [
+     "game-present"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: arc thrower native bindings (game-present), callbacks and duplicate guard"
+    ]
+   },
+   {
+    "test": "test_bindings.lua",
+    "args": [
+     "sdk-declared"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: arc thrower native bindings (sdk-declared), callbacks and duplicate guard"
+    ]
+   },
+   {
+    "test": "test_bindings.lua",
+    "args": [
+     "other-build"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: arc thrower native bindings (other-build), callbacks and duplicate guard"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: native Fire action without mouse polling, local index one, charge relocation, missing-input recovery, bounded scanning, continuous firing, second weapon, release, no render duplication or routine log IO"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: native Fire action without mouse polling, local index one, charge relocation, missing-input recovery, bounded scanning, continuous firing, second weapon, release, no render duplication or routine log IO"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "stale"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: stale scan snapshot revalidated before writing"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "budget"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: per-frame Windows calls pinned in 37 scenarios"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "budget",
+     "unsupported-build"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: build gate (unsupported-build): load GetCurrentProcess=1 GetModuleFileNameW=2 GetModuleHandleA=2 QueryPerformanceFrequency=1; then 0 game calls in 100 updates and the shutdown"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "budget",
+     "hash-unreadable"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: build gate (hash-unreadable): load CreateFileW=1 GetCurrentProcess=1 GetModuleFileNameW=1 GetModuleHandleA=2 QueryPerformanceFrequency=1; then 0 game calls in 100 updates and the shutdown"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "patch-reset"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery patch-reset (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "patch-replaced"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery patch-replaced (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "patch-shadow-copy"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery patch-shadow-copy (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "input-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery input-gap (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "identity-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery identity-gap (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "holder-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery holder-gap (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "charge-binding-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery charge-binding-gap (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "large-trigger-table"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery large-trigger-table (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "sparse-trigger-table"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery sparse-trigger-table (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "dense-trigger-table"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery dense-trigger-table (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "input-expired"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery input-expired (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "release-during-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery release-during-gap (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "identity-change-during-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery identity-change-during-gap (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "holder-change-during-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery holder-change-during-gap (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "diagnostic-recovery"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery diagnostic-recovery (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "entry-refused"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery entry-refused (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "record-protection-refused"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery record-protection-refused (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "record-not-private"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery record-not-private (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "record-restore-failed"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery record-restore-failed (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "update-error-pause"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery update-error-pause (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "update-errors-stop"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery update-errors-stop (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "own-errors"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery own-errors (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "shutdown-restore"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery shutdown-restore (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "normal",
+     "entry-query-failed"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery entry-query-failed (normal), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "patch-reset"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery patch-reset (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "patch-replaced"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery patch-replaced (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "patch-shadow-copy"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery patch-shadow-copy (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "input-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery input-gap (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "identity-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery identity-gap (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "holder-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery holder-gap (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "charge-binding-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery charge-binding-gap (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "large-trigger-table"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery large-trigger-table (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "sparse-trigger-table"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery sparse-trigger-table (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "dense-trigger-table"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery dense-trigger-table (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "input-expired"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery input-expired (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "release-during-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery release-during-gap (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "identity-change-during-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery identity-change-during-gap (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "holder-change-during-gap"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery holder-change-during-gap (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "diagnostic-recovery"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery diagnostic-recovery (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "entry-refused"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery entry-refused (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "record-protection-refused"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery record-protection-refused (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "record-not-private"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery record-not-private (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "record-restore-failed"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery record-restore-failed (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "update-error-pause"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery update-error-pause (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "update-errors-stop"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery update-errors-stop (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "own-errors"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery own-errors (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "shutdown-restore"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery shutdown-restore (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_work_budget.lua",
+    "args": [
+     "slow",
+     "entry-query-failed"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: recovery entry-query-failed (slow), bounded work and no render writes"
+    ]
+   },
+   {
+    "test": "test_equivalence.lua",
+    "args": [
+     "build/reference_entry.lua"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: equivalence over 12683 updates (11523 compared frame by frame; 10143 in missions, 2540 outside), 151 presses, 1068 frames with charging-flag writes, 15 record writes, 11 log lines"
+    ]
+   },
+   {
+    "test": "test_equivalence.lua",
+    "args": [
+     "build/reference_entry.lua",
+     "traces"
+    ],
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "PASS: no trace aborts in the addon over 3,900 updates, 1 at the guard boundary (v1.7.1: 27: 18x error 5 nil @630; 1x error 12 nil @1156; 4x error 12 nil @714; 4x error 5 nil @1173)"
+    ]
+   },
+   {
+    "test": "test_signature_pending.lua",
+    "args": [
+     "normal"
+    ],
+    "exit": 1,
+    "passed": false,
+    "tail": [
+     "\t[C]: in function 'assert'",
+     "\ttests/test_signature_pending.lua:342: in main chunk",
+     "\t[C]: at 0x01400020e0"
+    ]
+   },
+   {
+    "test": "test_signature_pending.lua",
+    "args": [
+     "slow"
+    ],
+    "exit": 1,
+    "passed": false,
+    "tail": [
+     "\t[C]: in function 'assert'",
+     "\ttests/test_signature_pending.lua:342: in main chunk",
+     "\t[C]: at 0x01400020e0"
+    ]
+   }
+  ],
+  "passed": 61,
+  "total": 63
+ },
+ "code_patch_check": {
+  "port_passes": true,
+  "upstream_fails": true,
+  "expected": "port passes, upstream fails"
+ },
+ "port_only_failures": [],
+ "failing_on_both (environment)": []
+}

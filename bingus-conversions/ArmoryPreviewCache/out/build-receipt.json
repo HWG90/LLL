@@ -1,0 +1,1866 @@
+{
+ "option": "ArmoryPreviewCache",
+ "name": "Armory Preview Cache",
+ "revision": "v23.1",
+ "build": 26088801,
+ "source": {
+  "used": "upstream-bingus/VanillaPlusMegapack/components/ArmoryPreviewCache",
+  "lock_check": {
+   "files": 57,
+   "standalone_v23_1_identical": true
+  },
+  "why": "the pinned component; upstream-bingus/ArmoryPreviewCache HEAD is tag v23.1 (ae7e2d9) and its src/, tests/, scripts/module.py are byte-identical to it"
+ },
+ "pack_recipe": "WRAPPERS: scripts/module.py wrapper(root, game_sha, exe_sha) then luajit -bsdW; the port ships the plaintext wrapper (GC64-loadable) in the pack's discoverable_resource() shape",
+ "resource": "mods/cowboybingus/armory_preview_cache",
+ "resource_hash": "88db289011074931",
+ "archive": "9ba626afa44a3aa3.patch_0",
+ "archive_sha256": "6C84B3D76430A161B74EF607BC5FA084A2354F910A396DBE7F55D7F03C45013E",
+ "archive_resources": [
+  "88db289011074931"
+ ],
+ "option_resource_sha256": "5F41765017758B3B997D50596255EC614D2E789D91B2FA6774B0B1CE3D58D9BA",
+ "option_entry_bytes": 672467,
+ "wrapper_sha256": "FA60ACF744D41054B9794B362607904B5593062256B159E4CC49434B12F04482",
+ "wrapper_bytes": 168084,
+ "upstream_wrapper_sha256": "A9A626528614182757FA7DCD9C0B9C6B9B471CF7CD95804BBAF9910D1292FB4E",
+ "pins": {
+  "game_sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+  "exe_sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE"
+ },
+ "reproduction": {
+  "fr1_luajit": "<workspace>/native-work/megapack-port/ArmoryPreviewCache/work/luajit-fr1/src/luajit",
+  "fr1_dump_flags": "0",
+  "bytecode_bytes": 86996,
+  "standalone_resource_sha256": "46F5227DCA0E54A49C4A8AFD3C4FA4C5D8D8D0B3C265F4A344D1211E4B3176FB",
+  "lock_resource_sha256": "46F5227DCA0E54A49C4A8AFD3C4FA4C5D8D8D0B3C265F4A344D1211E4B3176FB",
+  "lock_equal": true,
+  "v26_archive": "<hellforge>/mods/Vanilla Plus Megapack - v26/options/ArmoryPreviewCache/9ba626afa44a3aa3.patch_0",
+  "v26_archive_sha256": "5B964653C9E25958A0CF0B1CC181A2F79790AAD2136251A82E4C4FC8F138EDC7",
+  "v26_option_resource_sha256": "4A0C60F9DA95CA4E970C8C0600552193A87CA79EA1D0ED28D205388E84572E99",
+  "v26_equal_to_discoverable_of_reproduced_bytecode": true
+ },
+ "map_summary": {
+  "rows": 189,
+  "by_confidence": {
+   "high": 182,
+   "medium": 7
+  },
+  "source_edits": 125,
+  "feeds_write": 35
+ },
+ "map_edits": [
+  {
+   "row": 3,
+   "file": "src/dependencies.lua",
+   "line": 17,
+   "name": "ENTITIES global",
+   "old_text": "game+0x346bf98",
+   "new_text": "game+0x2ce41b8",
+   "confidence": "high"
+  },
+  {
+   "row": 4,
+   "file": "src/dependencies.lua",
+   "line": 17,
+   "name": "entities.weapon_configurations field",
+   "old_text": "database+0xf12e10",
+   "new_text": "database+0xf148d8",
+   "confidence": "high"
+  },
+  {
+   "row": 5,
+   "file": "src/dependencies.lua",
+   "line": 18,
+   "name": "attachment group count global",
+   "old_text": "game+0x348da98",
+   "new_text": "game+0x2e493c8",
+   "confidence": "high"
+  },
+  {
+   "row": 6,
+   "file": "src/dependencies.lua",
+   "line": 20,
+   "name": "attachment group pointer array",
+   "old_text": "game+0x37c5b50",
+   "new_text": "game+0x31812e0",
+   "confidence": "high"
+  },
+  {
+   "row": 7,
+   "file": "src/dependencies.lua",
+   "line": 21,
+   "name": "package mapping",
+   "old_text": "game+0x3799810",
+   "new_text": "game+0x3154f90",
+   "confidence": "high"
+  },
+  {
+   "row": 9,
+   "file": "src/dependencies.lua",
+   "line": 24,
+   "name": "entities.weapon_configurations field (identity)",
+   "old_text": "database+0xf12e10",
+   "new_text": "database+0xf148d8",
+   "confidence": "high"
+  },
+  {
+   "row": 19,
+   "file": "src/dependencies.lua",
+   "line": 64,
+   "name": "weapon configuration buckets",
+   "old_text": "read(definitions,648*16)",
+   "new_text": "read(definitions,658*16)",
+   "confidence": "high"
+  },
+  {
+   "row": 20,
+   "file": "src/dependencies.lua",
+   "line": 65,
+   "name": "fallback attachment table",
+   "old_text": "game+0x213f2b8",
+   "new_text": "game+0x1fc7988",
+   "confidence": "high"
+  },
+  {
+   "row": 21,
+   "file": "src/dependencies.lua",
+   "line": 66,
+   "name": "weapon configuration bucket loop",
+   "old_text": "for i=0,647 do",
+   "new_text": "for i=0,657 do",
+   "confidence": "high"
+  },
+  {
+   "row": 22,
+   "file": "src/dependencies.lua",
+   "line": 69,
+   "name": "weapon configuration count",
+   "old_text": "index<324",
+   "new_text": "index<329",
+   "confidence": "high"
+  },
+  {
+   "row": 23,
+   "file": "src/dependencies.lua",
+   "line": 70,
+   "name": "weapon configuration array offset",
+   "old_text": "definitions+10368+",
+   "new_text": "definitions+10528+",
+   "confidence": "high"
+  },
+  {
+   "row": 28,
+   "file": "src/dependencies.lua",
+   "line": 105,
+   "name": "UI preview global",
+   "old_text": "game+0x347ce60",
+   "new_text": "game+0x2e38190",
+   "confidence": "high"
+  },
+  {
+   "row": 33,
+   "file": "src/native.lua",
+   "line": 40,
+   "name": "SCRIPT_API global",
+   "old_text": "game+0x3326308",
+   "new_text": "game+0x2ce14c8",
+   "confidence": "high"
+  },
+  {
+   "row": 34,
+   "file": "src/native.lua",
+   "line": 41,
+   "name": "ScriptApi exe RVA",
+   "old_text": "exe+0x27c8d80",
+   "new_text": "exe+0x2870240",
+   "confidence": "high"
+  },
+  {
+   "row": 36,
+   "file": "src/native.lua",
+   "line": 43,
+   "name": "package request slot app+752",
+   "old_text": "exe+0x320dd0",
+   "new_text": "exe+0x2f0260",
+   "confidence": "high"
+  },
+  {
+   "row": 37,
+   "file": "src/native.lua",
+   "line": 43,
+   "name": "package release slot app+768",
+   "old_text": "exe+0x321030",
+   "new_text": "exe+0x2f04c0",
+   "confidence": "high"
+  },
+  {
+   "row": 38,
+   "file": "src/native.lua",
+   "line": 45,
+   "name": "package acquire",
+   "old_text": "game+0x12fe350)",
+   "new_text": "game+0x11912f0)",
+   "confidence": "high"
+  },
+  {
+   "row": 39,
+   "file": "src/native.lua",
+   "line": 46,
+   "name": "package release",
+   "old_text": "game+0x12fe4e0)",
+   "new_text": "game+0x1191480)",
+   "confidence": "high"
+  },
+  {
+   "row": 40,
+   "file": "src/native.lua",
+   "line": 54,
+   "name": "lease table global",
+   "old_text": "game+0x347ceb0",
+   "new_text": "game+0x2e381e8",
+   "confidence": "high"
+  },
+  {
+   "row": 44,
+   "file": "src/native.lua",
+   "line": 122,
+   "name": "kit catalogue global",
+   "old_text": "ptr(game+0x33264f8)",
+   "new_text": "ptr(game+0x2ce16a8)",
+   "confidence": "high"
+  },
+  {
+   "row": 45,
+   "file": "src/native.lua",
+   "line": 122,
+   "name": "presets global",
+   "old_text": "ptr(game+0x347cef8)",
+   "new_text": "ptr(game+0x2e38230)",
+   "confidence": "high"
+  },
+  {
+   "row": 46,
+   "file": "src/native.lua",
+   "line": 122,
+   "name": "ENTITIES global",
+   "old_text": "ptr(game+0x346bf98)",
+   "new_text": "ptr(game+0x2ce41b8)",
+   "confidence": "high"
+  },
+  {
+   "row": 47,
+   "file": "src/native.lua",
+   "line": 123,
+   "name": "entities.weapon_packages field",
+   "old_text": "wo+0xf12558",
+   "new_text": "wo+0xf14008",
+   "confidence": "high"
+  },
+  {
+   "row": 53,
+   "file": "src/native.lua",
+   "line": 140,
+   "name": "weapon package buckets",
+   "old_text": "read(wt,1080*16)",
+   "new_text": "read(wt,1100*16)",
+   "confidence": "high"
+  },
+  {
+   "row": 54,
+   "file": "src/native.lua",
+   "line": 140,
+   "name": "weapon package records offset",
+   "old_text": "read(wt+17280,540*32)",
+   "new_text": "read(wt+17600,550*32)",
+   "confidence": "high"
+  },
+  {
+   "row": 55,
+   "file": "src/native.lua",
+   "line": 141,
+   "name": "weapon package bucket loop",
+   "old_text": "for i=0,1079 do",
+   "new_text": "for i=0,1099 do",
+   "confidence": "high"
+  },
+  {
+   "row": 56,
+   "file": "src/native.lua",
+   "line": 144,
+   "name": "weapon package record count",
+   "old_text": "assert(index<540,",
+   "new_text": "assert(index<550,",
+   "confidence": "medium"
+  },
+  {
+   "row": 58,
+   "file": "src/native.lua",
+   "line": 172,
+   "name": "UI state global",
+   "old_text": "game+0x347ce28",
+   "new_text": "game+0x2e38160",
+   "confidence": "high"
+  },
+  {
+   "row": 60,
+   "file": "src/native.lua",
+   "line": 174,
+   "name": "UI world global",
+   "old_text": "game+0x347cd90",
+   "new_text": "game+0x2e380c8",
+   "confidence": "high"
+  },
+  {
+   "row": 64,
+   "file": "src/native.lua",
+   "line": 182,
+   "name": "thumbnail manager global",
+   "old_text": "ptr(game+0x347cd80);",
+   "new_text": "ptr(game+0x2e380b0);",
+   "confidence": "high"
+  },
+  {
+   "row": 65,
+   "file": "src/native.lua",
+   "line": 182,
+   "name": "thumbnail manager read size",
+   "old_text": "read(tm,12176)",
+   "new_text": "read(tm,12464)",
+   "confidence": "high"
+  },
+  {
+   "row": 66,
+   "file": "src/native.lua",
+   "line": 183,
+   "name": "thumbnail manager global (recheck)",
+   "old_text": "ptr(game+0x347cd80)==tm",
+   "new_text": "ptr(game+0x2e380b0)==tm",
+   "confidence": "high"
+  },
+  {
+   "row": 67,
+   "file": "src/native.lua",
+   "line": 183,
+   "name": "manager type field (== 7)",
+   "old_text": "u32(h,11052)==7",
+   "new_text": "u32(h,11344)==7",
+   "confidence": "high"
+  },
+  {
+   "row": 68,
+   "file": "src/native.lua",
+   "line": 184,
+   "name": "manager active card",
+   "old_text": "u32(h,11064)",
+   "new_text": "u32(h,11356)",
+   "confidence": "high"
+  },
+  {
+   "row": 72,
+   "file": "src/native.lua",
+   "line": 204,
+   "name": "UI dispatch global",
+   "old_text": "game+0x3326e68",
+   "new_text": "game+0x2ce2040",
+   "confidence": "high"
+  },
+  {
+   "row": 75,
+   "file": "src/native.lua",
+   "line": 212,
+   "name": "briefing controller kind",
+   "old_text": "u32(rows,i*16+8)==229",
+   "new_text": "u32(rows,i*16+8)==231",
+   "confidence": "high"
+  },
+  {
+   "row": 76,
+   "file": "src/image_native.lua",
+   "line": 104,
+   "name": "UI globals block size",
+   "old_text": "buffer(0x138)",
+   "new_text": "buffer(0x140)",
+   "confidence": "high"
+  },
+  {
+   "row": 77,
+   "file": "src/image_native.lua",
+   "line": 105,
+   "name": "thumbnail manager read size",
+   "old_text": "buffer(12176)",
+   "new_text": "buffer(12464)",
+   "confidence": "high"
+  },
+  {
+   "row": 82,
+   "file": "src/image_native.lua",
+   "line": 162,
+   "name": "briefing records base",
+   "old_text": "owner+454728+index*80",
+   "new_text": "owner+454792+index*80",
+   "confidence": "medium"
+  },
+  {
+   "row": 83,
+   "file": "src/image_native.lua",
+   "line": 170,
+   "name": "thumbnail manager global (UI block)",
+   "old_text": "read(base+0x347cd80,0x138,G,0)",
+   "new_text": "read(base+0x2e380b0,0x140,G,0)",
+   "confidence": "high"
+  },
+  {
+   "row": 84,
+   "file": "src/image_native.lua",
+   "line": 174,
+   "name": "UI block words ui 4 -> 6, sm 42 -> 44",
+   "old_text": "w=words(G,4,2,w);w=words(G,42,2,w)",
+   "new_text": "w=words(G,6,2,w);w=words(G,44,2,w)",
+   "confidence": "high"
+  },
+  {
+   "row": 85,
+   "file": "src/image_native.lua",
+   "line": 175,
+   "name": "UI block word lease 76 -> 78",
+   "old_text": "p=words(G,76,2,p)",
+   "new_text": "p=words(G,78,2,p)",
+   "confidence": "high"
+  },
+  {
+   "row": 86,
+   "file": "src/image_native.lua",
+   "line": 176,
+   "name": "UI block pointers ui/sm/lease",
+   "old_text": "pointer(G,4),pointer(G,42),pointer(G,56),pointer(G,76)",
+   "new_text": "pointer(G,6),pointer(G,44),pointer(G,56),pointer(G,78)",
+   "confidence": "high"
+  },
+  {
+   "row": 87,
+   "file": "src/image_native.lua",
+   "line": 182,
+   "name": "controller kinds (comment)",
+   "old_text": "(Armory 224, briefing 229)",
+   "new_text": "(Armory 226, briefing 231)",
+   "confidence": "high"
+  },
+  {
+   "row": 88,
+   "file": "src/image_native.lua",
+   "line": 193,
+   "name": "Armory / briefing controller kinds",
+   "old_text": "top==5 and 224 or (top==14 and 229 or nil)",
+   "new_text": "top==5 and 226 or (top==14 and 231 or nil)",
+   "confidence": "high"
+  },
+  {
+   "row": 91,
+   "file": "src/image_native.lua",
+   "line": 230,
+   "name": "briefing controller kind",
+   "old_text": "if k==229 and",
+   "new_text": "if k==231 and",
+   "confidence": "high"
+  },
+  {
+   "row": 92,
+   "file": "src/image_native.lua",
+   "line": 250,
+   "name": "UI dispatch global",
+   "old_text": "base+0x3326e68",
+   "new_text": "base+0x2ce2040",
+   "confidence": "high"
+  },
+  {
+   "row": 93,
+   "file": "src/image_native.lua",
+   "line": 277,
+   "name": "thumbnail manager read size",
+   "old_text": "read(self.tm,12176,MB,0)",
+   "new_text": "read(self.tm,12464,MB,0)",
+   "confidence": "high"
+  },
+  {
+   "row": 94,
+   "file": "src/image_native.lua",
+   "line": 282,
+   "name": "manager type word",
+   "old_text": "m[2763];w=w+1                -- +11052",
+   "new_text": "m[2836];w=w+1                -- +11344",
+   "confidence": "high"
+  },
+  {
+   "row": 95,
+   "file": "src/image_native.lua",
+   "line": 285,
+   "name": "manager active / phase words",
+   "old_text": "m[2766];cur[w+1]=m[2774];w=w+2  -- active +11064, phase +11096",
+   "new_text": "m[2839];cur[w+1]=m[2847];w=w+2  -- active +11356, phase +11388",
+   "confidence": "high"
+  },
+  {
+   "row": 96,
+   "file": "src/image_native.lua",
+   "line": 286,
+   "name": "manager layout words",
+   "old_text": "words(MB,2775,2,w)                -- +11100",
+   "new_text": "words(MB,2848,2,w)                -- +11392",
+   "confidence": "high"
+  },
+  {
+   "row": 97,
+   "file": "src/image_native.lua",
+   "line": 287,
+   "name": "manager atlas words",
+   "old_text": "words(MB,2778,2,w)                -- atlas +11112",
+   "new_text": "words(MB,2850,2,w)                -- atlas +11400",
+   "confidence": "high"
+  },
+  {
+   "row": 98,
+   "file": "src/image_native.lua",
+   "line": 288,
+   "name": "manager registry count word",
+   "old_text": "m[2784]                 -- registry +11136",
+   "new_text": "m[2856]                 -- registry +11424",
+   "confidence": "high"
+  },
+  {
+   "row": 99,
+   "file": "src/image_native.lua",
+   "line": 290,
+   "name": "manager registry words",
+   "old_text": "words(MB,2786,count*2,w)",
+   "new_text": "words(MB,2858,count*2,w)",
+   "confidence": "high"
+  },
+  {
+   "row": 100,
+   "file": "src/image_native.lua",
+   "line": 291,
+   "name": "manager atlas pointer word",
+   "old_text": "atlas=pointer(MB,2778)",
+   "new_text": "atlas=pointer(MB,2850)",
+   "confidence": "high"
+  },
+  {
+   "row": 103,
+   "file": "src/image_native.lua",
+   "line": 348,
+   "name": "briefing records base",
+   "old_text": "owner+454728,480",
+   "new_text": "owner+454792,480",
+   "confidence": "medium"
+  },
+  {
+   "row": 104,
+   "file": "src/image_native.lua",
+   "line": 352,
+   "name": "briefing loadout widgets",
+   "old_text": "owner+422768+index*5464+1984",
+   "new_text": "owner+422832+index*5464+1984",
+   "confidence": "high"
+  },
+  {
+   "row": 105,
+   "file": "src/image_native.lua",
+   "line": 356,
+   "name": "briefing grid",
+   "old_text": "grid(owner+864032,w)",
+   "new_text": "grid(owner+864096,w)",
+   "confidence": "high"
+  },
+  {
+   "row": 110,
+   "file": "src/image_native.lua",
+   "line": 381,
+   "name": "briefing controller kind",
+   "old_text": "if kind==229 then w=briefing_words",
+   "new_text": "if kind==231 then w=briefing_words",
+   "confidence": "high"
+  },
+  {
+   "row": 111,
+   "file": "src/image_native.lua",
+   "line": 440,
+   "name": "thumbnail manager global (probe)",
+   "old_text": "read(base+0x347cd80,0x138,G,0)",
+   "new_text": "read(base+0x2e380b0,0x140,G,0)",
+   "confidence": "high"
+  },
+  {
+   "row": 112,
+   "file": "src/image_native.lua",
+   "line": 441,
+   "name": "UI block sm word (probe)",
+   "old_text": "local sm=pointer(G,42)",
+   "new_text": "local sm=pointer(G,44)",
+   "confidence": "high"
+  },
+  {
+   "row": 114,
+   "file": "src/image_native.lua",
+   "line": 489,
+   "name": "SCRIPT_API global",
+   "old_text": "game+0x3326308",
+   "new_text": "game+0x2ce14c8",
+   "confidence": "high"
+  },
+  {
+   "row": 115,
+   "file": "src/image_native.lua",
+   "line": 489,
+   "name": "ScriptApi exe RVA",
+   "old_text": "exe+0x27c8d80",
+   "new_text": "exe+0x2870240",
+   "confidence": "high"
+  },
+  {
+   "row": 116,
+   "file": "src/image_native.lua",
+   "line": 491,
+   "name": "application create slot 368",
+   "old_text": "[368]=0x31af50",
+   "new_text": "[368]=0x2ea5a0",
+   "confidence": "high"
+  },
+  {
+   "row": 117,
+   "file": "src/image_native.lua",
+   "line": 491,
+   "name": "application destroy slot 400",
+   "old_text": "[400]=0x31b360",
+   "new_text": "[400]=0x2ea9b0",
+   "confidence": "high"
+  },
+  {
+   "row": 118,
+   "file": "src/image_native.lua",
+   "line": 491,
+   "name": "application register slot 528",
+   "old_text": "[528]=0x31e030",
+   "new_text": "[528]=0x2ed5c0",
+   "confidence": "high"
+  },
+  {
+   "row": 119,
+   "file": "src/image_native.lua",
+   "line": 494,
+   "name": "texture format size entry",
+   "old_text": "exe+0x1658990",
+   "new_text": "exe+0x16f5510",
+   "confidence": "high"
+  },
+  {
+   "row": 120,
+   "file": "src/image_native.lua",
+   "line": 496,
+   "name": "create render target",
+   "old_text": "exe+0x31af50)",
+   "new_text": "exe+0x2ea5a0)",
+   "confidence": "high"
+  },
+  {
+   "row": 121,
+   "file": "src/image_native.lua",
+   "line": 497,
+   "name": "destroy render target",
+   "old_text": "exe+0x31b360)",
+   "new_text": "exe+0x2ea9b0)",
+   "confidence": "high"
+  },
+  {
+   "row": 122,
+   "file": "src/image_native.lua",
+   "line": 498,
+   "name": "register render target",
+   "old_text": "exe+0x31e030)",
+   "new_text": "exe+0x2ed5c0)",
+   "confidence": "high"
+  },
+  {
+   "row": 123,
+   "file": "src/image_native.lua",
+   "line": 499,
+   "name": "set_texture",
+   "old_text": "game+0x14499e0)",
+   "new_text": "game+0x12e16f0)",
+   "confidence": "high"
+  },
+  {
+   "row": 124,
+   "file": "src/image_native.lua",
+   "line": 500,
+   "name": "set_uv",
+   "old_text": "game+0x143eef0)",
+   "new_text": "game+0x12d6c00)",
+   "confidence": "high"
+  },
+  {
+   "row": 125,
+   "file": "src/image_native.lua",
+   "line": 501,
+   "name": "set_size",
+   "old_text": "game+0x1447160)",
+   "new_text": "game+0x12dee70)",
+   "confidence": "high"
+  },
+  {
+   "row": 126,
+   "file": "src/image_native.lua",
+   "line": 502,
+   "name": "set_alpha",
+   "old_text": "game+0x1448ad0)",
+   "new_text": "game+0x12e07e0)",
+   "confidence": "high"
+  },
+  {
+   "row": 127,
+   "file": "src/image_native.lua",
+   "line": 503,
+   "name": "material",
+   "old_text": "game+0x144f800)",
+   "new_text": "game+0x12e7510)",
+   "confidence": "high"
+  },
+  {
+   "row": 128,
+   "file": "src/image_native.lua",
+   "line": 504,
+   "name": "register_image",
+   "old_text": "game+0x1392680)",
+   "new_text": "game+0x1229090)",
+   "confidence": "high"
+  },
+  {
+   "row": 131,
+   "file": "src/image_native.lua",
+   "line": 555,
+   "name": "UI state global",
+   "old_text": "game+0x347ce28",
+   "new_text": "game+0x2e38160",
+   "confidence": "high"
+  },
+  {
+   "row": 132,
+   "file": "src/image_native.lua",
+   "line": 558,
+   "name": "Armory / briefing controller kinds",
+   "old_text": "top==5 and 224 or (top==14 and 229 or nil)",
+   "new_text": "top==5 and 226 or (top==14 and 231 or nil)",
+   "confidence": "high"
+  },
+  {
+   "row": 133,
+   "file": "src/image_native.lua",
+   "line": 561,
+   "name": "UI dispatch global",
+   "old_text": "game+0x3326e68",
+   "new_text": "game+0x2ce2040",
+   "confidence": "high"
+  },
+  {
+   "row": 134,
+   "file": "src/image_native.lua",
+   "line": 581,
+   "name": "UI world global",
+   "old_text": "game+0x347cd90",
+   "new_text": "game+0x2e380c8",
+   "confidence": "high"
+  },
+  {
+   "row": 135,
+   "file": "src/image_native.lua",
+   "line": 583,
+   "name": "thumbnail manager global",
+   "old_text": "game+0x347cd80",
+   "new_text": "game+0x2e380b0",
+   "confidence": "high"
+  },
+  {
+   "row": 136,
+   "file": "src/image_native.lua",
+   "line": 584,
+   "name": "manager working atlas",
+   "old_text": "ptr(tm+11112)",
+   "new_text": "ptr(tm+11400)",
+   "confidence": "high"
+  },
+  {
+   "row": 141,
+   "file": "src/image_native.lua",
+   "line": 719,
+   "name": "manager registry count word",
+   "old_text": "local n=m[2784]",
+   "new_text": "local n=m[2856]",
+   "confidence": "high"
+  },
+  {
+   "row": 142,
+   "file": "src/image_native.lua",
+   "line": 721,
+   "name": "manager registry words",
+   "old_text": "pointer(mb,2786+i*2)",
+   "new_text": "pointer(mb,2858+i*2)",
+   "confidence": "high"
+  },
+  {
+   "row": 143,
+   "file": "src/image_native.lua",
+   "line": 740,
+   "name": "UI dispatch global",
+   "old_text": "st.base+0x3326e68",
+   "new_text": "st.base+0x2ce2040",
+   "confidence": "high"
+  },
+  {
+   "row": 144,
+   "file": "src/image_native.lua",
+   "line": 762,
+   "name": "thumbnail manager global (UI block)",
+   "old_text": "st.base+0x347cd80,0x138,G,0",
+   "new_text": "st.base+0x2e380b0,0x140,G,0",
+   "confidence": "high"
+  },
+  {
+   "row": 145,
+   "file": "src/image_native.lua",
+   "line": 763,
+   "name": "UI block words sm/ui",
+   "old_text": "pointer(G,42),pointer(G,4),pointer(G,0)",
+   "new_text": "pointer(G,44),pointer(G,6),pointer(G,0)",
+   "confidence": "high"
+  },
+  {
+   "row": 146,
+   "file": "src/image_native.lua",
+   "line": 773,
+   "name": "Armory / briefing controller kinds",
+   "old_text": "top==5 and 224 or (top==14 and 229 or nil)",
+   "new_text": "top==5 and 226 or (top==14 and 231 or nil)",
+   "confidence": "high"
+  },
+  {
+   "row": 147,
+   "file": "src/image_native.lua",
+   "line": 780,
+   "name": "thumbnail manager read size",
+   "old_text": "api.read(tm,12176,MB,0)",
+   "new_text": "api.read(tm,12464,MB,0)",
+   "confidence": "high"
+  },
+  {
+   "row": 148,
+   "file": "src/image_native.lua",
+   "line": 782,
+   "name": "manager atlas pointer word",
+   "old_text": "pointer(MB,2778)",
+   "new_text": "pointer(MB,2850)",
+   "confidence": "high"
+  },
+  {
+   "row": 149,
+   "file": "src/image_native.lua",
+   "line": 793,
+   "name": "manager layout bytes",
+   "old_text": "text(MB,11100,8)",
+   "new_text": "text(MB,11392,8)",
+   "confidence": "high"
+  },
+  {
+   "row": 150,
+   "file": "src/image_native.lua",
+   "line": 801,
+   "name": "manager active word",
+   "old_text": "=m[2766],true,true,0",
+   "new_text": "=m[2839],true,true,0",
+   "confidence": "high"
+  },
+  {
+   "row": 151,
+   "file": "src/image_native.lua",
+   "line": 802,
+   "name": "manager phase word",
+   "old_text": "local phase=m[2774]",
+   "new_text": "local phase=m[2847]",
+   "confidence": "high"
+  },
+  {
+   "row": 152,
+   "file": "src/image_native.lua",
+   "line": 853,
+   "name": "briefing controller kind",
+   "old_text": "if kind==229 then",
+   "new_text": "if kind==231 then",
+   "confidence": "high"
+  },
+  {
+   "row": 153,
+   "file": "src/image_native.lua",
+   "line": 854,
+   "name": "briefing records base",
+   "old_text": "owner+454728,480",
+   "new_text": "owner+454792,480",
+   "confidence": "medium"
+  },
+  {
+   "row": 154,
+   "file": "src/image_native.lua",
+   "line": 860,
+   "name": "briefing loadout widgets",
+   "old_text": "owner+422768+index*5464",
+   "new_text": "owner+422832+index*5464",
+   "confidence": "high"
+  },
+  {
+   "row": 155,
+   "file": "src/image_native.lua",
+   "line": 862,
+   "name": "briefing records base (widget check)",
+   "old_text": "owner+454728+index*80",
+   "new_text": "owner+454792+index*80",
+   "confidence": "medium"
+  },
+  {
+   "row": 156,
+   "file": "src/image_native.lua",
+   "line": 882,
+   "name": "Armory controller kind",
+   "old_text": "if kind==224 then",
+   "new_text": "if kind==226 then",
+   "confidence": "high"
+  },
+  {
+   "row": 157,
+   "file": "src/image_native.lua",
+   "line": 908,
+   "name": "briefing controller kind",
+   "old_text": "kind==229 and 'briefing_grid'",
+   "new_text": "kind==231 and 'briefing_grid'",
+   "confidence": "high"
+  },
+  {
+   "row": 158,
+   "file": "src/image_native.lua",
+   "line": 909,
+   "name": "briefing / Armory grid",
+   "old_text": "(kind==229 and 864032 or 523752)",
+   "new_text": "(kind==231 and 864096 or 523752)",
+   "confidence": "high"
+  },
+  {
+   "row": 163,
+   "file": "src/image_native.lua",
+   "line": 1011,
+   "name": "thumbnail manager global / atlas",
+   "old_text": "ptr(game+0x347cd80)==s.manager and ptr(s.manager+11112)",
+   "new_text": "ptr(game+0x2e380b0)==s.manager and ptr(s.manager+11400)",
+   "confidence": "high"
+  },
+  {
+   "row": 165,
+   "file": "src/image_native.lua",
+   "line": 1019,
+   "name": "manager working atlas (write)",
+   "old_text": "s.manager+11112)[0]=fresh",
+   "new_text": "s.manager+11400)[0]=fresh",
+   "confidence": "high"
+  },
+  {
+   "row": 166,
+   "file": "src/image_native.lua",
+   "line": 1081,
+   "name": "thumbnail manager global",
+   "old_text": "ptr(game+0x347cd80))",
+   "new_text": "ptr(game+0x2e380b0))",
+   "confidence": "high"
+  },
+  {
+   "row": 167,
+   "file": "src/image_native.lua",
+   "line": 1082,
+   "name": "manager registry count",
+   "old_text": "read(tm+11136,4)",
+   "new_text": "read(tm+11424,4)",
+   "confidence": "high"
+  },
+  {
+   "row": 169,
+   "file": "src/image_native.lua",
+   "line": 1122,
+   "name": "thumbnail manager global",
+   "old_text": "ptr(game+0x347cd80)",
+   "new_text": "ptr(game+0x2e380b0)",
+   "confidence": "high"
+  },
+  {
+   "row": 170,
+   "file": "src/image_native.lua",
+   "line": 1123,
+   "name": "manager working atlas",
+   "old_text": "ptr(tm+11112)",
+   "new_text": "ptr(tm+11400)",
+   "confidence": "high"
+  },
+  {
+   "row": 171,
+   "file": "src/image_native.lua",
+   "line": 1146,
+   "name": "thumbnail manager global",
+   "old_text": "ptr(game+0x347cd80)",
+   "new_text": "ptr(game+0x2e380b0)",
+   "confidence": "high"
+  },
+  {
+   "row": 172,
+   "file": "src/image_native.lua",
+   "line": 1147,
+   "name": "manager working atlas",
+   "old_text": "ptr(tm+11112)",
+   "new_text": "ptr(tm+11400)",
+   "confidence": "high"
+  },
+  {
+   "row": 173,
+   "file": "src/image_native.lua",
+   "line": 1165,
+   "name": "manager working atlas (restore write)",
+   "old_text": "s.manager+11112)[0]=t.handle",
+   "new_text": "s.manager+11400)[0]=t.handle",
+   "confidence": "high"
+  },
+  {
+   "row": 174,
+   "file": "src/signatures.lua",
+   "line": 2,
+   "name": "package_acquire signature (game+0x12fe350, 17 bytes)",
+   "old_text": "rva=0x12fe350,hex='4585c00f8475010000415641574883ec38'",
+   "new_text": "rva=0x11912f0,hex='4585c00f8475010000415641574883ec38'",
+   "confidence": "high"
+  },
+  {
+   "row": 175,
+   "file": "src/signatures.lua",
+   "line": 3,
+   "name": "package_acquire signature (game+0x12fe361, 365 bytes)",
+   "old_text": "rva=0x12fe361,hex='48895c24504c8bfa48896c24584c8bf1488974246048897c24304c896424284c8d25b9244d024c896c24204c8d2d89254d02418be866660f1f840000000000418b560833c0498b37458b46184c0fafc6448d4aff85d27459498b0e0f1f40008bd84903d84923d948c1e3044803d94839330f84f7000000ffc03bc272e24d8b5e104c8bd133c0660f1f8400000000008bd84903d84923d948c1e3044903da488b0b493bcb740d483bce7408ffc03bc272de33db48893348c7430801000000488b15cade01024c8d05b38b0001488b7b08498bcc4c8bce488d4216493bc5480f42caba1600000048890da2de0102e8cdf41eff4c8b0596de0102488d0db71bfc00ffc04c8bcf4863d04903d04889157dde0102488d15f63ffc00e8819e430048837b08017514488b057b7e0202488bce488b5010ff92f00200004983c7084883ed010f85f8feffff4c8b6c24204c8b642428488b7c2430488b742460488b6c2458488b5c24504883c438415f415e'",
+   "new_text": "rva=0x1191301,hex='48895c24504c8bfa48896c24584c8bf1488974246048897c24304c896424284c8d25a9b0ff014c896c24204c8d2d79b1ff01418be866660f1f840000000000418b560833c0498b37458b46184c0fafc6448d4aff85d27459498b0e0f1f40008bd84903d84923d948c1e3044803d94839330f84f7000000ffc03bc272e24d8b5e104c8bd133c0660f1f8400000000008bd84903d84923d948c1e3044903da488b0b493bcb740d483bce7408ffc03bc272de33db48893348c7430801000000488b155a5cb4014c8d054bbcff00488b7b08498bcc4c8bce488d4216493bc5480f42caba1600000048890d325cb401e82d4736ff4c8b05265cb401488d0d4795fb00ffc04c8bcf4863d04903d04889150d5cb401488d15e6bafb00e811af410048837b08017514488b059b00b501488bce488b5010ff92f00200004983c7084883ed010f85f8feffff4c8b6c24204c8b642428488b7c2430488b742460488b6c2458488b5c24504883c438415f415e'",
+   "confidence": "high"
+  },
+  {
+   "row": 176,
+   "file": "src/signatures.lua",
+   "line": 4,
+   "name": "package_acquire signature (game+0x12fe4ce, 1 bytes)",
+   "old_text": "rva=0x12fe4ce,hex='c3'",
+   "new_text": "rva=0x119146e,hex='c3'",
+   "confidence": "high"
+  },
+  {
+   "row": 177,
+   "file": "src/signatures.lua",
+   "line": 5,
+   "name": "package_acquire signature (game+0x12fe4cf, 9 bytes)",
+   "old_text": "rva=0x12fe4cf,hex='48ff4308e947ffffff'",
+   "new_text": "rva=0x119146f,hex='48ff4308e947ffffff'",
+   "confidence": "high"
+  },
+  {
+   "row": 178,
+   "file": "src/signatures.lua",
+   "line": 6,
+   "name": "package_release signature (game+0x12fe4e0, 17 bytes)",
+   "old_text": "rva=0x12fe4e0,hex='4585c00f8460010000415641574883ec38'",
+   "new_text": "rva=0x1191480,hex='4585c00f8460010000415641574883ec38'",
+   "confidence": "high"
+  },
+  {
+   "row": 179,
+   "file": "src/signatures.lua",
+   "line": 7,
+   "name": "package_release signature (game+0x12fe4f1, 344 bytes)",
+   "old_text": "rva=0x12fe4f1,hex='48895c24504c8bfa48896c24584c8bf148897424604c896424284c8d252e234d024c896c24204c8d2dfe234d0248897c2430418be866660f1f840000000000498b374885f60f84d9000000418b4e0833c0418b5618480fafd6448d49ff85c90f84bf0000004d8b060f1f80000000008bd84803da4923d948c1e3044903d8483933740bffc03bc172e6e996000000488b7b084885ff0f8489000000488b155ddd01024c8d05468a000148ffcf498bcc4c8bce48897b08488d4216493bc5480f42caba1600000048890d32dd0102e85df31eff4c8b0526dd0102488d0d471afc00ffc04c8bcf4863d04903d04889150ddd0102488d15163ffc00e8119d430048837b0800751f488bd6498bcee89f174300488b05007d0202488bce488b5010ff92000300004983c7084883ed010f850dffffff4c8b6c24204c8b642428488b7c2430488b742460488b6c2458488b5c24504883c438415f415e'",
+   "new_text": "rva=0x1191491,hex='48895c24504c8bfa48896c24584c8bf148897424604c896424284c8d251eafff014c896c24204c8d2deeafff0148897c2430418be866660f1f840000000000498b374885f60f84d9000000418b4e0833c0418b5618480fafd6448d49ff85c90f84bf0000004d8b060f1f80000000008bd84803da4923d948c1e3044903d8483933740bffc03bc172e6e996000000488b7b084885ff0f8489000000488b15ed5ab4014c8d05debaff0048ffcf498bcc4c8bce48897b08488d4216493bc5480f42caba1600000048890dc25ab401e8bd4536ff4c8b05b65ab401488d0dd793fb00ffc04c8bcf4863d04903d04889159d5ab401488d150eb9fb00e8a1ad410048837b0800751f488bd6498bcee85f264100488b0520ffb401488bce488b5010ff92000300004983c7084883ed010f850dffffff4c8b6c24204c8b642428488b7c2430488b742460488b6c2458488b5c24504883c438415f415e'",
+   "confidence": "high"
+  },
+  {
+   "row": 180,
+   "file": "src/signatures.lua",
+   "line": 8,
+   "name": "package_release signature (game+0x12fe649, 1 bytes)",
+   "old_text": "rva=0x12fe649,hex='c3'",
+   "new_text": "rva=0x11915e9,hex='c3'",
+   "confidence": "high"
+  },
+  {
+   "row": 181,
+   "file": "src/image_signatures.lua",
+   "line": 2,
+   "name": "set_texture signature (game+0x14499e0, 32 bytes)",
+   "old_text": "rva=0x14499e0,hex='48895c24084889742410574883ec20498bd88bfa488bf1e8e45c0000488bd0e8'",
+   "new_text": "rva=0x12e16f0,hex='48895c24084889742410574883ec20498bd88bfa488bf1e8e45c0000488bd0e8'",
+   "confidence": "high"
+  },
+  {
+   "row": 182,
+   "file": "src/image_signatures.lua",
+   "line": 3,
+   "name": "set_uv signature (game+0x143eef0, 32 bytes)",
+   "old_text": "rva=0x143eef0,hex='4c8944241848895424104883ec28f30f1081140100000f2e4424387a357533f3'",
+   "new_text": "rva=0x12d6c00,hex='4c8944241848895424104883ec28f30f1081140100000f2e4424387a357533f3'",
+   "confidence": "high"
+  },
+  {
+   "row": 183,
+   "file": "src/image_signatures.lua",
+   "line": 4,
+   "name": "set_size signature (game+0x1447160, 32 bytes)",
+   "old_text": "rva=0x1447160,hex='48895c241848896c24204889542410565741574883ec20f30f10410c488bda0f'",
+   "new_text": "rva=0x12dee70,hex='48895c241848896c24204889542410565741574883ec20f30f10410c488bda0f'",
+   "confidence": "high"
+  },
+  {
+   "row": 184,
+   "file": "src/image_signatures.lua",
+   "line": 5,
+   "name": "set_alpha signature (game+0x1448ad0, 32 bytes)",
+   "old_text": "rva=0x1448ad0,hex='40574883ec20f30f104144488bf90f2ec17a237521f701000000080f84770100'",
+   "new_text": "rva=0x12e07e0,hex='40574883ec20f30f104144488bf90f2ec17a237521f701000000080f84770100'",
+   "confidence": "high"
+  },
+  {
+   "row": 185,
+   "file": "src/image_signatures.lua",
+   "line": 6,
+   "name": "create signature (exe+0x31af50, 32 bytes)",
+   "old_text": "rva=0x31af50,hex='48896c2410488974241857415641574883ec40488b059e526f01458bf9418bf0'",
+   "new_text": "rva=0x2ea5a0,hex='48896c2410488974241857415641574883ec40488b054ed27c01458bf9418bf0'",
+   "confidence": "high"
+  },
+  {
+   "row": 186,
+   "file": "src/image_signatures.lua",
+   "line": 7,
+   "name": "destroy signature (exe+0x31b360, 32 bytes)",
+   "old_text": "rva=0x31b360,hex='48895c2408574883ec20488b1d974e6f01488bf9488b833803000080b8801400'",
+   "new_text": "rva=0x2ea9b0,hex='48895c2408574883ec20488b1d47ce7c01488bf9488b833803000080b8f81500'",
+   "confidence": "high"
+  },
+  {
+   "row": 187,
+   "file": "src/image_signatures.lua",
+   "line": 8,
+   "name": "register signature (exe+0x31e030, 32 bytes)",
+   "old_text": "rva=0x31e030,hex='4c8bc28bd1488b0dcc216f01488b8938030000e948b0deffcccccccccccccccc'",
+   "new_text": "rva=0x2ed5c0,hex='4c8bc28bd1488b0d3ca27c01488b8938030000e9a8c0e1ff488bcbc340535753'",
+   "confidence": "high"
+  },
+  {
+   "row": 188,
+   "file": "src/image_signatures.lua",
+   "line": 9,
+   "name": "material signature (game+0x144f800, 32 bytes)",
+   "old_text": "rva=0x144f800,hex='48895c2408574883ec20410fb6f8488bd94885d2750f488b5c24304883c4205f'",
+   "new_text": "rva=0x12e7510,hex='48895c2408574883ec20410fb6f8488bd94885d2750f488b5c24304883c4205f'",
+   "confidence": "high"
+  },
+  {
+   "row": 189,
+   "file": "src/image_signatures.lua",
+   "line": 10,
+   "name": "register_image signature (game+0x1392680, 32 bytes)",
+   "old_text": "rva=0x1392680,hex='40534883ec204533c9488bda488b15eda60e02418bc9448b82802b00004585c0'",
+   "new_text": "rva=0x1229090,hex='40534883ec204533c9488bda488b150df0c001418bc9448b82a02c00004585c0'",
+   "confidence": "high"
+  }
+ ],
+ "code_edits": [
+  {
+   "file": "src/native.lua",
+   "what": "code-page rule (deferred prologue check)",
+   "old_text": "    for _,s in ipairs(signatures)do\n        local bytes=(s.hex:gsub('..',function(v)return string.char(tonumber(v,16))end))\n        assert(read((s.module=='game' and game or exe)+s.rva,#bytes)==bytes,'Native instruction mismatch')\n    end\n",
+   "new_text": "    -- Code pages that are not resident yet cannot be read (ReadProcessMemory fails): those checks run right\n    -- before the first native call instead (checked below); a native is never called unchecked.\n    local pending={}\n    for _,s in ipairs(signatures)do\n        local bytes=(s.hex:gsub('..',function(v)return string.char(tonumber(v,16))end))\n        local at=(s.module=='game' and game or exe)+s.rva\n        local now=api.read(at,#bytes)\n        if now then assert(now==bytes,'Native instruction mismatch') else pending[#pending+1]={at,bytes} end\n    end\n    local function checked(call)\n        if #pending==0 then return call end\n        return function(...)\n            for i=#pending,1,-1 do\n                local now=api.read(pending[i][1],#pending[i][2])\n                assert(now,'Native code not resident yet');assert(now==pending[i][2],'Native instruction mismatch')\n                pending[i]=nil\n            end\n            return call(...)\n        end\n    end\n"
+  },
+  {
+   "file": "src/native.lua",
+   "what": "code-page rule (deferred prologue check)",
+   "old_text": "    local argument=ffi.new('uint64_t[1]')\n",
+   "new_text": "    acquire,release=checked(acquire),checked(release)\n    local argument=ffi.new('uint64_t[1]')\n"
+  },
+  {
+   "file": "src/image_native.lua",
+   "what": "code-page rule (deferred prologue check)",
+   "old_text": "    for _,s in ipairs(signatures)do\n        local bytes=s.hex:gsub('..',function(v)return string.char(tonumber(v,16))end)\n        assert(read((s.module=='game' and game or exe)+s.rva,#bytes)==bytes,'Image instruction mismatch')\n    end\n",
+   "new_text": "    -- Code pages that are not resident yet cannot be read (ReadProcessMemory fails): those checks run right\n    -- before the first native call instead (checked below); a native is never called unchecked.\n    local pending={}\n    for _,s in ipairs(signatures)do\n        local bytes=s.hex:gsub('..',function(v)return string.char(tonumber(v,16))end)\n        local at=(s.module=='game' and game or exe)+s.rva\n        local now=api.read(at,#bytes)\n        if now then assert(now==bytes,'Image instruction mismatch') else pending[#pending+1]={at,bytes} end\n    end\n    local function checked(call)\n        if #pending==0 then return call end\n        return function(...)\n            for i=#pending,1,-1 do\n                local now=api.read(pending[i][1],#pending[i][2])\n                assert(now,'Image code not resident yet');assert(now==pending[i][2],'Image instruction mismatch')\n                pending[i]=nil\n            end\n            return call(...)\n        end\n    end\n"
+  },
+  {
+   "file": "src/image_native.lua",
+   "what": "code-page rule (deferred prologue check)",
+   "old_text": "    local byte=calls.byte or function(p,v)ffi.cast('uint8_t *',p)[0]=v end\n",
+   "new_text": "    create,destroy,register=checked(create),checked(destroy),checked(register)\n    set_texture,set_uv,set_size,set_alpha=checked(set_texture),checked(set_uv),checked(set_size),checked(set_alpha)\n    material,register_image=checked(material),checked(register_image)\n    local byte=calls.byte or function(p,v)ffi.cast('uint8_t *',p)[0]=v end\n"
+  }
+ ],
+ "wrapper_changed_lines": [
+  {
+   "kind": "map edit",
+   "line": "local database=ptr(game+0x2ce41b8);local definitions=ptr(database+0xf148d8)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local groups=u32(read(game+0x2e493c8,4),0)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local gp=read(game+0x31812e0,groups*8)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local map=read(game+0x3154f90,28)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local headers,identity={},read(database+0xf148d8,8)..gp..map"
+  },
+  {
+   "kind": "map edit",
+   "line": "local buckets=read(definitions,658*16)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local fallback=read(game+0x1fc7988,320)"
+  },
+  {
+   "kind": "map edit",
+   "line": "for i=0,657 do"
+  },
+  {
+   "kind": "map edit",
+   "line": "local index=u32(buckets,i*16+8);assert(index<329,'Weapon configuration index bounds')"
+  },
+  {
+   "kind": "map edit",
+   "line": "local config=read(definitions+10528+index*46600,120)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local p=ptr(game+0x2e38190);local ring=read(p+50448,8+128*200)"
+  },
+  {
+   "kind": "code edit",
+   "line": "-- Code pages that are not resident yet cannot be read (ReadProcessMemory fails): those checks run right"
+  },
+  {
+   "kind": "code edit",
+   "line": "-- before the first native call instead (checked below); a native is never called unchecked."
+  },
+  {
+   "kind": "code edit",
+   "line": "local pending={}"
+  },
+  {
+   "kind": "code edit",
+   "line": "local at=(s.module=='game' and game or exe)+s.rva"
+  },
+  {
+   "kind": "code edit",
+   "line": "local now=api.read(at,#bytes)"
+  },
+  {
+   "kind": "code edit",
+   "line": "if now then assert(now==bytes,'Native instruction mismatch') else pending[#pending+1]={at,bytes} end"
+  },
+  {
+   "kind": "code edit",
+   "line": "end"
+  },
+  {
+   "kind": "code edit",
+   "line": "local function checked(call)"
+  },
+  {
+   "kind": "code edit",
+   "line": "if #pending==0 then return call end"
+  },
+  {
+   "kind": "code edit",
+   "line": "return function(...)"
+  },
+  {
+   "kind": "code edit",
+   "line": "for i=#pending,1,-1 do"
+  },
+  {
+   "kind": "code edit",
+   "line": "local now=api.read(pending[i][1],#pending[i][2])"
+  },
+  {
+   "kind": "code edit",
+   "line": "assert(now,'Native code not resident yet');assert(now==pending[i][2],'Native instruction mismatch')"
+  },
+  {
+   "kind": "code edit",
+   "line": "pending[i]=nil"
+  },
+  {
+   "kind": "code edit",
+   "line": "end"
+  },
+  {
+   "kind": "code edit",
+   "line": "return call(...)"
+  },
+  {
+   "kind": "code edit",
+   "line": "end"
+  },
+  {
+   "kind": "code edit",
+   "line": "end"
+  },
+  {
+   "kind": "map edit",
+   "line": "local root_api=ptr(game+0x2ce14c8)"
+  },
+  {
+   "kind": "map edit",
+   "line": "assert(root_api==exe+0x2870240,'Unexpected script API')"
+  },
+  {
+   "kind": "map edit",
+   "line": "assert(ptr(app+752)==exe+0x2f0260 and ptr(app+768)==exe+0x2f04c0,'Unexpected package API')"
+  },
+  {
+   "kind": "map edit",
+   "line": "local acquire=calls.acquire or ffi.cast('void (*)(void *,const uint64_t *,uint32_t)',game+0x11912f0)  -- lint-ok: R2 once per session in native.new (v23 cast; only the test stand-in is new)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local release=calls.release or ffi.cast('void (*)(void *,const uint64_t *,uint32_t)',game+0x1191480)  -- lint-ok: R2 once per session in native.new (v23 cast; only the test stand-in is new)"
+  },
+  {
+   "kind": "code edit",
+   "line": "acquire,release=checked(acquire),checked(release)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local p=ptr(game+0x2e381e8)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local ko,po,wo=ptr(game+0x2ce16a8),ptr(game+0x2e38230),ptr(game+0x2ce41b8)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local wt=ptr(wo+0xf14008)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local buckets=read(wt,1100*16);local records=read(wt+17600,550*32)"
+  },
+  {
+   "kind": "map edit",
+   "line": "for i=0,1099 do"
+  },
+  {
+   "kind": "map edit",
+   "line": "local index=u32(buckets,i*16+8);assert(index<550,'Weapon record bound changed')"
+  },
+  {
+   "kind": "map edit",
+   "line": "local sm=ptr(game+0x2e38160);local stack=read(sm+0x429c,24);local depth=u32(stack,20)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local ui=ptr(game+0x2e380c8);local world=api.pointer(read(ui+15432,8))"
+  },
+  {
+   "kind": "map edit",
+   "line": "local tm=ptr(game+0x2e380b0);local h=read(tm,12464)"
+  },
+  {
+   "kind": "map edit",
+   "line": "assert(ptr(game+0x2e380b0)==tm and u32(h,11344)==7,'Thumbnail manager changed')"
+  },
+  {
+   "kind": "map edit",
+   "line": "local active=u32(h,11356);assert(active==0xffffffff or active<6,'Invalid thumbnail active card')"
+  },
+  {
+   "kind": "map edit",
+   "line": "local dispatch=api.pointer(read(game+0x2ce2040,8))"
+  },
+  {
+   "kind": "map edit",
+   "line": "if u32(rows,i*16+8)==231 and api.pointer(rows,i*16)then matches=matches+1 end"
+  },
+  {
+   "kind": "map edit",
+   "line": "{module='game',rva=0x11912f0,hex='4585c00f8475010000415641574883ec38'},"
+  },
+  {
+   "kind": "map edit",
+   "line": "{module='game',rva=0x1191301,hex='48895c24504c8bfa48896c24584c8bf1488974246048897c24304c896424284c8d25a9b0ff014c896c24204c8d2d79b1ff01418be866660f1f840000000000418b560833c0498b37458b46184c0fafc6448d4a"
+  },
+  {
+   "kind": "map edit",
+   "line": "{module='game',rva=0x119146e,hex='c3'},"
+  },
+  {
+   "kind": "map edit",
+   "line": "{module='game',rva=0x119146f,hex='48ff4308e947ffffff'},"
+  },
+  {
+   "kind": "map edit",
+   "line": "{module='game',rva=0x1191480,hex='4585c00f8460010000415641574883ec38'},"
+  },
+  {
+   "kind": "map edit",
+   "line": "{module='game',rva=0x1191491,hex='48895c24504c8bfa48896c24584c8bf148897424604c896424284c8d251eafff014c896c24204c8d2deeafff0148897c2430418be866660f1f840000000000498b374885f60f84d9000000418b4e0833c0418b"
+  },
+  {
+   "kind": "map edit",
+   "line": "{module='game',rva=0x11915e9,hex='c3'},"
+  },
+  {
+   "kind": "map edit",
+   "line": "local G,STACK,UIB,DPTR,DROWS=buffer(0x140),buffer(24),buffer(464),buffer(8),buffer(4+64*16)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local MB,DESC,QH,QROWS=buffer(12464),buffer(104),buffer(8),buffer(127*200)"
+  },
+  {
+   "kind": "map edit",
+   "line": "or not tails_ok[index] or pointer(TAILS,index*2)~=owner+454792+index*80 then return false end"
+  },
+  {
+   "kind": "map edit",
+   "line": "local ok=self.probed or read(base+0x2e380b0,0x140,G,0)"
+  },
+  {
+   "kind": "map edit",
+   "line": "w=words(G,0,2,w);w=words(G,6,2,w);w=words(G,44,2,w);w=words(G,56,2,w)"
+  },
+  {
+   "kind": "map edit",
+   "line": "p=words(G,78,2,p)"
+  },
+  {
+   "kind": "map edit",
+   "line": "tm,ui,sm,preview,lease=pointer(G,0),pointer(G,6),pointer(G,44),pointer(G,56),pointer(G,78)"
+  },
+  {
+   "kind": "map edit",
+   "line": "-- screen (Armory 226, briefing 231)."
+  },
+  {
+   "kind": "map edit",
+   "line": "return w,top==5 and 226 or (top==14 and 231 or nil)"
+  },
+  {
+   "kind": "map edit",
+   "line": "if k==231 and pointer(DROWS,row)then briefing=briefing+1 end"
+  },
+  {
+   "kind": "map edit",
+   "line": "local ok=read(base+0x2ce2040,8,DPTR,0)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local ok=read(self.tm,12464,MB,0)"
+  },
+  {
+   "kind": "map edit",
+   "line": "cur[w]=m[2836];w=w+1                -- +11344"
+  },
+  {
+   "kind": "map edit",
+   "line": "cur[w]=m[2839];cur[w+1]=m[2847];w=w+2  -- active +11356, phase +11388"
+  },
+  {
+   "kind": "map edit",
+   "line": "w=words(MB,2848,2,w)                -- +11392 layout"
+  },
+  {
+   "kind": "map edit",
+   "line": "w=words(MB,2850,2,w)                -- atlas +11400"
+  },
+  {
+   "kind": "map edit",
+   "line": "local count=m[2856]                 -- registry +11424"
+  },
+  {
+   "kind": "map edit",
+   "line": "if count<=128 then w=words(MB,2858,count*2,w)end"
+  },
+  {
+   "kind": "map edit",
+   "line": "atlas=pointer(MB,2850)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local ok=read(owner+454792,480,SMALL,0)"
+  },
+  {
+   "kind": "map edit",
+   "line": "for index=0,5 do w=tail(index,owner+422832+index*5464+1984,w)end"
+  },
+  {
+   "kind": "map edit",
+   "line": "return grid(owner+864096,w)"
+  },
+  {
+   "kind": "map edit",
+   "line": "if kind==231 then w=briefing_words(owner,w)else w=armory_words(owner,w)end"
+  },
+  {
+   "kind": "map edit",
+   "line": "if not read(base+0x2e380b0,0x140,G,0)then return nil end"
+  },
+  {
+   "kind": "map edit",
+   "line": "local sm=pointer(G,44)"
+  },
+  {
+   "kind": "code edit",
+   "line": "-- Code pages that are not resident yet cannot be read (ReadProcessMemory fails): those checks run right"
+  },
+  {
+   "kind": "code edit",
+   "line": "-- before the first native call instead (checked below); a native is never called unchecked."
+  },
+  {
+   "kind": "code edit",
+   "line": "local pending={}"
+  },
+  {
+   "kind": "code edit",
+   "line": "local at=(s.module=='game' and game or exe)+s.rva"
+  },
+  {
+   "kind": "code edit",
+   "line": "local now=api.read(at,#bytes)"
+  },
+  {
+   "kind": "code edit",
+   "line": "if now then assert(now==bytes,'Image instruction mismatch') else pending[#pending+1]={at,bytes} end"
+  },
+  {
+   "kind": "code edit",
+   "line": "end"
+  },
+  {
+   "kind": "code edit",
+   "line": "local function checked(call)"
+  },
+  {
+   "kind": "code edit",
+   "line": "if #pending==0 then return call end"
+  },
+  {
+   "kind": "code edit",
+   "line": "return function(...)"
+  },
+  {
+   "kind": "code edit",
+   "line": "for i=#pending,1,-1 do"
+  },
+  {
+   "kind": "code edit",
+   "line": "local now=api.read(pending[i][1],#pending[i][2])"
+  },
+  {
+   "kind": "code edit",
+   "line": "assert(now,'Image code not resident yet');assert(now==pending[i][2],'Image instruction mismatch')"
+  },
+  {
+   "kind": "code edit",
+   "line": "pending[i]=nil"
+  },
+  {
+   "kind": "code edit",
+   "line": "end"
+  },
+  {
+   "kind": "code edit",
+   "line": "return call(...)"
+  },
+  {
+   "kind": "code edit",
+   "line": "end"
+  },
+  {
+   "kind": "code edit",
+   "line": "end"
+  },
+  {
+   "kind": "map edit",
+   "line": "local root=assert(ptr(game+0x2ce14c8));assert(root==exe+0x2870240,'Image API root mismatch')"
+  },
+  {
+   "kind": "map edit",
+   "line": "for off,rva in pairs({[368]=0x2ea5a0,[400]=0x2ea9b0,[528]=0x2ed5c0})do"
+  },
+  {
+   "kind": "map edit",
+   "line": "assert(u32(read(exe+0x16f5510,4),0)==32,'Unexpected texture format size')"
+  },
+  {
+   "kind": "map edit",
+   "line": "local create=calls.create or ffi.cast('void *(*)(int,int,int,int,uint32_t,uint8_t)',exe+0x2ea5a0)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local destroy=calls.destroy or ffi.cast('void (*)(void *)',exe+0x2ea9b0)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local register=calls.register or ffi.cast('void (*)(uint32_t,void *)',exe+0x2ed5c0)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local set_texture=calls.texture or ffi.cast('void (*)(void *,uint32_t,void *)',game+0x12e16f0)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local set_uv=calls.uv or ffi.cast('void (*)(void *,uint64_t,uint64_t)',game+0x12d6c00)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local set_size=calls.size or ffi.cast('void (*)(void *,uint64_t)',game+0x12dee70)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local set_alpha=calls.alpha or ffi.cast('void (*)(void *,float)',game+0x12e07e0)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local material=calls.material or ffi.cast('void (*)(void *,uint64_t,uint8_t)',game+0x12e7510)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local register_image=calls.register_image or ffi.cast('void (*)(void *,void *)',game+0x1229090)"
+  },
+  {
+   "kind": "code edit",
+   "line": "create,destroy,register=checked(create),checked(destroy),checked(register)"
+  },
+  {
+   "kind": "code edit",
+   "line": "set_texture,set_uv,set_size,set_alpha=checked(set_texture),checked(set_uv),checked(set_size),checked(set_alpha)"
+  },
+  {
+   "kind": "code edit",
+   "line": "material,register_image=checked(material),checked(register_image)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local sm=ptr(game+0x2e38160);if not sm then return end"
+  },
+  {
+   "kind": "map edit",
+   "line": "kind=top==5 and 226 or (top==14 and 231 or nil)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local d=ptr(game+0x2ce2040);if not d then return end"
+  },
+  {
+   "kind": "map edit",
+   "line": "local ui=ptr(game+0x2e380c8)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local tm=ptr(game+0x2e380b0)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local atlas=tm and ptr(tm+11400)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local n=m[2856];assert(n<=128,'Image registry bounds')"
+  },
+  {
+   "kind": "map edit",
+   "line": "local element=assert(pointer(mb,2858+i*2))"
+  },
+  {
+   "kind": "map edit",
+   "line": "need(st.dptr_ok or api.read(st.base+0x2ce2040,8,st.DPTR,0))"
+  },
+  {
+   "kind": "map edit",
+   "line": "need(st.g_ok or api.read(st.base+0x2e380b0,0x140,G,0))"
+  },
+  {
+   "kind": "map edit",
+   "line": "local sm,ui,tm=pointer(G,44),pointer(G,6),pointer(G,0)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local kind=top==5 and 226 or (top==14 and 231 or nil)"
+  },
+  {
+   "kind": "map edit",
+   "line": "need(st.mb_ok or api.read(tm,12464,MB,0))"
+  },
+  {
+   "kind": "map edit",
+   "line": "local atlas=pointer(MB,2850)"
+  },
+  {
+   "kind": "map edit",
+   "line": "result.layout=text(MB,16,16)..text(MB,11392,8)..text(DESC,8,28)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local active,all_complete,safe,nonempty=m[2839],true,true,0"
+  },
+  {
+   "kind": "map edit",
+   "line": "local phase=m[2847]"
+  },
+  {
+   "kind": "map edit",
+   "line": "if kind==231 then"
+  },
+  {
+   "kind": "map edit",
+   "line": "if not st.small_ok then need(api.read(owner+454792,480,small,0))end"
+  },
+  {
+   "kind": "map edit",
+   "line": "local address=owner+422832+index*5464"
+  },
+  {
+   "kind": "map edit",
+   "line": "or widget_pointer(st,index,address+1984)~=owner+454792+index*80 then valid=false;break end"
+  },
+  {
+   "kind": "map edit",
+   "line": "if kind==226 then"
+  },
+  {
+   "kind": "map edit",
+   "line": "result.screen=kind==231 and 'briefing_grid' or 'grid'"
+  },
+  {
+   "kind": "map edit",
+   "line": "local grid=owner+(kind==231 and 864096 or 523752)"
+  },
+  {
+   "kind": "map edit",
+   "line": "assert(ptr(game+0x2e380b0)==s.manager and ptr(s.manager+11400)==p.atlas,'Atlas owner changed')"
+  },
+  {
+   "kind": "map edit",
+   "line": "ffi.cast('void **',s.manager+11400)[0]=fresh"
+  },
+  {
+   "kind": "map edit",
+   "line": "local tm=assert(ptr(game+0x2e380b0))"
+  },
+  {
+   "kind": "map edit",
+   "line": "assert(u32(read(tm+11424,4),0)<128,'Image registration full')"
+  },
+  {
+   "kind": "map edit",
+   "line": "local tm=ptr(game+0x2e380b0)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local atlas=tm and ptr(tm+11400)"
+  },
+  {
+   "kind": "map edit",
+   "line": "local tm=ptr(game+0x2e380b0)"
+  },
+  {
+   "kind": "map edit",
+   "line": "assert(not tm or ptr(tm+11400)~=t.handle,'Refusing to release the game working atlas')"
+  },
+  {
+   "kind": "map edit",
+   "line": "ffi.cast('void **',s.manager+11400)[0]=t.handle"
+  },
+  {
+   "kind": "map edit",
+   "line": "{module='game',rva=0x12e16f0,hex='48895c24084889742410574883ec20498bd88bfa488bf1e8e45c0000488bd0e8'},"
+  },
+  {
+   "kind": "map edit",
+   "line": "{module='game',rva=0x12d6c00,hex='4c8944241848895424104883ec28f30f1081140100000f2e4424387a357533f3'},"
+  },
+  {
+   "kind": "map edit",
+   "line": "{module='game',rva=0x12dee70,hex='48895c241848896c24204889542410565741574883ec20f30f10410c488bda0f'},"
+  },
+  {
+   "kind": "map edit",
+   "line": "{module='game',rva=0x12e07e0,hex='40574883ec20f30f104144488bf90f2ec17a237521f701000000080f84770100'},"
+  },
+  {
+   "kind": "map edit",
+   "line": "{module='exe',rva=0x2ea5a0,hex='48896c2410488974241857415641574883ec40488b054ed27c01458bf9418bf0'},"
+  },
+  {
+   "kind": "map edit",
+   "line": "{module='exe',rva=0x2ea9b0,hex='48895c2408574883ec20488b1d47ce7c01488bf9488b833803000080b8f81500'},"
+  },
+  {
+   "kind": "map edit",
+   "line": "{module='exe',rva=0x2ed5c0,hex='4c8bc28bd1488b0d3ca27c01488b8938030000e9a8c0e1ff488bcbc340535753'},"
+  },
+  {
+   "kind": "map edit",
+   "line": "{module='game',rva=0x12e7510,hex='48895c2408574883ec20410fb6f8488bd94885d2750f488b5c24304883c4205f'},"
+  },
+  {
+   "kind": "map edit",
+   "line": "{module='game',rva=0x1229090,hex='40534883ec204533c9488bda488b150df0c001418bc9448b82a02c00004585c0'},"
+  },
+  {
+   "kind": "pins",
+   "line": "install(...) game_sha256/exe_sha256"
+  },
+  {
+   "kind": "blank line (diff alignment around inserted code)",
+   "line": ""
+  }
+ ],
+ "luajit": {
+  "binary": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit",
+  "string_dump_flags": 8,
+  "gc64_fr2": true,
+  "output": [
+   "compile: ok\tLuaJIT 2.1.ROLLING\t8",
+   "entry run: false: mods/cowboybingus/armory_preview_cache:357: libbcrypt.so: cannot open shared object file: No such file or directory",
+   "revision: nil",
+   "status after load: nil",
+   "first update: true",
+   "status after update: nil",
+   "previous update ran: 1"
+  ],
+  "windows_smoke_under_wine": {
+   "run": true,
+   "exit": 0,
+   "output": [
+    "compile: ok\tLuaJIT 2.1.ROLLING\t8",
+    "entry run: true",
+    "revision: v23.1",
+    "status after load: starting",
+    "first update: true",
+    "status after update: disabled: mods/cowboybingus/armory_preview_cache:2980: assertion failed!",
+    "previous update ran: 1"
+   ]
+  }
+ },
+ "tests": "out/TESTS.json",
+ "compat_adapter": false,
+ "live_tested": false,
+ "installed": false
+}

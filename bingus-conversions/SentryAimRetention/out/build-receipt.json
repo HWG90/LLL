@@ -1,0 +1,752 @@
+{
+ "mod": "Sentry Aim Retention (Vanilla Plus Megapack component data-v8.6)",
+ "upstream": "<workspace>/upstream-bingus/SentryAimRetention",
+ "upstream_git": "v1.1.1 (8f76f63), clean; all pinned source_sha256 of the lock match",
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "revision": "data-v8.6-26088801",
+ "game_sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+ "exe_sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+ "map": {
+  "path": "<workspace>/native-work/megapack-port/SentryAimRetention/MAP.json",
+  "sha256": "510758e6c9e7ceeb656a3d472afd7afed38150f33ffabf1557712aa41058dd86",
+  "counts": {
+   "high": 41,
+   "medium": 5,
+   "rows": 46,
+   "feeds_write": 33
+  }
+ },
+ "replacements": [
+  {
+   "file": "scripts/archive.py",
+   "line": 10,
+   "old": "EXE_SHA = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+   "new": "EXE_SHA = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'",
+   "map_rows": [
+    "archive.EXE_SHA"
+   ]
+  },
+  {
+   "file": "scripts/archive.py",
+   "line": 11,
+   "old": "GAME_DLL_SHA = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+   "new": "GAME_DLL_SHA = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'",
+   "map_rows": [
+    "archive.GAME_DLL_SHA"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 35,
+   "old": "[fromhex('701de358cfd685ef')]={name='Gatling',behavior=213,",
+   "new": "[fromhex('701de358cfd685ef')]={name='Gatling',behavior=214,",
+   "map_rows": [
+    "data.behavior_ids"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 36,
+   "old": "[fromhex('bb26ba7638e4cd37')]={name='Machine gun',behavior=312,",
+   "new": "[fromhex('bb26ba7638e4cd37')]={name='Machine gun',behavior=313,",
+   "map_rows": [
+    "data.behavior_ids"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 37,
+   "old": "[fromhex('a8a8ffcf360f0756')]={name='Laser cannon',behavior=308}",
+   "new": "[fromhex('a8a8ffcf360f0756')]={name='Laser cannon',behavior=309}",
+   "map_rows": [
+    "data.behavior_ids"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 39,
+   "old": "[fromhex('582896febac30c82')]={name='Flamethrower',behavior=207}",
+   "new": "[fromhex('582896febac30c82')]={name='Flamethrower',behavior=208}",
+   "map_rows": [
+    "data.behavior_ids"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 40,
+   "old": "[fromhex('742dce3b2e81a051')]={name='Mortar',behavior=319}",
+   "new": "[fromhex('742dce3b2e81a051')]={name='Mortar',behavior=320}",
+   "map_rows": [
+    "data.behavior_ids"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 41,
+   "old": "[fromhex('8b2f0938183a05b2')]={name='EMS mortar',behavior=323}",
+   "new": "[fromhex('8b2f0938183a05b2')]={name='EMS mortar',behavior=324}",
+   "map_rows": [
+    "data.behavior_ids"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 46,
+   "old": "{0x6bf390,'405741574883ec283b158248dc02450fb6f94c8b158779c6'},",
+   "new": "{0x6c9a50,'405741574883ec283b1572567702450fb6f94c8b15878461'},",
+   "map_rows": [
+    "native.retention"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 47,
+   "old": "{0x11cb930,'4883ec288b41083b05e3822b020f84d00000004c8b1526b4'},",
+   "new": "{0x105cf00,'4883ec288b41083b05c321de010f84d00000004c8b151650'},",
+   "map_rows": [
+    "native.vertical"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 48,
+   "old": "{0x11cba20,'4883ec288b41083b05f3812b020f84d00000004c8b1536b3'},",
+   "new": "{0x105cff0,'4883ec288b41083b05d320de010f84d00000004c8b15264fc80133d24889742438458b4a30458b5a38440fafd8418d71ff4585c90f84a400000048895c2430498b5a2848897c2420418b7a340f1f40008bce468d041a4c23c1428b0cc33bcf741f3bc8741fffc2413bd172e4488b5c2430488b7c2420488b7424384883c428c33bc87550428b44c30483f8ff74464c8d0cc5000000008bd0498b4240498b0c01f6411401742e498b425848c1e204f30f114c0208498b42404d8b42584983c0084c03c2bae5450bcc498b0c018b4910e8bcc6e0ff488b5c2430488b7c2420488b7424384883c428c3'},",
+   "map_rows": [
+    "native.horizontal"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 49,
+   "old": "{0x755f90,'48894c24085355565741574883ec20'},",
+   "new": "{0x761700,'48894c24085355565741574883ec20'},",
+   "map_rows": [
+    "native.fire_mode"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 174,
+   "old": "for _,g in ipairs({{game+0x3326d30,reg.tmb},{game+0x3326740,reg.bmb},{game+0x3326d70,reg.rmb},",
+   "new": "for _,g in ipairs({{game+0x2ce1ef0,reg.tmb},{game+0x2ce18f0,reg.bmb},{game+0x2ce1f30,reg.rmb},",
+   "map_rows": [
+    "game.behavior",
+    "game.targeting",
+    "game.turret"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 186,
+   "old": "local fm=need_pointer(api,need(api,game+0x3326cb8,8))",
+   "new": "local fm=need_pointer(api,need(api,game+0x2ce1e78,8))",
+   "map_rows": [
+    "game.target_faction"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 199,
+   "old": "local clock_root=need(api,game+0x3326348,8)",
+   "new": "local clock_root=need(api,game+0x2ce14f8,8)",
+   "map_rows": [
+    "game.clock"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 200,
+   "old": "local selection_guards={};guard(api,selection_guards,game+0x3326348,clock_root)",
+   "new": "local selection_guards={};guard(api,selection_guards,game+0x2ce14f8,clock_root)",
+   "map_rows": [
+    "game.clock"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 201,
+   "old": "local wm=need_pointer(api,need(api,game+0x3326ce0,8))",
+   "new": "local wm=need_pointer(api,need(api,game+0x2ce1ea0,8))",
+   "map_rows": [
+    "game.weapon"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 213,
+   "old": "guard(api,guards,game+0x3326ce0,need(api,game+0x3326ce0,8))",
+   "new": "guard(api,guards,game+0x2ce1ea0,need(api,game+0x2ce1ea0,8))",
+   "map_rows": [
+    "game.weapon"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 214,
+   "old": "local cmb=need(api,game+0x3326660,8);local cm=need_pointer(api,cmb)",
+   "new": "local cmb=need(api,game+0x2ce1810,8);local cm=need_pointer(api,cmb)",
+   "map_rows": [
+    "game.trigger"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 215,
+   "old": "guard(api,guards,game+0x3326660,cmb)",
+   "new": "guard(api,guards,game+0x2ce1810,cmb)",
+   "map_rows": [
+    "game.trigger"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 220,
+   "old": "return {wm=wm,cm=cm,wm_header=wm+48,cm_header=cm+40,clock_root_address=game+0x3326348,",
+   "new": "return {wm=wm,cm=cm,wm_header=wm+48,cm_header=cm+40,clock_root_address=game+0x2ce14f8,",
+   "map_rows": [
+    "game.clock"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 373,
+   "old": "c.at={tm=game+0x3326d30,bm=game+0x3326740,rm=game+0x3326d70}",
+   "new": "c.at={tm=game+0x2ce1ef0,bm=game+0x2ce18f0,rm=game+0x2ce1f30}",
+   "map_rows": [
+    "game.behavior",
+    "game.targeting",
+    "game.turret"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 494,
+   "old": "-- Whether a mission runs: the mode record at [game.dll+0x33266a0] (68 bytes;",
+   "new": "-- Whether a mission runs: the mode record at [game.dll+0x2ce1850] (68 bytes;",
+   "map_rows": [
+    "game.mode"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 501,
+   "old": "if c.mode_game~=game then c.mode_game,c.mode_global=game,game+0x33266a0 end",
+   "new": "if c.mode_game~=game then c.mode_game,c.mode_global=game,game+0x2ce1850 end",
+   "map_rows": [
+    "game.mode"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 1089,
+   "old": "local pose_signature=fromhex('40534883ec204863dae89206eaff488bc84c8b0041ff90e8')",
+   "new": "local pose_signature=fromhex('40534883ec204863dae8e2d5eaff488bc84c8b0041ff90e8')",
+   "map_rows": [
+    "engine.pose_getter"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 1090,
+   "old": "assert(exe and api.read(exe+0x1fd220,#pose_signature)==pose_signature,'Unsupported engine pose getter')",
+   "new": "assert(exe and api.read(exe+0x1f30c0,#pose_signature)==pose_signature,'Unsupported engine pose getter')",
+   "map_rows": [
+    "engine.pose_getter"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 1092,
+   "old": "{0x79f860,'33c04c8d05c7b201020f1f800000000049390cc0740cffc083f80475f3'},",
+   "new": "{0x826d10,'33c04c8d05f7b203020f1f800000000049390cc0740cffc083f80475f3'},",
+   "map_rows": [
+    "engine.world_id"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 1093,
+   "old": "{0x7f4590,'488bc4f30f11582089480855535657415441554156415748'},",
+   "new": "{0x87bc70,'488bc4f30f11582089480855535657415441554156415748'},",
+   "map_rows": [
+    "engine.raycast"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 139,
+   "old": "local pool=exe+0x2369b00+64*",
+   "new": "local pool=exe+0x2411200+64*",
+   "map_rows": [
+    "exe.actor_pools"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 155,
+   "old": "local world_slot=exe+0x27ba8a8+176*e.world_index",
+   "new": "local world_slot=exe+0x2861d88+176*e.world_index",
+   "map_rows": [
+    "exe.world_slots"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 167,
+   "old": "local properties=read_pointer(exe+0x27c5e48);if not properties then return nil end",
+   "new": "local properties=read_pointer(exe+0x286d338);if not properties then return nil end",
+   "map_rows": [
+    "exe.filter_properties"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 180,
+   "old": "and read_pointer(exe+0x27c5e48)==e.properties",
+   "new": "and read_pointer(exe+0x286d338)==e.properties",
+   "map_rows": [
+    "exe.filter_properties"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 193,
+   "old": "local flag = ffi.cast('sentry_aim_retention_fn',game+0x6bf390)",
+   "new": "local flag = ffi.cast('sentry_aim_retention_fn',game+0x6c9a50)",
+   "map_rows": [
+    "native.retention"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 194,
+   "old": "local horizontal = ffi.cast('sentry_aim_speed_fn',game+0x11cba20)",
+   "new": "local horizontal = ffi.cast('sentry_aim_speed_fn',game+0x105cff0)",
+   "map_rows": [
+    "native.horizontal"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 195,
+   "old": "local vertical = ffi.cast('sentry_aim_speed_fn',game+0x11cb930)",
+   "new": "local vertical = ffi.cast('sentry_aim_speed_fn',game+0x105cf00)",
+   "map_rows": [
+    "native.vertical"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 196,
+   "old": "local mode = ffi.cast('sentry_aim_fire_mode_fn',game+0x755f90)",
+   "new": "local mode = ffi.cast('sentry_aim_fire_mode_fn',game+0x761700)",
+   "map_rows": [
+    "native.fire_mode"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 197,
+   "old": "local world_id = ffi.cast('sentry_aim_world_id_fn',exe+0x79f860)",
+   "new": "local world_id = ffi.cast('sentry_aim_world_id_fn',exe+0x826d10)",
+   "map_rows": [
+    "engine.world_id"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 198,
+   "old": "local raycast = ffi.cast('sentry_aim_raycast_fn',exe+0x7f4590)",
+   "new": "local raycast = ffi.cast('sentry_aim_raycast_fn',exe+0x87bc70)",
+   "map_rows": [
+    "engine.raycast"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 231,
+   "old": "local scheduler=api.pointer(api.read(game+0x347d7e0,8))",
+   "new": "local scheduler=api.pointer(api.read(game+0x2e38988,8))",
+   "map_rows": [
+    "game.scheduler"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 232,
+   "old": "local world=api.pointer(api.read(game+0x346bfa0,8))",
+   "new": "local world=api.pointer(api.read(game+0x2e271f8,8))",
+   "map_rows": [
+    "game.physics_world"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 245,
+   "old": "local units=ptr(exe+0x1a100f0)",
+   "new": "local units=ptr(exe+0x1ab76f8)",
+   "map_rows": [
+    "exe.units"
+   ]
+  }
+ ],
+ "wrapper_changes_vs_upstream": [
+  {
+   "line": 773,
+   "what": "replacement",
+   "old": "local pool=exe+0x2369b00+64*(math.floor(actor/0x10000000)%4+10*world_index)",
+   "new": "local pool=exe+0x2411200+64*(math.floor(actor/0x10000000)%4+10*world_index)"
+  },
+  {
+   "line": 789,
+   "what": "replacement",
+   "old": "local world_slot=exe+0x27ba8a8+176*e.world_index;local world=read_pointer(world_slot)",
+   "new": "local world_slot=exe+0x2861d88+176*e.world_index;local world=read_pointer(world_slot)"
+  },
+  {
+   "line": 801,
+   "what": "replacement",
+   "old": "local properties=read_pointer(exe+0x27c5e48);if not properties then return nil end",
+   "new": "local properties=read_pointer(exe+0x286d338);if not properties then return nil end"
+  },
+  {
+   "line": 814,
+   "what": "replacement",
+   "old": "and read_pointer(exe+0x27c5e48)==e.properties and read_pointer(e.properties+256)==e.names",
+   "new": "and read_pointer(exe+0x286d338)==e.properties and read_pointer(e.properties+256)==e.names"
+  },
+  {
+   "line": 827,
+   "what": "replacement",
+   "old": "local flag = ffi.cast('sentry_aim_retention_fn',game+0x6bf390)",
+   "new": "local flag = ffi.cast('sentry_aim_retention_fn',game+0x6c9a50)"
+  },
+  {
+   "line": 828,
+   "what": "replacement",
+   "old": "local horizontal = ffi.cast('sentry_aim_speed_fn',game+0x11cba20)",
+   "new": "local horizontal = ffi.cast('sentry_aim_speed_fn',game+0x105cff0)"
+  },
+  {
+   "line": 829,
+   "what": "replacement",
+   "old": "local vertical = ffi.cast('sentry_aim_speed_fn',game+0x11cb930)",
+   "new": "local vertical = ffi.cast('sentry_aim_speed_fn',game+0x105cf00)"
+  },
+  {
+   "line": 830,
+   "what": "replacement",
+   "old": "local mode = ffi.cast('sentry_aim_fire_mode_fn',game+0x755f90)",
+   "new": "local mode = ffi.cast('sentry_aim_fire_mode_fn',game+0x761700)"
+  },
+  {
+   "line": 831,
+   "what": "replacement",
+   "old": "local world_id = ffi.cast('sentry_aim_world_id_fn',exe+0x79f860)",
+   "new": "local world_id = ffi.cast('sentry_aim_world_id_fn',exe+0x826d10)"
+  },
+  {
+   "line": 832,
+   "what": "replacement",
+   "old": "local raycast = ffi.cast('sentry_aim_raycast_fn',exe+0x7f4590)",
+   "new": "local raycast = ffi.cast('sentry_aim_raycast_fn',exe+0x87bc70)"
+  },
+  {
+   "line": 865,
+   "what": "replacement",
+   "old": "local scheduler=api.pointer(api.read(game+0x347d7e0,8))",
+   "new": "local scheduler=api.pointer(api.read(game+0x2e38988,8))"
+  },
+  {
+   "line": 866,
+   "what": "replacement",
+   "old": "local world=api.pointer(api.read(game+0x346bfa0,8))",
+   "new": "local world=api.pointer(api.read(game+0x2e271f8,8))"
+  },
+  {
+   "line": 879,
+   "what": "replacement",
+   "old": "local units=ptr(exe+0x1a100f0)",
+   "new": "local units=ptr(exe+0x1ab76f8)"
+  },
+  {
+   "line": 933,
+   "what": "replacement",
+   "old": "[fromhex('701de358cfd685ef')]={name='Gatling',behavior=213,fire_gate={pause=16,resume=4}},",
+   "new": "[fromhex('701de358cfd685ef')]={name='Gatling',behavior=214,fire_gate={pause=16,resume=4}},"
+  },
+  {
+   "line": 934,
+   "what": "replacement",
+   "old": "[fromhex('bb26ba7638e4cd37')]={name='Machine gun',behavior=312,fire_gate={pause=14,resume=3}},",
+   "new": "[fromhex('bb26ba7638e4cd37')]={name='Machine gun',behavior=313,fire_gate={pause=14,resume=3}},"
+  },
+  {
+   "line": 935,
+   "what": "replacement",
+   "old": "[fromhex('a8a8ffcf360f0756')]={name='Laser cannon',behavior=308},",
+   "new": "[fromhex('a8a8ffcf360f0756')]={name='Laser cannon',behavior=309},"
+  },
+  {
+   "line": 937,
+   "what": "replacement",
+   "old": "[fromhex('582896febac30c82')]={name='Flamethrower',behavior=207},",
+   "new": "[fromhex('582896febac30c82')]={name='Flamethrower',behavior=208},"
+  },
+  {
+   "line": 938,
+   "what": "replacement",
+   "old": "[fromhex('742dce3b2e81a051')]={name='Mortar',behavior=319},",
+   "new": "[fromhex('742dce3b2e81a051')]={name='Mortar',behavior=320},"
+  },
+  {
+   "line": 939,
+   "what": "replacement",
+   "old": "[fromhex('8b2f0938183a05b2')]={name='EMS mortar',behavior=323},",
+   "new": "[fromhex('8b2f0938183a05b2')]={name='EMS mortar',behavior=324},"
+  },
+  {
+   "line": 944,
+   "what": "replacement",
+   "old": "{0x6bf390,'405741574883ec283b158248dc02450fb6f94c8b158779c6'},",
+   "new": "{0x6c9a50,'405741574883ec283b1572567702450fb6f94c8b15878461'},"
+  },
+  {
+   "line": 945,
+   "what": "replacement",
+   "old": "{0x11cb930,'4883ec288b41083b05e3822b020f84d00000004c8b1526b4'},",
+   "new": "{0x105cf00,'4883ec288b41083b05c321de010f84d00000004c8b151650'},"
+  },
+  {
+   "line": 946,
+   "what": "replacement",
+   "old": "{0x11cba20,'4883ec288b41083b05f3812b020f84d00000004c8b1536b3'},",
+   "new": "{0x105cff0,'4883ec288b41083b05d320de010f84d00000004c8b15264fc80133d24889742438458b4a30458b5a38440fafd8418d71ff4585c90f84a400000048895c2430498b5a2848897c2420418b"
+  },
+  {
+   "line": 947,
+   "what": "replacement",
+   "old": "{0x755f90,'48894c24085355565741574883ec20'},",
+   "new": "{0x761700,'48894c24085355565741574883ec20'},"
+  },
+  {
+   "line": 1072,
+   "what": "replacement",
+   "old": "for _,g in ipairs({{game+0x3326d30,reg.tmb},{game+0x3326740,reg.bmb},{game+0x3326d70,reg.rmb},",
+   "new": "for _,g in ipairs({{game+0x2ce1ef0,reg.tmb},{game+0x2ce18f0,reg.bmb},{game+0x2ce1f30,reg.rmb},"
+  },
+  {
+   "line": 1084,
+   "what": "replacement",
+   "old": "local fm=need_pointer(api,need(api,game+0x3326cb8,8))",
+   "new": "local fm=need_pointer(api,need(api,game+0x2ce1e78,8))"
+  },
+  {
+   "line": 1097,
+   "what": "replacement",
+   "old": "local clock_root=need(api,game+0x3326348,8)",
+   "new": "local clock_root=need(api,game+0x2ce14f8,8)"
+  },
+  {
+   "line": 1098,
+   "what": "replacement",
+   "old": "local selection_guards={};guard(api,selection_guards,game+0x3326348,clock_root)",
+   "new": "local selection_guards={};guard(api,selection_guards,game+0x2ce14f8,clock_root)"
+  },
+  {
+   "line": 1099,
+   "what": "replacement",
+   "old": "local wm=need_pointer(api,need(api,game+0x3326ce0,8))",
+   "new": "local wm=need_pointer(api,need(api,game+0x2ce1ea0,8))"
+  },
+  {
+   "line": 1111,
+   "what": "replacement",
+   "old": "guard(api,guards,game+0x3326ce0,need(api,game+0x3326ce0,8))",
+   "new": "guard(api,guards,game+0x2ce1ea0,need(api,game+0x2ce1ea0,8))"
+  },
+  {
+   "line": 1112,
+   "what": "replacement",
+   "old": "local cmb=need(api,game+0x3326660,8);local cm=need_pointer(api,cmb)",
+   "new": "local cmb=need(api,game+0x2ce1810,8);local cm=need_pointer(api,cmb)"
+  },
+  {
+   "line": 1113,
+   "what": "replacement",
+   "old": "guard(api,guards,game+0x3326660,cmb)",
+   "new": "guard(api,guards,game+0x2ce1810,cmb)"
+  },
+  {
+   "line": 1118,
+   "what": "replacement",
+   "old": "return {wm=wm,cm=cm,wm_header=wm+48,cm_header=cm+40,clock_root_address=game+0x3326348,",
+   "new": "return {wm=wm,cm=cm,wm_header=wm+48,cm_header=cm+40,clock_root_address=game+0x2ce14f8,"
+  },
+  {
+   "line": 1271,
+   "what": "replacement",
+   "old": "c.at={tm=game+0x3326d30,bm=game+0x3326740,rm=game+0x3326d70}",
+   "new": "c.at={tm=game+0x2ce1ef0,bm=game+0x2ce18f0,rm=game+0x2ce1f30}"
+  },
+  {
+   "line": 1392,
+   "what": "replacement",
+   "old": "-- Whether a mission runs: the mode record at [game.dll+0x33266a0] (68 bytes;",
+   "new": "-- Whether a mission runs: the mode record at [game.dll+0x2ce1850] (68 bytes;"
+  },
+  {
+   "line": 1399,
+   "what": "replacement",
+   "old": "if c.mode_game~=game then c.mode_game,c.mode_global=game,game+0x33266a0 end",
+   "new": "if c.mode_game~=game then c.mode_game,c.mode_global=game,game+0x2ce1850 end"
+  },
+  {
+   "line": 1987,
+   "what": "replacement",
+   "old": "local pose_signature=fromhex('40534883ec204863dae89206eaff488bc84c8b0041ff90e8')",
+   "new": "local pose_signature=fromhex('40534883ec204863dae8e2d5eaff488bc84c8b0041ff90e8')"
+  },
+  {
+   "line": 1988,
+   "what": "replacement",
+   "old": "assert(exe and api.read(exe+0x1fd220,#pose_signature)==pose_signature,'Unsupported engine pose getter')",
+   "new": "assert(exe and api.read(exe+0x1f30c0,#pose_signature)==pose_signature,'Unsupported engine pose getter')"
+  },
+  {
+   "line": 1990,
+   "what": "replacement",
+   "old": "{0x79f860,'33c04c8d05c7b201020f1f800000000049390cc0740cffc083f80475f3'},",
+   "new": "{0x826d10,'33c04c8d05f7b203020f1f800000000049390cc0740cffc083f80475f3'},"
+  },
+  {
+   "line": 1991,
+   "what": "replacement",
+   "old": "{0x7f4590,'488bc4f30f11582089480855535657415441554156415748'},",
+   "new": "{0x87bc70,'488bc4f30f11582089480855535657415441554156415748'},"
+  },
+  {
+   "line": 2251,
+   "what": "install_loader call (revision, exe/game SHA-256 pins)"
+  }
+ ],
+ "reproduction": {
+  "unmodified_resource_sha256": "C66E3164AEA01AE1877FDB6F3D380999CD00281FE3001B83C94279B2613E2483",
+  "lock_resource_sha256": "C66E3164AEA01AE1877FDB6F3D380999CD00281FE3001B83C94279B2613E2483",
+  "compiler": "<workspace>/runtime-modules/vm-poc/work/runtime/linux/LuaJIT/src/luajit",
+  "shipped_v26_option_resource_identical": true,
+  "shipped_v26_archive": "<hellforge>/mods/Vanilla Plus Megapack - v26/options/SentryAimRetention/9ba626afa44a3aa3.patch_0"
+ },
+ "format": "declaration line + plaintext wrapper assembled by build_module(), type-2 Lua resource envelope (no bytecode)",
+ "runtime_gated_rows": [
+  "native.horizontal"
+ ],
+ "resource": {
+  "name": "mods/cowboybingus/sentry_aim_retention",
+  "hash": "5b268e629ad0619d",
+  "bytes": 115133
+ },
+ "outputs": {
+  "5b268e629ad0619d.lua": "baa8d5d9a41ea179167e7d8da71537d47d3ce6dc53ed637b3ebb20e40b938724",
+  "9ba626afa44a3aa3.patch_0": "12d1ee81131c154b530c1d07d3b668eb173082b6c16d00cb2f34449b31402888",
+  "9ba626afa44a3aa3.patch_0.gpu_resources": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "9ba626afa44a3aa3.patch_0.stream": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sentry_aim_retention.lua": "baa8d5d9a41ea179167e7d8da71537d47d3ce6dc53ed637b3ebb20e40b938724",
+  "wrapper.diff": "1aff9f0a09f64c480109f14b8f15cfe9b210ee6c43ab5c97c840614d7dc1c674"
+ },
+ "inputs": {
+  "src/aim_data.lua": "3c9b17c3b794b00ca5636cc7172cbc7b1201007c3713c5dce90bb6b51cdc53cc",
+  "src/archive_loader.lua": "59a56758141c9328f18d1a92648b132713db5a0dfe64e2daf92d41af4d315295",
+  "src/bingus_memory.lua": "3973924b1c009cc4e6c863a4eaf87f166899a16ddcb579c3d77ab5465172b416",
+  "src/bingus_runtime.lua": "c4450f555f697e583916d18f876412ca96f6963eb1bf4cdad451ebb906c2f988",
+  "src/bingus_write.lua": "9a0a217811d109418faebb2af8804bfb8301b0eeeb1e6b5bc020fdacbd596160",
+  "src/windows_api.lua": "ff7ef18a957b53d62f61580ecc915878e5f76a7d825967930720d5d218e0dc35"
+ },
+ "luajit_check": {
+  "luajit": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit",
+  "string_dump_flags": 8,
+  "gc64_fr2": true,
+  "output": [
+   "compile: ok\tLuaJIT 2.1.ROLLING\t8",
+   "[SentryAimRetention] data-v8.6-26088801: mods/cowboybingus/sentry_aim_retention:358: libbcrypt.so: cannot open shared object file: No such file or directory",
+   "chunk run: true",
+   "status: mods/cowboybingus/sentry_aim_retention:358: libbcrypt.so: cannot open shared object file: No such file or directory",
+   "revision: data-v8.6-26088801",
+   "active: false"
+  ]
+ },
+ "adapter_text_absent": [
+  "PORT51",
+  "compat51",
+  "require('cffi')",
+  "require(\"cffi\")"
+ ],
+ "port_test_fixture_edits": [
+  {
+   "file": "tests/reference/aim_data.lua",
+   "lines_changed": 10
+  },
+  {
+   "file": "tests/test_current_game.lua",
+   "lines_changed": 2
+  },
+  {
+   "file": "tests/test_idle_gate.lua",
+   "lines_changed": 10
+  },
+  {
+   "file": "tests/test_snapshot.lua",
+   "lines_changed": 8
+  },
+  {
+   "file": "tests/test_windows_api.lua",
+   "lines_changed": 5
+  },
+  {
+   "file": "tests/test_snapshot.lua",
+   "behavior_id_edits": 2
+  },
+  {
+   "file": "tests/test_idle_gate.lua",
+   "behavior_id_edits": 1
+  },
+  {
+   "file": "tests/reference/aim_data.lua",
+   "behavior_id_edits": 6
+  },
+  {
+   "file": "tests/current_game_25327279.lua",
+   "behavior_id": "213 -> 214 in the captured behavior record"
+  },
+  {
+   "file": "tests/current_game_25327279.lua",
+   "global_slot_blocks_relocated": 7
+  }
+ ],
+ "tests": {
+  "port": {
+   "tests/test_aim.lua": true,
+   "tests/test_firing.lua": true,
+   "tests/test_loader.lua": true,
+   "tests/test_snapshot.lua": true,
+   "tests/test_idle_gate.lua": true,
+   "tests/test_windows_api.lua": false,
+   "tests/test_current_game.lua": true,
+   "tests/test_module.lua": true,
+   "tests/test_windows_api_wine.lua (derived: 2 hash-counter checks relaxed)": true
+  },
+  "upstream": {
+   "tests/test_aim.lua": true,
+   "tests/test_firing.lua": true,
+   "tests/test_loader.lua": true,
+   "tests/test_snapshot.lua": true,
+   "tests/test_idle_gate.lua": true,
+   "tests/test_windows_api.lua": false,
+   "tests/test_current_game.lua": true,
+   "tests/test_module.lua": true,
+   "tests/test_windows_api_wine.lua (derived: 2 hash-counter checks relaxed)": true
+  }
+ }
+}

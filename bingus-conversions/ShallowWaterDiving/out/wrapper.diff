@@ -1,0 +1,66 @@
+--- upstream wrapper
++++ port wrapper
+@@ -358 +358 @@
+-M.GAME = {settings = 0x3326340, index = 705500 + 212, table = 0x37C5650, count = 15}
++M.GAME = {settings = 0x2CE1508, index = 705628 + 212, table = 0x3180DE0, count = 15}
+@@ -1388 +1388 @@
+-local DIVE_TIMEOUT_RVAS={0x23c7110,0x23c7100}
++local DIVE_TIMEOUT_RVAS={0x2246948,0x2246938}
+@@ -1417,2 +1417,2 @@
+-for rva,name in pairs({[0x33266a0]='mission',[0x3326468]='local_player',[0x346bf98]='local_avatar',
+-    [0x3326d20]='local_avatar',[0x3326a80]='water',[0x3326598]='stance',[0x3326558]='movement'}) do
++for rva,name in pairs({[0x2ce1850]='mission',[0x2ce1618]='local_player',[0x2ce41b8]='local_avatar',
++    [0x2ce1ee0]='local_avatar',[0x2ce1c40]='water',[0x2ce1748]='stance',[0x2ce1708]='movement'}) do
+@@ -1487 +1487 @@
+-local CONTROLLER,CONTROLLER_SIZE,FLAGS=0xb84,0x414,0xf80-0xb84
++local CONTROLLER,CONTROLLER_SIZE,FLAGS=0xb84,0x41c,0xf88-0xb84
+@@ -1503 +1503 @@
+-    local mode=global(0x33266a0);if not mode then return nil,wait end
++    local mode=global(0x2ce1850);if not mode then return nil,wait end
+@@ -1507 +1507 @@
+-    local pm=global(0x3326468);if not pm then return nil,wait end
++    local pm=global(0x2ce1618);if not pm then return nil,wait end
+@@ -1521,2 +1521,2 @@
+-    local owner=global(0x346bf98,true);if not owner then return nil,wait end
+-    local header=read(owner+0xf22ec8,20);if not header then return nil,wait end
++    local owner=global(0x2ce41b8,true);if not owner then return nil,wait end
++    local header=read(owner+0xf24990,20);if not header then return nil,wait end
+@@ -1526 +1526 @@
+-    local entity_address=owner+0xf32f18+ei*24
++    local entity_address=owner+0xf349e0+ei*24
+@@ -1531 +1531 @@
+-    local am=global(0x3326d20,true);if not am then return nil,wait end
++    local am=global(0x2ce1ee0,true);if not am then return nil,wait end
+@@ -1545 +1545 @@
+-    local controller=am+0x53d900+ai*0x1238
++    local controller=am+0x53d900+ai*0x1240
+@@ -1547 +1547 @@
+-    guard(controller+CONTROLLER,c,20);guard(controller+0xf80,c+FLAGS,24)
++    guard(controller+CONTROLLER,c,20);guard(controller+0xf88,c+FLAGS,24)
+@@ -1563 +1563 @@
+-    local dm=global(0x3326a80,true);if not dm then return nil,wait end
++    local dm=global(0x2ce1c40,true);if not dm then return nil,wait end
+@@ -1593 +1593 @@
+-    local sm=global(0x3326598,true);if not sm then return nil,wait end
++    local sm=global(0x2ce1748,true);if not sm then return nil,wait end
+@@ -1608 +1608 @@
+-    local mm=global(0x3326558);if not mm then return nil,wait end
++    local mm=global(0x2ce1708);if not mm then return nil,wait end
+@@ -1621 +1621 @@
+-    local components=read(owner+0xf12e20,8);if not components then return nil,wait end
++    local components=read(owner+0xf148e8,8);if not components then return nil,wait end
+@@ -1650 +1650 @@
+-            local window,two=reader.read(base+0x23c7080,0x100) or '',packed(2)
++            local window,two=reader.read(base+0x22468b8,0x100) or '',packed(2)
+@@ -1652 +1652 @@
+-            for o=0,#window-4,4 do if window:sub(o+1,o+4)==two then found[#found+1]=string.format('0x%x',0x23c7080+o) end end
++            for o=0,#window-4,4 do if window:sub(o+1,o+4)==two then found[#found+1]=string.format('0x%x',0x22468b8+o) end end
+@@ -1656 +1656 @@
+-        local prone=read(base+0x23c6ccc,4);if not prone then return nil,wait end
++        local prone=read(base+0x22464ec,4);if not prone then return nil,wait end
+@@ -1658 +1658 @@
+-        local crouch=read(base+0x23c69f8,4);if not crouch then return nil,wait end
++        local crouch=read(base+0x2246210,4);if not crouch then return nil,wait end
+@@ -2174 +2174 @@
+-install_loader(function() return create_api(runtime, runtime_write.extend(runtime_memory.new(runtime))) end, patch, {revision = 'data-v3.10.1', exe_sha256 = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06', game_sha256 = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'}, text, locales, runtime)
++install_loader(function() return create_api(runtime, runtime_write.extend(runtime_memory.new(runtime))) end, patch, {revision = 'data-v3.10.1-26088801', exe_sha256 = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE', game_sha256 = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'}, text, locales, runtime)

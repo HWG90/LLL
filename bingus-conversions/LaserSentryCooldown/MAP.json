@@ -1,0 +1,1549 @@
+{
+ "option": "LaserSentryCooldown",
+ "module": "mods/cowboybingus/laser_sentry_cooldown",
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "source": "upstream-bingus/LaserSentryCooldown (git v1.1.1, clean; equals the pinned VanillaPlusMegapack/components/LaserSentryCooldown byte for byte)",
+ "rows": [
+  {
+   "id": "build.pins",
+   "file": "src/laser_sentry_cooldown.lua",
+   "lines": [
+    666,
+    667,
+    725,
+    726
+   ],
+   "name": "game.dll / helldivers2.exe SHA-256 pins (the \"Disabled: unsupported game build\" gate) and the refusal text",
+   "old": "2E2C3B7C\u2026F51E / F5FEE03D\u20265F06, \"needs Steam build 25480438\"",
+   "new": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F / 0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE, \"needs Steam build 26088801\"",
+   "method": "hashes of the installed data/game/game.dll and bin/helldivers2.exe (BRIEF.md); verify_build call unchanged",
+   "witnesses": [
+    {
+     "check": "evidence manifest names the new game.dll hash",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "gate",
+   "live_check": "L0"
+  },
+  {
+   "id": "build.revision",
+   "file": "src/laser_sentry_cooldown.lua",
+   "lines": [
+    34
+   ],
+   "name": "revision string in the log start line",
+   "old": "'v' .. VERSION",
+   "new": "'v' .. VERSION .. '-26088801'",
+   "method": "port marker (log only)",
+   "witnesses": [],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "log",
+   "live_check": "L0"
+  },
+  {
+   "id": "heat.root_rva",
+   "file": "src/laser_sentry_cooldown.lua",
+   "lines": [
+    43
+   ],
+   "name": "entities object (ROOT_RVA)",
+   "old": "0x346BF98",
+   "new": "0x2CE41B8",
+   "method": "agreeing RIP-relative instruction windows",
+   "witnesses": [
+    {
+     "check": "entities object (ROOT_RVA): majority 0x2ce41b8",
+     "ok": true
+    },
+    {
+     "check": "entities object (ROOT_RVA): >= 20 agreeing witnesses",
+     "ok": true
+    },
+    {
+     "check": "entities object (ROOT_RVA): every exact window agrees",
+     "ok": true
+    },
+    {
+     "check": "entities object (ROOT_RVA): exact window 0x4536dc -> 0x45a4fc re-migrates",
+     "ok": true,
+     "old_insn": "mov rcx, qword ptr [rip + 0x30188b5]",
+     "new_insn": "mov rcx, qword ptr [rip + 0x2889cb5]"
+    },
+    {
+     "check": "entities object (ROOT_RVA): exact window 0x49c4a1 -> 0x4a3157 re-migrates",
+     "ok": true,
+     "old_insn": "mov rcx, qword ptr [rip + 0x2fcfaf0]",
+     "new_insn": "mov rcx, qword ptr [rip + 0x284105a]"
+    },
+    {
+     "check": "entities object (ROOT_RVA): exact window 0x4f57fa -> 0x4fdb5a re-migrates",
+     "ok": true,
+     "old_insn": "mov rbp, qword ptr [rip + 0x2f76797]",
+     "new_insn": "mov rbp, qword ptr [rip + 0x27e6657]"
+    },
+    {
+     "kind": "global",
+     "old_sites": 1449,
+     "sampled": 64,
+     "votes": {
+      "0x2ce41b8": 42
+     },
+     "exact_window_votes": {
+      "0x2ce41b8": 27
+     },
+     "distinct_old_functions": 42,
+     "disagreeing": 0,
+     "source": "evidence/globals.json (tools/map_globals.py)"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "write W1 address",
+   "live_check": "L1"
+  },
+  {
+   "id": "heat.table_offset",
+   "file": "src/laser_sentry_cooldown.lua",
+   "lines": [
+    44
+   ],
+   "name": "heat settings table field of the entities object (TABLE_OFFSET)",
+   "old": "0xF12CC8",
+   "new": "0xF14790",
+   "method": "the heat settings lookup (old 0x50DD30 -> new 0x516310, reached from the heat getter old 0x50E1F0 -> new 0x5167C0 by its tail jump) re-disassembled; whole-image raw displacement scan",
+   "witnesses": [
+    {
+     "check": "old lookup 0x50DD30 reads [[game+0x346BF98]+0xF12CC8]",
+     "ok": true
+    },
+    {
+     "check": "new lookup 0x516310 reads [[game+0x2CE41B8]+0xF14790]",
+     "ok": true
+    },
+    {
+     "check": "raw scan (pdata or not): 3 sites of +0xF12CC8 old, 3 of +0xF14790 new",
+     "ok": true
+    },
+    {
+     "check": "they pair 1:1 in order with identical instructions but the displacement",
+     "ok": true,
+     "pairs": [
+      [
+       "0x50dd3f",
+       "mov r10, qword ptr [rax + 0xf12cc8]",
+       "0x51631f",
+       "mov r10, qword ptr [rax + 0xf14790]"
+      ],
+      [
+       "0x50e1d7",
+       "mov rax, qword ptr [rax + 0xf12cc8]",
+       "0x5167a7",
+       "mov rax, qword ptr [rax + 0xf14790]"
+      ],
+      [
+       "0x767bf0",
+       "mov rax, qword ptr [r8 + 0xf12cc8]",
+       "0x773110",
+       "mov rax, qword ptr [r8 + 0xf14790]"
+      ]
+     ]
+    },
+    {
+     "check": "the third pair: old 0x50E1D0 / new 0x5167A0 load the same global then the table",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "write W1 address",
+   "live_check": "L1"
+  },
+  {
+   "id": "heat.slots",
+   "file": "src/laser_sentry_cooldown.lua",
+   "lines": [
+    40,
+    41,
+    45,
+    118,
+    119
+   ],
+   "name": "slot count (SLOTS; probe start resource % SLOTS; the slot table read = SLOTS*16 bytes)",
+   "old": "58",
+   "new": "60",
+   "method": "the lookup re-disassembled (see witnesses); 60*16 = 960 bytes still fits the adapter read buffer (1024)",
+   "witnesses": [
+    {
+     "check": "old: hash % 58 (reciprocal 0x1a7b9611a7b9611b, imul 0x3a), wrap at 0x39, 0x3a probes",
+     "ok": true
+    },
+    {
+     "check": "new: hash % 60 (reciprocal 0x8888888888888889, shr 5, imul 0x3c), wrap at 0x3b, 0x3c probes",
+     "ok": true
+    },
+    {
+     "check": "both: 16-byte slots (shl rax, 4), u64 key at +0 compared with the 64-bit resource, empty key 0, index u32 at +8",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "write W1 address",
+   "live_check": "L1"
+  },
+  {
+   "id": "heat.records_offset+size",
+   "file": "src/laser_sentry_cooldown.lua",
+   "lines": [
+    41,
+    46
+   ],
+   "name": "records offset (RECORDS_OFFSET) and record size (RECORD_SIZE)",
+   "old": "928 / 592",
+   "new": "960 / 592",
+   "method": "lookup re-disassembled",
+   "witnesses": [
+    {
+     "check": "old: record = table + 0x3A0 + 0x250 * index",
+     "ok": true
+    },
+    {
+     "check": "new: record = table + 0x3C0 + 0x250 * index",
+     "ok": true
+    },
+    {
+     "check": "records follow the slot table in both (0x3A0 = 58*16, 0x3C0 = 60*16)",
+     "ok": true
+    },
+    {
+     "check": "the per-entity override path of the getter keeps 0x250 records (old 0x50E292 / new 0x516862)",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "write W1 address",
+   "live_check": "L1"
+  },
+  {
+   "id": "heat.header",
+   "file": "src/laser_sentry_cooldown.lua",
+   "lines": [
+    47,
+    48
+   ],
+   "name": "table header 24 bytes before the table: 'LDLD', version 1, type 0x4C981CD9, byte size",
+   "old": "24 / 0x444C444C / 1 / 0x4C981CD9",
+   "new": "same",
+   "method": "data; runtime-checked by Cooldown.locate (fails closed)",
+   "witnesses": [
+    {
+     "check": "the WeaponHeatComponentData type hash 0x4C981CD9 occurs once in each image, in identical 64-byte surroundings (a hash table in .rdata)",
+     "ok": true
+    },
+    {
+     "kind": "note",
+     "note": "the header itself is built from game data at run time; the mod checks magic, version and type before any read of a record and refuses (unexpected heat table header) otherwise; the size field bounds the record. Captured 25480438 header: size 0x4900 = 928 + 30*592."
+    }
+   ],
+   "confidence": "medium",
+   "feeds_write": false,
+   "role": "read gate (fail-closed)",
+   "live_check": "L1"
+  },
+  {
+   "id": "heat.resource",
+   "file": "src/laser_sentry_cooldown.lua",
+   "lines": [
+    50
+   ],
+   "name": "Laser Sentry resource hash (RESOURCE_LOW/HIGH)",
+   "old": "0xCFFFA8A8, 0x56070F36",
+   "new": "same",
+   "method": "resource name hash; present in the installed data",
+   "witnesses": [
+    {
+     "check": "installed data has resource 0x56070F36CFFFA8A8 (laser_cannon_turret) with a unit, entity and state machine",
+     "ok": true,
+     "records": [
+      {
+       "archive": "36313bf684c1fd79",
+       "name": "56070f36cfffa8a8",
+       "type": "18dead01056b72e9",
+       "main_size": 159,
+       "stream_size": 0,
+       "gpu_size": 0
+      },
+      {
+       "archive": "36313bf684c1fd79",
+       "name": "56070f36cfffa8a8",
+       "type": "5f7203c8f280dab8",
+       "main_size": 73548,
+       "stream_size": 0,
+       "gpu_size": 0
+      },
+      {
+       "archive": "36313bf684c1fd79",
+       "name": "56070f36cfffa8a8",
+       "type": "a486d4045106165c",
+       "main_size": 2140,
+       "stream_size": 0,
+       "gpu_size": 0
+      },
+      {
+       "archive": "36313bf684c1fd79",
+       "name": "56070f36cfffa8a8",
+       "type": "e0a48d0be9a7453f",
+       "main_size": 10096,
+       "stream_size": 0,
+       "gpu_size": 4379676
+      }
+     ],
+     "source": "evidence/resources.json (tools/find_resource.py over data/bundles*.nxa)"
+    },
+    {
+     "check": "the getter passes the entity record's u64 at +0 to the lookup (old 0x50E2A5 / new 0x516875 mov rcx, [r10]; jmp lookup)",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "write W1 / W2 selection",
+   "live_check": "L1, L4"
+  },
+  {
+   "id": "heat.expected",
+   "file": "src/laser_sentry_cooldown.lua",
+   "lines": [
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59
+   ],
+   "name": "EXPECTED record values: +0x50 overheat enabled (u8 1), +0x54 magazines 0, +0x5C magazines_max 0, +0x60 overheat_temperature 250.0, +0x64 overheat_temperature_recover 0",
+   "old": "offsets and values as upstream",
+   "new": "same",
+   "method": "offsets: update/presentation identical (cmp byte [rdi+0x50], minss/comiss [rdi+0x60], comiss [rdi+0x64]); values: game data, checked by Cooldown.inspect before any write (fails closed)",
+   "witnesses": [
+    {
+     "check": "WeaponHeat update old 0x762F60 / new 0x76E3F0: every record operand [rdi+X] identical, in order",
+     "ok": true,
+     "operands": [
+      "movss xmm0, dword ptr [rdi + 0x94]",
+      "mulss xmm2, dword ptr [rdi + 0x78]",
+      "minss xmm6, dword ptr [rdi + 0x60]",
+      "mulss xmm2, dword ptr [rdi + 0x80]",
+      "cmp byte ptr [rdi + 0x90], 0",
+      "mulss xmm2, dword ptr [rdi + 0x8c]",
+      "movss xmm1, dword ptr [rdi + 0x60]",
+      "cmp byte ptr [rdi + 0x50], r13b",
+      "comiss xmm6, dword ptr [rdi + 0x60]",
+      "movss xmm0, dword ptr [rdi + 0x64]",
+      "cmp byte ptr [rdi + 0x90], 0",
+      "cmp dword ptr [rdi + 0xb0], 0",
+      "divss xmm6, dword ptr [rdi + 0x60]",
+      "mov edx, dword ptr [rdi + 0x1f4]",
+      "mov edx, dword ptr [rdi + 0x1f4]"
+     ]
+    },
+    {
+     "check": "update aligned with no non-branch operand difference except two engine-interface slots (+0x2c8->+0x2d0; the +0x378->+0x380 one is a call), unrelated effect call",
+     "ok": true,
+     "ratio": 0.9973,
+     "aligned": 183,
+     "old_insns": 183,
+     "diffs": [
+      "0x7631cd mov rbx, qword ptr [rax + 0x2c8] -> 0x76e65d mov rbx, qword ptr [rax + 0x2d0]"
+     ]
+    },
+    {
+     "check": "update calls the heat getter (old 0x50E1F0 / new 0x5167C0)",
+     "ok": true
+    },
+    {
+     "check": "presentation old 0x763780 / new 0x76EC10: every record operand [r13+X] identical",
+     "ok": true
+    },
+    {
+     "kind": "record field usage over every getter/lookup caller",
+     "old_call_sites": 52,
+     "new_call_sites": 42,
+     "fields": [
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x0",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 16,
+       "disp": "0x0",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x4c",
+       "old": 2,
+       "new": 2
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x54",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x58",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x5c",
+       "old": 5,
+       "new": 5
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x60",
+       "old": 18,
+       "new": 13
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x70",
+       "old": 2,
+       "new": 2
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x78",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x80",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "lea",
+       "size": 8,
+       "disp": "0x80",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x84",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x88",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x8c",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 1,
+       "disp": "0x90",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x94",
+       "old": 5,
+       "new": 5
+      },
+      {
+       "role": "read",
+       "size": 1,
+       "disp": "0xa1",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0xb0",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "lea",
+       "size": 8,
+       "disp": "0xc4",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x1e8",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x1f4",
+       "old": 1,
+       "new": 1
+      }
+     ],
+     "note": "no new offset appears; +0x60 count 18 -> 13 follows the 52 -> 42 call sites",
+     "source": "evidence/record-fields.json"
+    },
+    {
+     "check": "update: +0x50 compared with the overheated flag, +0x60 caps/compares the temperature, +0x64 is the recover threshold",
+     "ok": true
+    }
+   ],
+   "confidence": "medium",
+   "feeds_write": false,
+   "role": "read gate (game data; fail-closed)",
+   "live_check": "L2"
+  },
+  {
+   "id": "heat.cooling_rule",
+   "file": "src/laser_sentry_cooldown.lua",
+   "lines": [
+    68,
+    69
+   ],
+   "name": "COOLING_OFFSET 0x8C (temp_loss_per_second_overheated f32, then needs_reload_after_overheat u8 at 0x90) and IDLE_COOLING_OFFSET 0x80",
+   "old": "0x8C / 0x80",
+   "new": "same",
+   "method": "WeaponHeat update aligned and compared",
+   "witnesses": [
+    {
+     "check": "WeaponHeat update old 0x762F60 / new 0x76E3F0: every record operand [rdi+X] identical, in order",
+     "ok": true,
+     "operands": [
+      "movss xmm0, dword ptr [rdi + 0x94]",
+      "mulss xmm2, dword ptr [rdi + 0x78]",
+      "minss xmm6, dword ptr [rdi + 0x60]",
+      "mulss xmm2, dword ptr [rdi + 0x80]",
+      "cmp byte ptr [rdi + 0x90], 0",
+      "mulss xmm2, dword ptr [rdi + 0x8c]",
+      "movss xmm1, dword ptr [rdi + 0x60]",
+      "cmp byte ptr [rdi + 0x50], r13b",
+      "comiss xmm6, dword ptr [rdi + 0x60]",
+      "movss xmm0, dword ptr [rdi + 0x64]",
+      "cmp byte ptr [rdi + 0x90], 0",
+      "cmp dword ptr [rdi + 0xb0], 0",
+      "divss xmm6, dword ptr [rdi + 0x60]",
+      "mov edx, dword ptr [rdi + 0x1f4]",
+      "mov edx, dword ptr [rdi + 0x1f4]"
+     ]
+    },
+    {
+     "check": "update aligned with no non-branch operand difference except two engine-interface slots (+0x2c8->+0x2d0; the +0x378->+0x380 one is a call), unrelated effect call",
+     "ok": true,
+     "ratio": 0.9973,
+     "aligned": 183,
+     "old_insns": 183,
+     "diffs": [
+      "0x7631cd mov rbx, qword ptr [rax + 0x2c8] -> 0x76e65d mov rbx, qword ptr [rax + 0x2d0]"
+     ]
+    },
+    {
+     "check": "update calls the heat getter (old 0x50E1F0 / new 0x5167C0)",
+     "ok": true
+    },
+    {
+     "check": "presentation old 0x763780 / new 0x76EC10: every record operand [r13+X] identical",
+     "ok": true
+    },
+    {
+     "kind": "record field usage over every getter/lookup caller",
+     "old_call_sites": 52,
+     "new_call_sites": 42,
+     "fields": [
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x0",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 16,
+       "disp": "0x0",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x4c",
+       "old": 2,
+       "new": 2
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x54",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x58",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x5c",
+       "old": 5,
+       "new": 5
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x60",
+       "old": 18,
+       "new": 13
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x70",
+       "old": 2,
+       "new": 2
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x78",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x80",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "lea",
+       "size": 8,
+       "disp": "0x80",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x84",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x88",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x8c",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 1,
+       "disp": "0x90",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x94",
+       "old": 5,
+       "new": 5
+      },
+      {
+       "role": "read",
+       "size": 1,
+       "disp": "0xa1",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0xb0",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "lea",
+       "size": 8,
+       "disp": "0xc4",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x1e8",
+       "old": 1,
+       "new": 1
+      },
+      {
+       "role": "read",
+       "size": 4,
+       "disp": "0x1f4",
+       "old": 1,
+       "new": 1
+      }
+     ],
+     "note": "no new offset appears; +0x60 count 18 -> 13 follows the 52 -> 42 call sites",
+     "source": "evidence/record-fields.json"
+    },
+    {
+     "check": "cooling branch: overheated (r13b) -> needs_reload_after_overheat byte [rdi+0x90] == 0 -> cool by [rdi+0x8C] * dt; not overheated and idle -> [rdi+0x80]",
+     "ok": true
+    },
+    {
+     "check": "recovery: overheated, temperature <= [rdi+0x64] and [rdi+0x90] == 0 clears the overheated byte (state + 8)",
+     "ok": true
+    },
+    {
+     "kind": "note",
+     "note": "one control-flow change: when the per-instance input at [+0x50 list]+72i+0xC is non-zero (the beam powering up / winding down) build 26088801 skips cooling (jp/jne -> 0x76E4BE) where 25480438 went to the overheated-rate branch (0x76300F). With the mod an overheated Laser Sentry therefore does not cool during those ~0.7 s; the upstream comment (lines 20-21) describing extra cooling then no longer holds. The overheated, idle path the mod relies on is unchanged."
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "write W1 (5 bytes at record+0x8C) semantics",
+   "live_check": "L2"
+  },
+  {
+   "id": "heat.cooling_vanilla",
+   "file": "src/laser_sentry_cooldown.lua",
+   "lines": [
+    70
+   ],
+   "name": "COOLING_VANILLA 400.0f, 1",
+   "old": "'\\0\\0\\200\\67\\1'",
+   "new": "same",
+   "method": "game data; Cooldown.inspect requires it (or the mod's own change) before writing, restore writes back exactly these bytes, which were read there",
+   "witnesses": [],
+   "confidence": "medium",
+   "feeds_write": false,
+   "role": "read gate (game data; fail-closed)",
+   "live_check": "L2"
+  },
+  {
+   "id": "heat.ability_offset",
+   "file": "src/laser_sentry_cooldown.lua",
+   "lines": [
+    71,
+    73
+   ],
+   "name": "overheat_ability u32 at +0x248; ABILITY_NONE 0 plays nothing",
+   "old": "0x248 / 0",
+   "new": "same",
+   "method": "presentation compared",
+   "witnesses": [
+    {
+     "check": "presentation reads [r13+0x248] and skips the ability when 0 (test r14d, r14d; je), both builds",
+     "ok": true
+    },
+    {
+     "check": "presentation aligned; one non-branch operand difference, the same engine-interface slot +0x2c8->+0x2d0",
+     "ok": true,
+     "ratio": 0.9995,
+     "aligned": 1098,
+     "old_insns": 1098
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "write W1 (4 bytes at record+0x248) semantics",
+   "live_check": "L2"
+  },
+  {
+   "id": "heat.ability_vanilla",
+   "file": "src/laser_sentry_cooldown.lua",
+   "lines": [
+    8,
+    9,
+    67,
+    72
+   ],
+   "name": "ABILITY_VANILLA: the Laser Sentry overheat ability id (explosion)",
+   "old": "2866 ('\\50\\11\\0\\0')",
+   "new": "2884 ('\\68\\11\\0\\0')",
+   "method": "ability script switch: the id dispatching to the same (identical) explosion handler",
+   "witnesses": [
+    {
+     "check": "ability script switch old 0x11509E0: dec edx; cmp edx, 0xB32 (2867 ids); new 0xFE38D0: cmp edx, 0xB44 (2885 ids)",
+     "ok": true
+    },
+    {
+     "check": "old: exactly one id dispatches to the explosion ability 0x1150660: 2866",
+     "ok": true
+    },
+    {
+     "check": "0x1150660 -> 0xFE3550 by a unique exact window",
+     "ok": true
+    },
+    {
+     "check": "new: exactly one id dispatches to 0xFE3550: 2884",
+     "ok": true
+    },
+    {
+     "check": "the handler body is aligned with no operand difference",
+     "ok": true,
+     "ratio": 0.9286,
+     "aligned": 26
+    },
+    {
+     "kind": "note",
+     "note": "the ability enum grew by 18 below this id (2867 -> 2885 cases). Whether the record in the build-26088801 data holds 2884 is game data (generated_entities.dl_bin is encrypted); Cooldown.inspect refuses unless the record holds exactly ABILITY_VANILLA (or the full change), so a wrong value fails closed and restore only ever writes back bytes that were read there."
+    }
+   ],
+   "confidence": "medium",
+   "feeds_write": false,
+   "role": "read gate (game data; fail-closed)",
+   "live_check": "L2"
+  },
+  {
+   "id": "heat.manager_rva",
+   "file": "src/laser_sentry_cooldown.lua + src/test_hooks.lua",
+   "lines": [
+    282
+   ],
+   "name": "WeaponHeat manager (HEAT_MANAGER_RVA)",
+   "old": "0x3326D48",
+   "new": "0x2CE1F08",
+   "method": "agreeing RIP-relative instruction windows",
+   "witnesses": [
+    {
+     "check": "WeaponHeat manager (HEAT_MANAGER_RVA): majority 0x2ce1f08",
+     "ok": true
+    },
+    {
+     "check": "WeaponHeat manager (HEAT_MANAGER_RVA): >= 20 agreeing witnesses",
+     "ok": true
+    },
+    {
+     "check": "WeaponHeat manager (HEAT_MANAGER_RVA): every exact window agrees",
+     "ok": true
+    },
+    {
+     "check": "WeaponHeat manager (HEAT_MANAGER_RVA): exact window 0x4baae4 -> 0x4c11d4 re-migrates",
+     "ok": true,
+     "old_insn": "mov r14, qword ptr [rip + 0x2e6c25d]",
+     "new_insn": "mov r14, qword ptr [rip + 0x2820d2d]"
+    },
+    {
+     "check": "WeaponHeat manager (HEAT_MANAGER_RVA): exact window 0x4bace2 -> 0x4c13d2 re-migrates",
+     "ok": true,
+     "old_insn": "mov r14, qword ptr [rip + 0x2e6c05f]",
+     "new_insn": "mov r14, qword ptr [rip + 0x2820b2f]"
+    },
+    {
+     "check": "WeaponHeat manager (HEAT_MANAGER_RVA): exact window 0x4bb0b0 -> 0x4c17a0 re-migrates",
+     "ok": true,
+     "old_insn": "mov rbx, qword ptr [rip + 0x2e6bc91]",
+     "new_insn": "mov rbx, qword ptr [rip + 0x2820761]"
+    },
+    {
+     "kind": "global",
+     "old_sites": 78,
+     "sampled": 64,
+     "votes": {
+      "0x2ce1f08": 52,
+      "0x2ce1970": 1
+     },
+     "exact_window_votes": {
+      "0x2ce1f08": 52
+     },
+     "distinct_old_functions": 49,
+     "disagreeing": 1,
+     "source": "evidence/globals.json (tools/map_globals.py)"
+    },
+    {
+     "check": "the world initializer stores &world[+0xEB7E20] there (old &world[+0xEB6570] -> 0x3326D48)",
+     "ok": true
+    },
+    {
+     "check": "the heat getter (new 0x5167C0) loads it",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "write W2 selection (which sentries overheated)",
+   "live_check": "L3",
+   "lines_hooks": [
+    3
+   ]
+  },
+  {
+   "id": "heat.manager_layout",
+   "file": "src/laser_sentry_cooldown.lua + src/test_hooks.lua",
+   "lines": [
+    282
+   ],
+   "lines_hooks": [
+    3
+   ],
+   "name": "WeaponHeat manager: +0x14 instance count, +0x40 entity record pointers, +0x58 12-byte states (+8 overheated)",
+   "old": "same",
+   "new": "same",
+   "method": "taint field pairs over the functions loading the global + update re-disassembled",
+   "witnesses": [
+    {
+     "check": "HEAT+0x14 pairs only with itself",
+     "ok": true,
+     "field": "HEAT+0x14",
+     "pairs": 16,
+     "example": {
+      "old": "0x546064",
+      "new": "0x54eec4",
+      "old_function": "0x546050",
+      "new_function": "0x54eeab",
+      "old_insn": "mov r8d, dword ptr [rbx + 0x14]",
+      "new_insn": "mov r8d, dword ptr [rbx + 0x14]"
+     }
+    },
+    {
+     "check": "HEAT+0x40 pairs only with itself",
+     "ok": true,
+     "field": "HEAT+0x40",
+     "pairs": 25,
+     "example": {
+      "old": "0x5460c2",
+      "new": "0x54ef22",
+      "old_function": "0x546050",
+      "new_function": "0x54eeab",
+      "old_insn": "mov rax, qword ptr [rbx + 0x40]",
+      "new_insn": "mov rax, qword ptr [rbx + 0x40]"
+     }
+    },
+    {
+     "check": "HEAT+0x58 pairs only with itself",
+     "ok": true,
+     "field": "HEAT+0x58",
+     "pairs": 31,
+     "example": {
+      "old": "0x4bffe8",
+      "new": "0x4c67b8",
+      "old_function": "0x4bff50",
+      "new_function": "0x4c671e",
+      "old_insn": "mov rax, qword ptr [r11 + 0x58]",
+      "new_insn": "mov rax, qword ptr [r11 + 0x58]"
+     }
+    },
+    {
+     "check": "update: entity record pointer = [manager+0x40][i] (the getter argument), state = [manager+0x58] + 12*i: +4 temperature (f32), +8 overheated (u8)",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "write W2 selection",
+   "live_check": "L3"
+  },
+  {
+   "id": "entity.record",
+   "file": "src/laser_sentry_cooldown.lua",
+   "lines": [
+    109,
+    411,
+    412,
+    413,
+    414,
+    415,
+    416,
+    417,
+    418
+   ],
+   "name": "entity record: u64 resource +0, u32 id +8, flags byte +20 (bit 0 owned, bit 1 simulated elsewhere); address range 0x10000..0x800000000000",
+   "old": "same",
+   "new": "same",
+   "method": "getter / heat update / behavior update re-disassembled",
+   "witnesses": [
+    {
+     "check": "the getter (old 0x50E1F0 / new 0x5167C0) reads [rec+8] (id) and passes [rec] (u64 resource)",
+     "ok": true
+    },
+    {
+     "check": "the heat update tests [rec+0x14] bit 0 before the owner-side store (both)",
+     "ok": true
+    },
+    {
+     "check": "the behavior manager update tests [rec+0x14] bit 1 (both)",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "write W2 selection",
+   "live_check": "L4"
+  },
+  {
+   "id": "behavior.manager_rva",
+   "file": "src/laser_sentry_cooldown.lua",
+   "lines": [
+    283
+   ],
+   "name": "behavior manager (BEHAVIOR_MANAGER_RVA)",
+   "old": "0x3326740",
+   "new": "0x2CE18F0",
+   "method": "agreeing RIP-relative instruction windows",
+   "witnesses": [
+    {
+     "check": "behavior manager (BEHAVIOR_MANAGER_RVA): majority 0x2ce18f0",
+     "ok": true
+    },
+    {
+     "check": "behavior manager (BEHAVIOR_MANAGER_RVA): >= 20 agreeing witnesses",
+     "ok": true
+    },
+    {
+     "check": "behavior manager (BEHAVIOR_MANAGER_RVA): every exact window agrees",
+     "ok": true
+    },
+    {
+     "check": "behavior manager (BEHAVIOR_MANAGER_RVA): exact window 0x2887ac -> 0x28f44c re-migrates",
+     "ok": true,
+     "old_insn": "mov rcx, qword ptr [rip + 0x309df8d]",
+     "new_insn": "mov rcx, qword ptr [rip + 0x2a5249d]"
+    },
+    {
+     "check": "behavior manager (BEHAVIOR_MANAGER_RVA): exact window 0x4b056e -> 0x4b6e2e re-migrates",
+     "ok": true,
+     "old_insn": "mov r11, qword ptr [rip + 0x2e761cb]",
+     "new_insn": "mov r11, qword ptr [rip + 0x282aabb]"
+    },
+    {
+     "check": "behavior manager (BEHAVIOR_MANAGER_RVA): exact window 0x4cc18e -> 0x4d2fbe re-migrates",
+     "ok": true,
+     "old_insn": "mov rcx, qword ptr [rip + 0x2e5a5ab]",
+     "new_insn": "mov rcx, qword ptr [rip + 0x280e92b]"
+    },
+    {
+     "kind": "global",
+     "old_sites": 449,
+     "sampled": 64,
+     "votes": {
+      "0x2ce18f0": 27,
+      "0x2ce1eb8": 1
+     },
+     "exact_window_votes": {
+      "0x2ce18f0": 26
+     },
+     "distinct_old_functions": 27,
+     "disagreeing": 1,
+     "source": "evidence/globals.json (tools/map_globals.py)"
+    },
+    {
+     "check": "the world initializer stores &world[+0xEED2B8] there (old &world[+0xEEBA08])",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "write W2 address",
+   "live_check": "L5"
+  },
+  {
+   "id": "behavior.layout",
+   "file": "src/laser_sentry_cooldown.lua",
+   "lines": [
+    284,
+    317,
+    318,
+    319,
+    320
+   ],
+   "name": "behavior manager: +0x34 count, +0x40 id map (+0x48 capacity, +0x4C empty key, +0x50 multiplier), +0x58 entity record pointers, +0x60 blocks of 504 bytes (BEHAVIOR_SIZE)",
+   "old": "same",
+   "new": "same",
+   "method": "taint field pairs + manager update / owner check re-disassembled",
+   "witnesses": [
+    {
+     "check": "BM+0x34 pairs only with itself",
+     "ok": true,
+     "field": "BM+0x34",
+     "pairs": 16,
+     "example": {
+      "old": "0x549069",
+      "new": "0x551ec9",
+      "old_function": "0x549020",
+      "new_function": "0x551e78",
+      "old_insn": "mov esi, dword ptr [rdi + 0x34]",
+      "new_insn": "mov esi, dword ptr [rdi + 0x34]"
+     }
+    },
+    {
+     "check": "BM+0x40 pairs only with itself",
+     "ok": true,
+     "field": "BM+0x40",
+     "pairs": 34,
+     "example": {
+      "old": "0x5490d9",
+      "new": "0x551f39",
+      "old_function": "0x549020",
+      "new_function": "0x551e78",
+      "old_insn": "lea rcx, [rdi + 0x40]",
+      "new_insn": "lea rcx, [rdi + 0x40]"
+     }
+    },
+    {
+     "check": "BM+0x48 pairs only with itself",
+     "ok": true,
+     "field": "BM+0x48",
+     "pairs": 38,
+     "example": {
+      "old": "0x549044",
+      "new": "0x551ea4",
+      "old_function": "0x549020",
+      "new_function": "0x551e78",
+      "old_insn": "cmp eax, dword ptr [rdi + 0x48]",
+      "new_insn": "cmp eax, dword ptr [rdi + 0x48]"
+     }
+    },
+    {
+     "check": "BM+0x4c pairs only with itself",
+     "ok": true,
+     "field": "BM+0x4c",
+     "pairs": 30,
+     "example": {
+      "old": "0x5a8eeb",
+      "new": "0x5b1acb",
+      "old_function": "0x5a8ddb",
+      "new_function": "0x5b19bb",
+      "old_insn": "mov ebp, dword ptr [r11 + 0x4c]",
+      "new_insn": "mov ebp, dword ptr [r11 + 0x4c]"
+     }
+    },
+    {
+     "check": "BM+0x50 pairs only with itself",
+     "ok": true,
+     "field": "BM+0x50",
+     "pairs": 33,
+     "example": {
+      "old": "0x5a8ed7",
+      "new": "0x5b1ab7",
+      "old_function": "0x5a8ddb",
+      "new_function": "0x5b19bb",
+      "old_insn": "mov edi, dword ptr [r11 + 0x50]",
+      "new_insn": "mov edi, dword ptr [r11 + 0x50]"
+     }
+    },
+    {
+     "check": "BM+0x58 pairs only with itself",
+     "ok": true,
+     "field": "BM+0x58",
+     "pairs": 13,
+     "example": {
+      "old": "0x5490ce",
+      "new": "0x551f2e",
+      "old_function": "0x549020",
+      "new_function": "0x551e78",
+      "old_insn": "mov rax, qword ptr [rdi + 0x58]",
+      "new_insn": "mov rax, qword ptr [rdi + 0x58]"
+     }
+    },
+    {
+     "check": "BM+0x60 pairs only with itself",
+     "ok": true,
+     "field": "BM+0x60",
+     "pairs": 9,
+     "example": {
+      "old": "0x549097",
+      "new": "0x551ef7",
+      "old_function": "0x549020",
+      "new_function": "0x551e78",
+      "old_insn": "add rcx, qword ptr [rdi + 0x60]",
+      "new_insn": "add rcx, qword ptr [rdi + 0x60]"
+     }
+    },
+    {
+     "check": "behavior manager update old 0x843040 / new 0x84FF40: blocks = [m+0x60] + 0x1F8*index, records [m+0x58], count [m+0x34]",
+     "ok": true
+    },
+    {
+     "check": "map probe as the mod does: (k + id*[m+0x50]) & ([m+0x48]-1) over [m+0x40] 8-byte {key, value}, empty key [m+0x4C] (owner check old 0x843930 / new 0x850830, identical)",
+     "ok": true
+    },
+    {
+     "check": "owner check aligned with no operand difference",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "write W2 address",
+   "live_check": "L5"
+  },
+  {
+   "id": "behavior.block_fields",
+   "file": "src/laser_sentry_cooldown.lua",
+   "lines": [
+    278,
+    286,
+    287,
+    318,
+    319
+   ],
+   "name": "behavior block: +0 behavior id, +8 state, +12 pending state request (-1 none, NO_REQUEST), +16 last state set",
+   "old": "same",
+   "new": "same",
+   "method": "manager update + set_state re-disassembled",
+   "witnesses": [
+    {
+     "check": "manager update: a pending request at block+0xC (!= -1) goes through the gate (ecx = state at block+8, edx = id at block+0) then the applier (edx = id, r8d = request)",
+     "ok": true
+    },
+    {
+     "check": "set_state old 0x32B6B0 / new 0x3323B0 (state block = block+8): stores the new state as last set (+8), -1 as the request (+4), then the state (+0)",
+     "ok": true
+    },
+    {
+     "check": "set_state aligned; operand differences only in three immediates (sound/ability ids 0x9E6->0x9EC, 0x9DF->0x9E5) and its jump table",
+     "ok": true,
+     "ratio": 0.9837,
+     "aligned": 422,
+     "diffs": [
+      "0x32b73f lea rdx, [rip - 0x32b746] -> 0x33243f lea rdx, [rip - 0x332446]",
+      "0x32b746 mov ecx, dword ptr [rdx + rbx*4 + 0x32be08] -> 0x332446 mov ecx, dword ptr [rdx + rbx*4 + 0x332b08]",
+      "0x32ba33 mov edx, 0x9e6 -> 0x332733 mov edx, 0x9ec",
+      "0x32bd86 mov edx, 0x9df -> 0x332a86 mov edx, 0x9e5",
+      "0x32bd9d mov edx, 0x9df -> 0x332a9d mov edx, 0x9e5",
+      "0x32be0b add byte ptr [rax + 0x300032b8], dl -> 0x332b0b add byte ptr [rax + 0x30003325], dl"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "write W2 address/semantics",
+   "live_check": "L5"
+  },
+  {
+   "id": "behavior.id",
+   "file": "src/laser_sentry_cooldown.lua",
+   "lines": [
+    270,
+    271,
+    284
+   ],
+   "name": "Laser Sentry behavior id (BEHAVIOR_ID)",
+   "old": "308",
+   "new": "309",
+   "method": "behavior enum migrated through the dispatcher, the request gate and the request applier (three independent switches agree)",
+   "witnesses": [
+    {
+     "check": "dispatcher (old 0x472F60 / new 0x479CA0, 693 cases each): the only new case whose body and 13 state handlers match old 308 is 309",
+     "ok": true,
+     "unique_matches": 85,
+     "shift_histogram": {
+      "1": 45,
+      "0": 31,
+      "-1": 6,
+      "-35": 1,
+      "216": 1,
+      "-60": 1
+     },
+     "old_to_new_296_320": {
+      "296": null,
+      "297": null,
+      "298": null,
+      "299": null,
+      "300": null,
+      "301": 302,
+      "302": null,
+      "303": null,
+      "304": null,
+      "305": null,
+      "306": null,
+      "307": null,
+      "308": 309,
+      "309": null,
+      "310": null,
+      "311": null,
+      "312": null,
+      "313": 314,
+      "314": null,
+      "315": null,
+      "316": 317,
+      "317": null,
+      "318": 319,
+      "319": null,
+      "320": null
+     },
+     "source": "evidence/behavior-enum.json (tools/behavior_enum.py)"
+    },
+    {
+     "check": "request gate: old 308 and new 309 refuse only state 12 (cmp r8d, 0xc; setne al); 308 new and 309 old allow all",
+     "ok": true,
+     "gate": {
+      "old 305": "0x4963c0: mov al, 1; ret",
+      "old 306": "0x4963c0: mov al, 1; ret",
+      "old 307": "0x4963c0: mov al, 1; ret",
+      "old 308": "0x496398: cmp r8d, 0xc; setne al; ret",
+      "old 309": "0x4963c0: mov al, 1; ret",
+      "old 310": "0x4963c0: mov al, 1; ret",
+      "old 311": "0x4963c0: mov al, 1; ret",
+      "new 306": "0x49d0c0: mov al, 1; ret",
+      "new 307": "0x49d0c0: mov al, 1; ret",
+      "new 308": "0x49d0c0: mov al, 1; ret",
+      "new 309": "0x49d098: cmp r8d, 0xc; setne al; ret",
+      "new 310": "0x49d0c0: mov al, 1; ret",
+      "new 311": "0x49d0c0: mov al, 1; ret",
+      "new 312": "0x49d0c0: mov al, 1; ret"
+     }
+    },
+    {
+     "check": "request applier (old 0x48EE50 / new 0x495C20, 693-case switch): old case 308 and new case 309 call set_state (old 0x32B6B0 / new 0x3323B0)",
+     "ok": true
+    },
+    {
+     "check": "new case 308 of the dispatcher is another behavior (states 1/4/5 only, call 0x32CFB0)",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "write W2 selection",
+   "live_check": "L5"
+  },
+  {
+   "id": "behavior.states",
+   "file": "src/laser_sentry_cooldown.lua",
+   "lines": [
+    24,
+    25,
+    270,
+    271,
+    272,
+    276,
+    277,
+    285,
+    286
+   ],
+   "name": "STATE_STUCK 6 (no update), POWER_UP 7 (power-up state), firing 13",
+   "old": "6 / 7 / 13",
+   "new": "same",
+   "method": "dispatcher state tables of old 308 / new 309 compared",
+   "witnesses": [
+    {
+     "check": "old 308 / new 309 state switch: states 6, 11 and 12 go straight to the dispatcher exit (no update)",
+     "ok": true
+    },
+    {
+     "check": "state 1 (deployed): after 2 s set_state(7) (both)",
+     "ok": true
+    },
+    {
+     "check": "state 7 (power up): same handler shape (test [block+0x1E0] bit 1 -> 8, ...)",
+     "ok": true
+    },
+    {
+     "check": "states 8-10 share one handler, 13 (firing) calls its own function (old 0x32A3D0 / new 0x3310D0)",
+     "ok": true
+    },
+    {
+     "kind": "not verifiable offline",
+     "note": "that the firing state (new 0x3310D0) leaves for 6 when its weapon overheats: its page (0x331000) is still encrypted in every new capture (game-26088801*.dll, transmog-live-text.bin, diverkit-port/game-live-text.bin). The mod writes only when the block reads state 6 and no request is pending, so a different overheat state means no write (\"turret in state N\")."
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "write W2 value/semantics",
+   "live_check": "L5, L6"
+  },
+  {
+   "id": "comments",
+   "file": "src/laser_sentry_cooldown.lua + src/test_hooks.lua",
+   "lines": [
+    2,
+    7,
+    8,
+    9,
+    11,
+    14,
+    39,
+    40,
+    41,
+    42,
+    118,
+    119,
+    270,
+    271,
+    274,
+    279,
+    280,
+    282,
+    283
+   ],
+   "lines_hooks": [
+    3
+   ],
+   "name": "RVAs and build numbers in comments",
+   "old": [
+    "0x1150660",
+    "0x11509E0",
+    "0x11AD240",
+    "0x13C0A80",
+    "0x32A3D0",
+    "0x32B6B0",
+    "0x472F60",
+    "0x48EE50",
+    "0x4962C0",
+    "0x50DD30",
+    "0x568230",
+    "0x762F60",
+    "0x763780",
+    "0x843040",
+    "0x843930",
+    "EXE 1.8.46015.0 / Steam build 25480438"
+   ],
+   "new": {
+    "0x762F60": "0x76E3F0 (WeaponHeat update)",
+    "0x763780": "0x76EC10 (WeaponHeat presentation)",
+    "0x1150660": "0xFE3550 (explosion ability)",
+    "0x11509E0": "0xFE38D0 (ability script switch)",
+    "0x11AD240": "0x103DC80 (unique window; comment only)",
+    "0x13C0A80": "not mapped (comment only; kept)",
+    "0x50DD30": "0x516310 (heat settings lookup)",
+    "0x472F60": "0x479CA0 (behavior dispatcher)",
+    "0x32A3D0": "0x3310D0 (firing state; new page encrypted offline)",
+    "0x843930": "0x850830 (owner check)",
+    "0x843040": "0x84FF40 (behavior manager update)",
+    "0x4962C0": "0x49CFC0 (request gate)",
+    "0x48EE50": "0x495C20 (request applier)",
+    "0x32B6B0": "0x3323B0 (set_state)",
+    "0x568230": "0x5711CB (world initializer; world + 0xEEBA08 -> 0xEED2B8)",
+    "EXE 1.8.46015.0 / Steam build 25480438": "Steam build 26088801"
+   },
+   "method": "the function pairs above (aligned listings in evidence/listings)",
+   "witnesses": [],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "comment",
+   "live_check": null
+  },
+  {
+   "id": "unchanged.constants",
+   "file": "src/laser_sentry_cooldown.lua + src/test_hooks.lua",
+   "lines": [
+    94,
+    95,
+    109
+   ],
+   "lines_hooks": [
+    50,
+    64
+   ],
+   "name": "Windows constants MEM_COMMIT 0x1000, MEM_PRIVATE 0x20000, PAGE_READONLY 2, PAGE_READWRITE 4; user address range 0x10000..0x800000000000",
+   "old": "same",
+   "new": "same",
+   "method": "not build-specific",
+   "witnesses": [],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "not build data",
+   "live_check": null
+  }
+ ],
+ "writes": [
+  {
+   "id": "W1",
+   "what": "Laser Sentry WeaponHeatComponent record in the weapon data library: 5 bytes at +0x8C (temp_loss_per_second_overheated := the record's own idle rate at +0x80; needs_reload_after_overheat := 0) and 4 bytes at +0x248 (overheat_ability := 0); restore writes the vanilla bytes read there",
+   "how": "VirtualQuery (committed private) -> VirtualProtectEx RW -> WriteProcessMemory -> protection back -> read-back",
+   "rows": [
+    "heat.root_rva",
+    "heat.table_offset",
+    "heat.slots",
+    "heat.records_offset+size",
+    "heat.resource",
+    "heat.cooling_rule",
+    "heat.ability_offset"
+   ],
+   "gated_by": [
+    "heat.header",
+    "heat.expected",
+    "heat.cooling_vanilla",
+    "heat.ability_vanilla"
+   ]
+  },
+  {
+   "id": "W2",
+   "what": "behavior block +12 (pending state request) := 7 for an owned, overheated-then-cooled Laser Sentry whose block reads behavior 309, state 6, no pending request; applied by the game through set_state",
+   "how": "same protected write path (block memory is private RW: written directly), read-back",
+   "rows": [
+    "heat.manager_rva",
+    "heat.manager_layout",
+    "entity.record",
+    "behavior.manager_rva",
+    "behavior.layout",
+    "behavior.block_fields",
+    "behavior.id",
+    "behavior.states",
+    "heat.resource"
+   ],
+   "gated_by": []
+  }
+ ],
+ "counts": {
+  "high": 19,
+  "medium": 4,
+  "low": 0,
+  "unmapped": 0,
+  "feeds_write": 16
+ },
+ "inventory_sites": 28,
+ "inventory_uncovered": [],
+ "witness_check_failures": []
+}

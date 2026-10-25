@@ -1,0 +1,98 @@
+{
+ "wine_host_region_types": [
+  "section .text rva 0x1000 flags 0x60000020: state 0x1000 type 0x1000000 protect 0x20",
+  "section .data rva 0x74000 flags 0xC0000040: state 0x1000 type 0x1000000 protect 0x8",
+  "section .rdata rva 0x75000 flags 0x40000040: state 0x1000 type 0x1000000 protect 0x2",
+  "section /4 rva 0x7F000 flags 0xC0000040: state 0x1000 type 0x1000000 protect 0x8",
+  "section .pdata rva 0x80000 flags 0x40000040: state 0x1000 type 0x1000000 protect 0x2",
+  "section .xdata rva 0x84000 flags 0x40000040: state 0x1000 type 0x1000000 protect 0x2",
+  "section .bss rva 0x88000 flags 0xC0000080: state 0x1000 type 0x1000000 protect 0x8",
+  "section .idata rva 0x89000 flags 0x40000040: state 0x1000 type 0x1000000 protect 0x2",
+  "section .tls rva 0x8B000 flags 0xC0000040: state 0x1000 type 0x1000000 protect 0x8",
+  "section .reloc rva 0x8C000 flags 0x42000040: state 0x1000 type 0x1000000 protect 0x2"
+ ],
+ "port:tests/test_mod.lua": {
+  "command": "wine <workspace>/native-work/megapack-port/StratagemHeroExpanded/work/luajit.exe -e dofile([[../test_prelude.lua]]) tests/test_mod.lua .",
+  "exit": 0,
+  "passed": true,
+  "pass_lines": [
+   "PASS: 20 Stratagem Hero Expanded tests (LuaJIT 2.1.ROLLING)"
+  ],
+  "tail": [
+   "[StratagemHeroExpanded] applied (108 stratagems in 8 groups; pages 0x04, 0x04), after 0.1 s.",
+   "[StratagemHeroExpanded] Waiting for the game: the stratagem settings are not loaded yet.",
+   "[StratagemHeroExpanded] applied (108 stratagems in 8 groups; pages 0x04, 0x04), after 0.1 s.",
+   "[StratagemHeroExpanded] Waiting for the game: the stratagem settings are not loaded yet.",
+   "[StratagemHeroExpanded] applied (108 stratagems in 8 groups; pages 0x04, 0x04), after 0.1 s.",
+   "PASS: 20 Stratagem Hero Expanded tests (LuaJIT 2.1.ROLLING)"
+  ]
+ },
+ "port:tests/compile_entry.lua": {
+  "command": "wine <workspace>/native-work/megapack-port/StratagemHeroExpanded/work/luajit.exe -e dofile([[../test_prelude.lua]]) tests/compile_entry.lua entry-check.lua",
+  "exit": 0,
+  "passed": true,
+  "pass_lines": [
+   "PASS: assembled entry compiles"
+  ],
+  "tail": [
+   "PASS: assembled entry compiles"
+  ]
+ },
+ "port:tests/test_entry.lua": {
+  "command": "wine <workspace>/native-work/megapack-port/StratagemHeroExpanded/work/luajit.exe -e dofile([[../test_prelude.lua]]) tests/test_entry.lua entry-check.lua",
+  "exit": 0,
+  "passed": true,
+  "pass_lines": [
+   "PASS: assembled entry refuses outside the game and runs once (disabled: game modules unavailable)"
+  ],
+  "tail": [
+   "PASS: assembled entry refuses outside the game and runs once (disabled: game modules unavailable)"
+  ]
+ },
+ "upstream:tests/test_mod.lua": {
+  "command": "wine <workspace>/native-work/megapack-port/StratagemHeroExpanded/work/luajit.exe -e dofile([[../test_prelude.lua]]) tests/test_mod.lua .",
+  "exit": 0,
+  "passed": true,
+  "pass_lines": [
+   "PASS: 20 Stratagem Hero Expanded tests (LuaJIT 2.1.ROLLING)"
+  ],
+  "tail": [
+   "[StratagemHeroExpanded] applied (108 stratagems in 8 groups; pages 0x04, 0x04), after 0.1 s.",
+   "[StratagemHeroExpanded] Waiting for the game: the stratagem settings are not loaded yet.",
+   "[StratagemHeroExpanded] applied (108 stratagems in 8 groups; pages 0x04, 0x04), after 0.1 s.",
+   "[StratagemHeroExpanded] Waiting for the game: the stratagem settings are not loaded yet.",
+   "[StratagemHeroExpanded] applied (108 stratagems in 8 groups; pages 0x04, 0x04), after 0.1 s.",
+   "PASS: 20 Stratagem Hero Expanded tests (LuaJIT 2.1.ROLLING)"
+  ]
+ },
+ "upstream:tests/compile_entry.lua": {
+  "command": "wine <workspace>/native-work/megapack-port/StratagemHeroExpanded/work/luajit.exe -e dofile([[../test_prelude.lua]]) tests/compile_entry.lua entry-check.lua",
+  "exit": 0,
+  "passed": true,
+  "pass_lines": [
+   "PASS: assembled entry compiles"
+  ],
+  "tail": [
+   "PASS: assembled entry compiles"
+  ]
+ },
+ "upstream:tests/test_entry.lua": {
+  "command": "wine <workspace>/native-work/megapack-port/StratagemHeroExpanded/work/luajit.exe -e dofile([[../test_prelude.lua]]) tests/test_entry.lua entry-check.lua",
+  "exit": 0,
+  "passed": true,
+  "pass_lines": [
+   "PASS: assembled entry refuses outside the game and runs once (disabled: game modules unavailable)"
+  ],
+  "tail": [
+   "PASS: assembled entry refuses outside the game and runs once (disabled: game modules unavailable)"
+  ]
+ },
+ "luajit_exe_sha256": "F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7",
+ "environment_shim": {
+  "prelude": "local ffi = require('ffi')\nffi.cdef[[uint32_t GetModuleFileNameW(void *module, uint16_t *path, uint32_t capacity);]]\nlocal path = ffi.new('uint16_t[32768]')\nlocal length = ffi.load('kernel32').GetModuleFileNameW(nil, path, 32768)\nassert(length > 0 and length < 32768)\nBingusRuntime = {hashes = {['sha256:' .. ffi.string(path, length * 2)] = os.getenv('SHE_EXE_SHA')}}",
+  "why": "Wine bcrypt faults in BCryptDestroyHash; the runtime module_hash is served from its documented cache, both copies alike"
+ },
+ "not_run": {
+  "tests/game_lua.py": "runs the tests inside the game's own lua51.dll via Windows ctypes; Windows-only, and the game VM is now LuaJIT GC64 at boot"
+ }
+}

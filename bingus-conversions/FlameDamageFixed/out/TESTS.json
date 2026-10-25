@@ -1,0 +1,190 @@
+{
+ "port": {
+  "test_constants.py (installed 26088801 effects)": {
+   "command": "/usr/bin/python3 -I -B tests/test_constants.py",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: release header, 12 systems and 18 patches match the shipped effects (generated: 83)"
+   ],
+   "tail": [
+    "PASS: release header, 12 systems and 18 patches match the shipped effects (generated: 83)"
+   ]
+  },
+  "linux GC64 luajit: test_fix.lua": {
+   "command": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit tests/test_fix.lua <workspace>/native-work/megapack-port/FlameDamageFixed/work/port",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: patch table layout, effect lookup/check/apply with refusals and write guard, collision filter check, weapon family (hull, arm, cannon; pilot excluded; bound), body scan in 64 KB blocks (only owned, hittable, group-free or own-group bodies) and read spans, group allocator, verify/mark/unmark (group bits only; recycled and regrouped bodies untouched; write guard), instances by id and flame grouping (array read once), driver budgets (scan, family, body scan, present, first/second burst with one read per span, firing, group check on the weapon scan, release when weapons leave, idle), groups kept between bursts, distinct groups per weapon, rebuilt hit-box rescan, release mid-rescan, re-grouping, destroyed vehicle released, group handed out by the allocator (between bursts and at a burst start), group carried by other bodies (skipped when picking, left after a rescan; the other bodies untouched; bodies of its other weapons are its own), no usable group, refusals, mission reload, no garbage (interpreted), straight-line rarely-run paths interpreted (no trace starts in them; under 18 KB of machine code for 30 bursts), update chain (errors below pass through; pause restores bodies and flames and resumes after 60 clean frames; 8 errors in a burst stop and restore; bursts end after 3600 clean frames; first failure at shutdown; restore refused stops; hostile neighbours; no garbage), re-entry guard, loader detection (v18 reports version 17)"
+   ],
+   "tail": [
+    "PASS: patch table layout, effect lookup/check/apply with refusals and write guard, collision filter check, weapon family (hull, arm, cannon; pilot excluded; bound), body scan in 64 KB blocks (only owned, hittable, group-free or own-group bodies) and read spans, group allocator, verify/mark/unmark (group bits only; recycled and regrouped bodies untouched; write guard), instances by id and flame grouping (array read once), driver budgets (scan, family, body scan, present, first/second burst with one read per span, firing, group check on the weapon scan, release when weapons leave, idle), groups kept between bursts, distinct groups per weapon, rebuilt hit-box rescan, release mid-rescan, re-grouping, destroyed vehicle released, group handed out by the allocator (between bursts and at a burst start), group carried by other bodies (skipped when picking, left after a rescan; the other bodies untouched; bodies of its other weapons are its own), no usable group, refusals, mission reload, no garbage (interpreted), straight-line rarely-run paths interpreted (no trace starts in them; under 18 KB of machine code for 30 bursts), update chain (errors below pass through; pause restores bodies and flames and resumes after 60 clean frames; 8 errors in a burst stop and restore; bursts end after 3600 clean frames; first failure at shutdown; restore refused stops; hostile neighbours; no garbage), re-entry guard, loader detection (v18 reports version 17)"
+   ]
+  },
+  "linux GC64 luajit: test_guard_diff.lua": {
+   "command": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit tests/test_guard_diff.lua <workspace>/native-work/megapack-port/FlameDamageFixed/work/port",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: the retired Fix.guard and bingus_runtime.lua's runtime.guard behave identically over fixed, random and clean-window-crossing scripts (step runs, restore count, running state, pass-through and status counters), and the only differences are the documented log-text and shutdown-line ones"
+   ],
+   "tail": [
+    "PASS: the retired Fix.guard and bingus_runtime.lua's runtime.guard behave identically over fixed, random and clean-window-crossing scripts (step runs, restore count, running state, pass-through and status counters), and the only differences are the documented log-text and shutdown-line ones"
+   ]
+  },
+  "linux GC64 luajit: compile_entry.lua": {
+   "command": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit tests/compile_entry.lua <workspace>/native-work/megapack-port/FlameDamageFixed/work/port/build/entry-check.lua",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: assembled entry compiles"
+   ],
+   "tail": [
+    "PASS: assembled entry compiles"
+   ]
+  },
+  "wine luajit.exe: test_fix_adapter.lua": {
+   "command": "wine <workspace>/native-work/megapack-port/FlameDamageFixed/work/luajit.exe tests/test_fix_adapter.lua .",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: real adapter reads, bulk and block reads, raw and u32 writes, region query, module lookup; image and unmapped pages refused; no garbage per read, block read, u32 write or region query when interpreted"
+   ],
+   "tail": [
+    "MESA-EGL: warning: pci id for fd 33: 10de:2b85, driver (null)",
+    "pci id for fd 34: 10de:2b85, driver (null)",
+    "pci id for fd 35: 10de:2b85, driver (null)",
+    "MESA-EGL: warning: egl: failed to create dri2 screen",
+    "MESA-EGL: warning: pci id for fd 33: 10de:2b85, driver (null)"
+   ]
+  },
+  "wine luajit.exe: test_ffi_names.lua sdk": {
+   "command": "wine <workspace>/native-work/megapack-port/FlameDamageFixed/work/luajit.exe tests/test_ffi_names.lua . sdk",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: Windows functions under private names (sdk): reads, block reads, protection and region queries, raw and u32 writes, module lookup work after SDK-style declarations of the Windows names, which keep working too"
+   ],
+   "tail": [
+    "PASS: Windows functions under private names (sdk): reads, block reads, protection and region queries, raw and u32 writes, module lookup work after SDK-style declarations of the Windows names, which keep working too"
+   ]
+  },
+  "wine luajit.exe: test_ffi_names.lua hostile": {
+   "command": "wine <workspace>/native-work/megapack-port/FlameDamageFixed/work/luajit.exe tests/test_ffi_names.lua . hostile",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: Windows functions under private names (hostile): reads, block reads, protection and region queries, raw and u32 writes, module lookup work after wrong earlier declarations of all 5 names"
+   ],
+   "tail": [
+    "PASS: Windows functions under private names (hostile): reads, block reads, protection and region queries, raw and u32 writes, module lookup work after wrong earlier declarations of all 5 names"
+   ]
+  },
+  "wine luajit.exe: test_ffi_names.lua reverse": {
+   "command": "wine <workspace>/native-work/megapack-port/FlameDamageFixed/work/luajit.exe tests/test_ffi_names.lua . reverse",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: Windows functions under private names (reverse): reads, block reads, protection and region queries, raw and u32 writes, module lookup work and another mod's later integer-address declarations of the same names keep their own prototypes"
+   ],
+   "tail": [
+    "PASS: Windows functions under private names (reverse): reads, block reads, protection and region queries, raw and u32 writes, module lookup work and another mod's later integer-address declarations of the same names keep their own prototypes"
+   ]
+  }
+ },
+ "upstream": {
+  "test_constants.py (installed 26088801 effects)": {
+   "command": "/usr/bin/python3 -I -B tests/test_constants.py",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: release header, 12 systems and 18 patches match the shipped effects (generated: 83)"
+   ],
+   "tail": [
+    "PASS: release header, 12 systems and 18 patches match the shipped effects (generated: 83)"
+   ]
+  },
+  "linux GC64 luajit: test_fix.lua": {
+   "command": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit tests/test_fix.lua <workspace>/native-work/megapack-port/FlameDamageFixed/work/upstream",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: patch table layout, effect lookup/check/apply with refusals and write guard, collision filter check, weapon family (hull, arm, cannon; pilot excluded; bound), body scan in 64 KB blocks (only owned, hittable, group-free or own-group bodies) and read spans, group allocator, verify/mark/unmark (group bits only; recycled and regrouped bodies untouched; write guard), instances by id and flame grouping (array read once), driver budgets (scan, family, body scan, present, first/second burst with one read per span, firing, group check on the weapon scan, release when weapons leave, idle), groups kept between bursts, distinct groups per weapon, rebuilt hit-box rescan, release mid-rescan, re-grouping, destroyed vehicle released, group handed out by the allocator (between bursts and at a burst start), group carried by other bodies (skipped when picking, left after a rescan; the other bodies untouched; bodies of its other weapons are its own), no usable group, refusals, mission reload, no garbage (interpreted), straight-line rarely-run paths interpreted (no trace starts in them; under 18 KB of machine code for 30 bursts), update chain (errors below pass through; pause restores bodies and flames and resumes after 60 clean frames; 8 errors in a burst stop and restore; bursts end after 3600 clean frames; first failure at shutdown; restore refused stops; hostile neighbours; no garbage), re-entry guard, loader detection (v18 reports version 17)"
+   ],
+   "tail": [
+    "PASS: patch table layout, effect lookup/check/apply with refusals and write guard, collision filter check, weapon family (hull, arm, cannon; pilot excluded; bound), body scan in 64 KB blocks (only owned, hittable, group-free or own-group bodies) and read spans, group allocator, verify/mark/unmark (group bits only; recycled and regrouped bodies untouched; write guard), instances by id and flame grouping (array read once), driver budgets (scan, family, body scan, present, first/second burst with one read per span, firing, group check on the weapon scan, release when weapons leave, idle), groups kept between bursts, distinct groups per weapon, rebuilt hit-box rescan, release mid-rescan, re-grouping, destroyed vehicle released, group handed out by the allocator (between bursts and at a burst start), group carried by other bodies (skipped when picking, left after a rescan; the other bodies untouched; bodies of its other weapons are its own), no usable group, refusals, mission reload, no garbage (interpreted), straight-line rarely-run paths interpreted (no trace starts in them; under 18 KB of machine code for 30 bursts), update chain (errors below pass through; pause restores bodies and flames and resumes after 60 clean frames; 8 errors in a burst stop and restore; bursts end after 3600 clean frames; first failure at shutdown; restore refused stops; hostile neighbours; no garbage), re-entry guard, loader detection (v18 reports version 17)"
+   ]
+  },
+  "linux GC64 luajit: test_guard_diff.lua": {
+   "command": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit tests/test_guard_diff.lua <workspace>/native-work/megapack-port/FlameDamageFixed/work/upstream",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: the retired Fix.guard and bingus_runtime.lua's runtime.guard behave identically over fixed, random and clean-window-crossing scripts (step runs, restore count, running state, pass-through and status counters), and the only differences are the documented log-text and shutdown-line ones"
+   ],
+   "tail": [
+    "PASS: the retired Fix.guard and bingus_runtime.lua's runtime.guard behave identically over fixed, random and clean-window-crossing scripts (step runs, restore count, running state, pass-through and status counters), and the only differences are the documented log-text and shutdown-line ones"
+   ]
+  },
+  "linux GC64 luajit: compile_entry.lua": {
+   "command": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit tests/compile_entry.lua <workspace>/native-work/megapack-port/FlameDamageFixed/work/upstream/build/entry-check.lua",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: assembled entry compiles"
+   ],
+   "tail": [
+    "PASS: assembled entry compiles"
+   ]
+  },
+  "wine luajit.exe: test_fix_adapter.lua": {
+   "command": "wine <workspace>/native-work/megapack-port/FlameDamageFixed/work/luajit.exe tests/test_fix_adapter.lua .",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: real adapter reads, bulk and block reads, raw and u32 writes, region query, module lookup; image and unmapped pages refused; no garbage per read, block read, u32 write or region query when interpreted"
+   ],
+   "tail": [
+    "PASS: real adapter reads, bulk and block reads, raw and u32 writes, region query, module lookup; image and unmapped pages refused; no garbage per read, block read, u32 write or region query when interpreted"
+   ]
+  },
+  "wine luajit.exe: test_ffi_names.lua sdk": {
+   "command": "wine <workspace>/native-work/megapack-port/FlameDamageFixed/work/luajit.exe tests/test_ffi_names.lua . sdk",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: Windows functions under private names (sdk): reads, block reads, protection and region queries, raw and u32 writes, module lookup work after SDK-style declarations of the Windows names, which keep working too"
+   ],
+   "tail": [
+    "PASS: Windows functions under private names (sdk): reads, block reads, protection and region queries, raw and u32 writes, module lookup work after SDK-style declarations of the Windows names, which keep working too"
+   ]
+  },
+  "wine luajit.exe: test_ffi_names.lua hostile": {
+   "command": "wine <workspace>/native-work/megapack-port/FlameDamageFixed/work/luajit.exe tests/test_ffi_names.lua . hostile",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: Windows functions under private names (hostile): reads, block reads, protection and region queries, raw and u32 writes, module lookup work after wrong earlier declarations of all 5 names"
+   ],
+   "tail": [
+    "PASS: Windows functions under private names (hostile): reads, block reads, protection and region queries, raw and u32 writes, module lookup work after wrong earlier declarations of all 5 names"
+   ]
+  },
+  "wine luajit.exe: test_ffi_names.lua reverse": {
+   "command": "wine <workspace>/native-work/megapack-port/FlameDamageFixed/work/luajit.exe tests/test_ffi_names.lua . reverse",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: Windows functions under private names (reverse): reads, block reads, protection and region queries, raw and u32 writes, module lookup work and another mod's later integer-address declarations of the same names keep their own prototypes"
+   ],
+   "tail": [
+    "PASS: Windows functions under private names (reverse): reads, block reads, protection and region queries, raw and u32 writes, module lookup work and another mod's later integer-address declarations of the same names keep their own prototypes"
+   ]
+  }
+ },
+ "not_run": {
+  "tests/game_lua.py": "needs the game's old bin/lua51.dll through Windows ctypes (the game VM is LuaJIT GC64 now)",
+  "tests/live_check.lua": "live, against a running game process (not touched)"
+ }
+}

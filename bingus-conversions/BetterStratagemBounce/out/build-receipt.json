@@ -1,0 +1,370 @@
+{
+ "mod": "Better Stratagem Bounce archive-v15.4.1 (Vanilla Plus Megapack option BetterStratagemBounce)",
+ "upstream": "<workspace>/upstream-bingus/BetterStratagemBounce",
+ "upstream_tag": "v15.4.1",
+ "lock_revision": "archive-v15.4.1",
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "revision": "archive-v15.4.1-26088801",
+ "game_sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+ "exe_sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+ "map": {
+  "path": "<workspace>/native-work/megapack-port/BetterStratagemBounce/MAP.json",
+  "sha256": "82b3847311eddee2004a136c3d63d8b295ba5026f1f7425bca72992f3ca33efb",
+  "counts": {
+   "high": 14
+  },
+  "non_data_edits": [
+   "patch.header_tail"
+  ]
+ },
+ "replacements": [
+  {
+   "file": "src/navigation_patch.lua",
+   "line": 2,
+   "old": "buffer_rva = 0x348e8f8,",
+   "new": "buffer_rva = 0x2e4a228,",
+   "map_rows": [
+    "patch.buffer_rva"
+   ]
+  },
+  {
+   "file": "src/navigation_patch.lua",
+   "line": 3,
+   "old": "table_rva = 0x37cb600,",
+   "new": "table_rva = 0x31870e0,",
+   "map_rows": [
+    "patch.table_rva"
+   ]
+  },
+  {
+   "file": "src/navigation_patch.lua",
+   "line": 4,
+   "old": "data_size = 80280,",
+   "new": "data_size = 82384,",
+   "map_rows": [
+    "patch.data_size"
+   ]
+  },
+  {
+   "file": "src/navigation_patch.lua",
+   "line": 5,
+   "old": "groups = 11,",
+   "new": "groups = 12,",
+   "map_rows": [
+    "patch.groups"
+   ]
+  },
+  {
+   "file": "src/navigation_patch.lua",
+   "line": 12,
+   "old": "owned_records = 103,",
+   "new": "owned_records = 105,",
+   "map_rows": [
+    "patch.owned_records"
+   ]
+  },
+  {
+   "file": "src/navigation_patch.lua",
+   "line": 14,
+   "old": "        2, 2, 0, 0, 2, 2, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 3, 0,\n        2, 2, 2, 2, 2, 0, 0, 2, 0, 2, 2, 2, 0, 1, 2, 1, 0, 2, 1, 0, 2,\n        2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 0, 2,\n        2, 0, 2, 2, 2, 3, 2, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 3, 0, 2,\n        3, 2, 2, 0, 2, 3, 0, 2, 1, 0, 2, 2, 2, 1, 2, 2, 2, 0, 2, 2, 2,\n        0, 0, 2, 3, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 0, 0, 0,\n        2, 0, 2, 2, 2, 0, 0, 2, 2, 0, 2, 0, 2, 0, 2, 2, 3, 2, 0, 0, 2,\n        0, 2",
+   "new": "        2, 2, 0, 0, 2, 2, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 3, 0,\n        2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 1, 2, 1, 0, 2, 1, 0,\n        2, 2, 2, 2, 2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2,\n        0, 2, 2, 2, 0, 2, 2, 2, 3, 2, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2,\n        3, 0, 2, 3, 2, 2, 0, 2, 3, 0, 2, 1, 0, 2, 2, 2, 1, 2, 2, 2, 0,\n        2, 2, 2, 0, 0, 2, 3, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0,\n        0, 0, 0, 2, 0, 2, 2, 2, 0, 0, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 3,\n        2, 0, 0, 2, 0, 2",
+   "map_rows": [
+    "patch.vanilla_flags"
+   ]
+  },
+  {
+   "file": "src/navigation_patch.lua",
+   "line": 82,
+   "old": "api.read(module + patch.table_rva, 150 * 8)",
+   "new": "api.read(module + patch.table_rva, 154 * 8)",
+   "map_rows": [
+    "patch.table_bytes"
+   ]
+  },
+  {
+   "file": "src/navigation_patch.lua",
+   "line": 89,
+   "old": "            and u32(source, offset + 8) == 0x30EB6399\n            and u32(source, offset + 16) == 1 and u32(source, offset + 20) == 0, 'Unexpected settings header')",
+   "new": "            and u32(source, offset + 8) == 0x30EB6399, 'Unexpected settings header')\n        -- 26088801: header bytes +16..+23 are not checked; the game's parser never reads them (MAP patch.header_tail)",
+   "map_rows": [
+    "patch.header_tail"
+   ]
+  },
+  {
+   "file": "src/navigation_patch.lua",
+   "line": 97,
+   "old": "plan.records == 149",
+   "new": "plan.records == 153",
+   "map_rows": [
+    "patch.records"
+   ]
+  },
+  {
+   "file": "scripts/archive.py",
+   "line": 10,
+   "old": "EXE_SHA = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+   "new": "EXE_SHA = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'",
+   "map_rows": [
+    "archive.EXE_SHA"
+   ]
+  },
+  {
+   "file": "scripts/archive.py",
+   "line": 11,
+   "old": "GAME_DLL_SHA = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+   "new": "GAME_DLL_SHA = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'",
+   "map_rows": [
+    "archive.GAME_DLL_SHA"
+   ]
+  }
+ ],
+ "wrapper_changes_vs_upstream": [
+  {
+   "line": 656,
+   "what": "replacement",
+   "old": "buffer_rva = 0x348e8f8,",
+   "new": "buffer_rva = 0x2e4a228,"
+  },
+  {
+   "line": 657,
+   "what": "replacement",
+   "old": "table_rva = 0x37cb600,",
+   "new": "table_rva = 0x31870e0,"
+  },
+  {
+   "line": 658,
+   "what": "replacement",
+   "old": "data_size = 80280,",
+   "new": "data_size = 82384,"
+  },
+  {
+   "line": 659,
+   "what": "replacement",
+   "old": "groups = 11,",
+   "new": "groups = 12,"
+  },
+  {
+   "line": 666,
+   "what": "replacement",
+   "old": "owned_records = 103,",
+   "new": "owned_records = 105,"
+  },
+  {
+   "line": 669,
+   "what": "replacement",
+   "old": "2, 2, 2, 2, 2, 0, 0, 2, 0, 2, 2, 2, 0, 1, 2, 1, 0, 2, 1, 0, 2,",
+   "new": "2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 1, 2, 1, 0, 2, 1, 0,"
+  },
+  {
+   "line": 670,
+   "what": "replacement",
+   "old": "2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 0, 2,",
+   "new": "2, 2, 2, 2, 2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2,"
+  },
+  {
+   "line": 671,
+   "what": "replacement",
+   "old": "2, 0, 2, 2, 2, 3, 2, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 3, 0, 2,",
+   "new": "0, 2, 2, 2, 0, 2, 2, 2, 3, 2, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2,"
+  },
+  {
+   "line": 672,
+   "what": "replacement",
+   "old": "3, 2, 2, 0, 2, 3, 0, 2, 1, 0, 2, 2, 2, 1, 2, 2, 2, 0, 2, 2, 2,",
+   "new": "3, 0, 2, 3, 2, 2, 0, 2, 3, 0, 2, 1, 0, 2, 2, 2, 1, 2, 2, 2, 0,"
+  },
+  {
+   "line": 673,
+   "what": "replacement",
+   "old": "0, 0, 2, 3, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 0, 0, 0,",
+   "new": "2, 2, 2, 0, 0, 2, 3, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0,"
+  },
+  {
+   "line": 674,
+   "what": "replacement",
+   "old": "2, 0, 2, 2, 2, 0, 0, 2, 2, 0, 2, 0, 2, 0, 2, 2, 3, 2, 0, 0, 2,",
+   "new": "0, 0, 0, 2, 0, 2, 2, 2, 0, 0, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 3,"
+  },
+  {
+   "line": 675,
+   "what": "replacement",
+   "old": "0, 2",
+   "new": "2, 0, 0, 2, 0, 2"
+  },
+  {
+   "line": 736,
+   "what": "replacement",
+   "old": "local table_bytes = assert(api.read(module + patch.table_rva, 150 * 8), 'Cannot read settings table')",
+   "new": "local table_bytes = assert(api.read(module + patch.table_rva, 154 * 8), 'Cannot read settings table')"
+  },
+  {
+   "line": 743,
+   "what": "replacement",
+   "old": "and u32(source, offset + 8) == 0x30EB6399",
+   "new": "and u32(source, offset + 8) == 0x30EB6399, 'Unexpected settings header')"
+  },
+  {
+   "line": 744,
+   "what": "replacement",
+   "old": "and u32(source, offset + 16) == 1 and u32(source, offset + 20) == 0, 'Unexpected settings header')",
+   "new": "-- 26088801: header bytes +16..+23 are not checked; the game's parser never reads them (MAP patch.header_tail)"
+  },
+  {
+   "line": 751,
+   "what": "replacement",
+   "old": "assert(offset == #source and plan.records == 149 and plan.owned == patch.owned_records,",
+   "new": "assert(offset == #source and plan.records == 153 and plan.owned == patch.owned_records,"
+  },
+  {
+   "line": 870,
+   "what": "install_loader call (revision, exe/game SHA-256 pins)"
+  }
+ ],
+ "reproduction": {
+  "fr1_luajit": "<workspace>/native-work/megapack-port/BetterStratagemBounce/work/luajit-fr1/src/luajit",
+  "fr1_dump_flags": "0",
+  "bytecode_bytes": 18693,
+  "standalone_resource_sha256": "C0D19AB43D51B160607D6AB2ACFCDDD36EF32D68F06005D72638714089C3C390",
+  "lock_resource_sha256": "C0D19AB43D51B160607D6AB2ACFCDDD36EF32D68F06005D72638714089C3C390",
+  "lock_equal": true,
+  "v26_archive": "<hellforge>/mods/Vanilla Plus Megapack - v26/options/BetterStratagemBounce/9ba626afa44a3aa3.patch_0",
+  "v26_option_resource_sha256": "F074CCB8DCC07B1DB5AB3BFA24D39984F0B7090A5C38AD0301016D448ED5D2A8",
+  "v26_equal_to_discoverable_of_reproduced_bytecode": true
+ },
+ "compile_step_captured_not_run": [
+  "<workspace>/native-work/megapack-port/BetterStratagemBounce/work/upstream/tools/src/LuaJIT/src/luajit.exe",
+  "-bsdW",
+  "<wrapper>",
+  "<output>"
+ ],
+ "resource_format": "pack discoverable_resource() shape (declaration + loadstring of the escaped payload) with the plaintext wrapper as payload instead of non-GC64 bytecode; type-2 envelope",
+ "resource": {
+  "module": "mods/cowboybingus/better_stratagem_bounce",
+  "hash": "19170ca4b0725ff0",
+  "bytes": 171305
+ },
+ "archive_holds_only": [
+  "mods/cowboybingus/better_stratagem_bounce"
+ ],
+ "outputs": {
+  "19170ca4b0725ff0.lua.main": "a17aa04ed4ce7e4b7847f51cd74918197ec25fb34e50a987af4155d940e7c803",
+  "9ba626afa44a3aa3.patch_0": "17e40fca0b8b48a11fc462a54333bb834ff35c9964993743ec37788de85c8a54",
+  "9ba626afa44a3aa3.patch_0.gpu_resources": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "9ba626afa44a3aa3.patch_0.stream": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "option_entry.lua": "d5998ba89e062e33cb2c80cc84bbf3a41d7c4c2c5aeda79aa2f3bbded00c732e",
+  "wrapper.diff": "b58007b38d5dd3938f986eb337f085564431123ffbb82e360fd0c29f0d61669a",
+  "wrapper.lua": "588867b209208d832cc5c5896df0dde9bb3d0372be86909d9dc7fa4fc0e14547"
+ },
+ "inputs": {
+  "<workspace>/upstream-bingus/BetterStratagemBounce/src/archive_loader.lua": "ba6503eeb6af733064906ac9e444454e6cb9aa2e04820de433250376436bf7ea",
+  "<workspace>/upstream-bingus/BetterStratagemBounce/src/bingus_memory.lua": "3973924b1c009cc4e6c863a4eaf87f166899a16ddcb579c3d77ab5465172b416",
+  "<workspace>/upstream-bingus/BetterStratagemBounce/src/bingus_runtime.lua": "c4450f555f697e583916d18f876412ca96f6963eb1bf4cdad451ebb906c2f988",
+  "<workspace>/upstream-bingus/BetterStratagemBounce/src/bingus_write.lua": "9a0a217811d109418faebb2af8804bfb8301b0eeeb1e6b5bc020fdacbd596160",
+  "<workspace>/upstream-bingus/BetterStratagemBounce/src/navigation_patch.lua": "900b508c5c6c492d10bb4dc1a5fa0d426ff75da38ba695639157ab1beb1ceced",
+  "<workspace>/upstream-bingus/BetterStratagemBounce/src/windows_api.lua": "495025f608f9bfe99c177f431120c6f504a4074e9545f9c0356d42d5a90da8a0",
+  "<workspace>/upstream-bingus/BetterStratagemBounce/scripts/module.py": "9ab4d31700e89ed13fe77919e159db3930fd8cbe2deefa0b9152ea4def5ac72d",
+  "<workspace>/upstream-bingus/BetterStratagemBounce/scripts/archive.py": "63911a138a51532e5c44a1d77690db80c09f86c4ac003ef3b8a069a46c1e62bb"
+ },
+ "luajit_check": {
+  "luajit": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit",
+  "string_dump_flags": 8,
+  "gc64_fr2": true,
+  "output": [
+   "compile: ok\tLuaJIT 2.1.ROLLING\t8",
+   "entry run: true",
+   "printed: [BetterStratagemBounce] archive-v15.4.1-26088801: mods/cowboybingus/better_stratagem_bounce:357: libbcrypt.so: cannot open shared object file: No such file or directory",
+   "revision: archive-v15.4.1-26088801",
+   "active: false",
+   "status: mods/cowboybingus/better_stratagem_bounce:357: libbcrypt.so: cannot open shared object file: No such file or directory",
+   "update returns preserved: true"
+  ]
+ },
+ "capture_replay": {
+  "capture": "<workspace>/native-work/evidence/stratagem-settings-26088801.bin",
+  "capture_sha256": "e7c661fe2ba48d64581e3ac32fc337f15b56208bb03e32b0fc275bf61f097727",
+  "port": [
+   "apply: true navigation_settings_ready: 105 flags; executable code unchanged",
+   "owned bits cleared: 105, other byte changes: 0, writes: 105",
+   "restore: true, buffer equals capture: true",
+   "varied header tails: true navigation_settings_ready: 105 flags; executable code unchanged",
+   "foreign identity: false ...BetterStratagemBounce/work/port/src/navigation_patch.lua:52: Settings table identity mismatch, untouched: true"
+  ],
+  "upstream_unmodified (expected to refuse: old build data)": [
+   "apply: false ...erStratagemBounce/work/upstream/src/navigation_patch.lua:83: Unexpected settings group count",
+   "varied header tails: false ...erStratagemBounce/work/upstream/src/navigation_patch.lua:83: Unexpected settings group count",
+   "foreign identity: false ...erStratagemBounce/work/upstream/src/navigation_patch.lua:83: Unexpected settings group count, untouched: true"
+  ],
+  "data_only (all value replacements, upstream header clause kept)": [
+   "apply: false ...rStratagemBounce/work/data-only/src/navigation_patch.lua:88: Unexpected settings header",
+   "varied header tails: false ...rStratagemBounce/work/data-only/src/navigation_patch.lua:88: Unexpected settings header",
+   "foreign identity: false ...rStratagemBounce/work/data-only/src/navigation_patch.lua:52: Settings table identity mismatch, untouched: true"
+  ]
+ },
+ "adapter_text_absent": [
+  "PORT51",
+  "compat51",
+  "require('cffi')",
+  "require(\"cffi\")"
+ ],
+ "tests": {
+  "port": {
+   "passed": true,
+   "runs": [
+    [
+     "luajit.exe tests/test_archive.lua src build/mod.ljbc F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7",
+     false,
+     5,
+     0
+    ],
+    [
+     "luajit.exe -e EXE_HASH='F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7' -e dofile([[../test_prelude.lua]]) tests/test_archive.lua src build/mod.ljbc F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7",
+     true,
+     0,
+     14
+    ],
+    [
+     "luajit.exe tests/test_windows_interop.lua src peer-src hellpod-ball build/mod.ljbc F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7",
+     false,
+     0,
+     15
+    ],
+    [
+     "luajit.exe tests/test_windows_interop.lua src peer-src ball-hellpod build/mod.ljbc F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7",
+     false,
+     0,
+     15
+    ]
+   ]
+  },
+  "upstream": {
+   "passed": true,
+   "runs": [
+    [
+     "luajit.exe tests/test_archive.lua src build/mod.ljbc F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7",
+     false,
+     5,
+     0
+    ],
+    [
+     "luajit.exe -e EXE_HASH='F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7' -e dofile([[../test_prelude.lua]]) tests/test_archive.lua src build/mod.ljbc F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7",
+     true,
+     0,
+     14
+    ],
+    [
+     "luajit.exe tests/test_windows_interop.lua src peer-src hellpod-ball build/mod.ljbc F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7",
+     false,
+     0,
+     15
+    ],
+    [
+     "luajit.exe tests/test_windows_interop.lua src peer-src ball-hellpod build/mod.ljbc F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7",
+     false,
+     0,
+     15
+    ]
+   ]
+  }
+ }
+}

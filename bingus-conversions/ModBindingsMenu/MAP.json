@@ -1,0 +1,6809 @@
+{
+ "mod": "Mod Bindings Menu v2.3 (upstream-bingus/VanillaPlusMegapack/components/ModBindingsMenu, identical to upstream-bingus/ModBindingsMenu at tag v2.3 = ab48890)",
+ "old_build": 25480438,
+ "new_build": 26088801,
+ "generated_by": "native-work/megapack-port/ModBindingsMenu/analyze_mbm_map.py (static; reads native-work/evidence and native-work/mom-port/MAP.json only)",
+ "images": {
+  "old": "native-work/evidence/game-pre1020.dll",
+  "new": "native-work/evidence/game-26088801.dll"
+ },
+ "summary": {
+  "rows": 143,
+  "by_confidence": {
+   "high": 141,
+   "medium": 2
+  },
+  "source_edits": 82
+ },
+ "fields": {
+  "old/new": "value in the 25480438 source / value for 26088801 (null: not mapped)",
+  "witnesses": "independent agreeing evidence items",
+  "conflicts": "disagreeing witnesses",
+  "feeds_write": "the value decides an address or a value MBM writes (or a native it calls)",
+  "replace": "the exact source edit build.py makes for this row"
+ },
+ "witness_functions": {
+  "tab_switch": {
+   "old": "0x1475740",
+   "new": "0x130d3f0",
+   "how": "target of 3 mapped old call sites (strict windows), no disagreement",
+   "what": "binding page tab switch: [screen+8] = tab, [list+0x24cd98] = rows, build_rows(list = screen+0x529a8, descriptors)",
+   "identical_modulo_relocation": false,
+   "similarity": 0.0,
+   "changed_operands": []
+  },
+  "screen_init": {
+   "old": "0x1475440",
+   "new": "0x130d0f0",
+   "how": "target of 2 mapped old call sites (strict windows), no disagreement",
+   "what": "binding page screen init: list at +0x529a8, tab bar at +0x4e0",
+   "identical_modulo_relocation": false,
+   "similarity": 0.0,
+   "changed_operands": []
+  },
+  "row_init": {
+   "old": "0x17f8630",
+   "new": "0x16798d0",
+   "how": "strict 160-byte window at the entry",
+   "what": "binding row init (called by build_rows): type at +0x60b0, code at +0x60b8, label widget at +0x10a8",
+   "identical_modulo_relocation": true,
+   "similarity": 1.0,
+   "changed_operands": []
+  },
+  "list_clear": {
+   "old": "0x1812800",
+   "new": "0x1693a50",
+   "how": "strict 158-byte window at the entry",
+   "what": "binding list clear (first call of build_rows)",
+   "identical_modulo_relocation": true,
+   "similarity": 1.0,
+   "changed_operands": []
+  },
+  "list_layout": {
+   "old": "0x18123f0",
+   "new": "0x1693640",
+   "how": "strict 159-byte window at the entry",
+   "what": "binding list setup: controller flag +0x24cd80, row count +0x24cd8c",
+   "identical_modulo_relocation": true,
+   "similarity": 1.0,
+   "changed_operands": []
+  },
+  "hit_test": {
+   "old": "0x144d320",
+   "new": "0x12e5030",
+   "how": "strict 158-byte window at the entry",
+   "what": "widget hit test (panel.lua cites 0x144d320): solved rectangle and scale fields",
+   "identical_modulo_relocation": true,
+   "similarity": 1.0,
+   "changed_operands": []
+  },
+  "held_repeat": {
+   "old": "0x178dc50",
+   "new": "0x160eec0",
+   "how": "strict 160-byte window at the entry",
+   "what": "UI held repeat (panel.lua cites 0x178dc50): action state +0x328 down, +0x32c value, +0x330 held time",
+   "identical_modulo_relocation": true,
+   "similarity": 1.0,
+   "changed_operands": []
+  },
+  "row_hover": {
+   "old": "0x17fbf50",
+   "new": "0x167d1f0",
+   "how": "strict 95-byte window at the entry",
+   "what": "row hover/select test: cursor widget parent +0x200, position +0x26c, roots menu+0x160/+0x288, select = UI action 10",
+   "identical_modulo_relocation": false,
+   "similarity": 1.0,
+   "changed_operands": [
+    {
+     "old_site": "0x17fbfaf",
+     "new_site": "0x167d24f",
+     "kind": "disp",
+     "old": "0x160",
+     "new": "0x168",
+     "old_ins": "lea rax, [r9 + 0x160]",
+     "new_ins": "lea rax, [r9 + 0x168]"
+    },
+    {
+     "old_site": "0x17fbfbf",
+     "new_site": "0x167d25f",
+     "kind": "disp",
+     "old": "0x288",
+     "new": "0x290",
+     "old_ins": "lea rax, [r9 + 0x288]",
+     "new_ins": "lea rax, [r9 + 0x290]"
+    },
+    {
+     "old_site": "0x17fc022",
+     "new_site": "0x167d2c2",
+     "kind": "disp",
+     "old": "0x160",
+     "new": "0x168",
+     "old_ins": "lea rax, [r9 + 0x160]",
+     "new_ins": "lea rax, [r9 + 0x168]"
+    },
+    {
+     "old_site": "0x17fc035",
+     "new_site": "0x167d2d5",
+     "kind": "disp",
+     "old": "0x288",
+     "new": "0x290",
+     "old_ins": "lea rax, [r9 + 0x288]",
+     "new_ins": "lea rax, [r9 + 0x290]"
+    }
+   ]
+  },
+  "maps_init": {
+   "old": "0x12f8820",
+   "new": "0x118b7c0",
+   "how": "strict 158-byte window at the entry",
+   "what": "input owner binding maps init: live map +0xa7ad0, defaults map +0xa7b78",
+   "identical_modulo_relocation": false,
+   "similarity": 1.0,
+   "changed_operands": [
+    {
+     "old_site": "0x12f89dc",
+     "new_site": "0x118b97c",
+     "kind": "disp",
+     "old": "0x347d620",
+     "new": "0x2e38990",
+     "old_ins": "mov edi, dword ptr [r11 + rax*4 + 0x347d620]",
+     "new_ins": "mov edi, dword ptr [r11 + rax*4 + 0x2e38990]"
+    }
+   ]
+  },
+  "map_lookup": {
+   "old": "0x12f9470",
+   "new": "0x118c410",
+   "how": "strict 157-byte window at the entry",
+   "what": "binding map lookup: buckets [+0xa7ad0], capacity +0xa7ad8, 0x148-byte records, mappings at +8, 0x14 each, device nibble",
+   "identical_modulo_relocation": true,
+   "similarity": 1.0,
+   "changed_operands": []
+  },
+  "stack_check": {
+   "old": "0x12f3300",
+   "new": "0x1186260",
+   "how": "strict 63-byte window at the entry",
+   "what": "UI stack walk testing for screen type 0x1a (26)",
+   "identical_modulo_relocation": true,
+   "similarity": 1.0,
+   "changed_operands": []
+  },
+  "input_group_switch": {
+   "old": "0x585b80",
+   "new": "0x58e860",
+   "how": "relaxed 31-byte window at the entry",
+   "what": "action code -> state index (the consume prologue calls it)",
+   "identical_modulo_relocation": true,
+   "similarity": 1.0,
+   "changed_operands": []
+  },
+  "font_init": {
+   "old": "0x1387dfb",
+   "new": "0x121e74b",
+   "how": "strict 155-byte window at the entry",
+   "what": "native font initializer: body font, font material owner, atlas",
+   "identical_modulo_relocation": false,
+   "similarity": 1.0,
+   "changed_operands": [
+    {
+     "old_site": "0x1387e96",
+     "new_site": "0x121e7e6",
+     "kind": "disp",
+     "old": "0x21579d0",
+     "new": "0x1fe0240",
+     "old_ins": "mov edi, dword ptr [rdx + rax*4 + 0x21579d0]",
+     "new_ins": "mov edi, dword ptr [rdx + rax*4 + 0x1fe0240]"
+    },
+    {
+     "old_site": "0x1387ea5",
+     "new_site": "0x121e7f5",
+     "kind": "disp",
+     "old": "0x2157840",
+     "new": "0x1fe00c0",
+     "old_ins": "mov ebx, dword ptr [rdx + rax*4 + 0x2157840]",
+     "new_ins": "mov ebx, dword ptr [rdx + rax*4 + 0x1fe00c0]"
+    },
+    {
+     "old_site": "0x1387ed6",
+     "new_site": "0x121e826",
+     "kind": "disp",
+     "old": "0x21579d0",
+     "new": "0x1fe0240",
+     "old_ins": "mov ebx, dword ptr [rdx + rax*4 + 0x21579d0]",
+     "new_ins": "mov ebx, dword ptr [rdx + rax*4 + 0x1fe0240]"
+    },
+    {
+     "old_site": "0x1387ee5",
+     "new_site": "0x121e835",
+     "kind": "disp",
+     "old": "0x2157840",
+     "new": "0x1fe00c0",
+     "old_ins": "mov edi, dword ptr [rdx + rax*4 + 0x2157840]",
+     "new_ins": "mov edi, dword ptr [rdx + rax*4 + 0x1fe00c0]"
+    }
+   ]
+  },
+  "set_opacity": {
+   "old": "0x1448ad0",
+   "new": "0x12e07e0",
+   "how": "strict 158-byte window at the entry",
+   "what": "widget set_opacity (MOM NATIVE.set_opacity)",
+   "identical_modulo_relocation": true,
+   "similarity": 1.0,
+   "changed_operands": []
+  },
+  "set_label": {
+   "old": "0x143bf90",
+   "new": "0x12d3ca0",
+   "how": "target of 12 mapped old call sites (strict windows), no disagreement",
+   "what": "widget set_label (MOM NATIVE.set_label): label id at +0x110",
+   "identical_modulo_relocation": true,
+   "similarity": 1.0,
+   "changed_operands": []
+  }
+ },
+ "rows": [
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 57,
+   "name": "GAME_SHA256",
+   "category": "build pin",
+   "old": "2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E",
+   "new": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "feeds_write": false,
+   "method": "SHA-256 of the current disk game.dll recorded with the capture (evidence/game-26088801.manifest.json disk.sha256); the MOM port and the installed MBM copy pin the same value",
+   "witnesses": 2,
+   "confidence": "high",
+   "replace": {
+    "old_text": "'2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+    "new_text": "'6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'"
+   },
+   "id": 1
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 58,
+   "name": "EXE_SHA256",
+   "category": "build pin",
+   "old": "F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06",
+   "new": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "feeds_write": false,
+   "method": "current helldivers2.exe SHA-256 as supplied in the brief for build 26088801; the MOM port and the installed MBM copy (whose build check passes live) pin the same value",
+   "witnesses": 2,
+   "confidence": "high",
+   "replace": {
+    "old_text": "'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+    "new_text": "'0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'"
+   },
+   "id": 2
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 65,
+   "name": "BUILD_ROWS_RVA",
+   "category": "function RVA",
+   "old": "0x1812940",
+   "new": "0x1693b90",
+   "feeds_write": true,
+   "what": "binding list builder: list(rcx), {group, action, header} descriptors",
+   "method": "entry window -> 0x1693b90 (strict 152-byte window at the entry); bindiff.migrate -> 0x1693b90 (instruction window); call sites -> 0x1693b90 (4 mapped old call sites call it); installed MBM copy -> 0x1693b90 (port-tools/build_mbm_archive.py; its build check passes live on 26088801)",
+   "witnesses": 4,
+   "conflicts": 0,
+   "confidence": "high",
+   "body": {
+    "old_instructions": 229,
+    "new_instructions": 227,
+    "identical_modulo_relocation": false,
+    "similarity": 0.9693,
+    "changed_operands": [],
+    "readonly_constants_changed": [],
+    "callees": [
+     [
+      "0x1812800",
+      "0x1693a50"
+     ],
+     [
+      "0x17f8630",
+      "0x16798d0"
+     ],
+     [
+      "0x144c5c0",
+      "0x12e42d0"
+     ],
+     [
+      "0x1448ad0",
+      "0x12e07e0"
+     ],
+     [
+      "0x1793f60",
+      "0x16151f0"
+     ],
+     [
+      "0x1794600",
+      "0x1615890"
+     ],
+     [
+      "0x1448ad0",
+      "0x12e07e0"
+     ],
+     [
+      "0x1448ad0",
+      "0x12e07e0"
+     ]
+    ],
+    "unaligned": [
+     [
+      "replace",
+      "0x1812db0",
+      "0x1694000"
+     ]
+    ]
+   },
+   "note": "the body aligns 1:1 up to new 0x1693ffe; the captured new image holds encrypted bytes from 0x1694000 (a page the protection runtime had not decrypted when the image was dumped), so the last six instructions (old 0x1812db0-0x1812dd3: [rdi+0x7b8] = 0, scroll_reset, [list+0x24cd89] = 0, ret) cannot be compared statically; live check L3 reads that page once the game has run it",
+   "replace": {
+    "old_text": "local BUILD_ROWS_RVA = 0x1812940",
+    "new_text": "local BUILD_ROWS_RVA = 0x1693b90"
+   },
+   "id": 3
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "name": "BUILD_ROWS_RVA prologue (13 bytes)",
+   "category": "prologue signature",
+   "old": "\\x48\\x8b\\xc4\\x53\\x41\\x56\\x48\\x81\\xec\\xd8\\x00\\x00\\x00",
+   "new": "\\x48\\x8b\\xc4\\x53\\x41\\x56\\x48\\x81\\xec\\xd8\\x00\\x00\\x00",
+   "feeds_write": true,
+   "sig_changed": false,
+   "method": "read from the new image at the mapped RVA; unchanged",
+   "witnesses": 1,
+   "confidence": "high",
+   "id": 4,
+   "line": 418
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 144,
+   "name": "SET_TAB_LABELS_RVA",
+   "category": "function RVA",
+   "old": "0x17aac50",
+   "new": "0x162bee0",
+   "feeds_write": true,
+   "what": "tab bar label setter (bar, labels, count)",
+   "method": "entry window -> 0x162bee0 (strict 160-byte window at the entry); bindiff.migrate -> 0x162bee0 (instruction window); call sites -> 0x162bee0 (12 mapped old call sites call it); installed MBM copy -> 0x162bee0 (port-tools/build_mbm_archive.py; its build check passes live on 26088801)",
+   "witnesses": 4,
+   "conflicts": 0,
+   "confidence": "high",
+   "body": {
+    "old_instructions": 234,
+    "new_instructions": 234,
+    "identical_modulo_relocation": true,
+    "similarity": 1.0,
+    "changed_operands": [],
+    "readonly_constants_changed": [],
+    "callees": [
+     [
+      "0x20988f0",
+      "0x1f1ff40"
+     ],
+     [
+      "0x143bf90",
+      "0x12d3ca0"
+     ],
+     [
+      "0x17af020",
+      "0x16302b0"
+     ],
+     [
+      "0x1446d10",
+      "0x12dea20"
+     ],
+     [
+      "0x1441d20",
+      "0x12d9a30"
+     ],
+     [
+      "0x143c9d0",
+      "0x12d46e0"
+     ],
+     [
+      "0x1448ad0",
+      "0x12e07e0"
+     ],
+     [
+      "0x1448ad0",
+      "0x12e07e0"
+     ],
+     [
+      "0x1448ad0",
+      "0x12e07e0"
+     ],
+     [
+      "0x1448ad0",
+      "0x12e07e0"
+     ],
+     [
+      "0x1448ad0",
+      "0x12e07e0"
+     ],
+     [
+      "0x1448ad0",
+      "0x12e07e0"
+     ],
+     [
+      "0x1448ad0",
+      "0x12e07e0"
+     ],
+     [
+      "0x1448ad0",
+      "0x12e07e0"
+     ],
+     [
+      "0x14476a0",
+      "0x12df3b0"
+     ],
+     [
+      "0x14476a0",
+      "0x12df3b0"
+     ]
+    ]
+   },
+   "replace": {
+    "old_text": "local SET_TAB_LABELS_RVA = 0x17aac50",
+    "new_text": "local SET_TAB_LABELS_RVA = 0x162bee0"
+   },
+   "id": 5
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "name": "SET_TAB_LABELS_RVA prologue (16 bytes)",
+   "category": "prologue signature",
+   "old": "\\x48\\x89\\x54\\x24\\x10\\x53\\x56\\x48\\x83\\xec\\x68\\x0f\\x29\\x74\\x24\\x30",
+   "new": "\\x48\\x89\\x54\\x24\\x10\\x53\\x56\\x48\\x83\\xec\\x68\\x0f\\x29\\x74\\x24\\x30",
+   "feeds_write": true,
+   "sig_changed": false,
+   "method": "read from the new image at the mapped RVA; unchanged",
+   "witnesses": 1,
+   "confidence": "high",
+   "id": 6,
+   "line": 421
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 145,
+   "name": "LIST_RESET_RVA",
+   "category": "function RVA",
+   "old": "0x1813dd0",
+   "new": "0x1695020",
+   "feeds_write": true,
+   "what": "binding list focus/scroll reset (list, tab)",
+   "method": "entry window -> 0x1695020 (strict 156-byte window at the entry); bindiff.migrate -> 0x1695020 (instruction window); installed MBM copy -> 0x1695020 (port-tools/build_mbm_archive.py; its build check passes live on 26088801)",
+   "witnesses": 3,
+   "conflicts": 0,
+   "confidence": "high",
+   "body": {
+    "old_instructions": 50,
+    "new_instructions": 50,
+    "identical_modulo_relocation": true,
+    "similarity": 1.0,
+    "changed_operands": [],
+    "readonly_constants_changed": [],
+    "callees": [
+     [
+      "0x1812940",
+      "0x1693b90"
+     ],
+     [
+      "0x14476a0",
+      "0x12df3b0"
+     ]
+    ]
+   },
+   "replace": {
+    "old_text": "local LIST_RESET_RVA = 0x1813dd0",
+    "new_text": "local LIST_RESET_RVA = 0x1695020"
+   },
+   "id": 7
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "name": "LIST_RESET_RVA prologue (16 bytes)",
+   "category": "prologue signature",
+   "old": "\\x40\\x53\\x48\\x83\\xec\\x20\\x48\\x8b\\xd9\\x85\\xd2\\x74\\x30\\x83\\xea\\x01",
+   "new": "\\x40\\x53\\x48\\x83\\xec\\x20\\x48\\x8b\\xd9\\x85\\xd2\\x74\\x30\\x83\\xea\\x01",
+   "feeds_write": true,
+   "sig_changed": false,
+   "method": "read from the new image at the mapped RVA; unchanged",
+   "witnesses": 1,
+   "confidence": "high",
+   "id": 8,
+   "line": 424
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 77,
+   "name": "INPUT_CONSUME_RVA",
+   "category": "function RVA",
+   "old": "0x12fde90",
+   "new": "0x1190e30",
+   "feeds_write": true,
+   "what": "consume an input action until released (owner, code, seconds)",
+   "method": "entry window -> 0x1190e30 (strict 126-byte window at the entry); bindiff.migrate -> 0x1190e30 (instruction window); call sites -> 0x1190e30 (12 mapped old call sites call it); installed MBM copy -> 0x1190e30 (port-tools/build_mbm_archive.py; its build check passes live on 26088801)",
+   "witnesses": 4,
+   "conflicts": 0,
+   "confidence": "high",
+   "body": {
+    "old_instructions": 37,
+    "new_instructions": 37,
+    "identical_modulo_relocation": true,
+    "similarity": 1.0,
+    "changed_operands": [],
+    "readonly_constants_changed": [],
+    "callees": [
+     [
+      "0x585b80",
+      "0x58e860"
+     ]
+    ]
+   },
+   "replace": {
+    "old_text": "local INPUT_CONSUME_RVA = 0x12fde90",
+    "new_text": "local INPUT_CONSUME_RVA = 0x1190e30"
+   },
+   "id": 9
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "name": "INPUT_CONSUME_RVA prologue (20 bytes)",
+   "category": "prologue signature",
+   "old": "\\x40\\x53\\x48\\x83\\xec\\x20\\x4c\\x8b\\xd1\\x4c\\x8b\\xca\\x48\\x8b\\xca\\xe8\\xdc\\x7c\\x28\\xff",
+   "new": "\\x40\\x53\\x48\\x83\\xec\\x20\\x4c\\x8b\\xd1\\x4c\\x8b\\xca\\x48\\x8b\\xca\\xe8\\x1c\\xda\\x3f\\xff",
+   "feeds_write": true,
+   "sig_changed": true,
+   "method": "read from the new image at the mapped RVA; differs only in the rel32 of the call at +15 (callee input_group_switch 0x585b80 -> 0x58e860, both builds identical 9-instruction bodies): a relocation, the routine is identical",
+   "witnesses": 1,
+   "confidence": "high",
+   "id": 10,
+   "line": 430
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 59,
+   "name": "INPUT_OWNER_PTR_RVA",
+   "category": "global pointer RVA",
+   "old": "0x347cf18",
+   "new": "0x2e38250",
+   "method": "old RIP-relative uses mapped by masked windows; target of the new instruction; installed MBM copy 0x2e38250; MOM MAP INPUT_OWNER_PTR_RVA = 0x2e38250",
+   "witnesses": 16,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x5948b9",
+     "old_ins": "mov rax, qword ptr [rip + 0x2ee8658]",
+     "new_site": "0x59d409",
+     "new_ins": "mov rax, qword ptr [rip + 0x289ae40]",
+     "new_value": "0x2e38250",
+     "window": "strict 158 bytes from -0",
+     "status": "changed",
+     "implies": "0x2e38250"
+    },
+    {
+     "old_site": "0x597043",
+     "old_ins": "mov r10, qword ptr [rip + 0x2ee5ece]",
+     "new_site": "0x59fc03",
+     "new_ins": "mov r10, qword ptr [rip + 0x2898646]",
+     "new_value": "0x2e38250",
+     "window": "strict 126 bytes from -0",
+     "status": "changed",
+     "implies": "0x2e38250"
+    },
+    {
+     "old_site": "0x5979fc",
+     "old_ins": "mov r10, qword ptr [rip + 0x2ee5515]",
+     "new_site": "0x5a05bc",
+     "new_ins": "mov r10, qword ptr [rip + 0x2897c8d]",
+     "new_value": "0x2e38250",
+     "window": "strict 156 bytes from -0",
+     "status": "changed",
+     "implies": "0x2e38250"
+    },
+    {
+     "old_site": "0x6093eb",
+     "old_ins": "mov rax, qword ptr [rip + 0x2e73b26]",
+     "new_site": "0x6125bb",
+     "new_ins": "mov rax, qword ptr [rip + 0x2825c8e]",
+     "new_value": "0x2e38250",
+     "window": "strict 157 bytes from -0",
+     "status": "changed",
+     "implies": "0x2e38250"
+    },
+    {
+     "old_site": "0x6095b8",
+     "old_ins": "mov r12, qword ptr [rip + 0x2e73959]",
+     "new_site": "0x612788",
+     "new_ins": "mov r12, qword ptr [rip + 0x2825ac1]",
+     "new_value": "0x2e38250",
+     "window": "strict 126 bytes from -0",
+     "status": "changed",
+     "implies": "0x2e38250"
+    },
+    {
+     "old_site": "0x60988a",
+     "old_ins": "mov rax, qword ptr [rip + 0x2e73687]",
+     "new_site": "0x612a5a",
+     "new_ins": "mov rax, qword ptr [rip + 0x28257ef]",
+     "new_value": "0x2e38250",
+     "window": "strict 157 bytes from -0",
+     "status": "changed",
+     "implies": "0x2e38250"
+    },
+    {
+     "old_site": "0x69169b",
+     "old_ins": "mov rax, qword ptr [rip + 0x2deb876]",
+     "new_site": "0x69b72b",
+     "new_ins": "mov rax, qword ptr [rip + 0x279cb1e]",
+     "new_value": "0x2e38250",
+     "window": "strict 154 bytes from -0",
+     "status": "changed",
+     "implies": "0x2e38250"
+    },
+    {
+     "old_site": "0x6c765d",
+     "old_ins": "mov rax, qword ptr [rip + 0x2db58b4]",
+     "new_site": "0x6d1dad",
+     "new_ins": "mov rax, qword ptr [rip + 0x276649c]",
+     "new_value": "0x2e38250",
+     "window": "strict 158 bytes from -0",
+     "status": "changed",
+     "implies": "0x2e38250"
+    }
+   ],
+   "replace": {
+    "old_text": "local INPUT_OWNER_PTR_RVA = 0x347cf18",
+    "new_text": "local INPUT_OWNER_PTR_RVA = 0x2e38250"
+   },
+   "id": 11,
+   "feeds_write": true
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 60,
+   "name": "MENU_SYSTEM_PTR_RVA",
+   "category": "global pointer RVA",
+   "old": "0x347ce38",
+   "new": "0x2e38170",
+   "method": "old RIP-relative uses mapped by masked windows; target of the new instruction; installed MBM copy 0x2e38170; MOM MAP MENU_SYSTEM_PTR_RVA = 0x2e38170",
+   "witnesses": 16,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x6098d0",
+     "old_ins": "mov rax, qword ptr [rip + 0x2e73561]",
+     "new_site": "0x612aa0",
+     "new_ins": "mov rax, qword ptr [rip + 0x28256c9]",
+     "new_value": "0x2e38170",
+     "window": "strict 96 bytes from -0",
+     "status": "changed",
+     "implies": "0x2e38170"
+    },
+    {
+     "old_site": "0x662550",
+     "old_ins": "mov rcx, qword ptr [rip + 0x2e1a8e1]",
+     "new_site": "0x66be30",
+     "new_ins": "mov rcx, qword ptr [rip + 0x27cc339]",
+     "new_value": "0x2e38170",
+     "window": "strict 46 bytes from -32",
+     "status": "changed",
+     "implies": "0x2e38170"
+    },
+    {
+     "old_site": "0x873310",
+     "old_ins": "mov rax, qword ptr [rip + 0x2c09b21]",
+     "new_site": "0x880790",
+     "new_ins": "mov rax, qword ptr [rip + 0x25b79d9]",
+     "new_value": "0x2e38170",
+     "window": "relaxed 64 bytes from -0",
+     "status": "changed",
+     "implies": "0x2e38170"
+    },
+    {
+     "old_site": "0x8745b9",
+     "old_ins": "mov rax, qword ptr [rip + 0x2c08878]",
+     "new_site": "0x881a29",
+     "new_ins": "mov rax, qword ptr [rip + 0x25b6740]",
+     "new_value": "0x2e38170",
+     "window": "strict 46 bytes from -32",
+     "status": "changed",
+     "implies": "0x2e38170"
+    },
+    {
+     "old_site": "0x875b38",
+     "old_ins": "mov rcx, qword ptr [rip + 0x2c072f9]",
+     "new_site": "0x882fa8",
+     "new_ins": "mov rcx, qword ptr [rip + 0x25b51c1]",
+     "new_value": "0x2e38170",
+     "window": "relaxed 128 bytes from -0",
+     "status": "changed",
+     "implies": "0x2e38170"
+    },
+    {
+     "old_site": "0x97a145",
+     "old_ins": "mov rax, qword ptr [rip + 0x2b02cec]",
+     "new_site": "0x98bcc5",
+     "new_ins": "mov rax, qword ptr [rip + 0x24ac4a4]",
+     "new_value": "0x2e38170",
+     "window": "relaxed 160 bytes from -0",
+     "status": "changed",
+     "implies": "0x2e38170"
+    },
+    {
+     "old_site": "0x97b341",
+     "old_ins": "mov rax, qword ptr [rip + 0x2b01af0]",
+     "new_site": "0x98cec1",
+     "new_ins": "mov rax, qword ptr [rip + 0x24ab2a8]",
+     "new_value": "0x2e38170",
+     "window": "relaxed 156 bytes from -0",
+     "status": "changed",
+     "implies": "0x2e38170"
+    },
+    {
+     "old_site": "0xad5d25",
+     "old_ins": "mov r15, qword ptr [rip + 0x29a710c]",
+     "new_site": "0xaf1e45",
+     "new_ins": "mov r15, qword ptr [rip + 0x2346324]",
+     "new_value": "0x2e38170",
+     "window": "strict 27 bytes from -0",
+     "status": "changed",
+     "implies": "0x2e38170"
+    }
+   ],
+   "replace": {
+    "old_text": "local MENU_SYSTEM_PTR_RVA = 0x347ce38",
+    "new_text": "local MENU_SYSTEM_PTR_RVA = 0x2e38170"
+   },
+   "id": 12,
+   "feeds_write": false
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 61,
+   "name": "UI_STATE_PTR_RVA",
+   "category": "global pointer RVA",
+   "old": "0x347ce28",
+   "new": "0x2e38160",
+   "method": "old RIP-relative uses mapped by masked windows; target of the new instruction; installed MBM copy 0x2e38160; MOM MAP UI_STATE_PTR_RVA = 0x2e38160",
+   "witnesses": 16,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x5c08cb",
+     "old_ins": "mov rdx, qword ptr [rip + 0x2ebc556]",
+     "new_site": "0x5c970b",
+     "new_ins": "mov rdx, qword ptr [rip + 0x286ea4e]",
+     "new_value": "0x2e38160",
+     "window": "strict 123 bytes from -0",
+     "status": "changed",
+     "implies": "0x2e38160"
+    },
+    {
+     "old_site": "0x60961e",
+     "old_ins": "mov r9, qword ptr [rip + 0x2e73803]",
+     "new_site": "0x6127ee",
+     "new_ins": "mov r9, qword ptr [rip + 0x282596b]",
+     "new_value": "0x2e38160",
+     "window": "strict 31 bytes from -0",
+     "status": "changed",
+     "implies": "0x2e38160"
+    },
+    {
+     "old_site": "0x6617f3",
+     "old_ins": "mov rax, qword ptr [rip + 0x2e1b62e]",
+     "new_site": "0x66b0d3",
+     "new_ins": "mov rax, qword ptr [rip + 0x27cd086]",
+     "new_value": "0x2e38160",
+     "window": "strict 158 bytes from -0",
+     "status": "changed",
+     "implies": "0x2e38160"
+    },
+    {
+     "old_site": "0x661c36",
+     "old_ins": "mov r9, qword ptr [rip + 0x2e1b1eb]",
+     "new_site": "0x66b516",
+     "new_ins": "mov r9, qword ptr [rip + 0x27ccc43]",
+     "new_value": "0x2e38160",
+     "window": "strict 160 bytes from -0",
+     "status": "changed",
+     "implies": "0x2e38160"
+    },
+    {
+     "old_site": "0x661cfa",
+     "old_ins": "mov r9, qword ptr [rip + 0x2e1b127]",
+     "new_site": "0x66b5da",
+     "new_ins": "mov r9, qword ptr [rip + 0x27ccb7f]",
+     "new_value": "0x2e38160",
+     "window": "strict 159 bytes from -0",
+     "status": "changed",
+     "implies": "0x2e38160"
+    },
+    {
+     "old_site": "0x662520",
+     "old_ins": "mov rcx, qword ptr [rip + 0x2e1a901]",
+     "new_site": "0x66be00",
+     "new_ins": "mov rcx, qword ptr [rip + 0x27cc359]",
+     "new_value": "0x2e38160",
+     "window": "strict 62 bytes from -0",
+     "status": "changed",
+     "implies": "0x2e38160"
+    },
+    {
+     "old_site": "0x66319b",
+     "old_ins": "mov rcx, qword ptr [rip + 0x2e19c86]",
+     "new_site": "0x66cb0b",
+     "new_ins": "mov rcx, qword ptr [rip + 0x27cb64e]",
+     "new_value": "0x2e38160",
+     "window": "strict 124 bytes from -0",
+     "status": "changed",
+     "implies": "0x2e38160"
+    },
+    {
+     "old_site": "0x8745a9",
+     "old_ins": "mov rax, qword ptr [rip + 0x2c08878]",
+     "new_site": "0x881a19",
+     "new_ins": "mov rax, qword ptr [rip + 0x25b6740]",
+     "new_value": "0x2e38160",
+     "window": "strict 30 bytes from -0",
+     "status": "changed",
+     "implies": "0x2e38160"
+    }
+   ],
+   "note": "MENU_WORD = (menu - ui) / 4 stays 4: both moved by the same amount (0x10 apart in both)",
+   "replace": {
+    "old_text": "local UI_STATE_PTR_RVA = 0x347ce28",
+    "new_text": "local UI_STATE_PTR_RVA = 0x2e38160"
+   },
+   "id": 13,
+   "feeds_write": true
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 64,
+   "name": "ACTION_LABELS_RVA",
+   "category": "data table RVA",
+   "old": "0x26438a0",
+   "new": "0x24bc8a0",
+   "method": "old RIP-relative uses mapped by masked windows; target of the new instruction; installed MBM copy 0x24bc8a0",
+   "witnesses": 2,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x18129a8",
+     "old_ins": "lea r13, [rip + 0xe30ef1]",
+     "new_site": "0x1693bf8",
+     "new_ins": "lea r13, [rip + 0xe28ca1]",
+     "new_value": "0x24bc8a0",
+     "window": "strict 160 bytes from -0",
+     "status": "changed",
+     "implies": "0x24bc8a0"
+    }
+   ],
+   "note": "MBM writes label ids into this table (see data_check)",
+   "replace": {
+    "old_text": "local ACTION_LABELS_RVA = 0x26438a0",
+    "new_text": "local ACTION_LABELS_RVA = 0x24bc8a0"
+   },
+   "id": 14,
+   "data_check": {
+    "13x97 u32 label table identical": true,
+    "bytes": 5044
+   },
+   "feeds_write": true
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 73,
+   "name": "MISSION_MODE_PTR_RVA",
+   "category": "global pointer RVA",
+   "old": "0x33266a0",
+   "new": "0x2ce1850",
+   "method": "old RIP-relative uses mapped by masked windows; target of the new instruction; installed MBM copy 0x2ce1850",
+   "witnesses": 16,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x38013b",
+     "old_ins": "mov rax, qword ptr [rip + 0x2fa655e]",
+     "new_site": "0x386e3b",
+     "new_ins": "mov rax, qword ptr [rip + 0x295aa0e]",
+     "new_value": "0x2ce1850",
+     "window": "strict 157 bytes from -0",
+     "status": "changed",
+     "implies": "0x2ce1850"
+    },
+    {
+     "old_site": "0x38031c",
+     "old_ins": "mov rax, qword ptr [rip + 0x2fa637d]",
+     "new_site": "0x38701c",
+     "new_ins": "mov rax, qword ptr [rip + 0x295a82d]",
+     "new_value": "0x2ce1850",
+     "window": "strict 64 bytes from -0",
+     "status": "changed",
+     "implies": "0x2ce1850"
+    },
+    {
+     "old_site": "0x38053d",
+     "old_ins": "mov rax, qword ptr [rip + 0x2fa615c]",
+     "new_site": "0x38723d",
+     "new_ins": "mov rax, qword ptr [rip + 0x295a60c]",
+     "new_value": "0x2ce1850",
+     "window": "strict 128 bytes from -0",
+     "status": "changed",
+     "implies": "0x2ce1850"
+    },
+    {
+     "old_site": "0x461c76",
+     "old_ins": "mov rax, qword ptr [rip + 0x2ec4a23]",
+     "new_site": "0x468a96",
+     "new_ins": "mov rax, qword ptr [rip + 0x2878db3]",
+     "new_value": "0x2ce1850",
+     "window": "strict 154 bytes from -0",
+     "status": "changed",
+     "implies": "0x2ce1850"
+    },
+    {
+     "old_site": "0x461fc7",
+     "old_ins": "mov rax, qword ptr [rip + 0x2ec46d2]",
+     "new_site": "0x468de7",
+     "new_ins": "mov rax, qword ptr [rip + 0x2878a62]",
+     "new_value": "0x2ce1850",
+     "window": "strict 158 bytes from -0",
+     "status": "changed",
+     "implies": "0x2ce1850"
+    },
+    {
+     "old_site": "0x4b0074",
+     "old_ins": "mov rcx, qword ptr [rip + 0x2e76625]",
+     "new_site": "0x4b6934",
+     "new_ins": "mov rcx, qword ptr [rip + 0x282af15]",
+     "new_value": "0x2ce1850",
+     "window": "strict 48 bytes from -32",
+     "status": "changed",
+     "implies": "0x2ce1850"
+    },
+    {
+     "old_site": "0x4b012a",
+     "old_ins": "mov rax, qword ptr [rip + 0x2e7656f]",
+     "new_site": "0x4b69ea",
+     "new_ins": "mov rax, qword ptr [rip + 0x282ae5f]",
+     "new_value": "0x2ce1850",
+     "window": "strict 123 bytes from -0",
+     "status": "changed",
+     "implies": "0x2ce1850"
+    },
+    {
+     "old_site": "0x4b0640",
+     "old_ins": "mov rax, qword ptr [rip + 0x2e76059]",
+     "new_site": "0x4b6f00",
+     "new_ins": "mov rax, qword ptr [rip + 0x282a949]",
+     "new_value": "0x2ce1850",
+     "window": "strict 62 bytes from -32",
+     "status": "changed",
+     "implies": "0x2ce1850"
+    }
+   ],
+   "note": "megapack-global-candidates.json maps the same global to 0x2ce1850",
+   "replace": {
+    "old_text": "MISSION_MODE_PTR_RVA, MISSION_CHECK_FRAMES = 0x33266a0",
+    "new_text": "MISSION_MODE_PTR_RVA, MISSION_CHECK_FRAMES = 0x2ce1850"
+   },
+   "id": 15,
+   "feeds_write": false
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 146,
+   "name": "TAB_LABELS_RVA",
+   "category": "data table RVA",
+   "old": "0x3310210",
+   "new": "0x2cc8bb0",
+   "method": "old RIP-relative uses mapped by masked windows; target of the new instruction; installed MBM copy 0x2cc8bb0",
+   "witnesses": 2,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x147524c",
+     "old_ins": "lea rdx, [rip + 0x1e9afbd]",
+     "new_site": "0x130cefc",
+     "new_ins": "lea rdx, [rip + 0x19bbcad]",
+     "new_value": "0x2cc8bb0",
+     "window": "strict 158 bytes from -0",
+     "status": "changed",
+     "implies": "0x2cc8bb0"
+    }
+   ],
+   "replace": {
+    "old_text": "local TAB_LABELS_RVA = 0x3310210",
+    "new_text": "local TAB_LABELS_RVA = 0x2cc8bb0"
+   },
+   "id": 16,
+   "data_check": {
+    "expected": "51f4708d605c5ef1eb7f8400",
+    "read_at_new": "51f4708d605c5ef1eb7f8400",
+    "occurrences_in_new_image": [
+     "0x2cc8bb0"
+    ]
+   },
+   "feeds_write": false
+  },
+  {
+   "file": "src/panel.lua",
+   "line": 53,
+   "name": "panel FONT_RVA",
+   "category": "global RVA",
+   "old": "0x3772268",
+   "new": "0x312d998",
+   "method": "old RIP-relative uses mapped by masked windows; target of the new instruction; installed MBM copy 0x312d998",
+   "witnesses": 6,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x1388044",
+     "old_ins": "mov rdi, qword ptr [rip + 0x23ea21d]",
+     "new_site": "0x121e994",
+     "new_ins": "mov rdi, qword ptr [rip + 0x1f0effd]",
+     "new_value": "0x312d998",
+     "window": "strict 157 bytes from -0",
+     "status": "changed",
+     "implies": "0x312d998"
+    },
+    {
+     "old_site": "0x1420bb8",
+     "old_ins": "mov rax, qword ptr [rip + 0x23516a9]",
+     "new_site": "0x12b8728",
+     "new_ins": "mov rax, qword ptr [rip + 0x1e75269]",
+     "new_value": "0x312d998",
+     "window": "relaxed 159 bytes from -0",
+     "status": "changed",
+     "implies": "0x312d998"
+    },
+    {
+     "old_site": "0x142260b",
+     "old_ins": "mov rbx, qword ptr [rip + 0x234fc56]",
+     "new_site": "0x12ba17b",
+     "new_ins": "mov rbx, qword ptr [rip + 0x1e73816]",
+     "new_value": "0x312d998",
+     "window": "relaxed 159 bytes from -0",
+     "status": "changed",
+     "implies": "0x312d998"
+    },
+    {
+     "old_site": "0x14315bc",
+     "old_ins": "mov rbx, qword ptr [rip + 0x2340ca5]",
+     "new_site": "0x12c913c",
+     "new_ins": "mov rbx, qword ptr [rip + 0x1e64855]",
+     "new_value": "0x312d998",
+     "window": "strict 47 bytes from -32",
+     "status": "changed",
+     "implies": "0x312d998"
+    },
+    {
+     "old_site": "0x1431d3d",
+     "old_ins": "mov rbx, qword ptr [rip + 0x2340524]",
+     "new_site": "0x12c98bd",
+     "new_ins": "mov rbx, qword ptr [rip + 0x1e640d4]",
+     "new_value": "0x312d998",
+     "window": "relaxed 155 bytes from -0",
+     "status": "changed",
+     "implies": "0x312d998"
+    }
+   ],
+   "replace": {
+    "old_text": "= 0x3772268, ",
+    "new_text": "= 0x312d998, "
+   },
+   "id": 17,
+   "data_check": {
+    "old_u64": "f27dd1c5ba2a6db5",
+    "new_u64": "f27dd1c5ba2a6db5",
+    "same resource hash in both captures": true
+   },
+   "feeds_write": false
+  },
+  {
+   "file": "src/panel.lua",
+   "line": 53,
+   "name": "panel MATERIAL_PTR_RVA",
+   "category": "global pointer RVA",
+   "old": "0x37c5478",
+   "new": "0x3180c08",
+   "method": "old RIP-relative uses mapped by masked windows; target of the new instruction; installed MBM copy 0x3180c08",
+   "witnesses": 16,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x1388030",
+     "old_ins": "mov rbx, qword ptr [rip + 0x243d441]",
+     "new_site": "0x121e980",
+     "new_ins": "mov rbx, qword ptr [rip + 0x1f62281]",
+     "new_value": "0x3180c08",
+     "window": "strict 157 bytes from -0",
+     "status": "changed",
+     "implies": "0x3180c08"
+    },
+    {
+     "old_site": "0x17d4fa1",
+     "old_ins": "mov rdx, qword ptr [rip + 0x1ff04d0]",
+     "new_site": "0x1656241",
+     "new_ins": "mov rdx, qword ptr [rip + 0x1b2a9c0]",
+     "new_value": "0x3180c08",
+     "window": "strict 159 bytes from -0",
+     "status": "changed",
+     "implies": "0x3180c08"
+    },
+    {
+     "old_site": "0x17d5b62",
+     "old_ins": "mov rdx, qword ptr [rip + 0x1fef90f]",
+     "new_site": "0x1656e02",
+     "new_ins": "mov rdx, qword ptr [rip + 0x1b29dff]",
+     "new_value": "0x3180c08",
+     "window": "strict 160 bytes from -0",
+     "status": "changed",
+     "implies": "0x3180c08"
+    },
+    {
+     "old_site": "0x17e4404",
+     "old_ins": "mov rdx, qword ptr [rip + 0x1fe106d]",
+     "new_site": "0x16656a4",
+     "new_ins": "mov rdx, qword ptr [rip + 0x1b1b55d]",
+     "new_value": "0x3180c08",
+     "window": "strict 159 bytes from -0",
+     "status": "changed",
+     "implies": "0x3180c08"
+    },
+    {
+     "old_site": "0x17e456c",
+     "old_ins": "mov rdx, qword ptr [rip + 0x1fe0f05]",
+     "new_site": "0x166580c",
+     "new_ins": "mov rdx, qword ptr [rip + 0x1b1b3f5]",
+     "new_value": "0x3180c08",
+     "window": "strict 160 bytes from -32",
+     "status": "changed",
+     "implies": "0x3180c08"
+    },
+    {
+     "old_site": "0x17e46cc",
+     "old_ins": "mov rdx, qword ptr [rip + 0x1fe0da5]",
+     "new_site": "0x166596c",
+     "new_ins": "mov rdx, qword ptr [rip + 0x1b1b295]",
+     "new_value": "0x3180c08",
+     "window": "strict 160 bytes from -32",
+     "status": "changed",
+     "implies": "0x3180c08"
+    },
+    {
+     "old_site": "0x17ec621",
+     "old_ins": "mov rdx, qword ptr [rip + 0x1fd8e50]",
+     "new_site": "0x166d8c1",
+     "new_ins": "mov rdx, qword ptr [rip + 0x1b13340]",
+     "new_value": "0x3180c08",
+     "window": "strict 160 bytes from -0",
+     "status": "changed",
+     "implies": "0x3180c08"
+    },
+    {
+     "old_site": "0x17ec709",
+     "old_ins": "mov rdx, qword ptr [rip + 0x1fd8d68]",
+     "new_site": "0x166d9a9",
+     "new_ins": "mov rdx, qword ptr [rip + 0x1b13258]",
+     "new_value": "0x3180c08",
+     "window": "strict 159 bytes from -0",
+     "status": "changed",
+     "implies": "0x3180c08"
+    }
+   ],
+   "replace": {
+    "old_text": ", 0x37c5478, ",
+    "new_text": ", 0x3180c08, "
+   },
+   "id": 18,
+   "feeds_write": false
+  },
+  {
+   "file": "src/panel.lua",
+   "line": 53,
+   "name": "panel ATLAS_RVA",
+   "category": "global RVA",
+   "old": "0x3772ee8",
+   "new": "0x312e618",
+   "method": "old RIP-relative uses mapped by masked windows; target of the new instruction; installed MBM copy 0x312e618",
+   "witnesses": 2,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x1388054",
+     "old_ins": "mov rsi, qword ptr [rip + 0x23eae8d]",
+     "new_site": "0x121e9a4",
+     "new_ins": "mov rsi, qword ptr [rip + 0x1f0fc6d]",
+     "new_value": "0x312e618",
+     "window": "strict 159 bytes from -0",
+     "status": "changed",
+     "implies": "0x312e618"
+    }
+   ],
+   "replace": {
+    "old_text": ", 0x3772ee8\n",
+    "new_text": ", 0x312e618\n"
+   },
+   "id": 19,
+   "data_check": {
+    "old_u64": "4b939fc791b9ebd1",
+    "new_u64": "4b939fc791b9ebd1",
+    "same resource hash in both captures": true
+   },
+   "feeds_write": false
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 84,
+   "name": "DORMANT_ACTIONS (36 {group, action, label})",
+   "category": "input action ids + label ids",
+   "old": "36 entries",
+   "new": "36 entries unchanged",
+   "feeds_write": true,
+   "method": "each original label id read back from the new action label table at 0x24bc8a0 + 4*(97*group + action); the whole 13x97 table is byte-identical to the old one, so the developer-only groups 9-12 and their action order are unchanged",
+   "witnesses": 36,
+   "confidence": "high",
+   "mismatches": [],
+   "id": 20
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 427,
+   "name": "binding tab label ids (TAB_LABELS check)",
+   "category": "label ids",
+   "old": "51f4708d 605c5ef1 eb7f8400",
+   "new": "51f4708d 605c5ef1 eb7f8400",
+   "feeds_write": false,
+   "method": "read back from the new table (keyboard, controller, ... page tab labels)",
+   "witnesses": 1,
+   "confidence": "high",
+   "id": 21
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 67,
+   "name": "MODS_TITLE_PTR_RVA (cache slot of 0x781e104c)",
+   "category": "localization cache slot RVA",
+   "old": "0x3328420",
+   "new": "0x2ce3680",
+   "feeds_write": true,
+   "label_id": "0x781e104c",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb0206a",
+      "cache": "0x3328420"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1e0b2",
+      "cache": "0x2ce3680"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "local MODS_TITLE_PTR_RVA = 0x3328420",
+    "new_text": "local MODS_TITLE_PTR_RVA = 0x2ce3680"
+   },
+   "id": 22
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 118,
+   "name": "LABEL_POOL 0x76ad93e3",
+   "category": "localization cache slot RVA",
+   "old": "0x3327550",
+   "new": "0x2ce2738",
+   "feeds_write": true,
+   "label_id": "0x76ad93e3",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb0204a",
+      "cache": "0x3327550"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1e076",
+      "cache": "0x2ce2738"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x76ad93e3, 0x3327550}",
+    "new_text": "{0x76ad93e3, 0x2ce2738}"
+   },
+   "id": 23
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 119,
+   "name": "LABEL_POOL 0xa9cf13bb",
+   "category": "localization cache slot RVA",
+   "old": "0x3328230",
+   "new": "0x2ce3490",
+   "feeds_write": true,
+   "label_id": "0xa9cf13bb",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb02bd0",
+      "cache": "0x3328230"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1ec3e",
+      "cache": "0x2ce3490"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0xa9cf13bb, 0x3328230}",
+    "new_text": "{0xa9cf13bb, 0x2ce3490}"
+   },
+   "id": 24
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 119,
+   "name": "LABEL_POOL 0x431da596",
+   "category": "localization cache slot RVA",
+   "old": "0x3328238",
+   "new": "0x2ce3498",
+   "feeds_write": true,
+   "label_id": "0x431da596",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb0157e",
+      "cache": "0x3328238"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1d5c6",
+      "cache": "0x2ce3498"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x431da596, 0x3328238}",
+    "new_text": "{0x431da596, 0x2ce3498}"
+   },
+   "id": 25
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 119,
+   "name": "LABEL_POOL 0xc80d6bd6",
+   "category": "localization cache slot RVA",
+   "old": "0x3328248",
+   "new": "0x2ce34a8",
+   "feeds_write": true,
+   "label_id": "0xc80d6bd6",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb031fc",
+      "cache": "0x3328248"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1f220",
+      "cache": "0x2ce34a8"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0xc80d6bd6, 0x3328248}",
+    "new_text": "{0xc80d6bd6, 0x2ce34a8}"
+   },
+   "id": 26
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 120,
+   "name": "LABEL_POOL 0x9845cd37",
+   "category": "localization cache slot RVA",
+   "old": "0x3328250",
+   "new": "0x2ce34b0",
+   "feeds_write": true,
+   "label_id": "0x9845cd37",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb02704",
+      "cache": "0x3328250"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1e7ba",
+      "cache": "0x2ce34b0"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x9845cd37, 0x3328250}",
+    "new_text": "{0x9845cd37, 0x2ce34b0}"
+   },
+   "id": 27
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 120,
+   "name": "LABEL_POOL 0x9f020af7",
+   "category": "localization cache slot RVA",
+   "old": "0x3328260",
+   "new": "0x2ce34c0",
+   "feeds_write": true,
+   "label_id": "0x9f020af7",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb028ba",
+      "cache": "0x3328260"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1e8f0",
+      "cache": "0x2ce34c0"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x9f020af7, 0x3328260}",
+    "new_text": "{0x9f020af7, 0x2ce34c0}"
+   },
+   "id": 28
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 120,
+   "name": "LABEL_POOL 0x766f7a90",
+   "category": "localization cache slot RVA",
+   "old": "0x3328268",
+   "new": "0x2ce34c8",
+   "feeds_write": true,
+   "label_id": "0x766f7a90",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb0200e",
+      "cache": "0x3328268"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1e028",
+      "cache": "0x2ce34c8"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x766f7a90, 0x3328268}",
+    "new_text": "{0x766f7a90, 0x2ce34c8}"
+   },
+   "id": 29
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 121,
+   "name": "LABEL_POOL 0x3707c006",
+   "category": "localization cache slot RVA",
+   "old": "0x3328270",
+   "new": "0x2ce34d0",
+   "feeds_write": true,
+   "label_id": "0x3707c006",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb01276",
+      "cache": "0x3328270"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1d25e",
+      "cache": "0x2ce34d0"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x3707c006, 0x3328270}",
+    "new_text": "{0x3707c006, 0x2ce34d0}"
+   },
+   "id": 30
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 121,
+   "name": "LABEL_POOL 0x57063e09",
+   "category": "localization cache slot RVA",
+   "old": "0x3328278",
+   "new": "0x2ce34d8",
+   "feeds_write": true,
+   "label_id": "0x57063e09",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb01984",
+      "cache": "0x3328278"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1d990",
+      "cache": "0x2ce34d8"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x57063e09, 0x3328278}",
+    "new_text": "{0x57063e09, 0x2ce34d8}"
+   },
+   "id": 31
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 121,
+   "name": "LABEL_POOL 0x039cdc47",
+   "category": "localization cache slot RVA",
+   "old": "0x3328280",
+   "new": "0x2ce34e0",
+   "feeds_write": true,
+   "label_id": "0x39cdc47",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb00790",
+      "cache": "0x3328280"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1c730",
+      "cache": "0x2ce34e0"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x039cdc47, 0x3328280}",
+    "new_text": "{0x039cdc47, 0x2ce34e0}"
+   },
+   "id": 32
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 122,
+   "name": "LABEL_POOL 0x8f515fd7",
+   "category": "localization cache slot RVA",
+   "old": "0x3328288",
+   "new": "0x2ce34e8",
+   "feeds_write": true,
+   "label_id": "0x8f515fd7",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb0250a",
+      "cache": "0x3328288"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1e55a",
+      "cache": "0x2ce34e8"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x8f515fd7, 0x3328288}",
+    "new_text": "{0x8f515fd7, 0x2ce34e8}"
+   },
+   "id": 33
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 122,
+   "name": "LABEL_POOL 0x9cd0b591",
+   "category": "localization cache slot RVA",
+   "old": "0x3328290",
+   "new": "0x2ce34f0",
+   "feeds_write": true,
+   "label_id": "0x9cd0b591",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb02828",
+      "cache": "0x3328290"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1e878",
+      "cache": "0x2ce34f0"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x9cd0b591, 0x3328290}",
+    "new_text": "{0x9cd0b591, 0x2ce34f0}"
+   },
+   "id": 34
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 122,
+   "name": "LABEL_POOL 0xc58bdfa4",
+   "category": "localization cache slot RVA",
+   "old": "0x3328298",
+   "new": "0x2ce34f8",
+   "feeds_write": true,
+   "label_id": "0xc58bdfa4",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb0308e",
+      "cache": "0x3328298"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1f1dc",
+      "cache": "0x2ce34f8"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0xc58bdfa4, 0x3328298}",
+    "new_text": "{0xc58bdfa4, 0x2ce34f8}"
+   },
+   "id": 35
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 123,
+   "name": "LABEL_POOL 0xc977f7ac",
+   "category": "localization cache slot RVA",
+   "old": "0x33282a0",
+   "new": "0x2ce3500",
+   "feeds_write": true,
+   "label_id": "0xc977f7ac",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb0307c",
+      "cache": "0x33282a0"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1f2b4",
+      "cache": "0x2ce3500"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0xc977f7ac, 0x33282a0}",
+    "new_text": "{0xc977f7ac, 0x2ce3500}"
+   },
+   "id": 36
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 123,
+   "name": "LABEL_POOL 0xfa69c153",
+   "category": "localization cache slot RVA",
+   "old": "0x33282a8",
+   "new": "0x2ce3508",
+   "feeds_write": true,
+   "label_id": "0xfa69c153",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb03cc6",
+      "cache": "0x33282a8"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1fbcc",
+      "cache": "0x2ce3508"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0xfa69c153, 0x33282a8}",
+    "new_text": "{0xfa69c153, 0x2ce3508}"
+   },
+   "id": 37
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 123,
+   "name": "LABEL_POOL 0xed823922",
+   "category": "localization cache slot RVA",
+   "old": "0x33282b0",
+   "new": "0x2ce3510",
+   "feeds_write": true,
+   "label_id": "0xed823922",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb03964",
+      "cache": "0x33282b0"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1fa4e",
+      "cache": "0x2ce3510"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0xed823922, 0x33282b0}",
+    "new_text": "{0xed823922, 0x2ce3510}"
+   },
+   "id": 38
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 124,
+   "name": "LABEL_POOL 0x8cc549fb",
+   "category": "localization cache slot RVA",
+   "old": "0x33282b8",
+   "new": "0x2ce3518",
+   "feeds_write": true,
+   "label_id": "0x8cc549fb",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb024be",
+      "cache": "0x33282b8"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1e50e",
+      "cache": "0x2ce3518"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x8cc549fb, 0x33282b8}",
+    "new_text": "{0x8cc549fb, 0x2ce3518}"
+   },
+   "id": 39
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 124,
+   "name": "LABEL_POOL 0x780b23de",
+   "category": "localization cache slot RVA",
+   "old": "0x33282c0",
+   "new": "0x2ce3520",
+   "feeds_write": true,
+   "label_id": "0x780b23de",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb02062",
+      "cache": "0x33282c0"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1e0aa",
+      "cache": "0x2ce3520"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x780b23de, 0x33282c0}",
+    "new_text": "{0x780b23de, 0x2ce3520}"
+   },
+   "id": 40
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 124,
+   "name": "LABEL_POOL 0x8296f00f",
+   "category": "localization cache slot RVA",
+   "old": "0x33282c8",
+   "new": "0x2ce3528",
+   "feeds_write": true,
+   "label_id": "0x8296f00f",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb022fc",
+      "cache": "0x33282c8"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1e306",
+      "cache": "0x2ce3528"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x8296f00f, 0x33282c8}",
+    "new_text": "{0x8296f00f, 0x2ce3528}"
+   },
+   "id": 41
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 125,
+   "name": "LABEL_POOL 0x970548b1",
+   "category": "localization cache slot RVA",
+   "old": "0x33282d0",
+   "new": "0x2ce3530",
+   "feeds_write": true,
+   "label_id": "0x970548b1",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb0271e",
+      "cache": "0x33282d0"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1e786",
+      "cache": "0x2ce3530"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x970548b1, 0x33282d0}",
+    "new_text": "{0x970548b1, 0x2ce3530}"
+   },
+   "id": 42
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 125,
+   "name": "LABEL_POOL 0x019bb39b",
+   "category": "localization cache slot RVA",
+   "old": "0x33282e0",
+   "new": "0x2ce3540",
+   "feeds_write": true,
+   "label_id": "0x19bb39b",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb00718",
+      "cache": "0x33282e0"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1c6b8",
+      "cache": "0x2ce3540"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x019bb39b, 0x33282e0}",
+    "new_text": "{0x019bb39b, 0x2ce3540}"
+   },
+   "id": 43
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 125,
+   "name": "LABEL_POOL 0xbfd44f9f",
+   "category": "localization cache slot RVA",
+   "old": "0x33282e8",
+   "new": "0x2ce3548",
+   "feeds_write": true,
+   "label_id": "0xbfd44f9f",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb0300c",
+      "cache": "0x33282e8"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1f0a4",
+      "cache": "0x2ce3548"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0xbfd44f9f, 0x33282e8}",
+    "new_text": "{0xbfd44f9f, 0x2ce3548}"
+   },
+   "id": 44
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 126,
+   "name": "LABEL_POOL 0x110ebfca",
+   "category": "localization cache slot RVA",
+   "old": "0x33282f0",
+   "new": "0x2ce3550",
+   "feeds_write": true,
+   "label_id": "0x110ebfca",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb00ab0",
+      "cache": "0x33282f0"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1ca66",
+      "cache": "0x2ce3550"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x110ebfca, 0x33282f0}",
+    "new_text": "{0x110ebfca, 0x2ce3550}"
+   },
+   "id": 45
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 126,
+   "name": "LABEL_POOL 0x1a8ae3c1",
+   "category": "localization cache slot RVA",
+   "old": "0x3328300",
+   "new": "0x2ce3560",
+   "feeds_write": true,
+   "label_id": "0x1a8ae3c1",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb00c5c",
+      "cache": "0x3328300"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1cc20",
+      "cache": "0x2ce3560"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x1a8ae3c1, 0x3328300}",
+    "new_text": "{0x1a8ae3c1, 0x2ce3560}"
+   },
+   "id": 46
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 126,
+   "name": "LABEL_POOL 0x34fc79a3",
+   "category": "localization cache slot RVA",
+   "old": "0x3328310",
+   "new": "0x2ce3570",
+   "feeds_write": true,
+   "label_id": "0x34fc79a3",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb0121a",
+      "cache": "0x3328310"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1d1dc",
+      "cache": "0x2ce3570"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x34fc79a3, 0x3328310}",
+    "new_text": "{0x34fc79a3, 0x2ce3570}"
+   },
+   "id": 47
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 127,
+   "name": "LABEL_POOL 0xfc0db519",
+   "category": "localization cache slot RVA",
+   "old": "0x3328318",
+   "new": "0x2ce3578",
+   "feeds_write": true,
+   "label_id": "0xfc0db519",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb03d0a",
+      "cache": "0x3328318"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1fe02",
+      "cache": "0x2ce3578"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0xfc0db519, 0x3328318}",
+    "new_text": "{0xfc0db519, 0x2ce3578}"
+   },
+   "id": 48
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 127,
+   "name": "LABEL_POOL 0x1aef663a",
+   "category": "localization cache slot RVA",
+   "old": "0x3328320",
+   "new": "0x2ce3580",
+   "feeds_write": true,
+   "label_id": "0x1aef663a",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb00c64",
+      "cache": "0x3328320"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1cc28",
+      "cache": "0x2ce3580"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x1aef663a, 0x3328320}",
+    "new_text": "{0x1aef663a, 0x2ce3580}"
+   },
+   "id": 49
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 127,
+   "name": "LABEL_POOL 0x568a85ad",
+   "category": "localization cache slot RVA",
+   "old": "0x3328328",
+   "new": "0x2ce3588",
+   "feeds_write": true,
+   "label_id": "0x568a85ad",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb0197c",
+      "cache": "0x3328328"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1d988",
+      "cache": "0x2ce3588"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x568a85ad, 0x3328328}",
+    "new_text": "{0x568a85ad, 0x2ce3588}"
+   },
+   "id": 50
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 128,
+   "name": "LABEL_POOL 0xa1d192a5",
+   "category": "localization cache slot RVA",
+   "old": "0x3328340",
+   "new": "0x2ce35a0",
+   "feeds_write": true,
+   "label_id": "0xa1d192a5",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb029bc",
+      "cache": "0x3328340"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1e9b2",
+      "cache": "0x2ce35a0"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0xa1d192a5, 0x3328340}",
+    "new_text": "{0xa1d192a5, 0x2ce35a0}"
+   },
+   "id": 51
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 128,
+   "name": "LABEL_POOL 0xd4bb26a2",
+   "category": "localization cache slot RVA",
+   "old": "0x3328368",
+   "new": "0x2ce35c8",
+   "feeds_write": true,
+   "label_id": "0xd4bb26a2",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb033c0",
+      "cache": "0x3328368"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1f46e",
+      "cache": "0x2ce35c8"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0xd4bb26a2, 0x3328368}",
+    "new_text": "{0xd4bb26a2, 0x2ce35c8}"
+   },
+   "id": 52
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 128,
+   "name": "LABEL_POOL 0x1a416656",
+   "category": "localization cache slot RVA",
+   "old": "0x3328370",
+   "new": "0x2ce35d0",
+   "feeds_write": true,
+   "label_id": "0x1a416656",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb00c54",
+      "cache": "0x3328370"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1cc18",
+      "cache": "0x2ce35d0"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x1a416656, 0x3328370}",
+    "new_text": "{0x1a416656, 0x2ce35d0}"
+   },
+   "id": 53
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 129,
+   "name": "LABEL_POOL 0x0b2f407b",
+   "category": "localization cache slot RVA",
+   "old": "0x3328390",
+   "new": "0x2ce35f0",
+   "feeds_write": true,
+   "label_id": "0xb2f407b",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb00958",
+      "cache": "0x3328390"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1c8e0",
+      "cache": "0x2ce35f0"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x0b2f407b, 0x3328390}",
+    "new_text": "{0x0b2f407b, 0x2ce35f0}"
+   },
+   "id": 54
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 129,
+   "name": "LABEL_POOL 0xde392204",
+   "category": "localization cache slot RVA",
+   "old": "0x3328398",
+   "new": "0x2ce35f8",
+   "feeds_write": true,
+   "label_id": "0xde392204",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb035d6",
+      "cache": "0x3328398"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1f6b4",
+      "cache": "0x2ce35f8"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0xde392204, 0x3328398}",
+    "new_text": "{0xde392204, 0x2ce35f8}"
+   },
+   "id": 55
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 129,
+   "name": "LABEL_POOL 0xb753331c",
+   "category": "localization cache slot RVA",
+   "old": "0x33283b8",
+   "new": "0x2ce3618",
+   "feeds_write": true,
+   "label_id": "0xb753331c",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb02cee",
+      "cache": "0x33283b8"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1ef10",
+      "cache": "0x2ce3618"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0xb753331c, 0x33283b8}",
+    "new_text": "{0xb753331c, 0x2ce3618}"
+   },
+   "id": 56
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 130,
+   "name": "LABEL_POOL 0xb4a59ceb",
+   "category": "localization cache slot RVA",
+   "old": "0x33283c0",
+   "new": "0x2ce3620",
+   "feeds_write": true,
+   "label_id": "0xb4a59ceb",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb02e0c",
+      "cache": "0x33283c0"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1eea0",
+      "cache": "0x2ce3620"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0xb4a59ceb, 0x33283c0}",
+    "new_text": "{0xb4a59ceb, 0x2ce3620}"
+   },
+   "id": 57
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 130,
+   "name": "LABEL_POOL 0xfd66d0d5",
+   "category": "localization cache slot RVA",
+   "old": "0x33283c8",
+   "new": "0x2ce3628",
+   "feeds_write": true,
+   "label_id": "0xfd66d0d5",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb03ca0",
+      "cache": "0x33283c8"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1fe4e",
+      "cache": "0x2ce3628"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0xfd66d0d5, 0x33283c8}",
+    "new_text": "{0xfd66d0d5, 0x2ce3628}"
+   },
+   "id": 58
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 130,
+   "name": "LABEL_POOL 0x9f3cb7c9",
+   "category": "localization cache slot RVA",
+   "old": "0x33283d0",
+   "new": "0x2ce3630",
+   "feeds_write": true,
+   "label_id": "0x9f3cb7c9",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb028da",
+      "cache": "0x33283d0"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1e946",
+      "cache": "0x2ce3630"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x9f3cb7c9, 0x33283d0}",
+    "new_text": "{0x9f3cb7c9, 0x2ce3630}"
+   },
+   "id": 59
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 131,
+   "name": "LABEL_POOL 0x09976730",
+   "category": "localization cache slot RVA",
+   "old": "0x33283d8",
+   "new": "0x2ce3638",
+   "feeds_write": true,
+   "label_id": "0x9976730",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb008ea",
+      "cache": "0x33283d8"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1c88a",
+      "cache": "0x2ce3638"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x09976730, 0x33283d8}",
+    "new_text": "{0x09976730, 0x2ce3638}"
+   },
+   "id": 60
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 131,
+   "name": "LABEL_POOL 0x72b848bc",
+   "category": "localization cache slot RVA",
+   "old": "0x33283e0",
+   "new": "0x2ce3640",
+   "feeds_write": true,
+   "label_id": "0x72b848bc",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb01f64",
+      "cache": "0x33283e0"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1df50",
+      "cache": "0x2ce3640"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x72b848bc, 0x33283e0}",
+    "new_text": "{0x72b848bc, 0x2ce3640}"
+   },
+   "id": 61
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 131,
+   "name": "LABEL_POOL 0x6e083332",
+   "category": "localization cache slot RVA",
+   "old": "0x33283e8",
+   "new": "0x2ce3648",
+   "feeds_write": true,
+   "label_id": "0x6e083332",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb01e40",
+      "cache": "0x33283e8"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1de6a",
+      "cache": "0x2ce3648"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x6e083332, 0x33283e8}",
+    "new_text": "{0x6e083332, 0x2ce3648}"
+   },
+   "id": 62
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 132,
+   "name": "LABEL_POOL 0xbb4d13e4",
+   "category": "localization cache slot RVA",
+   "old": "0x33283f0",
+   "new": "0x2ce3650",
+   "feeds_write": true,
+   "label_id": "0xbb4d13e4",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb02eac",
+      "cache": "0x33283f0"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1effa",
+      "cache": "0x2ce3650"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0xbb4d13e4, 0x33283f0}",
+    "new_text": "{0xbb4d13e4, 0x2ce3650}"
+   },
+   "id": 63
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 132,
+   "name": "LABEL_POOL 0x8c084330",
+   "category": "localization cache slot RVA",
+   "old": "0x33283f8",
+   "new": "0x2ce3658",
+   "feeds_write": true,
+   "label_id": "0x8c084330",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb02482",
+      "cache": "0x33283f8"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1e4d2",
+      "cache": "0x2ce3658"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x8c084330, 0x33283f8}",
+    "new_text": "{0x8c084330, 0x2ce3658}"
+   },
+   "id": 64
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 132,
+   "name": "LABEL_POOL 0x480ccb51",
+   "category": "localization cache slot RVA",
+   "old": "0x3328400",
+   "new": "0x2ce3660",
+   "feeds_write": true,
+   "label_id": "0x480ccb51",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb016e4",
+      "cache": "0x3328400"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1d6b8",
+      "cache": "0x2ce3660"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x480ccb51, 0x3328400}",
+    "new_text": "{0x480ccb51, 0x2ce3660}"
+   },
+   "id": 65
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 133,
+   "name": "LABEL_POOL 0xe39ec311",
+   "category": "localization cache slot RVA",
+   "old": "0x3328408",
+   "new": "0x2ce3668",
+   "feeds_write": true,
+   "label_id": "0xe39ec311",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb0370a",
+      "cache": "0x3328408"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1f7a2",
+      "cache": "0x2ce3668"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0xe39ec311, 0x3328408}",
+    "new_text": "{0xe39ec311, 0x2ce3668}"
+   },
+   "id": 66
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 133,
+   "name": "LABEL_POOL 0xf4bfa80d",
+   "category": "localization cache slot RVA",
+   "old": "0x3328410",
+   "new": "0x2ce3670",
+   "feeds_write": true,
+   "label_id": "0xf4bfa80d",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb03b82",
+      "cache": "0x3328410"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1fc6c",
+      "cache": "0x2ce3670"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0xf4bfa80d, 0x3328410}",
+    "new_text": "{0xf4bfa80d, 0x2ce3670}"
+   },
+   "id": 67
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 133,
+   "name": "LABEL_POOL 0xcffc99dd",
+   "category": "localization cache slot RVA",
+   "old": "0x3328418",
+   "new": "0x2ce3678",
+   "feeds_write": true,
+   "label_id": "0xcffc99dd",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb0334c",
+      "cache": "0x3328418"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1f3f6",
+      "cache": "0x2ce3678"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0xcffc99dd, 0x3328418}",
+    "new_text": "{0xcffc99dd, 0x2ce3678}"
+   },
+   "id": 68
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 134,
+   "name": "LABEL_POOL 0xccd4045f",
+   "category": "localization cache slot RVA",
+   "old": "0x3328428",
+   "new": "0x2ce3688",
+   "feeds_write": true,
+   "label_id": "0xccd4045f",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb032e6",
+      "cache": "0x3328428"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1f386",
+      "cache": "0x2ce3688"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0xccd4045f, 0x3328428}",
+    "new_text": "{0xccd4045f, 0x2ce3688}"
+   },
+   "id": 69
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 134,
+   "name": "LABEL_POOL 0x11f38dc4",
+   "category": "localization cache slot RVA",
+   "old": "0x3328430",
+   "new": "0x2ce3690",
+   "feeds_write": true,
+   "label_id": "0x11f38dc4",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb00b06",
+      "cache": "0x3328430"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1cac6",
+      "cache": "0x2ce3690"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x11f38dc4, 0x3328430}",
+    "new_text": "{0x11f38dc4, 0x2ce3690}"
+   },
+   "id": 70
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 134,
+   "name": "LABEL_POOL 0xd8250934",
+   "category": "localization cache slot RVA",
+   "old": "0x3328438",
+   "new": "0x2ce3698",
+   "feeds_write": true,
+   "label_id": "0xd8250934",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb03470",
+      "cache": "0x3328438"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1f502",
+      "cache": "0x2ce3698"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0xd8250934, 0x3328438}",
+    "new_text": "{0xd8250934, 0x2ce3698}"
+   },
+   "id": 71
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 135,
+   "name": "LABEL_POOL 0x43213f6d",
+   "category": "localization cache slot RVA",
+   "old": "0x3328440",
+   "new": "0x2ce36a0",
+   "feeds_write": true,
+   "label_id": "0x43213f6d",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb015fa",
+      "cache": "0x3328440"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1d5ce",
+      "cache": "0x2ce36a0"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x43213f6d, 0x3328440}",
+    "new_text": "{0x43213f6d, 0x2ce36a0}"
+   },
+   "id": 72
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 135,
+   "name": "LABEL_POOL 0x2ec24cb3",
+   "category": "localization cache slot RVA",
+   "old": "0x3328448",
+   "new": "0x2ce36a8",
+   "feeds_write": true,
+   "label_id": "0x2ec24cb3",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb00d62",
+      "cache": "0x3328448"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1d092",
+      "cache": "0x2ce36a8"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x2ec24cb3, 0x3328448}",
+    "new_text": "{0x2ec24cb3, 0x2ce36a8}"
+   },
+   "id": 73
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 135,
+   "name": "LABEL_POOL 0xf40bd215",
+   "category": "localization cache slot RVA",
+   "old": "0x3328450",
+   "new": "0x2ce36b0",
+   "feeds_write": true,
+   "label_id": "0xf40bd215",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb03b10",
+      "cache": "0x3328450"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1fbfa",
+      "cache": "0x2ce36b0"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0xf40bd215, 0x3328450}",
+    "new_text": "{0xf40bd215, 0x2ce36b0}"
+   },
+   "id": 74
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 136,
+   "name": "LABEL_POOL 0xafba9b8b",
+   "category": "localization cache slot RVA",
+   "old": "0x3328458",
+   "new": "0x2ce36b8",
+   "feeds_write": true,
+   "label_id": "0xafba9b8b",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb02d36",
+      "cache": "0x3328458"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1edc0",
+      "cache": "0x2ce36b8"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0xafba9b8b, 0x3328458}",
+    "new_text": "{0xafba9b8b, 0x2ce36b8}"
+   },
+   "id": 75
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 136,
+   "name": "LABEL_POOL 0x0944ce13",
+   "category": "localization cache slot RVA",
+   "old": "0x3328460",
+   "new": "0x2ce36c0",
+   "feeds_write": true,
+   "label_id": "0x944ce13",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb008da",
+      "cache": "0x3328460"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1c87a",
+      "cache": "0x2ce36c0"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x0944ce13, 0x3328460}",
+    "new_text": "{0x0944ce13, 0x2ce36c0}"
+   },
+   "id": 76
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 136,
+   "name": "LABEL_POOL 0xddc61cbf",
+   "category": "localization cache slot RVA",
+   "old": "0x3328468",
+   "new": "0x2ce36c8",
+   "feeds_write": true,
+   "label_id": "0xddc61cbf",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb035e8",
+      "cache": "0x3328468"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1f652",
+      "cache": "0x2ce36c8"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0xddc61cbf, 0x3328468}",
+    "new_text": "{0xddc61cbf, 0x2ce36c8}"
+   },
+   "id": 77
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 137,
+   "name": "LABEL_POOL 0x61d0e824",
+   "category": "localization cache slot RVA",
+   "old": "0x3328470",
+   "new": "0x2ce36d0",
+   "feeds_write": true,
+   "label_id": "0x61d0e824",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb01bf2",
+      "cache": "0x3328470"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1dbea",
+      "cache": "0x2ce36d0"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x61d0e824, 0x3328470}",
+    "new_text": "{0x61d0e824, 0x2ce36d0}"
+   },
+   "id": 78
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 137,
+   "name": "LABEL_POOL 0xa95fd6a0",
+   "category": "localization cache slot RVA",
+   "old": "0x3328478",
+   "new": "0x2ce36d8",
+   "feeds_write": true,
+   "label_id": "0xa95fd6a0",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb02bac",
+      "cache": "0x3328478"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1ebf0",
+      "cache": "0x2ce36d8"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0xa95fd6a0, 0x3328478}",
+    "new_text": "{0xa95fd6a0, 0x2ce36d8}"
+   },
+   "id": 79
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 137,
+   "name": "LABEL_POOL 0x7505bcbf",
+   "category": "localization cache slot RVA",
+   "old": "0x3328480",
+   "new": "0x2ce36e0",
+   "feeds_write": true,
+   "label_id": "0x7505bcbf",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb01fa0",
+      "cache": "0x3328480"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1dfd2",
+      "cache": "0x2ce36e0"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x7505bcbf, 0x3328480}",
+    "new_text": "{0x7505bcbf, 0x2ce36e0}"
+   },
+   "id": 80
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 138,
+   "name": "LABEL_POOL 0x4777d7c3",
+   "category": "localization cache slot RVA",
+   "old": "0x3328488",
+   "new": "0x2ce36e8",
+   "feeds_write": true,
+   "label_id": "0x4777d7c3",
+   "method": "the game's id->slot dispatch leaf for this id emulated in both images (cmp ecx, id; branches; lea rax, [rip + slot]; ret): it yields the old slot in the old image and one slot in the new; native-work/localization-cache-map.json agrees",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": {
+    "old": [
+     {
+      "comparison": "0xb016c0",
+      "cache": "0x3328488"
+     }
+    ],
+    "new": [
+     {
+      "comparison": "0xb1d66a",
+      "cache": "0x2ce36e8"
+     }
+    ]
+   },
+   "replace": {
+    "old_text": "{0x4777d7c3, 0x3328488}",
+    "new_text": "{0x4777d7c3, 0x2ce36e8}"
+   },
+   "id": 81
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 68,
+   "name": "MODS_TITLE_ID",
+   "category": "label id",
+   "old": "0x781e104c",
+   "new": "0x781e104c",
+   "feeds_write": true,
+   "method": "the id still has exactly one cache-slot leaf in the new image (row above); MBM writes the slot, the game formats the text from it",
+   "witnesses": 1,
+   "confidence": "high",
+   "id": 82
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 104,
+   "name": "BINDING_MAP (owner + 686800 = 0xa7ad0)",
+   "category": "struct offset",
+   "old": "0xa7ad0",
+   "new": "0xa7ad0",
+   "feeds_write": true,
+   "witnesses": 12,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x12f8023",
+     "old_ins": "mov dword ptr [rbx + 0xa7ad0], eax",
+     "new_site": "0x118afc3",
+     "window": "strict 159 bytes from -0",
+     "new_ins": "mov dword ptr [rbx + 0xa7ad0], eax",
+     "new_value": "0xa7ad0",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xa7ad0"
+    },
+    {
+     "old_site": "0x12f8846",
+     "old_ins": "lea rcx, [rbx + 0xa7ad0]",
+     "new_site": "0x118b7e6",
+     "window": "strict 157 bytes from -0",
+     "new_ins": "lea rcx, [rbx + 0xa7ad0]",
+     "new_value": "0xa7ad0",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xa7ad0"
+    },
+    {
+     "old_site": "0x12f94c2",
+     "old_ins": "mov r11, qword ptr [r11 + 0xa7ad0]",
+     "new_site": "0x118c462",
+     "window": "strict 95 bytes from -0",
+     "new_ins": "mov r11, qword ptr [r11 + 0xa7ad0]",
+     "new_value": "0xa7ad0",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xa7ad0"
+    },
+    {
+     "old_site": "0x12f9592",
+     "old_ins": "mov r11, qword ptr [rbp + 0xa7ad0]",
+     "new_site": "0x118c532",
+     "window": "strict 160 bytes from -0",
+     "new_ins": "mov r11, qword ptr [rbp + 0xa7ad0]",
+     "new_value": "0xa7ad0",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xa7ad0"
+    },
+    {
+     "old_site": "0x12f99a8",
+     "old_ins": "mov rbx, qword ptr [rbx + 0xa7ad0]",
+     "new_site": "0x118c948",
+     "window": "strict 125 bytes from -0",
+     "new_ins": "mov rbx, qword ptr [rbx + 0xa7ad0]",
+     "new_value": "0xa7ad0",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xa7ad0"
+    },
+    {
+     "old_site": "0x12f9b93",
+     "old_ins": "mov r10, qword ptr [r10 + 0xa7ad0]",
+     "new_site": "0x118cb33",
+     "window": "strict 158 bytes from -0",
+     "new_ins": "mov r10, qword ptr [r10 + 0xa7ad0]",
+     "new_value": "0xa7ad0",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xa7ad0"
+    },
+    {
+     "old_site": "0x12fa3e1",
+     "old_ins": "mov r11, qword ptr [rsi + 0xa7ad0]",
+     "new_site": "0x118d381",
+     "window": "strict 153 bytes from -0",
+     "new_ins": "mov r11, qword ptr [rsi + 0xa7ad0]",
+     "new_value": "0xa7ad0",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xa7ad0"
+    },
+    {
+     "old_site": "0x12fcf70",
+     "old_ins": "mov r14, qword ptr [r15 + 0xa7ad0]",
+     "new_site": "0x118ff10",
+     "window": "strict 158 bytes from -0",
+     "new_ins": "mov r14, qword ptr [r15 + 0xa7ad0]",
+     "new_value": "0xa7ad0",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xa7ad0"
+    }
+   ],
+   "note": "live 26088801: the installed MBM copy indexed this map and logged \"Added Mod Bindings Menu's keyboard defaults to 6 binding records\" and slot 1's mappings",
+   "id": 83
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 104,
+   "name": "DEFAULTS_MAP (owner + 686968 = 0xa7b78)",
+   "category": "struct offset",
+   "old": "0xa7b78",
+   "new": "0xa7b78",
+   "feeds_write": true,
+   "witnesses": 1,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x12f8859",
+     "old_ins": "lea rcx, [rbx + 0xa7b78]",
+     "new_site": "0x118b7f9",
+     "window": "strict 158 bytes from -0",
+     "new_ins": "lea rcx, [rbx + 0xa7b78]",
+     "new_value": "0xa7b78",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xa7b78"
+    },
+    {
+     "old_site": "0x18137f8",
+     "old_ins": "mov r10, qword ptr [rbx + 0xa7b78]",
+     "status": "unmapped",
+     "base": "0x0"
+    },
+    {
+     "old_site": "0x1813add",
+     "old_ins": "mov r11, qword ptr [rdi + 0xa7b78]",
+     "status": "unmapped",
+     "base": "0x0"
+    },
+    {
+     "old_site": "0x12f8859",
+     "old_ins": "lea rcx, [rbx + 0xa7b78]",
+     "new_site": "0x118b7f9",
+     "new_ins": "lea rcx, [rbx + 0xa7b78]",
+     "new_value": "0xa7b78",
+     "function": "maps_init",
+     "strong": true,
+     "window": "aligned in function 0x12f8820->0x118b7c0",
+     "status": "duplicate of an earlier witness",
+     "base": "0x0"
+    }
+   ],
+   "id": 84
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 104,
+   "name": "map capacity word (map + 8 == 256: +0xa7ad8)",
+   "category": "layout",
+   "old": "0xa7ad8",
+   "new": "0xa7ad8",
+   "feeds_write": false,
+   "witnesses": 11,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x12f94a8",
+     "old_ins": "mov r10d, dword ptr [r11 + 0xa7ad8]",
+     "new_site": "0x118c448",
+     "new_ins": "mov r10d, dword ptr [r11 + 0xa7ad8]",
+     "new_value": "0xa7ad8",
+     "function": "map_lookup",
+     "strong": true,
+     "window": "aligned in function 0x12f9470->0x118c410 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0xa7ad8"
+    },
+    {
+     "old_site": "0x12f9568",
+     "old_ins": "mov r8d, dword ptr [rbp + 0xa7ad8]",
+     "new_site": "0x118c508",
+     "window": "strict 158 bytes from -0",
+     "new_ins": "mov r8d, dword ptr [rbp + 0xa7ad8]",
+     "new_value": "0xa7ad8",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xa7ad8"
+    },
+    {
+     "old_site": "0x12f997d",
+     "old_ins": "mov r10d, dword ptr [rbx + 0xa7ad8]",
+     "new_site": "0x118c91d",
+     "window": "strict 160 bytes from -0",
+     "new_ins": "mov r10d, dword ptr [rbx + 0xa7ad8]",
+     "new_value": "0xa7ad8",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xa7ad8"
+    },
+    {
+     "old_site": "0x12f9b78",
+     "old_ins": "mov r9d, dword ptr [r10 + 0xa7ad8]",
+     "new_site": "0x118cb18",
+     "window": "strict 159 bytes from -0",
+     "new_ins": "mov r9d, dword ptr [r10 + 0xa7ad8]",
+     "new_value": "0xa7ad8",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xa7ad8"
+    },
+    {
+     "old_site": "0x12fa3b8",
+     "old_ins": "mov r9d, dword ptr [rsi + 0xa7ad8]",
+     "new_site": "0x118d358",
+     "window": "strict 158 bytes from -0",
+     "new_ins": "mov r9d, dword ptr [rsi + 0xa7ad8]",
+     "new_value": "0xa7ad8",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xa7ad8"
+    },
+    {
+     "old_site": "0x12fcf41",
+     "old_ins": "mov r9d, dword ptr [r15 + 0xa7ad8]",
+     "new_site": "0x118fee1",
+     "window": "strict 158 bytes from -0",
+     "new_ins": "mov r9d, dword ptr [r15 + 0xa7ad8]",
+     "new_value": "0xa7ad8",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xa7ad8"
+    },
+    {
+     "old_site": "0x12fd10f",
+     "old_ins": "mov r8d, dword ptr [rdi + 0xa7ad8]",
+     "new_site": "0x11900af",
+     "window": "strict 153 bytes from -0",
+     "new_ins": "mov r8d, dword ptr [rdi + 0xa7ad8]",
+     "new_value": "0xa7ad8",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xa7ad8"
+    },
+    {
+     "old_site": "0x12fd946",
+     "old_ins": "mov r9d, dword ptr [rsi + 0xa7ad8]",
+     "new_site": "0x11908e6",
+     "window": "strict 95 bytes from -0",
+     "new_ins": "mov r9d, dword ptr [rsi + 0xa7ad8]",
+     "new_value": "0xa7ad8",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xa7ad8"
+    }
+   ],
+   "note": "MBM requires 256 records (MAP_RECORDS); the lookup masks the hash with this count - 1",
+   "id": 85
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 105,
+   "name": "RECORD_SIZE (8 + 16 * 20 = 0x148)",
+   "category": "layout",
+   "old": "0x148",
+   "new": "0x148",
+   "feeds_write": true,
+   "witnesses": 11,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x12f94d8",
+     "old_ins": "imul r9, rcx, 0x148",
+     "new_site": "0x118c478",
+     "new_ins": "imul r9, rcx, 0x148",
+     "new_value": "0x148",
+     "function": "map_lookup",
+     "strong": true,
+     "window": "aligned in function 0x12f9470->0x118c410 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x148"
+    },
+    {
+     "old_site": "0x12f95a9",
+     "old_ins": "imul rsi, rcx, 0x148",
+     "new_site": "0x118c549",
+     "window": "strict 160 bytes from -0",
+     "new_ins": "imul rsi, rcx, 0x148",
+     "new_value": "0x148",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x148"
+    },
+    {
+     "old_site": "0x12f99b8",
+     "old_ins": "imul r9, rcx, 0x148",
+     "new_site": "0x118c958",
+     "window": "strict 96 bytes from -0",
+     "new_ins": "imul r9, rcx, 0x148",
+     "new_value": "0x148",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x148"
+    },
+    {
+     "old_site": "0x12f9ba8",
+     "old_ins": "imul r8, rcx, 0x148",
+     "new_site": "0x118cb48",
+     "window": "strict 160 bytes from -0",
+     "new_ins": "imul r8, rcx, 0x148",
+     "new_value": "0x148",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x148"
+    },
+    {
+     "old_site": "0x12fa3f9",
+     "old_ins": "imul r13, rcx, 0x148",
+     "new_site": "0x118d399",
+     "window": "strict 153 bytes from -0",
+     "new_ins": "imul r13, rcx, 0x148",
+     "new_value": "0x148",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x148"
+    },
+    {
+     "old_site": "0x12fcf89",
+     "old_ins": "imul rsi, rcx, 0x148",
+     "new_site": "0x118ff29",
+     "window": "strict 159 bytes from -0",
+     "new_ins": "imul rsi, rcx, 0x148",
+     "new_value": "0x148",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x148"
+    },
+    {
+     "old_site": "0x12fcfd8",
+     "old_ins": "imul r11, rcx, 0x148",
+     "new_site": "0x118ff78",
+     "window": "strict 160 bytes from -0",
+     "new_ins": "imul r11, rcx, 0x148",
+     "new_value": "0x148",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x148"
+    },
+    {
+     "old_site": "0x12fd149",
+     "old_ins": "imul r11, rcx, 0x148",
+     "new_site": "0x11900e9",
+     "window": "strict 159 bytes from -0",
+     "new_ins": "imul r11, rcx, 0x148",
+     "new_value": "0x148",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x148"
+    }
+   ],
+   "id": 86
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 105,
+   "name": "MAPPINGS_OFFSET (record + 8)",
+   "category": "layout",
+   "old": "0x8",
+   "new": "0x8",
+   "feeds_write": true,
+   "witnesses": 2,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x12f9470",
+     "old_ins": "mov qword ptr [rsp + 8], rbx",
+     "new_site": "0x118c410",
+     "new_ins": "mov qword ptr [rsp + 8], rbx",
+     "new_value": "0x8",
+     "function": "map_lookup",
+     "strong": true,
+     "window": "aligned in function 0x12f9470->0x118c410 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x8"
+    },
+    {
+     "old_site": "0x12f950d",
+     "old_ins": "lea rax, [r9 + 8]",
+     "new_site": "0x118c4ad",
+     "new_ins": "lea rax, [r9 + 8]",
+     "new_value": "0x8",
+     "function": "map_lookup",
+     "strong": true,
+     "window": "aligned in function 0x12f9470->0x118c410 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x8"
+    }
+   ],
+   "note": "the lookup scans mappings from [record + 8]; [record] = code, [record + 4] = count",
+   "id": 87
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 105,
+   "name": "MAPPING_SIZE (0x14)",
+   "category": "layout",
+   "old": "0x14",
+   "new": "0x14",
+   "feeds_write": true,
+   "witnesses": 1,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x12f951d",
+     "old_ins": "add rax, 0x14",
+     "new_site": "0x118c4bd",
+     "new_ins": "add rax, 0x14",
+     "new_value": "0x14",
+     "function": "map_lookup",
+     "strong": true,
+     "window": "aligned in function 0x12f9470->0x118c410 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x14"
+    }
+   ],
+   "id": 88
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 104,
+   "name": "device nibble mask (flags & 0xf)",
+   "category": "layout",
+   "old": "0xf",
+   "new": "0xf",
+   "feeds_write": true,
+   "witnesses": 1,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x12f9513",
+     "old_ins": "and ecx, 0xf",
+     "new_site": "0x118c4b3",
+     "new_ins": "and ecx, 0xf",
+     "new_value": "0xf",
+     "function": "map_lookup",
+     "strong": true,
+     "window": "aligned in function 0x12f9470->0x118c410 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0xf"
+    }
+   ],
+   "id": 89
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 66,
+   "name": "ACTION_STATE_OFFSET (808 = 0x328)",
+   "category": "struct offset",
+   "old": "0x328",
+   "new": "0x328",
+   "feeds_write": false,
+   "witnesses": 9,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x178dc78",
+     "old_ins": "cmp byte ptr [r10 + r11 + 0x328], 0",
+     "new_site": "0x160eee8",
+     "new_ins": "cmp byte ptr [r10 + r11 + 0x328], 0",
+     "new_value": "0x328",
+     "function": "held_repeat",
+     "strong": true,
+     "window": "aligned in function 0x178dc50->0x160eec0 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x328"
+    },
+    {
+     "old_site": "0x17fbf9c",
+     "old_ins": "movzx ebp, byte ptr [r9 + r10 + 0x328]",
+     "new_site": "0x167d23c",
+     "new_ins": "movzx ebp, byte ptr [r9 + r10 + 0x328]",
+     "new_value": "0x328",
+     "function": "row_hover",
+     "strong": true,
+     "window": "aligned in function 0x17fbf50->0x167d1f0",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x328"
+    },
+    {
+     "old_site": "0x12f6551",
+     "old_ins": "mov byte ptr [r10 + r11 + 0x328], 0",
+     "new_site": "0x11894f1",
+     "window": "strict 24 bytes from -0",
+     "new_ins": "mov byte ptr [r10 + r11 + 0x328], 0",
+     "new_value": "0x328",
+     "status": "same",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0x328"
+    },
+    {
+     "old_site": "0x12f65c2",
+     "old_ins": "movups xmmword ptr [rax + r11 + 0x328], xmm0",
+     "new_site": "0x1189562",
+     "window": "strict 41 bytes from -32",
+     "new_ins": "movups xmmword ptr [rax + r11 + 0x328], xmm0",
+     "new_value": "0x328",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x328"
+    },
+    {
+     "old_site": "0x12f6603",
+     "old_ins": "movzx eax, byte ptr [r10 + r11 + 0x328]",
+     "new_site": "0x11895a3",
+     "new_ins": "movzx eax, byte ptr [r10 + r11 + 0x328]",
+     "new_value": "0x328",
+     "window": "aligned in function 0x12f65e0->0x1189580 (strict window at entry, identical)",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x328"
+    },
+    {
+     "old_site": "0x12f6643",
+     "old_ins": "cmp byte ptr [r10 + r11 + 0x328], 0",
+     "new_site": "0x11895e3",
+     "window": "strict 31 bytes from -0",
+     "new_ins": "cmp byte ptr [r10 + r11 + 0x328], 0",
+     "new_value": "0x328",
+     "status": "same",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0x328"
+    },
+    {
+     "old_site": "0x12fa0a6",
+     "old_ins": "lea rcx, [rsi + 0x328]",
+     "new_site": "0x118d046",
+     "window": "strict 62 bytes from -0",
+     "new_ins": "lea rcx, [rsi + 0x328]",
+     "new_value": "0x328",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x328"
+    },
+    {
+     "old_site": "0x12fbe9d",
+     "old_ins": "cmp byte ptr [r8 + rsi + 0x328], r14b",
+     "new_site": "0x118ee3d",
+     "window": "strict 160 bytes from -0",
+     "new_ins": "cmp byte ptr [r8 + rsi + 0x328], r14b",
+     "new_value": "0x328",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x328"
+    }
+   ],
+   "note": "MOM MAP row 64 (ACTION_STATES): 0x328 -> 0x328, high",
+   "id": 90
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 66,
+   "name": "ACTION_STATE_STRIDE 32 (shl 5)",
+   "category": "layout",
+   "old": "0x5",
+   "new": "0x5",
+   "feeds_write": false,
+   "witnesses": 3,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x178dc74",
+     "old_ins": "shl r10, 5",
+     "new_site": "0x160eee4",
+     "new_ins": "shl r10, 5",
+     "new_value": "0x5",
+     "function": "held_repeat",
+     "strong": true,
+     "window": "aligned in function 0x178dc50->0x160eec0 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x5"
+    },
+    {
+     "old_site": "0x17fbf8e",
+     "old_ins": "shl r9, 5",
+     "new_site": "0x167d22e",
+     "new_ins": "shl r9, 5",
+     "new_value": "0x5",
+     "function": "row_hover",
+     "strong": true,
+     "window": "aligned in function 0x17fbf50->0x167d1f0",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x5"
+    }
+   ],
+   "note": "MOM MAP row 65 (ACTION_STRIDE (32: shl 5)): 0x5 -> 0x5, high",
+   "id": 91
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 434,
+   "name": "GROUP_ACTIONS 97 (imul 0x61)",
+   "category": "layout",
+   "old": "0x61",
+   "new": "0x61",
+   "feeds_write": false,
+   "witnesses": 4,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x178dc6d",
+     "old_ins": "imul rdx, rax, 0x61",
+     "new_site": "0x160eedd",
+     "new_ins": "imul rdx, rax, 0x61",
+     "new_value": "0x61",
+     "function": "held_repeat",
+     "strong": true,
+     "window": "aligned in function 0x178dc50->0x160eec0 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x61"
+    },
+    {
+     "old_site": "0x1812a19",
+     "old_ins": "mov dword ptr [rsp + 0xf4], 0x61",
+     "new_site": "0x1693c69",
+     "new_ins": "mov dword ptr [rsp + 0xf4], 0x61",
+     "new_value": "0x61",
+     "function": "build_rows",
+     "strong": true,
+     "window": "aligned in function 0x1812940->0x1693b90",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x61"
+    },
+    {
+     "old_site": "0x1812ada",
+     "old_ins": "imul rcx, r10, 0x61",
+     "new_site": "0x1693d2a",
+     "new_ins": "imul rcx, r10, 0x61",
+     "new_value": "0x61",
+     "function": "build_rows",
+     "strong": true,
+     "window": "aligned in function 0x1812940->0x1693b90",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x61"
+    }
+   ],
+   "note": "MOM MAP row 66 (GROUP_ACTIONS (97: imul 0x61)): 0x61 -> 0x61, high",
+   "id": 92
+  },
+  {
+   "file": "src/panel.lua",
+   "line": 51,
+   "name": "action state +4 value / +8 held time (f32[1], f32[2])",
+   "category": "layout",
+   "old": "0x330",
+   "new": "0x330",
+   "feeds_write": false,
+   "witnesses": 2,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x178dc81",
+     "old_ins": "movss xmm2, dword ptr [r10 + r11 + 0x330]",
+     "new_site": "0x160eef1",
+     "new_ins": "movss xmm2, dword ptr [r10 + r11 + 0x330]",
+     "new_value": "0x330",
+     "function": "held_repeat",
+     "strong": true,
+     "window": "aligned in function 0x178dc50->0x160eec0 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x330"
+    },
+    {
+     "old_site": "0x17fbf92",
+     "old_ins": "movss xmm1, dword ptr [r9 + r10 + 0x330]",
+     "new_site": "0x167d232",
+     "new_ins": "movss xmm1, dword ptr [r9 + r10 + 0x330]",
+     "new_value": "0x330",
+     "function": "row_hover",
+     "strong": true,
+     "window": "aligned in function 0x17fbf50->0x167d1f0",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x330"
+    }
+   ],
+   "note": "0x328 + 8: held seconds; held_repeat also reads +0x32c (value) as panel.repeated does",
+   "id": 93
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 737,
+   "name": "SCREEN_STACK 0x429c",
+   "category": "struct offset",
+   "old": "0x429c",
+   "new": "0x429c",
+   "feeds_write": false,
+   "witnesses": 6,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x5c08e0",
+     "old_ins": "lea rax, [rdx + 0x429c]",
+     "new_site": "0x5c9720",
+     "window": "strict 96 bytes from -0",
+     "new_ins": "lea rax, [rdx + 0x429c]",
+     "new_value": "0x429c",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x429c"
+    },
+    {
+     "old_site": "0x661d1d",
+     "old_ins": "lea rdx, [r9 + 0x429c]",
+     "new_site": "0x66b5fd",
+     "window": "strict 154 bytes from -0",
+     "new_ins": "lea rdx, [r9 + 0x429c]",
+     "new_value": "0x429c",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x429c"
+    },
+    {
+     "old_site": "0xa610cd",
+     "old_ins": "lea rax, [rcx + 0x429c]",
+     "new_site": "0xa7caad",
+     "window": "strict 156 bytes from -0",
+     "new_ins": "lea rax, [rcx + 0x429c]",
+     "new_value": "0x429c",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x429c"
+    },
+    {
+     "old_site": "0xa6d9f2",
+     "old_ins": "lea r8, [r9 + 0x429c]",
+     "new_site": "0xa893e2",
+     "window": "strict 158 bytes from -0",
+     "new_ins": "lea r8, [r9 + 0x429c]",
+     "new_value": "0x429c",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x429c"
+    },
+    {
+     "old_site": "0xa73312",
+     "old_ins": "lea rdx, [r8 + 0x429c]",
+     "new_site": "0xa8ed02",
+     "window": "strict 160 bytes from -0",
+     "new_ins": "lea rdx, [r8 + 0x429c]",
+     "new_value": "0x429c",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x429c"
+    },
+    {
+     "old_site": "0xab4dd2",
+     "old_ins": "lea rax, [r10 + 0x429c]",
+     "status": "unmapped",
+     "base": "0x0"
+    },
+    {
+     "old_site": "0xad70c5",
+     "old_ins": "lea rax, [r10 + 0x429c]",
+     "status": "unmapped",
+     "base": "0x0"
+    },
+    {
+     "old_site": "0xad8867",
+     "old_ins": "lea rcx, [r14 + 0x429c]",
+     "status": "unmapped",
+     "base": "0x0"
+    }
+   ],
+   "note": "MOM MAP row 45 (UI_STACK): 0x429c -> 0x429c, high",
+   "id": 94
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 737,
+   "name": "BINDING_SCREEN 26 (0x1a)",
+   "category": "enum",
+   "old": "0x1a",
+   "new": "0x1a",
+   "feeds_write": false,
+   "witnesses": 1,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x12f3330",
+     "old_ins": "cmp dword ptr [rax], 0x1a",
+     "new_site": "0x1186290",
+     "new_ins": "cmp dword ptr [rax], 0x1a",
+     "new_value": "0x1a",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x12f331f (strict window)",
+     "status": "same",
+     "implies": "0x1a"
+    }
+   ],
+   "note": "the input module walks the UI stack for screen types 0x23, 7 and 0x1a (binding page)",
+   "id": 95
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 744,
+   "name": "binding screen at menu + 208 (0xd0)",
+   "category": "struct offset",
+   "old": "0xd0",
+   "new": "0xd0",
+   "feeds_write": false,
+   "witnesses": 2,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x14ace9d",
+     "old_ins": "mov rsi, qword ptr [rcx + 0xd0]",
+     "new_site": "0x1345135",
+     "new_ins": "mov rsi, qword ptr [rcx + 0xd0]",
+     "new_value": "0xd0",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x14ace9d (strict window)",
+     "status": "same",
+     "implies": "0xd0"
+    },
+    {
+     "old_site": "0x1498e95",
+     "old_ins": "mov qword ptr [rsi + 0xd0], rbx",
+     "new_site": "0x1331075",
+     "new_ins": "mov qword ptr [rsi + 0xd0], rbx",
+     "new_value": "0xd0",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x1498e63 (strict window)",
+     "status": "same",
+     "implies": "0xd0"
+    }
+   ],
+   "note": "the menu creates the binding screen (0x29f780 bytes, tab bar at +0x4e0) and stores it at [menu + 0xd0]; menu input dispatch, binding-screen case: rsi = [menu + 0xd0]; tab bar input on rsi + 0x4e0; on a switch it calls the binding tab switch with [rsi + 0xe54c]",
+   "id": 96
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 147,
+   "name": "SELECTED_TAB_OFFSET 8",
+   "category": "struct offset",
+   "old": "0x8",
+   "new": "0x8",
+   "feeds_write": false,
+   "witnesses": 5,
+   "conflicts": 0,
+   "confidence": "medium",
+   "evidence": [
+    {
+     "old_site": "0x14aceaa",
+     "old_ins": "cmp dword ptr [rsi + 0x498f8], 2",
+     "new_site": "0x1345142",
+     "new_ins": "cmp dword ptr [rsi + 0x498f8], 2",
+     "new_value": "0x498f8",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x14ace9d (strict window)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x14aceb3",
+     "old_ins": "cmp dword ptr [rsi + 0x52588], 2",
+     "new_site": "0x134514b",
+     "new_ins": "cmp dword ptr [rsi + 0x52588], 2",
+     "new_value": "0x52588",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x14ace9d (strict window)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x1498e0d",
+     "old_ins": "mov edx, 0x29f780",
+     "new_site": "0x1330fed",
+     "new_ins": "mov edx, 0x29f780",
+     "new_value": "0x29f780",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x1498e06 (strict window)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x1498e89",
+     "old_ins": "lea rcx, [rbx + 0x44610]",
+     "new_site": "0x1331069",
+     "new_ins": "lea rcx, [rbx + 0x44610]",
+     "new_value": "0x44610",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x1498e63 (strict window)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x1498e7d",
+     "old_ins": "lea rcx, [rbx + 0xe570]",
+     "new_site": "0x133105d",
+     "new_ins": "lea rcx, [rbx + 0xe570]",
+     "new_value": "0xe570",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x1498e63 (strict window)",
+     "status": "same"
+    },
+    {
+     "encrypted_pages_in_new_capture": {
+      "0x130d000": true,
+      "0x1694000": true,
+      "0x1693000": false,
+      "0x1190000": false
+     },
+     "new_screen_init": "0x130d0f0",
+     "new_tab_switch": "0x130d3f0"
+    }
+   ],
+   "note": "no readable new code uses this offset: the screen init / tab switch (new 0x130d0f0 / 0x130d3f0, mapped by their callers) sit on new page 0x130d000, encrypted in the capture. Indirect: the menu input dispatch (strict window) still reads the same binding-screen fields 0x498f8 and 0x52588 (just below 0x529a8) and the tab bar at +0x4e0 / +0xe54c; the menu still allocates the binding screen with the same size 0x29f780 (list end 0x529a8 + 0x24cda0 = 0x29f748 leaves 0x38 bytes, as before) and constructs it the same way (+0x4e0, +0xe570, +0x44610); the list object itself is unchanged (build_rows, list setup, clear, reset identical). Screen + 8 is the selected tab in every screen class MOM mapped (escape screen + 8, MOM SHOWN_CONTENT row, unchanged). Verify live (NOTES L5).",
+   "id": 97
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 148,
+   "name": "TAB_BAR_OFFSET 1248 (0x4e0)",
+   "category": "struct offset",
+   "old": "0x4e0",
+   "new": "0x4e0",
+   "feeds_write": true,
+   "witnesses": 2,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x14acebc",
+     "old_ins": "lea rcx, [rsi + 0x4e0]",
+     "new_site": "0x1345154",
+     "new_ins": "lea rcx, [rsi + 0x4e0]",
+     "new_value": "0x4e0",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x14ace9d (strict window)",
+     "status": "same",
+     "implies": "0x4e0"
+    }
+   ],
+   "note": "the same tab bar widget (and offset) as the escape menu's MOM MAP row 69 (TAB_BAR): 0x4e0 -> 0x4e0, high",
+   "id": 98
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 149,
+   "name": "TAB_COUNT 57448 (0xe068)",
+   "category": "struct offset",
+   "old": "0xe068",
+   "new": "0xe068",
+   "feeds_write": false,
+   "witnesses": 9,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x147199b",
+     "old_ins": "cmp eax, dword ptr [rbx + 0xe068]",
+     "new_site": "0x13095bb",
+     "window": "strict 39 bytes from -0",
+     "new_ins": "cmp eax, dword ptr [rbx + 0xe068]",
+     "new_value": "0xe068",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xe068"
+    },
+    {
+     "old_site": "0x1474013",
+     "old_ins": "cmp eax, dword ptr [rdi + 0xe068]",
+     "new_site": "0x130bc73",
+     "window": "strict 93 bytes from -0",
+     "new_ins": "cmp eax, dword ptr [rdi + 0xe068]",
+     "new_value": "0xe068",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xe068"
+    },
+    {
+     "old_site": "0x1474c17",
+     "old_ins": "cmp eax, dword ptr [rdi + 0xe068]",
+     "new_site": "0x130c8c7",
+     "window": "strict 157 bytes from -0",
+     "new_ins": "cmp eax, dword ptr [rdi + 0xe068]",
+     "new_value": "0xe068",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xe068"
+    },
+    {
+     "old_site": "0x17a9873",
+     "old_ins": "mov qword ptr [rcx + 0xe068], r12",
+     "new_site": "0x162ab03",
+     "window": "strict 159 bytes from -0",
+     "new_ins": "mov qword ptr [rcx + 0xe068], r12",
+     "new_value": "0xe068",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xe068"
+    },
+    {
+     "old_site": "0x17aa4df",
+     "old_ins": "mov esi, dword ptr [rbp + 0xe068]",
+     "new_site": "0x162b76f",
+     "window": "strict 158 bytes from -0",
+     "new_ins": "mov esi, dword ptr [rbp + 0xe068]",
+     "new_value": "0xe068",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xe068"
+    },
+    {
+     "old_site": "0x17aa6f2",
+     "old_ins": "mov eax, dword ptr [rdi + 0xe068]",
+     "new_site": "0x162b982",
+     "window": "strict 158 bytes from -0",
+     "new_ins": "mov eax, dword ptr [rdi + 0xe068]",
+     "new_value": "0xe068",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xe068"
+    },
+    {
+     "old_site": "0x17aa71a",
+     "old_ins": "mov eax, dword ptr [rdi + 0xe068]",
+     "new_site": "0x162b9aa",
+     "window": "strict 128 bytes from -0",
+     "new_ins": "mov eax, dword ptr [rdi + 0xe068]",
+     "new_value": "0xe068",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xe068"
+    },
+    {
+     "old_site": "0x17aa83e",
+     "old_ins": "cmp esi, dword ptr [rdi + 0xe068]",
+     "new_site": "0x162bace",
+     "window": "strict 63 bytes from -0",
+     "new_ins": "cmp esi, dword ptr [rdi + 0xe068]",
+     "new_value": "0xe068",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xe068"
+    }
+   ],
+   "note": "MOM MAP row 70 (TAB_COUNT): 0xe068 -> 0xe068, high",
+   "id": 99
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 149,
+   "name": "TAB_CURRENT 57452 (0xe06c)",
+   "category": "struct offset",
+   "old": "0xe06c",
+   "new": "0xe06c",
+   "feeds_write": false,
+   "witnesses": 9,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x1471986",
+     "old_ins": "movsxd rax, dword ptr [rbx + 0xe06c]",
+     "new_site": "0x13095a6",
+     "window": "strict 60 bytes from -0",
+     "new_ins": "movsxd rax, dword ptr [rbx + 0xe06c]",
+     "new_value": "0xe06c",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xe06c"
+    },
+    {
+     "old_site": "0x147339b",
+     "old_ins": "movsxd rax, dword ptr [rbx + 0xe06c]",
+     "new_site": "0x130afeb",
+     "window": "strict 94 bytes from -0",
+     "new_ins": "movsxd rax, dword ptr [rbx + 0xe06c]",
+     "new_value": "0xe06c",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xe06c"
+    },
+    {
+     "old_site": "0x1474005",
+     "old_ins": "mov dword ptr [rdi + 0xe06c], 2",
+     "new_site": "0x130bc65",
+     "window": "strict 92 bytes from -0",
+     "new_ins": "mov dword ptr [rdi + 0xe06c], 2",
+     "new_value": "0xe06c",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xe06c"
+    },
+    {
+     "old_site": "0x1474c09",
+     "old_ins": "mov dword ptr [rdi + 0xe06c], 0",
+     "new_site": "0x130c8b9",
+     "window": "strict 156 bytes from -0",
+     "new_ins": "mov dword ptr [rdi + 0xe06c], 0",
+     "new_value": "0xe06c",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xe06c"
+    },
+    {
+     "old_site": "0x17aaae4",
+     "old_ins": "cmp dword ptr [rdi + 0xe06c], ebx",
+     "new_site": "0x162bd74",
+     "window": "strict 156 bytes from -0",
+     "new_ins": "cmp dword ptr [rdi + 0xe06c], ebx",
+     "new_value": "0xe06c",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xe06c"
+    },
+    {
+     "old_site": "0x17abfd4",
+     "old_ins": "movsxd rax, dword ptr [rcx + 0xe06c]",
+     "new_site": "0x162d264",
+     "window": "strict 126 bytes from -0",
+     "new_ins": "movsxd rax, dword ptr [rcx + 0xe06c]",
+     "new_value": "0xe06c",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xe06c"
+    },
+    {
+     "old_site": "0x17ac083",
+     "old_ins": "cmp dword ptr [rsi + 0xe06c], edi",
+     "new_site": "0x162d313",
+     "window": "strict 27 bytes from -0",
+     "new_ins": "cmp dword ptr [rsi + 0xe06c], edi",
+     "new_value": "0xe06c",
+     "status": "same",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0xe06c"
+    },
+    {
+     "old_site": "0x17ac140",
+     "old_ins": "cmp edi, dword ptr [rsi + 0xe06c]",
+     "new_site": "0x162d3d0",
+     "window": "strict 26 bytes from -0",
+     "new_ins": "cmp edi, dword ptr [rsi + 0xe06c]",
+     "new_value": "0xe06c",
+     "status": "same",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0xe06c"
+    }
+   ],
+   "note": "MOM MAP row 71 (TAB_CURRENT): 0xe06c -> 0xe06c, high",
+   "id": 100
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 150,
+   "name": "TAB_BUTTON_STATE 11004 (0x2afc)",
+   "category": "struct offset",
+   "old": "0x2afc",
+   "new": "0x2afc",
+   "feeds_write": true,
+   "witnesses": 7,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x17a979b",
+     "old_ins": "mov dword ptr [rsi + 0x2afc], 3",
+     "new_site": "0x162aa2b",
+     "new_ins": "mov dword ptr [rsi + 0x2afc], 3",
+     "new_value": "0x2afc",
+     "window": "aligned in function 0x17a9760->0x162a9f0 (strict window at entry, identical)",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x2afc"
+    },
+    {
+     "old_site": "0x17a97f7",
+     "old_ins": "mov dword ptr [rsi + 0x2afc], 3",
+     "new_site": "0x162aa87",
+     "new_ins": "mov dword ptr [rsi + 0x2afc], 3",
+     "new_value": "0x2afc",
+     "window": "aligned in function 0x17a97c0->0x162aa50 (strict window at entry, identical)",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x2afc"
+    },
+    {
+     "old_site": "0x17ac024",
+     "old_ins": "mov dword ptr [rcx + rbx + 0x2afc], 3",
+     "new_site": "0x162d2b4",
+     "window": "strict 46 bytes from -0",
+     "new_ins": "mov dword ptr [rcx + rbx + 0x2afc], 3",
+     "new_value": "0x2afc",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x2afc"
+    },
+    {
+     "old_site": "0x17ac07c",
+     "old_ins": "lea rbx, [rcx + 0x2afc]",
+     "new_site": "0x162d30c",
+     "window": "strict 27 bytes from -0",
+     "new_ins": "lea rbx, [rcx + 0x2afc]",
+     "new_value": "0x2afc",
+     "status": "same",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0x2afc"
+    },
+    {
+     "old_site": "0x17ac136",
+     "old_ins": "lea rbx, [rcx + 0x2afc]",
+     "new_site": "0x162d3c6",
+     "window": "strict 43 bytes from -0",
+     "new_ins": "lea rbx, [rcx + 0x2afc]",
+     "new_value": "0x2afc",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x2afc"
+    },
+    {
+     "old_site": "0x17ac23e",
+     "old_ins": "mov dword ptr [rbx + 0x2afc], ecx",
+     "new_site": "0x162d4ce",
+     "window": "strict 44 bytes from -32",
+     "new_ins": "mov dword ptr [rbx + 0x2afc], ecx",
+     "new_value": "0x2afc",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x2afc"
+    }
+   ],
+   "note": "MOM MAP row 73 (TAB_BUTTON_STATE): 0x2afc -> 0x2afc, high",
+   "id": 101
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 150,
+   "name": "TAB_BUTTON_ACTIVE 11021 (0x2b0d)",
+   "category": "struct offset",
+   "old": "0x2b0d",
+   "new": "0x2b0d",
+   "feeds_write": true,
+   "witnesses": 7,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x17a97a5",
+     "old_ins": "mov byte ptr [rsi + 0x2b0d], 0",
+     "new_site": "0x162aa35",
+     "new_ins": "mov byte ptr [rsi + 0x2b0d], 0",
+     "new_value": "0x2b0d",
+     "window": "aligned in function 0x17a9760->0x162a9f0 (strict window at entry, identical)",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x2b0d"
+    },
+    {
+     "old_site": "0x17a9801",
+     "old_ins": "mov byte ptr [rsi + 0x2b0d], 0",
+     "new_site": "0x162aa91",
+     "new_ins": "mov byte ptr [rsi + 0x2b0d], 0",
+     "new_value": "0x2b0d",
+     "window": "aligned in function 0x17a97c0->0x162aa50 (strict window at entry, identical)",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x2b0d"
+    },
+    {
+     "old_site": "0x17aae9f",
+     "old_ins": "lea rbx, [rsi + 0x2b0d]",
+     "new_site": "0x162c12f",
+     "window": "strict 156 bytes from -0",
+     "new_ins": "lea rbx, [rsi + 0x2b0d]",
+     "new_value": "0x2b0d",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x2b0d"
+    },
+    {
+     "old_site": "0x17ab1fb",
+     "old_ins": "lea rbx, [rbp + 0x2b0d]",
+     "new_site": "0x162c48b",
+     "window": "strict 160 bytes from -0",
+     "new_ins": "lea rbx, [rbp + 0x2b0d]",
+     "new_value": "0x2b0d",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x2b0d"
+    },
+    {
+     "old_site": "0x17ac02f",
+     "old_ins": "mov byte ptr [rcx + rbx + 0x2b0d], bpl",
+     "new_site": "0x162d2bf",
+     "window": "strict 30 bytes from -0",
+     "new_ins": "mov byte ptr [rcx + rbx + 0x2b0d], bpl",
+     "new_value": "0x2b0d",
+     "status": "same",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0x2b0d"
+    },
+    {
+     "old_site": "0x17ac238",
+     "old_ins": "mov byte ptr [rbx + 0x2b0d], cl",
+     "new_site": "0x162d4c8",
+     "window": "strict 28 bytes from -0",
+     "new_ins": "mov byte ptr [rbx + 0x2b0d], cl",
+     "new_value": "0x2b0d",
+     "status": "same",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0x2b0d"
+    }
+   ],
+   "note": "MOM MAP row 74 (TAB_BUTTON_ACTIVE): 0x2b0d -> 0x2b0d, high",
+   "id": 102
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 150,
+   "name": "TAB_BUTTON_STRIDE 3400 (0xd48)",
+   "category": "struct offset",
+   "old": "0xd48",
+   "new": "0xd48",
+   "feeds_write": true,
+   "witnesses": 7,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x14719a3",
+     "old_ins": "imul rcx, rax, 0xd48",
+     "new_site": "0x13095c3",
+     "window": "strict 31 bytes from -0",
+     "new_ins": "imul rcx, rax, 0xd48",
+     "new_value": "0xd48",
+     "status": "same",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0xd48"
+    },
+    {
+     "old_site": "0x14733a2",
+     "old_ins": "imul rcx, rax, 0xd48",
+     "new_site": "0x130aff2",
+     "window": "strict 94 bytes from -0",
+     "new_ins": "imul rcx, rax, 0xd48",
+     "new_value": "0xd48",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xd48"
+    },
+    {
+     "old_site": "0x147401b",
+     "old_ins": "imul rdx, rax, 0xd48",
+     "new_site": "0x130bc7b",
+     "window": "strict 91 bytes from -0",
+     "new_ins": "imul rdx, rax, 0xd48",
+     "new_value": "0xd48",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xd48"
+    },
+    {
+     "old_site": "0x1474686",
+     "old_ins": "imul rcx, rax, 0xd48",
+     "new_site": "0x130c2e6",
+     "window": "strict 128 bytes from -0",
+     "new_ins": "imul rcx, rax, 0xd48",
+     "new_value": "0xd48",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xd48"
+    },
+    {
+     "old_site": "0x1474c1f",
+     "old_ins": "imul rcx, rax, 0xd48",
+     "new_site": "0x130c8cf",
+     "window": "strict 157 bytes from -0",
+     "new_ins": "imul rcx, rax, 0xd48",
+     "new_value": "0xd48",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xd48"
+    },
+    {
+     "old_site": "0x17a9f9c",
+     "old_ins": "add r14, 0xd48",
+     "new_site": "0x162b22c",
+     "window": "strict 157 bytes from -0",
+     "new_ins": "add r14, 0xd48",
+     "new_value": "0xd48",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0xd48"
+    },
+    {
+     "old_site": "0x17a498a",
+     "old_ins": "add rcx, 0xd48",
+     "status": "unmapped",
+     "base": "0x0"
+    },
+    {
+     "old_site": "0x17a4999",
+     "old_ins": "add rcx, 0xd48",
+     "status": "unmapped",
+     "base": "0x0"
+    }
+   ],
+   "note": "MOM MAP row 76 (TAB_STRIDE): 0xd48 -> 0xd48, high",
+   "id": 103
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 140,
+   "name": "ROW_LIST_OFFSET 338344 (0x529a8)",
+   "category": "struct offset",
+   "old": "0x529a8",
+   "new": "0x529a8",
+   "feeds_write": true,
+   "witnesses": 5,
+   "conflicts": 0,
+   "confidence": "medium",
+   "evidence": [
+    {
+     "old_site": "0x14aceaa",
+     "old_ins": "cmp dword ptr [rsi + 0x498f8], 2",
+     "new_site": "0x1345142",
+     "new_ins": "cmp dword ptr [rsi + 0x498f8], 2",
+     "new_value": "0x498f8",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x14ace9d (strict window)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x14aceb3",
+     "old_ins": "cmp dword ptr [rsi + 0x52588], 2",
+     "new_site": "0x134514b",
+     "new_ins": "cmp dword ptr [rsi + 0x52588], 2",
+     "new_value": "0x52588",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x14ace9d (strict window)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x1498e0d",
+     "old_ins": "mov edx, 0x29f780",
+     "new_site": "0x1330fed",
+     "new_ins": "mov edx, 0x29f780",
+     "new_value": "0x29f780",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x1498e06 (strict window)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x1498e89",
+     "old_ins": "lea rcx, [rbx + 0x44610]",
+     "new_site": "0x1331069",
+     "new_ins": "lea rcx, [rbx + 0x44610]",
+     "new_value": "0x44610",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x1498e63 (strict window)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x1498e7d",
+     "old_ins": "lea rcx, [rbx + 0xe570]",
+     "new_site": "0x133105d",
+     "new_ins": "lea rcx, [rbx + 0xe570]",
+     "new_value": "0xe570",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x1498e63 (strict window)",
+     "status": "same"
+    },
+    {
+     "encrypted_pages_in_new_capture": {
+      "0x130d000": true,
+      "0x1694000": true,
+      "0x1693000": false,
+      "0x1190000": false
+     },
+     "new_screen_init": "0x130d0f0",
+     "new_tab_switch": "0x130d3f0"
+    }
+   ],
+   "id": 104,
+   "note": "no readable new code uses this offset: the screen init / tab switch (new 0x130d0f0 / 0x130d3f0, mapped by their callers) sit on new page 0x130d000, encrypted in the capture. Indirect: the menu input dispatch (strict window) still reads the same binding-screen fields 0x498f8 and 0x52588 (just below 0x529a8) and the tab bar at +0x4e0 / +0xe54c; the menu still allocates the binding screen with the same size 0x29f780 (list end 0x529a8 + 0x24cda0 = 0x29f748 leaves 0x38 bytes, as before) and constructs it the same way (+0x4e0, +0xe570, +0x44610); the list object itself is unchanged (build_rows, list setup, clear, reset identical).  Verify live (NOTES L5)."
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 141,
+   "name": "ROW_START 7856 (0x1eb0)",
+   "category": "struct offset",
+   "old": "0x1eb0",
+   "new": "0x1eb0",
+   "feeds_write": false,
+   "witnesses": 3,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x1812a89",
+     "old_ins": "add rcx, 0x1eb0",
+     "new_site": "0x1693cd9",
+     "new_ins": "add rcx, 0x1eb0",
+     "new_value": "0x1eb0",
+     "function": "build_rows",
+     "strong": true,
+     "window": "aligned in function 0x1812940->0x1693b90",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x1eb0"
+    },
+    {
+     "old_site": "0x1812b51",
+     "old_ins": "lea rcx, [rbx + 0x1eb0]",
+     "new_site": "0x1693da1",
+     "new_ins": "lea rcx, [rbx + 0x1eb0]",
+     "new_value": "0x1eb0",
+     "function": "build_rows",
+     "strong": true,
+     "window": "aligned in function 0x1812940->0x1693b90",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x1eb0"
+    },
+    {
+     "old_site": "0x1812bbf",
+     "old_ins": "lea rdx, [rbx + 0x1eb0]",
+     "new_site": "0x1693e0f",
+     "new_ins": "lea rdx, [rbx + 0x1eb0]",
+     "new_value": "0x1eb0",
+     "function": "build_rows",
+     "strong": true,
+     "window": "aligned in function 0x1812940->0x1693b90",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x1eb0"
+    },
+    {
+     "old_site": "0x1812a89",
+     "old_ins": "add rcx, 0x1eb0",
+     "new_site": "0x1693cd9",
+     "window": "strict 160 bytes from -0",
+     "new_ins": "add rcx, 0x1eb0",
+     "new_value": "0x1eb0",
+     "status": "duplicate of an earlier witness",
+     "strong": true,
+     "base": "0x0"
+    },
+    {
+     "old_site": "0x1812faa",
+     "old_ins": "add rcx, 0x1eb0",
+     "status": "unmapped",
+     "base": "0x0"
+    },
+    {
+     "old_site": "0x181336a",
+     "old_ins": "add rcx, 0x1eb0",
+     "status": "unmapped",
+     "base": "0x0"
+    },
+    {
+     "old_site": "0x1813511",
+     "old_ins": "add rcx, 0x1eb0",
+     "status": "unmapped",
+     "base": "0x0"
+    },
+    {
+     "old_site": "0x1813d67",
+     "old_ins": "add rcx, 0x1eb0",
+     "status": "unmapped",
+     "base": "0x0"
+    }
+   ],
+   "id": 105
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 141,
+   "name": "ROW_STRIDE 24784 (0x60d0)",
+   "category": "struct offset",
+   "old": "0x60d0",
+   "new": "0x60d0",
+   "feeds_write": false,
+   "witnesses": 6,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x1812a74",
+     "old_ins": "imul rcx, rax, 0x60d0",
+     "new_site": "0x1693cc4",
+     "new_ins": "imul rcx, rax, 0x60d0",
+     "new_value": "0x60d0",
+     "function": "build_rows",
+     "strong": true,
+     "window": "aligned in function 0x1812940->0x1693b90",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x60d0"
+    },
+    {
+     "old_site": "0x1812b3f",
+     "old_ins": "imul r8, rcx, 0x60d0",
+     "new_site": "0x1693d8f",
+     "new_ins": "imul r8, rcx, 0x60d0",
+     "new_value": "0x60d0",
+     "function": "build_rows",
+     "strong": true,
+     "window": "aligned in function 0x1812940->0x1693b90",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x60d0"
+    },
+    {
+     "old_site": "0x1812bc6",
+     "old_ins": "imul rcx, rax, 0x60d0",
+     "new_site": "0x1693e16",
+     "new_ins": "imul rcx, rax, 0x60d0",
+     "new_value": "0x60d0",
+     "function": "build_rows",
+     "strong": true,
+     "window": "aligned in function 0x1812940->0x1693b90",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x60d0"
+    },
+    {
+     "old_site": "0x181282e",
+     "old_ins": "imul rax, rdi, 0x60d0",
+     "new_site": "0x1693a7e",
+     "window": "strict 155 bytes from -0",
+     "new_ins": "imul rax, rdi, 0x60d0",
+     "new_value": "0x60d0",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x60d0"
+    },
+    {
+     "old_site": "0x1812ef0",
+     "old_ins": "add rbx, 0x60d0",
+     "new_site": "0x181ccaf",
+     "window": "relaxed 47 bytes from -32",
+     "new_ins": "add rbx, 0x60d0",
+     "new_value": "0x60d0",
+     "status": "same",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0x60d0"
+    },
+    {
+     "old_site": "0x1813e4c",
+     "old_ins": "imul rcx, rax, 0x60d0",
+     "new_site": "0x169509c",
+     "window": "strict 158 bytes from -64",
+     "new_ins": "imul rcx, rax, 0x60d0",
+     "new_value": "0x60d0",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x60d0"
+    },
+    {
+     "old_site": "0x1812a74",
+     "old_ins": "imul rcx, rax, 0x60d0",
+     "new_site": "0x1693cc4",
+     "window": "strict 157 bytes from -0",
+     "new_ins": "imul rcx, rax, 0x60d0",
+     "new_value": "0x60d0",
+     "status": "duplicate of an earlier witness",
+     "strong": true,
+     "base": "0x0"
+    },
+    {
+     "old_site": "0x1812fa3",
+     "old_ins": "imul rcx, rax, 0x60d0",
+     "status": "unmapped",
+     "base": "0x0"
+    }
+   ],
+   "id": 106
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 931,
+   "name": "ROW_COUNT 2411916 (0x24cd8c)",
+   "category": "struct offset",
+   "old": "0x24cd8c",
+   "new": "0x24cd8c",
+   "feeds_write": false,
+   "witnesses": 8,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x1812a6d",
+     "old_ins": "movsxd rax, dword ptr [rbx + 0x24cd8c]",
+     "new_site": "0x1693cbd",
+     "new_ins": "movsxd rax, dword ptr [rbx + 0x24cd8c]",
+     "new_value": "0x24cd8c",
+     "function": "build_rows",
+     "strong": true,
+     "window": "aligned in function 0x1812940->0x1693b90",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x24cd8c"
+    },
+    {
+     "old_site": "0x1812b20",
+     "old_ins": "movsxd rcx, dword ptr [rbx + 0x24cd8c]",
+     "new_site": "0x1693d70",
+     "new_ins": "movsxd rcx, dword ptr [rbx + 0x24cd8c]",
+     "new_value": "0x24cd8c",
+     "function": "build_rows",
+     "strong": true,
+     "window": "aligned in function 0x1812940->0x1693b90",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x24cd8c"
+    },
+    {
+     "old_site": "0x1812bb8",
+     "old_ins": "movsxd rax, dword ptr [rbx + 0x24cd8c]",
+     "new_site": "0x1693e08",
+     "new_ins": "movsxd rax, dword ptr [rbx + 0x24cd8c]",
+     "new_value": "0x24cd8c",
+     "function": "build_rows",
+     "strong": true,
+     "window": "aligned in function 0x1812940->0x1693b90",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x24cd8c"
+    },
+    {
+     "old_site": "0x1812c41",
+     "old_ins": "inc dword ptr [rbx + 0x24cd8c]",
+     "new_site": "0x1693e91",
+     "new_ins": "inc dword ptr [rbx + 0x24cd8c]",
+     "new_value": "0x24cd8c",
+     "function": "build_rows",
+     "strong": true,
+     "window": "aligned in function 0x1812940->0x1693b90",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x24cd8c"
+    },
+    {
+     "old_site": "0x1812cfa",
+     "old_ins": "cmp dword ptr [rcx + 0x24cd8c], 0",
+     "new_site": "0x1693f4a",
+     "new_ins": "cmp dword ptr [rcx + 0x24cd8c], 0",
+     "new_value": "0x24cd8c",
+     "function": "build_rows",
+     "strong": true,
+     "window": "aligned in function 0x1812940->0x1693b90",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x24cd8c"
+    },
+    {
+     "old_site": "0x181280a",
+     "old_ins": "mov eax, dword ptr [rcx + 0x24cd8c]",
+     "new_site": "0x1693a5a",
+     "new_ins": "mov eax, dword ptr [rcx + 0x24cd8c]",
+     "new_value": "0x24cd8c",
+     "function": "list_clear",
+     "strong": true,
+     "window": "aligned in function 0x1812800->0x1693a50 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x24cd8c"
+    },
+    {
+     "old_site": "0x1812912",
+     "old_ins": "mov qword ptr [r14 + 0x24cd8c], r15",
+     "new_site": "0x1693b62",
+     "new_ins": "mov qword ptr [r14 + 0x24cd8c], r15",
+     "new_value": "0x24cd8c",
+     "function": "list_clear",
+     "strong": true,
+     "window": "aligned in function 0x1812800->0x1693a50 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x24cd8c"
+    },
+    {
+     "old_site": "0x181242a",
+     "old_ins": "mov qword ptr [rcx + 0x24cd8c], rax",
+     "new_site": "0x169367a",
+     "window": "strict 157 bytes from -0",
+     "new_ins": "mov qword ptr [rcx + 0x24cd8c], rax",
+     "new_value": "0x24cd8c",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x24cd8c"
+    }
+   ],
+   "id": 107
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 999,
+   "name": "descriptor count 2411928 (0x24cd98)",
+   "category": "struct offset",
+   "old": "0x24cd98",
+   "new": "0x24cd98",
+   "feeds_write": true,
+   "witnesses": 7,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x1812960",
+     "old_ins": "mov eax, dword ptr [rbx + 0x24cd98]",
+     "new_site": "0x1693bb0",
+     "new_ins": "mov eax, dword ptr [rbx + 0x24cd98]",
+     "new_value": "0x24cd98",
+     "function": "build_rows",
+     "strong": true,
+     "window": "aligned in function 0x1812940->0x1693b90",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x24cd98"
+    },
+    {
+     "old_site": "0x1812c54",
+     "old_ins": "mov eax, dword ptr [rbx + 0x24cd98]",
+     "new_site": "0x1693ea4",
+     "new_ins": "mov eax, dword ptr [rbx + 0x24cd98]",
+     "new_value": "0x24cd98",
+     "function": "build_rows",
+     "strong": true,
+     "window": "aligned in function 0x1812940->0x1693b90",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x24cd98"
+    },
+    {
+     "old_site": "0x1812cd3",
+     "old_ins": "mov dword ptr [rbx + 0x24cd98], eax",
+     "new_site": "0x1693f23",
+     "new_ins": "mov dword ptr [rbx + 0x24cd98], eax",
+     "new_value": "0x24cd98",
+     "function": "build_rows",
+     "strong": true,
+     "window": "aligned in function 0x1812940->0x1693b90",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x24cd98"
+    },
+    {
+     "old_site": "0x1813de7",
+     "old_ins": "mov dword ptr [rcx + 0x24cd98], 0xe",
+     "new_site": "0x1695037",
+     "new_ins": "mov dword ptr [rcx + 0x24cd98], 0xe",
+     "new_value": "0x24cd98",
+     "function": "reset_list",
+     "strong": true,
+     "window": "aligned in function 0x1813dd0->0x1695020 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x24cd98"
+    },
+    {
+     "old_site": "0x1813dfa",
+     "old_ins": "mov dword ptr [rcx + 0x24cd98], 0x1a",
+     "new_site": "0x169504a",
+     "new_ins": "mov dword ptr [rcx + 0x24cd98], 0x1a",
+     "new_value": "0x24cd98",
+     "function": "reset_list",
+     "strong": true,
+     "window": "aligned in function 0x1813dd0->0x1695020 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x24cd98"
+    },
+    {
+     "old_site": "0x1813e0d",
+     "old_ins": "mov dword ptr [rcx + 0x24cd98], 0x31",
+     "new_site": "0x169505d",
+     "new_ins": "mov dword ptr [rcx + 0x24cd98], 0x31",
+     "new_value": "0x24cd98",
+     "function": "reset_list",
+     "strong": true,
+     "window": "aligned in function 0x1813dd0->0x1695020 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x24cd98"
+    },
+    {
+     "old_site": "0x1813e36",
+     "old_ins": "mov r8d, dword ptr [rbx + 0x24cd98]",
+     "new_site": "0x1695086",
+     "new_ins": "mov r8d, dword ptr [rbx + 0x24cd98]",
+     "new_value": "0x24cd98",
+     "function": "reset_list",
+     "strong": true,
+     "window": "aligned in function 0x1813dd0->0x1695020 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x24cd98"
+    }
+   ],
+   "note": "the game's tab switch stores the descriptor count here, then calls build_rows(list, descriptors) - exactly what fill_tab does",
+   "id": 108
+  },
+  {
+   "file": "src/panel.lua",
+   "line": 48,
+   "name": "CONTROLLER_PAGE 2411904 (0x24cd80)",
+   "category": "struct offset",
+   "old": "0x24cd80",
+   "new": "0x24cd80",
+   "feeds_write": false,
+   "witnesses": 2,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x18129e1",
+     "old_ins": "mov edi, dword ptr [rbx + 0x24cd80]",
+     "new_site": "0x1693c31",
+     "new_ins": "mov edi, dword ptr [rbx + 0x24cd80]",
+     "new_value": "0x24cd80",
+     "function": "build_rows",
+     "strong": true,
+     "window": "aligned in function 0x1812940->0x1693b90",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x24cd80"
+    },
+    {
+     "old_site": "0x181240e",
+     "old_ins": "mov dword ptr [rcx + 0x24cd80], edx",
+     "new_site": "0x169365e",
+     "new_ins": "mov dword ptr [rcx + 0x24cd80], edx",
+     "new_value": "0x24cd80",
+     "function": "list_layout",
+     "strong": true,
+     "window": "aligned in function 0x18123f0->0x1693640 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x24cd80"
+    },
+    {
+     "old_site": "0x181240e",
+     "old_ins": "mov dword ptr [rcx + 0x24cd80], edx",
+     "new_site": "0x169365e",
+     "window": "strict 158 bytes from -0",
+     "new_ins": "mov dword ptr [rcx + 0x24cd80], edx",
+     "new_value": "0x24cd80",
+     "status": "duplicate of an earlier witness",
+     "strong": true,
+     "base": "0x0"
+    },
+    {
+     "old_site": "0x18129e1",
+     "old_ins": "mov edi, dword ptr [rbx + 0x24cd80]",
+     "new_site": "0x1693c31",
+     "window": "strict 159 bytes from -0",
+     "new_ins": "mov edi, dword ptr [rbx + 0x24cd80]",
+     "new_value": "0x24cd80",
+     "status": "duplicate of an earlier witness",
+     "strong": true,
+     "base": "0x0"
+    },
+    {
+     "old_site": "0x1813754",
+     "old_ins": "cmp dword ptr [rcx + 0x24cd80], 0",
+     "status": "unmapped",
+     "base": "0x0"
+    },
+    {
+     "old_site": "0x1813a48",
+     "old_ins": "cmp dword ptr [rcx + 0x24cd80], 0",
+     "status": "unmapped",
+     "base": "0x0"
+    },
+    {
+     "old_site": "0x1813d4f",
+     "old_ins": "mov eax, dword ptr [r14 + 0x24cd80]",
+     "status": "unmapped",
+     "base": "0x0"
+    }
+   ],
+   "id": 109
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 937,
+   "name": "row type at row + 24752 (0x60b0)",
+   "category": "struct offset",
+   "old": "0x60b0",
+   "new": "0x60b0",
+   "feeds_write": false,
+   "witnesses": 2,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x17f865a",
+     "old_ins": "mov dword ptr [rcx + 0x60b0], edx",
+     "new_site": "0x16798fa",
+     "new_ins": "mov dword ptr [rcx + 0x60b0], edx",
+     "new_value": "0x60b0",
+     "function": "row_init",
+     "strong": true,
+     "window": "aligned in function 0x17f8630->0x16798d0 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x60b0"
+    },
+    {
+     "old_site": "0x17f8b56",
+     "old_ins": "cmp dword ptr [rcx + 0x60b0], 2",
+     "new_site": "0x1679df6",
+     "window": "strict 96 bytes from -0",
+     "new_ins": "cmp dword ptr [rcx + 0x60b0], 2",
+     "new_value": "0x60b0",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x60b0"
+    },
+    {
+     "old_site": "0x17f865a",
+     "old_ins": "mov dword ptr [rcx + 0x60b0], edx",
+     "new_site": "0x16798fa",
+     "window": "strict 158 bytes from -0",
+     "new_ins": "mov dword ptr [rcx + 0x60b0], edx",
+     "new_value": "0x60b0",
+     "status": "duplicate of an earlier witness",
+     "strong": true,
+     "base": "0x0"
+    }
+   ],
+   "id": 110
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 937,
+   "name": "header row type 4",
+   "category": "enum",
+   "old": "0x4",
+   "new": "0x4",
+   "feeds_write": false,
+   "witnesses": 1,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x1812a80",
+     "old_ins": "mov edx, 4",
+     "new_site": "0x1693cd0",
+     "new_ins": "mov edx, 4",
+     "new_value": "0x4",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x1812a74 (strict window)",
+     "status": "same",
+     "implies": "0x4"
+    }
+   ],
+   "note": "build_rows passes edx = 4 to row_init for a descriptor with a header label (row_init stores it at +0x60b0)",
+   "id": 111
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 939,
+   "name": "row code at row + 24760 (0x60b8) = group << 16 | action",
+   "category": "struct offset",
+   "old": "0x60b8",
+   "new": "0x60b8",
+   "feeds_write": false,
+   "witnesses": 6,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x17f87a5",
+     "old_ins": "mov dword ptr [rbp + 0x60b8], ecx",
+     "new_site": "0x1679a45",
+     "new_ins": "mov dword ptr [rbp + 0x60b8], ecx",
+     "new_value": "0x60b8",
+     "function": "row_init",
+     "strong": true,
+     "window": "aligned in function 0x17f8630->0x16798d0 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x60b8"
+    },
+    {
+     "old_site": "0x17f890d",
+     "old_ins": "mov dword ptr [rbp + 0x60b8], 0xffffffff",
+     "new_site": "0x1679bad",
+     "new_ins": "mov dword ptr [rbp + 0x60b8], 0xffffffff",
+     "new_value": "0x60b8",
+     "function": "row_init",
+     "strong": true,
+     "window": "aligned in function 0x17f8630->0x16798d0 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x60b8"
+    },
+    {
+     "old_site": "0x17f8bea",
+     "old_ins": "cmp dword ptr [rcx + 0x60b8], -1",
+     "new_site": "0x1679e8a",
+     "window": "strict 62 bytes from -0",
+     "new_ins": "cmp dword ptr [rcx + 0x60b8], -1",
+     "new_value": "0x60b8",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x60b8"
+    },
+    {
+     "old_site": "0x17f90de",
+     "old_ins": "mov r11d, dword ptr [rcx + 0x60b8]",
+     "new_site": "0x167a37e",
+     "window": "strict 159 bytes from -0",
+     "new_ins": "mov r11d, dword ptr [rcx + 0x60b8]",
+     "new_value": "0x60b8",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x60b8"
+    },
+    {
+     "old_site": "0x17f95bb",
+     "old_ins": "mov r11d, dword ptr [rcx + 0x60b8]",
+     "new_site": "0x167a85b",
+     "window": "strict 160 bytes from -0",
+     "new_ins": "mov r11d, dword ptr [rcx + 0x60b8]",
+     "new_value": "0x60b8",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x60b8"
+    },
+    {
+     "old_site": "0x17f98e9",
+     "old_ins": "mov r11d, dword ptr [rcx + 0x60b8]",
+     "new_site": "0x167ab89",
+     "window": "strict 157 bytes from -0",
+     "new_ins": "mov r11d, dword ptr [rcx + 0x60b8]",
+     "new_value": "0x60b8",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x60b8"
+    },
+    {
+     "old_site": "0x17f87a5",
+     "old_ins": "mov dword ptr [rbp + 0x60b8], ecx",
+     "new_site": "0x1679a45",
+     "window": "strict 160 bytes from -0",
+     "new_ins": "mov dword ptr [rbp + 0x60b8], ecx",
+     "new_value": "0x60b8",
+     "status": "duplicate of an earlier witness",
+     "strong": true,
+     "base": "0x0"
+    }
+   ],
+   "id": 112
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 938,
+   "name": "header label widget at row + 4264 (0x10a8)",
+   "category": "struct offset",
+   "old": "0x10a8",
+   "new": "0x10a8",
+   "feeds_write": false,
+   "witnesses": 2,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x17f8a24",
+     "old_ins": "lea rcx, [rbp + 0x10a8]",
+     "new_site": "0x1679cc4",
+     "new_ins": "lea rcx, [rbp + 0x10a8]",
+     "new_value": "0x10a8",
+     "function": "row_init",
+     "strong": true,
+     "window": "aligned in function 0x17f8630->0x16798d0 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x10a8"
+    },
+    {
+     "old_site": "0x17f8a3d",
+     "old_ins": "lea rcx, [rbp + 0x10a8]",
+     "new_site": "0x1679cdd",
+     "new_ins": "lea rcx, [rbp + 0x10a8]",
+     "new_value": "0x10a8",
+     "function": "row_init",
+     "strong": true,
+     "window": "aligned in function 0x17f8630->0x16798d0 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x10a8"
+    }
+   ],
+   "id": 113
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 938,
+   "name": "label id at widget + 272 (0x110)",
+   "category": "struct offset",
+   "old": "0x110",
+   "new": "0x110",
+   "feeds_write": false,
+   "witnesses": 3,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x143bf97",
+     "old_ins": "cmp dword ptr [rcx + 0x110], edx",
+     "new_site": "0x12d3ca7",
+     "new_ins": "cmp dword ptr [rcx + 0x110], edx",
+     "new_value": "0x110",
+     "function": "set_label",
+     "strong": true,
+     "window": "aligned in function 0x143bf90->0x12d3ca0 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x110"
+    },
+    {
+     "old_site": "0x143bfa3",
+     "old_ins": "mov dword ptr [rcx + 0x110], edx",
+     "new_site": "0x12d3cb3",
+     "new_ins": "mov dword ptr [rcx + 0x110], edx",
+     "new_value": "0x110",
+     "function": "set_label",
+     "strong": true,
+     "window": "aligned in function 0x143bf90->0x12d3ca0 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x110"
+    }
+   ],
+   "note": "MOM MAP row 93 (LABEL): 0x110 -> 0x110, high",
+   "id": 114
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 857,
+   "name": "header descriptor group 13 (0xd)",
+   "category": "enum",
+   "old": "0xd",
+   "new": "0xd",
+   "feeds_write": false,
+   "witnesses": 1,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x1812a0e",
+     "old_ins": "mov dword ptr [rsp + 0xf0], 0xd",
+     "new_site": "0x1693c5e",
+     "new_ins": "mov dword ptr [rsp + 0xf0], 0xd",
+     "new_value": "0xd",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x1812a0e (strict window)",
+     "status": "same",
+     "implies": "0xd"
+    }
+   ],
+   "note": "build_rows gives header rows the code {13, 97}; MBM's header descriptors use group 13",
+   "id": 115
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 993,
+   "name": "descriptor size 12 (lea rdx, [rax + rax*2]; [r15 + rdx*4 + 8] = header)",
+   "category": "layout",
+   "old": "0x8",
+   "new": "0x8",
+   "feeds_write": false,
+   "witnesses": 1,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x1812a7b",
+     "old_ins": "mov eax, dword ptr [r15 + rdx*4 + 8]",
+     "new_site": "0x1693ccb",
+     "new_ins": "mov eax, dword ptr [r15 + rdx*4 + 8]",
+     "new_value": "0x8",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x1812a5e (strict window)",
+     "status": "same",
+     "implies": "0x8"
+    }
+   ],
+   "id": 116
+  },
+  {
+   "file": "src/panel.lua",
+   "line": 48,
+   "name": "widget x +148 (0x94)",
+   "category": "layout",
+   "old": "0x94",
+   "new": "0x94",
+   "feeds_write": false,
+   "witnesses": 2,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x144d3ef",
+     "old_ins": "addss xmm12, dword ptr [rcx + 0x94]",
+     "new_site": "0x12e50ff",
+     "new_ins": "addss xmm12, dword ptr [rcx + 0x94]",
+     "new_value": "0x94",
+     "function": "hit_test",
+     "strong": true,
+     "window": "aligned in function 0x144d320->0x12e5030 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x94"
+    },
+    {
+     "old_site": "0x144d3f8",
+     "old_ins": "addss xmm9, dword ptr [rcx + 0x94]",
+     "new_site": "0x12e5108",
+     "new_ins": "addss xmm9, dword ptr [rcx + 0x94]",
+     "new_value": "0x94",
+     "function": "hit_test",
+     "strong": true,
+     "window": "aligned in function 0x144d320->0x12e5030 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x94"
+    }
+   ],
+   "id": 117
+  },
+  {
+   "file": "src/panel.lua",
+   "line": 48,
+   "name": "widget y +156 (0x9c)",
+   "category": "layout",
+   "old": "0x9c",
+   "new": "0x9c",
+   "feeds_write": false,
+   "witnesses": 1,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x144d337",
+     "old_ins": "movss xmm4, dword ptr [rcx + 0x9c]",
+     "new_site": "0x12e5047",
+     "new_ins": "movss xmm4, dword ptr [rcx + 0x9c]",
+     "new_value": "0x9c",
+     "function": "hit_test",
+     "strong": true,
+     "window": "aligned in function 0x144d320->0x12e5030 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x9c"
+    }
+   ],
+   "id": 118
+  },
+  {
+   "file": "src/panel.lua",
+   "line": 48,
+   "name": "widget size +36/+40 (0x24)",
+   "category": "layout",
+   "old": "0x24",
+   "new": "0x24",
+   "feeds_write": false,
+   "witnesses": 1,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x144d33f",
+     "old_ins": "mov rax, qword ptr [rcx + 0x24]",
+     "new_site": "0x12e504f",
+     "new_ins": "mov rax, qword ptr [rcx + 0x24]",
+     "new_value": "0x24",
+     "function": "hit_test",
+     "strong": true,
+     "window": "aligned in function 0x144d320->0x12e5030 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x24"
+    }
+   ],
+   "id": 119
+  },
+  {
+   "file": "src/panel.lua",
+   "line": 48,
+   "name": "widget scale x +100 (0x64)",
+   "category": "layout",
+   "old": "0x64",
+   "new": "0x64",
+   "feeds_write": false,
+   "witnesses": 1,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x144d362",
+     "old_ins": "movss xmm9, dword ptr [rcx + 0x64]",
+     "new_site": "0x12e5072",
+     "new_ins": "movss xmm9, dword ptr [rcx + 0x64]",
+     "new_value": "0x64",
+     "function": "hit_test",
+     "strong": true,
+     "window": "aligned in function 0x144d320->0x12e5030 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x64"
+    }
+   ],
+   "id": 120
+  },
+  {
+   "file": "src/panel.lua",
+   "line": 48,
+   "name": "widget scale y +140 (0x8c)",
+   "category": "layout",
+   "old": "0x8c",
+   "new": "0x8c",
+   "feeds_write": false,
+   "witnesses": 1,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x144d32c",
+     "old_ins": "movss xmm2, dword ptr [rcx + 0x8c]",
+     "new_site": "0x12e503c",
+     "new_ins": "movss xmm2, dword ptr [rcx + 0x8c]",
+     "new_value": "0x8c",
+     "function": "hit_test",
+     "strong": true,
+     "window": "aligned in function 0x144d320->0x12e5030 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x8c"
+    }
+   ],
+   "id": 121
+  },
+  {
+   "file": "src/panel.lua",
+   "line": 48,
+   "name": "widget opacity +84 (0x54)",
+   "category": "layout",
+   "old": "0x54",
+   "new": "0x54",
+   "feeds_write": false,
+   "witnesses": 8,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x1439868",
+     "old_ins": "movss dword ptr [rcx + 0x54], xmm3",
+     "new_site": "0x12d1578",
+     "new_ins": "movss dword ptr [rcx + 0x54], xmm3",
+     "new_value": "0x54",
+     "function": "opacity solve",
+     "strong": true,
+     "window": "aligned in function 0x1439809->0x12d1519 (identical)",
+     "status": "same",
+     "implies": "0x54"
+    },
+    {
+     "old_site": "0x1439882",
+     "old_ins": "movss dword ptr [rcx + 0x54], xmm3",
+     "new_site": "0x12d1592",
+     "new_ins": "movss dword ptr [rcx + 0x54], xmm3",
+     "new_value": "0x54",
+     "function": "opacity solve",
+     "strong": true,
+     "window": "aligned in function 0x1439809->0x12d1519 (identical)",
+     "status": "same",
+     "implies": "0x54"
+    },
+    {
+     "old_site": "0x1439c1f",
+     "old_ins": "movss xmm1, dword ptr [r10 + 0x54]",
+     "new_site": "0x12d192f",
+     "new_ins": "movss xmm1, dword ptr [r10 + 0x54]",
+     "new_value": "0x54",
+     "function": "opacity solve",
+     "strong": true,
+     "window": "aligned in function 0x1439809->0x12d1519 (identical)",
+     "status": "same",
+     "implies": "0x54"
+    },
+    {
+     "old_site": "0x1439c62",
+     "old_ins": "movss dword ptr [r10 + 0x54], xmm1",
+     "new_site": "0x12d1972",
+     "new_ins": "movss dword ptr [r10 + 0x54], xmm1",
+     "new_value": "0x54",
+     "function": "opacity solve",
+     "strong": true,
+     "window": "aligned in function 0x1439809->0x12d1519 (identical)",
+     "status": "same",
+     "implies": "0x54"
+    },
+    {
+     "old_site": "0x14397cb",
+     "old_ins": "movss xmm3, dword ptr [rcx + 0x54]",
+     "new_site": "0x12d14db",
+     "new_ins": "movss xmm3, dword ptr [rcx + 0x54]",
+     "new_value": "0x54",
+     "function": "opacity read",
+     "strong": true,
+     "window": "aligned in function 0x14397a0->0x12d14b0 (identical)",
+     "status": "same",
+     "implies": "0x54"
+    },
+    {
+     "old_site": "0x143b1e6",
+     "old_ins": "movss xmm0, dword ptr [rcx + 0x54]",
+     "new_site": "0x12d2ef6",
+     "new_ins": "movss xmm0, dword ptr [rcx + 0x54]",
+     "new_value": "0x54",
+     "function": "widget pass",
+     "strong": true,
+     "window": "aligned in function 0x143b19e->0x12d2eae (identical)",
+     "status": "same",
+     "implies": "0x54"
+    },
+    {
+     "old_site": "0x143b527",
+     "old_ins": "movss xmm0, dword ptr [rdi + 0x54]",
+     "new_site": "0x12d3237",
+     "new_ins": "movss xmm0, dword ptr [rdi + 0x54]",
+     "new_value": "0x54",
+     "function": "widget pass",
+     "strong": true,
+     "window": "aligned in function 0x143b19e->0x12d2eae (identical)",
+     "status": "same",
+     "implies": "0x54"
+    },
+    {
+     "old_site": "0x143b5b5",
+     "old_ins": "movss xmm1, dword ptr [rax + 0x54]",
+     "new_site": "0x12d32c5",
+     "new_ins": "movss xmm1, dword ptr [rax + 0x54]",
+     "new_value": "0x54",
+     "function": "widget pass",
+     "strong": true,
+     "window": "aligned in function 0x143b19e->0x12d2eae (identical)",
+     "status": "same",
+     "implies": "0x54"
+    }
+   ],
+   "note": "disp8 field: witnessed inside widget-core functions that are identical in both builds",
+   "id": 122
+  },
+  {
+   "file": "src/panel.lua",
+   "line": 91,
+   "name": "widget visible flag 0x10 in word +0",
+   "category": "enum",
+   "old": "0x10",
+   "new": "0x10",
+   "feeds_write": false,
+   "witnesses": 2,
+   "confidence": "high",
+   "method": "native-work/mom-port/MAP.json row 63 (VISIBLE_FLAG 0x10 (button word bit 4)): old code using the value (inside the options-menu code clusters, aligned inside a mapped function, or at a fixed context site) mapped to the current build by masked byte windows; the value the matching new instruction uses (minus the composite base)",
+   "id": 123
+  },
+  {
+   "file": "src/panel.lua",
+   "line": 48,
+   "name": "VIEWPORT 272 (list + 0x110)",
+   "category": "struct offset",
+   "old": "0x110",
+   "new": "0x110",
+   "feeds_write": false,
+   "witnesses": 2,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x18124ed",
+     "old_ins": "lea rdi, [rsi + 0x110]",
+     "new_site": "0x169373d",
+     "new_ins": "lea rdi, [rsi + 0x110]",
+     "new_value": "0x110",
+     "function": "list_layout",
+     "strong": true,
+     "window": "aligned in function 0x18123f0->0x1693640 (identical)",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x110"
+    },
+    {
+     "old_site": "0x18120f8",
+     "old_ins": "lea rdx, [rdi + 0x110]",
+     "new_site": "0x1693348",
+     "new_ins": "lea rdx, [rdi + 0x110]",
+     "new_value": "0x110",
+     "window": "aligned in function 0x1812060->0x16932b0 (copy 2 of 2 identical bodies)",
+     "status": "same",
+     "strong": true,
+     "base": "0x0",
+     "implies": "0x110"
+    },
+    {
+     "old_site": "0x18124ed",
+     "old_ins": "lea rdi, [rsi + 0x110]",
+     "new_site": "0x169373d",
+     "window": "strict 160 bytes from -0",
+     "new_ins": "lea rdi, [rsi + 0x110]",
+     "new_value": "0x110",
+     "status": "duplicate of an earlier witness",
+     "strong": true,
+     "base": "0x0"
+    },
+    {
+     "old_site": "0x1812f87",
+     "old_ins": "lea rdx, [rdi + 0x110]",
+     "status": "unmapped",
+     "base": "0x0"
+    },
+    {
+     "old_site": "0x1813347",
+     "old_ins": "lea rdx, [rbx + 0x110]",
+     "status": "unmapped",
+     "base": "0x0"
+    }
+   ],
+   "note": "the list setup initialises the viewport widget at list + 0x110; the row walk hover-tests the menu cursor (menu + 0x5f0) against list + 0x110",
+   "id": 124
+  },
+  {
+   "file": "src/panel.lua",
+   "line": 50,
+   "name": "CURSOR widget at menu + 1520 (0x5f0)",
+   "category": "struct offset",
+   "old": "0x5f0",
+   "new": "0x5f8",
+   "feeds_write": false,
+   "witnesses": 7,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x1800375",
+     "old_ins": "lea r8, [r14 + 0x5f0]",
+     "new_site": "0x1681615",
+     "new_ins": "lea r8, [r14 + 0x5f8]",
+     "new_value": "0x5f8",
+     "base": "0x0",
+     "strong": false,
+     "window": "context from 0x180036e (relaxed window)",
+     "status": "changed",
+     "implies": "0x5f8"
+    },
+    {
+     "old_site": "0x14373db",
+     "old_ins": "lea rcx, [rdi + 0x5f0]",
+     "new_site": "0x12cef7b",
+     "window": "relaxed 158 bytes from -0",
+     "new_ins": "lea rcx, [rdi + 0x5f8]",
+     "new_value": "0x5f8",
+     "status": "changed",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0x5f8"
+    },
+    {
+     "old_site": "0x143789b",
+     "old_ins": "lea rdi, [rcx + 0x5f0]",
+     "new_site": "0x12cf43b",
+     "window": "relaxed 157 bytes from -0",
+     "new_ins": "lea rdi, [rcx + 0x5f8]",
+     "new_value": "0x5f8",
+     "status": "changed",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0x5f8"
+    },
+    {
+     "old_site": "0x1437c63",
+     "old_ins": "lea rcx, [rsi + 0x5f0]",
+     "new_site": "0x12cf803",
+     "window": "relaxed 92 bytes from -0",
+     "new_ins": "lea rcx, [rsi + 0x5f8]",
+     "new_value": "0x5f8",
+     "status": "changed",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0x5f8"
+    },
+    {
+     "old_site": "0x1437f64",
+     "old_ins": "lea rcx, [rdi + 0x5f0]",
+     "new_site": "0x12cfb14",
+     "window": "relaxed 60 bytes from -0",
+     "new_ins": "lea rcx, [rdi + 0x5f8]",
+     "new_value": "0x5f8",
+     "status": "changed",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0x5f8"
+    },
+    {
+     "old_site": "0x1812102",
+     "old_ins": "add rcx, 0x5f0",
+     "new_site": "0x1693352",
+     "new_ins": "add rcx, 0x5f8",
+     "new_value": "0x5f8",
+     "window": "aligned in function 0x1812060->0x16932b0 (copy 2 of 2 identical bodies)",
+     "status": "changed",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0x5f8"
+    },
+    {
+     "old_site": "0x1814548",
+     "old_ins": "add rcx, 0x5f0",
+     "new_site": "0x1695798",
+     "window": "relaxed 48 bytes from -0",
+     "new_ins": "add rcx, 0x5f8",
+     "new_value": "0x5f8",
+     "status": "changed",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0x5f8"
+    },
+    {
+     "old_site": "0x1437dcd",
+     "old_ins": "lea rcx, [rdi + 0x5f0]",
+     "status": "unmapped",
+     "base": "0x0"
+    }
+   ],
+   "note": "row input passes lea r8, [menu + 0x5f0] to the row handler that hover-tests with it",
+   "replace": {
+    "old_text": "= 1520, ",
+    "new_text": "= 1528, "
+   },
+   "id": 125
+  },
+  {
+   "file": "src/panel.lua",
+   "line": 50,
+   "name": "CURSOR_PARENT +512 (0x200)",
+   "category": "struct offset",
+   "old": "0x200",
+   "new": "0x200",
+   "feeds_write": false,
+   "witnesses": 2,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x17fbf7a",
+     "old_ins": "mov rcx, qword ptr [rbx + 0x200]",
+     "new_site": "0x167d21a",
+     "new_ins": "mov rcx, qword ptr [rbx + 0x200]",
+     "new_value": "0x200",
+     "function": "row_hover",
+     "strong": true,
+     "window": "aligned in function 0x17fbf50->0x167d1f0",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x200"
+    },
+    {
+     "old_site": "0x17fc01b",
+     "old_ins": "mov rcx, qword ptr [rbx + 0x200]",
+     "new_site": "0x167d2bb",
+     "new_ins": "mov rcx, qword ptr [rbx + 0x200]",
+     "new_value": "0x200",
+     "function": "row_hover",
+     "strong": true,
+     "window": "aligned in function 0x17fbf50->0x167d1f0",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x200"
+    }
+   ],
+   "id": 126
+  },
+  {
+   "file": "src/panel.lua",
+   "line": 50,
+   "name": "cursor position +620 (0x26c; f32[27], f32[28])",
+   "category": "struct offset",
+   "old": "0x26c",
+   "new": "0x26c",
+   "feeds_write": false,
+   "witnesses": 2,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x17fbf84",
+     "old_ins": "mov rdx, qword ptr [rbx + 0x26c]",
+     "new_site": "0x167d224",
+     "new_ins": "mov rdx, qword ptr [rbx + 0x26c]",
+     "new_value": "0x26c",
+     "function": "row_hover",
+     "strong": true,
+     "window": "aligned in function 0x17fbf50->0x167d1f0",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x26c"
+    },
+    {
+     "old_site": "0x17fc029",
+     "old_ins": "mov rdx, qword ptr [rbx + 0x26c]",
+     "new_site": "0x167d2c9",
+     "new_ins": "mov rdx, qword ptr [rbx + 0x26c]",
+     "new_value": "0x26c",
+     "function": "row_hover",
+     "strong": true,
+     "window": "aligned in function 0x17fbf50->0x167d1f0",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x26c"
+    }
+   ],
+   "id": 127
+  },
+  {
+   "file": "src/panel.lua",
+   "line": 50,
+   "name": "ROOT_A 352 (0x160)",
+   "category": "struct offset",
+   "old": "0x160",
+   "new": "0x168",
+   "feeds_write": false,
+   "witnesses": 10,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x17fbfaf",
+     "old_ins": "lea rax, [r9 + 0x160]",
+     "new_site": "0x167d24f",
+     "new_ins": "lea rax, [r9 + 0x168]",
+     "new_value": "0x168",
+     "function": "row_hover",
+     "strong": false,
+     "window": "aligned in function 0x17fbf50->0x167d1f0",
+     "status": "changed",
+     "base": "0x0",
+     "implies": "0x168"
+    },
+    {
+     "old_site": "0x17fc022",
+     "old_ins": "lea rax, [r9 + 0x160]",
+     "new_site": "0x167d2c2",
+     "new_ins": "lea rax, [r9 + 0x168]",
+     "new_value": "0x168",
+     "function": "row_hover",
+     "strong": false,
+     "window": "aligned in function 0x17fbf50->0x167d1f0",
+     "status": "changed",
+     "base": "0x0",
+     "implies": "0x168"
+    },
+    {
+     "old_site": "0x1436cd1",
+     "old_ins": "lea rcx, [rbp + 0x160]",
+     "new_site": "0x12ce851",
+     "window": "relaxed 158 bytes from -0",
+     "new_ins": "lea rcx, [rbp + 0x168]",
+     "new_value": "0x168",
+     "status": "changed",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0x168"
+    },
+    {
+     "old_site": "0x1436eb5",
+     "old_ins": "lea rcx, [rdi + 0x160]",
+     "new_site": "0x12cea35",
+     "window": "relaxed 157 bytes from -0",
+     "new_ins": "lea rcx, [rdi + 0x168]",
+     "new_value": "0x168",
+     "status": "changed",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0x168"
+    },
+    {
+     "old_site": "0x14370a7",
+     "old_ins": "add rcx, 0x160",
+     "new_site": "0x12cec47",
+     "window": "relaxed 159 bytes from -0",
+     "new_ins": "add rcx, 0x168",
+     "new_value": "0x168",
+     "status": "changed",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0x168"
+    },
+    {
+     "old_site": "0x1437396",
+     "old_ins": "lea rcx, [rdi + 0x160]",
+     "new_site": "0x12cef36",
+     "window": "relaxed 158 bytes from -0",
+     "new_ins": "lea rcx, [rdi + 0x168]",
+     "new_value": "0x168",
+     "status": "changed",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0x168"
+    },
+    {
+     "old_site": "0x1437f1f",
+     "old_ins": "lea rcx, [rdi + 0x160]",
+     "new_site": "0x12cfacf",
+     "window": "relaxed 127 bytes from -0",
+     "new_ins": "lea rcx, [rdi + 0x168]",
+     "new_value": "0x168",
+     "status": "changed",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0x168"
+    },
+    {
+     "old_site": "0x14388cf",
+     "old_ins": "lea rdi, [rcx + 0x160]",
+     "new_site": "0x12d05df",
+     "window": "relaxed 160 bytes from -0",
+     "new_ins": "lea rdi, [rcx + 0x168]",
+     "new_value": "0x168",
+     "status": "changed",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0x168"
+    }
+   ],
+   "replace": {
+    "old_text": ", 352, ",
+    "new_text": ", 360, "
+   },
+   "id": 128
+  },
+  {
+   "file": "src/panel.lua",
+   "line": 50,
+   "name": "ROOT_B 648 (0x288)",
+   "category": "struct offset",
+   "old": "0x288",
+   "new": "0x290",
+   "feeds_write": false,
+   "witnesses": 11,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x17fbfbf",
+     "old_ins": "lea rax, [r9 + 0x288]",
+     "new_site": "0x167d25f",
+     "new_ins": "lea rax, [r9 + 0x290]",
+     "new_value": "0x290",
+     "function": "row_hover",
+     "strong": false,
+     "window": "aligned in function 0x17fbf50->0x167d1f0",
+     "status": "changed",
+     "base": "0x0",
+     "implies": "0x290"
+    },
+    {
+     "old_site": "0x17fc035",
+     "old_ins": "lea rax, [r9 + 0x288]",
+     "new_site": "0x167d2d5",
+     "new_ins": "lea rax, [r9 + 0x290]",
+     "new_value": "0x290",
+     "function": "row_hover",
+     "strong": false,
+     "window": "aligned in function 0x17fbf50->0x167d1f0",
+     "status": "changed",
+     "base": "0x0",
+     "implies": "0x290"
+    },
+    {
+     "old_site": "0x1436ce0",
+     "old_ins": "lea rcx, [rbp + 0x288]",
+     "new_site": "0x12ce860",
+     "window": "relaxed 156 bytes from -0",
+     "new_ins": "lea rcx, [rbp + 0x290]",
+     "new_value": "0x290",
+     "status": "changed",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0x290"
+    },
+    {
+     "old_site": "0x1436ec1",
+     "old_ins": "lea rcx, [rdi + 0x288]",
+     "new_site": "0x12cea41",
+     "window": "relaxed 159 bytes from -0",
+     "new_ins": "lea rcx, [rdi + 0x290]",
+     "new_value": "0x290",
+     "status": "changed",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0x290"
+    },
+    {
+     "old_site": "0x14370b3",
+     "old_ins": "lea rcx, [rbp + 0x288]",
+     "new_site": "0x12cec53",
+     "window": "relaxed 160 bytes from -0",
+     "new_ins": "lea rcx, [rbp + 0x290]",
+     "new_value": "0x290",
+     "status": "changed",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0x290"
+    },
+    {
+     "old_site": "0x14373ba",
+     "old_ins": "lea rcx, [rdi + 0x288]",
+     "new_site": "0x12cef5a",
+     "window": "relaxed 159 bytes from -0",
+     "new_ins": "lea rcx, [rdi + 0x290]",
+     "new_value": "0x290",
+     "status": "changed",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0x290"
+    },
+    {
+     "old_site": "0x1437cac",
+     "old_ins": "lea rdx, [rsi + 0x288]",
+     "new_site": "0x12cf84c",
+     "window": "relaxed 48 bytes from -0",
+     "new_ins": "lea rdx, [rsi + 0x290]",
+     "new_value": "0x290",
+     "status": "changed",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0x290"
+    },
+    {
+     "old_site": "0x1437f43",
+     "old_ins": "lea rcx, [rdi + 0x288]",
+     "new_site": "0x12cfaf3",
+     "window": "relaxed 93 bytes from -0",
+     "new_ins": "lea rcx, [rdi + 0x290]",
+     "new_value": "0x290",
+     "status": "changed",
+     "strong": false,
+     "base": "0x0",
+     "implies": "0x290"
+    }
+   ],
+   "replace": {
+    "old_text": ", 648\n",
+    "new_text": ", 656\n"
+   },
+   "id": 129
+  },
+  {
+   "file": "src/panel.lua",
+   "line": 52,
+   "name": "SELECT UI action 10 (code 0xa00000000)",
+   "category": "input action index",
+   "old": "0xa00000000",
+   "new": "0xa00000000",
+   "feeds_write": false,
+   "witnesses": 1,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x17fbf68",
+     "old_ins": "movabs rcx, 0xa00000000",
+     "new_site": "0x167d208",
+     "new_ins": "movabs rcx, 0xa00000000",
+     "new_value": "0xa00000000",
+     "function": "row_hover",
+     "strong": true,
+     "window": "aligned in function 0x17fbf50->0x167d1f0",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0xa00000000"
+    }
+   ],
+   "note": "group 0 action order is the 13x97 label table, which is byte-identical (DORMANT_ACTIONS row)",
+   "id": 130
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 70,
+   "name": "mission record +8 (running)",
+   "category": "struct offset",
+   "old": "0x8",
+   "new": "0x8",
+   "feeds_write": false,
+   "witnesses": 4,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x380145",
+     "old_ins": "cmp dword ptr [rax + 8], 0",
+     "new_site": "0x386e45",
+     "new_ins": "cmp dword ptr [rax + 8], 0",
+     "new_value": "0x8",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x38013b (strict window)",
+     "status": "same",
+     "implies": "0x8"
+    },
+    {
+     "old_site": "0x380323",
+     "old_ins": "cmp dword ptr [rax + 8], 0",
+     "new_site": "0x387023",
+     "new_ins": "cmp dword ptr [rax + 8], 0",
+     "new_value": "0x8",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x38031c (strict window)",
+     "status": "same",
+     "implies": "0x8"
+    },
+    {
+     "old_site": "0x380544",
+     "old_ins": "cmp dword ptr [rax + 8], 0",
+     "new_site": "0x387244",
+     "new_ins": "cmp dword ptr [rax + 8], 0",
+     "new_value": "0x8",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x38053d (strict window)",
+     "status": "same",
+     "implies": "0x8"
+    },
+    {
+     "old_site": "0x461fce",
+     "old_ins": "cmp dword ptr [rax + 8], 0",
+     "new_site": "0x468dee",
+     "new_ins": "cmp dword ptr [rax + 8], 0",
+     "new_value": "0x8",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x461fc7 (strict window)",
+     "status": "same",
+     "implies": "0x8"
+    }
+   ],
+   "id": 131
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 70,
+   "name": "mission record +0x40 (mode)",
+   "category": "struct offset",
+   "old": "0x40",
+   "new": "0x40",
+   "feeds_write": false,
+   "witnesses": 4,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x38014f",
+     "old_ins": "mov eax, dword ptr [rax + 0x40]",
+     "new_site": "0x386e4f",
+     "new_ins": "mov eax, dword ptr [rax + 0x40]",
+     "new_value": "0x40",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x38013b (strict window)",
+     "status": "same",
+     "implies": "0x40"
+    },
+    {
+     "old_site": "0x380329",
+     "old_ins": "mov eax, dword ptr [rax + 0x40]",
+     "new_site": "0x387029",
+     "new_ins": "mov eax, dword ptr [rax + 0x40]",
+     "new_value": "0x40",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x38031c (strict window)",
+     "status": "same",
+     "implies": "0x40"
+    },
+    {
+     "old_site": "0x38054e",
+     "old_ins": "mov eax, dword ptr [rax + 0x40]",
+     "new_site": "0x38724e",
+     "new_ins": "mov eax, dword ptr [rax + 0x40]",
+     "new_value": "0x40",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x38053d (strict window)",
+     "status": "same",
+     "implies": "0x40"
+    },
+    {
+     "old_site": "0x461fd8",
+     "old_ins": "mov eax, dword ptr [rax + 0x40]",
+     "new_site": "0x468df8",
+     "new_ins": "mov eax, dword ptr [rax + 0x40]",
+     "new_value": "0x40",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x461fc7 (strict window)",
+     "status": "same",
+     "implies": "0x40"
+    }
+   ],
+   "id": 132
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 70,
+   "name": "mission modes 1-7 (dec eax; cmp eax, 6)",
+   "category": "enum",
+   "old": "0x6",
+   "new": "0x6",
+   "feeds_write": false,
+   "witnesses": 3,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x380154",
+     "old_ins": "cmp eax, 6",
+     "new_site": "0x386e54",
+     "new_ins": "cmp eax, 6",
+     "new_value": "0x6",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x38013b (strict window)",
+     "status": "same",
+     "implies": "0x6"
+    },
+    {
+     "old_site": "0x38032e",
+     "old_ins": "cmp eax, 6",
+     "new_site": "0x38702e",
+     "new_ins": "cmp eax, 6",
+     "new_value": "0x6",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x38031c (strict window)",
+     "status": "same",
+     "implies": "0x6"
+    },
+    {
+     "old_site": "0x380553",
+     "old_ins": "cmp eax, 6",
+     "new_site": "0x387253",
+     "new_ins": "cmp eax, 6",
+     "new_value": "0x6",
+     "base": "0x0",
+     "strong": true,
+     "window": "context from 0x38053d (strict window)",
+     "status": "same",
+     "implies": "0x6"
+    }
+   ],
+   "id": 133
+  },
+  {
+   "file": "src/panel.lua",
+   "line": 392,
+   "name": "font material owner + 24 (0x18)",
+   "category": "struct offset",
+   "old": "0x18",
+   "new": "0x18",
+   "feeds_write": false,
+   "witnesses": 1,
+   "conflicts": 0,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old_site": "0x13880e8",
+     "old_ins": "mov rbx, qword ptr [rbx + 0x18]",
+     "new_site": "0x121ea38",
+     "new_ins": "mov rbx, qword ptr [rbx + 0x18]",
+     "new_value": "0x18",
+     "function": "font_init",
+     "strong": true,
+     "window": "aligned in function 0x1387dfb->0x121e74b",
+     "status": "same",
+     "base": "0x0",
+     "implies": "0x18"
+    }
+   ],
+   "id": 134
+  },
+  {
+   "file": "src/sweep.lua",
+   "line": 52,
+   "name": "mapping enums: KEYBOARD_DEVICE 3, BUTTON_INPUT 4, REPEAT_INTERVAL 8, PRESS 0",
+   "category": "enum",
+   "old": "3 / 4 / 8 / 0",
+   "new": "3 / 4 / 8 / 0",
+   "feeds_write": true,
+   "method": "the game's input config name parsers (device, input type, trigger: string compare chains returning the enum) aligned 1:1 over the whole range; every string operand has the same text and every returned number is the same",
+   "witnesses": 2,
+   "confidence": "high",
+   "evidence": [
+    {
+     "old": "0xab9d50",
+     "new": "0xad62c0",
+     "instructions_aligned": 112,
+     "of": 112,
+     "strings": [
+      "PadDS",
+      "PadXBOX",
+      "Keyboard",
+      "Mouse",
+      "Tablet",
+      "TouchPanel",
+      "SimulatedTouchPanel",
+      "SynergyKeyboard",
+      "SynergyMouse"
+     ],
+     "differences": []
+    },
+    {
+     "old": "0xab9ee0",
+     "new": "0xad6450",
+     "instructions_aligned": 24,
+     "of": 24,
+     "strings": [
+      "Axis",
+      "Button"
+     ],
+     "differences": []
+    },
+    {
+     "old": "0xab9f40",
+     "new": "0xad64b0",
+     "instructions_aligned": 121,
+     "of": 121,
+     "strings": [
+      "Press",
+      "Release",
+      "Hold",
+      "LongPress",
+      "Tap",
+      "DoubleTap",
+      "LongHold",
+      "LongRelease",
+      "RepeatInterval"
+     ],
+     "differences": []
+    }
+   ],
+   "note": "live 26088801: slot 1 record read as flags 0x04d0ff43 (device 3, button 4, Press) key 0x7e = 49 + vk (installed copy log)",
+   "id": 135
+  },
+  {
+   "file": "src/sweep.lua",
+   "line": 47,
+   "name": "SHIPPED_KEYBOARD_DEFAULT (6 mappings: flags = vk << 20 | 0xff43, key = 49 + vk)",
+   "category": "mapping data",
+   "old": "6 entries",
+   "new": "6 entries unchanged",
+   "feeds_write": true,
+   "method": "derived from Windows virtual-key codes with the mapping encoding above (unchanged parsers); the live 26088801 slot 1 record has the same encoding",
+   "witnesses": 2,
+   "confidence": "high",
+   "id": 136
+  },
+  {
+   "file": "src/bingus_text.lua",
+   "line": 357,
+   "name": "bingus_text M.GAME.settings",
+   "category": "global pointer RVA",
+   "old": "0x3326340",
+   "new": "0x2ce1508",
+   "feeds_write": false,
+   "method": "src/bingus_text.lua is byte-identical to Mod Options Menu's (SHA-256 809317...); taken from native-work/mom-port/MAP.json row 31: old RIP-relative uses mapped by masked byte windows; RIP target of the matching new instruction",
+   "witnesses": 16,
+   "confidence": "high",
+   "replace": {
+    "old_text": "settings = 0x3326340",
+    "new_text": "settings = 0x2ce1508"
+   },
+   "id": 137
+  },
+  {
+   "file": "src/bingus_text.lua",
+   "line": 357,
+   "name": "bingus_text M.GAME.table",
+   "category": "data table RVA",
+   "old": "0x37c5650",
+   "new": "0x3180de0",
+   "feeds_write": false,
+   "method": "src/bingus_text.lua is byte-identical to Mod Options Menu's (SHA-256 809317...); taken from native-work/mom-port/MAP.json row 32: old RIP-relative uses mapped by masked byte windows; RIP target of the matching new instruction",
+   "witnesses": 16,
+   "confidence": "high",
+   "replace": {
+    "old_text": "table = 0x37C5650",
+    "new_text": "table = 0x3180DE0"
+   },
+   "id": 138
+  },
+  {
+   "file": "src/bingus_text.lua",
+   "line": 357,
+   "name": "bingus_text M.GAME.index (settings block 705500 + language field 212)",
+   "category": "struct offset",
+   "old": "705500 + 212",
+   "new": "705628 + 212",
+   "feeds_write": false,
+   "method": "src/bingus_text.lua is byte-identical to Mod Options Menu's (SHA-256 809317...); taken from native-work/mom-port/MAP.json row 43: options_visual compares the settings block [settings + 0xac3dc] (now 0xac45c) with the pending copy; every mapped old read/write of the language field [settings + 0xac4b0] now uses 0xac530 (= new block + 212, so the field inside the block is unchanged)",
+   "witnesses": 5,
+   "confidence": "high",
+   "replace": {
+    "old_text": "index = 705500 + 212",
+    "new_text": "index = 705628 + 212"
+   },
+   "id": 139
+  },
+  {
+   "file": "src/bingus_text.lua",
+   "line": 357,
+   "name": "bingus_text M.GAME.count",
+   "category": "data layout",
+   "old": 15,
+   "new": 15,
+   "feeds_write": false,
+   "method": "src/bingus_text.lua is byte-identical to Mod Options Menu's (SHA-256 809317...); taken from native-work/mom-port/MAP.json row 44: both tables hold 15 non-null record pointers followed by a null, records 0xd0 apart in both captures",
+   "witnesses": 1,
+   "confidence": "high",
+   "id": 140
+  },
+  {
+   "file": "src/mod_bindings_menu.lua",
+   "line": 2,
+   "name": "header comment build number",
+   "category": "comment",
+   "old": "25480438",
+   "new": "26088801",
+   "feeds_write": false,
+   "method": "comment only",
+   "witnesses": 0,
+   "confidence": "high",
+   "replace": {
+    "old_text": "-- Native bindings-page extension for Steam build 25480438.",
+    "new_text": "-- Native bindings-page extension for Steam build 26088801."
+   },
+   "id": 141
+  },
+  {
+   "file": "src/panel.lua",
+   "line": 19,
+   "name": "comment: hit test 0x144d320",
+   "category": "comment",
+   "old": "0x144d320",
+   "new": "0x12e5030",
+   "feeds_write": false,
+   "method": "comment only (left as upstream wrote it)",
+   "witnesses": 0,
+   "confidence": "high",
+   "id": 142
+  },
+  {
+   "file": "src/panel.lua",
+   "line": 204,
+   "name": "comment: held repeat 0x178dc50",
+   "category": "comment",
+   "old": "0x178dc50",
+   "new": "0x160eec0",
+   "feeds_write": false,
+   "method": "comment only (left as upstream wrote it)",
+   "witnesses": 0,
+   "confidence": "high",
+   "id": 143
+  }
+ ]
+}

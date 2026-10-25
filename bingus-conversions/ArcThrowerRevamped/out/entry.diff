@@ -1,0 +1,62 @@
+--- upstream entry
++++ port entry
+@@ -555 +555 @@
+-local module = {revision = 'v1.7.1'}
++local module = {revision = 'v1.7.1-26088801'}
+@@ -565 +565 @@
+--- Build 25480438 anchors. The charge manager holds one 40-byte entry per
++-- Build 26088801 anchors (megapack-port/ArcThrowerRevamped/MAP.json). The charge manager holds one 40-byte entry per
+@@ -568,3 +568,3 @@
+-local CHARGE_MANAGER = 0x3326c20
+-local TRIGGER_MANAGER = 0x3326660
+-local FIRE_MODE_SETTER = 0x755f90
++local CHARGE_MANAGER = 0x2ce1de8
++local TRIGGER_MANAGER = 0x2ce1810
++local FIRE_MODE_SETTER = 0x761700
+@@ -591 +591 @@
+-local MISSION_RECORD = 0x33266a0
++local MISSION_RECORD = 0x2ce1850
+@@ -695 +695 @@
+--- SHA-256 of helldivers2.exe and game.dll must be build 25480438's. Each file
++-- SHA-256 of helldivers2.exe and game.dll must be build 26088801's. Each file
+@@ -701,2 +701,2 @@
+-local EXE_SHA256 = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'
+-local GAME_SHA256 = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'
++local EXE_SHA256 = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'
++local GAME_SHA256 = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'
+@@ -712 +712 @@
+-    if why == 'unsupported game build' then return false, 'unsupported game build (needs Steam build 25480438)' end
++    if why == 'unsupported game build' then return false, 'unsupported game build (needs Steam build 26088801)' end
+@@ -894 +894 @@
+-    local pm,owner,am=pointer(state.game+0x3326468),pointer(state.game+0x346bf98),pointer(state.game+0x3326d20)
++    local pm,owner,am=pointer(state.game+0x2ce1618),pointer(state.game+0x2ce41b8),pointer(state.game+0x2ce1ee0)
+@@ -903 +903 @@
+-    local ei=lookup(owner+0xf22ec8,PLAYER_UNIT[0],1048576)
++    local ei=lookup(owner+0xf24990,PLAYER_UNIT[0],1048576)
+@@ -905 +905 @@
+-    if not read_into(owner+0xf32f18+ei*24,24,AVATAR) or AVATAR[0]~=AVATAR_TYPE_LOW or AVATAR[1]~=AVATAR_TYPE_HIGH
++    if not read_into(owner+0xf349e0+ei*24,24,AVATAR) or AVATAR[0]~=AVATAR_TYPE_LOW or AVATAR[1]~=AVATAR_TYPE_HIGH
+@@ -949 +949 @@
+-    if pointer(state.game+0x3326d20)~=kept.am then return nil end
++    if pointer(state.game+0x2ce1ee0)~=kept.am then return nil end
+@@ -1003 +1003 @@
+-    local manager=pointer(state.game+0x3326dc0)
++    local manager=pointer(state.game+0x2ce1f88)
+@@ -1046 +1045,0 @@
+-    state.checked = true
+@@ -1048,4 +1047,5 @@
+-    if game == nil then return false end
+-    local base = tonumber(ffi.cast('uint64_t', game))
+-    state.supported = read(base + FIRE_MODE_SETTER, #FIRE_MODE_SIGNATURE)
+-        == FIRE_MODE_SIGNATURE
++    if game == nil then state.checked = true; return false end
++    local code = read(tonumber(ffi.cast('uint64_t', game)) + FIRE_MODE_SETTER, #FIRE_MODE_SIGNATURE)
++    if code == nil then state.signature_pending = true; return false end -- port: no-access code page, retry
++    state.checked, state.signature_pending = true, nil
++    state.supported = code == FIRE_MODE_SIGNATURE
+@@ -1396 +1396 @@
+-        if not failure_logged then
++        if not failure_logged and not state.signature_pending then -- port: unreadable is not a refusal
+@@ -1737 +1737 @@
+-note('Arc Thrower Revamped ' .. module.revision .. ' initialised on game build 25480438 (loader API ' ..
++note('Arc Thrower Revamped ' .. module.revision .. ' initialised on game build 26088801 (loader API ' ..

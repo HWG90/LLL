@@ -1,0 +1,2785 @@
+{
+ "mod": "Ship Station Hotkeys (option GalacticMenuHotkey) v1.9.1, module mods/cowboybingus/galactic_menu_hotkey",
+ "source": {
+  "used": "upstream-bingus/ShipStationHotkeys (git tag v1.9.1 = HEAD b041826, clean)",
+  "why": "every file pinned in components.lock.json source_sha256 matches it byte for byte; the pinned copy upstream-bingus/VanillaPlusMegapack/components/GalacticMenuHotkey matches too (identical src/), so either assembles the same entry",
+  "lock_revision": "v1.9.1",
+  "lock_resource_sha256": "8FA1F904497F0733DAE19DD1282BCED380A2220A2768444E6349C392EBEA65A2",
+  "source_sha256_check": {
+   "locales/en.lua": {
+    "standalone_checkout": true,
+    "pinned_component": true
+   },
+   "scripts/build.py": {
+    "standalone_checkout": true,
+    "pinned_component": true
+   },
+   "scripts/entry.py": {
+    "standalone_checkout": true,
+    "pinned_component": true
+   },
+   "scripts/luatable.py": {
+    "standalone_checkout": true,
+    "pinned_component": true
+   },
+   "scripts/translations.py": {
+    "standalone_checkout": true,
+    "pinned_component": true
+   },
+   "src/bingus_memory.lua": {
+    "standalone_checkout": true,
+    "pinned_component": true
+   },
+   "src/bingus_runtime.lua": {
+    "standalone_checkout": true,
+    "pinned_component": true
+   },
+   "src/bingus_text.lua": {
+    "standalone_checkout": true,
+    "pinned_component": true
+   },
+   "src/galactic_menu_hotkey.lua": {
+    "standalone_checkout": true,
+    "pinned_component": true
+   },
+   "tests/frame_budget.lua": {
+    "standalone_checkout": true,
+    "pinned_component": true
+   },
+   "tests/game_lua.py": {
+    "standalone_checkout": true,
+    "pinned_component": true
+   },
+   "tests/hostile_vm.lua": {
+    "standalone_checkout": true,
+    "pinned_component": true
+   },
+   "tests/run_game_lua.py": {
+    "standalone_checkout": true,
+    "pinned_component": true
+   },
+   "tests/test_binding_paths.lua": {
+    "standalone_checkout": true,
+    "pinned_component": true
+   },
+   "tests/test_bingus_text.lua": {
+    "standalone_checkout": true,
+    "pinned_component": true
+   },
+   "tests/test_ffi_names.lua": {
+    "standalone_checkout": true,
+    "pinned_component": true
+   },
+   "tests/test_hotkey.lua": {
+    "standalone_checkout": true,
+    "pinned_component": true
+   }
+  }
+ },
+ "old_build": 25480438,
+ "new_build": 26088801,
+ "images": {
+  "old": "native-work/evidence/game-pre1020.dll",
+  "new": "native-work/evidence/game-26088801.dll",
+  "new_pdata": "native-work/evidence/game-26088801.pdata"
+ },
+ "generated_by": "native-work/megapack-port/GalacticMenuHotkey/make_map.py (static; every witness re-checked)",
+ "fields": {
+  "old/new": "value in the 25480438 source / value for 26088801 (null: not mapped)",
+  "witnesses": "code witnesses are re-disassembled at the given address in that image and must contain the text; rip witnesses must resolve to the global; data witnesses read the images",
+  "feeds_write": "the value decides the address, layout or meaning of a memory write the mod makes",
+  "feeds_call": "the value decides which game function is called or what it is passed",
+  "replace": "the exact source edits build.py applies (each must match once)"
+ },
+ "summary": {
+  "rows": 64,
+  "by_confidence": {
+   "high": 58,
+   "medium": 6
+  },
+  "unmapped": 0,
+  "source_edits": 29,
+  "rows_feeding_write": 4
+ },
+ "rows": [
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 107,
+   "id": 1,
+   "name": "GAME_SHA256",
+   "category": "build pin",
+   "old": "2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E",
+   "new": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "SHA-256 of the current disk game.dll recorded with the capture (evidence/game-26088801.manifest.json disk.sha256); the MOM, MYC, HDH and Mod Bindings Menu ports pin the same value",
+   "witnesses": [
+    {
+     "data": "manifest disk.sha256",
+     "detail": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+     "checked": true
+    }
+   ],
+   "replace": [
+    {
+     "old_text": "'2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+     "new_text": "'6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'"
+    }
+   ],
+   "anchor": "local GAME_SHA256 = '2E2C"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 108,
+   "id": 2,
+   "name": "EXE_SHA256",
+   "category": "build pin",
+   "old": "F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06",
+   "new": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "current helldivers2.exe SHA-256 as supplied in the brief for 26088801; the MOM/HDH/MYC ports pin the same value (the game folder is not read here)",
+   "witnesses": [],
+   "replace": [
+    {
+     "old_text": "'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+     "new_text": "'0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'"
+    }
+   ],
+   "anchor": "local EXE_SHA256 = 'F5FE"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 113,
+   "id": 3,
+   "name": "ENTER_PRESENTER_RVA (PresenterManager open)",
+   "category": "function RVA",
+   "old": "0x14c0350",
+   "new": "0x135b4f0",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "the old body changed enough that no masked window maps it, so: the first 20 bytes of the old function occur exactly once in the new .text, at a .pdata function start (0x135b4f0); that function has the same shape (scan the presenter stack [mgr+0x14 .. +0x14+4*[mgr+0x28]] for the requested id, log \"trying to reopen (%s) that is already showing\" with the same PresenterManager name table, else close the current presenter [mgr+0xc] and tail-jump to the open routine). New in 26088801: a check [mgr+0x10] != 0 that logs \"change_menu(%s) ignored: a popup is active\" and returns without opening (a game-side guard; harmless for the mod, which re-reads the current presenter after the call). Calling convention and arguments (manager, presenter id, extra) are unchanged; the 16-byte prologue the mod checks is identical.",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x14c035f",
+     "ins": "mov eax, dword ptr [rcx + 0x28]",
+     "proves": "depth read",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x135b4ff",
+     "ins": "mov eax, dword ptr [rcx + 0x28]",
+     "proves": "depth read",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x14c0373",
+     "ins": "lea rax, [rcx + 0x14]",
+     "proves": "stack array",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x135b513",
+     "ins": "lea rax, [rcx + 0x14]",
+     "proves": "stack array",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x14c038e",
+     "ins": "cmp dword ptr [rcx + 0xc], 0",
+     "proves": "current presenter",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x135b58e",
+     "ins": "cmp dword ptr [rcx + 0xc], 0",
+     "proves": "current presenter",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x135b52e",
+     "ins": "cmp dword ptr [rcx + 0x10], 0",
+     "proves": "new popup guard",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x14c03b0",
+     "ins": "jmp 0x14c0550",
+     "proves": "tail call open",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x135b5b0",
+     "ins": "jmp 0x135b830",
+     "proves": "tail call open",
+     "checked": true
+    },
+    {
+     "data": "unique 20-byte prologue window",
+     "detail": "only at 0x135b4f0",
+     "checked": true
+    },
+    {
+     "data": "strings",
+     "detail": "PresenterManager / reopen",
+     "checked": true
+    },
+    {
+     "data": "presenter name table identical (24 names)",
+     "detail": "5 Armory, 6 InformationTerminal, 8 ShipManagement, 14 Loadout, 15 Hologram",
+     "checked": true
+    },
+    {
+     "compare_open_routine": {
+      "old_fn": "0x14c0550",
+      "new_fn": "0x135b830",
+      "method": "momdiff.compare_functions (recursive descent)",
+      "old_ins": 208,
+      "new_ins": 214,
+      "paired": 154,
+      "identical_apart_from_relocations": false,
+      "ratio": 0.7299,
+      "changed_numbers": [
+       "mov r8, qword ptr [r14 + rbx*8 + 0x21dd450] -> mov r8, qword ptr [r14 + rbx*8 + 0x2065978]",
+       "mov byte ptr [rsp + 0x28], bl -> mov byte ptr [rsp + 0x20], bl",
+       "mov rcx, qword ptr [rbx + 0x2d8] -> mov rcx, qword ptr [rbx + 0x2d0]",
+       "movss xmm1, dword ptr [rcx + 0x11c] -> movss xmm1, dword ptr [rcx + 0x114]",
+       "mov rcx, qword ptr [rbx + 0x2d8] -> mov rcx, qword ptr [rbx + 0x2d0]",
+       "movss xmm1, dword ptr [rcx + 0x120] -> movss xmm1, dword ptr [rcx + 0x118]",
+       "mov edx, dword ptr [rcx + 0x30] -> mov edx, dword ptr [rcx + 0x28]",
+       "mov rax, qword ptr [rsi + 0x270] -> mov rax, qword ptr [rsi + 0x20]",
+       "mov qword ptr [rbx + 0x308], rcx -> mov qword ptr [rbx + 0x300], rcx",
+       "mov byte ptr [rsp + 0x28], 0 -> mov byte ptr [rsp + 0x20], 0",
+       "mov ecx, dword ptr [rax + 0xac470] -> mov ecx, dword ptr [rax + 0xac4f0]"
+      ]
+     }
+    }
+   ],
+   "replace": [
+    {
+     "old_text": "local ENTER_PRESENTER_RVA = 0x14c0350",
+     "new_text": "local ENTER_PRESENTER_RVA = 0x135b4f0"
+    }
+   ],
+   "anchor": "local ENTER_PRESENTER_RVA = 0x14c0350"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 114,
+   "id": 4,
+   "name": "START_ARCADE_RVA (arcade interaction start)",
+   "category": "function RVA",
+   "old": "0x997800",
+   "new": "0x9a9450",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "masked byte window at the entry, bindiff.migrate, aligned whole-body comparison; body identical apart from relocations except two internal numbers (settings object +0x80: [rax+0xac470] -> 0xac4f0, an internal record stride 0x1238 -> 0x1240); arguments unchanged",
+   "witnesses": [
+    {
+     "data": "unique strict masked window at entry (witness.map_owner) and bindiff.migrate agree",
+     "detail": "0x997800 -> 0x9a9450",
+     "checked": true
+    },
+    {
+     "data": "prologue bytes the mod checks are equal (16)",
+     "detail": "488bc448895010488948085355574883",
+     "checked": true
+    },
+    {
+     "compare": {
+      "old_fn": "0x997800",
+      "new_fn": "0x9a9450",
+      "method": "momdiff.compare_functions (recursive descent)",
+      "old_ins": 366,
+      "new_ins": 366,
+      "paired": 366,
+      "identical_apart_from_relocations": false,
+      "ratio": 1.0,
+      "changed_numbers": [
+       "mov ecx, dword ptr [rax + 0xac470] -> mov ecx, dword ptr [rax + 0xac4f0]",
+       "imul rcx, rax, 0x1238 -> imul rcx, rax, 0x1240"
+      ]
+     }
+    }
+   ],
+   "replace": [
+    {
+     "old_text": "local START_ARCADE_RVA = 0x997800",
+     "new_text": "local START_ARCADE_RVA = 0x9a9450"
+    }
+   ],
+   "anchor": "local START_ARCADE_RVA = 0x997800"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 128,
+   "id": 5,
+   "name": "INSTANT_SEAT_RVA (seater instant entry)",
+   "category": "function RVA",
+   "old": "0x639830",
+   "new": "0x642f30",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "masked byte window at the entry, bindiff.migrate, aligned whole-body comparison; body identical apart from relocations except the placement fields it reads: [placement+0x658/0x65c/0x660] -> 0x660/0x664/0x668 (see the placement row: the mod's buffer moves with them); it still loads the seater component global (now 0x2ce1f38) and request byte 0 / +0x48",
+   "witnesses": [
+    {
+     "data": "unique strict masked window at entry (witness.map_owner) and bindiff.migrate agree",
+     "detail": "0x639830 -> 0x642f30",
+     "checked": true
+    },
+    {
+     "data": "prologue bytes the mod checks are equal (16)",
+     "detail": "48895c24204889542410565741544155",
+     "checked": true
+    },
+    {
+     "compare": {
+      "old_fn": "0x639830",
+      "new_fn": "0x642f30",
+      "method": "momdiff.compare_functions (recursive descent)",
+      "old_ins": 198,
+      "new_ins": 198,
+      "paired": 198,
+      "identical_apart_from_relocations": false,
+      "ratio": 1.0,
+      "changed_numbers": [
+       "mov ebx, dword ptr [r14 + 0x658] -> mov ebx, dword ptr [r14 + 0x660]",
+       "mov esi, dword ptr [r14 + 0x65c] -> mov esi, dword ptr [r14 + 0x664]",
+       "mov ebp, dword ptr [r14 + 0x660] -> mov ebp, dword ptr [r14 + 0x668]",
+       "mov ebx, dword ptr [r14 + 0x658] -> mov ebx, dword ptr [r14 + 0x660]",
+       "mov edx, dword ptr [r14 + 0x658] -> mov edx, dword ptr [r14 + 0x660]",
+       "mov r8d, dword ptr [r14 + 0x658] -> mov r8d, dword ptr [r14 + 0x660]",
+       "mov edx, dword ptr [r14 + 0x658] -> mov edx, dword ptr [r14 + 0x660]"
+      ]
+     }
+    },
+    {
+     "image": "old",
+     "at": "0x639852",
+     "ins": "mov r13, qword ptr [rip + 0x2ced51f]",
+     "rip_target": "0x3326d78",
+     "proves": "seater component",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x642f52",
+     "ins": "mov r13, qword ptr [rip + 0x269efdf]",
+     "rip_target": "0x2ce1f38",
+     "proves": "seater component",
+     "checked": true
+    }
+   ],
+   "replace": [
+    {
+     "old_text": "local INSTANT_SEAT_RVA = 0x639830",
+     "new_text": "local INSTANT_SEAT_RVA = 0x642f30"
+    }
+   ],
+   "anchor": "local INSTANT_SEAT_RVA = 0x639830"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 132,
+   "id": 6,
+   "name": "OPEN_BRIEFING_RVA (Hellpod briefing entry)",
+   "category": "function RVA",
+   "old": "0x661cf0",
+   "new": "0x66b5d0",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "masked byte window at the entry, bindiff.migrate, aligned whole-body comparison; body identical apart from relocations; its own RIP loads are the UI state (0x2e38160) and the Hellpod deployment system (0x2ce17a0)",
+   "witnesses": [
+    {
+     "data": "unique strict masked window at entry (witness.map_owner) and bindiff.migrate agree",
+     "detail": "0x661cf0 -> 0x66b5d0",
+     "checked": true
+    },
+    {
+     "data": "prologue bytes the mod checks are equal (13)",
+     "detail": "48894c2408574883ec404c8b0d",
+     "checked": true
+    },
+    {
+     "compare": {
+      "old_fn": "0x661cf0",
+      "new_fn": "0x66b5d0",
+      "method": "momdiff.compare_functions (recursive descent)",
+      "old_ins": 80,
+      "new_ins": 80,
+      "paired": 80,
+      "identical_apart_from_relocations": true,
+      "ratio": 1.0,
+      "changed_numbers": []
+     }
+    },
+    {
+     "image": "new",
+     "at": "0x66b5da",
+     "ins": "mov r9, qword ptr [rip + 0x27ccb7f]",
+     "rip_target": "0x2e38160",
+     "proves": "UI state",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x66b5e1",
+     "ins": "mov rdi, qword ptr [rip + 0x26761b8]",
+     "rip_target": "0x2ce17a0",
+     "proves": "Hellpod system",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x661cfa",
+     "ins": "mov r9, qword ptr [rip + 0x2e1b127]",
+     "rip_target": "0x347ce28",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x661d01",
+     "ins": "mov rdi, qword ptr [rip + 0x2cc48e8]",
+     "rip_target": "0x33265f0",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "replace": [
+    {
+     "old_text": "local OPEN_BRIEFING_RVA = 0x661cf0",
+     "new_text": "local OPEN_BRIEFING_RVA = 0x66b5d0"
+    }
+   ],
+   "anchor": "local OPEN_BRIEFING_RVA = 0x661cf0"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 152,
+   "id": 7,
+   "name": "PRESENTER_PREFIX",
+   "category": "prologue signature",
+   "old": "48895c24084889742410574883ec208b",
+   "new": "48895c24084889742410574883ec208b",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "bytes at the new RVA in the captured image (.text equals the disk file)",
+   "witnesses": [
+    {
+     "data": "new image bytes",
+     "detail": "48895c24084889742410574883ec208b",
+     "checked": true
+    }
+   ],
+   "anchor": "local PRESENTER_PREFIX ="
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 154,
+   "id": 8,
+   "name": "ARCADE_PREFIX",
+   "category": "prologue signature",
+   "old": "488bc448895010488948085355574883",
+   "new": "488bc448895010488948085355574883",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "bytes at the new RVA in the captured image (.text equals the disk file)",
+   "witnesses": [
+    {
+     "data": "new image bytes",
+     "detail": "488bc448895010488948085355574883",
+     "checked": true
+    }
+   ],
+   "anchor": "local ARCADE_PREFIX ="
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 157,
+   "id": 9,
+   "name": "INSTANT_SEAT_PREFIX",
+   "category": "prologue signature",
+   "old": "48895c24204889542410565741544155",
+   "new": "48895c24204889542410565741544155",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "bytes at the new RVA in the captured image (.text equals the disk file)",
+   "witnesses": [
+    {
+     "data": "new image bytes",
+     "detail": "48895c24204889542410565741544155",
+     "checked": true
+    }
+   ],
+   "anchor": "local INSTANT_SEAT_PREFIX ="
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 159,
+   "id": 10,
+   "name": "BRIEFING_PREFIX",
+   "category": "prologue signature",
+   "old": "48894c2408574883ec404c8b0d",
+   "new": "48894c2408574883ec404c8b0d",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "bytes at the new RVA in the captured image (.text equals the disk file)",
+   "witnesses": [
+    {
+     "data": "new image bytes",
+     "detail": "48894c2408574883ec404c8b0d",
+     "checked": true
+    }
+   ],
+   "anchor": "local BRIEFING_PREFIX ="
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 156,
+   "id": 11,
+   "name": "UNIT_POSITION_PREFIX (+ unit_interface+24 -> table +136)",
+   "category": "runtime function signature",
+   "old": "40534883ec20 / +24 / +136",
+   "new": "40534883ec20 / +24 / +136",
+   "confidence": "medium",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "the world-position function is reached through a run-time table ([script API + 0x18] + 0x88); the slot is used by the same kind of call sites in both builds (old 784 uses of [table+0x88], new 685, same neighbouring slot usage), but the table is filled at run time, so the function behind it is only known live. The mod checks its prologue at run time and, if it differs, only disables the Stratagem Hero proximity check (logged); see live check.",
+   "witnesses": [],
+   "anchor": "local UNIT_POSITION_PREFIX ="
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 79,
+   "id": 12,
+   "name": "MODE_PTR_RVA (mission record pointer)",
+   "category": "game.dll global",
+   "old": "0x33266a0",
+   "new": "0x2ce1850",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "RIP-relative loads mapped by masked byte windows; megapack-global-candidates.json (6 consistent windows) and the Mod Bindings Menu port mapping (port-tools/build_mbm_archive.py)",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x38013b",
+     "ins": "mov rax, qword ptr [rip + 0x2fa655e]",
+     "rip_target": "0x33266a0",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x386e3b",
+     "ins": "mov rax, qword ptr [rip + 0x295aa0e]",
+     "rip_target": "0x2ce1850",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "replace": [
+    {
+     "old_text": "local MODE_PTR_RVA, MODE_RECORD_SIZE = 0x33266a0",
+     "new_text": "local MODE_PTR_RVA, MODE_RECORD_SIZE = 0x2ce1850"
+    }
+   ],
+   "anchor": "local MODE_PTR_RVA, MODE_RECORD_SIZE = 0x33266a0"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 89,
+   "id": 13,
+   "name": "INPUT_OWNER_PTR_RVA",
+   "category": "game.dll global",
+   "old": "0x347cf18",
+   "new": "0x2e38250",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "RIP-relative loads mapped by masked byte windows; live-verified (brief); MOM MAP.json INPUT_OWNER_PTR_RVA high",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x5948b9",
+     "ins": "mov rax, qword ptr [rip + 0x2ee8658]",
+     "rip_target": "0x347cf18",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x59d409",
+     "ins": "mov rax, qword ptr [rip + 0x289ae40]",
+     "rip_target": "0x2e38250",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "replace": [
+    {
+     "old_text": "local INPUT_OWNER_PTR_RVA, ACTION_STATE_OFFSET, ACTION_STATE_STRIDE = 0x347cf18",
+     "new_text": "local INPUT_OWNER_PTR_RVA, ACTION_STATE_OFFSET, ACTION_STATE_STRIDE = 0x2e38250"
+    }
+   ],
+   "anchor": "local INPUT_OWNER_PTR_RVA, ACTION_STATE_OFFSET, ACTION_STATE_STRIDE = 0x347cf18"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 115,
+   "id": 14,
+   "name": "UI_STATE_PTR_RVA",
+   "category": "game.dll global",
+   "old": "0x347ce28",
+   "new": "0x2e38160",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "RIP-relative loads mapped by masked byte windows; live-verified (brief); MOM MAP.json",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x5c08cb",
+     "ins": "mov rdx, qword ptr [rip + 0x2ebc556]",
+     "rip_target": "0x347ce28",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x5c970b",
+     "ins": "mov rdx, qword ptr [rip + 0x286ea4e]",
+     "rip_target": "0x2e38160",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "replace": [
+    {
+     "old_text": "local UI_STATE_PTR_RVA = 0x347ce28",
+     "new_text": "local UI_STATE_PTR_RVA = 0x2e38160"
+    }
+   ],
+   "anchor": "local UI_STATE_PTR_RVA = 0x347ce28"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 116,
+   "id": 15,
+   "name": "ARCADE_COMPONENT_PTR_RVA",
+   "category": "game.dll global",
+   "old": "0x3326700",
+   "new": "0x2ce18b0",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "RIP-relative loads mapped by masked byte windows; megapack-global-candidates.json (6 consistent windows); 11 old functions using it map to byte-identical new bodies (tools/fnsweep.py)",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x3862e6",
+     "ins": "mov rbp, qword ptr [rip + 0x2fa0413]",
+     "rip_target": "0x3326700",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x38cfe6",
+     "ins": "mov rbp, qword ptr [rip + 0x29548c3]",
+     "rip_target": "0x2ce18b0",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "replace": [
+    {
+     "old_text": "local ARCADE_COMPONENT_PTR_RVA = 0x3326700",
+     "new_text": "local ARCADE_COMPONENT_PTR_RVA = 0x2ce18b0"
+    }
+   ],
+   "anchor": "local ARCADE_COMPONENT_PTR_RVA = 0x3326700"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 117,
+   "id": 16,
+   "name": "ARCADE_SYSTEM_PTR_RVA (system registry)",
+   "category": "game.dll global",
+   "old": "0x3326e68",
+   "new": "0x2ce2040",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "RIP-relative loads mapped by masked byte windows; megapack-global-candidates.json (consistent); the registration function (old 0x551b60 -> new 0x55a9ae) loads it before filling the per-type lists the mod reads",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x554e03",
+     "ins": "mov rcx, qword ptr [rip + 0x2dd205e]",
+     "rip_target": "0x3326e68",
+     "proves": "registry loaded right before the type-67 registration",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x55dc76",
+     "ins": "mov rcx, qword ptr [rip + 0x27843c3]",
+     "rip_target": "0x2ce2040",
+     "proves": "same",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x551bab",
+     "ins": "mov rcx, qword ptr [rip + 0x2dd52b6]",
+     "rip_target": "0x3326e68",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x55a9fd",
+     "ins": "mov rcx, qword ptr [rip + 0x278763c]",
+     "rip_target": "0x2ce2040",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "replace": [
+    {
+     "old_text": "local ARCADE_SYSTEM_PTR_RVA = 0x3326e68",
+     "new_text": "local ARCADE_SYSTEM_PTR_RVA = 0x2ce2040"
+    }
+   ],
+   "anchor": "local ARCADE_SYSTEM_PTR_RVA = 0x3326e68"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 118,
+   "id": 17,
+   "name": "PLAYER_MANAGER_PTR_RVA",
+   "category": "game.dll global",
+   "old": "0x3326468",
+   "new": "0x2ce1618",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "RIP-relative loads mapped by masked byte windows; live-verified (brief)",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x3a4bde",
+     "ins": "mov rax, qword ptr [rip + 0x2f81883]",
+     "rip_target": "0x3326468",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x3ab8de",
+     "ins": "mov rax, qword ptr [rip + 0x2935d33]",
+     "rip_target": "0x2ce1618",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "replace": [
+    {
+     "old_text": "local PLAYER_MANAGER_PTR_RVA = 0x3326468",
+     "new_text": "local PLAYER_MANAGER_PTR_RVA = 0x2ce1618"
+    }
+   ],
+   "anchor": "local PLAYER_MANAGER_PTR_RVA = 0x3326468"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 119,
+   "id": 18,
+   "name": "ENTITY_MANAGER_PTR_RVA",
+   "category": "game.dll global",
+   "old": "0x346bf98",
+   "new": "0x2ce41b8",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "RIP-relative loads mapped by masked byte windows; live-verified (brief); HDH port high",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0xba0f5",
+     "ins": "mov rcx, qword ptr [rip + 0x33b1e9c]",
+     "rip_target": "0x346bf98",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0xbc835",
+     "ins": "mov rcx, qword ptr [rip + 0x2c2797c]",
+     "rip_target": "0x2ce41b8",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "replace": [
+    {
+     "old_text": "local ENTITY_MANAGER_PTR_RVA = 0x346bf98",
+     "new_text": "local ENTITY_MANAGER_PTR_RVA = 0x2ce41b8"
+    }
+   ],
+   "anchor": "local ENTITY_MANAGER_PTR_RVA = 0x346bf98"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 120,
+   "id": 19,
+   "name": "UNIT_INTERFACE_PTR_RVA (script C API)",
+   "category": "game.dll global",
+   "old": "0x3326308",
+   "new": "0x2ce14c8",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "RIP-relative loads mapped by masked byte windows; live-verified (brief: script C API)",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0xc4281",
+     "ins": "mov rax, qword ptr [rip + 0x3262080]",
+     "rip_target": "0x3326308",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0xd4e1a",
+     "ins": "mov rax, qword ptr [rip + 0x2c0c6a7]",
+     "rip_target": "0x2ce14c8",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0xc8520",
+     "ins": "mov rax, qword ptr [rip + 0x325dde1]",
+     "rip_target": "0x3326308",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x1ede7d",
+     "ins": "mov rax, qword ptr [rip + 0x2af3644]",
+     "rip_target": "0x2ce14c8",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "replace": [
+    {
+     "old_text": "local UNIT_INTERFACE_PTR_RVA = 0x3326308",
+     "new_text": "local UNIT_INTERFACE_PTR_RVA = 0x2ce14c8"
+    }
+   ],
+   "anchor": "local UNIT_INTERFACE_PTR_RVA = 0x3326308"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 121,
+   "id": 20,
+   "name": "HELLPOD_SYSTEM_PTR_RVA (deployment system)",
+   "category": "game.dll global",
+   "old": "0x33265f0",
+   "new": "0x2ce17a0",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "RIP-relative loads mapped by masked byte windows; megapack-global-candidates.json (7 consistent windows); the briefing entry loads it",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x1c5066",
+     "ins": "mov rax, qword ptr [rip + 0x3161583]",
+     "rip_target": "0x33265f0",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x1c4b16",
+     "ins": "mov rax, qword ptr [rip + 0x2b1cc83]",
+     "rip_target": "0x2ce17a0",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x66b5e1",
+     "ins": "mov rdi, qword ptr [rip + 0x26761b8]",
+     "rip_target": "0x2ce17a0",
+     "proves": "loaded by the briefing entry itself",
+     "checked": true
+    }
+   ],
+   "replace": [
+    {
+     "old_text": "local HELLPOD_SYSTEM_PTR_RVA = 0x33265f0",
+     "new_text": "local HELLPOD_SYSTEM_PTR_RVA = 0x2ce17a0"
+    }
+   ],
+   "anchor": "local HELLPOD_SYSTEM_PTR_RVA = 0x33265f0"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 122,
+   "id": 21,
+   "name": "HELLPOD_MANAGER_PTR_RVA",
+   "category": "game.dll global",
+   "old": "0x3326428",
+   "new": "0x2ce15d8",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "RIP-relative loads mapped by masked byte windows; megapack-global-candidates.json (5 consistent windows); its users 0x44aac0, 0x54aca0, 0x662418, 0x663310, 0x66acf0, 0x66aea0, 0x66bad0 map to byte-identical new bodies",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x44aadd",
+     "ins": "mov r9, qword ptr [rip + 0x2edb944]",
+     "rip_target": "0x3326428",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x4517dd",
+     "ins": "mov r9, qword ptr [rip + 0x288fdf4]",
+     "rip_target": "0x2ce15d8",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "replace": [
+    {
+     "old_text": "local HELLPOD_MANAGER_PTR_RVA = 0x3326428",
+     "new_text": "local HELLPOD_MANAGER_PTR_RVA = 0x2ce15d8"
+    }
+   ],
+   "anchor": "local HELLPOD_MANAGER_PTR_RVA = 0x3326428"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 123,
+   "id": 22,
+   "name": "SEATER_COMPONENT_PTR_RVA",
+   "category": "game.dll global",
+   "old": "0x3326d78",
+   "new": "0x2ce1f38",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "RIP-relative loads mapped by masked byte windows; megapack-global-candidates.json (7 consistent windows); the instant seat entry loads it",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x4a8a0a",
+     "ins": "mov r10, qword ptr [rip + 0x2e7e367]",
+     "rip_target": "0x3326d78",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x4af2ca",
+     "ins": "mov r10, qword ptr [rip + 0x2832c67]",
+     "rip_target": "0x2ce1f38",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x642f52",
+     "ins": "mov r13, qword ptr [rip + 0x269efdf]",
+     "rip_target": "0x2ce1f38",
+     "proves": "loaded by the instant seat entry itself",
+     "checked": true
+    }
+   ],
+   "replace": [
+    {
+     "old_text": "local SEATER_COMPONENT_PTR_RVA = 0x3326d78",
+     "new_text": "local SEATER_COMPONENT_PTR_RVA = 0x2ce1f38"
+    }
+   ],
+   "anchor": "local SEATER_COMPONENT_PTR_RVA = 0x3326d78"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 138,
+   "id": 23,
+   "name": "SCREEN_STACK_PTR_RVA (menu system)",
+   "category": "game.dll global",
+   "old": "0x347ce38",
+   "new": "0x2e38170",
+   "confidence": "high",
+   "feeds_write": true,
+   "feeds_call": true,
+   "method": "RIP-relative loads mapped by masked byte windows; live-verified (brief: menu system); MOM MAP.json",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x14ad7c7",
+     "ins": "mov rax, qword ptr [rip + 0x1fcf66a]",
+     "rip_target": "0x347ce38",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x1345737",
+     "ins": "mov rax, qword ptr [rip + 0x1af2a32]",
+     "rip_target": "0x2e38170",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "replace": [
+    {
+     "old_text": "local SCREEN_STACK_PTR_RVA = 0x347ce38",
+     "new_text": "local SCREEN_STACK_PTR_RVA = 0x2e38170"
+    }
+   ],
+   "anchor": "local SCREEN_STACK_PTR_RVA = 0x347ce38"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 80,
+   "id": 24,
+   "name": "mission record: flag +8, type +0x40, type 1..7, 68 bytes",
+   "category": "struct layout",
+   "old": "+8 / +0x40 / 1..7",
+   "new": "+8 / +0x40 / 1..7",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "the same mapped site reads both fields and range-checks the type (dec eax; cmp eax, 6) in both builds; 202 old / 192 new [record+8] uses, 156 / 149 [record+0x40]",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x380145",
+     "ins": "cmp dword ptr [rax + 8], 0",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x386e45",
+     "ins": "cmp dword ptr [rax + 8], 0",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x38014f",
+     "ins": "mov eax, dword ptr [rax + 0x40]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x386e4f",
+     "ins": "mov eax, dword ptr [rax + 0x40]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x380154",
+     "ins": "cmp eax, 6",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x386e54",
+     "ins": "cmp eax, 6",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "anchor": "local MODE_FLAG_WORD, MODE_TYPE_WORD = 2, 16"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 89,
+   "id": 25,
+   "name": "ACTION_STATE_OFFSET 808 / STRIDE 32 / 97 actions per group",
+   "category": "struct layout",
+   "old": "808 / 32 / 97",
+   "new": "808 / 32 / 97",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "native-work/mom-port/MAP.json rows ACTION_STATES (0x328), ACTION_STRIDE (shl 5), GROUP_ACTIONS (imul 0x61), all high, from mapped code",
+   "witnesses": [],
+   "anchor": "local INPUT_OWNER_PTR_RVA, ACTION_STATE_OFFSET, ACTION_STATE_STRIDE"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 90,
+   "id": 26,
+   "name": "SLOT_ACTIONS (Mod Bindings Menu v1 fixed slots: group, action)",
+   "category": "input action ids",
+   "old": "{12,1},{12,0},{10,1},{10,4},{10,8},{10,14},{10,9}",
+   "new": "unchanged",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "the game's 13 x 97 action label table (old 0x26438a0, new 0x24bc8a0) is identical (MOM MAP.json MENU_GROUP/APPLY_ACTION row), so every (group, action) still names the same action; MAP_SHORTCUT's label 0xb46c8096 is one of its entries in both builds",
+   "witnesses": [
+    {
+     "data": "action label table identical",
+     "detail": "13*97 u32 at 0x26438a0 / 0x24bc8a0",
+     "checked": true
+    }
+   ],
+   "anchor": "local SLOT_ACTIONS = {{12, 1}"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 49,
+   "id": 27,
+   "name": "Galactic Map label 0xb46c8096 / presenter 15 Hologram",
+   "category": "label id / enum",
+   "old": "0xb46c8096 / 15",
+   "new": "unchanged",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "label: entry of the identical action label table (old 0x2643c18, new 0x24bcc18); presenter: PresenterManager name table index 15 = Hologram in both builds",
+   "witnesses": [
+    {
+     "data": "label in table",
+     "detail": "0x24bcc18",
+     "checked": true
+    },
+    {
+     "data": "presenter 15",
+     "detail": "Hologram",
+     "checked": true
+    }
+   ],
+   "anchor": "label = 0xb46c8096, slot = 1"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 51,
+   "id": 28,
+   "name": "Armory label 0x19e97f02 / presenter 5",
+   "category": "label id / enum",
+   "old": "0x19e97f02 / 5",
+   "new": "unchanged",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "label: immediate in game code in both builds (5 old, 4 new occurrences); presenter: name table index 5 = Armory in both",
+   "witnesses": [
+    {
+     "data": "label occurs",
+     "detail": "present in both",
+     "checked": true
+    },
+    {
+     "data": "presenter 5",
+     "detail": "Armory",
+     "checked": true
+    }
+   ],
+   "anchor": "{name = 'Armory', id = 'cowboybingus.armory', label = 0x19e97f02"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 54,
+   "id": 29,
+   "name": "Control Center presenter 6",
+   "category": "enum",
+   "old": "6",
+   "new": "6",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "name table index 6 = InformationTerminal in both builds",
+   "witnesses": [
+    {
+     "data": "presenter 6",
+     "detail": "",
+     "checked": true
+    }
+   ],
+   "anchor": "text = 'binding.control_center', slot = 4, key = 0x74, presenter = 6"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 56,
+   "id": 30,
+   "name": "Ship Management label 0x2716885e / presenter 8",
+   "category": "label id / enum",
+   "old": "0x2716885e / 8",
+   "new": "unchanged",
+   "confidence": "medium",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "presenter: name table index 8 = ShipManagement in both. The label id occurs in neither game.dll (game string data); it only names the binding row in Mod Bindings Menu",
+   "witnesses": [
+    {
+     "data": "presenter 8",
+     "detail": "",
+     "checked": true
+    }
+   ],
+   "note": "label cosmetic: confirm the row text in Mod Bindings Menu",
+   "anchor": "label = 0x2716885e, slot = 5"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 60,
+   "id": 31,
+   "name": "Hellpod Deployment label 0xe89a91ef",
+   "category": "label id",
+   "old": "0xe89a91ef",
+   "new": "unchanged",
+   "confidence": "medium",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "occurs in neither game.dll (game string data); cosmetic (binding row text)",
+   "witnesses": [],
+   "note": "label cosmetic: confirm the row text in Mod Bindings Menu",
+   "anchor": "label = 0xe89a91ef, slot = 7"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 133,
+   "id": 32,
+   "name": "BRIEFING_PRESENTER 14 (Loadout)",
+   "category": "enum",
+   "old": "14",
+   "new": "14",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "name table index 14 = Loadout in both builds",
+   "witnesses": [
+    {
+     "data": "presenter 14",
+     "detail": "",
+     "checked": true
+    }
+   ],
+   "anchor": "local BRIEFING_PRESENTER = 14"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 106,
+   "id": 33,
+   "name": "SHIP_TABLE_HASH (galaxy table unit resource)",
+   "category": "resource id",
+   "old": "3b9bcf29e38da0a6",
+   "new": "unchanged",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "live evidence on the current build: the installed copy's log in the game prefix (Oct 24, build 26088801) says \"World detection: galaxy table present (12 worlds checked)\" / \"Super Destroyer detected.\" with this id before its build gate stopped it",
+   "witnesses": [
+    {
+     "data": "live log",
+     "detail": "<steam-library>/.../AppData/Local/LLL/Helldivers2/Logs/GalacticMenuHotkey.log",
+     "checked": true
+    }
+   ],
+   "anchor": "local SHIP_TABLE_HASH = '3b9bcf29e38da0a6'"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 145,
+   "id": 34,
+   "name": "PRESENTER_OFFSET 17032 (UI state + 0x4288 = presenter manager)",
+   "category": "struct offset",
+   "old": "17032",
+   "new": "17032",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "mapped code takes the manager at [ui + 0x4288] and reads the current presenter at ui + 0x4294 (= manager + 0xc) and the depth at ui + 0x42b0 (= manager + 0x28) in both builds",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x609629",
+     "ins": "lea r15, [r9 + 0x4288]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x6127f9",
+     "ins": "lea r15, [r9 + 0x4288]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x661c40",
+     "ins": "lea r8, [r9 + 0x4288]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x66b520",
+     "ins": "lea r8, [r9 + 0x4288]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x6617fa",
+     "ins": "cmp dword ptr [rax + 0x4294], 0",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x66b0da",
+     "ins": "cmp dword ptr [rax + 0x4294], 0",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x5c08d2",
+     "ins": "mov eax, dword ptr [rdx + 0x42b0]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x5c9712",
+     "ins": "mov eax, dword ptr [rdx + 0x42b0]",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "anchor": "local PRESENTER_OFFSET = 17032"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 412,
+   "id": 35,
+   "name": "presenter manager: current +12, depth +40; IDLE_MENU_PRESENTER 0",
+   "category": "struct layout",
+   "old": "+12 / +40 / 0",
+   "new": "+12 / +40 / 0",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "the presenter open routine and its caller read them identically (see ENTER_PRESENTER_RVA)",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x14c0584",
+     "ins": "movsxd rax, dword ptr [rcx + 0xc]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x135b877",
+     "ins": "movsxd rbx, dword ptr [rcx + 0xc]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x14c055d",
+     "ins": "mov eax, dword ptr [rcx + 0x28]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x135b83d",
+     "ins": "mov eax, dword ptr [rcx + 0x28]",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "anchor": "return manager, u32(read(manager + 12, 4)), u32(read(manager + 40, 4))"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 139,
+   "id": 36,
+   "name": "LOADOUT_SCREEN 11 at [menu system + 0], slot +176",
+   "category": "enum / struct offset",
+   "old": "11 / +0 / +176",
+   "new": "11 / +0 / +176",
+   "confidence": "high",
+   "feeds_write": true,
+   "feeds_call": false,
+   "method": "[menu system + 0] is the current MenuScreenType: it indexes the screen-type name table (old 0x21d90a0, new 0x2061c40), where 11 = Loadout in both (26088801 inserts EosErrorPopup at 27, after it). The screen factory (dec edx; jump table) case 11 allocates the loadout screen and stores it at [menu system + 0xb0] in both builds",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x14ad7dc",
+     "ins": "mov r8d, dword ptr [rax]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x134574c",
+     "ins": "mov r8d, dword ptr [rax]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x14ad7e6",
+     "ins": "mov r8, qword ptr [r14 + r8*8 + 0x21d90a0]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x1345756",
+     "ins": "mov r8, qword ptr [r14 + r8*8 + 0x2061c40]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "data": "screen type 11 / 24",
+     "detail": "Loadout / Hologram",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x14984e6",
+     "ins": "dec edx",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x13306c6",
+     "ins": "dec edx",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "data": "jump table case 10 (type 11)",
+     "detail": "0x1498ae1 / 0x1330cc1",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x1498b1c",
+     "ins": "mov qword ptr [rsi + 0xb0], rax",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x1330cfc",
+     "ins": "mov qword ptr [rsi + 0xb0], rax",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "anchor": "local LOADOUT_SCREEN, LOADOUT_SCREEN_SLOT = 11, 176"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 140,
+   "id": 37,
+   "name": "INTRO_TIMER_OFFSET / INTRO_PHASE_OFFSET (loadout screen intro timer float, phase u32)",
+   "category": "struct offset (WRITE)",
+   "old": "2570632 (0x273988) / 2570636 (0x27398c)",
+   "new": "2570696 (0x2739c8) / 2570700 (0x2739cc)",
+   "confidence": "high",
+   "feeds_write": true,
+   "feeds_call": false,
+   "method": "the loadout screen grew by 0x40 (allocation 0x2739d0 -> 0x273a10; its other fields +0x40 too, e.g. 0x27f8 -> 0x2838, 0xf950 -> 0xf990). The intro phase setter (old 0x146ac60 -> new 0x13028b0, aligned 1:1) writes phase and timer, and the intro step (old 0x1465c5e -> new 0x12fd88e) loads timer = table[phase] from an identical float table (-1, 2.0, 0.15, ...): phase 1 waits 2.0 s, so writing 0.0 to the timer while phase = 1 ends the wait exactly as before. Both fields are still the last two dwords before the object end (0x273a10 - 0x48).",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x1498ae8",
+     "ins": "mov edx, 0x2739d0",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x1330cc8",
+     "ins": "mov edx, 0x273a10",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x146ad39",
+     "ins": "mov dword ptr [rdi + 0x27398c], 0",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x1302989",
+     "ins": "mov dword ptr [rdi + 0x2739cc], 0",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x146ad43",
+     "ins": "mov dword ptr [rdi + 0x273988], 0xbf800000",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x1302993",
+     "ins": "mov dword ptr [rdi + 0x2739c8], 0xbf800000",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x1465d18",
+     "ins": "mov eax, dword ptr [rdi + 0x27398c]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x12fd948",
+     "ins": "mov eax, dword ptr [rdi + 0x2739cc]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x1465d28",
+     "ins": "mov dword ptr [rdi + 0x273988], eax",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x12fd958",
+     "ins": "mov dword ptr [rdi + 0x2739c8], eax",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x146b139",
+     "ins": "mov dword ptr [rdi + 0x273988], eax",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x1302d89",
+     "ins": "mov dword ptr [rdi + 0x2739c8], eax",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x146b199",
+     "ins": "mov ecx, dword ptr [rcx + 0x27398c]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x1302de9",
+     "ins": "mov ecx, dword ptr [rcx + 0x2739cc]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "data": "intro timer table identical",
+     "detail": "(-1.0, 2.0, 0.15000000596046448, 0.3499999940395355, 0.5, 1.0, 0.25, 0.0)",
+     "checked": true
+    },
+    {
+     "compare_phase_setter": {
+      "old_fn": "0x146ac60",
+      "new_fn": "0x13028b0",
+      "method": "momdiff.compare_functions (recursive descent)",
+      "old_ins": 111,
+      "new_ins": 111,
+      "paired": 111,
+      "identical_apart_from_relocations": false,
+      "ratio": 1.0,
+      "changed_numbers": [
+       "mov eax, dword ptr [rdi + 0x27398c] -> mov eax, dword ptr [rdi + 0x2739cc]",
+       "cmp byte ptr [rdi + 0x27f8], 0 -> cmp byte ptr [rdi + 0x2838], 0",
+       "cmp byte ptr [rdi + 0x27fb], 0 -> cmp byte ptr [rdi + 0x283b], 0",
+       "mov dword ptr [rdi + 0x27398c], 0 -> mov dword ptr [rdi + 0x2739cc], 0",
+       "mov dword ptr [rdi + 0x273988], 0xbf800000 -> mov dword ptr [rdi + 0x2739c8], 0xbf800000",
+       "mov byte ptr [rdi + 0x27fd], 1 -> mov byte ptr [rdi + 0x283d], 1",
+       "mov eax, dword ptr [r14 + rbp*4 + 0x21da890] -> mov eax, dword ptr [r14 + rbp*4 + 0x2063560]",
+       "mov dword ptr [rdi + 0x273988], eax -> mov dword ptr [rdi + 0x2739c8], eax",
+       "mov dword ptr [rdi + 0x27398c], ebp -> mov dword ptr [rdi + 0x2739cc], ebp"
+      ]
+     }
+    }
+   ],
+   "replace": [
+    {
+     "old_text": "local INTRO_TIMER_OFFSET, INTRO_PHASE_OFFSET = 2570632, 2570636",
+     "new_text": "local INTRO_TIMER_OFFSET, INTRO_PHASE_OFFSET = 2570696, 2570700"
+    }
+   ],
+   "anchor": "local INTRO_TIMER_OFFSET, INTRO_PHASE_OFFSET = 2570632, 2570636"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 141,
+   "id": 38,
+   "name": "INTRO_WAITING 1 / INTRO_DONE 0",
+   "category": "enum",
+   "old": "1 / 0",
+   "new": "1 / 0",
+   "confidence": "high",
+   "feeds_write": true,
+   "feeds_call": false,
+   "method": "phase 1 is the 2.0 s entry of the identical timer table; the phase setter writes 0 (timer -1) when the intro ends, identical in both builds",
+   "witnesses": [
+    {
+     "image": "new",
+     "at": "0x1302989",
+     "ins": "mov dword ptr [rdi + 0x2739cc], 0",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "anchor": "local INTRO_WAITING, INTRO_DONE = 1, 0"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 473,
+   "id": 39,
+   "name": "entity id map at entities + 0xf22ec8 (buckets, capacity +8, empty +12, multiplier +16)",
+   "category": "struct offset",
+   "old": "0xf22ec8",
+   "new": "0xf24990",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "brief (live-verified: 0xF22EC8 -> 0xF24990); mapped code reads the map pointer and the multiplier at +0x1ac8 like every other field of that block",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x60658d",
+     "ins": "mov rdi, qword ptr [rbp + 0xf22ec8]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x60f75d",
+     "ins": "mov rdi, qword ptr [rbp + 0xf24990]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x606579",
+     "ins": "mov r11d, dword ptr [rbp + 0xf22ed8]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x60f749",
+     "ins": "mov r11d, dword ptr [rbp + 0xf249a0]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x7c827c",
+     "ins": "mov rdi, qword ptr [rcx + 0xf22ec8]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x7d426c",
+     "ins": "mov rdi, qword ptr [rcx + 0xf24990]",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "replace": [
+    {
+     "old_text": "map_layout(read(entities + 0xf22ec8, 20))",
+     "new_text": "map_layout(read(entities + 0xf24990, 20))"
+    }
+   ],
+   "anchor": "map_layout(read(entities + 0xf22ec8, 20))"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 477,
+   "id": 40,
+   "name": "entity records at entities + 0xf32f18, 24 bytes (hash +0, id +8, unit +12, flags +20)",
+   "category": "struct offset",
+   "old": "0xf32f18",
+   "new": "0xf349e0",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "brief (live-verified: 0xF32F18 -> 0xF349E0); record +8 / +12 reads (index*3*8) moved by the same +0x1ac8; record layout: HDH port hold.record_size (high)",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x6065d0",
+     "ins": "lea eax, [rbp + 0xf32f20]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x60f7a0",
+     "ins": "lea eax, [rbp + 0xf349e8]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x678884",
+     "ins": "cmp dword ptr [rbx + rcx*8 + 0xf32f24], 0",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x682454",
+     "ins": "cmp dword ptr [rbx + rcx*8 + 0xf349ec], 0",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "replace": [
+    {
+     "old_text": "return read(entities + 0xf32f18 + 24 * index, 24)",
+     "new_text": "return read(entities + 0xf349e0 + 24 * index, 24)"
+    }
+   ],
+   "anchor": "return read(entities + 0xf32f18 + 24 * index, 24)"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 476,
+   "id": 41,
+   "name": "entity index bound 262144",
+   "category": "sanity bound",
+   "old": "262144",
+   "new": "262144",
+   "confidence": "medium",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "a read guard only (the mod refuses larger indices); not taken from code",
+   "witnesses": [],
+   "anchor": "index >= 262144 then return nil end"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 496,
+   "id": 42,
+   "name": "avatar entity type hash 0x4d1c334d294dfa97",
+   "category": "entity type hash",
+   "old": "0x4d1c334d294dfa97",
+   "new": "unchanged",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "the 64-bit constant is an immediate in game code in both builds (7 old, 6 new occurrences)",
+   "witnesses": [
+    {
+     "data": "hash occurs",
+     "detail": "present in both",
+     "checked": true
+    }
+   ],
+   "anchor": "avatar:sub(1, 8) ~= '\\x97\\xfa\\x4d\\x29\\x4d\\x33\\x1c\\x4d'"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 486,
+   "id": 43,
+   "name": "player manager: +0x84, +0x88, +0xe8 record (flags +20), +0x3a8 avatar ref (0x7fff none)",
+   "category": "struct layout",
+   "old": "+0x84 / +0x88 / +0xe8 / +0x3a8",
+   "new": "+0x84 / +0x88 / +0xe8 / +0x3a8",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "mapped code uses each field identically (old/new uses: 353/322, 586/511, 318/248, 257/242)",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x3a9dcc",
+     "ins": "cmp dword ptr [rdx + 0x84], 0",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x3b0acc",
+     "ins": "cmp dword ptr [rdx + 0x84], 0",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x52c445",
+     "ins": "cmp dword ptr [r8 + 0x88], 0",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x534e15",
+     "ins": "cmp dword ptr [r8 + 0x88], 0",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x3a4bea",
+     "ins": "mov rcx, qword ptr [rax + 0xe8]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x3ab8ea",
+     "ins": "mov rcx, qword ptr [rax + 0xe8]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x5bc848",
+     "ins": "mov edx, dword ptr [rax + 0x3a8]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x5c5688",
+     "ins": "mov edx, dword ptr [rax + 0x3a8]",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "anchor": "local local_count = u32(read(players + 0x84, 4))"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 510,
+   "id": 44,
+   "name": "arcade component: map buckets +48, capacity +56, empty +60, pool +88",
+   "category": "struct layout",
+   "old": "+48 / +56 / +60 / +88",
+   "new": "+48 / +56 / +60 / +88",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "the component lookup (old 0x3862c0 -> new 0x38cfc0) and its other users are byte-identical",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x386311",
+     "ins": "mov r10, qword ptr [rbp + 0x30]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x38d011",
+     "ins": "mov r10, qword ptr [rbp + 0x30]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x3862f5",
+     "ins": "mov r8d, dword ptr [rbp + 0x38]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x38cff5",
+     "ins": "mov r8d, dword ptr [rbp + 0x38]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x386315",
+     "ins": "mov r11d, dword ptr [rbp + 0x3c]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x38d015",
+     "ins": "mov r11d, dword ptr [rbp + 0x3c]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x4a6ec1",
+     "ins": "add rax, qword ptr [r10 + 0x58]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x4ad781",
+     "ins": "add rax, qword ptr [r10 + 0x58]",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "anchor": "local count = u32(read(manager + 24, 4))"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 510,
+   "id": 45,
+   "name": "arcade component: count +24 == 1, capacity == 128, empty == 0",
+   "category": "struct layout / runtime expectation",
+   "old": "+24 / 128 / 0",
+   "new": "+24 / 128 / 0",
+   "confidence": "medium",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "no code witness for +24 found (the component accessors that read the map are byte-identical, so the template layout is unchanged); these are the mod's refusal checks, so a wrong value only disables the Stratagem Hero shortcut (logged), never a wrong call",
+   "witnesses": [],
+   "anchor": "local count = u32(read(manager + 24, 4))"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 555,
+   "id": 46,
+   "name": "arcade pool record +5208 active player (record stride 0x1470)",
+   "category": "struct offset",
+   "old": "5208",
+   "new": "5208",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "the arcade start indexes pool records by 0x1470 and stores +0x145c in both; +0x1458 has many identical mapped uses (reads, compares, writes)",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x9979e2",
+     "ins": "imul r13, r8, 0x1470",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x9a9632",
+     "ins": "imul r13, r8, 0x1470",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x997a3b",
+     "ins": "mov dword ptr [r13 + 0x145c], edi",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x9a968b",
+     "ins": "mov dword ptr [r13 + 0x145c], edi",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x9847f5",
+     "ins": "cmp dword ptr [r14 + 0x1458], ebx",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x996475",
+     "ins": "cmp dword ptr [r14 + 0x1458], ebx",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x984e18",
+     "ins": "cmp dword ptr [r14 + 0x1458], 0",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x996a98",
+     "ins": "cmp dword ptr [r14 + 0x1458], 0",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "anchor": "if u32(read(pool + 5208, 4)) ~= 0 then return nil end"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 534,
+   "id": 47,
+   "name": "system registry list: count +19512, rows +19520 (16 bytes: system, type)",
+   "category": "struct offset",
+   "old": "19512 (0x4c38) / 19520 (0x4c40)",
+   "new": "19704 (0x4cf8) / 19712 (0x4d00)",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "the registry fill (old 0x551b60 -> new 0x55a9ae) registers the type-67 system into this list with count [rcx+0x4c38] and rows at (count + 0x4c4) * 16 in the old build, [rcx+0x4cf8] and (count + 0x4d0) * 16 in the new one; the registry grew (earlier lists moved +0xc0 too). Several fields there moved, so this is a changed value",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x554ea4",
+     "ins": "mov eax, dword ptr [rcx + 0x4c38]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x55dd17",
+     "ins": "mov eax, dword ptr [rcx + 0x4cf8]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x554eb0",
+     "ins": "add rax, 0x4c4",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x55dd23",
+     "ins": "add rax, 0x4d0",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x554ec3",
+     "ins": "inc dword ptr [rcx + 0x4c38]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x55dd36",
+     "ins": "inc dword ptr [rcx + 0x4cf8]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x554e18",
+     "ins": "mov dword ptr [rbp - 8], 0x43",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x55dc8b",
+     "ins": "mov dword ptr [rbp - 8], 0x43",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "replace": [
+    {
+     "old_text": "u32(read(systems + 19512, 4))",
+     "new_text": "u32(read(systems + 19704, 4))"
+    },
+    {
+     "old_text": "read(systems + 19520, system_count * 16)",
+     "new_text": "read(systems + 19712, system_count * 16)"
+    }
+   ],
+   "anchor": "local system_count = u32(read(systems + 19512, 4))"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 540,
+   "id": 48,
+   "name": "arcade system type 67",
+   "category": "enum",
+   "old": "67",
+   "new": "67",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "the registration stores type 0x43 with the arcade system object in both builds",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x554e18",
+     "ins": "mov dword ptr [rbp - 8], 0x43",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x55dc8b",
+     "ins": "mov dword ptr [rbp - 8], 0x43",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "anchor": "if u32_at(rows, index * 16 + 8) == 67 then"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 611,
+   "id": 49,
+   "name": "deployment system +32 / +36 (players), +72984 slot pod",
+   "category": "struct layout",
+   "old": "+32 / +36 / +72984",
+   "new": "+32 / +36 / +72984",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "mapped code uses each identically",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x1c5070",
+     "ins": "cmp dword ptr [rax + 0x20], 0",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x1c4b20",
+     "ins": "cmp dword ptr [rax + 0x20], 0",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x662585",
+     "ins": "cmp dword ptr [rsi + 0x24], r14d",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x66be65",
+     "ins": "cmp dword ptr [rsi + 0x24], r14d",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x662eb3",
+     "ins": "lea rdi, [r15 + 0x11d18]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x66c823",
+     "ins": "lea rdi, [r15 + 0x11d18]",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "anchor": "if u32(read(system + 32, 4)) ~= 1 or u32(read(system + 36, 4)) ~= 1 then"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 615,
+   "id": 50,
+   "name": "Hellpod manager: count +8, entities +104, mode +136 (12), state +184 (20), index +188 (20), target +264 (4); mode 2 / states 3 open, 4 occupied",
+   "category": "struct layout",
+   "old": "+8/+104/+136/+184/+188/+264; 2/3/4",
+   "new": "unchanged",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "its users map to byte-identical bodies; each offset and the occupied state 4 appear in them",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x44aae6",
+     "ins": "mov r10d, dword ptr [r9 + 8]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x4517e6",
+     "ins": "mov r10d, dword ptr [r9 + 8]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x662122",
+     "ins": "lea r12, [rax + 0x68]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x66ba02",
+     "ins": "lea r12, [rax + 0x68]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x662484",
+     "ins": "cmp dword ptr [r8 + rdx*4 + 0x88], 1",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x66bd64",
+     "ins": "cmp dword ptr [r8 + rdx*4 + 0x88], 1",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x44aaef",
+     "ins": "lea rax, [r9 + 0xb8]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x4517ef",
+     "ins": "lea rax, [r9 + 0xb8]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x4daf3e",
+     "ins": "lea rcx, [r9 + 0xbc]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x4e1ece",
+     "ins": "lea rcx, [r9 + 0xbc]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x4daf7b",
+     "ins": "cmp dword ptr [r9 + rax*4 + 0x108], 4",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x4e1f0b",
+     "ins": "cmp dword ptr [r9 + rax*4 + 0x108], 4",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "anchor": "local count = u32(read(manager + 8, 4))"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 642,
+   "id": 51,
+   "name": "seater component: map +32 (capacity +40, empty +44, multiplier +48), count +12, entities +56, records +72 (64 bytes)",
+   "category": "struct layout",
+   "old": "+32/+12/+56/+72, 64",
+   "new": "unchanged",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "mapped code, and the instant seat entry itself indexes [comp+0x48] by shl 6 and probes [comp+0x20..0x30]",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x4a89a8",
+     "ins": "mov rbx, qword ptr [rax + 0x20]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x4af268",
+     "ins": "mov rbx, qword ptr [rax + 0x20]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x4a8993",
+     "ins": "mov r9d, dword ptr [rax + 0x28]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x4af253",
+     "ins": "mov r9d, dword ptr [rax + 0x28]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x632d84",
+     "ins": "cmp dword ptr [r11 + 0xc], r10d",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x63c414",
+     "ins": "cmp dword ptr [r11 + 0xc], r10d",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x4bd090",
+     "ins": "mov rax, qword ptr [r11 + 0x38]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x4c3860",
+     "ins": "mov rax, qword ptr [r11 + 0x38]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x4a8a1c",
+     "ins": "add rax, qword ptr [r10 + 0x48]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x4af2dc",
+     "ins": "add rax, qword ptr [r10 + 0x48]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x642fad",
+     "ins": "mov rax, qword ptr [r13 + 0x48]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x642fb4",
+     "ins": "shl r12, 6",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "anchor": "map_layout(read(component + 32, 20))"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 663,
+   "id": 52,
+   "name": "seater record +0 seat collection, +48 transition byte",
+   "category": "struct layout",
+   "old": "+0 / +48",
+   "new": "+0 / +48",
+   "confidence": "medium",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "+0: set_entering (old 0x63a7b0 -> new 0x643eb0, identical) stores the seat collection at record +0. +48: no direct code witness found; read-only refusal check (a wrong value only refuses the shortcut)",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x63a8e7",
+     "ins": "mov dword ptr [r15], edi",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x643fe7",
+     "ins": "mov dword ptr [r15], edi",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "anchor": "if u32_at(record, 0) ~= 0 or record:byte(49) ~= 0 then"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 682,
+   "id": 53,
+   "name": "instant seat placement buffer: seat collection [406], entrance hash [407], entrance index [408] (u32 slots), request byte 0 enable, request +72 pointer",
+   "category": "struct layout (call argument)",
+   "old": "[406]/[407]/[408], 409 slots; request [0], +72",
+   "new": "[408]/[409]/[410], 411 slots; request [0], +72",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": true,
+   "method": "the instant seat entry reads [placement + 0x658/0x65c/0x660] in the old build and +0x660/0x664/0x668 in the new one (aligned 1:1 in the identical body): every field moved +8, i.e. two u32 slots. The mod's buffer is its own memory passed to the game, so the slot indices and the size follow",
+   "witnesses": [
+    {
+     "image": "old",
+     "at": "0x6398c1",
+     "ins": "cmp byte ptr [r14], 0",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x642fc1",
+     "ins": "cmp byte ptr [r14], 0",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x6398cb",
+     "ins": "mov r14, qword ptr [r14 + 0x48]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x642fcb",
+     "ins": "mov r14, qword ptr [r14 + 0x48]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x6398d8",
+     "ins": "mov ebx, dword ptr [r14 + 0x658]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x642fd8",
+     "ins": "mov ebx, dword ptr [r14 + 0x660]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x639969",
+     "ins": "mov esi, dword ptr [r14 + 0x65c]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x643069",
+     "ins": "mov esi, dword ptr [r14 + 0x664]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x639970",
+     "ins": "mov ebp, dword ptr [r14 + 0x660]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x643070",
+     "ins": "mov ebp, dword ptr [r14 + 0x668]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "old",
+     "at": "0x6399dd",
+     "ins": "mov ebx, dword ptr [r14 + 0x658]",
+     "proves": "",
+     "checked": true
+    },
+    {
+     "image": "new",
+     "at": "0x6430dd",
+     "ins": "mov ebx, dword ptr [r14 + 0x660]",
+     "proves": "",
+     "checked": true
+    }
+   ],
+   "replace": [
+    {
+     "old_text": "local placement = ffi.new('GMH_u32[409]')",
+     "new_text": "local placement = ffi.new('GMH_u32[411]')"
+    },
+    {
+     "old_text": "placement[406] = pod",
+     "new_text": "placement[408] = pod"
+    },
+    {
+     "old_text": "-- at +72 holds the seat collection at [406], an entrance hash at [407]\n    -- (0 selects by index) and the entrance index at [408].",
+     "new_text": "-- at +72 holds the seat collection at [408], an entrance hash at [409]\n    -- (0 selects by index) and the entrance index at [410] (build 26088801)."
+    }
+   ],
+   "anchor": "local placement = ffi.new('GMH_u32[409]')"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 331,
+   "id": 54,
+   "name": "user-mode pointer range",
+   "category": "not build data",
+   "old": "constant",
+   "new": "unchanged",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "Windows x64 user address range / the game's invalid id; not tied to a game build",
+   "witnesses": [],
+   "anchor": "if value < 0x10000 or value >= 0x800000000000 then return nil end"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 349,
+   "id": 55,
+   "name": "user-mode pointer range",
+   "category": "not build data",
+   "old": "constant",
+   "new": "unchanged",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "Windows x64 user address range / the game's invalid id; not tied to a game build",
+   "witnesses": [],
+   "anchor": "if address < 0x10000 or address >= 0x800000000000 then return nil end"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 524,
+   "id": 56,
+   "name": "invalid id 0xffffffff",
+   "category": "not build data",
+   "old": "constant",
+   "new": "unchanged",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "Windows x64 user address range / the game's invalid id; not tied to a game build",
+   "witnesses": [],
+   "anchor": "if arcade_id or not entity or entity == 0xffffffff or slot ~= 0 then"
+  },
+  {
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 499,
+   "id": 57,
+   "name": "invalid id 0xffffffff",
+   "category": "not build data",
+   "old": "constant",
+   "new": "unchanged",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "Windows x64 user address range / the game's invalid id; not tied to a game build",
+   "witnesses": [],
+   "anchor": "if not avatar_id or avatar_id == 0 or avatar_id == 0xffffffff or"
+  },
+  {
+   "file": "src/bingus_text.lua",
+   "line": 54,
+   "id": 58,
+   "name": "Unicode ranges",
+   "category": "not build data",
+   "old": "constant",
+   "new": "unchanged",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "UTF-8 / Unicode constants",
+   "witnesses": [],
+   "anchor": "if value < 0x10000 then"
+  },
+  {
+   "file": "src/bingus_text.lua",
+   "line": 178,
+   "id": 59,
+   "name": "Unicode ranges",
+   "category": "not build data",
+   "old": "constant",
+   "new": "unchanged",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "UTF-8 / Unicode constants",
+   "witnesses": [],
+   "anchor": "or (v >= 0xFE20 and v <= 0xFE2F)"
+  },
+  {
+   "file": "src/bingus_text.lua",
+   "line": 187,
+   "id": 60,
+   "name": "Unicode ranges",
+   "category": "not build data",
+   "old": "constant",
+   "new": "unchanged",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "UTF-8 / Unicode constants",
+   "witnesses": [],
+   "anchor": "or (v >= 0x1F300 and v <= 0x1FAFF)"
+  },
+  {
+   "file": "src/bingus_text.lua",
+   "line": 357,
+   "id": 61,
+   "name": "bingus_text M.GAME.settings",
+   "category": "game.dll global / settings field",
+   "old": "0x3326340",
+   "new": "0x2ce1508",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "identical bingus_text.lua (same SHA-256 as MOM's); value from native-work/mom-port/MAP.json: old RIP-relative uses mapped by masked byte windows; RIP target of the matching new instruction",
+   "witnesses": [
+    {
+     "mom_row": 31,
+     "mom_confidence": "high"
+    }
+   ],
+   "replace": [
+    {
+     "old_text": "settings = 0x3326340",
+     "new_text": "settings = 0x2ce1508"
+    }
+   ],
+   "anchor": "M.GAME = {settings = 0x3326340"
+  },
+  {
+   "file": "src/bingus_text.lua",
+   "line": 357,
+   "id": 62,
+   "name": "bingus_text M.GAME.index",
+   "category": "game.dll global / settings field",
+   "old": "705500 + 212",
+   "new": "705628 + 212",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "identical bingus_text.lua (same SHA-256 as MOM's); value from native-work/mom-port/MAP.json: options_visual compares the settings block [settings + 0xac3dc] (now 0xac45c) with the pending copy; every mapped old read/write of the language field [settings + 0xac4b0] now uses 0xac530 (= new block + 212, so the field inside the block is unchanged)",
+   "witnesses": [
+    {
+     "mom_row": 43,
+     "mom_confidence": "high"
+    }
+   ],
+   "replace": [
+    {
+     "old_text": "index = 705500 + 212",
+     "new_text": "index = 705628 + 212"
+    }
+   ],
+   "anchor": "M.GAME = {settings = 0x3326340"
+  },
+  {
+   "file": "src/bingus_text.lua",
+   "line": 357,
+   "id": 63,
+   "name": "bingus_text M.GAME.table",
+   "category": "game.dll global / settings field",
+   "old": "0x37c5650",
+   "new": "0x3180de0",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "identical bingus_text.lua (same SHA-256 as MOM's); value from native-work/mom-port/MAP.json: old RIP-relative uses mapped by masked byte windows; RIP target of the matching new instruction",
+   "witnesses": [
+    {
+     "mom_row": 32,
+     "mom_confidence": "high"
+    }
+   ],
+   "replace": [
+    {
+     "old_text": "table = 0x37C5650",
+     "new_text": "table = 0x3180DE0"
+    }
+   ],
+   "anchor": "M.GAME = {settings = 0x3326340"
+  },
+  {
+   "file": "src/bingus_text.lua",
+   "line": 357,
+   "id": 64,
+   "name": "bingus_text M.GAME.count",
+   "category": "table size",
+   "old": "15",
+   "new": "15",
+   "confidence": "high",
+   "feeds_write": false,
+   "feeds_call": false,
+   "method": "native-work/mom-port/MAP.json (high)",
+   "witnesses": [],
+   "anchor": "M.GAME = {settings = 0x3326340"
+  }
+ ]
+}

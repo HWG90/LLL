@@ -1,0 +1,645 @@
+{
+ "mod": "Hellpod Steering Unlocked data-v7.5.1 (upstream-bingus/HellpodSteeringUnlocked, git tag v7.5.1; every components.lock.json source_sha256 matches the checkout and the pack copy, so the checkout is used)",
+ "source": "upstream-bingus/HellpodSteeringUnlocked @ v7.5.1",
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "old_image": "<workspace>/native-work/evidence/game-pre1020.dll",
+ "new_image": "<workspace>/native-work/evidence/game-26088801.dll",
+ "counts": {
+  "high": 12
+ },
+ "rows_total": 12,
+ "rows_feeding_write": 12,
+ "changed": [
+  "archive.EXE_SHA",
+  "archive.GAME_DLL_SHA",
+  "patch.manager_rva",
+  "patch.owner_rva",
+  "patch.owner_offset"
+ ],
+ "witness_check_failures": [],
+ "rows": [
+  {
+   "id": "archive.EXE_SHA",
+   "file": "scripts/archive.py",
+   "line": 10,
+   "symbol": "EXE_SHA",
+   "kind": "SHA-256 pin (archive_loader.lua refuses any other module; passed by scripts/module.py into install_loader)",
+   "old": "F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06",
+   "new": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "role": "gate",
+   "feeds_write": true,
+   "method": "SHA-256 of the installed file (read-only), equal to the hash the brief supplies",
+   "witnesses": [
+    {
+     "file": "<game>/bin/helldivers2.exe",
+     "sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+     "equal": true
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L0",
+   "agreeing": 1,
+   "disagreeing": 0,
+   "changed": true
+  },
+  {
+   "id": "archive.GAME_DLL_SHA",
+   "file": "scripts/archive.py",
+   "line": 11,
+   "symbol": "GAME_DLL_SHA",
+   "kind": "SHA-256 pin (archive_loader.lua refuses any other module; passed by scripts/module.py into install_loader)",
+   "old": "2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E",
+   "new": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "role": "gate",
+   "feeds_write": true,
+   "method": "SHA-256 of the installed file (read-only), equal to the hash the brief supplies",
+   "witnesses": [
+    {
+     "file": "<game>/data/game/game.dll",
+     "sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+     "equal": true
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L0",
+   "agreeing": 1,
+   "disagreeing": 0,
+   "changed": true
+  },
+  {
+   "id": "patch.manager_rva",
+   "file": "src/steering_patch.lua",
+   "line": 4,
+   "symbol": "manager_rva",
+   "kind": "game.dll global: pointer to the hellpod avoidance (steering restriction) manager",
+   "old": "0x346d578",
+   "new": "0x2e287d8",
+   "role": "address of the written object",
+   "feeds_write": true,
+   "method": "static initializer store (paired block) + every one of the 7 RIP references paired by a unique masked instruction window that references the new global",
+   "witnesses": [
+    {
+     "old": "0x13f2937..0x13f2961",
+     "new": "0x1289cc7..0x1289cf1",
+     "what": "one straight-line block: mov [owner_global], rcx; ...; lea rax, [rcx + owner_offset]; mov [manager_global], rax (rcx not written in between); same instruction shape in both builds",
+     "old_values": {
+      "owner_global": "0x347cf18",
+      "owner_offset": "0x7c8c90",
+      "manager_global": "0x346d578"
+     },
+     "new_values": {
+      "owner_global": "0x2e38250",
+      "owner_offset": "0x7c8810",
+      "manager_global": "0x2e287d8"
+     }
+    },
+    {
+     "old": "0x92a3b5",
+     "new": "0x93b285",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "new_references_new_global": true
+    },
+    {
+     "old": "0x92a4a6",
+     "new": "0x93b376",
+     "window_bytes": 128,
+     "field_displacements_masked": false,
+     "new_references_new_global": true
+    },
+    {
+     "old": "0x92a56c",
+     "new": "0x93b43c",
+     "window_bytes": 64,
+     "field_displacements_masked": true,
+     "new_references_new_global": true
+    },
+    {
+     "old": "0x13cb47d",
+     "new": "0x126249d",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "new_references_new_global": true
+    },
+    {
+     "old": "0x13d56c6",
+     "new": "0x126c836",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "new_references_new_global": true
+    },
+    {
+     "old": "0x13d59a5",
+     "new": "0x126cb15",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "new_references_new_global": true
+    },
+    {
+     "old": "0x13d61e6",
+     "new": "0x126d356",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "new_references_new_global": true
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L1",
+   "agreeing": 8,
+   "disagreeing": 0,
+   "changed": true
+  },
+  {
+   "id": "patch.owner_rva",
+   "file": "src/steering_patch.lua",
+   "line": 4,
+   "symbol": "owner_rva",
+   "kind": "game.dll global: the object the manager is embedded in (input owner, BRIEF live-verified 0x347CF18->0x2E38250)",
+   "old": "0x347cf18",
+   "new": "0x2e38250",
+   "role": "ownership check (manager - owner == owner_offset)",
+   "feeds_write": true,
+   "method": "static initializer store (paired block) + 8 recomputed unmasked reference windows (megapack-global-candidates.json) + BRIEF live verification",
+   "witnesses": [
+    {
+     "old": "0x13f2937..0x13f2961",
+     "new": "0x1289cc7..0x1289cf1",
+     "what": "one straight-line block: mov [owner_global], rcx; ...; lea rax, [rcx + owner_offset]; mov [manager_global], rax (rcx not written in between); same instruction shape in both builds",
+     "old_values": {
+      "owner_global": "0x347cf18",
+      "owner_offset": "0x7c8c90",
+      "manager_global": "0x346d578"
+     },
+     "new_values": {
+      "owner_global": "0x2e38250",
+      "owner_offset": "0x7c8810",
+      "manager_global": "0x2e287d8"
+     }
+    },
+    {
+     "old": "0x5948b9",
+     "new": "0x59d409",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "recomputed_equal": true
+    },
+    {
+     "old": "0x597043",
+     "new": "0x59fc03",
+     "window_bytes": 128,
+     "field_displacements_masked": false,
+     "recomputed_equal": true
+    },
+    {
+     "old": "0x5979fc",
+     "new": "0x5a05bc",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "recomputed_equal": true
+    },
+    {
+     "old": "0x6093eb",
+     "new": "0x6125bb",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "recomputed_equal": true
+    },
+    {
+     "old": "0x6095b8",
+     "new": "0x612788",
+     "window_bytes": 128,
+     "field_displacements_masked": false,
+     "recomputed_equal": true
+    },
+    {
+     "old": "0x60988a",
+     "new": "0x612a5a",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "recomputed_equal": true
+    },
+    {
+     "old": "0x69169b",
+     "new": "0x69b72b",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "recomputed_equal": true
+    },
+    {
+     "old": "0x6c765d",
+     "new": "0x6d1dad",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "recomputed_equal": true
+    },
+    {
+     "live": "BRIEF: input owner 0x347CF18->0x2E38250 live-verified on 26088801"
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L1",
+   "agreeing": 10,
+   "disagreeing": 0,
+   "changed": true
+  },
+  {
+   "id": "patch.owner_offset",
+   "file": "src/steering_patch.lua",
+   "line": 5,
+   "symbol": "owner_offset",
+   "kind": "byte offset of the manager inside the owner object (manager global = owner + owner_offset)",
+   "old": "0x7c8c90",
+   "new": "0x7c8810",
+   "role": "ownership check",
+   "feeds_write": true,
+   "method": "lea rax,[rcx+X] immediately before the manager global store, rcx = the value just stored to the owner global",
+   "witnesses": [
+    {
+     "old": "0x13f2937..0x13f2961",
+     "new": "0x1289cc7..0x1289cf1",
+     "what": "one straight-line block: mov [owner_global], rcx; ...; lea rax, [rcx + owner_offset]; mov [manager_global], rax (rcx not written in between); same instruction shape in both builds",
+     "old_values": {
+      "owner_global": "0x347cf18",
+      "owner_offset": "0x7c8c90",
+      "manager_global": "0x346d578"
+     },
+     "new_values": {
+      "owner_global": "0x2e38250",
+      "owner_offset": "0x7c8810",
+      "manager_global": "0x2e287d8"
+     }
+    },
+    {
+     "note": "native-work/field-7c8c90.json proposed 0x1466d38 from a 32-byte masked window that landed on a different lea in the same initializer (it is not followed by the manager store); rejected by the paired straight-line block above",
+     "rejected": "0x1466d38"
+    }
+   ],
+   "agreeing": 1,
+   "disagreeing": 0,
+   "confidence": "high",
+   "live_check": "L1",
+   "changed": true
+  },
+  {
+   "id": "patch.size",
+   "file": "src/steering_patch.lua",
+   "line": 5,
+   "symbol": "size",
+   "kind": "bytes of the manager the protection check covers",
+   "old": "69688",
+   "new": "69688",
+   "role": "write_batch / writable_data extent",
+   "feeds_write": true,
+   "method": "end of the last field the mission initializer writes ([rbx+0x11034] + 4 = 0x11038 = 69688); identical in both builds",
+   "witnesses": [
+    {
+     "old": "0x13d56c0",
+     "new": "0x126c830",
+     "what": "mission initializer: rbx = [manager global]; memset(rbx, 0, 0x10010); memset(rbx+0x10018, 0, 0x1010); width = arg + 100.0 -> [rbx+0x11028]; [rbx+0x1102c] = width*0.5; [rbx+0x11030] = width*0.015625; [rbx+0x11034] = 1.0/cell; [rbx+0x10010] = rbx+0x10028; [rbx+0x10020] = 3; [rbx+0x10018] = 0x400; ...; mov byte ptr [rbx], 1",
+     "old_large_displacements": [
+      "0x10018",
+      "0x10028",
+      "0x11028",
+      "0x1102c",
+      "0x11030"
+     ],
+     "new_large_displacements": [
+      "0x10018",
+      "0x10028",
+      "0x11028",
+      "0x1102c",
+      "0x11030"
+     ],
+     "constants_old": [
+      100.0,
+      0.5,
+      0.015625,
+      1.0
+     ],
+     "constants_new": [
+      100.0,
+      0.5,
+      0.015625,
+      1.0
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L2",
+   "agreeing": 1,
+   "disagreeing": 0,
+   "changed": false
+  },
+  {
+   "id": "patch.fields.flag",
+   "file": "src/steering_patch.lua",
+   "line": 33,
+   "symbol": "at_flag (base + 0)",
+   "kind": "u8 avoidance enable flag at manager + 0: game value 1 (mission initializer), mod value 0",
+   "old": "0 (GAME_VALUE 1, OWN_VALUE 0)",
+   "new": "0 (GAME_VALUE 1, OWN_VALUE 0)",
+   "role": "the written byte",
+   "feeds_write": true,
+   "method": "mission initializer ends with mov byte ptr [rbx], 1; the avoidance reader tests the byte for 0 and skips; both builds",
+   "witnesses": [
+    {
+     "old": "0x13d56c0",
+     "new": "0x126c830",
+     "what": "mission initializer: rbx = [manager global]; memset(rbx, 0, 0x10010); memset(rbx+0x10018, 0, 0x1010); width = arg + 100.0 -> [rbx+0x11028]; [rbx+0x1102c] = width*0.5; [rbx+0x11030] = width*0.015625; [rbx+0x11034] = 1.0/cell; [rbx+0x10010] = rbx+0x10028; [rbx+0x10020] = 3; [rbx+0x10018] = 0x400; ...; mov byte ptr [rbx], 1",
+     "old_large_displacements": [
+      "0x10018",
+      "0x10028",
+      "0x11028",
+      "0x1102c",
+      "0x11030"
+     ],
+     "new_large_displacements": [
+      "0x10018",
+      "0x10028",
+      "0x11028",
+      "0x1102c",
+      "0x11030"
+     ],
+     "constants_old": [
+      100.0,
+      0.5,
+      0.015625,
+      1.0
+     ],
+     "constants_new": [
+      100.0,
+      0.5,
+      0.015625,
+      1.0
+     ]
+    },
+    {
+     "old": "0x92a3b5",
+     "new": "0x93b285",
+     "what": "rcx = [manager global]; cmp byte ptr [rcx], 0; je (skips the avoidance push when 0) - identical 160-byte window in both builds"
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L2",
+   "agreeing": 2,
+   "disagreeing": 0,
+   "changed": false
+  },
+  {
+   "id": "patch.fields.records",
+   "file": "src/steering_patch.lua",
+   "line": 33,
+   "symbol": "at_records (base + 32772)",
+   "kind": "u32 record count at +0x8004, bound 1024",
+   "old": "32772 <= 1024",
+   "new": "32772 <= 1024",
+   "role": "layout check before the write",
+   "feeds_write": true,
+   "method": "record/link function, both builds",
+   "witnesses": [
+    {
+     "old": "0x13d5980",
+     "new": "0x126caf0",
+     "sequence": [
+      "mov r14d, dword ptr [rdi + 0x8004]",
+      "cmp r14d, 0x400",
+      "mov dword ptr [rdi + 0x8004], eax",
+      "mov r8d, dword ptr [rdi + 0x10008]",
+      "cmp r8d, 0x2000",
+      "mov dword ptr [rdi + 0x10008], eax",
+      "dec dword ptr [rdi + 0x8004]",
+      "mov r8d, dword ptr [rdi + 0x10008]",
+      "cmp r8d, 0x2000",
+      "mov dword ptr [rdi + 0x10008], eax"
+     ],
+     "equal": true,
+     "what": "records count u32 at +0x8004 checked < 0x400 before an add; links count u32 at +0x10008 checked < 0x2000 before an add (same function, both builds)"
+    },
+    {
+     "old": "0x13d56c0",
+     "new": "0x126c830",
+     "what": "mission initializer: rbx = [manager global]; memset(rbx, 0, 0x10010); memset(rbx+0x10018, 0, 0x1010); width = arg + 100.0 -> [rbx+0x11028]; [rbx+0x1102c] = width*0.5; [rbx+0x11030] = width*0.015625; [rbx+0x11034] = 1.0/cell; [rbx+0x10010] = rbx+0x10028; [rbx+0x10020] = 3; [rbx+0x10018] = 0x400; ...; mov byte ptr [rbx], 1",
+     "old_large_displacements": [
+      "0x10018",
+      "0x10028",
+      "0x11028",
+      "0x1102c",
+      "0x11030"
+     ],
+     "new_large_displacements": [
+      "0x10018",
+      "0x10028",
+      "0x11028",
+      "0x1102c",
+      "0x11030"
+     ],
+     "constants_old": [
+      100.0,
+      0.5,
+      0.015625,
+      1.0
+     ],
+     "constants_new": [
+      100.0,
+      0.5,
+      0.015625,
+      1.0
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L2",
+   "agreeing": 2,
+   "disagreeing": 0,
+   "changed": false
+  },
+  {
+   "id": "patch.fields.links",
+   "file": "src/steering_patch.lua",
+   "line": 33,
+   "symbol": "at_links (base + 65544)",
+   "kind": "u32 link count at +0x10008, bound 8192",
+   "old": "65544 <= 8192",
+   "new": "65544 <= 8192",
+   "role": "layout check before the write",
+   "feeds_write": true,
+   "method": "record/link function, both builds",
+   "witnesses": [
+    {
+     "old": "0x13d5980",
+     "new": "0x126caf0",
+     "sequence": [
+      "mov r14d, dword ptr [rdi + 0x8004]",
+      "cmp r14d, 0x400",
+      "mov dword ptr [rdi + 0x8004], eax",
+      "mov r8d, dword ptr [rdi + 0x10008]",
+      "cmp r8d, 0x2000",
+      "mov dword ptr [rdi + 0x10008], eax",
+      "dec dword ptr [rdi + 0x8004]",
+      "mov r8d, dword ptr [rdi + 0x10008]",
+      "cmp r8d, 0x2000",
+      "mov dword ptr [rdi + 0x10008], eax"
+     ],
+     "equal": true,
+     "what": "records count u32 at +0x8004 checked < 0x400 before an add; links count u32 at +0x10008 checked < 0x2000 before an add (same function, both builds)"
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L2",
+   "agreeing": 1,
+   "disagreeing": 0,
+   "changed": false
+  },
+  {
+   "id": "patch.fields.set",
+   "file": "src/steering_patch.lua",
+   "line": 34,
+   "symbol": "at_set (base + 65552), 24 bytes",
+   "kind": "{u64 pointer = manager + 65576, u32 capacity 1024, u32 count <= 1024, u32 3}",
+   "old": "65552: self+65576, 1024, <=1024, 3",
+   "new": "65552: self+65576, 1024, <=1024, 3",
+   "role": "layout/identity check before the write",
+   "feeds_write": true,
+   "method": "mission initializer: [rbx+0x10010] = rbx+0x10028 (65576), [rbx+0x10018] = 0x400, count [rbx+0x1001c] copied 0x400 times, [rbx+0x10020] = 3; both builds",
+   "witnesses": [
+    {
+     "old": "0x13d56c0",
+     "new": "0x126c830",
+     "what": "mission initializer: rbx = [manager global]; memset(rbx, 0, 0x10010); memset(rbx+0x10018, 0, 0x1010); width = arg + 100.0 -> [rbx+0x11028]; [rbx+0x1102c] = width*0.5; [rbx+0x11030] = width*0.015625; [rbx+0x11034] = 1.0/cell; [rbx+0x10010] = rbx+0x10028; [rbx+0x10020] = 3; [rbx+0x10018] = 0x400; ...; mov byte ptr [rbx], 1",
+     "old_large_displacements": [
+      "0x10018",
+      "0x10028",
+      "0x11028",
+      "0x1102c",
+      "0x11030"
+     ],
+     "new_large_displacements": [
+      "0x10018",
+      "0x10028",
+      "0x11028",
+      "0x1102c",
+      "0x11030"
+     ],
+     "constants_old": [
+      100.0,
+      0.5,
+      0.015625,
+      1.0
+     ],
+     "constants_new": [
+      100.0,
+      0.5,
+      0.015625,
+      1.0
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L2",
+   "agreeing": 1,
+   "disagreeing": 0,
+   "changed": false
+  },
+  {
+   "id": "patch.fields.dims",
+   "file": "src/steering_patch.lua",
+   "line": 34,
+   "symbol": "at_dims (base + 69672), 4 floats",
+   "kind": "width, half (= width*0.5), cell (= width/64), reciprocal (= 1/cell)",
+   "old": "69672: w, w/2, w/64, 64/w",
+   "new": "69672: w, w/2, w/64, 64/w",
+   "role": "layout check before the write",
+   "feeds_write": true,
+   "method": "mission initializer stores at 0x11028..0x11034 with constants 0.5, 0.015625, 1.0 in both builds (width = argument + 100.0)",
+   "witnesses": [
+    {
+     "old": "0x13d56c0",
+     "new": "0x126c830",
+     "what": "mission initializer: rbx = [manager global]; memset(rbx, 0, 0x10010); memset(rbx+0x10018, 0, 0x1010); width = arg + 100.0 -> [rbx+0x11028]; [rbx+0x1102c] = width*0.5; [rbx+0x11030] = width*0.015625; [rbx+0x11034] = 1.0/cell; [rbx+0x10010] = rbx+0x10028; [rbx+0x10020] = 3; [rbx+0x10018] = 0x400; ...; mov byte ptr [rbx], 1",
+     "old_large_displacements": [
+      "0x10018",
+      "0x10028",
+      "0x11028",
+      "0x1102c",
+      "0x11030"
+     ],
+     "new_large_displacements": [
+      "0x10018",
+      "0x10028",
+      "0x11028",
+      "0x1102c",
+      "0x11030"
+     ],
+     "constants_old": [
+      100.0,
+      0.5,
+      0.015625,
+      1.0
+     ],
+     "constants_new": [
+      100.0,
+      0.5,
+      0.015625,
+      1.0
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L2",
+   "agreeing": 1,
+   "disagreeing": 0,
+   "changed": false
+  },
+  {
+   "id": "patch.layout_bounds",
+   "file": "src/steering_patch.lua",
+   "line": 74,
+   "symbol": "width >= 64 and width <= 16384",
+   "kind": "the mod's own plausibility bounds on the map width (not a game constant)",
+   "old": "64..16384",
+   "new": "64..16384",
+   "role": "layout check before the write",
+   "feeds_write": true,
+   "method": "width = argument + 100.0 in the mission initializer of both builds (the formula did not change); the bound is the mod's and only refuses (never widens) the write; re-checked live (L2 prints the width)",
+   "witnesses": [
+    {
+     "old": "0x13d56c0",
+     "new": "0x126c830",
+     "what": "mission initializer: rbx = [manager global]; memset(rbx, 0, 0x10010); memset(rbx+0x10018, 0, 0x1010); width = arg + 100.0 -> [rbx+0x11028]; [rbx+0x1102c] = width*0.5; [rbx+0x11030] = width*0.015625; [rbx+0x11034] = 1.0/cell; [rbx+0x10010] = rbx+0x10028; [rbx+0x10020] = 3; [rbx+0x10018] = 0x400; ...; mov byte ptr [rbx], 1",
+     "old_large_displacements": [
+      "0x10018",
+      "0x10028",
+      "0x11028",
+      "0x1102c",
+      "0x11030"
+     ],
+     "new_large_displacements": [
+      "0x10018",
+      "0x10028",
+      "0x11028",
+      "0x1102c",
+      "0x11030"
+     ],
+     "constants_old": [
+      100.0,
+      0.5,
+      0.015625,
+      1.0
+     ],
+     "constants_new": [
+      100.0,
+      0.5,
+      0.015625,
+      1.0
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L2",
+   "agreeing": 1,
+   "disagreeing": 0,
+   "changed": false
+  }
+ ]
+}

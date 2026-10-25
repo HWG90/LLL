@@ -1,0 +1,1157 @@
+{
+ "option": "Vanilla Plus Megapack / ConsistentVaulting (Consistent Vaulting data-v8.9.1)",
+ "source": "<workspace>/upstream-bingus/VanillaPlusMegapack/components/ConsistentVaulting",
+ "source_match": {
+  "lock_revision": "data-v8.9.1",
+  "lock_resource_sha256": "F7086B62BCF3484C406110911FDB1B8769D142417C7D85E8575E10C8E19140FF",
+  "used": "<workspace>/upstream-bingus/VanillaPlusMegapack/components/ConsistentVaulting",
+  "pinned_copy_matches_lock": true,
+  "checkout": "<workspace>/upstream-bingus/ConsistentVaulting",
+  "checkout_tag": "v8.9.1 (git tag at HEAD c0b42df)",
+  "checkout_matches_lock": true,
+  "note": "both copies hold the locked bytes; the build copies the pinned component the pack builds from"
+ },
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "revision": "data-v8.9.1-26088801",
+ "game_sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+ "exe_sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+ "map": {
+  "path": "<workspace>/native-work/megapack-port/ConsistentVaulting/MAP.json",
+  "sha256": "5eef94956ca3974de621c3473f1466919bbd25c7a47935ff74741abb8e9cfa42",
+  "counts": {
+   "high": 56,
+   "medium": 3
+  },
+  "rows": 59
+ },
+ "replacements": [
+  {
+   "file": "scripts/archive.py",
+   "lines": [
+    9
+   ],
+   "old": "EXE_SHA = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+   "new": "EXE_SHA = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'",
+   "map_rows": [
+    "archive.EXE_SHA"
+   ]
+  },
+  {
+   "file": "scripts/archive.py",
+   "lines": [
+    10
+   ],
+   "old": "GAME_DLL_SHA = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+   "new": "GAME_DLL_SHA = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'",
+   "map_rows": [
+    "archive.GAME_DLL_SHA"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/vault_data.lua",
+   "lines": [
+    139
+   ],
+   "old": "gate_global=game,game+0x33266a0",
+   "new": "gate_global=game,game+0x2ce1850",
+   "map_rows": [
+    "g.mode"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/vault_data.lua",
+   "lines": [
+    158
+   ],
+   "old": "global(api,s,game,0x3326468,true)",
+   "new": "global(api,s,game,0x2ce1618,true)",
+   "map_rows": [
+    "g.players"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/vault_data.lua",
+   "lines": [
+    171
+   ],
+   "old": "read(api,s,owner+0xf22ec8,20)",
+   "new": "read(api,s,owner+0xf24990,20)",
+   "map_rows": [
+    "entities.unit_map"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/vault_data.lua",
+   "lines": [
+    174
+   ],
+   "old": "local entity_address=owner+0xf32f18+ei*24",
+   "new": "local entity_address=owner+0xf349e0+ei*24",
+   "map_rows": [
+    "entities.records"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/vault_data.lua",
+   "lines": [
+    223
+   ],
+   "old": "s.flags_address=manager+ai*0x1238+0x53e880",
+   "new": "s.flags_address=manager+ai*0x1240+0x53e888",
+   "map_rows": [
+    "avatars.flags",
+    "avatars.stride"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/vault_data.lua",
+   "lines": [
+    249
+   ],
+   "old": "s.world=global(api,s,game,0x346bfa0,true)",
+   "new": "s.world=global(api,s,game,0x2e271f8,true)",
+   "map_rows": [
+    "g.world"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/vault_data.lua",
+   "lines": [
+    303
+   ],
+   "old": "ffi.cast('uint32_t *',template+0x70)[0]=u32(entity,12)",
+   "new": "ffi.cast('uint32_t *',template+0x74)[0]=u32(entity,12)",
+   "map_rows": [
+    "query.unit"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/vault_data.lua",
+   "lines": [
+    304
+   ],
+   "old": "ffi.cast('uint16_t *',template+0x74)[0]=1",
+   "new": "ffi.cast('uint16_t *',template+0x78)[0]=1",
+   "map_rows": [
+    "query.capacity"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/vault_data.lua",
+   "lines": [
+    305
+   ],
+   "old": "template[0x7a],template[0x7b],template[0x7c]=2,1,5",
+   "new": "template[0x7c],template[0x7d],template[0x7e]=2,1,5",
+   "map_rows": [
+    "query.type"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/vault_data.lua",
+   "lines": [
+    313
+   ],
+   "old": "u32(record,0x70)==u32(entity,12)",
+   "new": "u32(record,0x74)==u32(entity,12)",
+   "map_rows": [
+    "query.unit"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/vault_data.lua",
+   "lines": [
+    314
+   ],
+   "old": "record:byte(0x7b)==2 and record:byte(0x7c)==1 and record:byte(0x7d)==5",
+   "new": "record:byte(0x7d)==2 and record:byte(0x7e)==1 and record:byte(0x7f)==5",
+   "map_rows": [
+    "query.type"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/vault_data.lua",
+   "lines": [
+    315
+   ],
+   "old": "u16(record,0x74)==1 and u16(record,0x76)<=1",
+   "new": "u16(record,0x78)==1 and u16(record,0x7a)<=1",
+   "map_rows": [
+    "query.capacity",
+    "query.count"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/vault_data.lua",
+   "lines": [
+    320
+   ],
+   "old": "return record,u16(record,0x76)",
+   "new": "return record,u16(record,0x7a)",
+   "map_rows": [
+    "query.count"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/vault_data.lua",
+   "lines": [
+    340
+   ],
+   "old": "read(api,s,manager+0x547c70,20)",
+   "new": "read(api,s,manager+0x547cb0,20)",
+   "map_rows": [
+    "avatars.override_map"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/vault_data.lua",
+   "lines": [
+    343
+   ],
+   "old": "manager+0x547d24+override*0x354",
+   "new": "manager+0x547d64+override*0x354",
+   "map_rows": [
+    "avatars.override_records"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/vault_data.lua",
+   "lines": [
+    345
+   ],
+   "old": "read(api,s,owner+0xf12bb8,8)",
+   "new": "read(api,s,owner+0xf14680,8)",
+   "map_rows": [
+    "entities.avatar_settings"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/vault_data.lua",
+   "lines": [
+    365
+   ],
+   "old": "global(api,s,game,0x3326558)",
+   "new": "global(api,s,game,0x2ce1708)",
+   "map_rows": [
+    "g.movement"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/vault_data.lua",
+   "lines": [
+    388
+   ],
+   "old": "global(api,s,game,0x346d560)",
+   "new": "global(api,s,game,0x2e287d0)",
+   "map_rows": [
+    "g.camera"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/vault_data.lua",
+   "lines": [
+    393
+   ],
+   "old": "manager+ai*0x1238+0x53e15c",
+   "new": "manager+ai*0x1240+0x53e15c",
+   "map_rows": [
+    "avatars.stride"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/vault_data.lua",
+   "lines": [
+    406
+   ],
+   "old": "global(api,s,game,0x346bf98,true)",
+   "new": "global(api,s,game,0x2ce41b8,true)",
+   "map_rows": [
+    "g.entities"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/vault_data.lua",
+   "lines": [
+    409
+   ],
+   "old": "global(api,s,game,0x3326d20,true)",
+   "new": "global(api,s,game,0x2ce1ee0,true)",
+   "map_rows": [
+    "g.avatars"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/vault_data.lua",
+   "lines": [
+    433
+   ],
+   "old": "s.controller=manager+0x53e1b8+ai*0x1238",
+   "new": "s.controller=manager+0x53e1b8+ai*0x1240",
+   "map_rows": [
+    "avatars.stride"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/slope_assist.lua",
+   "lines": [
+    141
+   ],
+   "old": "light_global(api,base,0x33266a0,CHAIN)",
+   "new": "light_global(api,base,0x2ce1850,CHAIN)",
+   "map_rows": [
+    "g.mode"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/slope_assist.lua",
+   "lines": [
+    148
+   ],
+   "old": "light_global(api,base,0x3326468,OWNED)",
+   "new": "light_global(api,base,0x2ce1618,OWNED)",
+   "map_rows": [
+    "g.players"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/slope_assist.lua",
+   "lines": [
+    167
+   ],
+   "old": "light_lookup(api,owner+0xf22ec8,ref,1048576)",
+   "new": "light_lookup(api,owner+0xf24990,ref,1048576)",
+   "map_rows": [
+    "entities.unit_map"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/slope_assist.lua",
+   "lines": [
+    170
+   ],
+   "old": "local address=owner+0xf32f18+ei*24",
+   "new": "local address=owner+0xf349e0+ei*24",
+   "map_rows": [
+    "entities.records"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/slope_assist.lua",
+   "lines": [
+    205
+   ],
+   "old": "light_global(api,base,0x346bf98,OWNED),light_global(api,base,0x3326d20,OWNED)",
+   "new": "light_global(api,base,0x2ce41b8,OWNED),light_global(api,base,0x2ce1ee0,OWNED)",
+   "map_rows": [
+    "g.avatars",
+    "g.entities"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/slope_assist.lua",
+   "lines": [
+    294
+   ],
+   "old": "global(api,s,game,0x3326558)",
+   "new": "global(api,s,game,0x2ce1708)",
+   "map_rows": [
+    "g.movement"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/slope_assist.lua",
+   "lines": [
+    308
+   ],
+   "old": "exe+0x27c3298+bit.rshift(handle,30)*0x810",
+   "new": "exe+0x286a768+bit.rshift(handle,30)*0x810",
+   "map_rows": [
+    "exe.handle_pools"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/slope_assist.lua",
+   "lines": [
+    320
+   ],
+   "old": "exe+0x16a16d8",
+   "new": "exe+0x17430a0",
+   "map_rows": [
+    "exe.controller_vtable"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/slope_assist.lua",
+   "lines": [
+    338
+   ],
+   "old": "lookup(api,s,manager+0x547c70,s.key.id,64)",
+   "new": "lookup(api,s,manager+0x547cb0,s.key.id,64)",
+   "map_rows": [
+    "avatars.override_map"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/slope_assist.lua",
+   "lines": [
+    341
+   ],
+   "old": "local base=manager+0x547d24+oi*852",
+   "new": "local base=manager+0x547d64+oi*852",
+   "map_rows": [
+    "avatars.override_records"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/slope_assist.lua",
+   "lines": [
+    346
+   ],
+   "old": "s.key.owner+0xf12bb8",
+   "new": "s.key.owner+0xf14680",
+   "map_rows": [
+    "entities.avatar_settings"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/slope_assist.lua",
+   "lines": [
+    358
+   ],
+   "old": "s.key.manager+0x547d20",
+   "new": "s.key.manager+0x547d60",
+   "map_rows": [
+    "avatars.override_count"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/slope_assist.lua",
+   "lines": [
+    376
+   ],
+   "old": "manager+0x53e880+ai*0x1238",
+   "new": "manager+0x53e888+ai*0x1240",
+   "map_rows": [
+    "avatars.flags",
+    "avatars.stride"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/slope_assist.lua",
+   "lines": [
+    400,
+    418
+   ],
+   "old": "found_manager+0x53e1b8+found_ai*0x1238+4)",
+   "new": "found_manager+0x53e1b8+found_ai*0x1240+4)",
+   "map_rows": [
+    "avatars.stride"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/slope_assist.lua",
+   "lines": [
+    429
+   ],
+   "old": "manager+0x53e1b8+ai*0x1238+0x2ac",
+   "new": "manager+0x53e1b8+ai*0x1240+0x2ac",
+   "map_rows": [
+    "avatars.stride"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/slope_assist.lua",
+   "lines": [
+    430
+   ],
+   "old": "manager+0x53e134+ai*0x1238",
+   "new": "manager+0x53e134+ai*0x1240",
+   "map_rows": [
+    "avatars.stride"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/windows_api.lua",
+   "lines": [
+    22
+   ],
+   "old": "{0x3326338,0x27cd910,{{0x18,0x7972f0},{0x38,0x7993d0},{0xa8,0x799540}}}",
+   "new": "{0x2ce1500,0x2874ed0,{{0x18,0x81e620},{0x38,0x820700},{0xa8,0x820870}}}",
+   "map_rows": [
+    "exe.flags",
+    "exe.motion",
+    "exe.table_actor",
+    "exe.valid",
+    "g.table_actor"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/windows_api.lua",
+   "lines": [
+    23
+   ],
+   "old": "{0x3326388,0x27cdc30,{{0,0x7ce220},{0x28,0x7cf050},{0x68,0x7cfe10}}}",
+   "new": "{0x2ce1548,0x2875170,{{0,0x855900},{0x28,0x856730},{0x68,0x8574f0}}}",
+   "map_rows": [
+    "exe.dimensions",
+    "exe.mover",
+    "exe.position",
+    "exe.table_mover",
+    "g.table_mover"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/windows_api.lua",
+   "lines": [
+    24
+   ],
+   "old": "{0x3326328,0x27cdb40,{{0,0x79f860},{0x68,0x77dec0},{0x80,0x7f9070}}}",
+   "new": "{0x2ce14e8,0x2875080,{{0,0x826d10},{0x68,0x805160},{0x80,0x880750}}}",
+   "map_rows": [
+    "exe.query",
+    "exe.table_world",
+    "exe.world_68",
+    "exe.world_id",
+    "g.table_world"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/windows_api.lua",
+   "lines": [
+    33
+   ],
+   "old": "api.read(game+0xa9d560,12)",
+   "new": "api.read(game+0xab9040,12)",
+   "map_rows": [
+    "game.classify"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/windows_api.lua",
+   "lines": [
+    35
+   ],
+   "old": "api.read(game+0xa9a0c0,16)",
+   "new": "api.read(game+0xab5ba0,16)",
+   "map_rows": [
+    "game.drive"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/windows_api.lua",
+   "lines": [
+    38
+   ],
+   "old": "'uint64_t (*)(uint32_t)',exe+0x7972f0)",
+   "new": "'uint64_t (*)(uint32_t)',exe+0x81e620)",
+   "map_rows": [
+    "exe.valid"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/windows_api.lua",
+   "lines": [
+    39
+   ],
+   "old": "'uint32_t (*)(uint32_t)',exe+0x7993d0)",
+   "new": "'uint32_t (*)(uint32_t)',exe+0x820700)",
+   "map_rows": [
+    "exe.flags"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/windows_api.lua",
+   "lines": [
+    40
+   ],
+   "old": "'void (*)(uint32_t,float *,float *)',exe+0x799540)",
+   "new": "'void (*)(uint32_t,float *,float *)',exe+0x820870)",
+   "map_rows": [
+    "exe.motion"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/windows_api.lua",
+   "lines": [
+    41
+   ],
+   "old": "'uint32_t (*)(uint32_t,uint32_t)',exe+0x7ce220)",
+   "new": "'uint32_t (*)(uint32_t,uint32_t)',exe+0x855900)",
+   "map_rows": [
+    "exe.mover"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/windows_api.lua",
+   "lines": [
+    42
+   ],
+   "old": "'void *(*)(uint32_t)',exe+0x7cfe10)",
+   "new": "'void *(*)(uint32_t)',exe+0x8574f0)",
+   "map_rows": [
+    "exe.dimensions"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/windows_api.lua",
+   "lines": [
+    43
+   ],
+   "old": "'void (*)(uint32_t,float *)',exe+0x7cf050)",
+   "new": "'void (*)(uint32_t,float *)',exe+0x856730)",
+   "map_rows": [
+    "exe.position"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/windows_api.lua",
+   "lines": [
+    44
+   ],
+   "old": "game+0x173f150)",
+   "new": "game+0x15b3180)",
+   "map_rows": [
+    "game.basis"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/windows_api.lua",
+   "lines": [
+    45
+   ],
+   "old": "game+0x173a750)",
+   "new": "game+0x15ae780)",
+   "map_rows": [
+    "game.rotation"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/windows_api.lua",
+   "lines": [
+    47
+   ],
+   "old": "const float *,const float *)',game+0xa9d560)",
+   "new": "const float *,const float *)',game+0xab9040)",
+   "map_rows": [
+    "game.classify"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/windows_api.lua",
+   "lines": [
+    48
+   ],
+   "old": "'uint32_t (*)(const void *)',exe+0x79f860)",
+   "new": "'uint32_t (*)(const void *)',exe+0x826d10)",
+   "map_rows": [
+    "exe.world_id"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/windows_api.lua",
+   "lines": [
+    49
+   ],
+   "old": "const void *,void *,uint32_t)',exe+0x7f9070)",
+   "new": "const void *,void *,uint32_t)',exe+0x880750)",
+   "map_rows": [
+    "exe.query"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/windows_api.lua",
+   "lines": [
+    50
+   ],
+   "old": "'void (*)(void *,float)',game+0xa9a0c0)",
+   "new": "'void (*)(void *,float)',game+0xab5ba0)",
+   "map_rows": [
+    "game.drive"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/windows_api.lua",
+   "lines": [
+    51
+   ],
+   "old": "'uint32_t (*)(void *,float)',game+0xa9c3e0)",
+   "new": "'uint32_t (*)(void *,float)',game+0xab7ec0)",
+   "map_rows": [
+    "game.detect"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/windows_api.lua",
+   "lines": [
+    52
+   ],
+   "old": "api.read(game+0xa9dd90,16)",
+   "new": "api.read(game+0xab9870,16)",
+   "map_rows": [
+    "game.approach"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/windows_api.lua",
+   "lines": [
+    55
+   ],
+   "old": "float *,float *,float *,float *)',game+0xa9dd90)",
+   "new": "float *,float *,float *,float *)',game+0xab9870)",
+   "map_rows": [
+    "game.approach"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/windows_api.lua",
+   "lines": [
+    56
+   ],
+   "old": "'void (*)(void *,const void *,const void *)',game+0x83c420)",
+   "new": "'void (*)(void *,const void *,const void *)',game+0x8492a0)",
+   "map_rows": [
+    "game.override"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/windows_api.lua",
+   "lines": [
+    64
+   ],
+   "old": "api.read(game+0x83c420,16)",
+   "new": "api.read(game+0x8492a0,16)",
+   "map_rows": [
+    "game.override"
+   ]
+  },
+  {
+   "file": "components/ConsistentVaulting/src/windows_api.lua",
+   "lines": [
+    193
+   ],
+   "old": "tail[12]=ffi.cast('uint32_t *',copy+112)[0]",
+   "new": "tail[12]=ffi.cast('uint32_t *',copy+116)[0]",
+   "map_rows": [
+    "query.unit"
+   ]
+  }
+ ],
+ "wrapper_lines_changed_vs_upstream": [
+  {
+   "line": 656,
+   "old": "{0x3326338,0x27cd910,{{0x18,0x7972f0},{0x38,0x7993d0},{0xa8,0x799540}}},",
+   "new": "{0x2ce1500,0x2874ed0,{{0x18,0x81e620},{0x38,0x820700},{0xa8,0x820870}}},"
+  },
+  {
+   "line": 657,
+   "old": "{0x3326388,0x27cdc30,{{0,0x7ce220},{0x28,0x7cf050},{0x68,0x7cfe10}}},",
+   "new": "{0x2ce1548,0x2875170,{{0,0x855900},{0x28,0x856730},{0x68,0x8574f0}}},"
+  },
+  {
+   "line": 658,
+   "old": "{0x3326328,0x27cdb40,{{0,0x79f860},{0x68,0x77dec0},{0x80,0x7f9070}}},",
+   "new": "{0x2ce14e8,0x2875080,{{0,0x826d10},{0x68,0x805160},{0x80,0x880750}}},"
+  },
+  {
+   "line": 667,
+   "old": "assert(api.read(game+0xa9d560,12)=='\\072\\139\\196\\072\\137\\088\\008\\072\\137\\104\\032\\086',",
+   "new": "assert(api.read(game+0xab9040,12)=='\\072\\139\\196\\072\\137\\088\\008\\072\\137\\104\\032\\086',"
+  },
+  {
+   "line": 669,
+   "old": "assert(api.read(game+0xa9a0c0,16)=='\\064\\085\\083\\086\\087\\065\\084\\065\\086\\065\\087\\072\\141\\108\\036\\208',",
+   "new": "assert(api.read(game+0xab5ba0,16)=='\\064\\085\\083\\086\\087\\065\\084\\065\\086\\065\\087\\072\\141\\108\\036\\208',"
+  },
+  {
+   "line": 672,
+   "old": "local valid=ffi.cast('uint64_t (*)(uint32_t)',exe+0x7972f0)",
+   "new": "local valid=ffi.cast('uint64_t (*)(uint32_t)',exe+0x81e620)"
+  },
+  {
+   "line": 673,
+   "old": "local flags=ffi.cast('uint32_t (*)(uint32_t)',exe+0x7993d0)",
+   "new": "local flags=ffi.cast('uint32_t (*)(uint32_t)',exe+0x820700)"
+  },
+  {
+   "line": 674,
+   "old": "local motion=ffi.cast('void (*)(uint32_t,float *,float *)',exe+0x799540)",
+   "new": "local motion=ffi.cast('void (*)(uint32_t,float *,float *)',exe+0x820870)"
+  },
+  {
+   "line": 675,
+   "old": "local mover=ffi.cast('uint32_t (*)(uint32_t,uint32_t)',exe+0x7ce220)",
+   "new": "local mover=ffi.cast('uint32_t (*)(uint32_t,uint32_t)',exe+0x855900)"
+  },
+  {
+   "line": 676,
+   "old": "local dimensions=ffi.cast('void *(*)(uint32_t)',exe+0x7cfe10)",
+   "new": "local dimensions=ffi.cast('void *(*)(uint32_t)',exe+0x8574f0)"
+  },
+  {
+   "line": 677,
+   "old": "local position=ffi.cast('void (*)(uint32_t,float *)',exe+0x7cf050)",
+   "new": "local position=ffi.cast('void (*)(uint32_t,float *)',exe+0x856730)"
+  },
+  {
+   "line": 678,
+   "old": "local basis=ffi.cast('void *(*)(void *,const float *,const float *)',game+0x173f150)",
+   "new": "local basis=ffi.cast('void *(*)(void *,const float *,const float *)',game+0x15b3180)"
+  },
+  {
+   "line": 679,
+   "old": "local rotation=ffi.cast('void (*)(float *,const void *)',game+0x173a750)",
+   "new": "local rotation=ffi.cast('void (*)(float *,const void *)',game+0x15ae780)"
+  },
+  {
+   "line": 681,
+   "old": "local classify=ffi.cast('int32_t (*)(void *,const void *,const float *,const float *)',game+0xa9d560)",
+   "new": "local classify=ffi.cast('int32_t (*)(void *,const void *,const float *,const float *)',game+0xab9040)"
+  },
+  {
+   "line": 682,
+   "old": "local world_id=ffi.cast('uint32_t (*)(const void *)',exe+0x79f860)",
+   "new": "local world_id=ffi.cast('uint32_t (*)(const void *)',exe+0x826d10)"
+  },
+  {
+   "line": 683,
+   "old": "local query=ffi.cast('uint32_t (*)(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,const void *,void *,uint32_t)',exe+0x7f9070)",
+   "new": "local query=ffi.cast('uint32_t (*)(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,const void *,void *,uint32_t)',exe+0x880750)"
+  },
+  {
+   "line": 684,
+   "old": "local drive=ffi.cast('void (*)(void *,float)',game+0xa9a0c0)",
+   "new": "local drive=ffi.cast('void (*)(void *,float)',game+0xab5ba0)"
+  },
+  {
+   "line": 685,
+   "old": "local detect=ffi.cast('uint32_t (*)(void *,float)',game+0xa9c3e0)",
+   "new": "local detect=ffi.cast('uint32_t (*)(void *,float)',game+0xab7ec0)"
+  },
+  {
+   "line": 686,
+   "old": "assert(api.read(game+0xa9dd90,16)=='\\072\\139\\196\\072\\137\\088\\008\\085\\086\\087\\065\\084\\065\\085\\065\\086',",
+   "new": "assert(api.read(game+0xab9870,16)=='\\072\\139\\196\\072\\137\\088\\008\\085\\086\\087\\065\\084\\065\\085\\065\\086',"
+  },
+  {
+   "line": 689,
+   "old": "local approach=ffi.cast('uint8_t (*)(void *,const void *,float *,float *,float *,float *)',game+0xa9dd90)",
+   "new": "local approach=ffi.cast('uint8_t (*)(void *,const void *,float *,float *,float *,float *)',game+0xab9870)"
+  },
+  {
+   "line": 690,
+   "old": "local override=ffi.cast('void (*)(void *,const void *,const void *)',game+0x83c420)",
+   "new": "local override=ffi.cast('void (*)(void *,const void *,const void *)',game+0x8492a0)"
+  },
+  {
+   "line": 698,
+   "old": "assert(api.read(game+0x83c420,16)=='\\072\\137\\092\\036\\008\\072\\137\\108\\036\\016\\072\\137\\116\\036\\024\\087',",
+   "new": "assert(api.read(game+0x8492a0,16)=='\\072\\137\\092\\036\\008\\072\\137\\108\\036\\016\\072\\137\\116\\036\\024\\087',"
+  },
+  {
+   "line": 827,
+   "old": "tail[12]=ffi.cast('uint32_t *',copy+112)[0]",
+   "new": "tail[12]=ffi.cast('uint32_t *',copy+116)[0]"
+  },
+  {
+   "line": 985,
+   "old": "if game~=gate_game then gate_game,gate_global=game,game+0x33266a0 end",
+   "new": "if game~=gate_game then gate_game,gate_global=game,game+0x2ce1850 end"
+  },
+  {
+   "line": 1004,
+   "old": "local pm=global(api,s,game,0x3326468,true)",
+   "new": "local pm=global(api,s,game,0x2ce1618,true)"
+  },
+  {
+   "line": 1017,
+   "old": "local ei=lookup(api,s,read(api,s,owner+0xf22ec8,20),unit_ref,1048576)",
+   "new": "local ei=lookup(api,s,read(api,s,owner+0xf24990,20),unit_ref,1048576)"
+  },
+  {
+   "line": 1020,
+   "old": "local entity_address=owner+0xf32f18+ei*24",
+   "new": "local entity_address=owner+0xf349e0+ei*24"
+  },
+  {
+   "line": 1069,
+   "old": "s.flags_address=manager+ai*0x1238+0x53e880",
+   "new": "s.flags_address=manager+ai*0x1240+0x53e888"
+  },
+  {
+   "line": 1095,
+   "old": "s.world=global(api,s,game,0x346bfa0,true)",
+   "new": "s.world=global(api,s,game,0x2e271f8,true)"
+  },
+  {
+   "line": 1149,
+   "old": "ffi.cast('uint32_t *',template+0x70)[0]=u32(entity,12)",
+   "new": "ffi.cast('uint32_t *',template+0x74)[0]=u32(entity,12)"
+  },
+  {
+   "line": 1150,
+   "old": "ffi.cast('uint16_t *',template+0x74)[0]=1",
+   "new": "ffi.cast('uint16_t *',template+0x78)[0]=1"
+  },
+  {
+   "line": 1151,
+   "old": "template[0x7a],template[0x7b],template[0x7c]=2,1,5",
+   "new": "template[0x7c],template[0x7d],template[0x7e]=2,1,5"
+  },
+  {
+   "line": 1159,
+   "old": "assert(u32(record,0x68)==0x05a5271a and u32(record,0x70)==u32(entity,12), 'Query identity mismatch')",
+   "new": "assert(u32(record,0x68)==0x05a5271a and u32(record,0x74)==u32(entity,12), 'Query identity mismatch')"
+  },
+  {
+   "line": 1160,
+   "old": "assert(record:byte(0x7b)==2 and record:byte(0x7c)==1 and record:byte(0x7d)==5,'Unsupported query type')",
+   "new": "assert(record:byte(0x7d)==2 and record:byte(0x7e)==1 and record:byte(0x7f)==5,'Unsupported query type')"
+  },
+  {
+   "line": 1161,
+   "old": "assert(u16(record,0x74)==1 and u16(record,0x76)<=1,'Unsupported query capacity')",
+   "new": "assert(u16(record,0x78)==1 and u16(record,0x7a)<=1,'Unsupported query capacity')"
+  },
+  {
+   "line": 1166,
+   "old": "return record,u16(record,0x76)",
+   "new": "return record,u16(record,0x7a)"
+  },
+  {
+   "line": 1186,
+   "old": "local override=lookup(api,s,read(api,s,manager+0x547c70,20),id,64)",
+   "new": "local override=lookup(api,s,read(api,s,manager+0x547cb0,20),id,64)"
+  },
+  {
+   "line": 1189,
+   "old": "return read(api,s,manager+0x547d24+override*0x354,852)",
+   "new": "return read(api,s,manager+0x547d64+override*0x354,852)"
+  },
+  {
+   "line": 1191,
+   "old": "local component=pointer(api,read(api,s,owner+0xf12bb8,8))",
+   "new": "local component=pointer(api,read(api,s,owner+0xf14680,8))"
+  },
+  {
+   "line": 1211,
+   "old": "local movement=global(api,s,game,0x3326558)",
+   "new": "local movement=global(api,s,game,0x2ce1708)"
+  },
+  {
+   "line": 1234,
+   "old": "local camera=vector(read(api,s,global(api,s,game,0x346d560)+0x1c,12),0)",
+   "new": "local camera=vector(read(api,s,global(api,s,game,0x2e287d0)+0x1c,12),0)"
+  },
+  {
+   "line": 1239,
+   "old": "assert(u32(read(api,s,manager+ai*0x1238+0x53e15c,4),0)==id,'Direction state identity mismatch')",
+   "new": "assert(u32(read(api,s,manager+ai*0x1240+0x53e15c,4),0)==id,'Direction state identity mismatch')"
+  },
+  {
+   "line": 1252,
+   "old": "local owner=global(api,s,game,0x346bf98,true)",
+   "new": "local owner=global(api,s,game,0x2ce41b8,true)"
+  },
+  {
+   "line": 1255,
+   "old": "local manager=global(api,s,game,0x3326d20,true)",
+   "new": "local manager=global(api,s,game,0x2ce1ee0,true)"
+  },
+  {
+   "line": 1279,
+   "old": "s.controller=manager+0x53e1b8+ai*0x1238",
+   "new": "s.controller=manager+0x53e1b8+ai*0x1240"
+  },
+  {
+   "line": 2233,
+   "old": "local mode=light_read(api,light_global(api,base,0x33266a0,CHAIN),0x44,CHAIN)",
+   "new": "local mode=light_read(api,light_global(api,base,0x2ce1850,CHAIN),0x44,CHAIN)"
+  },
+  {
+   "line": 2240,
+   "old": "local pm=light_global(api,base,0x3326468,OWNED)",
+   "new": "local pm=light_global(api,base,0x2ce1618,OWNED)"
+  },
+  {
+   "line": 2259,
+   "old": "local ei=light_lookup(api,owner+0xf22ec8,ref,1048576)",
+   "new": "local ei=light_lookup(api,owner+0xf24990,ref,1048576)"
+  },
+  {
+   "line": 2262,
+   "old": "local address=owner+0xf32f18+ei*24",
+   "new": "local address=owner+0xf349e0+ei*24"
+  },
+  {
+   "line": 2297,
+   "old": "local owner,manager=light_global(api,base,0x346bf98,OWNED),light_global(api,base,0x3326d20,OWNED)",
+   "new": "local owner,manager=light_global(api,base,0x2ce41b8,OWNED),light_global(api,base,0x2ce1ee0,OWNED)"
+  },
+  {
+   "line": 2386,
+   "old": "local mm=global(api,s,game,0x3326558)",
+   "new": "local mm=global(api,s,game,0x2ce1708)"
+  },
+  {
+   "line": 2400,
+   "old": "local pool=ptr(api,read(api,s,exe+0x27c3298+bit.rshift(handle,30)*0x810,8,true))",
+   "new": "local pool=ptr(api,read(api,s,exe+0x286a768+bit.rshift(handle,30)*0x810,8,true))"
+  },
+  {
+   "line": 2412,
+   "old": "assert(api.distance(ptr(api,read(api,s,object,8,true)),exe+0x16a16d8)==0,'Unsupported character controller')",
+   "new": "assert(api.distance(ptr(api,read(api,s,object,8,true)),exe+0x17430a0)==0,'Unsupported character controller')"
+  },
+  {
+   "line": 2430,
+   "old": "local oi=lookup(api,s,manager+0x547c70,s.key.id,64)",
+   "new": "local oi=lookup(api,s,manager+0x547cb0,s.key.id,64)"
+  },
+  {
+   "line": 2433,
+   "old": "local base=manager+0x547d24+oi*852",
+   "new": "local base=manager+0x547d64+oi*852"
+  },
+  {
+   "line": 2438,
+   "old": "local component=ptr(api,read(api,s,s.key.owner+0xf12bb8,8,true))",
+   "new": "local component=ptr(api,read(api,s,s.key.owner+0xf14680,8,true))"
+  },
+  {
+   "line": 2450,
+   "old": "s.override_count=u(read(api,s,s.key.manager+0x547d20,4,true))",
+   "new": "s.override_count=u(read(api,s,s.key.manager+0x547d60,4,true))"
+  },
+  {
+   "line": 2468,
+   "old": "local flags=read(api,s,manager+0x53e880+ai*0x1238,24,true)",
+   "new": "local flags=read(api,s,manager+0x53e888+ai*0x1240,24,true)"
+  },
+  {
+   "line": 2492,
+   "old": "IDLE.vault_phase=api_address(found_manager+0x53e1b8+found_ai*0x1238+4)",
+   "new": "IDLE.vault_phase=api_address(found_manager+0x53e1b8+found_ai*0x1240+4)"
+  },
+  {
+   "line": 2510,
+   "old": "local vault_phase=api_address(found_manager+0x53e1b8+found_ai*0x1238+4)",
+   "new": "local vault_phase=api_address(found_manager+0x53e1b8+found_ai*0x1240+4)"
+  },
+  {
+   "line": 2521,
+   "old": "assert(u(read(api,s,manager+0x53e1b8+ai*0x1238+0x2ac,4,true))==id,'Vault identity mismatch')",
+   "new": "assert(u(read(api,s,manager+0x53e1b8+ai*0x1240+0x2ac,4,true))==id,'Vault identity mismatch')"
+  },
+  {
+   "line": 2522,
+   "old": "local direction=manager+0x53e134+ai*0x1238",
+   "new": "local direction=manager+0x53e134+ai*0x1240"
+  },
+  {
+   "line": 3080,
+   "what": "install_loader call (revision, exe/game SHA-256 pins)"
+  }
+ ],
+ "upstream_reproduction": {
+  "luajit": "<workspace>/runtime-modules/vm-poc/work/runtime/linux/LuaJIT/src/luajit",
+  "resource_sha256": "F7086B62BCF3484C406110911FDB1B8769D142417C7D85E8575E10C8E19140FF",
+  "equals_lock_resource_sha256": true,
+  "discoverable_entry_equals_shipped_v26": "<hellforge>/mods/Vanilla Plus Megapack - v26/options/ConsistentVaulting/9ba626afa44a3aa3.patch_0 resource 38ec9f6555859108",
+  "shipped_entry_sha256": "6b89a5490f3ec388b7f52a518a66cf13b7cfa002d6c6bcace79a9a769ae92980"
+ },
+ "compile_step_captured_not_run": [
+  "<workspace>/runtime-modules/vm-poc/work/runtime/linux/LuaJIT/src/luajit",
+  "-bsdW",
+  "<wrapper>",
+  "<output>"
+ ],
+ "resource_format": "plaintext: BingusSharedLoader build_addon.entry_source(module, mod.wrapper.lua) in the struct.pack('<II', len, 2) envelope (the shipped option carried the non-GC64 bytecode of the same wrapper inside loadstring)",
+ "resource": {
+  "name": "mods/cowboybingus/consistent_vaulting",
+  "hash": "38ec9f6555859108",
+  "bytes": 153765
+ },
+ "outputs": {
+  "consistent_vaulting.lua": "0426f18ffc0026055da4c5ec28e404983563e677106f8d430305976bb615dbb3",
+  "9ba626afa44a3aa3.patch_0": "3f91477a98fda7a1cebf27f3713b22da74cea329d69b4c58e288c33d60a962ef",
+  "9ba626afa44a3aa3.patch_0.stream": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "9ba626afa44a3aa3.patch_0.gpu_resources": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+ },
+ "inputs": {
+  "<workspace>/upstream-bingus/VanillaPlusMegapack/components/ConsistentVaulting/src/archive_loader.lua": "89be5a7138bed470ad06026f78e3011eaa50c09089b4ecc8b9e4981f019a5696",
+  "<workspace>/upstream-bingus/VanillaPlusMegapack/components/ConsistentVaulting/src/bingus_memory.lua": "3973924b1c009cc4e6c863a4eaf87f166899a16ddcb579c3d77ab5465172b416",
+  "<workspace>/upstream-bingus/VanillaPlusMegapack/components/ConsistentVaulting/src/bingus_runtime.lua": "c4450f555f697e583916d18f876412ca96f6963eb1bf4cdad451ebb906c2f988",
+  "<workspace>/upstream-bingus/VanillaPlusMegapack/components/ConsistentVaulting/src/bingus_write.lua": "9a0a217811d109418faebb2af8804bfb8301b0eeeb1e6b5bc020fdacbd596160",
+  "<workspace>/upstream-bingus/VanillaPlusMegapack/components/ConsistentVaulting/src/slope_assist.lua": "5cf69ba9fac29b7b8fcc498d74ff0cba91ba349d88277ff38a91f027f065d4eb",
+  "<workspace>/upstream-bingus/VanillaPlusMegapack/components/ConsistentVaulting/src/vault_data.lua": "bdb34f519dab54ed6b57a3a58749e6da70f9621e69b1406fb2edebe66a1796ad",
+  "<workspace>/upstream-bingus/VanillaPlusMegapack/components/ConsistentVaulting/src/windows_api.lua": "ce97dad18f8843045a581e1cfbe94be2c3a019b6a4b36982d8363202ac337ffb"
+ },
+ "luajit_check": {
+  "luajit": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit",
+  "string_dump_flags": 8,
+  "gc64_fr2": true,
+  "output": [
+   "compile: ok\tLuaJIT 2.1.ROLLING\t8",
+   "entry run: true",
+   "mod: [ConsistentVaulting] data-v8.9.1-26088801: mods/cowboybingus/consistent_vaulting:2972: Bingus Shared Loader loader-v4 or newer / API 1 or newer is required",
+   "state: data-v8.9.1-26088801 | mods/cowboybingus/consistent_vaulting:2972: Bingus Shared Loader loader-v4 or newer / API 1 or newer is required | active false"
+  ]
+ },
+ "adapter_text_absent": [
+  "PORT51",
+  "compat51",
+  "require('cffi')",
+  "require(\"cffi\")"
+ ],
+ "tests": {
+  "linux-fr1": {
+   "upstream": {
+    "test_vault": 1,
+    "test_geometry": 0,
+    "test_raised_approach": 0,
+    "test_slope": 0,
+    "test_loader": 0
+   },
+   "port": {
+    "test_vault": 1,
+    "test_geometry": 0,
+    "test_raised_approach": 0,
+    "test_slope": 0,
+    "test_loader": 0
+   }
+  },
+  "linux-gc64": {
+   "upstream": {
+    "test_vault": 1,
+    "test_geometry": 0,
+    "test_raised_approach": 0,
+    "test_slope": -11,
+    "test_loader": 0
+   },
+   "port": {
+    "test_vault": 1,
+    "test_geometry": 0,
+    "test_raised_approach": 0,
+    "test_slope": -11,
+    "test_loader": 0
+   }
+  },
+  "wine-windows": {
+   "upstream": {
+    "test_vault": 0,
+    "test_geometry": 0,
+    "test_raised_approach": 0,
+    "test_slope": 5,
+    "test_loader": 0
+   },
+   "port": {
+    "test_vault": 0,
+    "test_geometry": 0,
+    "test_raised_approach": 0,
+    "test_slope": 5,
+    "test_loader": 0
+   }
+  }
+ }
+}

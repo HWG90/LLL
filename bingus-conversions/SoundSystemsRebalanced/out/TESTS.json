@@ -1,0 +1,95 @@
+{
+ "luajit_exe_sha256": "F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7",
+ "port": {
+  "tests/test_mod.lua": {
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: 11 Sound Systems Rebalanced tests (LuaJIT 2.1.ROLLING)"
+   ],
+   "tail": [
+    "PASS: 11 Sound Systems Rebalanced tests (LuaJIT 2.1.ROLLING)"
+   ]
+  },
+  "tests/compile_entry.lua": {
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: assembled entry compiles"
+   ],
+   "tail": [
+    "PASS: assembled entry compiles"
+   ]
+  },
+  "tests/test_entry.lua": {
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: assembled entry refuses outside the game and runs once (disabled: game modules unavailable)"
+   ],
+   "tail": [
+    "PASS: assembled entry refuses outside the game and runs once (disabled: game modules unavailable)"
+   ]
+  },
+  "port/test_native_set_state.lua": {
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: 9 native SetState port tests (LuaJIT 2.1.ROLLING)"
+   ],
+   "tail": [
+    "PASS: 9 native SetState port tests (LuaJIT 2.1.ROLLING)"
+   ]
+  }
+ },
+ "upstream": {
+  "tests/test_mod.lua": {
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: 11 Sound Systems Rebalanced tests (LuaJIT 2.1.ROLLING)"
+   ],
+   "tail": [
+    "PASS: 11 Sound Systems Rebalanced tests (LuaJIT 2.1.ROLLING)"
+   ]
+  },
+  "tests/compile_entry.lua": {
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: assembled entry compiles"
+   ],
+   "tail": [
+    "PASS: assembled entry compiles"
+   ]
+  },
+  "tests/test_entry.lua": {
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: assembled entry refuses outside the game and runs once (disabled: game modules unavailable)"
+   ],
+   "tail": [
+    "PASS: assembled entry refuses outside the game and runs once (disabled: game modules unavailable)"
+   ]
+  }
+ },
+ "tests/test_biome_patch.py (25480438 banks)": {
+  "exit": 0,
+  "tail": [
+   "----------------------------------------------------------------------",
+   "Ran 14 tests in 0.161s",
+   "",
+   "OK"
+  ]
+ },
+ "music archive reproduction (25480438 banks)": {
+  "sha256": "F16873AEC5A4B7762CC5BAE3BB978CDDBC2DBEAF679D91CD45C7578A04D2BDA3",
+  "lock_music_archive_sha256": "F16873AEC5A4B7762CC5BAE3BB978CDDBC2DBEAF679D91CD45C7578A04D2BDA3",
+  "shipped_v26_patch_1": "F16873AEC5A4B7762CC5BAE3BB978CDDBC2DBEAF679D91CD45C7578A04D2BDA3",
+  "reproduces": true
+ },
+ "not_run": {
+  "tests/game_lua.py": "runs the suites in the game's lua51.dll via Windows ctypes; Windows only"
+ }
+}

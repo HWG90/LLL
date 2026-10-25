@@ -1,0 +1,2 @@
+BLOCKED: MAP.json rows feeding the memory write are not high confidence: settings.duration.
+Run live/hover_pack_cancel_readonly.lua (NOTES.md, check L5), record the result in live/accepted.json, rerun tools/build_map.py and build.py.

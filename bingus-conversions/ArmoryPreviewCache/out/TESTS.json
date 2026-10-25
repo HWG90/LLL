@@ -1,0 +1,1077 @@
+{
+ "test_input_mapping": {
+  "text": {
+   "synthetic_screens.lua": {
+    "owner+454728 -> owner+454792": 2,
+    "owner+422768 -> owner+422832": 1
+   },
+   "test_current_ui.lua": {
+    "0x1658990 -> 0x16f5510": 1,
+    "'armory' and 224 or 229 -> 'armory' and 226 or 231": 1
+   },
+   "test_frame_budget.lua": {
+    "0x347cd80 -> 0x2e380b0": 2,
+    "0x347ce28 -> 0x2e38160": 1,
+    "0x3326e68 -> 0x2ce2040": 1,
+    "0x1658990 -> 0x16f5510": 1,
+    "12176 -> 12464": 4,
+    "w.m32[2778]+w.m32[2779] -> w.m32[2850]+w.m32[2851]": 1,
+    "11064/4 -> 11356/4": 1,
+    "11096/4 -> 11388/4": 1,
+    "==224 -> ==226": 1
+   },
+   "test_gate_equivalence.lua": {
+    "0x347cd80 -> 0x2e380b0": 2,
+    "0x347ce28 -> 0x2e38160": 1,
+    "0x347ce60 -> 0x2e38190": 1,
+    "0x3326e68 -> 0x2ce2040": 1,
+    "0x1658990 -> 0x16f5510": 1,
+    "12176 -> 12464": 5,
+    "w.m32[2778]+w.m32[2779] -> w.m32[2850]+w.m32[2851]": 2,
+    "m32[2784] -> m32[2856]": 4,
+    "m32[2786+ -> m32[2858+": 3,
+    "m32[2787+ -> m32[2859+": 3,
+    "11064/4 -> 11356/4": 1,
+    "11096/4 -> 11388/4": 1,
+    "bytes:sub(1,11112) -> bytes:sub(1,11400)": 1,
+    "bytes:sub(11121) -> bytes:sub(11409)": 1,
+    "864032 -> 864096": 1,
+    "==224 -> ==226": 1,
+    "==229 -> ==231": 2
+   },
+   "test_idle_gate.lua": {
+    "0x347cd80 -> 0x2e380b0": 2,
+    "0x347cd90 -> 0x2e380c8": 1,
+    "0x347ce28 -> 0x2e38160": 1,
+    "0x1658990 -> 0x16f5510": 1,
+    "12176 -> 12464": 7,
+    "w.m32[2778]+w.m32[2779] -> w.m32[2850]+w.m32[2851]": 2,
+    "m32[2784] -> m32[2856]": 2,
+    "m32[2786+ -> m32[2858+": 2,
+    "m32[2787+ -> m32[2859+": 2,
+    "ffi.string(w.manager,11112) -> ffi.string(w.manager,11400)": 1
+   },
+   "test_install.lua": {
+    "0x347cd80 -> 0x2e380b0": 1,
+    "0x347cd90 -> 0x2e380c8": 1,
+    "0x347ce28 -> 0x2e38160": 1,
+    "0x347ceb0 -> 0x2e381e8": 1,
+    "0x3326308 -> 0x2ce14c8": 1,
+    "0x27c8d80 -> 0x2870240": 2,
+    "0x320dd0 -> 0x2f0260": 1,
+    "0x321030 -> 0x2f04c0": 1
+   },
+   "test_lease_table.lua": {
+    "0x347ceb0 -> 0x2e381e8": 1
+   },
+   "test_material_synthetic.lua": {
+    "0x347cd80 -> 0x2e380b0": 1,
+    "0x347cd90 -> 0x2e380c8": 1,
+    "0x347ce28 -> 0x2e38160": 1,
+    "0x3326e68 -> 0x2ce2040": 1,
+    "0x3326308 -> 0x2ce14c8": 1,
+    "0x227c8d80 -> 0x22870240": 1,
+    "0x27c8d80 -> 0x2870240": 1,
+    "0x31af50 -> 0x2ea5a0": 1,
+    "0x31b360 -> 0x2ea9b0": 1,
+    "0x31e030 -> 0x2ed5c0": 1,
+    "0x1658990 -> 0x16f5510": 1,
+    "tm+11112 -> tm+11400": 1,
+    "tm+11136 -> tm+11424": 1,
+    "word(229) -> word(231)": 1,
+    "controller_kind=229 -> controller_kind=231": 1
+   },
+   "test_policy_gate.lua": {
+    "0x347cd80 -> 0x2e380b0": 2,
+    "0x347cd90 -> 0x2e380c8": 1,
+    "0x347ce28 -> 0x2e38160": 1,
+    "0x347ceb0 -> 0x2e381e8": 1,
+    "0x1658990 -> 0x16f5510": 1,
+    "12176 -> 12464": 4,
+    "w.m32[2778]+w.m32[2779] -> w.m32[2850]+w.m32[2851]": 1
+   },
+   "test_visible_adapter.lua": {
+    "0x347cd80 -> 0x2e380b0": 2,
+    "0x1658990 -> 0x16f5510": 1,
+    "12176 -> 12464": 4,
+    "11064/4 -> 11356/4": 1,
+    "11096/4 -> 11388/4": 1,
+    "tm+11112 -> tm+11400": 4,
+    "ffi.string(tm,11112) -> ffi.string(tm,11400)": 2
+   }
+  },
+  "fixtures": {
+   "ui_armory_25327279.lua": {
+    "entities weapon table field 0xX -> 0xX": 1,
+    "manager X re-laid out 12176 -> 12464": 1,
+    "weapon buckets 1080 -> 1100": 1,
+    "weapon records +17280 -> +17600, 540 -> 550": 1,
+    "ScriptApi+16 moved, application table X -> X": 1,
+    "application slot 368": 1,
+    "application slot 400": 1,
+    "application slot 528": 1,
+    "application slot 752": 1,
+    "application slot 768": 1,
+    "global X -> X": 10,
+    "dispatch kind 224 -> 226": 1
+   },
+   "ui_loadout_25327279.lua": {
+    "entities weapon table field 0xX -> 0xX": 1,
+    "manager X re-laid out 12176 -> 12464": 1,
+    "weapon buckets 1080 -> 1100": 1,
+    "weapon records +17280 -> +17600, 540 -> 550": 1,
+    "briefing block +6f048 -> +6f088": 1,
+    "briefing block +d5e08 -> +d5e48": 1,
+    "briefing block +d65c8 -> +d6608": 1,
+    "briefing block +d8970 -> +d89b0": 1,
+    "briefing block +d9130 -> +d9170": 1,
+    "briefing block +db4d8 -> +db518": 1,
+    "briefing block +dbc98 -> +dbcd8": 1,
+    "briefing block +de8d4 -> +de914": 1,
+    "briefing block +e0cd8 -> +e0d18": 1,
+    "briefing block +e1498 -> +e14d8": 1,
+    "briefing block +e3840 -> +e3880": 1,
+    "briefing block +e4000 -> +e4040": 1,
+    "briefing block +e63a8 -> +e63e8": 1,
+    "briefing block +e6b68 -> +e6ba8": 1,
+    "briefing block +e97a4 -> +e97e4": 1,
+    "briefing block +ebba8 -> +ebbe8": 1,
+    "briefing block +ec368 -> +ec3a8": 1,
+    "briefing block +ee710 -> +ee750": 1,
+    "briefing block +eeed0 -> +eef10": 1,
+    "briefing block +f1278 -> +f12b8": 1,
+    "briefing block +f1a38 -> +f1a78": 1,
+    "briefing block +f4674 -> +f46b4": 1,
+    "briefing block +f6a78 -> +f6ab8": 1,
+    "briefing block +f7238 -> +f7278": 1,
+    "briefing block +f95e0 -> +f9620": 1,
+    "briefing block +f9da0 -> +f9de0": 1,
+    "briefing block +fc148 -> +fc188": 1,
+    "briefing block +fc908 -> +fc948": 1,
+    "briefing block +ff544 -> +ff584": 1,
+    "briefing block +X -> +X": 8,
+    "ScriptApi+16 moved, application table X -> X": 1,
+    "application slot 368": 1,
+    "application slot 400": 1,
+    "application slot 528": 1,
+    "application slot 752": 1,
+    "application slot 768": 1,
+    "global X -> X": 10,
+    "dispatch kind 229 -> 231": 1,
+    "pointers into the briefing controller moved: 105": 1
+   }
+  },
+  "references": {
+   "image_native_ungated.lua": {
+    "replaced": {
+     "game+0x347ce60 -> game+0x2e38190": 1,
+     "game+0x3326308 -> game+0x2ce14c8": 1,
+     "exe+0x27c8d80 -> exe+0x2870240": 1,
+     "game+0x347ce28 -> game+0x2e38160": 2,
+     "game+0x347cd90 -> game+0x2e380c8": 2,
+     "read(tm,12176) -> read(tm,12464)": 1,
+     "game+0x3326e68 -> game+0x2ce2040": 1,
+     "owner+454728+index*80 -> owner+454792+index*80": 1,
+     "top==5 and 224 or (top==14 and 229 or nil) -> top==5 and 226 or (top==14 and 231 or nil)": 2,
+     "owner+454728,480 -> owner+454792,480": 1,
+     "[368]=0x31af50 -> [368]=0x2ea5a0": 1,
+     "[400]=0x31b360 -> [400]=0x2ea9b0": 1,
+     "[528]=0x31e030 -> [528]=0x2ed5c0": 1,
+     "exe+0x1658990 -> exe+0x16f5510": 1,
+     "exe+0x31af50) -> exe+0x2ea5a0)": 1,
+     "exe+0x31b360) -> exe+0x2ea9b0)": 1,
+     "exe+0x31e030) -> exe+0x2ed5c0)": 1,
+     "game+0x14499e0) -> game+0x12e16f0)": 1,
+     "game+0x143eef0) -> game+0x12d6c00)": 1,
+     "game+0x1447160) -> game+0x12dee70)": 1,
+     "game+0x1448ad0) -> game+0x12e07e0)": 1,
+     "game+0x144f800) -> game+0x12e7510)": 1,
+     "game+0x1392680) -> game+0x1229090)": 1,
+     "game+0x347cd80 -> game+0x2e380b0": 6,
+     "ptr(tm+11112) -> ptr(tm+11400)": 3,
+     "if kind==229 then -> if kind==231 then": 1,
+     "owner+422768+index*5464 -> owner+422832+index*5464": 1,
+     "kind==229 and 'briefing_grid' -> kind==231 and 'briefing_grid'": 1,
+     "(kind==229 and 864032 or 523752) -> (kind==231 and 864096 or 523752)": 1,
+     "s.manager+11112)[0]=fresh -> s.manager+11400)[0]=fresh": 1,
+     "read(tm+11136,4) -> read(tm+11424,4)": 1,
+     "s.manager+11112)[0]=t.handle -> s.manager+11400)[0]=t.handle": 1,
+     "api.pointer(mb,11112) -> api.pointer(mb,11400)": 1,
+     "raw(mb,11100,8) -> raw(mb,11392,8)": 1,
+     "u32(mb,11064) -> u32(mb,11356)": 1,
+     "u32(mb,11096) -> u32(mb,11388)": 1,
+     "u32(mb,11136) -> u32(mb,11424)": 1,
+     "kind==224 and read( -> kind==226 and read(": 1,
+     "ptr(s.manager+11112) -> ptr(s.manager+11400)": 1,
+     "api.pointer(mb,11144+i*8) -> api.pointer(mb,11432+i*8)": 1
+    },
+    "old_tokens_left": []
+   },
+   "image_native_v23.lua": {
+    "replaced": {
+     "game+0x3326308 -> game+0x2ce14c8": 1,
+     "exe+0x27c8d80 -> exe+0x2870240": 1,
+     "game+0x347ce28 -> game+0x2e38160": 1,
+     "game+0x347cd90 -> game+0x2e380c8": 1,
+     "game+0x3326e68 -> game+0x2ce2040": 1,
+     "buffer(0x138) -> buffer(0x140)": 1,
+     "buffer(12176) -> buffer(12464)": 1,
+     "owner+454728+index*80 -> owner+454792+index*80": 2,
+     "read(base+0x347cd80,0x138,G,0) -> read(base+0x2e380b0,0x140,G,0)": 1,
+     "w=words(G,4,2,w);w=words(G,42,2,w) -> w=words(G,6,2,w);w=words(G,44,2,w)": 1,
+     "p=words(G,76,2,p) -> p=words(G,78,2,p)": 1,
+     "pointer(G,4),pointer(G,42),pointer(G,56),pointer(G,76) -> pointer(G,6),pointer(G,44),pointer(G,56),pointer(G,78)": 1,
+     "(Armory 224, briefing 229) -> (Armory 226, briefing 231)": 1,
+     "top==5 and 224 or (top==14 and 229 or nil) -> top==5 and 226 or (top==14 and 231 or nil)": 3,
+     "if k==229 and -> if k==231 and": 1,
+     "base+0x3326e68 -> base+0x2ce2040": 2,
+     "read(self.tm,12176,MB,0) -> read(self.tm,12464,MB,0)": 1,
+     "m[2763];w=w+1                -- +11052 -> m[2836];w=w+1                -- +11344": 1,
+     "m[2766];cur[w+1]=m[2774];w=w+2  -- active +11064, phase +11096 -> m[2839];cur[w+1]=m[2847];w=w+2  -- active +11356, phase +11388": 1,
+     "words(MB,2775,2,w)                -- +11100 -> words(MB,2848,2,w)                -- +11392": 1,
+     "words(MB,2778,2,w)                -- atlas +11112 -> words(MB,2850,2,w)                -- atlas +11400": 1,
+     "m[2784]                 -- registry +11136 -> m[2856]                 -- registry +11424": 1,
+     "words(MB,2786,count*2,w) -> words(MB,2858,count*2,w)": 1,
+     "atlas=pointer(MB,2778) -> atlas=pointer(MB,2850)": 2,
+     "owner+454728,480 -> owner+454792,480": 2,
+     "owner+422768+index*5464+1984 -> owner+422832+index*5464+1984": 1,
+     "grid(owner+864032,w) -> grid(owner+864096,w)": 1,
+     "if kind==229 then w=briefing_words -> if kind==231 then w=briefing_words": 1,
+     "[368]=0x31af50 -> [368]=0x2ea5a0": 1,
+     "[400]=0x31b360 -> [400]=0x2ea9b0": 1,
+     "[528]=0x31e030 -> [528]=0x2ed5c0": 1,
+     "exe+0x1658990 -> exe+0x16f5510": 1,
+     "exe+0x31af50) -> exe+0x2ea5a0)": 1,
+     "exe+0x31b360) -> exe+0x2ea9b0)": 1,
+     "exe+0x31e030) -> exe+0x2ed5c0)": 1,
+     "game+0x14499e0) -> game+0x12e16f0)": 1,
+     "game+0x143eef0) -> game+0x12d6c00)": 1,
+     "game+0x1447160) -> game+0x12dee70)": 1,
+     "game+0x1448ad0) -> game+0x12e07e0)": 1,
+     "game+0x144f800) -> game+0x12e7510)": 1,
+     "game+0x1392680) -> game+0x1229090)": 1,
+     "game+0x347cd80 -> game+0x2e380b0": 5,
+     "ptr(tm+11112) -> ptr(tm+11400)": 3,
+     "local n=m[2784] -> local n=m[2856]": 1,
+     "pointer(mb,2786+i*2) -> pointer(mb,2858+i*2)": 1,
+     "st.base+0x347cd80,0x138,G,0 -> st.base+0x2e380b0,0x140,G,0": 1,
+     "pointer(G,42),pointer(G,4),pointer(G,0) -> pointer(G,44),pointer(G,6),pointer(G,0)": 1,
+     "api.read(tm,12176,MB,0) -> api.read(tm,12464,MB,0)": 1,
+     "text(MB,11100,8) -> text(MB,11392,8)": 1,
+     "=m[2766],true,true,0 -> =m[2839],true,true,0": 1,
+     "local phase=m[2774] -> local phase=m[2847]": 1,
+     "if kind==229 then -> if kind==231 then": 1,
+     "owner+422768+index*5464 -> owner+422832+index*5464": 1,
+     "if kind==224 then -> if kind==226 then": 1,
+     "kind==229 and 'briefing_grid' -> kind==231 and 'briefing_grid'": 1,
+     "(kind==229 and 864032 or 523752) -> (kind==231 and 864096 or 523752)": 1,
+     "s.manager+11112)[0]=fresh -> s.manager+11400)[0]=fresh": 1,
+     "read(tm+11136,4) -> read(tm+11424,4)": 1,
+     "s.manager+11112)[0]=t.handle -> s.manager+11400)[0]=t.handle": 1,
+     "ptr(s.manager+11112) -> ptr(s.manager+11400)": 1
+    },
+    "old_tokens_left": []
+   },
+   "images_ungated.lua": {
+    "replaced": {},
+    "old_tokens_left": []
+   },
+   "images_v23.lua": {
+    "replaced": {},
+    "old_tokens_left": []
+   },
+   "install_ungated.lua": {
+    "replaced": {},
+    "old_tokens_left": []
+   },
+   "install_v23.lua": {
+    "replaced": {},
+    "old_tokens_left": []
+   },
+   "native_v23.lua": {
+    "replaced": {
+     "game+0x346bf98 -> game+0x2ce41b8": 1,
+     "game+0x3326308 -> game+0x2ce14c8": 1,
+     "exe+0x27c8d80 -> exe+0x2870240": 1,
+     "exe+0x320dd0 -> exe+0x2f0260": 1,
+     "exe+0x321030 -> exe+0x2f04c0": 1,
+     "game+0x12fe350) -> game+0x11912f0)": 1,
+     "game+0x12fe4e0) -> game+0x1191480)": 1,
+     "game+0x347ceb0 -> game+0x2e381e8": 1,
+     "ptr(game+0x33264f8) -> ptr(game+0x2ce16a8)": 1,
+     "ptr(game+0x347cef8) -> ptr(game+0x2e38230)": 1,
+     "wo+0xf12558 -> wo+0xf14008": 1,
+     "read(wt,1080*16) -> read(wt,1100*16)": 1,
+     "read(wt+17280,540*32) -> read(wt+17600,550*32)": 1,
+     "for i=0,1079 do -> for i=0,1099 do": 1,
+     "assert(index<540, -> assert(index<550,": 1,
+     "game+0x347ce28 -> game+0x2e38160": 1,
+     "game+0x347cd90 -> game+0x2e380c8": 1,
+     "ptr(game+0x347cd80); -> ptr(game+0x2e380b0);": 1,
+     "read(tm,12176) -> read(tm,12464)": 1,
+     "ptr(game+0x347cd80)==tm -> ptr(game+0x2e380b0)==tm": 1,
+     "u32(h,11052)==7 -> u32(h,11344)==7": 1,
+     "u32(h,11064) -> u32(h,11356)": 1,
+     "game+0x3326e68 -> game+0x2ce2040": 1,
+     "u32(rows,i*16+8)==229 -> u32(rows,i*16+8)==231": 1
+    },
+    "old_tokens_left": []
+   },
+   "policy_ungated.lua": {
+    "replaced": {},
+    "old_tokens_left": []
+   }
+  }
+ },
+ "port": {
+  "test_policy.lua (linux GC64 luajit)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: bounded leases, busy UI retention, independent references, cold profile, real memory-pressure thresholds and automatic recovery, manager reset and malformed profiles"
+   ]
+  },
+  "test_install.lua (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "stack traceback:",
+    "\t[C]: in function 'load'",
+    "\t...port/ArmoryPreviewCache/work/tests-port/src/platform.lua:14: in function <...port/ArmoryPreviewCache/work/tests-port/src/platform.lua:1>",
+    "\ttests/test_install.lua:131: in main chunk",
+    "\t[C]: at 0x5639b2ba1480"
+   ]
+  },
+  "test_install.lua (wine luajit.exe)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "<workspace>\\native-work\\megapack-port\\ArmoryPreviewCache\\work\\luajit.exe: tests/test_install.lua:133: assertion failed!",
+    "stack traceback:",
+    "\t[C]: in function 'assert'",
+    "\ttests/test_install.lua:133: in main chunk",
+    "\t[C]: at 0x01400020e0"
+   ]
+  },
+  "test_images.lua (linux GC64 luajit)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: finished-image revisit before native completion; early-only handoff; late/resize rejection; duplicate suppression; world invalidation; restoration; pressure cleanup; eight-atlas budget; allocation failure"
+   ]
+  },
+  "test_partial_images.lua (linux GC64 luajit)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: short-visit completed-card retention; incomplete pixels excluded; same-request progress never detaches; refreshed completion metadata; late handoff rejection; readiness regression"
+   ]
+  },
+  "test_image_keys.lua (linux GC64 luajit)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: actual helmet/armor pre-generation inputs miss v5 but match v6; visual IDs, overrides, dimensions, stable camera inputs, grid/style and layout remain distinct"
+   ]
+  },
+  "test_v10_images.lua (linux GC64 luajit)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: all six grids and both three-slot pre-select screens survive destructive layout switches; same-callback idle presentation; early revisit hits; eight-atlas LRU; cleanup"
+   ]
+  },
+  "test_v10_policy.lua (linux GC64 luajit)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: startup before Armory; default/custom dependency prewarm; no first-world flush; foreground during busy UI; bounded startup expiry; legacy profile migration; precise 64-bit attachment IDs; malformed input rejection"
+   ]
+  },
+  "test_material_synthetic.lua (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "stack traceback:",
+    "\t[C]: in function 'load'",
+    "\t...port/ArmoryPreviewCache/work/tests-port/src/read_api.lua:37: in function <...port/ArmoryPreviewCache/work/tests-port/src/read_api.lua:1>",
+    "\ttests/test_material_synthetic.lua:4: in main chunk",
+    "\t[C]: at 0x56342cfb8480"
+   ]
+  },
+  "test_material_synthetic.lua (wine luajit.exe)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: synthetic production-adapter material lifetime: cleared/replaced instances rejected; valid cleanup; post-clone ownership; failed initialization remains a miss"
+   ]
+  },
+  "test_prewarm_recency.lua (linux GC64 luajit)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: recency applies to primary/secondary/throwable/helmet/armor/cape and both pre-select groups; 37-cape revisit survives old-category competition; profile roundtrip and foreground order; no stable-menu churn; unique entries/custom attachments; unchanged bounds"
+   ]
+  },
+  "test_render_refresh.lua (linux GC64 luajit)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: re-rendered request keys adopt their new pixels (weapon pattern/attachment change), retained presentation is unchanged during regeneration, blank hand-off remainders stay rejected, unchanged renders do not churn, partial re-renders converge, and a configured-slot change retires its stale crop at once while unobserved or unchanged slots keep serving it"
+   ]
+  },
+  "test_current_ui.lua (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "\t[C]: in function 'load'",
+    "\t...ArmoryPreviewCache/work/tests-port/tests/captured_ui.lua:16: in main chunk",
+    "\t[C]: in function 'dofile'",
+    "\ttests/test_current_ui.lua:5: in main chunk",
+    "\t[C]: at 0x55af7903d480"
+   ]
+  },
+  "test_current_ui.lua (wine luajit.exe)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: historical Armory/loadout UI replay with current-build native instruction guards"
+   ]
+  },
+  "test_visible_handoff.lua (linux GC64 luajit)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: visible handoff keeps a short visit; one visible handoff per request; offscreen cards retained later without recapturing blank regions; warm visits allocate no extra atlas; uncovered blank tiles block detach; grid hits reported"
+   ]
+  },
+  "test_visible_adapter.lua (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "\t[C]: in function 'load'",
+    "\t...ArmoryPreviewCache/work/tests-port/tests/captured_ui.lua:16: in main chunk",
+    "\t[C]: in function 'dofile'",
+    "\ttests/test_visible_adapter.lua:6: in main chunk",
+    "\t[C]: at 0x558f215c5480"
+   ]
+  },
+  "test_visible_adapter.lua (wine luajit.exe)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: grid visible handoff on captured UI; composition/phase/unfinished-visible gates; registry reads skipped while blocked; only composed pixels captured; offscreen cards retained through the rebind boundary; no native state writes or blank restores"
+   ]
+  },
+  "test_platform_reads.lua (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "stack traceback:",
+    "\t[C]: in function 'load'",
+    "\t...port/ArmoryPreviewCache/work/tests-port/src/platform.lua:14: in function <...port/ArmoryPreviewCache/work/tests-port/src/platform.lua:1>",
+    "\ttests/test_platform_reads.lua:6: in main chunk",
+    "\t[C]: at 0x5636dfa09480"
+   ]
+  },
+  "test_platform_reads.lua (wine luajit.exe)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "<workspace>\\native-work\\megapack-port\\ArmoryPreviewCache\\work\\luajit.exe: tests/test_platform_reads.lua:31: assertion failed!",
+    "stack traceback:",
+    "\t[C]: in function 'assert'",
+    "\ttests/test_platform_reads.lua:31: in main chunk",
+    "\t[C]: at 0x01400020e0"
+   ]
+  },
+  "test_gate_equivalence.lua (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "\t[C]: in function 'dofile'",
+    "\ttests/test_gate_equivalence.lua:21: in function 'world'",
+    "\ttests/test_gate_equivalence.lua:216: in function 'run'",
+    "\ttests/test_gate_equivalence.lua:307: in main chunk",
+    "\t[C]: at 0x5626237fe480"
+   ]
+  },
+  "test_gate_equivalence.lua (wine luajit.exe)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: ungated and gated update give identical presentation, native writes, manager and cache state before and after the game update in each of 586 frames (218 gated): first visit, idle/visible/rebind handoffs, scrolling in and outside the update, invalidation and regeneration, a card completing alone, appearance change, pressure, leave and return, late switch, weapon/cosmetic pre-select, nine categories through LRU eviction, a capture held by a hidden consumer, a tile retried until its material exists, a material replaced after the update, briefing grid and loadout; lost texture ownership raises in both; verify_gate reports no miss for correct gating and catches an uncovered widget change and two uncovered releases (197 of the frames)"
+   ]
+  },
+  "test_policy_gate.lua (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "\t...ArmoryPreviewCache/work/tests-port/tests/captured_ui.lua:16: in main chunk",
+    "\t[C]: in function 'dofile'",
+    "\ttests/test_policy_gate.lua:17: in function 'world'",
+    "\ttests/test_policy_gate.lua:162: in main chunk",
+    "\t[C]: at 0x5568c7718480"
+   ]
+  },
+  "test_policy_gate.lua (wine luajit.exe)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: ungated and gated asset steps give identical leases, recency order, learned profile, counters, lease calls, saved files, memory guard and state after each of 1180 frames (97 steps skipped): startup prewarm at an empty state stack (never reused) with pressure, ship, generation, prewarm, busy UI, attachments, pressure and recovery, a refused lease retried every step, profile save, lease table change and lost ownership; settled ticks checked one by one; verify_gate reports no miss for correct reuse and catches an uncovered change (180 of the frames)"
+   ]
+  },
+  "test_idle_gate.lua (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "\t...ArmoryPreviewCache/work/tests-port/tests/captured_ui.lua:16: in main chunk",
+    "\t[C]: in function 'dofile'",
+    "\ttests/test_idle_gate.lua:61: in function 'world'",
+    "\ttests/test_idle_gate.lua:219: in main chunk",
+    "\t[C]: at 0x55e498ba8480"
+   ]
+  },
+  "test_idle_gate.lua (wine luajit.exe)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: v23 and idle-gated updates give identical presentation, native writes, manager, retained images, leases, lease calls, profile and memory guard over 2680 frames (1217 idle on the ship with 2 reads and nothing else, 585 in a mission, also 2 reads): startup prewarm and its end, ship, Armory visit and retention, leaving with images held, return hits, mission, thumbnail manager replaced, memory pressure while idle (released within the 2 s poll) and recovery; never idle with a briefing on the stack or with verify_gate=1"
+   ]
+  },
+  "test_lease_table.lua (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "\t[C]: in function 'load'",
+    "\t...ArmoryPreviewCache/work/tests-port/tests/captured_ui.lua:16: in main chunk",
+    "\t[C]: in function 'dofile'",
+    "\ttests/test_lease_table.lua:12: in main chunk",
+    "\t[C]: at 0x559b468ec480"
+   ]
+  },
+  "test_lease_table.lua (wine luajit.exe)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: in-place lease table decode equals v23 for 0, 1, 300 and 1007 rows: rows and counts, ownership checks, acquire/release outcomes, full table, unbalanced call and malformed rows; 377 bytes allocated per decode (v23: 44450)"
+   ]
+  },
+  "test_frame_budget.lua (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "\t...ArmoryPreviewCache/work/tests-port/tests/captured_ui.lua:16: in main chunk",
+    "\t[C]: in function 'dofile'",
+    "\ttests/test_frame_budget.lua:16: in function 'game_world'",
+    "\ttests/test_frame_budget.lua:136: in main chunk",
+    "\t[C]: at 0x561fa4273480"
+   ]
+  },
+  "test_frame_budget.lua (wine luajit.exe)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: per-frame budget: ship idle 2 reads; mission idle 2 reads; Armory grid unchanged 10 reads (nothing bound) or 21 (15 retained crops bound); pre-select 12; policy step +2 reads and one memory poll in a menu; one thread check per working frame, none idle; no garbage in any unchanged scenario, interpreted or compiled"
+   ]
+  },
+  "test_ffi_names.lua hostile (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit: tests/test_ffi_names.lua:16: libkernel32.so: cannot open shared object file: No such file or directory",
+    "stack traceback:",
+    "\t[C]: in function 'load'",
+    "\ttests/test_ffi_names.lua:16: in main chunk",
+    "\t[C]: at 0x56042bb92480"
+   ]
+  },
+  "test_ffi_names.lua hostile (wine luajit.exe)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "stack traceback:",
+    "\t[C]: in function 'assert'",
+    "\ttests/test_ffi_names.lua:168: in function 'exercise_adapter'",
+    "\ttests/test_ffi_names.lua:242: in main chunk",
+    "\t[C]: at 0x01400020e0"
+   ]
+  },
+  "test_ffi_names.lua sdk (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit: tests/test_ffi_names.lua:16: libkernel32.so: cannot open shared object file: No such file or directory",
+    "stack traceback:",
+    "\t[C]: in function 'load'",
+    "\ttests/test_ffi_names.lua:16: in main chunk",
+    "\t[C]: at 0x556d1161e480"
+   ]
+  },
+  "test_ffi_names.lua sdk (wine luajit.exe)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "stack traceback:",
+    "\t[C]: in function 'assert'",
+    "\ttests/test_ffi_names.lua:168: in function 'exercise_adapter'",
+    "\ttests/test_ffi_names.lua:249: in main chunk",
+    "\t[C]: at 0x01400020e0"
+   ]
+  },
+  "test_ffi_names.lua after (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit: tests/test_ffi_names.lua:16: libkernel32.so: cannot open shared object file: No such file or directory",
+    "stack traceback:",
+    "\t[C]: in function 'load'",
+    "\ttests/test_ffi_names.lua:16: in main chunk",
+    "\t[C]: at 0x557029739480"
+   ]
+  },
+  "test_ffi_names.lua after (wine luajit.exe)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "stack traceback:",
+    "\t[C]: in function 'assert'",
+    "\ttests/test_ffi_names.lua:168: in function 'exercise_adapter'",
+    "\ttests/test_ffi_names.lua:257: in main chunk",
+    "\t[C]: at 0x01400020e0"
+   ]
+  }
+ },
+ "upstream": {
+  "test_policy.lua (linux GC64 luajit)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: bounded leases, busy UI retention, independent references, cold profile, real memory-pressure thresholds and automatic recovery, manager reset and malformed profiles"
+   ]
+  },
+  "test_install.lua (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "stack traceback:",
+    "\t[C]: in function 'load'",
+    "\t...k-port/ArmoryPreviewCache/work/upstream/src/platform.lua:14: in function <...k-port/ArmoryPreviewCache/work/upstream/src/platform.lua:1>",
+    "\ttests/test_install.lua:131: in main chunk",
+    "\t[C]: at 0x55947dad0480"
+   ]
+  },
+  "test_install.lua (wine luajit.exe)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "<workspace>\\native-work\\megapack-port\\ArmoryPreviewCache\\work\\luajit.exe: tests/test_install.lua:133: assertion failed!",
+    "stack traceback:",
+    "\t[C]: in function 'assert'",
+    "\ttests/test_install.lua:133: in main chunk",
+    "\t[C]: at 0x01400020e0"
+   ]
+  },
+  "test_images.lua (linux GC64 luajit)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: finished-image revisit before native completion; early-only handoff; late/resize rejection; duplicate suppression; world invalidation; restoration; pressure cleanup; eight-atlas budget; allocation failure"
+   ]
+  },
+  "test_partial_images.lua (linux GC64 luajit)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: short-visit completed-card retention; incomplete pixels excluded; same-request progress never detaches; refreshed completion metadata; late handoff rejection; readiness regression"
+   ]
+  },
+  "test_image_keys.lua (linux GC64 luajit)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: actual helmet/armor pre-generation inputs miss v5 but match v6; visual IDs, overrides, dimensions, stable camera inputs, grid/style and layout remain distinct"
+   ]
+  },
+  "test_v10_images.lua (linux GC64 luajit)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: all six grids and both three-slot pre-select screens survive destructive layout switches; same-callback idle presentation; early revisit hits; eight-atlas LRU; cleanup"
+   ]
+  },
+  "test_v10_policy.lua (linux GC64 luajit)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: startup before Armory; default/custom dependency prewarm; no first-world flush; foreground during busy UI; bounded startup expiry; legacy profile migration; precise 64-bit attachment IDs; malformed input rejection"
+   ]
+  },
+  "test_material_synthetic.lua (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "stack traceback:",
+    "\t[C]: in function 'load'",
+    "\t...k-port/ArmoryPreviewCache/work/upstream/src/read_api.lua:37: in function <...k-port/ArmoryPreviewCache/work/upstream/src/read_api.lua:1>",
+    "\ttests/test_material_synthetic.lua:4: in main chunk",
+    "\t[C]: at 0x557f67a7f480"
+   ]
+  },
+  "test_material_synthetic.lua (wine luajit.exe)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: synthetic production-adapter material lifetime: cleared/replaced instances rejected; valid cleanup; post-clone ownership; failed initialization remains a miss"
+   ]
+  },
+  "test_prewarm_recency.lua (linux GC64 luajit)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: recency applies to primary/secondary/throwable/helmet/armor/cape and both pre-select groups; 37-cape revisit survives old-category competition; profile roundtrip and foreground order; no stable-menu churn; unique entries/custom attachments; unchanged bounds"
+   ]
+  },
+  "test_render_refresh.lua (linux GC64 luajit)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: re-rendered request keys adopt their new pixels (weapon pattern/attachment change), retained presentation is unchanged during regeneration, blank hand-off remainders stay rejected, unchanged renders do not churn, partial re-renders converge, and a configured-slot change retires its stale crop at once while unobserved or unchanged slots keep serving it"
+   ]
+  },
+  "test_current_ui.lua (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "\t[C]: in function 'load'",
+    "\t...t/ArmoryPreviewCache/work/upstream/tests/captured_ui.lua:16: in main chunk",
+    "\t[C]: in function 'dofile'",
+    "\ttests/test_current_ui.lua:5: in main chunk",
+    "\t[C]: at 0x562d7ecf8480"
+   ]
+  },
+  "test_current_ui.lua (wine luajit.exe)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: historical Armory/loadout UI replay with current-build native instruction guards"
+   ]
+  },
+  "test_visible_handoff.lua (linux GC64 luajit)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: visible handoff keeps a short visit; one visible handoff per request; offscreen cards retained later without recapturing blank regions; warm visits allocate no extra atlas; uncovered blank tiles block detach; grid hits reported"
+   ]
+  },
+  "test_visible_adapter.lua (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "\t[C]: in function 'load'",
+    "\t...t/ArmoryPreviewCache/work/upstream/tests/captured_ui.lua:16: in main chunk",
+    "\t[C]: in function 'dofile'",
+    "\ttests/test_visible_adapter.lua:6: in main chunk",
+    "\t[C]: at 0x561069dd8480"
+   ]
+  },
+  "test_visible_adapter.lua (wine luajit.exe)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: grid visible handoff on captured UI; composition/phase/unfinished-visible gates; registry reads skipped while blocked; only composed pixels captured; offscreen cards retained through the rebind boundary; no native state writes or blank restores"
+   ]
+  },
+  "test_platform_reads.lua (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "stack traceback:",
+    "\t[C]: in function 'load'",
+    "\t...k-port/ArmoryPreviewCache/work/upstream/src/platform.lua:14: in function <...k-port/ArmoryPreviewCache/work/upstream/src/platform.lua:1>",
+    "\ttests/test_platform_reads.lua:6: in main chunk",
+    "\t[C]: at 0x561d223fd480"
+   ]
+  },
+  "test_platform_reads.lua (wine luajit.exe)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "<workspace>\\native-work\\megapack-port\\ArmoryPreviewCache\\work\\luajit.exe: tests/test_platform_reads.lua:31: assertion failed!",
+    "stack traceback:",
+    "\t[C]: in function 'assert'",
+    "\ttests/test_platform_reads.lua:31: in main chunk",
+    "\t[C]: at 0x01400020e0"
+   ]
+  },
+  "test_gate_equivalence.lua (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "\t[C]: in function 'dofile'",
+    "\ttests/test_gate_equivalence.lua:21: in function 'world'",
+    "\ttests/test_gate_equivalence.lua:216: in function 'run'",
+    "\ttests/test_gate_equivalence.lua:307: in main chunk",
+    "\t[C]: at 0x55696ca8e480"
+   ]
+  },
+  "test_gate_equivalence.lua (wine luajit.exe)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: ungated and gated update give identical presentation, native writes, manager and cache state before and after the game update in each of 586 frames (218 gated): first visit, idle/visible/rebind handoffs, scrolling in and outside the update, invalidation and regeneration, a card completing alone, appearance change, pressure, leave and return, late switch, weapon/cosmetic pre-select, nine categories through LRU eviction, a capture held by a hidden consumer, a tile retried until its material exists, a material replaced after the update, briefing grid and loadout; lost texture ownership raises in both; verify_gate reports no miss for correct gating and catches an uncovered widget change and two uncovered releases (197 of the frames)"
+   ]
+  },
+  "test_policy_gate.lua (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "\t...t/ArmoryPreviewCache/work/upstream/tests/captured_ui.lua:16: in main chunk",
+    "\t[C]: in function 'dofile'",
+    "\ttests/test_policy_gate.lua:17: in function 'world'",
+    "\ttests/test_policy_gate.lua:162: in main chunk",
+    "\t[C]: at 0x55dd4bff1480"
+   ]
+  },
+  "test_policy_gate.lua (wine luajit.exe)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: ungated and gated asset steps give identical leases, recency order, learned profile, counters, lease calls, saved files, memory guard and state after each of 1180 frames (97 steps skipped): startup prewarm at an empty state stack (never reused) with pressure, ship, generation, prewarm, busy UI, attachments, pressure and recovery, a refused lease retried every step, profile save, lease table change and lost ownership; settled ticks checked one by one; verify_gate reports no miss for correct reuse and catches an uncovered change (180 of the frames)"
+   ]
+  },
+  "test_idle_gate.lua (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "\t...t/ArmoryPreviewCache/work/upstream/tests/captured_ui.lua:16: in main chunk",
+    "\t[C]: in function 'dofile'",
+    "\ttests/test_idle_gate.lua:61: in function 'world'",
+    "\ttests/test_idle_gate.lua:219: in main chunk",
+    "\t[C]: at 0x561b7144e480"
+   ]
+  },
+  "test_idle_gate.lua (wine luajit.exe)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: v23 and idle-gated updates give identical presentation, native writes, manager, retained images, leases, lease calls, profile and memory guard over 2680 frames (1217 idle on the ship with 2 reads and nothing else, 585 in a mission, also 2 reads): startup prewarm and its end, ship, Armory visit and retention, leaving with images held, return hits, mission, thumbnail manager replaced, memory pressure while idle (released within the 2 s poll) and recovery; never idle with a briefing on the stack or with verify_gate=1"
+   ]
+  },
+  "test_lease_table.lua (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "\t[C]: in function 'load'",
+    "\t...t/ArmoryPreviewCache/work/upstream/tests/captured_ui.lua:16: in main chunk",
+    "\t[C]: in function 'dofile'",
+    "\ttests/test_lease_table.lua:12: in main chunk",
+    "\t[C]: at 0x55c521e39480"
+   ]
+  },
+  "test_lease_table.lua (wine luajit.exe)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: in-place lease table decode equals v23 for 0, 1, 300 and 1007 rows: rows and counts, ownership checks, acquire/release outcomes, full table, unbalanced call and malformed rows; 377 bytes allocated per decode (v23: 44450)"
+   ]
+  },
+  "test_frame_budget.lua (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "\t...t/ArmoryPreviewCache/work/upstream/tests/captured_ui.lua:16: in main chunk",
+    "\t[C]: in function 'dofile'",
+    "\ttests/test_frame_budget.lua:16: in function 'game_world'",
+    "\ttests/test_frame_budget.lua:136: in main chunk",
+    "\t[C]: at 0x5633a3e3e480"
+   ]
+  },
+  "test_frame_budget.lua (wine luajit.exe)": {
+   "exit": 0,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: per-frame budget: ship idle 2 reads; mission idle 2 reads; Armory grid unchanged 10 reads (nothing bound) or 21 (15 retained crops bound); pre-select 12; policy step +2 reads and one memory poll in a menu; one thread check per working frame, none idle; no garbage in any unchanged scenario, interpreted or compiled"
+   ]
+  },
+  "test_ffi_names.lua hostile (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit: tests/test_ffi_names.lua:16: libkernel32.so: cannot open shared object file: No such file or directory",
+    "stack traceback:",
+    "\t[C]: in function 'load'",
+    "\ttests/test_ffi_names.lua:16: in main chunk",
+    "\t[C]: at 0x561941826480"
+   ]
+  },
+  "test_ffi_names.lua hostile (wine luajit.exe)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "stack traceback:",
+    "\t[C]: in function 'assert'",
+    "\ttests/test_ffi_names.lua:168: in function 'exercise_adapter'",
+    "\ttests/test_ffi_names.lua:242: in main chunk",
+    "\t[C]: at 0x01400020e0"
+   ]
+  },
+  "test_ffi_names.lua sdk (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit: tests/test_ffi_names.lua:16: libkernel32.so: cannot open shared object file: No such file or directory",
+    "stack traceback:",
+    "\t[C]: in function 'load'",
+    "\ttests/test_ffi_names.lua:16: in main chunk",
+    "\t[C]: at 0x56334a541480"
+   ]
+  },
+  "test_ffi_names.lua sdk (wine luajit.exe)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "stack traceback:",
+    "\t[C]: in function 'assert'",
+    "\ttests/test_ffi_names.lua:168: in function 'exercise_adapter'",
+    "\ttests/test_ffi_names.lua:249: in main chunk",
+    "\t[C]: at 0x01400020e0"
+   ]
+  },
+  "test_ffi_names.lua after (linux GC64 luajit)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit: tests/test_ffi_names.lua:16: libkernel32.so: cannot open shared object file: No such file or directory",
+    "stack traceback:",
+    "\t[C]: in function 'load'",
+    "\ttests/test_ffi_names.lua:16: in main chunk",
+    "\t[C]: at 0x557c60c97480"
+   ]
+  },
+  "test_ffi_names.lua after (wine luajit.exe)": {
+   "exit": 1,
+   "pass_lines": 0,
+   "tail": [
+    "stack traceback:",
+    "\t[C]: in function 'assert'",
+    "\ttests/test_ffi_names.lua:168: in function 'exercise_adapter'",
+    "\ttests/test_ffi_names.lua:257: in main chunk",
+    "\t[C]: at 0x01400020e0"
+   ]
+  }
+ },
+ "summary": {
+  "test_policy.lua": {
+   "port": true,
+   "upstream": true,
+   "verdict": "pass"
+  },
+  "test_install.lua": {
+   "port": false,
+   "upstream": false,
+   "verdict": "environment (fails on unmodified upstream too)"
+  },
+  "test_images.lua": {
+   "port": true,
+   "upstream": true,
+   "verdict": "pass"
+  },
+  "test_partial_images.lua": {
+   "port": true,
+   "upstream": true,
+   "verdict": "pass"
+  },
+  "test_image_keys.lua": {
+   "port": true,
+   "upstream": true,
+   "verdict": "pass"
+  },
+  "test_v10_images.lua": {
+   "port": true,
+   "upstream": true,
+   "verdict": "pass"
+  },
+  "test_v10_policy.lua": {
+   "port": true,
+   "upstream": true,
+   "verdict": "pass"
+  },
+  "test_material_synthetic.lua": {
+   "port": true,
+   "upstream": true,
+   "verdict": "pass"
+  },
+  "test_prewarm_recency.lua": {
+   "port": true,
+   "upstream": true,
+   "verdict": "pass"
+  },
+  "test_render_refresh.lua": {
+   "port": true,
+   "upstream": true,
+   "verdict": "pass"
+  },
+  "test_current_ui.lua": {
+   "port": true,
+   "upstream": true,
+   "verdict": "pass"
+  },
+  "test_visible_handoff.lua": {
+   "port": true,
+   "upstream": true,
+   "verdict": "pass"
+  },
+  "test_visible_adapter.lua": {
+   "port": true,
+   "upstream": true,
+   "verdict": "pass"
+  },
+  "test_platform_reads.lua": {
+   "port": false,
+   "upstream": false,
+   "verdict": "environment (fails on unmodified upstream too)"
+  },
+  "test_gate_equivalence.lua": {
+   "port": true,
+   "upstream": true,
+   "verdict": "pass"
+  },
+  "test_policy_gate.lua": {
+   "port": true,
+   "upstream": true,
+   "verdict": "pass"
+  },
+  "test_idle_gate.lua": {
+   "port": true,
+   "upstream": true,
+   "verdict": "pass"
+  },
+  "test_lease_table.lua": {
+   "port": true,
+   "upstream": true,
+   "verdict": "pass"
+  },
+  "test_frame_budget.lua": {
+   "port": true,
+   "upstream": true,
+   "verdict": "pass"
+  },
+  "test_ffi_names.lua hostile": {
+   "port": false,
+   "upstream": false,
+   "verdict": "environment (fails on unmodified upstream too)"
+  },
+  "test_ffi_names.lua sdk": {
+   "port": false,
+   "upstream": false,
+   "verdict": "environment (fails on unmodified upstream too)"
+  },
+  "test_ffi_names.lua after": {
+   "port": false,
+   "upstream": false,
+   "verdict": "environment (fails on unmodified upstream too)"
+  }
+ },
+ "retired_paths_absent_from_port_wrapper": true
+}

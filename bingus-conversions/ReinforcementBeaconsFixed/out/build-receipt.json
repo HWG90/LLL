@@ -1,0 +1,355 @@
+{
+ "mod": "Reinforcement Beacons Fixed data-v4.6.1 (Vanilla Plus Megapack option ReinforcementBeaconsFixed)",
+ "upstream": "<workspace>/upstream-bingus/ReinforcementBeaconsFixed",
+ "upstream_tag": "v4.6.1",
+ "lock_revision": "data-v4.6.1",
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "revision": "data-v4.6.1-26088801",
+ "game_sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+ "exe_sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+ "map": {
+  "path": "<workspace>/native-work/megapack-port/ReinforcementBeaconsFixed/MAP.json",
+  "sha256": "ffe4e54a8e2c1ec0c9cce4aceb115730f42633227d47a2a97fccba98b6ddb091",
+  "counts": {
+   "high": 31,
+   "medium": 3
+  }
+ },
+ "replacements": [
+  {
+   "file": "src/spawn_data.lua",
+   "line": 6,
+   "old": "local PLAYER_MANAGER, PENDING = 0x3326468, string.char(2, 0, 0, 0)",
+   "new": "local PLAYER_MANAGER, PENDING = 0x2CE1618, string.char(2, 0, 0, 0)",
+   "map_rows": [
+    "spawn.PLAYER_MANAGER"
+   ]
+  },
+  {
+   "file": "src/spawn_data.lua",
+   "line": 126,
+   "old": "global(reader,0x33266a0,'mission_mode')",
+   "new": "global(reader,0x2ce1850,'mission_mode')",
+   "map_rows": [
+    "spawn.mission_mode"
+   ]
+  },
+  {
+   "file": "src/spawn_data.lua",
+   "line": 161,
+   "old": "global(reader,0x33269c0,'reinforcement_manager')",
+   "new": "global(reader,0x2ce1b78,'reinforcement_manager')",
+   "map_rows": [
+    "spawn.reinforcement_manager"
+   ]
+  },
+  {
+   "file": "src/spawn_data.lua",
+   "line": 164,
+   "old": "global(reader,0x3326b20,'position_manager')",
+   "new": "global(reader,0x2ce1ce0,'position_manager')",
+   "map_rows": [
+    "spawn.position_manager"
+   ]
+  },
+  {
+   "file": "src/spawn_data.lua",
+   "line": 197,
+   "old": "global(reader,0x33266b0,'automatic_anchor_manager')",
+   "new": "global(reader,0x2ce1860,'automatic_anchor_manager')",
+   "map_rows": [
+    "spawn.automatic_anchor_manager"
+   ]
+  },
+  {
+   "file": "src/spawn_data.lua",
+   "line": 211,
+   "old": "-- Current automatic-reinforcement producer ACCC96 / ACCEC5.",
+   "new": "-- Current automatic-reinforcement producer ACCC96 / ACCEC5 (26088801: AE8EF6 / AE9125, type 0x7F).",
+   "map_rows": []
+  },
+  {
+   "file": "src/spawn_data.lua",
+   "line": 212,
+   "old": "if u32(rows,base+12)==0x7C then",
+   "new": "if u32(rows,base+12)==0x7F then",
+   "map_rows": [
+    "spawn.AUTOMATIC_TYPE"
+   ]
+  },
+  {
+   "file": "src/spawn_data.lua",
+   "line": 224,
+   "old": "em+15937304+24*index",
+   "new": "em+15944160+24*index",
+   "map_rows": [
+    "spawn.ent.table"
+   ]
+  },
+  {
+   "file": "src/spawn_data.lua",
+   "line": 226,
+   "old": "pointer(reader,reader.exe+0x1a100f0)",
+   "new": "pointer(reader,reader.exe+0x1ab76f8)",
+   "map_rows": [
+    "spawn.exe.registry"
+   ]
+  },
+  {
+   "file": "src/spawn_data.lua",
+   "line": 234,
+   "old": "reader.exe)==0x2bd870,",
+   "new": "reader.exe)==0x28d3a0,",
+   "map_rows": [
+    "spawn.exe.scene_graph_fn"
+   ]
+  },
+  {
+   "file": "src/spawn_data.lua",
+   "line": 242,
+   "old": "global(reader,0x346bf98,'source_entity_manager')",
+   "new": "global(reader,0x2ce41b8,'source_entity_manager')",
+   "map_rows": [
+    "spawn.source_entity_manager"
+   ]
+  },
+  {
+   "file": "src/spawn_data.lua",
+   "line": 243,
+   "old": "read(reader,em+15871688,20,SOURCE_LOOKUP)",
+   "new": "read(reader,em+15878544,20,SOURCE_LOOKUP)",
+   "map_rows": [
+    "spawn.ent.source_lookup"
+   ]
+  },
+  {
+   "file": "src/spawn_data.lua",
+   "line": 245,
+   "old": "global(reader,0x346d560,'fallback_position')",
+   "new": "global(reader,0x2e287d0,'fallback_position')",
+   "map_rows": [
+    "spawn.fallback_position"
+   ]
+  },
+  {
+   "file": "scripts/archive.py",
+   "line": 12,
+   "old": "EXE_SHA = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+   "new": "EXE_SHA = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'",
+   "map_rows": [
+    "archive.EXE_SHA"
+   ]
+  },
+  {
+   "file": "scripts/archive.py",
+   "line": 13,
+   "old": "GAME_DLL_SHA = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+   "new": "GAME_DLL_SHA = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'",
+   "map_rows": [
+    "archive.GAME_DLL_SHA"
+   ]
+  }
+ ],
+ "wrapper_changes_vs_upstream": [
+  {
+   "line": 674,
+   "what": "replacement",
+   "old": "local PLAYER_MANAGER, PENDING = 0x3326468, string.char(2, 0, 0, 0)",
+   "new": "local PLAYER_MANAGER, PENDING = 0x2CE1618, string.char(2, 0, 0, 0)"
+  },
+  {
+   "line": 794,
+   "what": "replacement",
+   "old": "read(reader,global(reader,0x33266a0,'mission_mode'),0x44,MODE)",
+   "new": "read(reader,global(reader,0x2ce1850,'mission_mode'),0x44,MODE)"
+  },
+  {
+   "line": 829,
+   "what": "replacement",
+   "old": "read(reader,global(reader,0x33269c0,'reinforcement_manager'),0x58,REINFORCEMENT)",
+   "new": "read(reader,global(reader,0x2ce1b78,'reinforcement_manager'),0x58,REINFORCEMENT)"
+  },
+  {
+   "line": 832,
+   "what": "replacement",
+   "old": "if positioned and active>0 then read(reader,global(reader,0x3326b20,'position_manager'),0x60,POSITIONS) end",
+   "new": "if positioned and active>0 then read(reader,global(reader,0x2ce1ce0,'position_manager'),0x60,POSITIONS) end"
+  },
+  {
+   "line": 865,
+   "what": "replacement",
+   "old": "read(reader,global(reader,0x33266b0,'automatic_anchor_manager'),0x80,STRATAGEMS)",
+   "new": "read(reader,global(reader,0x2ce1860,'automatic_anchor_manager'),0x80,STRATAGEMS)"
+  },
+  {
+   "line": 879,
+   "what": "replacement",
+   "old": "-- Current automatic-reinforcement producer ACCC96 / ACCEC5.",
+   "new": "-- Current automatic-reinforcement producer ACCC96 / ACCEC5 (26088801: AE8EF6 / AE9125, type 0x7F)."
+  },
+  {
+   "line": 880,
+   "what": "replacement",
+   "old": "if u32(rows,base+12)==0x7C then",
+   "new": "if u32(rows,base+12)==0x7F then"
+  },
+  {
+   "line": 892,
+   "what": "replacement",
+   "old": "local engine_ref=u32(read(reader,em+15937304+24*index,24,ENTITY),12)",
+   "new": "local engine_ref=u32(read(reader,em+15944160+24*index,24,ENTITY),12)"
+  },
+  {
+   "line": 894,
+   "what": "replacement",
+   "old": "read(reader,pointer(reader,reader.exe+0x1a100f0),0xA8,REGISTRY)",
+   "new": "read(reader,pointer(reader,reader.exe+0x1ab76f8),0xA8,REGISTRY)"
+  },
+  {
+   "line": 902,
+   "what": "replacement",
+   "old": "assert(reader.api.distance(pointer(reader,vtable+0xE8),reader.exe)==0x2bd870, 'Unsupported unit scene-graph layout')",
+   "new": "assert(reader.api.distance(pointer(reader,vtable+0xE8),reader.exe)==0x28d3a0, 'Unsupported unit scene-graph layout')"
+  },
+  {
+   "line": 910,
+   "what": "replacement",
+   "old": "local em=global(reader,0x346bf98,'source_entity_manager')",
+   "new": "local em=global(reader,0x2ce41b8,'source_entity_manager')"
+  },
+  {
+   "line": 911,
+   "what": "replacement",
+   "old": "local index=unit_ref~=0x7fff and lookup(reader,read(reader,em+15871688,20,SOURCE_LOOKUP),0,unit_ref) or nil",
+   "new": "local index=unit_ref~=0x7fff and lookup(reader,read(reader,em+15878544,20,SOURCE_LOOKUP),0,unit_ref) or nil"
+  },
+  {
+   "line": 913,
+   "what": "replacement",
+   "old": "return vector(read(reader,global(reader,0x346d560,'fallback_position')+0x3C,12,COORDINATES),0)",
+   "new": "return vector(read(reader,global(reader,0x2e287d0,'fallback_position')+0x3C,12,COORDINATES),0)"
+  },
+  {
+   "line": 1371,
+   "what": "install_loader call (revision, exe/game SHA-256 pins)"
+  }
+ ],
+ "reproduction": {
+  "fr1_luajit": "<workspace>/native-work/megapack-port/ReinforcementBeaconsFixed/work/luajit-fr1/src/luajit",
+  "fr1_dump_flags": "0",
+  "bytecode_bytes": 28487,
+  "standalone_resource_sha256": "A9913B738610B422383FA842AE537C592A1BF0755459DE65785C3B3B9F201AA4",
+  "lock_resource_sha256": "A9913B738610B422383FA842AE537C592A1BF0755459DE65785C3B3B9F201AA4",
+  "lock_equal": true,
+  "v26_archive": "<hellforge>/mods/Vanilla Plus Megapack - v26/options/ReinforcementBeaconsFixed/9ba626afa44a3aa3.patch_0",
+  "v26_option_resource_sha256": "9BC5F765B201133CD94B97E4F46E63EF9845111FB59749B06D8852E9D9BE2E8A",
+  "v26_equal_to_discoverable_of_reproduced_bytecode": true
+ },
+ "compile_step_captured_not_run": [
+  "<workspace>/native-work/megapack-port/ReinforcementBeaconsFixed/work/upstream/tools/src/LuaJIT/src/luajit.exe",
+  "-bsdW",
+  "<wrapper>",
+  "<output>"
+ ],
+ "resource_format": "pack discoverable_resource() shape (declaration + loadstring of the escaped payload) with the plaintext wrapper as payload instead of non-GC64 bytecode; type-2 envelope",
+ "resource": {
+  "module": "mods/cowboybingus/reinforcement_beacon_fix_data",
+  "hash": "4f1ba22daa1eab5c",
+  "bytes": 272365
+ },
+ "archive_holds_only": [
+  "mods/cowboybingus/reinforcement_beacon_fix_data"
+ ],
+ "outputs": {
+  "4f1ba22daa1eab5c.lua.main": "0a350b39cb40ed3202c70e02984f55c57d0a666851bbf3b889f1b8035cfd3f63",
+  "9ba626afa44a3aa3.patch_0": "4d796745e0dc2b49608ea0ce3d93e7fb787d05cc880d9496a38c30260f65827e",
+  "9ba626afa44a3aa3.patch_0.gpu_resources": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "9ba626afa44a3aa3.patch_0.stream": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "option_entry.lua": "28f56ff5ef8d58ef249dc587597d023f8243d8bcb622fd90f94912d1bfa1f21c",
+  "wrapper.diff": "9c798b7e0a6ed0954347835a16e4ee6295fdab95921b6c395322e325e277f910",
+  "wrapper.lua": "8b88ed8b3a0b9ab92a005bc92d6f0de83f579c7020f7ff10c331ed0a4c1b85a5"
+ },
+ "inputs": {
+  "<workspace>/upstream-bingus/ReinforcementBeaconsFixed/src/archive_loader.lua": "78c78fcfd8dff96561ce3c9c8bca27899821594ff160272307325390e62dc17f",
+  "<workspace>/upstream-bingus/ReinforcementBeaconsFixed/src/bingus_memory.lua": "3973924b1c009cc4e6c863a4eaf87f166899a16ddcb579c3d77ab5465172b416",
+  "<workspace>/upstream-bingus/ReinforcementBeaconsFixed/src/bingus_runtime.lua": "c4450f555f697e583916d18f876412ca96f6963eb1bf4cdad451ebb906c2f988",
+  "<workspace>/upstream-bingus/ReinforcementBeaconsFixed/src/bingus_write.lua": "9a0a217811d109418faebb2af8804bfb8301b0eeeb1e6b5bc020fdacbd596160",
+  "<workspace>/upstream-bingus/ReinforcementBeaconsFixed/src/spawn_data.lua": "fb3f29310198698628786f73a7949eeabc5c8bdef6b48892c25bba35d7d8abe6",
+  "<workspace>/upstream-bingus/ReinforcementBeaconsFixed/src/windows_api.lua": "26be11bf2556bd316f3fe1a18db8c340af9a1dfb0e6d56f19fb246df96e3c5e4",
+  "<workspace>/upstream-bingus/ReinforcementBeaconsFixed/scripts/module.py": "b7f60c1d16a4551a10b89962a3f32511dc4b78260810858363e59697ed1e4140",
+  "<workspace>/upstream-bingus/ReinforcementBeaconsFixed/scripts/archive.py": "25e5a6045ebc429402e11ce642c6cafa7cf4e0c2d866fb08af4a1adc357d504c"
+ },
+ "luajit_check": {
+  "luajit": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit",
+  "string_dump_flags": 8,
+  "gc64_fr2": true,
+  "output": [
+   "compile: ok\tLuaJIT 2.1.ROLLING\t8",
+   "entry run: true",
+   "printed: [ReinforcementBeaconsFixed] data-v4.6.1-26088801: mods/cowboybingus/reinforcement_beacon_fix_data:357: libkernel32.so: cannot open shared object file: No such file or directory",
+   "revision: data-v4.6.1-26088801",
+   "active: false",
+   "status: mods/cowboybingus/reinforcement_beacon_fix_data:357: libkernel32.so: cannot open shared object file: No such file or directory",
+   "update untouched: true"
+  ]
+ },
+ "adapter_text_absent": [
+  "PORT51",
+  "compat51",
+  "require('cffi')",
+  "require(\"cffi\")"
+ ],
+ "tests": {
+  "port": {
+   "passed": false,
+   "runs": [
+    [
+     "luajit tests/test_data.lua src tests/solo_scenarios.lua",
+     0,
+     1
+    ],
+    [
+     "luajit tests/test_idle_equivalence.lua src",
+     0,
+     2
+    ],
+    [
+     "wine luajit.exe tests/test_startup.lua src build",
+     0,
+     7
+    ],
+    [
+     "wine luajit.exe tests/benchmark_synthetic.lua src check",
+     1,
+     1
+    ]
+   ]
+  },
+  "upstream": {
+   "passed": false,
+   "runs": [
+    [
+     "luajit tests/test_data.lua src tests/solo_scenarios.lua",
+     0,
+     1
+    ],
+    [
+     "luajit tests/test_idle_equivalence.lua src",
+     0,
+     2
+    ],
+    [
+     "wine luajit.exe tests/test_startup.lua src build",
+     0,
+     7
+    ],
+    [
+     "wine luajit.exe tests/benchmark_synthetic.lua src check",
+     1,
+     1
+    ]
+   ]
+  }
+ }
+}

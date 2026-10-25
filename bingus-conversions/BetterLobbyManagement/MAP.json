@@ -1,0 +1,4691 @@
+{
+ "mod": "Better Lobby Management v1.2.1",
+ "old_build": 25480438,
+ "new_build": 26088801,
+ "source": "upstream-bingus/BetterLobbyManagement (tag v1.2.1; all 41 locked source hashes match; identical to upstream-bingus/VanillaPlusMegapack/components/BetterLobbyManagement)",
+ "pins": {
+  "game_dll_sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+  "exe_sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE"
+ },
+ "summary": {
+  "high": 118,
+  "medium": 4,
+  "unmapped": 5
+ },
+ "rows_total": 127,
+ "witness_check_failures": [],
+ "rows": [
+  {
+   "id": "G.CONTEXT_PTR",
+   "file": "src/game.lua",
+   "line": 7,
+   "name": "network context (game.dll global)",
+   "kind": "game.dll global",
+   "old": "0x347cef0",
+   "new": "0x2e38228",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated (map_globals.py)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 1136,
+     "sampled": 48,
+     "agreeing": 24,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x4c375b",
+       "new": "0x4ca39b",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2fb978e]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x296de86]"
+      },
+      {
+       "old": "0x60909a",
+       "new": "0x61226a",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2e73e4f]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2825fb7]"
+      },
+      {
+       "old": "0x66ce7d",
+       "new": "0x67697d",
+       "instruction_old": "mov rsi, qword ptr [rip + 0x2e1006c]",
+       "instruction_new": "mov rsi, qword ptr [rip + 0x27c18a4]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "G.CONTEXT_PTR = 0x347cef0",
+    "new_text": "G.CONTEXT_PTR = 0x2e38228"
+   },
+   "live_check": "L2"
+  },
+  {
+   "id": "G.GAME_STATE_PTR",
+   "file": "src/game.lua",
+   "line": 8,
+   "name": "game state object (game.dll global)",
+   "kind": "game.dll global",
+   "old": "0x3326340",
+   "new": "0x2ce1508",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated (map_globals.py)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 2624,
+     "sampled": 48,
+     "agreeing": 4,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x7f724e",
+       "new": "0x803b6e",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2b2f0eb]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x24dd993]"
+      },
+      {
+       "old": "0x8d1cd7",
+       "new": "0x8e2017",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2a54662]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x23ff4ea]"
+      },
+      {
+       "old": "0x11ed0de",
+       "new": "0x107e8fe",
+       "instruction_old": "mov rdi, qword ptr [rip + 0x213925b]",
+       "instruction_new": "mov rdi, qword ptr [rip + 0x1c62c03]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "G.GAME_STATE_PTR = 0x3326340",
+    "new_text": "G.GAME_STATE_PTR = 0x2ce1508"
+   },
+   "live_check": "L2"
+  },
+  {
+   "id": "G.ROSTER_PTR",
+   "file": "src/game.lua",
+   "line": 9,
+   "name": "roster (persona names) (game.dll global)",
+   "kind": "game.dll global",
+   "old": "0x347ced8",
+   "new": "0x2e38210",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated (map_globals.py)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 85,
+     "sampled": 48,
+     "agreeing": 29,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x5bab5d",
+       "new": "0x5c399d",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2ec2374]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x287486c]"
+      },
+      {
+       "old": "0x6067ab",
+       "new": "0x60f97b",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2e76726]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x282888e]"
+      },
+      {
+       "old": "0x607a3f",
+       "new": "0x610c0f",
+       "instruction_old": "mov r8, qword ptr [rip + 0x2e75492]",
+       "instruction_new": "mov r8, qword ptr [rip + 0x28275fa]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "replace": {
+    "old_text": "G.ROSTER_PTR = 0x347ced8",
+    "new_text": "G.ROSTER_PTR = 0x2e38210"
+   },
+   "live_check": "L3"
+  },
+  {
+   "id": "G.ENGINE_API_PTR",
+   "file": "src/game.lua",
+   "line": 10,
+   "name": "engine API tables (ScriptApi) (game.dll global)",
+   "kind": "game.dll global",
+   "old": "0x3326308",
+   "new": "0x2ce14c8",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated (map_globals.py)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 18562,
+     "sampled": 48,
+     "agreeing": 33,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x295f02",
+       "new": "0x18fd32",
+       "instruction_old": "mov rax, qword ptr [rip + 0x30903ff]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2b5178f]"
+      },
+      {
+       "old": "0x65efcb",
+       "new": "0x6687bb",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2cc7336]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2678d06]"
+      },
+      {
+       "old": "0x6b7068",
+       "new": "0x6c16c8",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2c6f298]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x261fdf8]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "replace": {
+    "old_text": "G.ENGINE_API_PTR = 0x3326308",
+    "new_text": "G.ENGINE_API_PTR = 0x2ce14c8"
+   },
+   "live_check": "L1"
+  },
+  {
+   "id": "G.MATCHMAKING_PTR",
+   "file": "src/game.lua",
+   "line": 11,
+   "name": "matchmaking object (game.dll global)",
+   "kind": "game.dll global",
+   "old": "0x347ce80",
+   "new": "0x2e381b8",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated (map_globals.py)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 106,
+     "sampled": 48,
+     "agreeing": 34,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x72a695",
+       "new": "0x735d36",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2d527e4]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x270247b]"
+      },
+      {
+       "old": "0x73838e",
+       "new": "0x743ace",
+       "instruction_old": "mov rdx, qword ptr [rip + 0x2d44aeb]",
+       "instruction_new": "mov rdx, qword ptr [rip + 0x26f46e3]"
+      },
+      {
+       "old": "0x7383cc",
+       "new": "0x743b0c",
+       "instruction_old": "mov rdx, qword ptr [rip + 0x2d44aad]",
+       "instruction_new": "mov rdx, qword ptr [rip + 0x26f46a5]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "replace": {
+    "old_text": "G.MATCHMAKING_PTR = 0x347ce80",
+    "new_text": "G.MATCHMAKING_PTR = 0x2e381b8"
+   },
+   "live_check": "L5"
+  },
+  {
+   "id": "M.MENU_SYSTEM_PTR",
+   "file": "src/menu.lua",
+   "line": 17,
+   "name": "menu system (game.dll global)",
+   "kind": "game.dll global",
+   "old": "0x347ce38",
+   "new": "0x2e38170",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated (map_globals.py)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 336,
+     "sampled": 48,
+     "agreeing": 7,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x6098d0",
+       "new": "0x612aa0",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2e73561]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x28256c9]"
+      },
+      {
+       "old": "0x12ff1d4",
+       "new": "0x1192164",
+       "instruction_old": "mov r8, qword ptr [rip + 0x217dc5d]",
+       "instruction_new": "mov r8, qword ptr [rip + 0x1ca6005]"
+      },
+      {
+       "old": "0x1495322",
+       "new": "0x132d3f2",
+       "instruction_old": "mov rdx, qword ptr [rip + 0x1fe7b0f]",
+       "instruction_new": "mov rdx, qword ptr [rip + 0x1b0ad77]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "M.MENU_SYSTEM_PTR = 0x347ce38",
+    "new_text": "M.MENU_SYSTEM_PTR = 0x2e38170"
+   },
+   "live_check": "L6"
+  },
+  {
+   "id": "M.PRESENTERS_PTR",
+   "file": "src/menu.lua",
+   "line": 59,
+   "name": "presenter manager (game.dll global)",
+   "kind": "game.dll global",
+   "old": "0x347ce28",
+   "new": "0x2e38160",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated (map_globals.py)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 569,
+     "sampled": 48,
+     "agreeing": 17,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x5c08cb",
+       "new": "0x5c970b",
+       "instruction_old": "mov rdx, qword ptr [rip + 0x2ebc556]",
+       "instruction_new": "mov rdx, qword ptr [rip + 0x286ea4e]"
+      },
+      {
+       "old": "0xa610b3",
+       "new": "0xa7ca93",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2a1bd6e]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x23bb6c6]"
+      },
+      {
+       "old": "0xadaf61",
+       "new": "0xaf6cd1",
+       "instruction_old": "mov rax, qword ptr [rip + 0x29a1ec0]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2341488]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "M.PRESENTERS_PTR = 0x347ce28",
+    "new_text": "M.PRESENTERS_PTR = 0x2e38160"
+   },
+   "live_check": "L6"
+  },
+  {
+   "id": "S.CONFIG_PTR_RVA",
+   "file": "src/scanner.lua",
+   "line": 11,
+   "name": "online config (game.dll global)",
+   "kind": "game.dll global",
+   "old": "0x347cee0",
+   "new": "0x2e38218",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated (map_globals.py)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 381,
+     "sampled": 48,
+     "agreeing": 31,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x596f8a",
+       "new": "0x59fb4f",
+       "instruction_old": "mov rbx, qword ptr [rip + 0x2ee5f4f]",
+       "instruction_new": "mov rbx, qword ptr [rip + 0x28986c2]"
+      },
+      {
+       "old": "0x979e38",
+       "new": "0x98b9b8",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2b030a1]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x24ac859]"
+      },
+      {
+       "old": "0xad5a13",
+       "new": "0xaf1b33",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x29a74c6]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x23466de]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "M.CONFIG_PTR_RVA = 0x347cee0",
+    "new_text": "M.CONFIG_PTR_RVA = 0x2e38218"
+   },
+   "live_check": "L5"
+  },
+  {
+   "id": "S.MATCHMAKING_PTR_RVA",
+   "file": "src/scanner.lua",
+   "line": 13,
+   "name": "matchmaking object (game.dll global)",
+   "kind": "game.dll global",
+   "old": "0x347ce80",
+   "new": "0x2e381b8",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated (map_globals.py)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 106,
+     "sampled": 48,
+     "agreeing": 34,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x72a695",
+       "new": "0x735d36",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2d527e4]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x270247b]"
+      },
+      {
+       "old": "0x73838e",
+       "new": "0x743ace",
+       "instruction_old": "mov rdx, qword ptr [rip + 0x2d44aeb]",
+       "instruction_new": "mov rdx, qword ptr [rip + 0x26f46e3]"
+      },
+      {
+       "old": "0x7383cc",
+       "new": "0x743b0c",
+       "instruction_old": "mov rdx, qword ptr [rip + 0x2d44aad]",
+       "instruction_new": "mov rdx, qword ptr [rip + 0x26f46a5]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "M.MATCHMAKING_PTR_RVA = 0x347ce80",
+    "new_text": "M.MATCHMAKING_PTR_RVA = 0x2e381b8"
+   },
+   "live_check": "L5"
+  },
+  {
+   "id": "B.SOS_PTR",
+   "file": "src/sos.lua",
+   "line": 20,
+   "name": "SOS system (SosComponent manager) (game.dll global)",
+   "kind": "game.dll global",
+   "old": "0x3326bf0",
+   "new": "0x2ce1db0",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated (map_globals.py)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 12,
+     "sampled": 12,
+     "agreeing": 8,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x517e13",
+       "new": "0x520593",
+       "instruction_old": "mov rbx, qword ptr [rip + 0x2e0edd6]",
+       "instruction_new": "mov rbx, qword ptr [rip + 0x27c1816]"
+      },
+      {
+       "old": "0x517e83",
+       "new": "0x520603",
+       "instruction_old": "mov rbx, qword ptr [rip + 0x2e0ed66]",
+       "instruction_new": "mov rbx, qword ptr [rip + 0x27c17a6]"
+      },
+      {
+       "old": "0x517f0b",
+       "new": "0x52068b",
+       "instruction_old": "mov rbx, qword ptr [rip + 0x2e0ecde]",
+       "instruction_new": "mov rbx, qword ptr [rip + 0x27c171e]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "B.SOS_PTR = 0x3326bf0",
+    "new_text": "B.SOS_PTR = 0x2ce1db0"
+   },
+   "live_check": "L8"
+  },
+  {
+   "id": "B.PLAYERS_PTR",
+   "file": "src/sos.lua",
+   "line": 36,
+   "name": "per-player records (PlayerHistory) (game.dll global)",
+   "kind": "game.dll global",
+   "old": "0x347ce50",
+   "new": "0x2e38188",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated (map_globals.py)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 149,
+     "sampled": 48,
+     "agreeing": 6,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x8568ba",
+       "new": "0x8639aa",
+       "instruction_old": "mov r8, qword ptr [rip + 0x2c2658f]",
+       "instruction_new": "mov r8, qword ptr [rip + 0x25d47d7]"
+      },
+      {
+       "old": "0x8756e3",
+       "new": "0x882b53",
+       "instruction_old": "mov r10, qword ptr [rip + 0x2c07766]",
+       "instruction_new": "mov r10, qword ptr [rip + 0x25b562e]"
+      },
+      {
+       "old": "0x135c1e6",
+       "new": "0x11f1b96",
+       "instruction_old": "mov r10, qword ptr [rip + 0x2120c63]",
+       "instruction_new": "mov r10, qword ptr [rip + 0x1c465eb]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "B.PLAYERS_PTR = 0x347ce50",
+    "new_text": "B.PLAYERS_PTR = 0x2e38188"
+   },
+   "live_check": "L9"
+  },
+  {
+   "id": "B.STRATAGEMS",
+   "file": "src/sos.lua",
+   "line": 40,
+   "name": "stratagem settings by type (game.dll global)",
+   "kind": "game.dll global",
+   "old": "0x37cb600",
+   "new": "0x31870e0",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated (map_globals.py)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 169,
+     "sampled": 48,
+     "agreeing": 30,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x5979c7",
+       "new": "0x5a0587",
+       "instruction_old": "lea r11, [rip + 0x3233c32]",
+       "instruction_new": "lea r11, [rip + 0x2be6b52]"
+      },
+      {
+       "old": "0x5db927",
+       "new": "0x5e45f7",
+       "instruction_old": "lea rdx, [rip + 0x31efcd2]",
+       "instruction_new": "lea rdx, [rip + 0x2ba2ae2]"
+      },
+      {
+       "old": "0x5ded29",
+       "new": "0x5e8189",
+       "instruction_old": "lea r8, [rip + 0x31ec8d0]",
+       "instruction_new": "lea r8, [rip + 0x2b9ef50]"
+      }
+     ]
+    },
+    {
+     "kind": "live capture",
+     "file": "native-work/evidence/stratagem-settings-26088801.json",
+     "detail": "table read at game.dll+0x31870e0 (0x6ffff39f70e0 with base 0x6ffff0870000); each of the 153 pointers leads to a definition whose +0 is its type"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "replace": {
+    "old_text": "B.STRATAGEMS = 0x37cb600",
+    "new_text": "B.STRATAGEMS = 0x31870e0"
+   },
+   "live_check": "L9"
+  },
+  {
+   "id": "R.CONFIG_PTR",
+   "file": "src/region.lua",
+   "line": 21,
+   "name": "override config (game.dll global)",
+   "kind": "game.dll global",
+   "old": "0x347cdf8",
+   "new": "0x2e38128",
+   "changed": true,
+   "method": "RIP-relative instruction windows migrated (map_globals.py)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 251,
+     "sampled": 48,
+     "agreeing": 32,
+     "disagreeing": 0,
+     "examples": [
+      {
+       "old": "0x63d013",
+       "new": "0x646713",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2e3fdde]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x27f1a0e]"
+      },
+      {
+       "old": "0x997b0d",
+       "new": "0x9a975d",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2ae52e4]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x248e9c4]"
+      },
+      {
+       "old": "0xa54673",
+       "new": "0xa6ee83",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2a2877e]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x23c929e]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "R.CONFIG_PTR = 0x347cdf8",
+    "new_text": "R.CONFIG_PTR = 0x2e38128"
+   },
+   "live_check": "L10"
+  },
+  {
+   "id": "R.CONTINENT_IDS_RVA",
+   "file": "src/region.lua",
+   "line": 36,
+   "name": "continent ids (game.dll .rdata)",
+   "kind": "game.dll data",
+   "old": "0x21d45b0",
+   "new": "0x205d3f0",
+   "changed": true,
+   "method": "the 28 bytes of the 7 ids occur once in the new image",
+   "witnesses": [
+    {
+     "kind": "data search",
+     "bytes": "63bf6190 47449ac5 e9887261 275bab0f 3f1ece29 91bfc7cc 30af44d0",
+     "hits": [
+      "0x205d3f0"
+     ]
+    },
+    {
+     "kind": "code",
+     "detail": "filter_string (0xf25640) indexes a neighbouring rdata table: [rdx+rax*8+0x21d42f0] -> +0x205d130 (both 0x2c0 below the ids)"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "replace": {
+    "old_text": "R.CONTINENT_IDS_RVA = 0x21d45b0",
+    "new_text": "R.CONTINENT_IDS_RVA = 0x205d3f0"
+   },
+   "live_check": "L10"
+  },
+  {
+   "id": "G.MODE",
+   "file": "src/game.lua",
+   "line": 12,
+   "name": "game state -> mode (3 ship, 4 mission)",
+   "kind": "struct field / argument",
+   "old": "0xac21c",
+   "new": "0xac29c",
+   "changed": true,
+   "method": "aligned field pairs; host-left check signature",
+   "witnesses": [
+    {
+     "kind": "aligned functions (map_fields.py)",
+     "path": "SET",
+     "old_disp": "0xac21c",
+     "new": [
+      {
+       "disp": "0xac29c",
+       "count": 45
+      }
+     ],
+     "example": {
+      "old": "0x126fc05",
+      "new": "0x1101915",
+      "old_insn": "cmp dword ptr [rax + 0xac21c], 3",
+      "new_insn": "cmp dword ptr [rax + 0xac29c], 3"
+     }
+    },
+    {
+     "kind": "signature",
+     "signature": "G:host-left check",
+     "old": "0x10834ed",
+     "new": "0xf13d3d",
+     "detail": "cmp [rcx+0xac29c], 3"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "replace": {
+    "old_text": "G.MODE = 0xac21c",
+    "new_text": "G.MODE = 0xac29c"
+   },
+   "live_check": "L2"
+  },
+  {
+   "id": "G.SESSION+LOCAL+HOST",
+   "file": "src/game.lua",
+   "line": 16,
+   "name": "context -> session, local peer, host peer",
+   "kind": "struct field / argument",
+   "old": "0xb390, 0xb398, 0xb3a8",
+   "new": "0xb390, 0xb398, 0xb3a8",
+   "changed": false,
+   "method": "aligned field pairs; SOS off signature",
+   "witnesses": [
+    {
+     "kind": "aligned functions (map_fields.py)",
+     "path": "NC",
+     "old_disp": "0xb390",
+     "new": [
+      {
+       "disp": "0xb390",
+       "count": 2
+      }
+     ],
+     "example": {
+      "old": "0x108fcd1",
+      "new": "0xf20481",
+      "old_insn": "mov r15, qword ptr [r15 + 0xb390]",
+      "new_insn": "mov r15, qword ptr [r15 + 0xb390]"
+     }
+    },
+    {
+     "kind": "aligned functions (map_fields.py)",
+     "path": "NC",
+     "old_disp": "0xb398",
+     "new": [
+      {
+       "disp": "0xb398",
+       "count": 152
+      }
+     ],
+     "example": {
+      "old": "0x6a186f",
+      "new": "0x6aba8f",
+      "old_insn": "mov rcx, qword ptr [rax + 0xb398]",
+      "new_insn": "mov rcx, qword ptr [rax + 0xb398]"
+     }
+    },
+    {
+     "kind": "aligned functions (map_fields.py)",
+     "path": "NC",
+     "old_disp": "0xb3a8",
+     "new": [
+      {
+       "disp": "0xb3a8",
+       "count": 65
+      }
+     ],
+     "example": {
+      "old": "0x6a1863",
+      "new": "0x6aba83",
+      "old_insn": "mov rcx, qword ptr [rax + 0xb3a8]",
+      "new_insn": "mov rcx, qword ptr [rax + 0xb3a8]"
+     }
+    },
+    {
+     "kind": "signature",
+     "signature": "B:deactivate",
+     "old": "0x67aa20",
+     "new": "0x684660",
+     "detail": "host [rdi+0xb3a8] == local [rdi+0xb398], unchanged"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "L2"
+  },
+  {
+   "id": "G.HOST_SYNC+HS",
+   "file": "src/game.lua",
+   "line": 17,
+   "name": "context -> host synchronizer (+24 hosting, +28 step)",
+   "kind": "struct field / argument",
+   "old": "0x159b0 (+24, +28)",
+   "new": "0x159b0 (+24, +28)",
+   "changed": false,
+   "method": "network update signature (lea ctx+0x159b0 -> host sync update); its update aligns 0.997",
+   "witnesses": [
+    {
+     "kind": "signature",
+     "signature": "G:network components",
+     "old": "0x13f7858",
+     "new": "0x128ebe4",
+     "detail": "lea rcx,[rbx+0x159b0]; call host sync update (0xf1abf0)"
+    },
+    {
+     "kind": "function",
+     "old": "0x108a440",
+     "new": "0xf1abf0",
+     "ratio": 0.997,
+     "detail": "cmp [r12+0x18],1 (hosting), [rbx+rdi+0x1c] step, mov [rbx+rdi+0x18],2: unchanged"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "L2"
+  },
+  {
+   "id": "G.CLIENT_SYNC",
+   "file": "src/game.lua",
+   "line": 19,
+   "name": "context -> client synchronizer",
+   "kind": "struct field / argument",
+   "old": "0x162c8",
+   "new": "0x162c8",
+   "changed": false,
+   "method": "network update signature; field pairs",
+   "witnesses": [
+    {
+     "kind": "aligned functions (map_fields.py)",
+     "path": "NC",
+     "old_disp": "0x162c8",
+     "new": [
+      {
+       "disp": "0x162c8",
+       "count": 2
+      }
+     ],
+     "example": {
+      "old": "0xb6733f",
+      "new": "0xb83dde",
+      "old_insn": "lea rcx, [rbx + 0x162c8]",
+      "new_insn": "lea rcx, [rbx + 0x162c8]"
+     }
+    },
+    {
+     "kind": "signature",
+     "signature": "G:network components",
+     "old": "0x13f7858",
+     "new": "0x128ebe4",
+     "detail": "lea rcx,[rbx+0x162c8] unchanged"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "L2"
+  },
+  {
+   "id": "G.CS_PARTY_JOIN",
+   "file": "src/game.lua",
+   "line": 20,
+   "name": "client sync -> party join in progress (byte)",
+   "kind": "struct field / argument",
+   "old": "0x521",
+   "new": "0x529",
+   "changed": true,
+   "method": "party join flag signature",
+   "witnesses": [
+    {
+     "kind": "signature",
+     "signature": "G:party join flag",
+     "old": "0x1082fe3",
+     "new": "0xf13853",
+     "detail": "mov byte [rbx+0x521],1 -> [rbx+0x529]"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "replace": {
+    "old_text": "G.CS_PARTY_JOIN = 0x521",
+    "new_text": "G.CS_PARTY_JOIN = 0x529"
+   },
+   "live_check": "L2"
+  },
+  {
+   "id": "G.JOIN",
+   "file": "src/game.lua",
+   "line": 21,
+   "name": "context -> join component",
+   "kind": "struct field / argument",
+   "old": "0x171c8",
+   "new": "0x171d0",
+   "changed": true,
+   "method": "network update signature; field pairs; start_join call sites",
+   "witnesses": [
+    {
+     "kind": "aligned functions (map_fields.py)",
+     "path": "NC",
+     "old_disp": "0x171c8",
+     "new": [
+      {
+       "disp": "0x171d0",
+       "count": 1
+      }
+     ],
+     "example": {
+      "old": "0x14891b1",
+      "new": "0x1321081",
+      "old_insn": "cmp dword ptr [rcx + 0x171c8], r13d",
+      "new_insn": "cmp dword ptr [rcx + 0x171d0], r13d"
+     }
+    },
+    {
+     "kind": "signature",
+     "signature": "G:network components",
+     "old": "0x13f7858",
+     "new": "0x128ebe4",
+     "detail": "lea rcx,[rbx+0x171c8] -> +0x171d0"
+    },
+    {
+     "kind": "call sites",
+     "detail": "squad quickplay 0x133cfea->0x11d22ee: add rcx,0x171c8 -> 0x171d0 before start_join(..., 2, 0, 5)"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "replace": {
+    "old_text": "G.JOIN = 0x171c8",
+    "new_text": "G.JOIN = 0x171d0"
+   },
+   "live_check": "L2"
+  },
+  {
+   "id": "G.LOBBY",
+   "file": "src/game.lua",
+   "line": 22,
+   "name": "context -> lobby wrapper (engine lobby at +0)",
+   "kind": "struct field / argument",
+   "old": "0x1d470",
+   "new": "0x1d478",
+   "changed": true,
+   "method": "network update, SOS on/off, start_join, host sync update; MYC live L12",
+   "witnesses": [
+    {
+     "kind": "aligned functions (map_fields.py)",
+     "path": "NC",
+     "old_disp": "0x1d470",
+     "new": [
+      {
+       "disp": "0x1d478",
+       "count": 2
+      }
+     ],
+     "example": {
+      "old": "0x195ce4a",
+      "new": "0x17de0ba",
+      "old_insn": "mov rdi, qword ptr [rax + 0x1d470]",
+      "new_insn": "mov rdi, qword ptr [rax + 0x1d478]"
+     }
+    },
+    {
+     "kind": "signature",
+     "signature": "G:network components",
+     "old": "0x13f7858",
+     "new": "0x128ebe4",
+     "detail": "lea rcx,[rbx+0x1d470] -> +0x1d478"
+    },
+    {
+     "kind": "signature",
+     "signature": "B:deactivate",
+     "old": "0x67aa20",
+     "new": "0x684660",
+     "detail": "lea rcx,[rdi+0x1d470] -> +0x1d478 before the key setter"
+    },
+    {
+     "kind": "live",
+     "detail": "myc-port/live/myc_readonly.live.log L12: [NC+0x1D478] -> lobby, PlayFab state 3"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "G.LOBBY = 0x1d470",
+    "new_text": "G.LOBBY = 0x1d478"
+   },
+   "live_check": "L4"
+  },
+  {
+   "id": "G.BROWSER",
+   "file": "src/game.lua",
+   "line": 23,
+   "name": "context -> lobby browser handle",
+   "kind": "struct field / argument",
+   "old": "0x1f028",
+   "new": "0x1f030",
+   "changed": true,
+   "method": "lobby browser signature (add rcx,0x1f028 -> 0x1f030); field pairs",
+   "witnesses": [
+    {
+     "kind": "aligned functions (map_fields.py)",
+     "path": "NC",
+     "old_disp": "0x1f028",
+     "new": [
+      {
+       "disp": "0x1f030",
+       "count": 1
+      }
+     ],
+     "example": {
+      "old": "0x133d191",
+      "new": "0x11d24d1",
+      "old_insn": "mov r14, qword ptr [rax + 0x1f028]",
+      "new_insn": "mov r14, qword ptr [rax + 0x1f030]"
+     }
+    },
+    {
+     "kind": "signature",
+     "signature": "G:lobby browser",
+     "old": "0x133d460",
+     "new": "0x11d27a0",
+     "detail": "add rcx,0x1f028 -> add rcx,0x1f030"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "replace": {
+    "old_text": "G.BROWSER = 0x1f028",
+    "new_text": "G.BROWSER = 0x1f030"
+   },
+   "live_check": "L4"
+  },
+  {
+   "id": "G.PEERS",
+   "file": "src/game.lua",
+   "line": 24,
+   "name": "context -> peer count, 32-byte peer entries, player index +20",
+   "kind": "struct field / argument",
+   "old": "0x16390, 0x16398, 32, 20",
+   "new": "0x16390, 0x16398, 32, 20",
+   "changed": false,
+   "method": "peer list signature unchanged; field pairs",
+   "witnesses": [
+    {
+     "kind": "aligned functions (map_fields.py)",
+     "path": "NC",
+     "old_disp": "0x16390",
+     "new": [
+      {
+       "disp": "0x16390",
+       "count": 21
+      }
+     ],
+     "example": {
+      "old": "0xb67313",
+      "new": "0xb83db2",
+      "old_insn": "cmp dword ptr [rbx + 0x16390], 1",
+      "new_insn": "cmp dword ptr [rbx + 0x16390], 1"
+     }
+    },
+    {
+     "kind": "aligned functions (map_fields.py)",
+     "path": "NC",
+     "old_disp": "0x16398",
+     "new": [
+      {
+       "disp": "0x16398",
+       "count": 12
+      }
+     ],
+     "example": {
+      "old": "0xba58f2",
+      "new": "0xbc3ce2",
+      "old_insn": "lea rcx, [r9 + 0x16398]",
+      "new_insn": "lea rcx, [r9 + 0x16398]"
+     }
+    },
+    {
+     "kind": "signature",
+     "signature": "G:peer list",
+     "old": "0x134fa90",
+     "new": "0x11e5430",
+     "detail": "count +0x16390, shl 5, +0x16398 unchanged"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "L2"
+  },
+  {
+   "id": "G.PLAYFAB",
+   "file": "src/game.lua",
+   "line": 29,
+   "name": "engine lobby +0x10 -> PlayfabLobby (+0x100 members, +0x118 state, +0x120 handle) (exe)",
+   "kind": "struct field / argument",
+   "old": "0x10, 0x100, 0x118, 0x120",
+   "new": "0x10, 0x100, 0x118, 0x120",
+   "changed": false,
+   "method": "exe PlayfabLobby::kick_member signatures unchanged; MYC live L12",
+   "witnesses": [
+    {
+     "kind": "signature",
+     "signature": "G:PlayFab lobby layout",
+     "old": "0x8cdf90",
+     "new": "0x9562e0",
+     "detail": "unchanged"
+    },
+    {
+     "kind": "signature",
+     "signature": "G:PlayFab lobby members",
+     "old": "0x8ce012",
+     "new": "0x956362",
+     "detail": "unchanged"
+    },
+    {
+     "kind": "live",
+     "detail": "MYC L12: state 3, members 1"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "L4"
+  },
+  {
+   "id": "G.LOBBY_API+SLOTS",
+   "file": "src/game.lua",
+   "line": 32,
+   "name": "ScriptApi +0xF8 lobby API table; slots 0x198 clear filters, 0x40 continent",
+   "kind": "struct field / argument",
+   "old": "0xf8, 0x198, 0x40",
+   "new": "0xf8, 0x198, 0x40",
+   "changed": false,
+   "method": "ScriptApi initializer (new exe 0x1c3bce stores 0x28753b0 at ScriptApi+0xF8); table initializers slot by slot",
+   "witnesses": [
+    {
+     "kind": "exe tables",
+     "file": "evidence/exe-slots.json",
+     "detail": "old 92 / new 96 slots; slots 0x8..0xa0 keep their order; 0x198 -> 0x94a5c0 equal body; 0x40 -> 0x948f50 same shape, its object path changed (see sig row)"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "L1"
+  },
+  {
+   "id": "G.PACKAGE_API+SLOTS",
+   "file": "src/game.lua",
+   "line": 112,
+   "name": "ScriptApi +0x10 package API; slots 0x348/0x350",
+   "kind": "struct field / argument",
+   "old": "0x10, 0x348, 0x350",
+   "new": "0x10, 0x348, 0x350",
+   "changed": false,
+   "method": "ScriptApi initializer stores 0x2f4790()=0x2871350 at +0x10; slot functions equal",
+   "witnesses": [
+    {
+     "kind": "exe tables",
+     "file": "evidence/exe-slots.json",
+     "detail": "0x348 -> 0x2f0bc0, 0x350 -> 0x2f0be0: equal bodies (app +0x400 -> +0x3224 flag)"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "L1"
+  },
+  {
+   "id": "G.REQUESTS",
+   "file": "src/game.lua",
+   "line": 35,
+   "name": "matchmaking -> quickplay/scanner request (+4 state)",
+   "kind": "struct field / argument",
+   "old": "0x688, 0x56e0",
+   "new": "0x688, 0x56e0",
+   "changed": false,
+   "method": "request signatures unchanged",
+   "witnesses": [
+    {
+     "kind": "signature",
+     "signature": "G:quickplay request",
+     "old": "0x1337dcc",
+     "new": "0x11cd05c",
+     "detail": "unchanged"
+    },
+    {
+     "kind": "signature",
+     "signature": "G:scanner request",
+     "old": "0x133812a",
+     "new": "0x11cd3ba",
+     "detail": "unchanged"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "L5"
+  },
+  {
+   "id": "G.JOIN_ARGS",
+   "file": "src/game.lua",
+   "line": 40,
+   "name": "start_join type 2, reason 5",
+   "kind": "struct field / argument",
+   "old": "2, 5",
+   "new": "2, 5",
+   "changed": false,
+   "method": "the game's squad quickplay call site",
+   "witnesses": [
+    {
+     "kind": "call site",
+     "old": "0x133cfea",
+     "new": "0x11d22ee",
+     "detail": "lea r8d,[r9+2] / mov [rsp+0x20],5 unchanged"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false
+  },
+  {
+   "id": "G.FILTER_ARGS",
+   "file": "src/game.lua",
+   "line": 41,
+   "name": "lobby search: logical key 3 (host peer id), op 2 (equal)",
+   "kind": "struct field / argument",
+   "old": "3, 2",
+   "new": "3, 2",
+   "changed": false,
+   "method": "filter_string body unchanged; the game's own search builder still passes op 2 (0x11cff7f)",
+   "witnesses": [
+    {
+     "kind": "call site",
+     "old": "0x133acdf",
+     "new": "0x11cff7f",
+     "detail": "mov r9d,2 unchanged"
+    },
+    {
+     "kind": "note",
+     "detail": "that a host publishes its peer id under key 3 was verified live on 25480438; no static witness for the publishing side"
+    }
+   ],
+   "confidence": "medium",
+   "feeds_write": false,
+   "live_check": "promote test"
+  },
+  {
+   "id": "L.INFO",
+   "file": "src/lobby.lua",
+   "line": 36,
+   "name": "browser result buffer 256, connection +72",
+   "kind": "struct field / argument",
+   "old": "256, 72",
+   "new": "256, 72",
+   "changed": false,
+   "method": "browser_result and start_join bodies align 1.000 (same frame, same copies)",
+   "witnesses": [
+    {
+     "kind": "function",
+     "detail": "browser_result 0x1094890->0xf250e0 ratio 1.0; start_join ratio 1.0"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false
+  },
+  {
+   "id": "M.SCREEN+SHOWN",
+   "file": "src/menu.lua",
+   "line": 18,
+   "name": "menu system +200 escape screen; screen +8 shown content",
+   "kind": "struct field / argument",
+   "old": "200, 8",
+   "new": "200, 8",
+   "changed": false,
+   "method": "field pairs MS->0xc8; escape screen update aligned",
+   "witnesses": [
+    {
+     "kind": "aligned functions (map_fields.py)",
+     "path": "MS",
+     "old_disp": "0xc8",
+     "new": [
+      {
+       "disp": "0xc8",
+       "count": 2
+      }
+     ],
+     "example": {
+      "old": "0x13e4dcf",
+      "new": "0x127c05f",
+      "old_insn": "mov rdx, qword ptr [r10 + 0xc8]",
+      "new_insn": "mov rdx, qword ptr [r10 + 0xc8]"
+     }
+    },
+    {
+     "kind": "function",
+     "old": "0x14745e0",
+     "new": "0x130c240",
+     "detail": "mov ecx,[rcx+8] then lea rcx,[rdi+0x44b88] (GAME content), unchanged"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "live_check": "L6"
+  },
+  {
+   "id": "M.GAME_TAB",
+   "file": "src/menu.lua",
+   "line": 21,
+   "name": "GAME content layout: cards 1371024/85552 (+85504 peer, +85512 state), buttons 1714544/14920 (+1928 text), list 1714272, count/types 1789912/1789913, focus 1970000, dialog 1970288, flags 1989648..1989651, hidden 1989808, fade 1989812, panel 1832636, popup +7144, KICK hold +85520",
+   "kind": "struct field / argument",
+   "old": "unchanged values",
+   "new": "unchanged values",
+   "changed": false,
+   "method": "every M.CODE signature aligns with only RIP/branch changes; popup +0x1be8 in the card update; text +0x788 inside the buttons signature",
+   "witnesses": [
+    {
+     "kind": "signature",
+     "signature": "M:GAME tab dispatch",
+     "old": "0x147476e",
+     "new": "0x130c3e6",
+     "detail": "lea rcx,[rdi+0x44b88]"
+    },
+    {
+     "kind": "signature",
+     "signature": "M:GAME tab attach",
+     "old": "0x18fb500",
+     "new": "0x177c6e0",
+     "detail": "+0x1a2970/+0x1a2860/0x3a48"
+    },
+    {
+     "kind": "signature",
+     "signature": "M:GAME tab dialog result",
+     "old": "0x18fac55",
+     "new": "0x177be35",
+     "detail": "+0x1e0f50, +0x1b4fd8/9"
+    },
+    {
+     "kind": "signature",
+     "signature": "M:GAME tab player menu",
+     "old": "0x18fa6b2",
+     "new": "0x177b895",
+     "detail": "0x14e30, +0x14eb90"
+    },
+    {
+     "kind": "signature",
+     "signature": "M:player menu kick hold",
+     "old": "0x18f78b9",
+     "new": "0x17789c9",
+     "detail": "+0x14e10"
+    },
+    {
+     "kind": "signature",
+     "signature": "M:player menu kick",
+     "old": "0x18f7992",
+     "new": "0x1778aa2",
+     "detail": "+0x14e00"
+    },
+    {
+     "kind": "function",
+     "old": "0x18f7110",
+     "new": "0x1778220",
+     "detail": "cmp qword [rcx+0x1be8],0 (popup)"
+    },
+    {
+     "kind": "function",
+     "old": "0x18f7830",
+     "new": "0x1778940",
+     "detail": "KICK: addss [rsi+0x14e10], threshold 3.0f from rdata in both builds"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "live_check": "L6"
+  },
+  {
+   "id": "M.DIALOG_TEXT",
+   "file": "src/menu.lua",
+   "line": 33,
+   "name": "dialog title +1496, body +2192, state +19372",
+   "kind": "struct field / argument",
+   "old": "1496, 2192, 19372",
+   "new": "1496, 2192, 19372",
+   "changed": false,
+   "method": "dialog builders aligned; dialog_setup signature",
+   "witnesses": [
+    {
+     "kind": "function",
+     "old": "0x179ec30",
+     "new": "0x161febe",
+     "detail": "lea rbx,[r14+0x5d8] / [r14+0x890]"
+    },
+    {
+     "kind": "function",
+     "old": "0x17a0a60",
+     "new": "0x1621cee",
+     "detail": "add rcx,0x5d8; lea rdi,[rsi+0x890]"
+    },
+    {
+     "kind": "signature",
+     "signature": "M:dialog_setup",
+     "old": "0x179fdf0",
+     "new": "0x1621080",
+     "detail": "cmp [rcx+0x4bac],0 unchanged"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "L6"
+  },
+  {
+   "id": "M.TEXT_WIDGET",
+   "file": "src/menu.lua",
+   "line": 36,
+   "name": "text widget label +272, kind bits 18-21 (8 wrapped)",
+   "kind": "struct field / argument",
+   "old": "272, 8",
+   "new": "272, 8",
+   "changed": false,
+   "method": "set_label / measure_text signatures",
+   "witnesses": [
+    {
+     "kind": "signature",
+     "signature": "M:set_label",
+     "old": "0x143bf90",
+     "new": "0x12d3ca0",
+     "detail": "cmp [rcx+0x110]"
+    },
+    {
+     "kind": "signature",
+     "signature": "M:measure_text",
+     "old": "0x144e1a0",
+     "new": "0x12e5eb0",
+     "detail": "shr eax,0x12"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false
+  },
+  {
+   "id": "M.WIDGET_GEOMETRY",
+   "file": "src/menu.lua",
+   "line": 38,
+   "name": "widget x +4, width +12 (floats)",
+   "kind": "struct field / argument",
+   "old": "4, 12",
+   "new": "4, 12",
+   "changed": false,
+   "method": "no dedicated witness; only the marquee width is computed from them, with the 388 fallback",
+   "witnesses": [
+    {
+     "kind": "note",
+     "detail": "set_marquee unchanged (+0x2a0 flag, +0x28c width)"
+    }
+   ],
+   "confidence": "medium",
+   "feeds_write": false,
+   "live_check": "L6"
+  },
+  {
+   "id": "M.TEXT_TEMPLATE",
+   "file": "src/menu.lua",
+   "line": 40,
+   "name": "'#COUNT' template id and COUNT key",
+   "kind": "struct field / argument",
+   "old": "0xc67c7faf, 0xab2a7b35",
+   "new": "0xc67c7faf, 0xab2a7b35",
+   "changed": false,
+   "method": "string data, not code (as in the MOM port); 0xab2a7b35 is still loaded as an argument key by game code",
+   "witnesses": [
+    {
+     "kind": "scan",
+     "detail": "mov edx,0xab2a7b35: 11 sites migrate unchanged (0x14627ad -> 0x12fa3dd)"
+    },
+    {
+     "kind": "reference",
+     "detail": "the Mod Options Menu port labels its MODS tab through the same template (native-work/mom-port/NOTES.md, TEXT_TEMPLATE)"
+    }
+   ],
+   "confidence": "medium",
+   "feeds_write": false,
+   "live_check": "L6"
+  },
+  {
+   "id": "M.LABELS",
+   "file": "src/menu.lua",
+   "line": 42,
+   "name": "native button labels, confirm/cancel labels, types 0-4",
+   "kind": "struct field / argument",
+   "old": "unchanged",
+   "new": "unchanged",
+   "changed": false,
+   "method": "GAME tab buttons / dialog / select types signatures",
+   "witnesses": [
+    {
+     "kind": "signature",
+     "signature": "M:GAME tab buttons",
+     "old": "0x18fb4be",
+     "new": "0x177c69e",
+     "detail": "label table unchanged"
+    },
+    {
+     "kind": "signature",
+     "signature": "M:GAME tab dialog",
+     "old": "0x18fae6c",
+     "new": "0x177c04c",
+     "detail": "0xd94b7608, 0x8a36d40a"
+    },
+    {
+     "kind": "signature",
+     "signature": "M:GAME tab select types",
+     "old": "0x18fade7",
+     "new": "0x177bfc7",
+     "detail": "types 0-4"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true
+  },
+  {
+   "id": "M.PRESENTER_CLOSE",
+   "file": "src/menu.lua",
+   "line": 60,
+   "name": "presenter manager +0x4388 Main presenter, +16 pending close",
+   "kind": "struct field / argument",
+   "old": "0x4388, 16",
+   "new": "0x4388, 16",
+   "changed": false,
+   "method": "escape menu close signatures",
+   "witnesses": [
+    {
+     "kind": "signature",
+     "signature": "M:escape menu pending close",
+     "old": "0x18fa53f",
+     "new": "0x177b705",
+     "detail": "mov rax,[rbx+0x4388]; mov byte [rax+0x10],1"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "live_check": "L6"
+  },
+  {
+   "id": "C.CHAT",
+   "file": "src/chat.lua",
+   "line": 22,
+   "name": "context -> text chat; history +0x9590/+0x9594; 512 bytes",
+   "kind": "struct field / argument",
+   "old": "0xc418, 0x9590, 0x9594, 512",
+   "new": "0xc418, 0x9590, 0x9594, 512",
+   "changed": false,
+   "method": "chat box send / chat history signatures; chat send body",
+   "witnesses": [
+    {
+     "kind": "signature",
+     "signature": "C:chat box send",
+     "old": "0x186025d",
+     "new": "0x16e163d",
+     "detail": "add rcx,0xc418"
+    },
+    {
+     "kind": "signature",
+     "signature": "C:chat history",
+     "old": "0x1097a7c",
+     "new": "0xf282cc",
+     "detail": "unchanged"
+    },
+    {
+     "kind": "function",
+     "old": "0x1097560",
+     "new": "0xf27db0",
+     "detail": "cmp rbx,0x200 unchanged (merged live page)"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "L7"
+  },
+  {
+   "id": "C.NEW_HOST",
+   "file": "src/chat.lua",
+   "line": 43,
+   "name": "rpc_from_host_notify_new_host, {type 9, 8 bytes}",
+   "kind": "struct field / argument",
+   "old": "0xb9e77c36, 9, 8, 24/16",
+   "new": "0xb9e77c36, 9, 8, 24/16",
+   "changed": false,
+   "method": "new host notice signature unchanged",
+   "witnesses": [
+    {
+     "kind": "signature",
+     "signature": "C:new host notice",
+     "old": "0x108a2dc",
+     "new": "0xf1aa8c",
+     "detail": "unchanged"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false
+  },
+  {
+   "id": "S.RECHARGE",
+   "file": "src/scanner.lua",
+   "line": 12,
+   "name": "online config -> scanner recharge seconds (int32)",
+   "kind": "struct field / argument",
+   "old": "0x3ce4c",
+   "new": "0x3ceac",
+   "changed": true,
+   "method": "recharge reader signature; every online config field around it moved +0x60",
+   "witnesses": [
+    {
+     "kind": "signature",
+     "signature": "S:recharge reader",
+     "old": "0x1337fa8",
+     "new": "0x11cd238",
+     "detail": "movd xmm0,[rax+0x3ce4c] -> [rax+0x3ceac]"
+    },
+    {
+     "kind": "aligned functions (map_fields.py)",
+     "path": "CFG",
+     "old_disp": "0x3ce68",
+     "new": [
+      {
+       "disp": "0x3cec8",
+       "count": 1
+      }
+     ],
+     "example": {
+      "old": "0x1094149",
+      "new": "0xf24999",
+      "old_insn": "movd xmm0, dword ptr [rax + 0x3ce68]",
+      "new_insn": "movd xmm0, dword ptr [rax + 0x3cec8]"
+     }
+    },
+    {
+     "kind": "aligned functions (map_fields.py)",
+     "path": "CFG",
+     "old_disp": "0x3cdd0",
+     "new": [
+      {
+       "disp": "0x3ce30",
+       "count": 8
+      }
+     ],
+     "example": {
+      "old": "0xfedb34",
+      "new": "0xe7df14",
+      "old_insn": "mov esi, dword ptr [rbx + 0x3cdd0]",
+      "new_insn": "mov esi, dword ptr [rbx + 0x3ce30]"
+     }
+    },
+    {
+     "kind": "aligned functions (map_fields.py)",
+     "path": "CFG",
+     "old_disp": "0x33dd0",
+     "new": [
+      {
+       "disp": "0x33e30",
+       "count": 6
+      }
+     ],
+     "example": {
+      "old": "0xfedef3",
+      "new": "0xe7e2d3",
+      "old_insn": "lea rsi, [rax + 0x33dd0]",
+      "new_insn": "lea rsi, [rax + 0x33e30]"
+     }
+    },
+    {
+     "kind": "signature",
+     "signature": "B:lobby post countdown",
+     "old": "0x109411d",
+     "new": "0xf2496d",
+     "detail": "config +0x3ce68 -> +0x3cec8 (lobby post seconds)"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "M.RECHARGE = 0x3ce4c",
+    "new_text": "M.RECHARGE = 0x3ceac"
+   },
+   "live_check": "L5"
+  },
+  {
+   "id": "S.COUNTDOWN",
+   "file": "src/scanner.lua",
+   "line": 14,
+   "name": "matchmaking -> scanner countdown (float)",
+   "kind": "struct field / argument",
+   "old": "0x10bd74",
+   "new": "0x10bd74",
+   "changed": false,
+   "method": "countdown update / recharge reader signatures; 6 of 6 sites unchanged",
+   "witnesses": [
+    {
+     "kind": "signature",
+     "signature": "S:countdown update",
+     "old": "0x133752e",
+     "new": "0x11cc7be",
+     "detail": "unchanged"
+    },
+    {
+     "kind": "scan",
+     "detail": "disp 0x10bd74: 6 sites, 6 unchanged"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "live_check": "L5"
+  },
+  {
+   "id": "B.SOS_FIELDS",
+   "file": "src/sos.lua",
+   "line": 21,
+   "name": "SOS +8 on byte, +24 enabled beacons",
+   "kind": "struct field / argument",
+   "old": "8, 24",
+   "new": "8, 24",
+   "changed": false,
+   "method": "SOS on/off signatures; re-arm sites",
+   "witnesses": [
+    {
+     "kind": "signature",
+     "signature": "B:SOS re-arm after a leave",
+     "old": "0xb5f2c3",
+     "new": "0xb7bd77",
+     "detail": "cmp [rcx+0x18]; cmp byte [rcx+8]"
+    },
+    {
+     "kind": "signature",
+     "signature": "B:deactivate",
+     "old": "0x67aa20",
+     "new": "0x684660",
+     "detail": "mov byte [rcx+8],0"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "L8"
+  },
+  {
+   "id": "B.PRIVACY",
+   "file": "src/sos.lua",
+   "line": 23,
+   "name": "game state -> privacy setting",
+   "kind": "struct field / argument",
+   "old": "0xac550",
+   "new": "0xac5d0",
+   "changed": true,
+   "method": "SOS off signature; field pairs",
+   "witnesses": [
+    {
+     "kind": "aligned functions (map_fields.py)",
+     "path": "SET",
+     "old_disp": "0xac550",
+     "new": [
+      {
+       "disp": "0xac5d0",
+       "count": 4
+      }
+     ],
+     "example": {
+      "old": "0x195422d",
+      "new": "0x17d545d",
+      "old_insn": "cmp dword ptr [rax + 0xac550], 2",
+      "new_insn": "cmp dword ptr [rax + 0xac5d0], 2"
+     }
+    },
+    {
+     "kind": "signature",
+     "signature": "B:deactivate",
+     "old": "0x67aa20",
+     "new": "0x684660",
+     "detail": "mov r8d,[rax+0xac550] -> [rax+0xac5d0]"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "replace": {
+    "old_text": "B.PRIVACY = 0xac550",
+    "new_text": "B.PRIVACY = 0xac5d0"
+   },
+   "live_check": "L8"
+  },
+  {
+   "id": "B.LOBBY_KEYS",
+   "file": "src/sos.lua",
+   "line": 28,
+   "name": "lobby wrapper key cache +56/257, keys 8 and 19, pending bits +0x20, post countdown +0x1b80",
+   "kind": "struct field / argument",
+   "old": "56, 257, 8, 19, 0x20, 0x1b80",
+   "new": "56, 257, 8, 19, 0x20, 0x1b80",
+   "changed": false,
+   "method": "lobby key setter / post countdown / SOS on-off signatures unchanged",
+   "witnesses": [
+    {
+     "kind": "signature",
+     "signature": "B:lobby key setter",
+     "old": "0x10924e6",
+     "new": "0xf22c96",
+     "detail": "unchanged"
+    },
+    {
+     "kind": "signature",
+     "signature": "B:lobby post countdown",
+     "old": "0x109411d",
+     "new": "0xf2496d",
+     "detail": "+0x1b80 unchanged"
+    },
+    {
+     "kind": "signature",
+     "signature": "B:SOS activate",
+     "old": "0x67a9a0",
+     "new": "0x6845e0",
+     "detail": "mov edx,8 / lea r8d,[rdx-7] / key 0x13"
+    },
+    {
+     "kind": "scan",
+     "detail": "disp 0x1b80: 8 sites unchanged in the lobby code"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "live_check": "L4"
+  },
+  {
+   "id": "B.PLAYERS",
+   "file": "src/sos.lua",
+   "line": 37,
+   "name": "player records: size, count field, 32 records",
+   "kind": "struct field / argument",
+   "old": "0x1690, 0x2d200, 32",
+   "new": "0x16c0, 0x2d800, 32",
+   "changed": true,
+   "method": "player records signature (count and stride both moved); 79 field pairs",
+   "witnesses": [
+    {
+     "kind": "signature",
+     "signature": "B:player records",
+     "old": "0x66f060",
+     "new": "0x678b90",
+     "detail": "mov r8d,[r9+0x2d200] -> 0x2d800; add rdx,0x1690 -> 0x16c0; imul 0x1690 -> 0x16c0"
+    },
+    {
+     "kind": "aligned functions (map_fields.py)",
+     "path": "PL",
+     "old_disp": "0x2d200",
+     "new": [
+      {
+       "disp": "0x2d800",
+       "count": 79
+      }
+     ],
+     "example": {
+      "old": "0xac5704",
+      "new": "0xae1933",
+      "old_insn": "mov edx, dword ptr [rax + 0x2d200]",
+      "new_insn": "mov edx, dword ptr [rax + 0x2d800]"
+     }
+    },
+    {
+     "kind": "arithmetic",
+     "detail": "0x2d800 / 0x16c0 = 32 records"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "B.PLAYER_SIZE, B.PLAYER_COUNT, B.MAX_PLAYERS = 0x1690, 0x2d200, 32",
+    "new_text": "B.PLAYER_SIZE, B.PLAYER_COUNT, B.MAX_PLAYERS = 0x16c0, 0x2d800, 32"
+   },
+   "live_check": "L9"
+  },
+  {
+   "id": "B.SLOTS",
+   "file": "src/sos.lua",
+   "line": 38,
+   "name": "stratagem slots +0x1c0, 48 bytes, count +0x7c0, 16, uses +4",
+   "kind": "struct field / argument",
+   "old": "0x1c0, 0x30, 0x7c0, 16, 4",
+   "new": "0x1c0, 0x30, 0x7c0, 16, 4",
+   "changed": false,
+   "method": "stratagem slots / uses signatures unchanged",
+   "witnesses": [
+    {
+     "kind": "signature",
+     "signature": "B:stratagem slots",
+     "old": "0x66f0f8",
+     "new": "0x678c28",
+     "detail": "+0x788, cmp 0x10, +0x188/+0x18c"
+    },
+    {
+     "kind": "signature",
+     "signature": "B:stratagem uses",
+     "old": "0x66d3d0",
+     "new": "0x676ed0",
+     "detail": "+0x188/+0x18c"
+    },
+    {
+     "kind": "aligned functions (map_fields.py)",
+     "path": "PL",
+     "old_disp": "0x1c0",
+     "new": [
+      {
+       "disp": "0x1c0",
+       "count": 3
+      }
+     ],
+     "example": {
+      "old": "0x6706bf",
+      "new": "0x67a1ef",
+      "old_insn": "lea rcx, [rsi + 0x1c0]",
+      "new_insn": "lea rcx, [rsi + 0x1c0]"
+     }
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "live_check": "L9"
+  },
+  {
+   "id": "B.STRATAGEM_FIELDS",
+   "file": "src/sos.lua",
+   "line": 41,
+   "name": "stratagem settings +0x50 uses per mission, +0x94 shared",
+   "kind": "struct field / argument",
+   "old": "0x50, 0x94",
+   "new": "0x50, 0x94",
+   "changed": false,
+   "method": "stratagem uses signature; live settings capture",
+   "witnesses": [
+    {
+     "kind": "signature",
+     "signature": "B:stratagem uses",
+     "old": "0x66d3d0",
+     "new": "0x676ed0",
+     "detail": "cmp [rax+0x94],0; cmp [rax+0x50],-1"
+    },
+    {
+     "kind": "live capture",
+     "detail": "SOS Beacon (type 149): +0x50 = 1, +0x94 = 0"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "live_check": "L9"
+  },
+  {
+   "id": "B.SOS_STRATAGEM",
+   "file": "src/sos.lua",
+   "line": 42,
+   "name": "SOS Beacon stratagem type",
+   "kind": "game data id",
+   "old": "0x91",
+   "new": "0x95",
+   "changed": true,
+   "method": "availability check aligned (cmp edi,0x91 -> 0x95); live settings capture names type 149 \"MISSIONS. SOS Beacon\"",
+   "witnesses": [
+    {
+     "kind": "function",
+     "old": "0x66c920",
+     "new": "0x676370",
+     "detail": "cmp edi,0x91 -> cmp edi,0x95 (and 0x80 -> 0x83, 0x65 -> 0x66, 0x1c -> 0x1d: the type ids shifted)"
+    },
+    {
+     "kind": "live capture",
+     "file": "native-work/evidence/stratagem-settings-26088801.json",
+     "detail": "type 145 (0x91) is now ORBITAL CONFETTI (+0x50 -1); type 149 (0x95) is MISSIONS. SOS Beacon (nui_stratagem_sos_beacon_name), +0x50 = 1 use, +0x94 = 0 not shared"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "B.SOS_STRATAGEM = 0x91",
+    "new_text": "B.SOS_STRATAGEM = 0x95"
+   },
+   "live_check": "L9"
+  },
+  {
+   "id": "R.TABLES",
+   "file": "src/region.lua",
+   "line": 22,
+   "name": "override config tables +0x12078 / +0xC050, header, entries 48 x 512, checksum +0x6020",
+   "kind": "struct field / argument",
+   "old": "unchanged values",
+   "new": "unchanged values",
+   "changed": false,
+   "method": "override lookup / refresh signatures unchanged; field scans",
+   "witnesses": [
+    {
+     "kind": "signature",
+     "signature": "R:override lookup",
+     "old": "0x12e7990",
+     "new": "0x117a7a0",
+     "detail": "unchanged (0x12078, 0x6028)"
+    },
+    {
+     "kind": "signature",
+     "signature": "R:override refresh",
+     "old": "0x103f61d",
+     "new": "0xecfd0d",
+     "detail": "unchanged"
+    },
+    {
+     "kind": "scan",
+     "detail": "disp 0x12078: 60 sites unchanged; 0xc050: 7; 0x6020: 12"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "live_check": "L10"
+  },
+  {
+   "id": "R.KEYS",
+   "file": "src/region.lua",
+   "line": 33,
+   "name": "pair key words, bool type 7, weight 100.0",
+   "kind": "struct field / argument",
+   "old": "0x673bc524, 0x5df5d36b, 7",
+   "new": null,
+   "changed": false,
+   "method": "only witnessed by the continent filter code, which is encrypted in every capture of build 26088801",
+   "witnesses": [
+    {
+     "kind": "scan",
+     "detail": "mov [rsp+0x20],0x673bc524 still at 0x11cf6f8 (search builder, merged live page); 0x5df5d36b and the flag check sit on page 0x11d0000, encrypted in every capture"
+    }
+   ],
+   "confidence": "unmapped",
+   "feeds_write": true,
+   "live_check": "L11 (page dump)",
+   "note": "blocked until a live page dump: Lobby Region stays disabled"
+  },
+  {
+   "id": "T.GAME",
+   "file": "src/bingus_text.lua",
+   "line": 357,
+   "name": "Text Language: settings object, index, records",
+   "kind": "game.dll global",
+   "old": "settings 0x3326340, index 705500 + 212, table 0x37C5650",
+   "new": "settings 0x2CE1508, index 705628 + 212, table 0x3180DE0",
+   "changed": true,
+   "method": "as myc-port/MAP.json bingus_text.GAME.* (globals by windows; +705712 -> +705840 by scans)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "detail": "0x37c5650 -> 0x3180de0: 19 agreeing (map_globals.py)"
+    },
+    {
+     "kind": "reference",
+     "file": "native-work/myc-port/MAP.json",
+     "rows": [
+      "bingus_text.GAME.settings",
+      "bingus_text.GAME.index",
+      "bingus_text.GAME.table"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "replace": {
+    "old_text": "M.GAME = {settings = 0x3326340, index = 705500 + 212, table = 0x37C5650, count = 15}",
+    "new_text": "M.GAME = {settings = 0x2CE1508, index = 705628 + 212, table = 0x3180DE0, count = 15}"
+   },
+   "live_check": "L3"
+  },
+  {
+   "id": "sig.G.code.network components",
+   "file": "src/game.lua",
+   "line": 70,
+   "name": "G code: network components",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x13f7858",
+    "bytes": "498d9fd01cc901488d8b00b40000e89581efff488d8bb0590100e8c92bc9ff488d8bc8620100e8cdb8c8ff488d8b70d40100e811bfc9ff488d8bc8710100"
+   },
+   "new": {
+    "rva": "0x128ebe4",
+    "bytes": "498d9f2022c901488d8b00b40000e8493cefff488d8bb0590100e8edbfc8ff488d8bc8620100e8b14dc8ff488d8b78d40100e89553c9ff488d8bd0710100"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 10,
+     "ratio": 0.571,
+     "changes": [
+      "disp"
+     ],
+     "explained_by": "JOIN and LOBBY moved +8 (rows G.JOIN, G.LOBBY)",
+     "new_pages": [
+      "0x128e000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.G.code.host-left check",
+   "file": "src/game.lua",
+   "line": 75,
+   "name": "G code: host-left check",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x10834ed",
+    "bytes": "83b91cc20a00030f85c7000000e8d1c32c00488b15ea993f0284db41b90700000041be04000000450f45ce33f68b8238f80100488b8aa8b30000"
+   },
+   "new": {
+    "rva": "0xf13d3d",
+    "bytes": "83b99cc20a00030f85bd000000e831152d00488b15d244f20184db41b90700000041be04000000450f45ce33f68b8240f80100488b8aa8b30000"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 11,
+     "ratio": 0.579,
+     "changes": [
+      "disp"
+     ],
+     "explained_by": "MODE +0x80 (G.MODE); event ring +0x1f838 -> +0x1f840 (not used by the mod)",
+     "new_pages": [
+      "0xf13000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.G.code.peer list",
+   "file": "src/game.lua",
+   "line": 79,
+   "name": "G code: peer list",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x134fa90",
+    "bytes": "48895c2410564883ec2033db488bf1399990630100767748897c24300f1f40008bc348c1e005488bbc3098630100483b"
+   },
+   "new": {
+    "rva": "0x11e5430",
+    "bytes": "48895c2410564883ec2033db488bf1399990630100767748897c24300f1f40008bc348c1e005488bbc3098630100483b"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 13,
+     "ratio": 0.591,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x11e5000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.G.code.quickplay request",
+   "file": "src/game.lua",
+   "line": 83,
+   "name": "G code: quickplay request",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x1337dcc",
+    "bytes": "8b9e8c0600004c8d8688060000"
+   },
+   "new": {
+    "rva": "0x11cd05c",
+    "bytes": "8b9e8c0600004c8d8688060000"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 2,
+     "ratio": 0.222,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x11cd000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.G.code.scanner request",
+   "file": "src/game.lua",
+   "line": 84,
+   "name": "G code: scanner request",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x133812a",
+    "bytes": "8b9ee45600004c8d86e0560000"
+   },
+   "new": {
+    "rva": "0x11cd3ba",
+    "bytes": "8b9ee45600004c8d86e0560000"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 2,
+     "ratio": 0.235,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x11cd000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.G.code.lobby browser",
+   "file": "src/game.lua",
+   "line": 86,
+   "name": "G code: lobby browser",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x133d460",
+    "bytes": "40534883ec40488b0d83fa1302488bda4881c128f00100e8"
+   },
+   "new": {
+    "rva": "0x11d27a0",
+    "bytes": "40534883ec40488b0d7b5ac601488bda4881c130f00100e8"
+   },
+   "changed": true,
+   "method": "whole-function alignment (palign; evidence/resolved.json)",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 6,
+     "ratio": 0.5,
+     "changes": [
+      "imm"
+     ],
+     "explained_by": "G.BROWSER",
+     "new_pages": [
+      "0x11d2000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.G.code.party join flag",
+   "file": "src/game.lua",
+   "line": 89,
+   "name": "G code: party join flag",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x1082fe3",
+    "bytes": "488d83300d0000c6832105000001"
+   },
+   "new": {
+    "rva": "0xf13853",
+    "bytes": "488d83380d0000c6832905000001"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 2,
+     "ratio": 0.211,
+     "changes": [
+      "disp"
+     ],
+     "explained_by": "G.CS_PARTY_JOIN",
+     "new_pages": [
+      "0xf13000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.G.exe_code.PlayFab lobby layout",
+   "file": "src/game.lua",
+   "line": 94,
+   "name": "G exe_code: PlayFab lobby layout",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x8cdf90",
+    "bytes": "488b46188bcf488b0cc8488b59104863831801000083f8030f8551010000498bd6488d0dd8addd00e82337cfff488b8b20010000488d9424d00000004c89bc24d0000000"
+   },
+   "new": {
+    "rva": "0x9562e0",
+    "bytes": "488b46188bcf488b0cc8488b59104863831801000083f8030f8551010000498bd6488d0dd0f3de00e843a7caff488b8b20010000488d9424d00000004c89bc24d0000000"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 13,
+     "ratio": 0.619,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": []
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "image": "exe",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.G.exe_code.PlayFab lobby members",
+   "file": "src/game.lua",
+   "line": 98,
+   "name": "G exe_code: PlayFab lobby members",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x8ce012",
+    "bytes": "8b8b00010000488b9340010000"
+   },
+   "new": {
+    "rva": "0x956362",
+    "bytes": "8b8b00010000488b9340010000"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 2,
+     "ratio": 0.19,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": []
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "image": "exe",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.G.native.browser_busy",
+   "file": "src/game.lua",
+   "line": 54,
+   "name": "G native: browser_busy",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x1094780",
+    "bytes": "4883ec284c8b014d85c0750732c04883c428c3488b05a6262902"
+   },
+   "new": {
+    "rva": "0xf24fd0",
+    "bytes": "4883ec284c8b014d85c0750732c04883c428c3488b052ed0db01"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 8,
+     "ratio": 0.485,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0xf24000:base"
+     ]
+    },
+    {
+     "kind": "whole body",
+     "old": "0x1094780",
+     "new": "0xf24fd0",
+     "ratio": 0.862,
+     "unpaired_old": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.G.native.browser_count",
+   "file": "src/game.lua",
+   "line": 56,
+   "name": "G native: browser_count",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x1094820",
+    "bytes": "4c8b014d85c0750333c0c3488b050e26290280780900"
+   },
+   "new": {
+    "rva": "0xf25070",
+    "bytes": "4c8b014d85c0750333c0c3488b0596cfdb0180780900"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 7,
+     "ratio": 0.5,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0xf25000:base"
+     ]
+    },
+    {
+     "kind": "whole body",
+     "old": "0x1094820",
+     "new": "0xf25070",
+     "ratio": 0.435,
+     "unpaired_old": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.G.native.browser_result",
+   "file": "src/game.lua",
+   "line": 58,
+   "name": "G native: browser_result",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x1094890",
+    "bytes": "4055565741574881ec38020000488b056c775a01"
+   },
+   "new": {
+    "rva": "0xf250e0",
+    "bytes": "4055565741574881ec38020000488b051cff5801"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 6,
+     "ratio": 0.444,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0xf25000:base"
+     ]
+    },
+    {
+     "kind": "whole body",
+     "old": "0x1094890",
+     "new": "0xf250e0",
+     "ratio": 1.0,
+     "unpaired_old": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.G.native.browser_start",
+   "file": "src/game.lua",
+   "line": 52,
+   "name": "G native: browser_start",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x1094710",
+    "bytes": "4c8b114d85d27464488b052127290280780900741c"
+   },
+   "new": {
+    "rva": "0xf24f60",
+    "bytes": "4c8b114d85d27464488b05a9d0db0180780900741c"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 6,
+     "ratio": 0.462,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0xf24000:base"
+     ]
+    },
+    {
+     "kind": "whole body",
+     "old": "0x1094710",
+     "new": "0xf24f60",
+     "ratio": 1.0,
+     "unpaired_old": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.G.native.filter_string",
+   "file": "src/game.lua",
+   "line": 50,
+   "name": "G native: filter_string",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x1094df0",
+    "bytes": "405556574883ec50488b0511725a014833c44889442430"
+   },
+   "new": {
+    "rva": "0xf25640",
+    "bytes": "405556574883ec50488b05c1f958014833c44889442430"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 7,
+     "ratio": 0.5,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0xf25000:base"
+     ]
+    },
+    {
+     "kind": "whole body",
+     "old": "0x1094df0",
+     "new": "0xf25640",
+     "ratio": 0.94,
+     "unpaired_old": 4
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.G.native.is_friend",
+   "file": "src/game.lua",
+   "line": 63,
+   "name": "G native: is_friend",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x13efea0",
+    "bytes": "4883ec58488b059d64f3014c8bc2807828007438"
+   },
+   "new": {
+    "rva": "0x12874b0",
+    "bytes": "4883ec58488b053da0a5014c8bc2807828007438"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 5,
+     "ratio": 0.4,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x1287000:base"
+     ]
+    },
+    {
+     "kind": "whole body",
+     "old": "0x13efea0",
+     "new": "0x12874b0",
+     "ratio": 1.0,
+     "unpaired_old": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.G.native.kick_peer",
+   "file": "src/game.lua",
+   "line": 46,
+   "name": "G native: kick_peer",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x108d130",
+    "bytes": "48895c2408574883ec20488bda488bf94c8bc2488d0d2e631d01"
+   },
+   "new": {
+    "rva": "0xf1d8f0",
+    "bytes": null
+   },
+   "changed": true,
+   "method": "whole-function alignment (palign; evidence/resolved.json)",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 0,
+     "ratio": null,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0xf1d000:encrypted"
+     ]
+    }
+   ],
+   "confidence": "unmapped",
+   "feeds_write": false,
+   "image": "game.dll",
+   "status": "located; bytes encrypted in every capture (needs a live page dump)",
+   "note": "located at 0xf1d8f0, but its page is encrypted in every capture of build 26088801; the port ships bytes = nil (the check cannot pass: a native the release build never calls; it is bound as a stub that refuses) until live/blm_page_dump.lua is run and ingested",
+   "live_check": "L11 (page dump)"
+  },
+  {
+   "id": "sig.G.native.send_kick",
+   "file": "src/game.lua",
+   "line": 61,
+   "name": "G native: send_kick",
+   "kind": "native entry",
+   "old": {
+    "rva": "0xbf3950",
+    "bytes": "488bd14533c9b92d3786f74533c0e9cdaafeff"
+   },
+   "new": {
+    "rva": "0xc12380",
+    "bytes": "488bd14533c9b92d3786f74533c0e93da8feff"
+   },
+   "changed": true,
+   "method": "unique masked match of the signature itself",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 5,
+     "ratio": 0.357,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0xc12000:base"
+     ]
+    },
+    {
+     "kind": "whole body",
+     "old": "0xbf3950",
+     "new": "0xc12380",
+     "ratio": 1.0,
+     "unpaired_old": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.G.native.start_join",
+   "file": "src/game.lua",
+   "line": 48,
+   "name": "G native: start_join",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x108ff40",
+    "bytes": "48895c2420565741564881ec70010000488b05b9c05a01"
+   },
+   "new": {
+    "rva": "0xf206f0",
+    "bytes": "48895c2420565741564881ec70010000488b0509495901"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 6,
+     "ratio": 0.444,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0xf20000:base"
+     ]
+    },
+    {
+     "kind": "whole body",
+     "old": "0x108ff40",
+     "new": "0xf206f0",
+     "ratio": 1.0,
+     "unpaired_old": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.G.engine_slot.clear_filters",
+   "file": "src/game.lua",
+   "line": 103,
+   "name": "G engine_slot: clear_filters",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x8c7620",
+    "bytes": "33c08981b40000008981b8250000c3"
+   },
+   "new": {
+    "rva": "0x94a5c0",
+    "bytes": "33c08981b40000008981b8250000c3"
+   },
+   "changed": true,
+   "method": "table initializer slot (evidence/exe-slots.json)",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 4,
+     "ratio": 0.32,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": []
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "image": "exe",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.G.engine_slot.continent",
+   "file": "src/game.lua",
+   "line": 104,
+   "name": "G engine_slot: continent",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x8c5f20",
+    "bytes": "488b05a184a901488b88d005000033c0488b89a00000004885c9740a4883c1443801480f45c1c3"
+   },
+   "new": {
+    "rva": "0x948f50",
+    "bytes": "488b0571cbab01488b88a800000033c04885c9740a4883c1443801480f45c1c3"
+   },
+   "changed": true,
+   "method": "table initializer slot (evidence/exe-slots.json)",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 10,
+     "ratio": 0.409,
+     "changes": [
+      "disp"
+     ],
+     "explained_by": "engine object path changed: [[g]+0x5d0]+0xa0 -> [g']+0xa8; still the +0x44 two-letter code or null",
+     "new_pages": []
+    },
+    {
+     "kind": "exe table",
+     "detail": "lobby API slot 0x40 (evidence/exe-slots.json); slots 0x8..0xa0 keep their order across the table"
+    }
+   ],
+   "confidence": "medium",
+   "feeds_write": false,
+   "image": "exe",
+   "status": "needs review (alignment gaps)"
+  },
+  {
+   "id": "sig.G.package_slot.pause_unloads",
+   "file": "src/game.lua",
+   "line": 116,
+   "name": "G package_slot: pause_unloads",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x321750",
+    "bytes": "488b05b1ea6e0185c90f95c2488b8800040000889124320000c3"
+   },
+   "new": {
+    "rva": "0x2f0be0",
+    "bytes": "488b05216c7c0185c90f95c2488b8800040000889124320000c3"
+   },
+   "changed": true,
+   "method": "table initializer slot (evidence/exe-slots.json)",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 6,
+     "ratio": 0.444,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": []
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "image": "exe",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.G.package_slot.unload_paused",
+   "file": "src/game.lua",
+   "line": 114,
+   "name": "G package_slot: unload_paused",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x321730",
+    "bytes": "488b05d1ea6e01488b88000400000fb68124320000c3"
+   },
+   "new": {
+    "rva": "0x2f0bc0",
+    "bytes": "488b05416c7c01488b88000400000fb68124320000c3"
+   },
+   "changed": true,
+   "method": "table initializer slot (evidence/exe-slots.json)",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 4,
+     "ratio": 0.348,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": []
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "image": "exe",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.native.add_child",
+   "file": "src/menu.lua",
+   "line": 64,
+   "name": "M native: add_child",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x144c5c0",
+    "bytes": "40534883ec204c8bca488bd9488b91e0"
+   },
+   "new": {
+    "rva": "0x12e42d0",
+    "bytes": "40534883ec204c8bca488bd9488b91e0"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 5,
+     "ratio": 0.345,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x12e4000:base"
+     ]
+    },
+    {
+     "kind": "whole body",
+     "old": "0x144c5c0",
+     "new": "0x12e42d0",
+     "ratio": 0.924,
+     "unpaired_old": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.native.card_state",
+   "file": "src/menu.lua",
+   "line": 89,
+   "name": "M native: card_state",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x18f7e00",
+    "bytes": "48895c242055488bec4883ec40488b05fc41d4004833c448"
+   },
+   "new": {
+    "rva": "0x1778f10",
+    "bytes": "48895c242055488bec4883ec40488b05ecc0d3004833c448"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 7,
+     "ratio": 0.538,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x1778000:base"
+     ]
+    },
+    {
+     "kind": "whole body",
+     "old": "0x18f7e00",
+     "new": "0x1778f10",
+     "ratio": 1.0,
+     "unpaired_old": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.native.clear_args",
+   "file": "src/menu.lua",
+   "line": 73,
+   "name": "M native: clear_args",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x143a0f0",
+    "bytes": "80b95801000000c68158010000000f97"
+   },
+   "new": {
+    "rva": "0x12d1e00",
+    "bytes": "80b95801000000c68158010000000f97"
+   },
+   "changed": true,
+   "method": "unique masked match of the signature itself",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 3,
+     "ratio": 0.222,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x12d1000:base"
+     ]
+    },
+    {
+     "kind": "whole body",
+     "old": "0x143a0f0",
+     "new": "0x12d1e00",
+     "ratio": 1.0,
+     "unpaired_old": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.native.dialog_setup",
+   "file": "src/menu.lua",
+   "line": 79,
+   "name": "M native: dialog_setup",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x179fdf0",
+    "bytes": "40555657488bec4883ec5083b9ac4b000000"
+   },
+   "new": {
+    "rva": "0x1621080",
+    "bytes": "40555657488bec4883ec5083b9ac4b000000"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 6,
+     "ratio": 0.414,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x1621000:base"
+     ]
+    },
+    {
+     "kind": "whole body",
+     "old": "0x179fdf0",
+     "new": "0x1621080",
+     "ratio": 1.0,
+     "unpaired_old": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.native.focus",
+   "file": "src/menu.lua",
+   "line": 87,
+   "name": "M native: focus",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x18fb240",
+    "bytes": "48895c2410574883ec200fb681500f1e00488bf90fb6da3a"
+   },
+   "new": {
+    "rva": "0x177c420",
+    "bytes": "48895c2410574883ec200fb681500f1e00488bf90fb6da3a"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 7,
+     "ratio": 0.467,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x177c000:base"
+     ]
+    },
+    {
+     "kind": "whole body",
+     "old": "0x18fb240",
+     "new": "0x177c420",
+     "ratio": 1.0,
+     "unpaired_old": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.native.measure_text",
+   "file": "src/menu.lua",
+   "line": 75,
+   "name": "M native: measure_text",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x144e1a0",
+    "bytes": "40534883ec70488bd98b098bc1c1e812"
+   },
+   "new": {
+    "rva": "0x12e5eb0",
+    "bytes": "40534883ec70488bd98b098bc1c1e812"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 6,
+     "ratio": 0.48,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x12e5000:base"
+     ]
+    },
+    {
+     "kind": "whole body",
+     "old": "0x144e1a0",
+     "new": "0x12e5eb0",
+     "ratio": 0.94,
+     "unpaired_old": 16
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.native.rebuild",
+   "file": "src/menu.lua",
+   "line": 81,
+   "name": "M native: rebuild",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x18fbf50",
+    "bytes": "48895c2410564883ec2032db488bf13899d84f1b00"
+   },
+   "new": {
+    "rva": "0x177d140",
+    "bytes": "48895c2410564883ec2032db488bf13899d84f1b00"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 6,
+     "ratio": 0.462,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x177d000:base"
+     ]
+    },
+    {
+     "kind": "whole body",
+     "old": "0x18fbf50",
+     "new": "0x177d140",
+     "ratio": 1.0,
+     "unpaired_old": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.native.set_enabled",
+   "file": "src/menu.lua",
+   "line": 77,
+   "name": "M native: set_enabled",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x14508e0",
+    "bytes": "4883ec28448b014c8bd1418bc0458bc8"
+   },
+   "new": {
+    "rva": "0x12e85f0",
+    "bytes": "4883ec28448b014c8bd1418bc0458bc8"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 5,
+     "ratio": 0.333,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x12e8000:base"
+     ]
+    },
+    {
+     "kind": "whole body",
+     "old": "0x14508e0",
+     "new": "0x12e85f0",
+     "ratio": 0.782,
+     "unpaired_old": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.native.set_label",
+   "file": "src/menu.lua",
+   "line": 66,
+   "name": "M native: set_label",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x143bf90",
+    "bytes": "4883ec284c8bd93991100100000f8480"
+   },
+   "new": {
+    "rva": "0x12d3ca0",
+    "bytes": "4883ec284c8bd93991100100000f8480"
+   },
+   "changed": true,
+   "method": "every migrated call site calls it (51 agreeing)",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 4,
+     "ratio": 0.364,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x12d3000:base"
+     ]
+    },
+    {
+     "kind": "whole body",
+     "old": "0x143bf90",
+     "new": "0x12d3ca0",
+     "ratio": 0.812,
+     "unpaired_old": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.native.set_label_wrapped",
+   "file": "src/menu.lua",
+   "line": 69,
+   "name": "M native: set_label_wrapped",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x1441720",
+    "bytes": "4883ec284c8bd93991100100000f8480000000899110010000488b9170020000"
+   },
+   "new": {
+    "rva": "0x12d9430",
+    "bytes": "4883ec284c8bd93991100100000f8480000000899110010000488b9170020000"
+   },
+   "changed": true,
+   "method": "every migrated call site calls it (35 agreeing)",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 6,
+     "ratio": 0.429,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x12d9000:base"
+     ]
+    },
+    {
+     "kind": "whole body",
+     "old": "0x1441720",
+     "new": "0x12d9430",
+     "ratio": 0.796,
+     "unpaired_old": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.native.set_marquee",
+   "file": "src/menu.lua",
+   "line": 84,
+   "name": "M native: set_marquee",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x143c400",
+    "bytes": "4883ec288089a0020000204c8bc9f30f11898c020000"
+   },
+   "new": {
+    "rva": "0x12d4110",
+    "bytes": "4883ec288089a0020000204c8bc9f30f11898c020000"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 4,
+     "ratio": 0.286,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x12d4000:base"
+     ]
+    },
+    {
+     "kind": "whole body",
+     "old": "0x143c400",
+     "new": "0x12d4110",
+     "ratio": 0.898,
+     "unpaired_old": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.native.set_string_arg",
+   "file": "src/menu.lua",
+   "line": 71,
+   "name": "M native: set_string_arg",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x143c950",
+    "bytes": "40534883ec20488bd94881c110010000"
+   },
+   "new": {
+    "rva": "0x12d4660",
+    "bytes": "40534883ec20488bd94881c110010000"
+   },
+   "changed": true,
+   "method": "every migrated call site calls it (44 agreeing)",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 4,
+     "ratio": 0.296,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x12d4000:base"
+     ]
+    },
+    {
+     "kind": "whole body",
+     "old": "0x143c950",
+     "new": "0x12d4660",
+     "ratio": 0.8,
+     "unpaired_old": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.code.GAME tab dispatch",
+   "file": "src/menu.lua",
+   "line": 96,
+   "name": "M code: GAME tab dispatch",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x147476e",
+    "bytes": "488d8f884b0400e8565e4800"
+   },
+   "new": {
+    "rva": "0x130c3e6",
+    "bytes": "488d8f884b0400e89ef34600"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 2,
+     "ratio": 0.2,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x130c000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.code.GAME tab select",
+   "file": "src/menu.lua",
+   "line": 98,
+   "name": "M code: GAME tab select",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x18fad76",
+    "bytes": "83fa040f82a20200008d42fc4889bc24a00000000fb6bc08d94f1b008bd04c69c2483a0000"
+   },
+   "new": {
+    "rva": "0x177bf56",
+    "bytes": "83fa040f82a20200008d42fc4889bc24a00000000fb6bc08d94f1b008bd04c69c2483a0000"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 7,
+     "ratio": 0.519,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x177b000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.code.GAME tab select types",
+   "file": "src/menu.lua",
+   "line": 101,
+   "name": "M code: GAME tab select types",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x18fade7",
+    "bytes": "8bcf4084ff747383e901744783e901743583e901742383f901"
+   },
+   "new": {
+    "rva": "0x177bfc7",
+    "bytes": "8bcf4084ff747383e901744783e901743583e901742383f901"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 10,
+     "ratio": 0.588,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x177b000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.code.GAME tab dialog",
+   "file": "src/menu.lua",
+   "line": 104,
+   "name": "M code: GAME tab dialog",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x18fae6c",
+    "bytes": "c644243000488d8b70101e00c64424280141b908764bd9c74424200ad4368ae8604feaff"
+   },
+   "new": {
+    "rva": "0x177c04c",
+    "bytes": "c644243000488d8b70101e00c64424280141b908764bd9c74424200ad4368ae81050eaff"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 6,
+     "ratio": 0.5,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x177c000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.code.GAME tab dialog result",
+   "file": "src/menu.lua",
+   "line": 108,
+   "name": "M code: GAME tab dialog result",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x18fac55",
+    "bytes": "4438b3135c1e000f84ab0000000fb683500f1e002c043a83d84f1b000f83960000000fb6c00fb68c18d94f1b0085c9747183e902746283e901741583f9017578"
+   },
+   "new": {
+    "rva": "0x177be35",
+    "bytes": "4438b3135c1e000f84ab0000000fb683500f1e002c043a83d84f1b000f83960000000fb6c00fb68c18d94f1b0085c9747183e902746283e901741583f9017578"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 16,
+     "ratio": 0.711,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x177b000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.code.GAME tab buttons",
+   "file": "src/menu.lua",
+   "line": 113,
+   "name": "M code: GAME tab buttons",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x18fb4be",
+    "bytes": "c744242006cfd742c74424247b94e065488da9d94f1b00c7442428e7c71e80488db1f8301a00c744242c63f86f1f33dbc7442430484193cc"
+   },
+   "new": {
+    "rva": "0x177c69e",
+    "bytes": "c744242006cfd742c74424247b94e065488da9d94f1b00c7442428e7c71e80488db1f8301a00c744242c63f86f1f33dbc7442430484193cc"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 8,
+     "ratio": 0.571,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x177c000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.code.GAME tab attach",
+   "file": "src/menu.lua",
+   "line": 116,
+   "name": "M code: GAME tab attach",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x18fb500",
+    "bytes": "0fb687d84f1b003bd80f8d980000004863c3488d9770291a004869c8483a00004803d1488d8f60281a00e89110b5ff"
+   },
+   "new": {
+    "rva": "0x177c6e0",
+    "bytes": "0fb687d84f1b003bd80f8d980000004863c3488d9770291a004869c8483a00004803d1488d8f60281a00e8c17bb6ff"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 9,
+     "ratio": 0.5,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x177c000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.code.GAME tab dialog gate",
+   "file": "src/menu.lua",
+   "line": 120,
+   "name": "M code: GAME tab dialog gate",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x18fa613",
+    "bytes": "80b9b05c1e00000f850607000049897b184881c170101e004d8973204532f64438b3105c1e00"
+   },
+   "new": {
+    "rva": "0x177b7d6",
+    "bytes": "80b9b05c1e00000f852307000049897b184881c170101e004d8973204532f64438b3105c1e00"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 7,
+     "ratio": 0.519,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x177b000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.code.GAME tab fade gate",
+   "file": "src/menu.lua",
+   "line": 124,
+   "name": "M code: GAME tab fade gate",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x18fa5f0",
+    "bytes": "f30f1081b45c1e000f57f60f2ec64d8be14c8bfa488bd90f8a190700000f8513070000"
+   },
+   "new": {
+    "rva": "0x177b7b3",
+    "bytes": "f30f1081b45c1e000f57f60f2ec64d8be14c8bfa488bd90f8a360700000f8530070000"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 8,
+     "ratio": 0.593,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x177b000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.code.GAME tab panel gate",
+   "file": "src/menu.lua",
+   "line": 127,
+   "name": "M code: GAME tab panel gate",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x18fa64c",
+    "bytes": "83bbbcf61b0002745d"
+   },
+   "new": {
+    "rva": "0x177b80f",
+    "bytes": "83bbbcf61b0002747d"
+   },
+   "changed": true,
+   "method": "unique masked match of the signature itself",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 2,
+     "ratio": 0.222,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x177b000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.code.GAME tab player menu",
+   "file": "src/menu.lua",
+   "line": 128,
+   "name": "M code: GAME tab player menu",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x18fa6b2",
+    "bytes": "0fb683500f1e003c040f83f90000004869c8304e010083bc1998391600020f85e40000004881c190eb14004d8bc44803cbe818c9ffff"
+   },
+   "new": {
+    "rva": "0x177b895",
+    "bytes": "0fb683500f1e003c040f83f60000004869c8304e010083bc1998391600020f85e10000004881c190eb14004d8bc44803cbe845c8ffff"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 10,
+     "ratio": 0.588,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x177b000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.code.player menu kick hold",
+   "file": "src/menu.lua",
+   "line": 132,
+   "name": "M code: player menu kick hold",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x18f78b9",
+    "bytes": "f30f5886104e0100"
+   },
+   "new": {
+    "rva": "0x17789c9",
+    "bytes": "f30f5886104e0100"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 1,
+     "ratio": 0.133,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x1778000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.code.player menu kick",
+   "file": "src/menu.lua",
+   "line": 133,
+   "name": "M code: player menu kick",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x18f7992",
+    "bytes": "488b9e004e0100488d1500c39600488b3d4955b801488d0dcaba96004c8bc3e84a09e4ff4533c94533c0488bd3b92d3786f7e8676a2eff4533c9488d8fb0590100488bd3458d4101e8b15779ff"
+   },
+   "new": {
+    "rva": "0x1778aa2",
+    "bytes": "488b9e004e0100488d1558589700488b3d71f76b01488d0d1a5197004c8bc3e86a38e3ff4533c94533c0488bd3b92d3786f7e8f74048ff4533c9488d8fb0590100488bd3458d4101e8614e7aff"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 16,
+     "ratio": 0.667,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x1778000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.code.escape menu close",
+   "file": "src/menu.lua",
+   "line": 138,
+   "name": "M code: escape menu close",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x18fa514",
+    "bytes": "488b1d0d29b8014c8d055af89c004533"
+   },
+   "new": {
+    "rva": "0x177b6da",
+    "bytes": "488b1d7fca6b014c8d0550b29d004533"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 3,
+     "ratio": 0.333,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x177b000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.M.code.escape menu pending close",
+   "file": "src/menu.lua",
+   "line": 139,
+   "name": "M code: escape menu pending close",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x18fa53f",
+    "bytes": "488b83884300004885c07410c6401001"
+   },
+   "new": {
+    "rva": "0x177b705",
+    "bytes": "488b83884300004885c07410c6401001"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 4,
+     "ratio": 0.333,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x177b000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.C.native.send",
+   "file": "src/chat.lua",
+   "line": 23,
+   "name": "C native: send",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x1097560",
+    "bytes": "415641574881ec78040000488b059e4a5a014833c44889842450040000803900"
+   },
+   "new": {
+    "rva": "0xf27db0",
+    "bytes": "415641574881ec78040000488b054ed258014833c44889842450040000803900"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 7,
+     "ratio": 0.5,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0xf27000:merged"
+     ]
+    },
+    {
+     "kind": "whole body",
+     "old": "0x1097560",
+     "new": "0xf27db0",
+     "ratio": 0.938,
+     "unpaired_old": 4
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.C.native.rpc",
+   "file": "src/chat.lua",
+   "line": 26,
+   "name": "C native: rpc",
+   "kind": "native entry",
+   "old": {
+    "rva": "0xbde430",
+    "bytes": "4053555657415641574881ec98000000488b05c9dba5014833c44889"
+   },
+   "new": {
+    "rva": "0xbfcbd0",
+    "bytes": "4053555657415641574881ec98000000488b0529848b014833c44889"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 10,
+     "ratio": 0.588,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0xbfc000:base"
+     ]
+    },
+    {
+     "kind": "whole body",
+     "old": "0xbde430",
+     "new": "0xbfcbd0",
+     "ratio": 0.959,
+     "unpaired_old": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.C.code.chat box send",
+   "file": "src/chat.lua",
+   "line": 30,
+   "name": "C code: chat box send",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x186025d",
+    "bytes": "488b0d8cccc1014c8d87d41600004881c118c40000e8e97283ff"
+   },
+   "new": {
+    "rva": "0x16e163d",
+    "bytes": "488b0de46b75014c8d87d41600004881c118c40000e8596784ff"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 4,
+     "ratio": 0.364,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x16e1000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.C.code.chat message RPC",
+   "file": "src/chat.lua",
+   "line": 33,
+   "name": "C code: chat message RPC",
+   "kind": "code signature",
+   "old": {
+    "rva": "0xbeb103",
+    "bytes": "41b901000000488bd7b98eb8dd9fe81a33ffff"
+   },
+   "new": {
+    "rva": "0xc09ac3",
+    "bytes": null
+   },
+   "changed": true,
+   "method": "unresolved",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 0,
+     "ratio": null,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": []
+    }
+   ],
+   "confidence": "unmapped",
+   "feeds_write": false,
+   "image": "game.dll",
+   "status": "unresolved",
+   "note": "located at 0xc09ac3, but its page is encrypted in every capture of build 26088801; the port ships bytes = nil (the check cannot pass: squad messages stay off; the actions still run) until live/blm_page_dump.lua is run and ingested",
+   "live_check": "L11 (page dump)"
+  },
+  {
+   "id": "sig.C.code.chat history",
+   "file": "src/chat.lua",
+   "line": 35,
+   "name": "C code: chat history",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x1097a7c",
+    "bytes": "8b87949500008b8f90950000"
+   },
+   "new": {
+    "rva": "0xf282cc",
+    "bytes": "8b87949500008b8f90950000"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 2,
+     "ratio": 0.2,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0xf28000:merged"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.C.code.new host notice",
+   "file": "src/chat.lua",
+   "line": 37,
+   "name": "C code: new host notice",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x108a2dc",
+    "bytes": "488d456748895d6741b901000000488945e74c8d45dfc745df0900000048c7c2ffffffffc745e308000000b9367ce7b9e81f41b5ff"
+   },
+   "new": {
+    "rva": "0xf1aa8c",
+    "bytes": "488d456748895d6741b901000000488945e74c8d45dfc745df0900000048c7c2ffffffffc745e308000000b9367ce7b9e80f21ceff"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 10,
+     "ratio": 0.385,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0xf1a000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.S.code.recharge reader",
+   "file": "src/scanner.lua",
+   "line": 29,
+   "name": "S code: recharge reader",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x1337fa8",
+    "bytes": "488b05314f1402458bce660f6e804cce03008b8628a70000c7863cbd100032000000898640f10c008986d8f20c000f5bc0f30f118674bd1000"
+   },
+   "new": {
+    "rva": "0x11cd238",
+    "bytes": "488b05d9afc601458bce660f6e80acce03008b8628a70000c7863cbd100032000000898640f10c008986d8f20c000f5bc0f30f118674bd1000"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 9,
+     "ratio": 0.545,
+     "changes": [
+      "disp"
+     ],
+     "explained_by": "S.RECHARGE",
+     "new_pages": [
+      "0x11cd000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.S.code.countdown update",
+   "file": "src/scanner.lua",
+   "line": 40,
+   "name": "S code: countdown update",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x133752e",
+    "bytes": "f30f108174bd10000f2fc6760cf30f5cc7f30f118174bd1000"
+   },
+   "new": {
+    "rva": "0x11cc7be",
+    "bytes": "f30f108174bd10000f2fc6760cf30f5cc7f30f118174bd1000"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 5,
+     "ratio": 0.435,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x11cc000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.S.code.matchmaking global",
+   "file": "src/scanner.lua",
+   "line": 47,
+   "name": "S code: matchmaking global",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x133e9e0",
+    "bytes": "488b0599e4130288905dbd1000c3"
+   },
+   "new": {
+    "rva": "0x11d3d30",
+    "bytes": "488b058144c60188905dbd1000c3"
+   },
+   "changed": true,
+   "method": "unique masked match of the signature itself",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 3,
+     "ratio": 0.261,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x11d3000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.B.native.deactivate",
+   "file": "src/sos.lua",
+   "line": 46,
+   "name": "B native: deactivate",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x67aa20",
+    "bytes": "48895c2408574883ec20488b3dbf24e002488bd9488b87a8b300004885c0741f483b8798b300007416c641080048c70100000000488b5c24304883c4205fc34533c0488d8f70d40100418d5008e85e7ba100488b05c7b8ca02ba13000000488bcf448b8050c50a00e81352cd00c643080048c70300000000488b5c24304883c4205fc3"
+   },
+   "new": {
+    "rva": "0x684660",
+    "bytes": "48895c2408574883ec20488b3db73b7b02488bd9488b87a8b300004885c0741f483b8798b300007416c641080048c70100000000488b5c24304883c4205fc34533c0488d8f78d40100418d5008e8cee68900488b054fce6502ba13000000488bcf448b80d0c50a00e8730fb600c643080048c70300000000488b5c24304883c4205fc3"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 31,
+     "ratio": 0.805,
+     "changes": [
+      "disp"
+     ],
+     "explained_by": "G.LOBBY, B.PRIVACY",
+     "new_pages": [
+      "0x684000:base"
+     ]
+    },
+    {
+     "kind": "whole body",
+     "old": "0x67aa20",
+     "new": "0x684660",
+     "ratio": 0.816,
+     "unpaired_old": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.B.native.set_key",
+   "file": "src/sos.lua",
+   "line": 53,
+   "name": "B native: set_key",
+   "kind": "native entry",
+   "old": {
+    "rva": "0x10925d0",
+    "bytes": "4c8bdc49895b20574881ecc0000000488b052a9a5a014833c448898424b00000000f57c08bfa0f11442430488bd9458bc80f114424404c8d0523551b01ba800000000f11442450488d4c24300f114424600f11442470410f1143b8410f1143c8410f1143d8e8e6b245ff488d4c243048c7c0ffffffff48ffc0803c010075f7894424204c8d442420488d4424308bd74889442428488bcb0f28442420660f7f442420e859feffff"
+   },
+   "new": {
+    "rva": "0xf22d80",
+    "bytes": "4c8bdc49895b20574881ecc0000000488b057a2259014833c448898424b00000000f57c08bfa0f11442430488bd9458bc80f114424404c8d0547ef1a01ba800000000f11442450488d4c24300f114424600f11442470410f1143b8410f1143c8410f1143d8e8362d5dff488d4c243048c7c0ffffffff48ffc0803c010075f7894424204c8d442420488d4424308bd74889442428488bcb0f28442420660f7f442420e859feffff"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 37,
+     "ratio": 0.796,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0xf22000:base"
+     ]
+    },
+    {
+     "kind": "whole body",
+     "old": "0x10925d0",
+     "new": "0xf22d80",
+     "ratio": 0.822,
+     "unpaired_old": 0
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.B.code.SOS activate",
+   "file": "src/sos.lua",
+   "line": 64,
+   "name": "B code: SOS activate",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x67a9a0",
+    "bytes": "48895c2408574883ec20488b1d3f25e002488bf9488b83a8b300004885c07418483b8398b30000740fc6410801488b5c24304883c4205fc3ba08000000488d8b70d40100448d42f9e8e37ba1004533c0488bcb418d5013e8a452cd00488b0545b9ca02488b5c2430488b481048890fc64708014883c4205fc3"
+   },
+   "new": {
+    "rva": "0x6845e0",
+    "bytes": "48895c2408574883ec20488b1d373c7b02488bf9488b83a8b300004885c07418483b8398b30000740fc6410801488b5c24304883c4205fc3ba08000000488d8b78d40100448d42f9e853e789004533c0488bcb418d5013e80410b600488b05b5ce6502488b5c2430488b481048890fc64708014883c4205fc3"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 31,
+     "ratio": 0.805,
+     "changes": [
+      "disp"
+     ],
+     "explained_by": "G.LOBBY",
+     "new_pages": [
+      "0x684000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.B.code.SOS activation event",
+   "file": "src/sos.lua",
+   "line": 70,
+   "name": "B code: SOS activation event",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x517fd0",
+    "bytes": "803a007422488b0d14ece002488b050d4ff60248c7010000000083b890630100040f82a9291600c3"
+   },
+   "new": {
+    "rva": "0x520750",
+    "bytes": "803a007422488b0d54167c02488b05c57a910248c7010000000083b890630100040f82693e1600c3"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 8,
+     "ratio": 0.485,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x520000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.B.code.SOS re-arm after a leave",
+   "file": "src/sos.lua",
+   "line": 74,
+   "name": "B code: SOS re-arm after a leave",
+   "kind": "code signature",
+   "old": {
+    "rva": "0xb5f2c3",
+    "bytes": "488b0944397918760b443879087505e8c9b6b1ff"
+   },
+   "new": {
+    "rva": "0xb7bd77",
+    "bytes": "488b89a820000044397918760b443879087505e85188b0ff"
+   },
+   "changed": true,
+   "method": "whole-function alignment (palign; evidence/resolved.json)",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 6,
+     "ratio": 0.48,
+     "changes": [
+      "disp"
+     ],
+     "explained_by": "the component registry's layout ([rcx] -> [rcx+0x20a8], SOS type 0x85 -> 0x87); not a mod constant",
+     "new_pages": [
+      "0xb7b000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.B.code.SOS re-arm after a new host",
+   "file": "src/sos.lua",
+   "line": 76,
+   "name": "B code: SOS re-arm after a new host",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x10871f3",
+    "bytes": "488b0944396918760b443869087505e899375fff"
+   },
+   "new": {
+    "rva": "0xf179f7",
+    "bytes": "488b89a820000044396918760b443869087505e8d1cb76ff"
+   },
+   "changed": true,
+   "method": "whole-function alignment (palign; evidence/resolved.json)",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 6,
+     "ratio": 0.545,
+     "changes": [
+      "disp"
+     ],
+     "explained_by": "as the other re-arm site",
+     "new_pages": [
+      "0xf17000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.B.code.lobby key setter",
+   "file": "src/sos.lua",
+   "line": 79,
+   "name": "B code: lobby key setter",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x10924e6",
+    "bytes": "488d59384869c501010000498bf0488bf94803d8418b0085c075043803745c488b4e084c8bc0488bd3e84c38040185c07449488b4720488bcb480fabe848894720488b4718480fabe848894718"
+   },
+   "new": {
+    "rva": "0xf22c96",
+    "bytes": "488d59384869c501010000498bf0488bf94803d8418b0085c075043803745c488b4e084c8bc0488bd3e8bcab030185c07449488b4720488bcb480fabe848894720488b4718480fabe848894718"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 23,
+     "ratio": 0.73,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0xf22000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.B.code.lobby post countdown",
+   "file": "src/sos.lua",
+   "line": 84,
+   "name": "B code: lobby post countdown",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x109411d",
+    "bytes": "f30f1087801b0000488b051c222902f30f5c000f2ff0f30f1187801b00000f93c384db741a488b05978d3e02660f6e8068ce03000f5bc0f30f1187801b0000"
+   },
+   "new": {
+    "rva": "0xf2496d",
+    "bytes": "f30f1087801b0000488b057ccbdb01f30f5c000f2ff0f30f1187801b00000f93c384db741a488b057f38f101660f6e80c8ce03000f5bc0f30f1187801b0000"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 12,
+     "ratio": 0.615,
+     "changes": [
+      "disp"
+     ],
+     "explained_by": "online config +0x60 (not a mod constant)",
+     "new_pages": [
+      "0xf24000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.B.code.stratagem uses",
+   "file": "src/sos.lua",
+   "line": 89,
+   "name": "B code: stratagem uses",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x66d3d0",
+    "bytes": "4883ec28418bc04c8d1522e21503488d0c404803c98b84ca8c010000448b84ca88010000488d1575e0150389442440488bc24585c074044b8b04c283b894000000007446837850ff7440"
+   },
+   "new": {
+    "rva": "0x676ed0",
+    "bytes": "4883ec28418bc04c8d150202b102488d0c404803c98b84ca8c010000448b84ca88010000488d154d00b10289442440488bc24585c074044b8b04c283b894000000007446837850ff7440"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 17,
+     "ratio": 0.667,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x676000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.B.code.player records",
+   "file": "src/sos.lua",
+   "line": 94,
+   "name": "B code: player records",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x66f060",
+    "bytes": "458b8100d202004585c00f8407010000498bd14c3922741fffc14881c290160000413bc872ed488b5c24684883c420415d415c5f5e5dc34c897c24604d8d79388bc14869c8901600004c03f90f84c0000000"
+   },
+   "new": {
+    "rva": "0x678b90",
+    "bytes": "458b8100d802004585c00f8407010000498bd14c3922741fffc14881c2c0160000413bc872ed488b5c24684883c420415d415c5f5e5dc34c897c24604d8d79388bc14869c8c01600004c03f90f84c0000000"
+   },
+   "changed": true,
+   "method": "containing function start + offset (alignment-checked)",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 24,
+     "ratio": 0.8,
+     "changes": [
+      "disp",
+      "imm"
+     ],
+     "explained_by": "B.PLAYERS",
+     "new_pages": [
+      "0x678000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.B.code.stratagem slots",
+   "file": "src/sos.lua",
+   "line": 99,
+   "name": "B code: stratagem slots",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x66f0f8",
+    "bytes": "418bb788070000498bd4488b0def73cb0283fe10410f43f54533c9488d3c7648c1e7044903ff44898788010000e826a4200089878c010000"
+   },
+   "new": {
+    "rva": "0x678c28",
+    "bytes": "418bb788070000498bd4488b0d6f8a660283fe10410f43f54533c9488d3c7648c1e7044903ff44898788010000e886dd200089878c010000"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 12,
+     "ratio": 0.649,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x678000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.R.code.continent filter",
+   "file": "src/region.lua",
+   "line": 42,
+   "name": "R code: continent filter",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x133b1a3",
+    "bytes": "c785c000000024c53b67488d35647fe900c785c40000006bd3f55d4c8d35eb93e90041bc07000000"
+   },
+   "new": {
+    "rva": "0x11d0443",
+    "bytes": null
+   },
+   "changed": true,
+   "method": "unresolved",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 0,
+     "ratio": null,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": []
+    }
+   ],
+   "confidence": "unmapped",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "unresolved",
+   "note": "located at 0x11d0443, but its page is encrypted in every capture of build 26088801; the port ships bytes = nil (the check cannot pass: Lobby Region stays off) until live/blm_page_dump.lua is run and ingested",
+   "live_check": "L11 (page dump)"
+  },
+  {
+   "id": "sig.R.code.continent flag check",
+   "file": "src/region.lua",
+   "line": 46,
+   "name": "R code: continent flag check",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x133b229",
+    "bytes": "488b0dc81b1402418bd7e858c7faff4885c0742183780c07751b443868107515"
+   },
+   "new": {
+    "rva": "0x11d04c9",
+    "bytes": null
+   },
+   "changed": true,
+   "method": "unresolved",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 0,
+     "ratio": null,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": []
+    }
+   ],
+   "confidence": "unmapped",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "unresolved",
+   "note": "located at 0x11d04c9, but its page is encrypted in every capture of build 26088801; the port ships bytes = nil (the check cannot pass: Lobby Region stays off) until live/blm_page_dump.lua is run and ingested",
+   "live_check": "L11 (page dump)"
+  },
+  {
+   "id": "sig.R.code.override lookup",
+   "file": "src/region.lua",
+   "line": 50,
+   "name": "R code: override lookup",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x12e7990",
+    "bytes": "48895c240848896c2410488974241848897c2420415685d24c8bd1b978200100b8286000000f45c1448bf24903c233d2"
+   },
+   "new": {
+    "rva": "0x117a7a0",
+    "bytes": "48895c240848896c2410488974241848897c2420415685d24c8bd1b978200100b8286000000f45c1448bf24903c233d2"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 13,
+     "ratio": 0.542,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0x117a000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "sig.R.code.override refresh",
+   "file": "src/region.lua",
+   "line": 54,
+   "name": "R code: override refresh",
+   "kind": "code signature",
+   "old": {
+    "rva": "0x103f61d",
+    "bytes": "8b8370200100418b8d2060000089442428894c242c3bc1743e418b4514488d8b70c00000898364c00000498d5520418b451841b800600000898368c00000e890920501418b8520600000898370200100"
+   },
+   "new": {
+    "rva": "0xecfd0d",
+    "bytes": "8b8370200100418b8d2060000089442428894c242c3bc1743e418b4514488d8b70c00000898364c00000498d5520418b451841b800600000898368c00000e8f0010501418b8520600000898370200100"
+   },
+   "changed": true,
+   "method": "window at the signature",
+   "witnesses": [
+    {
+     "kind": "alignment",
+     "old_insns": 16,
+     "ratio": 0.696,
+     "changes": [],
+     "explained_by": null,
+     "new_pages": [
+      "0xecf000:base"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "image": "game.dll",
+   "status": "mapped"
+  },
+  {
+   "id": "pin.GAME_DLL_SHA",
+   "file": "scripts/entry.py",
+   "line": 8,
+   "name": "SHA-256 pin",
+   "kind": "pin",
+   "old": "2E2C3B7C\u2026F51E",
+   "new": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "changed": true,
+   "method": "game.dll: capture manifest disk sha256 (native-work/evidence/game-26088801.manifest.json); exe: as supplied in the brief",
+   "witnesses": [],
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "GAME_DLL_SHA = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+    "new_text": "GAME_DLL_SHA = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'"
+   }
+  },
+  {
+   "id": "pin.EXE_SHA",
+   "file": "scripts/entry.py",
+   "line": 7,
+   "name": "SHA-256 pin",
+   "kind": "pin",
+   "old": "F5FEE03D\u20265F06",
+   "new": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "changed": true,
+   "method": "game.dll: capture manifest disk sha256 (native-work/evidence/game-26088801.manifest.json); exe: as supplied in the brief",
+   "witnesses": [],
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "EXE_SHA = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+    "new_text": "EXE_SHA = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'"
+   }
+  }
+ ]
+}

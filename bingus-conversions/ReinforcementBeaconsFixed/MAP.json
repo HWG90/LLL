@@ -1,0 +1,1794 @@
+{
+ "mod": "Reinforcement Beacons Fixed data-v4.6.1 (upstream-bingus/ReinforcementBeaconsFixed, git tag v4.6.1)",
+ "source": {
+  "used": "upstream-bingus/ReinforcementBeaconsFixed",
+  "why": "checkout is at tag v4.6.1 and every file in components.lock.json source_sha256 matches it (and the pinned copy in VanillaPlusMegapack/components/ReinforcementBeaconsFixed, also identical)",
+  "lock_revision": "data-v4.6.1",
+  "module": "mods/cowboybingus/reinforcement_beacon_fix_data"
+ },
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "old_image": "<workspace>/native-work/evidence/game-pre1020.dll",
+ "new_image": "<workspace>/native-work/evidence/game-26088801.dll",
+ "old_exe": "<hellforge>/mods-retired/localappdata-1019/LocalAppData/LinksLinkToMemory/r6_reload_exe_20261017.bin",
+ "new_exe": "<workspace>/native-work/evidence/exe-26088801.bin",
+ "counts": {
+  "high": 31,
+  "medium": 3
+ },
+ "rows_total": 34,
+ "rows_feeding_write": 31,
+ "changed": [
+  "archive.EXE_SHA",
+  "archive.GAME_DLL_SHA",
+  "spawn.PLAYER_MANAGER",
+  "spawn.mission_mode",
+  "spawn.reinforcement_manager",
+  "spawn.position_manager",
+  "spawn.automatic_anchor_manager",
+  "spawn.source_entity_manager",
+  "spawn.fallback_position",
+  "spawn.AUTOMATIC_TYPE",
+  "spawn.ent.source_lookup",
+  "spawn.ent.table",
+  "spawn.exe.registry",
+  "spawn.exe.scene_graph_fn"
+ ],
+ "writes": [
+  {
+   "site": "spawn_data.lua write_xy / write_correction (line 457) and patch.restore (line 579)",
+   "address": "[game.dll+0x2CE1618] + 0x10C",
+   "bytes": 8,
+   "value": "beacon XY (or solo: frozen source XY) as two floats; restore: the original 8 bytes",
+   "rows": [
+    "spawn.PLAYER_MANAGER",
+    "spawn.pm.pending_xy",
+    "spawn.pm.spawn_state",
+    "spawn.PENDING"
+   ]
+  },
+  {
+   "site": "write_correction rollback (line 462)",
+   "address": "same",
+   "bytes": 8,
+   "value": "the original XY, only while [pm+0x2E0] == 2",
+   "rows": [
+    "spawn.pm.spawn_state"
+   ]
+  }
+ ],
+ "not_build_data": [
+  "float/bit decoding constants (lines 32-36)",
+  "lookup index sentinel 0xFFFFFFFF (line 113; witnessed in spawn.lookup.layout)",
+  "windows_api.lua pointer range 0x10000..0x800000000000",
+  "mod policy bounds: 4 players, 128 reinforcements, 512 rows, 262144 entities, 512 m range"
+ ],
+ "witness_check_failures": [],
+ "rows": [
+  {
+   "id": "archive.EXE_SHA",
+   "file": "scripts/archive.py",
+   "line": 12,
+   "symbol": "EXE_SHA",
+   "kind": "SHA-256 pin (archive_loader.lua refuses another build: \"Unsupported game module\" / \"Unsupported executable\")",
+   "old": "F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06",
+   "new": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "method": "SHA-256 of the installed file (read-only), equal to the coordinator hash",
+   "witnesses": [
+    {
+     "file": "<game>/bin/helldivers2.exe",
+     "sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+     "equal": true,
+     "verified": true
+    }
+   ],
+   "agreeing": 1,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L0"
+  },
+  {
+   "id": "archive.GAME_DLL_SHA",
+   "file": "scripts/archive.py",
+   "line": 13,
+   "symbol": "GAME_DLL_SHA",
+   "kind": "SHA-256 pin (archive_loader.lua refuses another build: \"Unsupported game module\" / \"Unsupported executable\")",
+   "old": "2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E",
+   "new": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "method": "SHA-256 of the installed file (read-only), equal to the coordinator hash",
+   "witnesses": [
+    {
+     "file": "<game>/data/game/game.dll",
+     "sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+     "equal": true,
+     "verified": true
+    }
+   ],
+   "agreeing": 1,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L0"
+  },
+  {
+   "id": "spawn.PLAYER_MANAGER",
+   "file": "src/spawn_data.lua",
+   "line": 6,
+   "symbol": "PLAYER_MANAGER",
+   "kind": "game.dll global: player manager global (also the write base)",
+   "old": "0x3326468",
+   "new": "0x2ce1618",
+   "method": "instruction-window witnesses",
+   "witnesses": [
+    {
+     "method": "masked instruction windows at sampled RIP xrefs of the old global (tools/map_globals.py)",
+     "old_sites": 1199,
+     "sampled": 64,
+     "votes": {
+      "0x2ce1618": 47
+     },
+     "exact_window_votes": {
+      "0x2ce1618": 45
+     },
+     "distinct_old_functions": 47,
+     "examples": [
+      {
+       "old_insn_rva": "0x3a4bde",
+       "new_insn_rva": "0x3ab8de",
+       "old_insn": "mov rax, qword ptr [rip + 0x2f81883]",
+       "new_insn": "mov rax, qword ptr [rip + 0x2935d33]",
+       "verified": true
+      },
+      {
+       "old_insn_rva": "0x545204",
+       "new_insn_rva": "0x54e054",
+       "old_insn": "mov rax, qword ptr [rip + 0x2de125d]",
+       "new_insn": "mov rax, qword ptr [rip + 0x27935bd]",
+       "verified": true
+      }
+     ],
+     "verified": true
+    }
+   ],
+   "agreeing": 47,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L1"
+  },
+  {
+   "id": "spawn.mission_mode",
+   "file": "src/spawn_data.lua",
+   "line": 126,
+   "symbol": "global(reader,0x33266a0,'mission_mode')",
+   "kind": "game.dll global: mission mode global",
+   "old": "0x33266a0",
+   "new": "0x2ce1850",
+   "method": "instruction-window witnesses",
+   "witnesses": [
+    {
+     "method": "masked instruction windows at sampled RIP xrefs of the old global (tools/map_globals.py)",
+     "old_sites": 240,
+     "sampled": 64,
+     "votes": {
+      "0x2ce1850": 51
+     },
+     "exact_window_votes": {
+      "0x2ce1850": 46
+     },
+     "distinct_old_functions": 50,
+     "examples": [
+      {
+       "old_insn_rva": "0x38013b",
+       "new_insn_rva": "0x386e3b",
+       "old_insn": "mov rax, qword ptr [rip + 0x2fa655e]",
+       "new_insn": "mov rax, qword ptr [rip + 0x295aa0e]",
+       "verified": true
+      },
+      {
+       "old_insn_rva": "0x461c76",
+       "new_insn_rva": "0x468a96",
+       "old_insn": "mov rax, qword ptr [rip + 0x2ec4a23]",
+       "new_insn": "mov rax, qword ptr [rip + 0x2878db3]",
+       "verified": true
+      }
+     ],
+     "verified": true
+    }
+   ],
+   "agreeing": 51,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L1"
+  },
+  {
+   "id": "spawn.reinforcement_manager",
+   "file": "src/spawn_data.lua",
+   "line": 161,
+   "symbol": "global(reader,0x33269c0,'reinforcement_manager')",
+   "kind": "game.dll global: reinforcement (beacon) component manager global",
+   "old": "0x33269c0",
+   "new": "0x2ce1b78",
+   "method": "instruction-window witnesses",
+   "witnesses": [
+    {
+     "method": "masked instruction windows at sampled RIP xrefs of the old global (tools/map_globals.py)",
+     "old_sites": 24,
+     "sampled": 24,
+     "votes": {
+      "0x2ce1b78": 15,
+      "0x2ce1c60": 1
+     },
+     "exact_window_votes": {
+      "0x2ce1b78": 14
+     },
+     "distinct_old_functions": 15,
+     "examples": [
+      {
+       "old_insn_rva": "0x51a854",
+       "new_insn_rva": "0x522fd4",
+       "old_insn": "mov rsi, qword ptr [rip + 0x2e0c165]",
+       "new_insn": "mov rsi, qword ptr [rip + 0x27beb9d]",
+       "verified": true
+      },
+      {
+       "old_insn_rva": "0x51a99b",
+       "new_insn_rva": "0x52311b",
+       "old_insn": "mov r10, qword ptr [rip + 0x2e0c01e]",
+       "new_insn": "mov r10, qword ptr [rip + 0x27bea56]",
+       "verified": true
+      }
+     ],
+     "verified": true
+    }
+   ],
+   "agreeing": 15,
+   "disagreeing": 1,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L1",
+   "note": "1 masked-window witness(es) disagree; every exact (unmasked) window agrees on 0x2ce1b78"
+  },
+  {
+   "id": "spawn.position_manager",
+   "file": "src/spawn_data.lua",
+   "line": 164,
+   "symbol": "global(reader,0x3326b20,'position_manager')",
+   "kind": "game.dll global: position component manager global",
+   "old": "0x3326b20",
+   "new": "0x2ce1ce0",
+   "method": "instruction-window witnesses",
+   "witnesses": [
+    {
+     "method": "masked instruction windows at sampled RIP xrefs of the old global (tools/map_globals.py)",
+     "old_sites": 29,
+     "sampled": 29,
+     "votes": {
+      "0x2ce1ce0": 19
+     },
+     "exact_window_votes": {
+      "0x2ce1ce0": 19
+     },
+     "distinct_old_functions": 18,
+     "examples": [
+      {
+       "old_insn_rva": "0x52306a",
+       "new_insn_rva": "0x52b7ea",
+       "old_insn": "mov rbx, qword ptr [rip + 0x2e03aaf]",
+       "new_insn": "mov rbx, qword ptr [rip + 0x27b64ef]",
+       "verified": true
+      },
+      {
+       "old_insn_rva": "0x5230ea",
+       "new_insn_rva": "0x52b86a",
+       "old_insn": "mov rbx, qword ptr [rip + 0x2e03a2f]",
+       "new_insn": "mov rbx, qword ptr [rip + 0x27b646f]",
+       "verified": true
+      }
+     ],
+     "verified": true
+    }
+   ],
+   "agreeing": 19,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L1"
+  },
+  {
+   "id": "spawn.automatic_anchor_manager",
+   "file": "src/spawn_data.lua",
+   "line": 197,
+   "symbol": "global(reader,0x33266b0,'automatic_anchor_manager')",
+   "kind": "game.dll global: active stratagem manager global (automatic-reinforcement rows)",
+   "old": "0x33266b0",
+   "new": "0x2ce1860",
+   "method": "instruction-window witnesses",
+   "witnesses": [
+    {
+     "method": "masked instruction windows at sampled RIP xrefs of the old global (tools/map_globals.py)",
+     "old_sites": 43,
+     "sampled": 43,
+     "votes": {
+      "0x2ce1860": 29
+     },
+     "exact_window_votes": {
+      "0x2ce1860": 26
+     },
+     "distinct_old_functions": 29,
+     "examples": [
+      {
+       "old_insn_rva": "0x4dd69d",
+       "new_insn_rva": "0x4e462d",
+       "old_insn": "mov r9, qword ptr [rip + 0x2e4900c]",
+       "new_insn": "mov r9, qword ptr [rip + 0x27fd22c]",
+       "verified": true
+      },
+      {
+       "old_insn_rva": "0x5187a4",
+       "new_insn_rva": "0x520f24",
+       "old_insn": "mov rdi, qword ptr [rip + 0x2e0df05]",
+       "new_insn": "mov rdi, qword ptr [rip + 0x27c0935]",
+       "verified": true
+      }
+     ],
+     "verified": true
+    }
+   ],
+   "agreeing": 29,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L1"
+  },
+  {
+   "id": "spawn.source_entity_manager",
+   "file": "src/spawn_data.lua",
+   "line": 242,
+   "symbol": "global(reader,0x346bf98,'source_entity_manager')",
+   "kind": "game.dll global: entities object global",
+   "old": "0x346bf98",
+   "new": "0x2ce41b8",
+   "method": "instruction-window witnesses",
+   "witnesses": [
+    {
+     "method": "masked instruction windows at sampled RIP xrefs of the old global (tools/map_globals.py)",
+     "old_sites": 1449,
+     "sampled": 64,
+     "votes": {
+      "0x2ce41b8": 42
+     },
+     "exact_window_votes": {
+      "0x2ce41b8": 27
+     },
+     "distinct_old_functions": 42,
+     "examples": [
+      {
+       "old_insn_rva": "0x4536dc",
+       "new_insn_rva": "0x45a4fc",
+       "old_insn": "mov rcx, qword ptr [rip + 0x30188b5]",
+       "new_insn": "mov rcx, qword ptr [rip + 0x2889cb5]",
+       "verified": true
+      },
+      {
+       "old_insn_rva": "0x49c4a1",
+       "new_insn_rva": "0x4a3157",
+       "old_insn": "mov rcx, qword ptr [rip + 0x2fcfaf0]",
+       "new_insn": "mov rcx, qword ptr [rip + 0x284105a]",
+       "verified": true
+      }
+     ],
+     "verified": true
+    }
+   ],
+   "agreeing": 42,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L1"
+  },
+  {
+   "id": "spawn.fallback_position",
+   "file": "src/spawn_data.lua",
+   "line": 245,
+   "symbol": "global(reader,0x346d560,'fallback_position')",
+   "kind": "game.dll global: fallback position object global (AC5BB0 reads +0x3C when the player has no unit)",
+   "old": "0x346d560",
+   "new": "0x2e287d0",
+   "method": "instruction-window witnesses",
+   "witnesses": [
+    {
+     "method": "masked instruction windows at sampled RIP xrefs of the old global (tools/map_globals.py)",
+     "old_sites": 342,
+     "sampled": 64,
+     "votes": {
+      "0x2e287d0": 52
+     },
+     "exact_window_votes": {
+      "0x2e287d0": 44
+     },
+     "distinct_old_functions": 51,
+     "examples": [
+      {
+       "old_insn_rva": "0x4d54d3",
+       "new_insn_rva": "0x4dc493",
+       "old_insn": "mov rax, qword ptr [rip + 0x2f98086]",
+       "new_insn": "mov rax, qword ptr [rip + 0x294c336]",
+       "verified": true
+      },
+      {
+       "old_insn_rva": "0x5bd6f0",
+       "new_insn_rva": "0x5c6530",
+       "old_insn": "mov rax, qword ptr [rip + 0x2eafe68]",
+       "new_insn": "mov rax, qword ptr [rip + 0x2862298]",
+       "verified": true
+      }
+     ],
+     "verified": true
+    }
+   ],
+   "agreeing": 52,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L1"
+  },
+  {
+   "id": "spawn.pm.count+available",
+   "file": "src/spawn_data.lua",
+   "line": 132,
+   "symbol": "u32(PLAYERS,0x84), u32(PLAYERS,0x88)",
+   "kind": "player manager: player count, available-player count",
+   "old": "0x84,0x88",
+   "new": "0x84,0x88",
+   "method": "aligned identical functions",
+   "witnesses": [
+    {
+     "image": "game",
+     "old_insn_rva": "0xac7a0e",
+     "new_insn_rva": "0xae3c2e",
+     "operand": "disp",
+     "old_value": "0x84",
+     "new_value": "0x84",
+     "note": "AC7280",
+     "old_insn": "mov eax, dword ptr [r13 + 0x84]",
+     "new_insn": "mov eax, dword ptr [r13 + 0x84]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0xacc297",
+     "new_insn_rva": "0xae84f7",
+     "operand": "disp",
+     "old_value": "0x84",
+     "new_value": "0x84",
+     "note": "ACBE60",
+     "old_insn": "mov r11d, dword ptr [r14 + 0x84]",
+     "new_insn": "mov r11d, dword ptr [r14 + 0x84]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0xac84ad",
+     "new_insn_rva": "0xae46cd",
+     "operand": "disp",
+     "old_value": "0x88",
+     "new_value": "0x88",
+     "note": "AC83F0",
+     "old_insn": "cmp ebx, dword ptr [rsi + 0x88]",
+     "new_insn": "cmp ebx, dword ptr [rsi + 0x88]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0xaccaeb",
+     "new_insn_rva": "0xae8d4b",
+     "operand": "disp",
+     "old_value": "0x88",
+     "new_value": "0x88",
+     "note": "ACBE60",
+     "old_insn": "cmp dword ptr [r14 + 0x88], 1",
+     "new_insn": "cmp dword ptr [r14 + 0x88], 1",
+     "verified": true
+    }
+   ],
+   "agreeing": 4,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false,
+   "live_check": "L2"
+  },
+  {
+   "id": "spawn.pm.entity",
+   "file": "src/spawn_data.lua",
+   "line": 144,
+   "symbol": "data_pointer(reader,PLAYERS,0xE8)",
+   "kind": "player manager: entity record pointers (8 bytes per player; local player first)",
+   "old": "0xE8",
+   "new": "0xE8",
+   "method": "aligned identical functions",
+   "witnesses": [
+    {
+     "image": "game",
+     "old_insn_rva": "0xacc8d6",
+     "new_insn_rva": "0xae8b36",
+     "operand": "disp",
+     "old_value": "0xe8",
+     "new_value": "0xe8",
+     "note": "ACBE60 local player",
+     "old_insn": "mov rax, qword ptr [r14 + 0xe8]",
+     "new_insn": "mov rax, qword ptr [r14 + 0xe8]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0xac8601",
+     "new_insn_rva": "0xae4821",
+     "operand": "disp",
+     "old_value": "0xe8",
+     "new_value": "0xe8",
+     "note": "AC83F0 indexed rax*8",
+     "old_insn": "mov rcx, qword ptr [rsi + rax*8 + 0xe8]",
+     "new_insn": "mov rcx, qword ptr [rsi + rax*8 + 0xe8]",
+     "verified": true
+    }
+   ],
+   "agreeing": 2,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false,
+   "live_check": "L2"
+  },
+  {
+   "id": "spawn.pm.pending_xy",
+   "file": "src/spawn_data.lua",
+   "line": 147,
+   "symbol": "PLAYERS+0x10C (snapshot.position, original, write address pm+0x10C)",
+   "kind": "player manager: pending spawn XY (8 of 12 bytes) - THE WRITE TARGET",
+   "old": "0x10C",
+   "new": "0x10C",
+   "method": "the game's own store of the beacon position into the pending spawn (AC83F0), aligned identical",
+   "witnesses": [
+    {
+     "image": "game",
+     "old_insn_rva": "0xac84d8",
+     "new_insn_rva": "0xae46f8",
+     "operand": "disp",
+     "old_value": "0x10c",
+     "new_value": "0x10c",
+     "note": "AC83F0 movsd [player+0x10C] (game writes the beacon XY here)",
+     "old_insn": "movsd qword ptr [rcx + 0x10c], xmm0",
+     "new_insn": "movsd qword ptr [rcx + 0x10c], xmm0",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0xac84e0",
+     "new_insn_rva": "0xae4700",
+     "operand": "disp",
+     "old_value": "0x114",
+     "new_value": "0x114",
+     "note": "AC83F0 the Z completes the 12-byte vector",
+     "old_insn": "mov dword ptr [rcx + 0x114], eax",
+     "new_insn": "mov dword ptr [rcx + 0x114], eax",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0xac84cd",
+     "new_insn_rva": "0xae46ed",
+     "operand": "imm",
+     "old_value": "0x70",
+     "new_value": "0x70",
+     "note": "AC83F0 player block stride 0x70 (local player = slot 0)",
+     "old_insn": "imul rcx, rdx, 0x70",
+     "new_insn": "imul rcx, rdx, 0x70",
+     "verified": true
+    }
+   ],
+   "agreeing": 3,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false,
+   "live_check": "L2"
+  },
+  {
+   "id": "spawn.pm.countdown",
+   "file": "src/spawn_data.lua",
+   "line": 151,
+   "symbol": "float(PLAYERS,0x12C)",
+   "kind": "player manager: pending spawn countdown (float)",
+   "old": "0x12C",
+   "new": "0x12C",
+   "method": "aligned identical functions",
+   "witnesses": [
+    {
+     "image": "game",
+     "old_insn_rva": "0xacc966",
+     "new_insn_rva": "0xae8bc6",
+     "operand": "disp",
+     "old_value": "0x12c",
+     "new_value": "0x12c",
+     "note": "ACBE60 read",
+     "old_insn": "movss xmm0, dword ptr [rbx + 0x12c]",
+     "new_insn": "movss xmm0, dword ptr [rbx + 0x12c]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0xacc9e0",
+     "new_insn_rva": "0xae8c40",
+     "operand": "disp",
+     "old_value": "0x12c",
+     "new_value": "0x12c",
+     "note": "ACBE60 store",
+     "old_insn": "movss dword ptr [rbx + 0x12c], xmm1",
+     "new_insn": "movss dword ptr [rbx + 0x12c], xmm1",
+     "verified": true
+    }
+   ],
+   "agreeing": 2,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false,
+   "live_check": "L2"
+  },
+  {
+   "id": "spawn.pm.spawn_state",
+   "file": "src/spawn_data.lua",
+   "line": 146,
+   "symbol": "u32(PLAYERS,0x2E0); state.spawn_address=pm+0x2E0; restore pm+0x2E0",
+   "kind": "player manager: local spawn state (0 none, 1 queued, 2 pending, 3 alive)",
+   "old": "0x2E0",
+   "new": "0x2E0",
+   "method": "aligned identical functions; compared immediates 2 and 3 unchanged",
+   "witnesses": [
+    {
+     "image": "game",
+     "old_insn_rva": "0xacc2f2",
+     "new_insn_rva": "0xae8552",
+     "operand": "disp",
+     "old_value": "0x2e0",
+     "new_value": "0x2e0",
+     "note": "ACBE60",
+     "old_insn": "cmp dword ptr [r14 + 0x2e0], ebx",
+     "new_insn": "cmp dword ptr [r14 + 0x2e0], ebx",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0x6e30e7",
+     "new_insn_rva": "0x6edd97",
+     "operand": "imm",
+     "old_value": "0x2",
+     "new_value": "0x2",
+     "note": "cmp [pm+0x2E0], 2",
+     "old_insn": "cmp dword ptr [rcx + 0x2e0], 2",
+     "new_insn": "cmp dword ptr [rcx + 0x2e0], 2",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0x6e2ed8",
+     "new_insn_rva": "0x6edb88",
+     "operand": "imm",
+     "old_value": "0x3",
+     "new_value": "0x3",
+     "note": "cmp [pm+0x2E0], 3",
+     "old_insn": "cmp dword ptr [rcx + 0x2e0], 3",
+     "new_insn": "cmp dword ptr [rcx + 0x2e0], 3",
+     "verified": true
+    }
+   ],
+   "agreeing": 3,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false,
+   "live_check": "L2"
+  },
+  {
+   "id": "spawn.PENDING",
+   "file": "src/spawn_data.lua",
+   "line": 6,
+   "symbol": "PENDING = string.char(2,0,0,0)",
+   "kind": "spawn state value: pending",
+   "old": "2",
+   "new": "2",
+   "method": "compared immediate unchanged (see spawn.pm.spawn_state)",
+   "witnesses": [
+    {
+     "image": "game",
+     "old_insn_rva": "0x6e30e7",
+     "new_insn_rva": "0x6edd97",
+     "operand": "imm",
+     "old_value": "0x2",
+     "new_value": "0x2",
+     "old_insn": "cmp dword ptr [rcx + 0x2e0], 2",
+     "new_insn": "cmp dword ptr [rcx + 0x2e0], 2",
+     "verified": true
+    }
+   ],
+   "agreeing": 1,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false
+  },
+  {
+   "id": "spawn.pm.unit_ref",
+   "file": "src/spawn_data.lua",
+   "line": 152,
+   "symbol": "u32(PLAYERS,0x3A8)",
+   "kind": "player manager: unit reference (32-byte per-player block)",
+   "old": "0x3A8",
+   "new": "0x3A8",
+   "method": "aligned identical functions (0x606630 reads it for AC5BB0)",
+   "witnesses": [
+    {
+     "image": "game",
+     "old_insn_rva": "0x6066ed",
+     "new_insn_rva": "0x60f8bd",
+     "operand": "disp",
+     "old_value": "0x3a8",
+     "new_value": "0x3a8",
+     "note": "0x606630 [idx*32+pm+0x3A8]",
+     "old_insn": "mov edx, dword ptr [rax + rdx + 0x3a8]",
+     "new_insn": "mov edx, dword ptr [rax + rdx + 0x3a8]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0x6066e6",
+     "new_insn_rva": "0x60f8b6",
+     "operand": "imm",
+     "old_value": "0x5",
+     "new_value": "0x5",
+     "note": "shl 5: 32-byte stride",
+     "old_insn": "shl rax, 5",
+     "new_insn": "shl rax, 5",
+     "verified": true
+    }
+   ],
+   "agreeing": 2,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false,
+   "live_check": "L2"
+  },
+  {
+   "id": "spawn.pm.use_bit",
+   "file": "src/spawn_data.lua",
+   "line": 146,
+   "symbol": "u32(PLAYERS,0x3B4)",
+   "kind": "player manager: the beacon use-bit index of the local player",
+   "old": "0x3B4",
+   "new": "0x3B4",
+   "method": "aligned identical functions",
+   "witnesses": [
+    {
+     "image": "game",
+     "old_insn_rva": "0xac8501",
+     "new_insn_rva": "0xae4721",
+     "operand": "disp",
+     "old_value": "0x3b4",
+     "new_value": "0x3b4",
+     "note": "AC83F0",
+     "old_insn": "mov eax, dword ptr [rdx + rsi + 0x3b4]",
+     "new_insn": "mov eax, dword ptr [rdx + rsi + 0x3b4]",
+     "verified": true
+    }
+   ],
+   "agreeing": 1,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false,
+   "live_check": "L2"
+  },
+  {
+   "id": "spawn.read.PLAYERS",
+   "file": "src/spawn_data.lua",
+   "line": 14,
+   "symbol": "buffer(0x440); read(reader,pm,0x440,PLAYERS)",
+   "kind": "read size of the player manager block",
+   "old": "0x440",
+   "new": "0x440",
+   "method": "every field read inside it is unchanged; the furthest per-player block field witnessed ends at 0x428 (0x3A8 + 4 x 0x20); the object extent itself is not witnessed",
+   "witnesses": [
+    {
+     "image": "game",
+     "old_insn_rva": "0x6066ed",
+     "new_insn_rva": "0x60f8bd",
+     "operand": "disp",
+     "old_value": "0x3a8",
+     "new_value": "0x3a8",
+     "old_insn": "mov edx, dword ptr [rax + rdx + 0x3a8]",
+     "new_insn": "mov edx, dword ptr [rax + rdx + 0x3a8]",
+     "verified": true
+    }
+   ],
+   "agreeing": 1,
+   "disagreeing": 0,
+   "confidence": "medium",
+   "feeds_write": false,
+   "changed": false,
+   "live_check": "L2"
+  },
+  {
+   "id": "spawn.entity.id+owned",
+   "file": "src/spawn_data.lua",
+   "line": 145,
+   "symbol": "u32(ENTITY,8), ENTITY[20] bit 0",
+   "kind": "entity record: id at +8, flags byte +0x14 bit 0 (owned on this machine); 24-byte read",
+   "old": "8,0x14",
+   "new": "8,0x14",
+   "method": "aligned identical functions",
+   "witnesses": [
+    {
+     "image": "game",
+     "old_insn_rva": "0x605633",
+     "new_insn_rva": "0x60e803",
+     "operand": "disp",
+     "old_value": "0x8",
+     "new_value": "0x8",
+     "note": "player entity ->+8",
+     "old_insn": "cmp dword ptr [rdx + 8], ecx",
+     "new_insn": "cmp dword ptr [rdx + 8], ecx",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0xacc8dd",
+     "new_insn_rva": "0xae8b3d",
+     "operand": "disp",
+     "old_value": "0x14",
+     "new_value": "0x14",
+     "note": "ACBE60 test byte [ent+0x14],1 (local player)",
+     "old_insn": "test byte ptr [rax + 0x14], 1",
+     "new_insn": "test byte ptr [rax + 0x14], 1",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0xac8598",
+     "new_insn_rva": "0xae47b8",
+     "operand": "disp",
+     "old_value": "0x14",
+     "new_value": "0x14",
+     "note": "AC83F0 beacon entity owned bit",
+     "old_insn": "test byte ptr [rdx + 0x14], 1",
+     "new_insn": "test byte ptr [rdx + 0x14], 1",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0x18a2a88",
+     "new_insn_rva": "0x1723c98",
+     "operand": "disp",
+     "old_value": "0x8",
+     "new_value": "0x8",
+     "note": "beacon entity ->+8",
+     "old_insn": "mov eax, dword ptr [r15 + 8]",
+     "new_insn": "mov eax, dword ptr [r15 + 8]",
+     "verified": true
+    }
+   ],
+   "agreeing": 4,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false,
+   "live_check": "L3"
+  },
+  {
+   "id": "spawn.mode.fields",
+   "file": "src/spawn_data.lua",
+   "line": 127,
+   "symbol": "u32(MODE,8)>0 and u32(MODE,0x40); read 0x44",
+   "kind": "mission mode object: count +8, mode +0x40",
+   "old": "8,0x40,0x44",
+   "new": "8,0x40,0x44",
+   "method": "aligned identical functions; every compared mode immediate unchanged",
+   "witnesses": [
+    {
+     "image": "game",
+     "old_insn_rva": "0xacc939",
+     "new_insn_rva": "0xae8b99",
+     "operand": "disp",
+     "old_value": "0x8",
+     "new_value": "0x8",
+     "old_insn": "cmp dword ptr [rax + 8], edi",
+     "new_insn": "cmp dword ptr [rax + 8], edi",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0xacc93e",
+     "new_insn_rva": "0xae8b9e",
+     "operand": "disp",
+     "old_value": "0x40",
+     "new_value": "0x40",
+     "old_insn": "cmp dword ptr [rax + 0x40], 4",
+     "new_insn": "cmp dword ptr [rax + 0x40], 4",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0xacc93e",
+     "new_insn_rva": "0xae8b9e",
+     "operand": "imm",
+     "old_value": "0x4",
+     "new_value": "0x4",
+     "note": "mode 4",
+     "old_insn": "cmp dword ptr [rax + 0x40], 4",
+     "new_insn": "cmp dword ptr [rax + 0x40], 4",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0xaca1b2",
+     "new_insn_rva": "0xae6412",
+     "operand": "imm",
+     "old_value": "0x7",
+     "new_value": "0x7",
+     "note": "mode 7",
+     "old_insn": "cmp dword ptr [rcx + 0x40], 7",
+     "new_insn": "cmp dword ptr [rcx + 0x40], 7",
+     "verified": true
+    }
+   ],
+   "agreeing": 4,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false,
+   "live_check": "L1"
+  },
+  {
+   "id": "spawn.rm.fields",
+   "file": "src/spawn_data.lua",
+   "line": 162,
+   "symbol": "REINFORCEMENT(0x58): +8 capacity, +12 active, +0x38 entity pointers, +0x48 use bits",
+   "kind": "reinforcement component manager layout",
+   "old": "8,0xC,0x38,0x48",
+   "new": "8,0xC,0x38,0x48",
+   "method": "the reinforcement manager functions (all old functions loading the global) align 1.000 with identical displacements",
+   "witnesses": [
+    {
+     "image": "game",
+     "old_insn_rva": "0x61c440",
+     "new_insn_rva": "0x6259b0",
+     "operand": "disp",
+     "old_value": "0x8",
+     "new_value": "0x8",
+     "old_insn": "mov qword ptr [rsp + 8], rbx",
+     "new_insn": "mov qword ptr [rsp + 8], rbx",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0x61c44e",
+     "new_insn_rva": "0x6259be",
+     "operand": "disp",
+     "old_value": "0xc",
+     "new_value": "0xc",
+     "old_insn": "mov r9d, dword ptr [rbx + 0xc]",
+     "new_insn": "mov r9d, dword ptr [rbx + 0xc]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0x61c482",
+     "new_insn_rva": "0x6259f2",
+     "operand": "disp",
+     "old_value": "0x38",
+     "new_value": "0x38",
+     "old_insn": "mov rax, qword ptr [rbx + 0x38]",
+     "new_insn": "mov rax, qword ptr [rbx + 0x38]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0x61c457",
+     "new_insn_rva": "0x6259c7",
+     "operand": "disp",
+     "old_value": "0x48",
+     "new_value": "0x48",
+     "old_insn": "mov r10, qword ptr [rbx + 0x48]",
+     "new_insn": "mov r10, qword ptr [rbx + 0x48]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0x61d1b0",
+     "new_insn_rva": "0x8cedf0",
+     "operand": "disp",
+     "old_value": "0xc",
+     "new_value": "0xc",
+     "old_insn": "mov r8d, dword ptr [rdi + 0xc]",
+     "new_insn": "mov r8d, dword ptr [rdi + 0xc]",
+     "verified": true
+    }
+   ],
+   "agreeing": 5,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false,
+   "live_check": "L4"
+  },
+  {
+   "id": "spawn.read.REINFORCEMENT",
+   "file": "src/spawn_data.lua",
+   "line": 15,
+   "symbol": "buffer(0x58)",
+   "kind": "read size of the reinforcement manager header",
+   "old": "0x58",
+   "new": "0x58",
+   "method": "fields to +0x50 witnessed unchanged; object extent not witnessed",
+   "witnesses": [],
+   "agreeing": 0,
+   "disagreeing": 0,
+   "confidence": "medium",
+   "feeds_write": false,
+   "changed": false
+  },
+  {
+   "id": "spawn.pos.fields",
+   "file": "src/spawn_data.lua",
+   "line": 170,
+   "symbol": "POSITIONS(0x60): +8 count, lookup header at +0x28 (+0x28 table, +0x30 capacity, +0x34 empty key, +0x38 multiplier), +0x50 positions (12 bytes each)",
+   "kind": "position component manager layout",
+   "old": "8,0x28,0x30,0x34,0x38,0x50",
+   "new": "8,0x28,0x30,0x34,0x38,0x50",
+   "method": "position manager functions align 1.000, identical",
+   "witnesses": [
+    {
+     "image": "game",
+     "old_insn_rva": "0x5231e4",
+     "new_insn_rva": "0x52b964",
+     "operand": "disp",
+     "old_value": "0x8",
+     "new_value": "0x8",
+     "old_insn": "mov eax, dword ptr [rcx + 8]",
+     "new_insn": "mov eax, dword ptr [rcx + 8]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0x523227",
+     "new_insn_rva": "0x52b9a7",
+     "operand": "disp",
+     "old_value": "0x28",
+     "new_value": "0x28",
+     "old_insn": "mov rbx, qword ptr [rdi + 0x28]",
+     "new_insn": "mov rbx, qword ptr [rdi + 0x28]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0x523206",
+     "new_insn_rva": "0x52b986",
+     "operand": "disp",
+     "old_value": "0x30",
+     "new_value": "0x30",
+     "old_insn": "mov r10d, dword ptr [rdi + 0x30]",
+     "new_insn": "mov r10d, dword ptr [rdi + 0x30]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0x52322b",
+     "new_insn_rva": "0x52b9ab",
+     "operand": "disp",
+     "old_value": "0x34",
+     "new_value": "0x34",
+     "old_insn": "mov esi, dword ptr [rdi + 0x34]",
+     "new_insn": "mov esi, dword ptr [rdi + 0x34]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0x52320c",
+     "new_insn_rva": "0x52b98c",
+     "operand": "disp",
+     "old_value": "0x38",
+     "new_value": "0x38",
+     "old_insn": "mov r11d, dword ptr [rdi + 0x38]",
+     "new_insn": "mov r11d, dword ptr [rdi + 0x38]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0x523290",
+     "new_insn_rva": "0x52ba10",
+     "operand": "disp",
+     "old_value": "0x50",
+     "new_value": "0x50",
+     "old_insn": "mov rcx, qword ptr [rdi + 0x50]",
+     "new_insn": "mov rcx, qword ptr [rdi + 0x50]",
+     "verified": true
+    }
+   ],
+   "agreeing": 6,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false,
+   "live_check": "L4"
+  },
+  {
+   "id": "spawn.read.POSITIONS",
+   "file": "src/spawn_data.lua",
+   "line": 15,
+   "symbol": "buffer(0x60)",
+   "kind": "read size of the position manager header",
+   "old": "0x60",
+   "new": "0x60",
+   "method": "fields to +0x58 witnessed unchanged; object extent not witnessed",
+   "witnesses": [],
+   "agreeing": 0,
+   "disagreeing": 0,
+   "confidence": "medium",
+   "feeds_write": false,
+   "changed": false
+  },
+  {
+   "id": "spawn.lookup.layout",
+   "file": "src/spawn_data.lua",
+   "line": 98,
+   "symbol": "lookup(): header +0 table, +8 capacity, +12 empty, +16 multiplier; rows {u32 key, u32 index}; index 0xFFFFFFFF = none",
+   "kind": "open-addressing id map (position manager, entities)",
+   "old": "unchanged",
+   "new": "unchanged",
+   "method": "the game probe loops align identical",
+   "witnesses": [
+    {
+     "image": "game",
+     "old_insn_rva": "0x6066dd",
+     "new_insn_rva": "0x60f8ad",
+     "operand": "disp",
+     "old_value": "0x4",
+     "new_value": "0x4",
+     "note": "row +4 index",
+     "old_insn": "mov eax, dword ptr [r11 + 4]",
+     "new_insn": "mov eax, dword ptr [r11 + 4]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0x6066e1",
+     "new_insn_rva": "0x60f8b1",
+     "operand": "imm",
+     "old_value": "-0x1",
+     "new_value": "-0x1",
+     "note": "index -1 = none",
+     "old_insn": "cmp eax, -1",
+     "new_insn": "cmp eax, -1",
+     "verified": true
+    }
+   ],
+   "agreeing": 2,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false
+  },
+  {
+   "id": "spawn.aam.fields",
+   "file": "src/spawn_data.lua",
+   "line": 198,
+   "symbol": "STRATAGEMS(0x80): +0x34 active count, +0x78 rows; rows 64 bytes, +12 type, +16 XYZ",
+   "kind": "active stratagem manager layout and row",
+   "old": "0x34,0x78,64,+12,+16",
+   "new": "0x34,0x78,64,+12,+16",
+   "method": "aligned identical (producer ACCC96 and the row consumer 0x518A20)",
+   "witnesses": [
+    {
+     "image": "game",
+     "old_insn_rva": "0xaccc80",
+     "new_insn_rva": "0xae8ee0",
+     "operand": "disp",
+     "old_value": "0x34",
+     "new_value": "0x34",
+     "note": "ACCC96 count",
+     "old_insn": "mov edx, dword ptr [r8 + 0x34]",
+     "new_insn": "mov edx, dword ptr [r8 + 0x34]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0xaccc88",
+     "new_insn_rva": "0xae8ee8",
+     "operand": "disp",
+     "old_value": "0x78",
+     "new_value": "0x78",
+     "old_insn": "mov r8, qword ptr [r8 + 0x78]",
+     "new_insn": "mov r8, qword ptr [r8 + 0x78]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0xaccc92",
+     "new_insn_rva": "0xae8ef2",
+     "operand": "imm",
+     "old_value": "0x6",
+     "new_value": "0x6",
+     "note": "shl 6: 64-byte rows",
+     "old_insn": "shl rax, 6",
+     "new_insn": "shl rax, 6",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0xaccc96",
+     "new_insn_rva": "0xae8ef6",
+     "operand": "disp",
+     "old_value": "0xc",
+     "new_value": "0xc",
+     "note": "row +12 type",
+     "old_insn": "cmp dword ptr [rax + r8 + 0xc], 0x7c",
+     "new_insn": "cmp dword ptr [rax + r8 + 0xc], 0x7f",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0x518b06",
+     "new_insn_rva": "0x521286",
+     "operand": "disp",
+     "old_value": "0x10",
+     "new_value": "0x10",
+     "note": "row +16 position",
+     "old_insn": "movsd xmm0, qword ptr [rdx + rax + 0x10]",
+     "new_insn": "movsd xmm0, qword ptr [rdx + rax + 0x10]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0x4dd6a9",
+     "new_insn_rva": "0x4e4639",
+     "operand": "disp",
+     "old_value": "0x34",
+     "new_value": "0x34",
+     "old_insn": "mov r8d, dword ptr [r9 + 0x34]",
+     "new_insn": "mov r8d, dword ptr [r9 + 0x34]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0x4dd6b2",
+     "new_insn_rva": "0x4e4642",
+     "operand": "disp",
+     "old_value": "0x78",
+     "new_value": "0x78",
+     "old_insn": "mov r9, qword ptr [r9 + 0x78]",
+     "new_insn": "mov r9, qword ptr [r9 + 0x78]",
+     "verified": true
+    }
+   ],
+   "agreeing": 7,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false,
+   "live_check": "L5"
+  },
+  {
+   "id": "spawn.AUTOMATIC_TYPE",
+   "file": "src/spawn_data.lua",
+   "line": 212,
+   "symbol": "if u32(rows,base+12)==0x7C",
+   "kind": "stratagem type of the automatic-reinforcement dummy row (ReinforcementBeacon). NOT in megapack-native-inventory.json: the stratagem enum gained 3 entries below it",
+   "old": "0x7C",
+   "new": "0x7F",
+   "method": "the game's own producer/consumers of these rows compare/store the new immediate; the stratagem enum name table maps 124 ReinforcementBeacon -> 127",
+   "witnesses": [
+    {
+     "image": "game",
+     "old_insn_rva": "0xaccc96",
+     "new_insn_rva": "0xae8ef6",
+     "operand": "imm",
+     "old_value": "0x7c",
+     "new_value": "0x7f",
+     "note": "ACCC96 cmp [row+12], type",
+     "old_insn": "cmp dword ptr [rax + r8 + 0xc], 0x7c",
+     "new_insn": "cmp dword ptr [rax + r8 + 0xc], 0x7f",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0xaccec5",
+     "new_insn_rva": "0xae9125",
+     "operand": "imm",
+     "old_value": "0x7c",
+     "new_value": "0x7f",
+     "note": "ACCEC5 mov [row+12], type (producer)",
+     "old_insn": "mov dword ptr [rbp - 0x40], 0x7c",
+     "new_insn": "mov dword ptr [rbp - 0x40], 0x7f",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0xac762f",
+     "new_insn_rva": "0xae384f",
+     "operand": "imm",
+     "old_value": "0x7c",
+     "new_value": "0x7f",
+     "note": "AC7280",
+     "old_insn": "mov r8d, 0x7c",
+     "new_insn": "mov r8d, 0x7f",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0xac7643",
+     "new_insn_rva": "0xae3863",
+     "operand": "imm",
+     "old_value": "0x7c",
+     "new_value": "0x7f",
+     "note": "AC7280",
+     "old_insn": "mov dword ptr [rsp + 0x60], 0x7c",
+     "new_insn": "mov dword ptr [rsp + 0x60], 0x7f",
+     "verified": true
+    },
+    {
+     "file": "<workspace>/native-work/stratagem-enum-migration.json",
+     "old_kind_124": "ReinforcementBeacon",
+     "current_kind_127": "ReinforcementBeacon",
+     "old_to_current_124": 127,
+     "verified": true
+    }
+   ],
+   "agreeing": 5,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L5"
+  },
+  {
+   "id": "spawn.ent.source_lookup",
+   "file": "src/spawn_data.lua",
+   "line": 243,
+   "symbol": "em+15871688 (20-byte lookup header)",
+   "kind": "entities: unit-reference -> entity index map (fd9ba0)",
+   "old": "15871688 (0xF22EC8)",
+   "new": "15878544 (0xF24990)",
+   "method": "aligned 0xFD9BA0 -> 0xE69B40 (1.000)",
+   "witnesses": [
+    {
+     "image": "game",
+     "old_insn_rva": "0xfd9bf9",
+     "new_insn_rva": "0xe69b99",
+     "operand": "disp",
+     "old_value": "0xf22ec8",
+     "new_value": "0xf24990",
+     "note": "table",
+     "old_insn": "mov rdi, qword ptr [r11 + 0xf22ec8]",
+     "new_insn": "mov rdi, qword ptr [r11 + 0xf24990]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0xfd9bc9",
+     "new_insn_rva": "0xe69b69",
+     "operand": "disp",
+     "old_value": "0xf22ed0",
+     "new_value": "0xf24998",
+     "note": "capacity +8",
+     "old_insn": "mov r10d, dword ptr [r11 + 0xf22ed0]",
+     "new_insn": "mov r10d, dword ptr [r11 + 0xf24998]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0xfd9c00",
+     "new_insn_rva": "0xe69ba0",
+     "operand": "disp",
+     "old_value": "0xf22ed4",
+     "new_value": "0xf2499c",
+     "note": "empty +12",
+     "old_insn": "mov esi, dword ptr [r11 + 0xf22ed4]",
+     "new_insn": "mov esi, dword ptr [r11 + 0xf2499c]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0xfd9bd7",
+     "new_insn_rva": "0xe69b77",
+     "operand": "disp",
+     "old_value": "0xf22ed8",
+     "new_value": "0xf249a0",
+     "note": "multiplier +16",
+     "old_insn": "mov ebx, dword ptr [r11 + 0xf22ed8]",
+     "new_insn": "mov ebx, dword ptr [r11 + 0xf249a0]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0xfd9bb1",
+     "new_insn_rva": "0xe69b51",
+     "operand": "imm",
+     "old_value": "0x7fff",
+     "new_value": "0x7fff",
+     "note": "unit_ref 0x7fff = none (spawn_data line 243)",
+     "old_insn": "cmp edx, 0x7fff",
+     "new_insn": "cmp edx, 0x7fff",
+     "verified": true
+    }
+   ],
+   "agreeing": 5,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L6"
+  },
+  {
+   "id": "spawn.ent.table",
+   "file": "src/spawn_data.lua",
+   "line": 224,
+   "symbol": "em+15937304+24*index, u32 at +12 (engine reference)",
+   "kind": "entities: 24-byte entity records",
+   "old": "15937304 (0xF32F18)",
+   "new": "15944160 (0xF349E0)",
+   "method": "record address arithmetic in 0xFD9BA0/0xFD9D40 and AC5BB0's +12 read",
+   "witnesses": [
+    {
+     "image": "game",
+     "old_insn_rva": "0xfd9c50",
+     "new_insn_rva": "0xe69bf0",
+     "operand": "disp",
+     "old_value": "0x1e65e4",
+     "new_value": "0x1e693d",
+     "note": "(idx*3+X)*8 = record+8: old 0xF32F20, new 0xF349E8",
+     "old_insn": "lea rax, [rax + 0x1e65e4]",
+     "new_insn": "lea rax, [rax + 0x1e693d]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "side": "old",
+     "insn_rva": "0xfd9ddb",
+     "insn": "lea rax, [rax + 0x1e65e3]",
+     "expected": "lea rax, [rax + 0x1e65e3]",
+     "note": "old 0xFD9D40: (idx*3+0x1E65E3)*8 = 0xF32F18+24*idx",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "side": "new",
+     "insn_rva": "0xe69d77",
+     "insn": "add rax, 0xa2314",
+     "expected": "add rax, 0xa2314",
+     "note": "new 0xE69CE0: (idx+0xA2314)*3*8 = 0xF349E0+24*idx",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "side": "old",
+     "insn_rva": "0xfd9dd7",
+     "insn": "lea rax, [rax + rax*2]",
+     "expected": "lea rax, [rax + rax*2]",
+     "note": "stride 3*8 = 24",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "side": "new",
+     "insn_rva": "0xe69d7d",
+     "insn": "lea rax, [rax + rax*2]",
+     "expected": "lea rax, [rax + rax*2]",
+     "note": "stride 3*8 = 24",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0xac5bea",
+     "new_insn_rva": "0xae1e1a",
+     "operand": "disp",
+     "old_value": "0xc",
+     "new_value": "0xc",
+     "note": "AC5BB0 engine reference at record +12",
+     "old_insn": "mov ecx, dword ptr [rax + 0xc]",
+     "new_insn": "mov ecx, dword ptr [rax + 0xc]",
+     "verified": true
+    }
+   ],
+   "agreeing": 6,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L6"
+  },
+  {
+   "id": "spawn.exe.registry",
+   "file": "src/spawn_data.lua",
+   "line": 226,
+   "symbol": "pointer(reader,reader.exe+0x1a100f0)",
+   "kind": "helldivers2.exe global: unit registry",
+   "old": "0x1a100f0",
+   "new": "0x1ab76f8",
+   "method": "masked instruction windows at every RIP xref of the old global (old exe capture -> exe-26088801.bin)",
+   "witnesses": [
+    {
+     "old_sites": 57,
+     "votes": {
+      "0x1ab76f8": 44
+     },
+     "exact_window_votes": {
+      "0x1ab76f8": 42
+     },
+     "verified": true
+    },
+    {
+     "image": "exe",
+     "old_insn_rva": "0x9d8cf",
+     "new_insn_rva": "0xa06bf",
+     "operand": "rip",
+     "old_value": "0x1a100f0",
+     "new_value": "0x1ab76f8",
+     "note": "unit resolve 0x9D8C0 -> 0xA06B0",
+     "old_insn": "mov rsi, qword ptr [rip + 0x197281a]",
+     "new_insn": "mov rsi, qword ptr [rip + 0x1a17032]",
+     "verified": true
+    }
+   ],
+   "agreeing": 44,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L7"
+  },
+  {
+   "id": "spawn.exe.registry_layout",
+   "file": "src/spawn_data.lua",
+   "line": 227,
+   "symbol": "slot=ref&0x3fffff < +0x98; generation byte [+0xA0][slot] == ref>>22; object [+0x88][slot]; read 0xA8",
+   "kind": "unit registry layout",
+   "old": "unchanged",
+   "new": "unchanged",
+   "method": "aligned unit resolve function (exe 0x9D8C0 -> 0xA06B0)",
+   "witnesses": [
+    {
+     "image": "exe",
+     "old_insn_rva": "0x9d8e7",
+     "new_insn_rva": "0xa06d7",
+     "operand": "imm",
+     "old_value": "0x3fffff",
+     "new_value": "0x3fffff",
+     "old_insn": "and eax, 0x3fffff",
+     "new_insn": "and eax, 0x3fffff",
+     "verified": true
+    },
+    {
+     "image": "exe",
+     "old_insn_rva": "0x9d8ec",
+     "new_insn_rva": "0xa06dc",
+     "operand": "disp",
+     "old_value": "0x98",
+     "new_value": "0x98",
+     "old_insn": "cmp eax, dword ptr [rsi + 0x98]",
+     "new_insn": "cmp eax, dword ptr [rsi + 0x98]",
+     "verified": true
+    },
+    {
+     "image": "exe",
+     "old_insn_rva": "0x9d8fa",
+     "new_insn_rva": "0xa06ea",
+     "operand": "disp",
+     "old_value": "0xa0",
+     "new_value": "0xa0",
+     "old_insn": "mov rax, qword ptr [rsi + 0xa0]",
+     "new_insn": "mov rax, qword ptr [rsi + 0xa0]",
+     "verified": true
+    },
+    {
+     "image": "exe",
+     "old_insn_rva": "0x9d901",
+     "new_insn_rva": "0xa06f1",
+     "operand": "imm",
+     "old_value": "0x16",
+     "new_value": "0x16",
+     "old_insn": "shr ebx, 0x16",
+     "new_insn": "shr ebx, 0x16",
+     "verified": true
+    },
+    {
+     "image": "exe",
+     "old_insn_rva": "0x9d909",
+     "new_insn_rva": "0xa06f9",
+     "operand": "disp",
+     "old_value": "0x88",
+     "new_value": "0x88",
+     "old_insn": "mov rax, qword ptr [rsi + 0x88]",
+     "new_insn": "mov rax, qword ptr [rsi + 0x88]",
+     "verified": true
+    }
+   ],
+   "agreeing": 5,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false,
+   "live_check": "L7"
+  },
+  {
+   "id": "spawn.exe.scene_graph_fn",
+   "file": "src/spawn_data.lua",
+   "line": 234,
+   "symbol": "distance(pointer(vtable+0xE8),exe)==0x2bd870",
+   "kind": "helldivers2.exe: the unit class's scene-graph getter (vtable slot 0xE8), identity check of the registry object",
+   "old": "0x2bd870",
+   "new": "0x28d3a0",
+   "method": "the only old vtable holding 0x2BD870 (0x1676D80, slot 0xE8) mapped to new vtable 0x1714B70 by slot functions migrated individually; the slot itself holds the same code",
+   "witnesses": [
+    {
+     "old_vtable": "0x1676d80",
+     "new_vtable": "0x1714b70",
+     "slots_checked": 48,
+     "slots_agreeing_by_window": 23,
+     "old_slot_e8": "0x2bd870",
+     "new_slot_e8": "0x28d3a0",
+     "old_insn": "lea rax, [rcx + 0x60]",
+     "new_insn": "lea rax, [rcx + 0x60]",
+     "verified": true
+    },
+    {
+     "image": "exe",
+     "old_insn_rva": "0x1fd1a4",
+     "new_insn_rva": "0x1f3044",
+     "operand": "disp",
+     "old_value": "0xe8",
+     "new_value": "0xe8",
+     "note": "world_position 0x1FD190 -> 0x1F3030 calls slot 0xE8",
+     "old_insn": "call qword ptr [r8 + 0xe8]",
+     "new_insn": "call qword ptr [r8 + 0xe8]",
+     "verified": true
+    }
+   ],
+   "agreeing": 2,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "L7"
+  },
+  {
+   "id": "spawn.exe.world_position",
+   "file": "src/spawn_data.lua",
+   "line": 235,
+   "symbol": "pointer(object+0x88)+0x30, 12 bytes",
+   "kind": "unit node 0 world position: getter returns object+0x60, world matrices at +0x28 (object+0x88), translation at matrix +0x30",
+   "old": "0x88,0x30",
+   "new": "0x88,0x30",
+   "method": "aligned world_position (exe 0x1FD190 -> 0x1F3030, ratio 1.000) and slot 0xE8 code",
+   "witnesses": [
+    {
+     "image": "exe",
+     "old_insn_rva": "0x1fd1b6",
+     "new_insn_rva": "0x1f3056",
+     "operand": "disp",
+     "old_value": "0x28",
+     "new_value": "0x28",
+     "note": "[sg+0x28] world matrices",
+     "old_insn": "mov rax, qword ptr [rax + 0x28]",
+     "new_insn": "mov rax, qword ptr [rax + 0x28]",
+     "verified": true
+    },
+    {
+     "image": "exe",
+     "old_insn_rva": "0x1fd1b2",
+     "new_insn_rva": "0x1f3052",
+     "operand": "imm",
+     "old_value": "0x30",
+     "new_value": "0x30",
+     "note": "translation row",
+     "old_insn": "add rcx, 0x30",
+     "new_insn": "add rcx, 0x30",
+     "verified": true
+    },
+    {
+     "image": "exe",
+     "old_insn_rva": "0x1fd1ae",
+     "new_insn_rva": "0x1f304e",
+     "operand": "imm",
+     "old_value": "0x6",
+     "new_value": "0x6",
+     "note": "64-byte matrices",
+     "old_insn": "shl rcx, 6",
+     "new_insn": "shl rcx, 6",
+     "verified": true
+    },
+    {
+     "image": "exe",
+     "old_insn_rva": "0x2bd870",
+     "new_insn_rva": "0x28d3a0",
+     "operand": "disp",
+     "old_value": "0x60",
+     "new_value": "0x60",
+     "note": "slot 0xE8: lea rax,[rcx+0x60]",
+     "old_insn": "lea rax, [rcx + 0x60]",
+     "new_insn": "lea rax, [rcx + 0x60]",
+     "verified": true
+    }
+   ],
+   "agreeing": 4,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false,
+   "live_check": "L7"
+  },
+  {
+   "id": "spawn.fallback.offset",
+   "file": "src/spawn_data.lua",
+   "line": 245,
+   "symbol": "+0x3C, 12 bytes",
+   "kind": "fallback position vector",
+   "old": "0x3C",
+   "new": "0x3C",
+   "method": "AC5BB0 aligned",
+   "witnesses": [
+    {
+     "image": "game",
+     "old_insn_rva": "0xac5c0d",
+     "new_insn_rva": "0xae1e3d",
+     "operand": "disp",
+     "old_value": "0x3c",
+     "new_value": "0x3c",
+     "old_insn": "movsd xmm0, qword ptr [rax + 0x3c]",
+     "new_insn": "movsd xmm0, qword ptr [rax + 0x3c]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0xac5c12",
+     "new_insn_rva": "0xae1e42",
+     "operand": "disp",
+     "old_value": "0x44",
+     "new_value": "0x44",
+     "old_insn": "mov eax, dword ptr [rax + 0x44]",
+     "new_insn": "mov eax, dword ptr [rax + 0x44]",
+     "verified": true
+    },
+    {
+     "image": "game",
+     "old_insn_rva": "0xac5c06",
+     "new_insn_rva": "0xae1e36",
+     "operand": "rip",
+     "old_value": "0x346d560",
+     "new_value": "0x2e287d0",
+     "old_insn": "mov rax, qword ptr [rip + 0x29a7953]",
+     "new_insn": "mov rax, qword ptr [rip + 0x2346993]",
+     "verified": true
+    }
+   ],
+   "agreeing": 3,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false,
+   "live_check": "L8"
+  }
+ ]
+}

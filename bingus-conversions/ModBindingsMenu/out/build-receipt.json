@@ -1,0 +1,822 @@
+{
+ "mod": "Mod Bindings Menu v2.3",
+ "slug": "ModBindingsMenu",
+ "build": 26088801,
+ "resource": "mods/cowboybingus/mod_bindings_menu",
+ "resource_hash": "ace3bd664062daa9",
+ "archive": "9ba626afa44a3aa3.patch_0",
+ "archive_resources": [
+  "ace3bd664062daa9"
+ ],
+ "archive_sha256": "FC6ADDED52BBB8299B5077C2D1A85A82384AD0DB8FDB228CA6F1AB41342B4746",
+ "resource_sha256": "F7F255B19150D76FDF164962A90DF7BFF420CBFE1812467306D371D8D99D5FBF",
+ "entry_sha256": "98592434657CD205AFA44ECF3EA1857CB22C2C4AB91B29D7765B976769100D47",
+ "entry_bytes": 240050,
+ "source": {
+  "pinned": "upstream-bingus/VanillaPlusMegapack/components/ModBindingsMenu",
+  "revision": "v2.3",
+  "standalone_checkout_identical": true,
+  "standalone_checkout": "upstream-bingus/ModBindingsMenu (git tag v2.3, commit ab48890)"
+ },
+ "assembly": "components/ModBindingsMenu/scripts/entry.py entry_text(root); resource = struct.pack(<II, len, 2) + entry (the pack's ASSEMBLED path; plaintext, so no bytecode/GC64 issue)",
+ "reproduction": {
+  "locked_resource_sha256": "B24B2A04844555CFD3B10FDD2401409721C69E7A12A353A10D79061604102E5C",
+  "assembled_sha256": "B24B2A04844555CFD3B10FDD2401409721C69E7A12A353A10D79061604102E5C",
+  "matches_lock": true,
+  "shipped_v26_archive": "<hellforge>/mods/Vanilla Plus Megapack - v26/options/ModBindingsMenu/9ba626afa44a3aa3.patch_0",
+  "shipped_resource_sha256": "B24B2A04844555CFD3B10FDD2401409721C69E7A12A353A10D79061604102E5C",
+  "matches_shipped_v26": true
+ },
+ "map_summary": {
+  "rows": 143,
+  "by_confidence": {
+   "high": 141,
+   "medium": 2
+  },
+  "source_edits": 82
+ },
+ "edits": [
+  {
+   "row": 1,
+   "name": "GAME_SHA256",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 57,
+   "old_text": "'2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+   "new_text": "'6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'",
+   "confidence": "high"
+  },
+  {
+   "row": 2,
+   "name": "EXE_SHA256",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 58,
+   "old_text": "'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+   "new_text": "'0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'",
+   "confidence": "high"
+  },
+  {
+   "row": 3,
+   "name": "BUILD_ROWS_RVA",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 65,
+   "old_text": "local BUILD_ROWS_RVA = 0x1812940",
+   "new_text": "local BUILD_ROWS_RVA = 0x1693b90",
+   "confidence": "high"
+  },
+  {
+   "row": 5,
+   "name": "SET_TAB_LABELS_RVA",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 144,
+   "old_text": "local SET_TAB_LABELS_RVA = 0x17aac50",
+   "new_text": "local SET_TAB_LABELS_RVA = 0x162bee0",
+   "confidence": "high"
+  },
+  {
+   "row": 7,
+   "name": "LIST_RESET_RVA",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 145,
+   "old_text": "local LIST_RESET_RVA = 0x1813dd0",
+   "new_text": "local LIST_RESET_RVA = 0x1695020",
+   "confidence": "high"
+  },
+  {
+   "row": 9,
+   "name": "INPUT_CONSUME_RVA",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 77,
+   "old_text": "local INPUT_CONSUME_RVA = 0x12fde90",
+   "new_text": "local INPUT_CONSUME_RVA = 0x1190e30",
+   "confidence": "high"
+  },
+  {
+   "row": 11,
+   "name": "INPUT_OWNER_PTR_RVA",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 59,
+   "old_text": "local INPUT_OWNER_PTR_RVA = 0x347cf18",
+   "new_text": "local INPUT_OWNER_PTR_RVA = 0x2e38250",
+   "confidence": "high"
+  },
+  {
+   "row": 12,
+   "name": "MENU_SYSTEM_PTR_RVA",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 60,
+   "old_text": "local MENU_SYSTEM_PTR_RVA = 0x347ce38",
+   "new_text": "local MENU_SYSTEM_PTR_RVA = 0x2e38170",
+   "confidence": "high"
+  },
+  {
+   "row": 13,
+   "name": "UI_STATE_PTR_RVA",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 61,
+   "old_text": "local UI_STATE_PTR_RVA = 0x347ce28",
+   "new_text": "local UI_STATE_PTR_RVA = 0x2e38160",
+   "confidence": "high"
+  },
+  {
+   "row": 14,
+   "name": "ACTION_LABELS_RVA",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 64,
+   "old_text": "local ACTION_LABELS_RVA = 0x26438a0",
+   "new_text": "local ACTION_LABELS_RVA = 0x24bc8a0",
+   "confidence": "high"
+  },
+  {
+   "row": 15,
+   "name": "MISSION_MODE_PTR_RVA",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 73,
+   "old_text": "MISSION_MODE_PTR_RVA, MISSION_CHECK_FRAMES = 0x33266a0",
+   "new_text": "MISSION_MODE_PTR_RVA, MISSION_CHECK_FRAMES = 0x2ce1850",
+   "confidence": "high"
+  },
+  {
+   "row": 16,
+   "name": "TAB_LABELS_RVA",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 146,
+   "old_text": "local TAB_LABELS_RVA = 0x3310210",
+   "new_text": "local TAB_LABELS_RVA = 0x2cc8bb0",
+   "confidence": "high"
+  },
+  {
+   "row": 17,
+   "name": "panel FONT_RVA",
+   "file": "src/panel.lua",
+   "line": 53,
+   "old_text": "= 0x3772268, ",
+   "new_text": "= 0x312d998, ",
+   "confidence": "high"
+  },
+  {
+   "row": 18,
+   "name": "panel MATERIAL_PTR_RVA",
+   "file": "src/panel.lua",
+   "line": 53,
+   "old_text": ", 0x37c5478, ",
+   "new_text": ", 0x3180c08, ",
+   "confidence": "high"
+  },
+  {
+   "row": 19,
+   "name": "panel ATLAS_RVA",
+   "file": "src/panel.lua",
+   "line": 53,
+   "old_text": ", 0x3772ee8\n",
+   "new_text": ", 0x312e618\n",
+   "confidence": "high"
+  },
+  {
+   "row": 22,
+   "name": "MODS_TITLE_PTR_RVA (cache slot of 0x781e104c)",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 67,
+   "old_text": "local MODS_TITLE_PTR_RVA = 0x3328420",
+   "new_text": "local MODS_TITLE_PTR_RVA = 0x2ce3680",
+   "confidence": "high"
+  },
+  {
+   "row": 23,
+   "name": "LABEL_POOL 0x76ad93e3",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 118,
+   "old_text": "{0x76ad93e3, 0x3327550}",
+   "new_text": "{0x76ad93e3, 0x2ce2738}",
+   "confidence": "high"
+  },
+  {
+   "row": 24,
+   "name": "LABEL_POOL 0xa9cf13bb",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 119,
+   "old_text": "{0xa9cf13bb, 0x3328230}",
+   "new_text": "{0xa9cf13bb, 0x2ce3490}",
+   "confidence": "high"
+  },
+  {
+   "row": 25,
+   "name": "LABEL_POOL 0x431da596",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 119,
+   "old_text": "{0x431da596, 0x3328238}",
+   "new_text": "{0x431da596, 0x2ce3498}",
+   "confidence": "high"
+  },
+  {
+   "row": 26,
+   "name": "LABEL_POOL 0xc80d6bd6",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 119,
+   "old_text": "{0xc80d6bd6, 0x3328248}",
+   "new_text": "{0xc80d6bd6, 0x2ce34a8}",
+   "confidence": "high"
+  },
+  {
+   "row": 27,
+   "name": "LABEL_POOL 0x9845cd37",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 120,
+   "old_text": "{0x9845cd37, 0x3328250}",
+   "new_text": "{0x9845cd37, 0x2ce34b0}",
+   "confidence": "high"
+  },
+  {
+   "row": 28,
+   "name": "LABEL_POOL 0x9f020af7",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 120,
+   "old_text": "{0x9f020af7, 0x3328260}",
+   "new_text": "{0x9f020af7, 0x2ce34c0}",
+   "confidence": "high"
+  },
+  {
+   "row": 29,
+   "name": "LABEL_POOL 0x766f7a90",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 120,
+   "old_text": "{0x766f7a90, 0x3328268}",
+   "new_text": "{0x766f7a90, 0x2ce34c8}",
+   "confidence": "high"
+  },
+  {
+   "row": 30,
+   "name": "LABEL_POOL 0x3707c006",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 121,
+   "old_text": "{0x3707c006, 0x3328270}",
+   "new_text": "{0x3707c006, 0x2ce34d0}",
+   "confidence": "high"
+  },
+  {
+   "row": 31,
+   "name": "LABEL_POOL 0x57063e09",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 121,
+   "old_text": "{0x57063e09, 0x3328278}",
+   "new_text": "{0x57063e09, 0x2ce34d8}",
+   "confidence": "high"
+  },
+  {
+   "row": 32,
+   "name": "LABEL_POOL 0x039cdc47",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 121,
+   "old_text": "{0x039cdc47, 0x3328280}",
+   "new_text": "{0x039cdc47, 0x2ce34e0}",
+   "confidence": "high"
+  },
+  {
+   "row": 33,
+   "name": "LABEL_POOL 0x8f515fd7",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 122,
+   "old_text": "{0x8f515fd7, 0x3328288}",
+   "new_text": "{0x8f515fd7, 0x2ce34e8}",
+   "confidence": "high"
+  },
+  {
+   "row": 34,
+   "name": "LABEL_POOL 0x9cd0b591",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 122,
+   "old_text": "{0x9cd0b591, 0x3328290}",
+   "new_text": "{0x9cd0b591, 0x2ce34f0}",
+   "confidence": "high"
+  },
+  {
+   "row": 35,
+   "name": "LABEL_POOL 0xc58bdfa4",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 122,
+   "old_text": "{0xc58bdfa4, 0x3328298}",
+   "new_text": "{0xc58bdfa4, 0x2ce34f8}",
+   "confidence": "high"
+  },
+  {
+   "row": 36,
+   "name": "LABEL_POOL 0xc977f7ac",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 123,
+   "old_text": "{0xc977f7ac, 0x33282a0}",
+   "new_text": "{0xc977f7ac, 0x2ce3500}",
+   "confidence": "high"
+  },
+  {
+   "row": 37,
+   "name": "LABEL_POOL 0xfa69c153",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 123,
+   "old_text": "{0xfa69c153, 0x33282a8}",
+   "new_text": "{0xfa69c153, 0x2ce3508}",
+   "confidence": "high"
+  },
+  {
+   "row": 38,
+   "name": "LABEL_POOL 0xed823922",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 123,
+   "old_text": "{0xed823922, 0x33282b0}",
+   "new_text": "{0xed823922, 0x2ce3510}",
+   "confidence": "high"
+  },
+  {
+   "row": 39,
+   "name": "LABEL_POOL 0x8cc549fb",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 124,
+   "old_text": "{0x8cc549fb, 0x33282b8}",
+   "new_text": "{0x8cc549fb, 0x2ce3518}",
+   "confidence": "high"
+  },
+  {
+   "row": 40,
+   "name": "LABEL_POOL 0x780b23de",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 124,
+   "old_text": "{0x780b23de, 0x33282c0}",
+   "new_text": "{0x780b23de, 0x2ce3520}",
+   "confidence": "high"
+  },
+  {
+   "row": 41,
+   "name": "LABEL_POOL 0x8296f00f",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 124,
+   "old_text": "{0x8296f00f, 0x33282c8}",
+   "new_text": "{0x8296f00f, 0x2ce3528}",
+   "confidence": "high"
+  },
+  {
+   "row": 42,
+   "name": "LABEL_POOL 0x970548b1",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 125,
+   "old_text": "{0x970548b1, 0x33282d0}",
+   "new_text": "{0x970548b1, 0x2ce3530}",
+   "confidence": "high"
+  },
+  {
+   "row": 43,
+   "name": "LABEL_POOL 0x019bb39b",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 125,
+   "old_text": "{0x019bb39b, 0x33282e0}",
+   "new_text": "{0x019bb39b, 0x2ce3540}",
+   "confidence": "high"
+  },
+  {
+   "row": 44,
+   "name": "LABEL_POOL 0xbfd44f9f",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 125,
+   "old_text": "{0xbfd44f9f, 0x33282e8}",
+   "new_text": "{0xbfd44f9f, 0x2ce3548}",
+   "confidence": "high"
+  },
+  {
+   "row": 45,
+   "name": "LABEL_POOL 0x110ebfca",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 126,
+   "old_text": "{0x110ebfca, 0x33282f0}",
+   "new_text": "{0x110ebfca, 0x2ce3550}",
+   "confidence": "high"
+  },
+  {
+   "row": 46,
+   "name": "LABEL_POOL 0x1a8ae3c1",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 126,
+   "old_text": "{0x1a8ae3c1, 0x3328300}",
+   "new_text": "{0x1a8ae3c1, 0x2ce3560}",
+   "confidence": "high"
+  },
+  {
+   "row": 47,
+   "name": "LABEL_POOL 0x34fc79a3",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 126,
+   "old_text": "{0x34fc79a3, 0x3328310}",
+   "new_text": "{0x34fc79a3, 0x2ce3570}",
+   "confidence": "high"
+  },
+  {
+   "row": 48,
+   "name": "LABEL_POOL 0xfc0db519",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 127,
+   "old_text": "{0xfc0db519, 0x3328318}",
+   "new_text": "{0xfc0db519, 0x2ce3578}",
+   "confidence": "high"
+  },
+  {
+   "row": 49,
+   "name": "LABEL_POOL 0x1aef663a",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 127,
+   "old_text": "{0x1aef663a, 0x3328320}",
+   "new_text": "{0x1aef663a, 0x2ce3580}",
+   "confidence": "high"
+  },
+  {
+   "row": 50,
+   "name": "LABEL_POOL 0x568a85ad",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 127,
+   "old_text": "{0x568a85ad, 0x3328328}",
+   "new_text": "{0x568a85ad, 0x2ce3588}",
+   "confidence": "high"
+  },
+  {
+   "row": 51,
+   "name": "LABEL_POOL 0xa1d192a5",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 128,
+   "old_text": "{0xa1d192a5, 0x3328340}",
+   "new_text": "{0xa1d192a5, 0x2ce35a0}",
+   "confidence": "high"
+  },
+  {
+   "row": 52,
+   "name": "LABEL_POOL 0xd4bb26a2",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 128,
+   "old_text": "{0xd4bb26a2, 0x3328368}",
+   "new_text": "{0xd4bb26a2, 0x2ce35c8}",
+   "confidence": "high"
+  },
+  {
+   "row": 53,
+   "name": "LABEL_POOL 0x1a416656",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 128,
+   "old_text": "{0x1a416656, 0x3328370}",
+   "new_text": "{0x1a416656, 0x2ce35d0}",
+   "confidence": "high"
+  },
+  {
+   "row": 54,
+   "name": "LABEL_POOL 0x0b2f407b",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 129,
+   "old_text": "{0x0b2f407b, 0x3328390}",
+   "new_text": "{0x0b2f407b, 0x2ce35f0}",
+   "confidence": "high"
+  },
+  {
+   "row": 55,
+   "name": "LABEL_POOL 0xde392204",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 129,
+   "old_text": "{0xde392204, 0x3328398}",
+   "new_text": "{0xde392204, 0x2ce35f8}",
+   "confidence": "high"
+  },
+  {
+   "row": 56,
+   "name": "LABEL_POOL 0xb753331c",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 129,
+   "old_text": "{0xb753331c, 0x33283b8}",
+   "new_text": "{0xb753331c, 0x2ce3618}",
+   "confidence": "high"
+  },
+  {
+   "row": 57,
+   "name": "LABEL_POOL 0xb4a59ceb",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 130,
+   "old_text": "{0xb4a59ceb, 0x33283c0}",
+   "new_text": "{0xb4a59ceb, 0x2ce3620}",
+   "confidence": "high"
+  },
+  {
+   "row": 58,
+   "name": "LABEL_POOL 0xfd66d0d5",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 130,
+   "old_text": "{0xfd66d0d5, 0x33283c8}",
+   "new_text": "{0xfd66d0d5, 0x2ce3628}",
+   "confidence": "high"
+  },
+  {
+   "row": 59,
+   "name": "LABEL_POOL 0x9f3cb7c9",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 130,
+   "old_text": "{0x9f3cb7c9, 0x33283d0}",
+   "new_text": "{0x9f3cb7c9, 0x2ce3630}",
+   "confidence": "high"
+  },
+  {
+   "row": 60,
+   "name": "LABEL_POOL 0x09976730",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 131,
+   "old_text": "{0x09976730, 0x33283d8}",
+   "new_text": "{0x09976730, 0x2ce3638}",
+   "confidence": "high"
+  },
+  {
+   "row": 61,
+   "name": "LABEL_POOL 0x72b848bc",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 131,
+   "old_text": "{0x72b848bc, 0x33283e0}",
+   "new_text": "{0x72b848bc, 0x2ce3640}",
+   "confidence": "high"
+  },
+  {
+   "row": 62,
+   "name": "LABEL_POOL 0x6e083332",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 131,
+   "old_text": "{0x6e083332, 0x33283e8}",
+   "new_text": "{0x6e083332, 0x2ce3648}",
+   "confidence": "high"
+  },
+  {
+   "row": 63,
+   "name": "LABEL_POOL 0xbb4d13e4",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 132,
+   "old_text": "{0xbb4d13e4, 0x33283f0}",
+   "new_text": "{0xbb4d13e4, 0x2ce3650}",
+   "confidence": "high"
+  },
+  {
+   "row": 64,
+   "name": "LABEL_POOL 0x8c084330",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 132,
+   "old_text": "{0x8c084330, 0x33283f8}",
+   "new_text": "{0x8c084330, 0x2ce3658}",
+   "confidence": "high"
+  },
+  {
+   "row": 65,
+   "name": "LABEL_POOL 0x480ccb51",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 132,
+   "old_text": "{0x480ccb51, 0x3328400}",
+   "new_text": "{0x480ccb51, 0x2ce3660}",
+   "confidence": "high"
+  },
+  {
+   "row": 66,
+   "name": "LABEL_POOL 0xe39ec311",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 133,
+   "old_text": "{0xe39ec311, 0x3328408}",
+   "new_text": "{0xe39ec311, 0x2ce3668}",
+   "confidence": "high"
+  },
+  {
+   "row": 67,
+   "name": "LABEL_POOL 0xf4bfa80d",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 133,
+   "old_text": "{0xf4bfa80d, 0x3328410}",
+   "new_text": "{0xf4bfa80d, 0x2ce3670}",
+   "confidence": "high"
+  },
+  {
+   "row": 68,
+   "name": "LABEL_POOL 0xcffc99dd",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 133,
+   "old_text": "{0xcffc99dd, 0x3328418}",
+   "new_text": "{0xcffc99dd, 0x2ce3678}",
+   "confidence": "high"
+  },
+  {
+   "row": 69,
+   "name": "LABEL_POOL 0xccd4045f",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 134,
+   "old_text": "{0xccd4045f, 0x3328428}",
+   "new_text": "{0xccd4045f, 0x2ce3688}",
+   "confidence": "high"
+  },
+  {
+   "row": 70,
+   "name": "LABEL_POOL 0x11f38dc4",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 134,
+   "old_text": "{0x11f38dc4, 0x3328430}",
+   "new_text": "{0x11f38dc4, 0x2ce3690}",
+   "confidence": "high"
+  },
+  {
+   "row": 71,
+   "name": "LABEL_POOL 0xd8250934",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 134,
+   "old_text": "{0xd8250934, 0x3328438}",
+   "new_text": "{0xd8250934, 0x2ce3698}",
+   "confidence": "high"
+  },
+  {
+   "row": 72,
+   "name": "LABEL_POOL 0x43213f6d",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 135,
+   "old_text": "{0x43213f6d, 0x3328440}",
+   "new_text": "{0x43213f6d, 0x2ce36a0}",
+   "confidence": "high"
+  },
+  {
+   "row": 73,
+   "name": "LABEL_POOL 0x2ec24cb3",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 135,
+   "old_text": "{0x2ec24cb3, 0x3328448}",
+   "new_text": "{0x2ec24cb3, 0x2ce36a8}",
+   "confidence": "high"
+  },
+  {
+   "row": 74,
+   "name": "LABEL_POOL 0xf40bd215",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 135,
+   "old_text": "{0xf40bd215, 0x3328450}",
+   "new_text": "{0xf40bd215, 0x2ce36b0}",
+   "confidence": "high"
+  },
+  {
+   "row": 75,
+   "name": "LABEL_POOL 0xafba9b8b",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 136,
+   "old_text": "{0xafba9b8b, 0x3328458}",
+   "new_text": "{0xafba9b8b, 0x2ce36b8}",
+   "confidence": "high"
+  },
+  {
+   "row": 76,
+   "name": "LABEL_POOL 0x0944ce13",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 136,
+   "old_text": "{0x0944ce13, 0x3328460}",
+   "new_text": "{0x0944ce13, 0x2ce36c0}",
+   "confidence": "high"
+  },
+  {
+   "row": 77,
+   "name": "LABEL_POOL 0xddc61cbf",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 136,
+   "old_text": "{0xddc61cbf, 0x3328468}",
+   "new_text": "{0xddc61cbf, 0x2ce36c8}",
+   "confidence": "high"
+  },
+  {
+   "row": 78,
+   "name": "LABEL_POOL 0x61d0e824",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 137,
+   "old_text": "{0x61d0e824, 0x3328470}",
+   "new_text": "{0x61d0e824, 0x2ce36d0}",
+   "confidence": "high"
+  },
+  {
+   "row": 79,
+   "name": "LABEL_POOL 0xa95fd6a0",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 137,
+   "old_text": "{0xa95fd6a0, 0x3328478}",
+   "new_text": "{0xa95fd6a0, 0x2ce36d8}",
+   "confidence": "high"
+  },
+  {
+   "row": 80,
+   "name": "LABEL_POOL 0x7505bcbf",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 137,
+   "old_text": "{0x7505bcbf, 0x3328480}",
+   "new_text": "{0x7505bcbf, 0x2ce36e0}",
+   "confidence": "high"
+  },
+  {
+   "row": 81,
+   "name": "LABEL_POOL 0x4777d7c3",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 138,
+   "old_text": "{0x4777d7c3, 0x3328488}",
+   "new_text": "{0x4777d7c3, 0x2ce36e8}",
+   "confidence": "high"
+  },
+  {
+   "row": 125,
+   "name": "CURSOR widget at menu + 1520 (0x5f0)",
+   "file": "src/panel.lua",
+   "line": 50,
+   "old_text": "= 1520, ",
+   "new_text": "= 1528, ",
+   "confidence": "high"
+  },
+  {
+   "row": 128,
+   "name": "ROOT_A 352 (0x160)",
+   "file": "src/panel.lua",
+   "line": 50,
+   "old_text": ", 352, ",
+   "new_text": ", 360, ",
+   "confidence": "high"
+  },
+  {
+   "row": 129,
+   "name": "ROOT_B 648 (0x288)",
+   "file": "src/panel.lua",
+   "line": 50,
+   "old_text": ", 648\n",
+   "new_text": ", 656\n",
+   "confidence": "high"
+  },
+  {
+   "row": 137,
+   "name": "bingus_text M.GAME.settings",
+   "file": "src/bingus_text.lua",
+   "line": 357,
+   "old_text": "settings = 0x3326340",
+   "new_text": "settings = 0x2ce1508",
+   "confidence": "high"
+  },
+  {
+   "row": 138,
+   "name": "bingus_text M.GAME.table",
+   "file": "src/bingus_text.lua",
+   "line": 357,
+   "old_text": "table = 0x37C5650",
+   "new_text": "table = 0x3180DE0",
+   "confidence": "high"
+  },
+  {
+   "row": 139,
+   "name": "bingus_text M.GAME.index (settings block 705500 + language field 212)",
+   "file": "src/bingus_text.lua",
+   "line": 357,
+   "old_text": "index = 705500 + 212",
+   "new_text": "index = 705628 + 212",
+   "confidence": "high"
+  },
+  {
+   "row": 141,
+   "name": "header comment build number",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 2,
+   "old_text": "-- Native bindings-page extension for Steam build 25480438.",
+   "new_text": "-- Native bindings-page extension for Steam build 26088801.",
+   "confidence": "high"
+  },
+  {
+   "row": 10,
+   "name": "INPUT_CONSUME_RVA prologue (20 bytes)",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 430,
+   "old_text": "'\\x40\\x53\\x48\\x83\\xec\\x20\\x4c\\x8b\\xd1\\x4c\\x8b\\xca\\x48\\x8b\\xca\\xe8\\xdc\\x7c\\x28\\xff'",
+   "new_text": "'\\x40\\x53\\x48\\x83\\xec\\x20\\x4c\\x8b\\xd1\\x4c\\x8b\\xca\\x48\\x8b\\xca\\xe8\\x1c\\xda\\x3f\\xff'",
+   "confidence": "high"
+  },
+  {
+   "name": "native code check helpers (code-page rule)",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 400,
+   "old_text": "local function check(condition, reason)\n    if not condition then error(reason, 0) end\nend\n",
+   "new_text": "local function check(condition, reason)\n    if not condition then error(reason, 0) end\nend\n-- Port to Steam build 26088801: the game keeps some of its code pages no-access until it first runs them\n-- (its protection runtime decrypts them then), so a prologue read on the first frame can fail although the\n-- code is right. Each native is verified through ReadProcessMemory (read) when its page is resident, else\n-- right before its first call; it is never called unchecked, and bytes that differ refuse the build.\nlocal NATIVE_ORDER = {'build_rows', 'set_tab_labels', 'reset_list', 'consume'}\nlocal NATIVE_CODE = {\n    build_rows = {BUILD_ROWS_RVA, '\\x48\\x8b\\xc4\\x53\\x41\\x56\\x48\\x81\\xec\\xd8\\x00\\x00\\x00',\n                  'binding list builder changed', 'void (__fastcall *)(void *, const void *)'},\n    set_tab_labels = {SET_TAB_LABELS_RVA, '\\x48\\x89\\x54\\x24\\x10\\x53\\x56\\x48\\x83\\xec\\x68\\x0f\\x29\\x74\\x24\\x30',\n                      'tab bar label setter changed', 'void (__fastcall *)(void *, const void *, int)'},\n    reset_list = {LIST_RESET_RVA, '\\x40\\x53\\x48\\x83\\xec\\x20\\x48\\x8b\\xd9\\x85\\xd2\\x74\\x30\\x83\\xea\\x01',\n                  'binding list reset changed', 'void (__fastcall *)(void *, int)'},\n    consume = {INPUT_CONSUME_RVA, '\\x40\\x53\\x48\\x83\\xec\\x20\\x4c\\x8b\\xd1\\x4c\\x8b\\xca\\x48\\x8b\\xca\\xe8\\x1c\\xda\\x3f\\xff',\n               'input consume routine changed', 'MBM_consume_action'},\n}\nlocal native_fn = {}\n-- true once verified (the function is then cast), false when the bytes differ, nil while unreadable.\nlocal function native_ready(name)\n    if native_fn[name] then return true end\n    local entry = NATIVE_CODE[name]\n    local bytes = read(state.base + entry[1], #entry[2])\n    if bytes == nil then return nil end\n    if bytes ~= entry[2] then return false end\n    native_fn[name] = ffi.cast(entry[4], state.base + entry[1])\n    return true\nend\n-- A native found changed after the build check (its page was not resident then): the build check's\n-- refusal (the update stops, the borrowed slots go back, the bindings turn inert), then the error.\nlocal function refuse_native(name)\n    local reason = NATIVE_CODE[name][3]\n    guard.stop(reason)\n    state.base, state.unsupported, state.build_rows = nil, true, nil\n    note(INACTIVE_NOTE)\n    error(reason, 0)\nend\n-- The verified native, or nil while its page is not resident; refuses on changed bytes.\nlocal function native(name)\n    local fn = native_fn[name]\n    if fn then return fn end\n    local ready = native_ready(name)\n    if ready == false then refuse_native(name) end\n    return native_fn[name]\nend\n-- The page's natives as Mod Bindings Menu calls them (state.build_rows, state.set_tab_labels).\nlocal function port_build_rows(...)\n    local fn = native('build_rows')\n    check(fn, 'binding list builder not resident')\n    return fn(...)\nend\nlocal function port_set_tab_labels(...)\n    local fn = native('set_tab_labels')\n    check(fn, 'tab bar label setter not resident')\n    return fn(...)\nend\n-- The first of them not verified yet (its page not resident), or nil: page_frame waits for it.\nlocal function page_code_waiting()\n    if state.build_rows == port_build_rows and not native('build_rows') then return 'build_rows' end\n    if state.set_tab_labels == port_set_tab_labels and not native('set_tab_labels') then\n        return 'set_tab_labels'\n    end\n    return nil\nend\n"
+  },
+  {
+   "name": "build check: natives verified when resident, else at first call",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 479,
+   "old_text": "        check(read(state.base + BUILD_ROWS_RVA, 13) ==\n              '\\x48\\x8b\\xc4\\x53\\x41\\x56\\x48\\x81\\xec\\xd8\\x00\\x00\\x00',\n              'binding list builder changed')\n        check(read(state.base + SET_TAB_LABELS_RVA, 16) ==\n              '\\x48\\x89\\x54\\x24\\x10\\x53\\x56\\x48\\x83\\xec\\x68\\x0f\\x29\\x74\\x24\\x30',\n              'tab bar label setter changed')\n        check(read(state.base + LIST_RESET_RVA, 16) ==\n              '\\x40\\x53\\x48\\x83\\xec\\x20\\x48\\x8b\\xd9\\x85\\xd2\\x74\\x30\\x83\\xea\\x01',\n              'binding list reset changed')\n        check(read(state.base + TAB_LABELS_RVA, 12) ==\n              '\\x51\\xf4\\x70\\x8d\\x60\\x5c\\x5e\\xf1\\xeb\\x7f\\x84\\x00',\n              'binding tab labels changed')\n        check(read(state.base + INPUT_CONSUME_RVA, 20) ==\n              '\\x40\\x53\\x48\\x83\\xec\\x20\\x4c\\x8b\\xd1\\x4c\\x8b\\xca\\x48\\x8b\\xca\\xe8\\x1c\\xda\\x3f\\xff',\n              'input consume routine changed')\n",
+   "new_text": "        check(read(state.base + TAB_LABELS_RVA, 12) ==\n              '\\x51\\xf4\\x70\\x8d\\x60\\x5c\\x5e\\xf1\\xeb\\x7f\\x84\\x00',\n              'binding tab labels changed')\n        -- Native code (port 26088801): checked now where its page is resident, else right before its\n        -- first call (native_ready, native below); changed bytes refuse the build here as before.\n        local deferred = {}\n        for _, name in ipairs(NATIVE_ORDER) do\n            local ready = native_ready(name)\n            check(ready ~= false, NATIVE_CODE[name][3])\n            if not ready then deferred[#deferred + 1] = name end\n        end\n        if #deferred > 0 then\n            note('Native code checked at first use (page not resident yet): ' .. table.concat(deferred, ', '))\n        end\n"
+  },
+  {
+   "name": "natives called only after verification",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 510,
+   "old_text": "    state.build_rows = ffi.cast('void (__fastcall *)(void *, const void *)',\n                                state.base + BUILD_ROWS_RVA)\n    state.set_tab_labels = ffi.cast('void (__fastcall *)(void *, const void *, int)',\n                                    state.base + SET_TAB_LABELS_RVA)\n    state.reset_list = ffi.cast('void (__fastcall *)(void *, int)',\n                                state.base + LIST_RESET_RVA)\n    -- -1: consumed until released, as the game's buttons do.\n    local consume = ffi.cast('MBM_consume_action', state.base + INPUT_CONSUME_RVA)\n    mbm.consume_action = function(owner, code) consume(ffi.cast('void *', owner), code, -1) end\n",
+   "new_text": "    -- Port 26088801: the natives are called through native(), verified before a first call whose page was\n    -- not resident at the build check. state.build_rows stays the flag that native input is ready.\n    -- page_frame waits until build_rows and set_tab_labels are verified (page_code_waiting).\n    state.build_rows = port_build_rows\n    state.set_tab_labels = port_set_tab_labels\n    -- The focus reset is cosmetic: skipped (never called unchecked) while its page is not resident.\n    state.reset_list = function(...)\n        local fn = native('reset_list')\n        if fn then return fn(...) end\n        if not state.reset_deferred then\n            state.reset_deferred = true\n            note('Binding list focus reset skipped: its code is not resident yet.')\n        end\n    end\n    -- -1: consumed until released, as the game's buttons do. Skipped while its page is not resident.\n    mbm.consume_action = function(owner, code)\n        local consume = native('consume')\n        if consume then return consume(ffi.cast('void *', owner), code, -1) end\n        if not state.consume_deferred then\n            state.consume_deferred = true\n            note('Input consume routine not resident yet: UI actions are not consumed this time.')\n        end\n    end\n"
+  },
+  {
+   "name": "binding page waits for its natives",
+   "file": "src/mod_bindings_menu.lua",
+   "line": 1093,
+   "old_text": "local function page_frame(screen, seconds)\n    state.release_pending = true\n",
+   "new_text": "local function page_frame(screen, seconds)\n    -- Port 26088801: the page's natives are verified before the page is touched; while one is not\n    -- resident yet the page stays as the game drew it (gameplay input is unaffected).\n    local waiting = page_code_waiting()\n    if waiting then\n        if state.page_deferred ~= waiting then\n            state.page_deferred = waiting\n            note('Binding page code not resident yet (' .. waiting .. '); the MODS tab waits.')\n        end\n        return\n    end\n    state.release_pending = true\n"
+  }
+ ],
+ "entry_changed_lines": 202,
+ "luajit": {
+  "binary": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit",
+  "result": "loadstring OK: 240050 bytes, LuaJIT 2.1.ROLLING"
+ },
+ "compat_adapter": false,
+ "live_tested": false
+}

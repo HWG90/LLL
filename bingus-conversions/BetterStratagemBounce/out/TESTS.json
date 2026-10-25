@@ -1,0 +1,231 @@
+{
+ "port": {
+  "runs": [
+   {
+    "command": "luajit.exe tests/test_archive.lua src build/mod.ljbc F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7",
+    "hash_cache_shim": false,
+    "exit": 5,
+    "pass_lines": [],
+    "tail": [
+     "wine: Unhandled page fault on execute access to 00006FFFFCEFCFD0 at address 00006FFFFCEFCFD0 (thread 0024), starting debugger..."
+    ]
+   },
+   {
+    "command": "luajit.exe -e EXE_HASH='F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7' -e dofile([[../test_prelude.lua]]) tests/test_archive.lua src build/mod.ljbc F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7",
+    "hash_cache_shim": true,
+    "exit": 0,
+    "pass_lines": [
+     "PASS: runtime-backed SHA256 matches independent hash once per session; invalid memory reads are contained; the adapter refuses a missing runtime or write side; 16 of the runtime's 17 Windows names declared first with wrong prototypes (H.clash)",
+     "PASS: adapter refuses executable, read-only, image and unmapped write targets",
+     "PASS: first apply allocates 335 KB of Lua heap (under 2 MB)",
+     "PASS: 105 navigation bits change across 153 shuffled records; every other data and code byte survives",
+     "PASS: malformed groups, counts, pointers, identities and read-only data fail before writes",
+     "PASS: partial-write and verification failures recover the original settings with one query each way",
+     "PASS: a neighbour's other flag bits and its bit in an unowned record survive the apply and the restore",
+     "PASS: bits a neighbour already cleared are accepted, never written and never restored; all clear makes no query",
+     "PASS: the restore puts back only this mod's bit, keeps later neighbour changes and skips moved records",
+     "PASS: first-frame and idle call budgets: one apply per session, no calls and no garbage (interpreted or compiled) on later frames",
+     "PASS: loader preserves updates, verifies both modules, contains failures and removes its update hook",
+     "PASS: loader equivalence: 4200 scripted frames match the published loader event for event",
+     "PASS: idle frames below a later mod record no aborting traces in the loader (published loader: 13)",
+     "PASS: compiled module initializes once, preserves update returns and rejects the non-game host"
+    ],
+    "tail": [
+     "PASS: first-frame and idle call budgets: one apply per session, no calls and no garbage (interpreted or compiled) on later frames",
+     "PASS: loader preserves updates, verifies both modules, contains failures and removes its update hook",
+     "PASS: loader equivalence: 4200 scripted frames match the published loader event for event",
+     "PASS: idle frames below a later mod record no aborting traces in the loader (published loader: 13)",
+     "PASS: compiled module initializes once, preserves update returns and rejects the non-game host",
+     "14 runtime checks passed; no game process was accessed."
+    ]
+   },
+   {
+    "command": "luajit.exe tests/test_windows_interop.lua src peer-src hellpod-ball build/mod.ljbc F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7",
+    "hash_cache_shim": false,
+    "exit": 0,
+    "pass_lines": [
+     "PASS: real Windows adapters share one Lua VM in hellpod-ball order (Hellpod adapter on split runtime); repeated ball initialization and write guards survive",
+     "PASS: runtime-backed SHA256 matches independent hash once per session; invalid memory reads are contained; the adapter refuses a missing runtime or write side; 17 of the runtime's 17 Windows names declared first with wrong prototypes (H.clash)",
+     "PASS: adapter refuses executable, read-only, image and unmapped write targets",
+     "PASS: first apply allocates 341 KB of Lua heap (under 2 MB)",
+     "PASS: 105 navigation bits change across 153 shuffled records; every other data and code byte survives",
+     "PASS: malformed groups, counts, pointers, identities and read-only data fail before writes",
+     "PASS: partial-write and verification failures recover the original settings with one query each way",
+     "PASS: a neighbour's other flag bits and its bit in an unowned record survive the apply and the restore",
+     "PASS: bits a neighbour already cleared are accepted, never written and never restored; all clear makes no query",
+     "PASS: the restore puts back only this mod's bit, keeps later neighbour changes and skips moved records",
+     "PASS: first-frame and idle call budgets: one apply per session, no calls and no garbage (interpreted or compiled) on later frames",
+     "PASS: loader preserves updates, verifies both modules, contains failures and removes its update hook",
+     "PASS: loader equivalence: 4200 scripted frames match the published loader event for event",
+     "PASS: idle frames below a later mod record no aborting traces in the loader (published loader: 13)",
+     "PASS: compiled module initializes once, preserves update returns and rejects the non-game host"
+    ],
+    "tail": [
+     "PASS: first-frame and idle call budgets: one apply per session, no calls and no garbage (interpreted or compiled) on later frames",
+     "PASS: loader preserves updates, verifies both modules, contains failures and removes its update hook",
+     "PASS: loader equivalence: 4200 scripted frames match the published loader event for event",
+     "PASS: idle frames below a later mod record no aborting traces in the loader (published loader: 13)",
+     "PASS: compiled module initializes once, preserves update returns and rejects the non-game host",
+     "14 runtime checks passed; no game process was accessed."
+    ]
+   },
+   {
+    "command": "luajit.exe tests/test_windows_interop.lua src peer-src ball-hellpod build/mod.ljbc F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7",
+    "hash_cache_shim": false,
+    "exit": 0,
+    "pass_lines": [
+     "PASS: real Windows adapters share one Lua VM in ball-hellpod order (Hellpod adapter on split runtime); repeated ball initialization and write guards survive",
+     "PASS: runtime-backed SHA256 matches independent hash once per session; invalid memory reads are contained; the adapter refuses a missing runtime or write side; 17 of the runtime's 17 Windows names declared first with wrong prototypes (H.clash)",
+     "PASS: adapter refuses executable, read-only, image and unmapped write targets",
+     "PASS: first apply allocates 334 KB of Lua heap (under 2 MB)",
+     "PASS: 105 navigation bits change across 153 shuffled records; every other data and code byte survives",
+     "PASS: malformed groups, counts, pointers, identities and read-only data fail before writes",
+     "PASS: partial-write and verification failures recover the original settings with one query each way",
+     "PASS: a neighbour's other flag bits and its bit in an unowned record survive the apply and the restore",
+     "PASS: bits a neighbour already cleared are accepted, never written and never restored; all clear makes no query",
+     "PASS: the restore puts back only this mod's bit, keeps later neighbour changes and skips moved records",
+     "PASS: first-frame and idle call budgets: one apply per session, no calls and no garbage (interpreted or compiled) on later frames",
+     "PASS: loader preserves updates, verifies both modules, contains failures and removes its update hook",
+     "PASS: loader equivalence: 4200 scripted frames match the published loader event for event",
+     "PASS: idle frames below a later mod record no aborting traces in the loader (published loader: 13)",
+     "PASS: compiled module initializes once, preserves update returns and rejects the non-game host"
+    ],
+    "tail": [
+     "PASS: first-frame and idle call budgets: one apply per session, no calls and no garbage (interpreted or compiled) on later frames",
+     "PASS: loader preserves updates, verifies both modules, contains failures and removes its update hook",
+     "PASS: loader equivalence: 4200 scripted frames match the published loader event for event",
+     "PASS: idle frames below a later mod record no aborting traces in the loader (published loader: 13)",
+     "PASS: compiled module initializes once, preserves update returns and rejects the non-game host",
+     "14 runtime checks passed; no game process was accessed."
+    ]
+   }
+  ],
+  "fixture_value_changes": {
+   "tests/test_archive.lua:150 * 8->154 * 8": 3,
+   "tests/test_archive.lua:integer(data, 12)->integer(data, 13)": 1,
+   "tests/test_archive.lua:integer(data, 11)->integer(data, 12)": 1,
+   "tests/test_archive.lua:local group_sizes = {7204,1184,5860,5228,19152,7040,3832,18344,4884,1104,6444}->local group_sizes = {7204,1184,5860,5228,1116,19152,7040,3832,19332,4884,1104,6444}": 1,
+   "tests/test_archive.lua:local group_counts = {13,2,11,9,36,13,7,34,9,2,13}->local group_counts = {13,2,11,9,2,36,13,7,36,9,2,13}": 1,
+   "tests/test_archive.lua:pointer = 161, distance = 11->pointer = 166, distance = 12": 2,
+   "tests/test_archive.lua:written == 93->written == 95": 2,
+   "tests/test_archive.lua:\\b149\\b->153": 9,
+   "tests/test_archive.lua:\\b103\\b->105": 14,
+   "tests/test_archive.lua:written == 101->written == 103": 1
+  },
+  "passed": true
+ },
+ "upstream": {
+  "runs": [
+   {
+    "command": "luajit.exe tests/test_archive.lua src build/mod.ljbc F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7",
+    "hash_cache_shim": false,
+    "exit": 5,
+    "pass_lines": [],
+    "tail": [
+     "wine: Unhandled page fault on execute access to 00006FFFFCEFCFD0 at address 00006FFFFCEFCFD0 (thread 0024), starting debugger..."
+    ]
+   },
+   {
+    "command": "luajit.exe -e EXE_HASH='F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7' -e dofile([[../test_prelude.lua]]) tests/test_archive.lua src build/mod.ljbc F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7",
+    "hash_cache_shim": true,
+    "exit": 0,
+    "pass_lines": [
+     "PASS: runtime-backed SHA256 matches independent hash once per session; invalid memory reads are contained; the adapter refuses a missing runtime or write side; 16 of the runtime's 17 Windows names declared first with wrong prototypes (H.clash)",
+     "PASS: adapter refuses executable, read-only, image and unmapped write targets",
+     "PASS: first apply allocates 348 KB of Lua heap (under 2 MB)",
+     "PASS: 103 navigation bits change across 149 shuffled records; every other data and code byte survives",
+     "PASS: malformed groups, counts, pointers, identities and read-only data fail before writes",
+     "PASS: partial-write and verification failures recover the original settings with one query each way",
+     "PASS: a neighbour's other flag bits and its bit in an unowned record survive the apply and the restore",
+     "PASS: bits a neighbour already cleared are accepted, never written and never restored; all clear makes no query",
+     "PASS: the restore puts back only this mod's bit, keeps later neighbour changes and skips moved records",
+     "PASS: first-frame and idle call budgets: one apply per session, no calls and no garbage (interpreted or compiled) on later frames",
+     "PASS: loader preserves updates, verifies both modules, contains failures and removes its update hook",
+     "PASS: loader equivalence: 4200 scripted frames match the published loader event for event",
+     "PASS: idle frames below a later mod record no aborting traces in the loader (published loader: 13)",
+     "PASS: compiled module initializes once, preserves update returns and rejects the non-game host"
+    ],
+    "tail": [
+     "PASS: first-frame and idle call budgets: one apply per session, no calls and no garbage (interpreted or compiled) on later frames",
+     "PASS: loader preserves updates, verifies both modules, contains failures and removes its update hook",
+     "PASS: loader equivalence: 4200 scripted frames match the published loader event for event",
+     "PASS: idle frames below a later mod record no aborting traces in the loader (published loader: 13)",
+     "PASS: compiled module initializes once, preserves update returns and rejects the non-game host",
+     "14 runtime checks passed; no game process was accessed."
+    ]
+   },
+   {
+    "command": "luajit.exe tests/test_windows_interop.lua src peer-src hellpod-ball build/mod.ljbc F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7",
+    "hash_cache_shim": false,
+    "exit": 0,
+    "pass_lines": [
+     "PASS: real Windows adapters share one Lua VM in hellpod-ball order (Hellpod adapter on split runtime); repeated ball initialization and write guards survive",
+     "PASS: runtime-backed SHA256 matches independent hash once per session; invalid memory reads are contained; the adapter refuses a missing runtime or write side; 17 of the runtime's 17 Windows names declared first with wrong prototypes (H.clash)",
+     "PASS: adapter refuses executable, read-only, image and unmapped write targets",
+     "PASS: first apply allocates 361 KB of Lua heap (under 2 MB)",
+     "PASS: 103 navigation bits change across 149 shuffled records; every other data and code byte survives",
+     "PASS: malformed groups, counts, pointers, identities and read-only data fail before writes",
+     "PASS: partial-write and verification failures recover the original settings with one query each way",
+     "PASS: a neighbour's other flag bits and its bit in an unowned record survive the apply and the restore",
+     "PASS: bits a neighbour already cleared are accepted, never written and never restored; all clear makes no query",
+     "PASS: the restore puts back only this mod's bit, keeps later neighbour changes and skips moved records",
+     "PASS: first-frame and idle call budgets: one apply per session, no calls and no garbage (interpreted or compiled) on later frames",
+     "PASS: loader preserves updates, verifies both modules, contains failures and removes its update hook",
+     "PASS: loader equivalence: 4200 scripted frames match the published loader event for event",
+     "PASS: idle frames below a later mod record no aborting traces in the loader (published loader: 13)",
+     "PASS: compiled module initializes once, preserves update returns and rejects the non-game host"
+    ],
+    "tail": [
+     "PASS: first-frame and idle call budgets: one apply per session, no calls and no garbage (interpreted or compiled) on later frames",
+     "PASS: loader preserves updates, verifies both modules, contains failures and removes its update hook",
+     "PASS: loader equivalence: 4200 scripted frames match the published loader event for event",
+     "PASS: idle frames below a later mod record no aborting traces in the loader (published loader: 13)",
+     "PASS: compiled module initializes once, preserves update returns and rejects the non-game host",
+     "14 runtime checks passed; no game process was accessed."
+    ]
+   },
+   {
+    "command": "luajit.exe tests/test_windows_interop.lua src peer-src ball-hellpod build/mod.ljbc F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7",
+    "hash_cache_shim": false,
+    "exit": 0,
+    "pass_lines": [
+     "PASS: real Windows adapters share one Lua VM in ball-hellpod order (Hellpod adapter on split runtime); repeated ball initialization and write guards survive",
+     "PASS: runtime-backed SHA256 matches independent hash once per session; invalid memory reads are contained; the adapter refuses a missing runtime or write side; 17 of the runtime's 17 Windows names declared first with wrong prototypes (H.clash)",
+     "PASS: adapter refuses executable, read-only, image and unmapped write targets",
+     "PASS: first apply allocates 350 KB of Lua heap (under 2 MB)",
+     "PASS: 103 navigation bits change across 149 shuffled records; every other data and code byte survives",
+     "PASS: malformed groups, counts, pointers, identities and read-only data fail before writes",
+     "PASS: partial-write and verification failures recover the original settings with one query each way",
+     "PASS: a neighbour's other flag bits and its bit in an unowned record survive the apply and the restore",
+     "PASS: bits a neighbour already cleared are accepted, never written and never restored; all clear makes no query",
+     "PASS: the restore puts back only this mod's bit, keeps later neighbour changes and skips moved records",
+     "PASS: first-frame and idle call budgets: one apply per session, no calls and no garbage (interpreted or compiled) on later frames",
+     "PASS: loader preserves updates, verifies both modules, contains failures and removes its update hook",
+     "PASS: loader equivalence: 4200 scripted frames match the published loader event for event",
+     "PASS: idle frames below a later mod record no aborting traces in the loader (published loader: 13)",
+     "PASS: compiled module initializes once, preserves update returns and rejects the non-game host"
+    ],
+    "tail": [
+     "PASS: first-frame and idle call budgets: one apply per session, no calls and no garbage (interpreted or compiled) on later frames",
+     "PASS: loader preserves updates, verifies both modules, contains failures and removes its update hook",
+     "PASS: loader equivalence: 4200 scripted frames match the published loader event for event",
+     "PASS: idle frames below a later mod record no aborting traces in the loader (published loader: 13)",
+     "PASS: compiled module initializes once, preserves update returns and rejects the non-game host",
+     "14 runtime checks passed; no game process was accessed."
+    ]
+   }
+  ],
+  "fixture_value_changes": {},
+  "passed": true
+ },
+ "luajit_exe_sha256": "F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7",
+ "environment_shim": {
+  "prelude": "local ffi = require('ffi')\nffi.cdef[[uint32_t GetModuleFileNameW(void *module, uint16_t *path, uint32_t capacity);]]\nlocal path = ffi.new('uint16_t[32768]')\nlocal length = ffi.load('kernel32').GetModuleFileNameW(nil, path, 32768)\nassert(length > 0 and length < 32768)\nBingusRuntime = {hashes = {['sha256:' .. ffi.string(path, length * 2)] = EXE_HASH}}",
+  "when": "only if a run without it fails (same for both copies)",
+  "why": "Wine's bcrypt can fault inside BCryptDestroyHash (hdh-port, unmodified upstream too); the shim serves the adapter's module_hash of luajit.exe from Bingus Shared Runtime's documented per-session cache"
+ },
+ "not_run": {
+  "tests/test_package.py": "checks the standalone release zip from scripts/package.py; no release package is built here",
+  "scripts/test_arsenal_archive.cjs": "Arsenal archive import check (Node + Arsenal sources); the archive round trip is checked by build.py instead"
+ }
+}

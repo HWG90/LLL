@@ -1,0 +1,178 @@
+{
+ "port": {
+  "runs": [
+   {
+    "command": "luajit tests/test_data.lua src tests/solo_scenarios.lua",
+    "exit": 0,
+    "pass_lines": [
+     "PASS: beacon correction, three synthetic solo scenarios, guarded eight-byte writes, rollback, restore of its own pending write only, exclusions and minimum/newer loader API returns"
+    ],
+    "tail": [
+     "PASS: beacon correction, three synthetic solo scenarios, guarded eight-byte writes, rollback, restore of its own pending write only, exclusions and minimum/newer loader API returns"
+    ]
+   },
+   {
+    "command": "luajit tests/test_idle_equivalence.lua src",
+    "exit": 0,
+    "pass_lines": [
+     "PASS: idle equivalence with v4.6 over 3000 frames: the main scenario (2,100 frames: co-op and solo deaths, a teammate's beacon, landings, a restart, a pause, a stop) equal frame for frame; the three documented changes appear exactly where expected (alive to pending skipped, no anchor without a landing, an unsupported layout met at the death); loading screens differ only in the waiting status text (92 frames, log only)",
+     "PASS: 4 mutants of the gate fail the comparison"
+    ],
+    "tail": [
+     "PASS: idle equivalence with v4.6 over 3000 frames: the main scenario (2,100 frames: co-op and solo deaths, a teammate's beacon, landings, a restart, a pause, a stop) equal frame for frame; the three documented changes appear exactly where expected (alive to pending skipped, no anchor without a landing, an unsupported layout met at the death); loading screens differ only in the waiting status text (92 frames, log only)",
+     "PASS: 4 mutants of the gate fail the comparison"
+    ]
+   },
+   {
+    "command": "wine luajit.exe tests/test_startup.lua src build",
+    "exit": 0,
+    "pass_lines": [
+     "PASS: per-frame call budget: no protection query outside the correction frame; 2 reads alive in a mission",
+     "PASS: null startup, staged initialization, unreadable transition, correction, mission reload and fatal-layout protection",
+     "PASS: update guard: an error below pauses with the pending correction restored and resumes afresh; 8 below or 8 own errors in a burst stop; a refusal stops and restores; shutdown writes nothing",
+     "PASS: under the game's tostring, a changed player manager is noticed against the previous snapshot and before the write",
+     "PASS: idle gate: initial deployment excluded, alive-to-pending skipped, co-op and solo corrected through it; an earlier death's row still listed is not the new anchor; two rows with no landing seen capture nothing",
+     "PASS: runtime-backed Windows adapter hashes once per session, refuses module pages and writes checked data",
+     "PASS: compiled module rejects the non-game test host"
+    ],
+    "tail": [
+     "PASS: null startup, staged initialization, unreadable transition, correction, mission reload and fatal-layout protection",
+     "PASS: update guard: an error below pauses with the pending correction restored and resumes afresh; 8 below or 8 own errors in a burst stop; a refusal stops and restores; shutdown writes nothing",
+     "PASS: under the game's tostring, a changed player manager is noticed against the previous snapshot and before the write",
+     "PASS: idle gate: initial deployment excluded, alive-to-pending skipped, co-op and solo corrected through it; an earlier death's row still listed is not the new anchor; two rows with no landing seen capture nothing",
+     "PASS: runtime-backed Windows adapter hashes once per session, refuses module pages and writes checked data",
+     "PASS: compiled module rejects the non-game test host"
+    ]
+   },
+   {
+    "command": "wine luajit.exe tests/benchmark_synthetic.lua src check",
+    "exit": 1,
+    "pass_lines": [
+     "PASS: synthetic benchmark fixtures for 23 scenarios: exact reads per update, statuses, one protection query and one eight-byte write per correction, every fixture store in bounds"
+    ],
+    "tail": [
+     "<workspace>\\native-work\\megapack-port\\ReinforcementBeaconsFixed\\work\\luajit.exe: tests/benchmark_synthetic.lua:412: mp_pending_b4: 5504.00 B per update interpreted, 4352.00 B compiled (pin 4080)",
+     "stack traceback:",
+     "\t[C]: in function 'assert'",
+     "\ttests/benchmark_synthetic.lua:412: in function 'garbage_pins'",
+     "\ttests/benchmark_synthetic.lua:422: in main chunk",
+     "\t[C]: at 0x01400020e0"
+    ]
+   }
+  ],
+  "fixture_value_changes": {
+   "tests/benchmark_synthetic.lua:0x3326468->0x2ce1618": 1,
+   "tests/benchmark_synthetic.lua:0x33266a0->0x2ce1850": 1,
+   "tests/benchmark_synthetic.lua:0x33269c0->0x2ce1b78": 1,
+   "tests/benchmark_synthetic.lua:0x3326b20->0x2ce1ce0": 1,
+   "tests/benchmark_synthetic.lua:0x33266b0->0x2ce1860": 1,
+   "tests/benchmark_synthetic.lua:0x346bf98->0x2ce41b8": 1,
+   "tests/benchmark_synthetic.lua:0x346d560->0x2e287d0": 1,
+   "tests/benchmark_synthetic.lua:0x1a100f0->0x1ab76f8": 1,
+   "tests/benchmark_synthetic.lua:0x2bd870->0x28d3a0": 2,
+   "tests/benchmark_synthetic.lua:15937304->15944160": 2,
+   "tests/benchmark_synthetic.lua:15871688->15878544": 4,
+   "tests/benchmark_synthetic.lua:0x7C->0x7F": 1,
+   "tests/benchmark_synthetic.lua:0x1A14100->0x1ABB708": 1,
+   "tests/reference/spawn_data.lua:0x3326468->0x2ce1618": 1,
+   "tests/reference/spawn_data.lua:0x33266a0->0x2ce1850": 1,
+   "tests/reference/spawn_data.lua:0x33269c0->0x2ce1b78": 1,
+   "tests/reference/spawn_data.lua:0x3326b20->0x2ce1ce0": 1,
+   "tests/reference/spawn_data.lua:0x33266b0->0x2ce1860": 1,
+   "tests/reference/spawn_data.lua:0x346bf98->0x2ce41b8": 1,
+   "tests/reference/spawn_data.lua:0x346d560->0x2e287d0": 1,
+   "tests/reference/spawn_data.lua:0x1a100f0->0x1ab76f8": 1,
+   "tests/reference/spawn_data.lua:0x2bd870->0x28d3a0": 1,
+   "tests/reference/spawn_data.lua:15937304->15944160": 1,
+   "tests/reference/spawn_data.lua:15871688->15878544": 1,
+   "tests/reference/spawn_data.lua:0x7C->0x7F": 2,
+   "tests/test_data.lua:0x3326468->0x2ce1618": 1,
+   "tests/test_idle_equivalence.lua:0x3326468->0x2ce1618": 1,
+   "tests/test_idle_equivalence.lua:0x33266a0->0x2ce1850": 1,
+   "tests/test_idle_equivalence.lua:0x33269c0->0x2ce1b78": 1,
+   "tests/test_idle_equivalence.lua:0x3326b20->0x2ce1ce0": 1,
+   "tests/test_idle_equivalence.lua:0x33266b0->0x2ce1860": 1,
+   "tests/test_idle_equivalence.lua:0x346bf98->0x2ce41b8": 1,
+   "tests/test_idle_equivalence.lua:0x346d560->0x2e287d0": 1,
+   "tests/test_idle_equivalence.lua:0x7c->0x7f": 1,
+   "tests/test_startup.lua:0x3326468->0x2ce1618": 12,
+   "tests/test_startup.lua:0x33266a0->0x2ce1850": 2,
+   "tests/test_startup.lua:0x33269c0->0x2ce1b78": 2,
+   "tests/test_startup.lua:0x3326b20->0x2ce1ce0": 2,
+   "tests/test_startup.lua:0x33266b0->0x2ce1860": 1,
+   "tests/test_startup.lua:0x346bf98->0x2ce41b8": 1,
+   "tests/test_startup.lua:0x346d560->0x2e287d0": 1,
+   "tests/test_startup.lua:0x7c->0x7f": 3,
+   "tests/test_startup.lua:0x7C->0x7F": 2
+  },
+  "passed": false
+ },
+ "upstream": {
+  "runs": [
+   {
+    "command": "luajit tests/test_data.lua src tests/solo_scenarios.lua",
+    "exit": 0,
+    "pass_lines": [
+     "PASS: beacon correction, three synthetic solo scenarios, guarded eight-byte writes, rollback, restore of its own pending write only, exclusions and minimum/newer loader API returns"
+    ],
+    "tail": [
+     "PASS: beacon correction, three synthetic solo scenarios, guarded eight-byte writes, rollback, restore of its own pending write only, exclusions and minimum/newer loader API returns"
+    ]
+   },
+   {
+    "command": "luajit tests/test_idle_equivalence.lua src",
+    "exit": 0,
+    "pass_lines": [
+     "PASS: idle equivalence with v4.6 over 3000 frames: the main scenario (2,100 frames: co-op and solo deaths, a teammate's beacon, landings, a restart, a pause, a stop) equal frame for frame; the three documented changes appear exactly where expected (alive to pending skipped, no anchor without a landing, an unsupported layout met at the death); loading screens differ only in the waiting status text (92 frames, log only)",
+     "PASS: 4 mutants of the gate fail the comparison"
+    ],
+    "tail": [
+     "PASS: idle equivalence with v4.6 over 3000 frames: the main scenario (2,100 frames: co-op and solo deaths, a teammate's beacon, landings, a restart, a pause, a stop) equal frame for frame; the three documented changes appear exactly where expected (alive to pending skipped, no anchor without a landing, an unsupported layout met at the death); loading screens differ only in the waiting status text (92 frames, log only)",
+     "PASS: 4 mutants of the gate fail the comparison"
+    ]
+   },
+   {
+    "command": "wine luajit.exe tests/test_startup.lua src build",
+    "exit": 0,
+    "pass_lines": [
+     "PASS: per-frame call budget: no protection query outside the correction frame; 2 reads alive in a mission",
+     "PASS: null startup, staged initialization, unreadable transition, correction, mission reload and fatal-layout protection",
+     "PASS: update guard: an error below pauses with the pending correction restored and resumes afresh; 8 below or 8 own errors in a burst stop; a refusal stops and restores; shutdown writes nothing",
+     "PASS: under the game's tostring, a changed player manager is noticed against the previous snapshot and before the write",
+     "PASS: idle gate: initial deployment excluded, alive-to-pending skipped, co-op and solo corrected through it; an earlier death's row still listed is not the new anchor; two rows with no landing seen capture nothing",
+     "PASS: runtime-backed Windows adapter hashes once per session, refuses module pages and writes checked data",
+     "PASS: compiled module rejects the non-game test host"
+    ],
+    "tail": [
+     "PASS: null startup, staged initialization, unreadable transition, correction, mission reload and fatal-layout protection",
+     "PASS: update guard: an error below pauses with the pending correction restored and resumes afresh; 8 below or 8 own errors in a burst stop; a refusal stops and restores; shutdown writes nothing",
+     "PASS: under the game's tostring, a changed player manager is noticed against the previous snapshot and before the write",
+     "PASS: idle gate: initial deployment excluded, alive-to-pending skipped, co-op and solo corrected through it; an earlier death's row still listed is not the new anchor; two rows with no landing seen capture nothing",
+     "PASS: runtime-backed Windows adapter hashes once per session, refuses module pages and writes checked data",
+     "PASS: compiled module rejects the non-game test host"
+    ]
+   },
+   {
+    "command": "wine luajit.exe tests/benchmark_synthetic.lua src check",
+    "exit": 1,
+    "pass_lines": [
+     "PASS: synthetic benchmark fixtures for 23 scenarios: exact reads per update, statuses, one protection query and one eight-byte write per correction, every fixture store in bounds"
+    ],
+    "tail": [
+     "<workspace>\\native-work\\megapack-port\\ReinforcementBeaconsFixed\\work\\luajit.exe: tests/benchmark_synthetic.lua:412: mp_pending_b4: 5504.00 B per update interpreted, 4352.00 B compiled (pin 4080)",
+     "stack traceback:",
+     "\t[C]: in function 'assert'",
+     "\ttests/benchmark_synthetic.lua:412: in function 'garbage_pins'",
+     "\ttests/benchmark_synthetic.lua:422: in main chunk",
+     "\t[C]: at 0x01400020e0"
+    ]
+   }
+  ],
+  "fixture_value_changes": {},
+  "passed": false
+ },
+ "not_run": {
+  "tests/test_data_package.py": "checks the standalone release zip from scripts/package.py; no release package is built here",
+  "tests/frame_budget.lua": "helper loaded by test_startup.lua (runs inside it)"
+ }
+}

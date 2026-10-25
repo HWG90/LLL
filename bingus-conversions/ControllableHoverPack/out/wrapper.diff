@@ -1,0 +1,42 @@
+--- upstream hover_source
++++ port hover_source
+@@ -786 +786 @@
+-    if api.pointer(read(game+0x3326bb8,8))~=target.manager then return nil end
++    if api.pointer(read(game+0x2ce1d78,8))~=target.manager then return nil end
+@@ -825,2 +825,2 @@
+-        local owner=ptr(read(game+0x346bf98,8))
+-        local resources=ptr(read(owner+0xf12cb8,8));local headers=read(resources,96)
++        local owner=ptr(read(game+0x2ce41b8,8))
++        local resources=ptr(read(owner+0xf14780,8));local headers=read(resources,96)
+@@ -1018 +1018 @@
+-    local mode=read(global(0x33266a0),0x44)
++    local mode=read(global(0x2ce1850),0x44)
+@@ -1027 +1027 @@
+-    local pm=global(0x3326468);local counts=read(pm+0x84,8)
++    local pm=global(0x2ce1618);local counts=read(pm+0x84,8)
+@@ -1039,2 +1039,2 @@
+-    local owner=global(0x346bf98)
+-    local ei=lookup(read(owner+0xf22ec8,20),unit,1048576)
++    local owner=global(0x2ce41b8)
++    local ei=lookup(read(owner+0xf24990,20),unit,1048576)
+@@ -1043 +1043 @@
+-    L.avatar=owner+0xf32f18+ei*24
++    L.avatar=owner+0xf349e0+ei*24
+@@ -1052 +1052 @@
+-    local am=global(0x3326d20)
++    local am=global(0x2ce1ee0)
+@@ -1065 +1065 @@
+-    local equipment=global(0x3326738)
++    local equipment=global(0x2ce18e8)
+@@ -1080 +1080 @@
+-    local jm=global(0x3326bb8)
++    local jm=global(0x2ce1d78)
+@@ -1099 +1099 @@
+-    local attach=global(0x3326dc0)
++    local attach=global(0x2ce1f88)
+@@ -1111 +1111 @@
+-    local flags=read(am+0x53d900+ai*0x1238+0xf80,24)
++    local flags=read(am+0x53d900+ai*0x1240+0xf88,24)
+@@ -1503 +1503 @@
+-install(function()return create_api(runtime,runtime_write.extend(runtime_memory.new(runtime)))end,patch,{revision='v1.8.1',game_sha256='2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E',exe_sha256='F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'},runtime)
++install(function()return create_api(runtime,runtime_write.extend(runtime_memory.new(runtime)))end,patch,{revision='v1.8.1-26088801',game_sha256='6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F',exe_sha256='0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'},runtime)

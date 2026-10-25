@@ -1,0 +1,207 @@
+{
+ "fixture_edits": {
+  "test_binding_paths.lua": [
+   "0x33266a0",
+   "0x347ce28",
+   "0x347cf18"
+  ],
+  "test_hotkey.lua": [
+   "0x14c0350",
+   "0x3326428",
+   "0x3326468",
+   "0x33265f0",
+   "0x33266a0",
+   "0x3326700",
+   "0x3326d78",
+   "0x3326e68",
+   "0x346bf98",
+   "0x347ce28",
+   "0x347ce38",
+   "0x347cf18",
+   "0x639830",
+   "0x661cf0",
+   "0x997800",
+   "0xf22ec8",
+   "0xf32f18",
+   "2570632",
+   "2570636",
+   "placement[406] == 60 and placement[407] == 0 and placement[408] == 0",
+   "systems + 19512",
+   "systems + 19520"
+  ]
+ },
+ "fixture_map": {
+  "0x14c0350": "0x135b4f0",
+  "0x997800": "0x9a9450",
+  "0x639830": "0x642f30",
+  "0x661cf0": "0x66b5d0",
+  "0x347ce28": "0x2e38160",
+  "0x347ce38": "0x2e38170",
+  "0x347cf18": "0x2e38250",
+  "0x33266a0": "0x2ce1850",
+  "0x33265f0": "0x2ce17a0",
+  "0x3326428": "0x2ce15d8",
+  "0x3326d78": "0x2ce1f38",
+  "0x3326700": "0x2ce18b0",
+  "0x3326e68": "0x2ce2040",
+  "0x3326468": "0x2ce1618",
+  "0x346bf98": "0x2ce41b8",
+  "0x3326308": "0x2ce14c8",
+  "2570632": "2570696",
+  "2570636": "2570700",
+  "systems + 19512": "systems + 19704",
+  "systems + 19520": "systems + 19712",
+  "0xf22ec8": "0xf24990",
+  "0xf32f18": "0xf349e0",
+  "placement[406] == 60 and placement[407] == 0 and placement[408] == 0": "placement[408] == 60 and placement[409] == 0 and placement[410] == 0",
+  "2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+  "F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE"
+ },
+ "ported": {
+  "test_hotkey.lua": {
+   "exit": 0,
+   "passed": true,
+   "pass_lines": 8,
+   "tail": [
+    "Mod Bindings Menu registration: a refused or failing registration is tried again at most 8 times, 60 frames after the last try and doubling, sooner after a revision change but never within 60 frames; nothing per frame once registered or out of tries; a new table registers again OK",
+    "Registration after startup: with the loader's after_startup the six shortcuts register before the first frame (the fixed keys answer until Mod Bindings Menu is ready), a refusal there is retried 60 frames later, a menu absent then registers when it appears, a callback run at once registers at load; without the capability, or when after_startup refuses (logged once), the first frame registers OK",
+    "Per-frame calls, with is_down, with poll and with the idle gate: the context read until the ship is found and on frames that act, the mission check every 60 frames aboard and in a mission, one read per idle frame aboard with the gate (Mod Bindings Menu versions 3 and 4; 2 and 5 polled), nothing between checks in a mission, presses on and off focus, fixed keys and a Hellpod wait within their exact pinned budgets, and idle frames without allocation OK",
+    "Idle gate layouts: Mod Bindings Menu API version 3 or 4 with 36 actions, ready and all six shortcuts registered; versions 1, 2, 5, nil, \"4\" and 4.5, other capacities, no ready and a missing shortcut keep the polling fallback OK"
+   ]
+  },
+  "test_binding_paths.lua": {
+   "exit": 0,
+   "passed": true,
+   "pass_lines": 2,
+   "tail": [
+    "poll and is_down paths over 30000 generated frames: the same calls, log lines, shortcut states and presenter state on every frame; 17313 frames answered by one poll (10204 nil answers on fixed keys), 439 presenters opened, 1078 frames on fixed keys only (281 with Mod Bindings Menu but nothing registered), 278 focus changes, 28 Mod Bindings Menu tables, 3 polls that raised and 4 that refused, each logged once OK",
+    "idle gate and poll on every frame over the same 30000 frames: the same log lines, shortcut states, presenter state and ship on every frame; 1602 idle frames aboard answered by the gate alone (621 with Mod Bindings Menu version 3, 981 with version 4), 433 presenters opened, 2220 frames in a mission OK"
+   ]
+  },
+  "test_bingus_text.lua (linux luajit)": {
+   "exit": 0,
+   "passed": true,
+   "pass_lines": 15,
+   "tail": [
+    "PASS: the game's Text Language is read in five reads, mapped, and unreadable memory never guesses",
+    "PASS: two copies share one registry; a pack registered inline reaches every mod",
+    "PASS: refresh() and lookups with nothing changed allocate nothing",
+    "PASS: the Steam language query fails soft outside the game and tolerates several copies"
+   ]
+  },
+  "test_bingus_text.lua": {
+   "exit": 0,
+   "passed": true,
+   "pass_lines": 15,
+   "tail": [
+    "PASS: the game's Text Language is read in five reads, mapped, and unreadable memory never guesses",
+    "PASS: two copies share one registry; a pack registered inline reaches every mod",
+    "PASS: refresh() and lookups with nothing changed allocate nothing",
+    "PASS: the Steam language query fails soft outside the game and tolerates several copies"
+   ]
+  },
+  "test_ffi_names.lua sdk-first": {
+   "exit": 0,
+   "passed": true,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: Windows calls under private names, SDK-style declarations made first: window focus, key state, memory reads and module hashing work, and the SDK prototypes stay live"
+   ]
+  },
+  "test_ffi_names.lua mod-first": {
+   "exit": 0,
+   "passed": true,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: Windows calls under private names, SDK-style declarations made after the mod loaded, with the real names and type names free until then: window focus, key state, memory reads and module hashing work, and the SDK prototypes stay live"
+   ]
+  },
+  "test_ffi_names.lua hostile-first": {
+   "exit": 0,
+   "passed": true,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: Windows calls under private names, every real name declared first with a prototype that fits nothing (H.clash): window focus, key state, memory reads and module hashing work"
+   ]
+  },
+  "test_hotkey.lua with HD2_GAME_CAPTURE=game-26088801.dll": {
+   "exit": 0,
+   "passed": true,
+   "pass_lines": 8,
+   "tail": [
+    "Mod Bindings Menu registration: a refused or failing registration is tried again at most 8 times, 60 frames after the last try and doubling, sooner after a revision change but never within 60 frames; nothing per frame once registered or out of tries; a new table registers again OK",
+    "Registration after startup: with the loader's after_startup the six shortcuts register before the first frame (the fixed keys answer until Mod Bindings Menu is ready), a refusal there is retried 60 frames later, a menu absent then registers when it appears, a callback run at once registers at load; without the capability, or when after_startup refuses (logged once), the first frame registers OK",
+    "Per-frame calls, with is_down, with poll and with the idle gate: the context read until the ship is found and on frames that act, the mission check every 60 frames aboard and in a mission, one read per idle frame aboard with the gate (Mod Bindings Menu versions 3 and 4; 2 and 5 polled), nothing between checks in a mission, presses on and off focus, fixed keys and a Hellpod wait within their exact pinned budgets, and idle frames without allocation OK",
+    "Idle gate layouts: Mod Bindings Menu API version 3 or 4 with 36 actions, ready and all six shortcuts registered; versions 1, 2, 5, nil, \"4\" and 4.5, other capacities, no ready and a missing shortcut keep the polling fallback OK"
+   ]
+  }
+ },
+ "upstream": {
+  "test_hotkey.lua": {
+   "exit": 0,
+   "passed": true,
+   "pass_lines": 8,
+   "tail": [
+    "Mod Bindings Menu registration: a refused or failing registration is tried again at most 8 times, 60 frames after the last try and doubling, sooner after a revision change but never within 60 frames; nothing per frame once registered or out of tries; a new table registers again OK",
+    "Registration after startup: with the loader's after_startup the six shortcuts register before the first frame (the fixed keys answer until Mod Bindings Menu is ready), a refusal there is retried 60 frames later, a menu absent then registers when it appears, a callback run at once registers at load; without the capability, or when after_startup refuses (logged once), the first frame registers OK",
+    "Per-frame calls, with is_down, with poll and with the idle gate: the context read until the ship is found and on frames that act, the mission check every 60 frames aboard and in a mission, one read per idle frame aboard with the gate (Mod Bindings Menu versions 3 and 4; 2 and 5 polled), nothing between checks in a mission, presses on and off focus, fixed keys and a Hellpod wait within their exact pinned budgets, and idle frames without allocation OK",
+    "Idle gate layouts: Mod Bindings Menu API version 3 or 4 with 36 actions, ready and all six shortcuts registered; versions 1, 2, 5, nil, \"4\" and 4.5, other capacities, no ready and a missing shortcut keep the polling fallback OK"
+   ]
+  },
+  "test_binding_paths.lua": {
+   "exit": 0,
+   "passed": true,
+   "pass_lines": 2,
+   "tail": [
+    "poll and is_down paths over 30000 generated frames: the same calls, log lines, shortcut states and presenter state on every frame; 17313 frames answered by one poll (10204 nil answers on fixed keys), 439 presenters opened, 1078 frames on fixed keys only (281 with Mod Bindings Menu but nothing registered), 278 focus changes, 28 Mod Bindings Menu tables, 3 polls that raised and 4 that refused, each logged once OK",
+    "idle gate and poll on every frame over the same 30000 frames: the same log lines, shortcut states, presenter state and ship on every frame; 1602 idle frames aboard answered by the gate alone (621 with Mod Bindings Menu version 3, 981 with version 4), 433 presenters opened, 2220 frames in a mission OK"
+   ]
+  },
+  "test_bingus_text.lua (linux luajit)": {
+   "exit": 0,
+   "passed": true,
+   "pass_lines": 15,
+   "tail": [
+    "PASS: the game's Text Language is read in five reads, mapped, and unreadable memory never guesses",
+    "PASS: two copies share one registry; a pack registered inline reaches every mod",
+    "PASS: refresh() and lookups with nothing changed allocate nothing",
+    "PASS: the Steam language query fails soft outside the game and tolerates several copies"
+   ]
+  },
+  "test_bingus_text.lua": {
+   "exit": 0,
+   "passed": true,
+   "pass_lines": 15,
+   "tail": [
+    "PASS: the game's Text Language is read in five reads, mapped, and unreadable memory never guesses",
+    "PASS: two copies share one registry; a pack registered inline reaches every mod",
+    "PASS: refresh() and lookups with nothing changed allocate nothing",
+    "PASS: the Steam language query fails soft outside the game and tolerates several copies"
+   ]
+  },
+  "test_ffi_names.lua sdk-first": {
+   "exit": 0,
+   "passed": true,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: Windows calls under private names, SDK-style declarations made first: window focus, key state, memory reads and module hashing work, and the SDK prototypes stay live"
+   ]
+  },
+  "test_ffi_names.lua mod-first": {
+   "exit": 0,
+   "passed": true,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: Windows calls under private names, SDK-style declarations made after the mod loaded, with the real names and type names free until then: window focus, key state, memory reads and module hashing work, and the SDK prototypes stay live"
+   ]
+  },
+  "test_ffi_names.lua hostile-first": {
+   "exit": 0,
+   "passed": true,
+   "pass_lines": 1,
+   "tail": [
+    "PASS: Windows calls under private names, every real name declared first with a prototype that fits nothing (H.clash): window focus, key state, memory reads and module hashing work"
+   ]
+  }
+ }
+}

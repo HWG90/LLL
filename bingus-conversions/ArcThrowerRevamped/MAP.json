@@ -1,0 +1,2028 @@
+{
+ "mod": "Arc Thrower Revamped v1.7.1 (VanillaPlusMegapack/components/ArcThrowerRevamped, identical to upstream-bingus/ArcThrowerRevamped at tag v1.7.1)",
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "old_image": "old-game",
+ "new_image": "native-work/evidence/game-26088801.dll",
+ "counts": {
+  "high": 28,
+  "medium": 1
+ },
+ "rows_total": 29,
+ "rows_feeding_write": 26,
+ "changed": [
+  "gate.EXE_SHA256",
+  "gate.GAME_SHA256",
+  "text.build_number",
+  "text.revision",
+  "atr.FIRE_MODE_SETTER",
+  "atr.CHARGE_MANAGER",
+  "atr.TRIGGER_MANAGER",
+  "atr.MISSION_RECORD",
+  "atr.player_manager",
+  "atr.entities",
+  "atr.avatar_manager",
+  "atr.weapon_holder_manager",
+  "atr.entity_unit_lookup",
+  "atr.entity_records"
+ ],
+ "writes": [
+  {
+   "what": "charging flag: byte 1 at charge entry + 12",
+   "address": "[[game+0x2ce1de8]+0x40] + 40*i + 12",
+   "rows": [
+    "atr.CHARGE_MANAGER",
+    "atr.charge_layout",
+    "atr.TRIGGER_MANAGER",
+    "atr.trigger_layout"
+   ],
+   "guard": "entry found by the weapon entity pointer at [m+0x38][i]; page must be committed private RW (VirtualQueryEx) or the addon stops; WriteProcessMemory with byte count check"
+  },
+  {
+   "what": "auto-fire flag: byte 1 at charge record + 184, then the original byte back on pause/stop/shutdown",
+   "address": "found by scanning committed private read-only regions >= 1 MiB for ARC_FINGERPRINT at +168 plus the five charge floats",
+   "rows": [
+    "atr.charge_record",
+    "atr.ARC_FINGERPRINT"
+   ],
+   "guard": "VirtualProtectEx to RW for the byte only, restored and checked; read back; revalidated every poll"
+  }
+ ],
+ "witness_check_failures": [],
+ "rows": [
+  {
+   "id": "gate.EXE_SHA256",
+   "line": 159,
+   "symbol": "EXE_SHA256",
+   "kind": "SHA-256 pin of bin/helldivers2.exe (verify_build gate)",
+   "old": "F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06",
+   "new": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "role": "gate",
+   "feeds_write": true,
+   "method": "SHA-256 of the installed file, read only",
+   "witnesses": [
+    {
+     "file": "<game>/bin/helldivers2.exe",
+     "sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE"
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L0",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": true
+  },
+  {
+   "id": "gate.GAME_SHA256",
+   "line": 160,
+   "symbol": "GAME_SHA256",
+   "kind": "SHA-256 pin of data/game/game.dll (verify_build gate)",
+   "old": "2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E",
+   "new": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "role": "gate",
+   "feeds_write": true,
+   "method": "SHA-256 of the installed file, read only",
+   "witnesses": [
+    {
+     "file": "<game>/data/game/game.dll",
+     "sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F"
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L0",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": true
+  },
+  {
+   "id": "text.build_number",
+   "line": [
+    23,
+    153,
+    170,
+    1195
+   ],
+   "symbol": "'25480438' in comments and log text",
+   "kind": "log/comment text naming the supported build",
+   "old": "25480438",
+   "new": "26088801",
+   "role": "cosmetic",
+   "feeds_write": false,
+   "method": "text",
+   "witnesses": [],
+   "confidence": "high",
+   "live_check": "L0",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": true
+  },
+  {
+   "id": "text.revision",
+   "line": 13,
+   "symbol": "module.revision",
+   "kind": "revision string (log line)",
+   "old": "v1.7.1",
+   "new": "v1.7.1-26088801",
+   "role": "cosmetic",
+   "feeds_write": false,
+   "method": "text",
+   "witnesses": [],
+   "confidence": "high",
+   "live_check": "L0",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": true
+  },
+  {
+   "id": "atr.FIRE_MODE_SETTER",
+   "line": 28,
+   "symbol": "FIRE_MODE_SETTER",
+   "kind": "game.dll function RVA (gate: its first 15 bytes are compared with FIRE_MODE_SIGNATURE through ReadProcessMemory; the addon never calls it)",
+   "old": "0x755f90",
+   "new": "0x761700",
+   "role": "gate",
+   "feeds_write": true,
+   "method": "unique masked 160-byte window at the old function start; the 15-byte signature occurs exactly once in each image; whole function aligned 427/427",
+   "witnesses": [
+    {
+     "signature_unique_old": true,
+     "signature_unique_new": true,
+     "ok": true
+    },
+    {
+     "function_old": "0x755f90",
+     "function_new": "0x761700",
+     "old_insns": 427,
+     "new_insns": 427,
+     "aligned": 427,
+     "ratio": 1.0,
+     "non_target_operand_differences": 0,
+     "explained_differences": [
+      "0x756586 mov rdx, qword ptr [rax + 0x288] -> 0x761cf6 mov rdx, qword ptr [rax + 0x290]",
+      "0x75658d mov rcx, qword ptr [rcx + 0x10f8] -> 0x761cfd mov rcx, qword ptr [rcx + 0x1178]",
+      "0x756594 mov rdi, qword ptr [rax + 0x338] -> 0x761d04 mov rdi, qword ptr [rax + 0x340]",
+      "0x7565bd mov rcx, qword ptr [rcx + 0x10f8] -> 0x761d2d mov rcx, qword ptr [rcx + 0x1178]"
+     ],
+     "ok": true
+    },
+    {
+     "pdata_new": [
+      "0x761700",
+      "0x76170f"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L1",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": true
+  },
+  {
+   "id": "atr.FIRE_MODE_SIGNATURE",
+   "line": 29,
+   "symbol": "FIRE_MODE_SIGNATURE",
+   "kind": "15 code bytes (prologue)",
+   "old": "48894c24085355565741574883ec20",
+   "new": "48894c24085355565741574883ec20",
+   "role": "gate",
+   "feeds_write": true,
+   "method": "byte comparison of both images",
+   "witnesses": [
+    {
+     "old_bytes": "48894c24085355565741574883ec20",
+     "new_bytes": "48894c24085355565741574883ec20"
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L1",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": false
+  },
+  {
+   "id": "atr.CHARGE_MANAGER",
+   "line": 26,
+   "symbol": "CHARGE_MANAGER",
+   "kind": "game.dll global: weapon charge component manager",
+   "old": "0x3326c20",
+   "new": "0x2ce1de8",
+   "role": "address",
+   "feeds_write": true,
+   "method": "instruction windows (18 agree; 1 masked 32-byte twin in the world initializer and 1 exact 32-byte twin in an unrelated function far from its old position rejected) + world-initializer store order + the charge settings getter and the charge update both load it",
+   "witnesses": [
+    {
+     "sampled_old_sites": 38,
+     "old_sites": 38,
+     "witnesses": 20,
+     "votes": {
+      "0x2ce1de8": 18,
+      "0x2ce1ea8": 1,
+      "0x2ce1f48": 1
+     },
+     "exact_window_votes": {
+      "0x2ce1de8": 18,
+      "0x2ce1f48": 1
+     },
+     "distinct_old_functions": 16
+    },
+    {
+     "image": "old",
+     "address": "0x568cde",
+     "instruction": "lea rax, [rbx + 0x75f1d8]",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0x568ce5",
+     "instruction": "mov qword ptr [rip + 0x2dbdf34], rax ->0x3326c20",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x571ca8",
+     "instruction": "lea rax, [rbx + 0x75ec38]",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x571caf",
+     "instruction": "mov qword ptr [rip + 0x2770132], rax ->0x2ce1de8",
+     "ok": true,
+     "note": "CHARGE: same store order in the world initializer"
+    },
+    {
+     "image": "old",
+     "address": "0x5052e2",
+     "instruction": "mov r11, qword ptr [rip + 0x2e21937] ->0x3326c20",
+     "ok": true,
+     "note": "charge settings getter (old 0x5052c0 -> new 0x50d8b0)"
+    },
+    {
+     "image": "new",
+     "address": "0x50d8d2",
+     "instruction": "mov r11, qword ptr [rip + 0x27d450f] ->0x2ce1de8",
+     "ok": true,
+     "note": "charge settings getter (old 0x5052c0 -> new 0x50d8b0)"
+    },
+    {
+     "image": "old",
+     "address": "0x555b04",
+     "instruction": "lea rcx, [rsi + 0x75f1d8]",
+     "ok": true,
+     "note": "world update passes &world[+charge] to the component update"
+    },
+    {
+     "image": "new",
+     "address": "0x55eae3",
+     "instruction": "lea rcx, [rsi + 0x75ec38]",
+     "ok": true,
+     "note": "world update passes &world[+charge] to the component update"
+    }
+   ],
+   "rejected": [
+    {
+     "old": "0x568ce5",
+     "new": "0x571c15",
+     "new_global": "0x2ce1ea8",
+     "why": "field-masked 32-byte window in the initializer: the next store in sequence; the unmasked store order pairs 0x571caf"
+    },
+    {
+     "old": "0x83e321",
+     "new": "0x112fd63",
+     "new_global": "0x2ce1f48",
+     "why": "32-byte window, new hit outside the paired function region (old fn 0x83e24f); template twin"
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L4",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": true
+  },
+  {
+   "id": "atr.TRIGGER_MANAGER",
+   "line": 27,
+   "symbol": "TRIGGER_MANAGER",
+   "kind": "game.dll global: weapon trigger / fire-command manager",
+   "old": "0x3326660",
+   "new": "0x2ce1810",
+   "role": "selection",
+   "feeds_write": true,
+   "method": "instruction windows (51/51 agree) + world-initializer store order",
+   "witnesses": [
+    {
+     "sampled_old_sites": 64,
+     "old_sites": 221,
+     "witnesses": 51,
+     "votes": {
+      "0x2ce1810": 51
+     },
+     "exact_window_votes": {
+      "0x2ce1810": 48
+     },
+     "distinct_old_functions": 48
+    },
+    {
+     "image": "old",
+     "address": "0x568eac",
+     "instruction": "lea rax, [rbx + 0xe9fc38]",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0x568eb3",
+     "instruction": "mov qword ptr [rip + 0x2dbd7a6], rax ->0x3326660",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x571e76",
+     "instruction": "lea rax, [rbx + 0xea14e0]",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x571e7d",
+     "instruction": "mov qword ptr [rip + 0x276f98c], rax ->0x2ce1810",
+     "ok": true,
+     "note": "TRIGGER: same store order in the world initializer"
+    },
+    {
+     "image": "old",
+     "address": "0x54034f",
+     "instruction": "mov rbx, qword ptr [rip + 0x2de630a] ->0x3326660",
+     "ok": true,
+     "note": "trigger add-entity (old 0x540340 -> new 0x54916e)"
+    },
+    {
+     "image": "new",
+     "address": "0x54917f",
+     "instruction": "mov rbx, qword ptr [rip + 0x279868a] ->0x2ce1810",
+     "ok": true,
+     "note": "trigger add-entity (old 0x540340 -> new 0x54916e)"
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L5",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": true
+  },
+  {
+   "id": "atr.MISSION_RECORD",
+   "line": 49,
+   "symbol": "MISSION_RECORD",
+   "kind": "game.dll global: mission/mode record pointer",
+   "old": "0x33266a0",
+   "new": "0x2ce1850",
+   "role": "timing",
+   "feeds_write": true,
+   "method": "instruction windows (51/51 agree) + world-initializer store order (&world[+0x898] in both)",
+   "witnesses": [
+    {
+     "sampled_old_sites": 64,
+     "old_sites": 240,
+     "witnesses": 51,
+     "votes": {
+      "0x2ce1850": 51
+     },
+     "exact_window_votes": {
+      "0x2ce1850": 46
+     },
+     "distinct_old_functions": 50
+    },
+    {
+     "image": "old",
+     "address": "0x5682a4",
+     "instruction": "lea rax, [rbx + 0x898]",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0x5682ab",
+     "instruction": "mov qword ptr [rip + 0x2dbe3ee], rax ->0x33266a0",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x571244",
+     "instruction": "lea rax, [rbx + 0x898]",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x57124b",
+     "instruction": "mov qword ptr [rip + 0x27705fe], rax ->0x2ce1850",
+     "ok": true,
+     "note": "MISSION: same store order in the world initializer"
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L2",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": true
+  },
+  {
+   "id": "atr.player_manager",
+   "line": 352,
+   "symbol": "state.game+0x3326468",
+   "kind": "game.dll global: player manager",
+   "old": "0x3326468",
+   "new": "0x2ce1618",
+   "role": "identity",
+   "feeds_write": true,
+   "method": "instruction windows (47/47 agree) + world-initializer store order",
+   "witnesses": [
+    {
+     "sampled_old_sites": 64,
+     "old_sites": 1199,
+     "witnesses": 47,
+     "votes": {
+      "0x2ce1618": 47
+     },
+     "exact_window_votes": {
+      "0x2ce1618": 45
+     },
+     "distinct_old_functions": 47
+    },
+    {
+     "image": "old",
+     "address": "0x568ec8",
+     "instruction": "lea rax, [rbx + 0xea0818]",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0x568ecf",
+     "instruction": "mov qword ptr [rip + 0x2dbd592], rax ->0x3326468",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x571e92",
+     "instruction": "lea rax, [rbx + 0xea20c8]",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x571e99",
+     "instruction": "mov qword ptr [rip + 0x276f778], rax ->0x2ce1618",
+     "ok": true,
+     "note": "PLAYERS: same store order in the world initializer"
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L3",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": true
+  },
+  {
+   "id": "atr.entities",
+   "line": 352,
+   "symbol": "state.game+0x346bf98",
+   "kind": "game.dll global: entities object (unit -> entity registry)",
+   "old": "0x346bf98",
+   "new": "0x2ce41b8",
+   "role": "identity",
+   "feeds_write": true,
+   "method": "instruction windows (42/42 agree) + the unit lookup function (old 0xfdba60 -> new 0xe6c010) loads it",
+   "witnesses": [
+    {
+     "sampled_old_sites": 64,
+     "old_sites": 1449,
+     "witnesses": 42,
+     "votes": {
+      "0x2ce41b8": 42
+     },
+     "exact_window_votes": {
+      "0x2ce41b8": 27
+     },
+     "distinct_old_functions": 42
+    },
+    {
+     "image": "old",
+     "address": "0xfdba64",
+     "instruction": "mov r9, qword ptr [rip + 0x249052d] ->0x346bf98",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0xe6c014",
+     "instruction": "mov r9, qword ptr [rip + 0x1e7819d] ->0x2ce41b8",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L3",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": true
+  },
+  {
+   "id": "atr.avatar_manager",
+   "line": [
+    352,
+    407
+   ],
+   "symbol": "state.game+0x3326d20",
+   "kind": "game.dll global: avatar manager",
+   "old": "0x3326d20",
+   "new": "0x2ce1ee0",
+   "role": "address",
+   "feeds_write": true,
+   "method": "instruction windows (47/47 agree) + world-initializer store order + the avatar input reader loads it",
+   "witnesses": [
+    {
+     "sampled_old_sites": 64,
+     "old_sites": 1644,
+     "witnesses": 47,
+     "votes": {
+      "0x2ce1ee0": 47
+     },
+     "exact_window_votes": {
+      "0x2ce1ee0": 43
+     },
+     "distinct_old_functions": 47
+    },
+    {
+     "image": "old",
+     "address": "0x568e66",
+     "instruction": "lea rax, [rbx + 0x956128]",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0x568e6d",
+     "instruction": "mov qword ptr [rip + 0x2dbdeac], rax ->0x3326d20",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x571e30",
+     "instruction": "lea rax, [rbx + 0x957990]",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x571e37",
+     "instruction": "mov qword ptr [rip + 0x27700a2], rax ->0x2ce1ee0",
+     "ok": true,
+     "note": "AVATARS: same store order in the world initializer"
+    },
+    {
+     "image": "old",
+     "address": "0xa43418",
+     "instruction": "mov r9, qword ptr [rip + 0x28e3901] ->0x3326d20",
+     "ok": true,
+     "note": "avatar input reader (old 0xa433f0 -> new 0xa5dbfe)"
+    },
+    {
+     "image": "new",
+     "address": "0xa5dc28",
+     "instruction": "mov r9, qword ptr [rip + 0x22842b1] ->0x2ce1ee0",
+     "ok": true,
+     "note": "avatar input reader (old 0xa433f0 -> new 0xa5dbfe)"
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L3",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": true
+  },
+  {
+   "id": "atr.weapon_holder_manager",
+   "line": 461,
+   "symbol": "state.game+0x3326dc0",
+   "kind": "game.dll global: weapon holder manager",
+   "old": "0x3326dc0",
+   "new": "0x2ce1f88",
+   "role": "identity",
+   "feeds_write": true,
+   "method": "instruction windows (45 agree; 2 field-masked 32/48-byte twins far from the paired code rejected) + world-initializer store order",
+   "witnesses": [
+    {
+     "sampled_old_sites": 64,
+     "old_sites": 197,
+     "witnesses": 47,
+     "votes": {
+      "0x2ce17c0": 1,
+      "0x2ce1f88": 45,
+      "0x2ce1848": 1
+     },
+     "exact_window_votes": {
+      "0x2ce1f88": 45
+     },
+     "distinct_old_functions": 40
+    },
+    {
+     "image": "old",
+     "address": "0x568e74",
+     "instruction": "lea rax, [rbx + 0xe9f8f0]",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0x568e7b",
+     "instruction": "mov qword ptr [rip + 0x2dbdf3e], rax ->0x3326dc0",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x571e3e",
+     "instruction": "lea rax, [rbx + 0xea1198]",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x571e45",
+     "instruction": "mov qword ptr [rip + 0x277013c], rax ->0x2ce1f88",
+     "ok": true,
+     "note": "HOLDERS: same store order in the world initializer"
+    }
+   ],
+   "rejected": [
+    {
+     "old": "0xc30b8",
+     "new": "0x1033b4d",
+     "new_global": "0x2ce17c0",
+     "why": "masked 48-byte window, new hit outside any pdata function"
+    },
+    {
+     "old": "0x9b5f44",
+     "new": "0x5a8392",
+     "new_global": "0x2ce1848",
+     "why": "masked 32-byte window, new function 4 MB away from the old one; template twin"
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L6",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": true
+  },
+  {
+   "id": "atr.entity_unit_lookup",
+   "line": 361,
+   "symbol": "owner+0xf22ec8",
+   "kind": "entities field: unit id -> entity index hash map header {slots u64, capacity u32, empty u32, multiplier u32}",
+   "old": "0xf22ec8",
+   "new": "0xf24990",
+   "role": "identity",
+   "feeds_write": true,
+   "method": "the unit lookup (old 0xfdba60 -> new 0xe6c010) re-disassembled: same unit != 0x7fff check, probing and header fields at +0x1AC8; whole-image displacement scan agrees (0xf22ec8 x17, 0xf22ed0 x14, 0xf22ed4 x13, 0xf22ed8 x11, all to +0x1AC8, none elsewhere); the same +0x1AC8 shift as the brief's live-verified field",
+   "witnesses": [
+    {
+     "image": "old",
+     "address": "0xfdba7c",
+     "instruction": "cmp edx, 0x7fff",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0xe6c02c",
+     "instruction": "cmp edx, 0x7fff",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0xfdba88",
+     "instruction": "mov r10d, dword ptr [r9 + 0xf22ed0]",
+     "ok": true,
+     "note": "capacity (+8)"
+    },
+    {
+     "image": "new",
+     "address": "0xe6c038",
+     "instruction": "mov r10d, dword ptr [r9 + 0xf24998]",
+     "ok": true,
+     "note": "capacity (+8)"
+    },
+    {
+     "image": "old",
+     "address": "0xfdba91",
+     "instruction": "mov r11d, dword ptr [r9 + 0xf22ed8]",
+     "ok": true,
+     "note": "multiplier (+0x10)"
+    },
+    {
+     "image": "new",
+     "address": "0xe6c041",
+     "instruction": "mov r11d, dword ptr [r9 + 0xf249a0]",
+     "ok": true,
+     "note": "multiplier (+0x10)"
+    },
+    {
+     "image": "old",
+     "address": "0xfdbab4",
+     "instruction": "mov rbx, qword ptr [r9 + 0xf22ec8]",
+     "ok": true,
+     "note": "slots pointer (+0)"
+    },
+    {
+     "image": "new",
+     "address": "0xe6c064",
+     "instruction": "mov rbx, qword ptr [r9 + 0xf24990]",
+     "ok": true,
+     "note": "slots pointer (+0)"
+    },
+    {
+     "image": "old",
+     "address": "0xfdbabb",
+     "instruction": "mov edi, dword ptr [r9 + 0xf22ed4]",
+     "ok": true,
+     "note": "empty key (+0xc)"
+    },
+    {
+     "image": "new",
+     "address": "0xe6c06b",
+     "instruction": "mov edi, dword ptr [r9 + 0xf2499c]",
+     "ok": true,
+     "note": "empty key (+0xc)"
+    },
+    {
+     "image": "old",
+     "address": "0xfdbb06",
+     "instruction": "mov eax, dword ptr [rax + 4]",
+     "ok": true,
+     "note": "row index at slot+4"
+    },
+    {
+     "image": "new",
+     "address": "0xe6c0b6",
+     "instruction": "mov eax, dword ptr [rax + 4]",
+     "ok": true,
+     "note": "row index at slot+4"
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L3",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": true
+  },
+  {
+   "id": "atr.entity_records",
+   "line": 363,
+   "symbol": "owner+0xf32f18",
+   "kind": "entities field: 24-byte entity records (hash u64, id u32 at +8, owned bit at +20)",
+   "old": "0xf32f18",
+   "new": "0xf349e0",
+   "role": "identity",
+   "feeds_write": true,
+   "method": "both unit lookups re-disassembled: record = entities + 0xf349e0 + 24*index in the new image (index bias 0xa2314*24 = 0xf349e0; 18 sites of that bias in new code, none in old); +0x1AC8 like the lookup",
+   "witnesses": [
+    {
+     "image": "old",
+     "address": "0xfdbb09",
+     "instruction": "lea rdx, [rax*2 + 0x1e65e3]",
+     "ok": true,
+     "note": "old: (3*i + 0x1e65e3)*8 = 24*i + 0xf32f18; new: (i + 0xa2314)*24 = 24*i + 0xf349e0"
+    },
+    {
+     "image": "new",
+     "address": "0xe6c0b9",
+     "instruction": "add rax, 0xa2314",
+     "ok": true,
+     "note": "old: (3*i + 0x1e65e3)*8 = 24*i + 0xf32f18; new: (i + 0xa2314)*24 = 24*i + 0xf349e0"
+    },
+    {
+     "image": "old",
+     "address": "0xfdbb14",
+     "instruction": "lea rdx, [r9 + rdx*8]",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0xe6c0c3",
+     "instruction": "lea rdx, [r9 + rax*8]",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0x13c85f2",
+     "instruction": "lea rax, [rbp + 0xf32f18]",
+     "ok": true,
+     "note": "second lookup (old 0x13c8540 -> new 0x125f53b), same records"
+    },
+    {
+     "image": "new",
+     "address": "0x125f5ee",
+     "instruction": "add rax, 0xa2314",
+     "ok": true,
+     "note": "second lookup (old 0x13c8540 -> new 0x125f53b), same records"
+    },
+    {
+     "check": "0xa2314*24",
+     "value": "0xf349e0",
+     "ok": true
+    },
+    {
+     "check": "0x1e65e3*8",
+     "value": "0xf32f18",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L3",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": true
+  },
+  {
+   "id": "atr.unit_sentinel",
+   "line": 356,
+   "symbol": "PLAYER_UNIT[0]==0x7fff",
+   "kind": "invalid unit id",
+   "old": "0x7fff",
+   "new": "0x7fff",
+   "role": "identity",
+   "feeds_write": true,
+   "method": "the unit lookup compares edx with 0x7fff in both builds",
+   "witnesses": [
+    {
+     "image": "old",
+     "address": "0xfdba7c",
+     "instruction": "cmp edx, 0x7fff",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0xe6c02c",
+     "instruction": "cmp edx, 0x7fff",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L3",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": false
+  },
+  {
+   "id": "atr.player_fields",
+   "line": [
+    354,
+    357
+   ],
+   "symbol": "pm+0x84, pm+0x88, pm+0x3a8, pm+0xe8",
+   "kind": "player manager: players count u32 (+0x84), local players count u32 (+0x88), local unit u32 (+0x3a8), players array (+0xe8, player 0 = local; 24-byte record, owned bit +20)",
+   "old": "0x84/0x88/0x3a8/0xe8",
+   "new": "0x84/0x88/0x3a8/0xe8",
+   "role": "identity",
+   "feeds_write": true,
+   "method": "taint-paired field displacements over the aligned functions loading the global (no disagreement)",
+   "witnesses": [
+    {
+     "PM+0x84": {
+      "PM+0x84": 99
+     },
+     "PM+0x88": {
+      "PM+0x88": 102
+     },
+     "PM+0xe8": {
+      "PM+0xe8": 47
+     },
+     "PM+0xe8[idx*8]": {
+      "PM+0xe8": 19
+     },
+     "PM+0x3a8": {
+      "PM+0x3a8": 54
+     }
+    },
+    {
+     "image": "old",
+     "address": "0x5bd68c",
+     "instruction": "cmp dword ptr [rax + 0x88], 0",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x5c64cc",
+     "instruction": "cmp dword ptr [rax + 0x88], 0",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0x5bd695",
+     "instruction": "mov edx, dword ptr [rax + 0x3a8]",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x5c64d5",
+     "instruction": "mov edx, dword ptr [rax + 0x3a8]",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0x4b3bbf",
+     "instruction": "cmp dword ptr [rcx + 0x84], ebx",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x4ba47f",
+     "instruction": "cmp dword ptr [rcx + 0x84], ebx",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0x4b3bd0",
+     "instruction": "mov rcx, qword ptr [rcx + rbx*8 + 0xe8]",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x4ba490",
+     "instruction": "mov rcx, qword ptr [rcx + rbx*8 + 0xe8]",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L3",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": false
+  },
+  {
+   "id": "atr.avatar_layout",
+   "line": [
+    370,
+    371,
+    373,
+    377,
+    408
+   ],
+   "symbol": "am+0xf8 lookup, am+0x6c count, am+0x110 entities, am+0x150+ai*0xa7aec+0x1b68+9*32 Fire slot, +8 held float",
+   "kind": "avatar manager layout and the native Fire input slot",
+   "old": "0xf8/0x6c/0x110/0x150/0xa7aec/0x1b68/32/9/+8",
+   "new": "0xf8/0x6c/0x110/0x150/0xa7aec/0x1b68/32/9/+8",
+   "role": "input",
+   "feeds_write": true,
+   "method": "the avatar input reader (old 0xa433f0 -> new 0xa5dbfe, ratio 0.995) re-disassembled; the Fire action user (old 0x6c74c0 -> new 0x6d1c10, ratio 1.0); action mapper jump tables decoded; taint-paired fields",
+   "witnesses": [
+    {
+     "image": "old",
+     "address": "0xa43423",
+     "instruction": "mov r10d, dword ptr [r9 + 0x100]",
+     "ok": true,
+     "note": "lookup capacity"
+    },
+    {
+     "image": "new",
+     "address": "0xa5dc33",
+     "instruction": "mov r10d, dword ptr [r9 + 0x100]",
+     "ok": true,
+     "note": "lookup capacity"
+    },
+    {
+     "image": "old",
+     "address": "0xa4342d",
+     "instruction": "mov r11d, dword ptr [r9 + 0x108]",
+     "ok": true,
+     "note": "lookup multiplier"
+    },
+    {
+     "image": "new",
+     "address": "0xa5dc3d",
+     "instruction": "mov r11d, dword ptr [r9 + 0x108]",
+     "ok": true,
+     "note": "lookup multiplier"
+    },
+    {
+     "image": "old",
+     "address": "0xa43441",
+     "instruction": "mov rbx, qword ptr [r9 + 0xf8]",
+     "ok": true,
+     "note": "lookup slots"
+    },
+    {
+     "image": "new",
+     "address": "0xa5dc51",
+     "instruction": "mov rbx, qword ptr [r9 + 0xf8]",
+     "ok": true,
+     "note": "lookup slots"
+    },
+    {
+     "image": "old",
+     "address": "0xa43448",
+     "instruction": "mov esi, dword ptr [r9 + 0x104]",
+     "ok": true,
+     "note": "lookup empty key"
+    },
+    {
+     "image": "new",
+     "address": "0xa5dc58",
+     "instruction": "mov esi, dword ptr [r9 + 0x104]",
+     "ok": true,
+     "note": "lookup empty key"
+    },
+    {
+     "image": "old",
+     "address": "0xa43483",
+     "instruction": "mov r12, qword ptr [r9 + rcx*8 + 0x110]",
+     "ok": true,
+     "note": "avatar entity pointers"
+    },
+    {
+     "image": "new",
+     "address": "0xa5dc93",
+     "instruction": "mov r12, qword ptr [r9 + rcx*8 + 0x110]",
+     "ok": true,
+     "note": "avatar entity pointers"
+    },
+    {
+     "image": "old",
+     "address": "0xa434f9",
+     "instruction": "imul r15, rdx, 0xa7aec",
+     "ok": true,
+     "note": "avatar stride"
+    },
+    {
+     "image": "new",
+     "address": "0xa5dd09",
+     "instruction": "imul r15, rdx, 0xa7aec",
+     "ok": true,
+     "note": "avatar stride"
+    },
+    {
+     "image": "old",
+     "address": "0xa43500",
+     "instruction": "add r15, r9",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0xa5dd10",
+     "instruction": "add r15, r9",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0xa435d2",
+     "instruction": "movabs rcx, 0x2500000002",
+     "ok": true,
+     "note": "input action (2,37)"
+    },
+    {
+     "image": "new",
+     "address": "0xa5dde2",
+     "instruction": "movabs rcx, 0x2500000002",
+     "ok": true,
+     "note": "input action (2,37)"
+    },
+    {
+     "image": "old",
+     "address": "0xa435e4",
+     "instruction": "shl r9, 5",
+     "ok": true,
+     "note": "32-byte action slots"
+    },
+    {
+     "image": "new",
+     "address": "0xa5ddf4",
+     "instruction": "shl r9, 5",
+     "ok": true,
+     "note": "32-byte action slots"
+    },
+    {
+     "image": "old",
+     "address": "0xa435e8",
+     "instruction": "cmp byte ptr [r9 + r15 + 0x1cb8], r14b",
+     "ok": true,
+     "note": "slot base 0x150+0x1b68 = 0x1cb8"
+    },
+    {
+     "image": "new",
+     "address": "0xa5ddf8",
+     "instruction": "cmp byte ptr [r9 + r15 + 0x1cb8], r14b",
+     "ok": true,
+     "note": "slot base 0x150+0x1b68 = 0x1cb8"
+    },
+    {
+     "image": "old",
+     "address": "0x6c763e",
+     "instruction": "imul r14, rcx, 0xa7aec",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x6d1d8e",
+     "instruction": "imul r14, rcx, 0xa7aec",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0x6c7645",
+     "instruction": "movabs rcx, 0x900000002",
+     "ok": true,
+     "note": "the Fire action (2,9) in the same avatar function (ratio 1.0)"
+    },
+    {
+     "image": "new",
+     "address": "0x6d1d95",
+     "instruction": "movabs rcx, 0x900000002",
+     "ok": true,
+     "note": "the Fire action (2,9) in the same avatar function (ratio 1.0)"
+    },
+    {
+     "image": "old",
+     "address": "0xa63d45",
+     "instruction": "movabs rcx, 0xf00000002",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0xa7f725",
+     "instruction": "movabs rcx, 0xf00000002",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0xa63d64",
+     "instruction": "shl r10, 5",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0xa7f744",
+     "instruction": "shl r10, 5",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0xa63d68",
+     "instruction": "movss xmm1, dword ptr [r10 + rax + 0x1b70]",
+     "ok": true,
+     "note": "slot +8 float (0x1b68 + 8)"
+    },
+    {
+     "image": "new",
+     "address": "0xa7f748",
+     "instruction": "movss xmm1, dword ptr [r10 + rax + 0x1b70]",
+     "ok": true,
+     "note": "slot +8 float (0x1b68 + 8)"
+    },
+    {
+     "old_jump_table": [
+      "0x585b9b",
+      "0x585b9b",
+      "0x585b9b",
+      "0x585b9b",
+      "0x585b9b",
+      "0x585b9b",
+      "0x585b9b",
+      "0x585b9b",
+      "0x585b9b",
+      "0x585b9b",
+      "0x585b9b",
+      "0x585b9b",
+      "0x585b9b"
+     ],
+     "new_jump_table": [
+      "0x58e87b",
+      "0x58e87b",
+      "0x58e87b",
+      "0x58e87b",
+      "0x58e87b",
+      "0x58e87b",
+      "0x58e87b",
+      "0x58e87b",
+      "0x58e87b",
+      "0x58e87b",
+      "0x58e87b",
+      "0x58e87b",
+      "0x58e87b"
+     ],
+     "note": "action -> slot mapper old 0x585b80 / new 0x58e860: categories 0..12 all return the action number (shr rcx, 0x20), so (2,9) -> slot 9 in both builds"
+    },
+    {
+     "image": "old",
+     "address": "0x585b9b",
+     "instruction": "shr rcx, 0x20",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x58e87b",
+     "instruction": "shr rcx, 0x20",
+     "ok": true
+    },
+    {
+     "AV+0x6c": {
+      "AV+0x6c": 28
+     },
+     "AV+0xf8": {
+      "AV+0xf8": 203
+     },
+     "AV+0x100": {
+      "AV+0x100": 192
+     },
+     "AV+0x104": {
+      "AV+0x104": 180
+     },
+     "AV+0x108": {
+      "AV+0x108": 197
+     },
+     "AV+0x110[idx*8]": {
+      "AV+0x110": 60
+     },
+     "AV+0x110": {
+      "AV+0x110": 4
+     }
+    },
+    {
+     "whole_image_scan": "imul 0xa7aec: 55 old sites map to 0xa7aec, none to another value; disp 0x1cb8: 19 agree"
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L3",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": false
+  },
+  {
+   "id": "atr.weapon_holder_layout",
+   "line": [
+    464,
+    469,
+    471,
+    472
+   ],
+   "symbol": "manager+32 lookup, manager+64 rows, row stride 48, row+4 holder avatar id",
+   "kind": "weapon holder rows",
+   "old": "32/64/48/4",
+   "new": "32/64/48/4",
+   "role": "identity",
+   "feeds_write": true,
+   "method": "holder readers (old 0x763780 -> new 0x76ec10, ratio 1.0; old 0x87f970 -> new 0x88cfa0, ratio 1.0): rows [m+0x40], index*6*8, +4 holder id, then looked up in the avatar manager",
+   "witnesses": [
+    {
+     "image": "old",
+     "address": "0x764661",
+     "instruction": "mov rax, qword ptr [rsi + 0x40]",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x76faf1",
+     "instruction": "mov rax, qword ptr [rsi + 0x40]",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0x764665",
+     "instruction": "lea r8, [rdx + rdx*2]",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x76faf5",
+     "instruction": "lea r8, [rdx + rdx*2]",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0x764669",
+     "instruction": "add r8, r8",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x76faf9",
+     "instruction": "add r8, r8",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0x76466c",
+     "instruction": "mov ebx, dword ptr [rax + r8*8 + 4]",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x76fafc",
+     "instruction": "mov ebx, dword ptr [rax + r8*8 + 4]",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0x764679",
+     "instruction": "mov rax, qword ptr [rip + 0x2bc26a0] ->0x3326d20",
+     "ok": true,
+     "note": "holder id is an avatar id"
+    },
+    {
+     "image": "new",
+     "address": "0x76fb09",
+     "instruction": "mov rax, qword ptr [rip + 0x25723d0] ->0x2ce1ee0",
+     "ok": true,
+     "note": "holder id is an avatar id"
+    },
+    {
+     "image": "old",
+     "address": "0x87fb57",
+     "instruction": "mov ebx, dword ptr [rax + rdx*8 + 4]",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x88d187",
+     "instruction": "mov ebx, dword ptr [rax + rdx*8 + 4]",
+     "ok": true
+    },
+    {
+     "WH+0x20": {
+      "WH+0x20": 68,
+      "AV+0xf8": 1
+     },
+     "WH+0x28": {
+      "WH+0x28": 78
+     },
+     "WH+0x2c": {
+      "WH+0x2c": 70,
+      "AV+0x104": 1
+     },
+     "WH+0x30": {
+      "WH+0x30": 83,
+      "AV+0x108": 1
+     },
+     "WH+0x40": {
+      "WH+0x40": 34
+     }
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L6",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": false
+  },
+  {
+   "id": "atr.trigger_layout",
+   "line": [
+    716,
+    718,
+    731
+   ],
+   "symbol": "header at manager+24: count u32 (+24), entities u64 (+64), held flags u64 (+88)",
+   "kind": "trigger manager table",
+   "old": "24/64/88",
+   "new": "24/64/88",
+   "role": "selection",
+   "feeds_write": true,
+   "method": "trigger add-entity (old 0x540340 -> new 0x54916e) and the trigger update (old 0x763780 -> new 0x76ec10) re-disassembled",
+   "witnesses": [
+    {
+     "image": "old",
+     "address": "0x5403c6",
+     "instruction": "inc dword ptr [rbx + 0x18]",
+     "ok": true,
+     "note": "count"
+    },
+    {
+     "image": "new",
+     "address": "0x5491f6",
+     "instruction": "inc dword ptr [rbx + 0x18]",
+     "ok": true,
+     "note": "count"
+    },
+    {
+     "image": "old",
+     "address": "0x5403d2",
+     "instruction": "mov rax, qword ptr [rbx + 0x40]",
+     "ok": true,
+     "note": "entities"
+    },
+    {
+     "image": "new",
+     "address": "0x549202",
+     "instruction": "mov rax, qword ptr [rbx + 0x40]",
+     "ok": true,
+     "note": "entities"
+    },
+    {
+     "image": "old",
+     "address": "0x5403e1",
+     "instruction": "mov qword ptr [rax + rdx*8], rsi",
+     "ok": true,
+     "note": "entity pointer per index"
+    },
+    {
+     "image": "new",
+     "address": "0x549211",
+     "instruction": "mov qword ptr [rax + rdx*8], rsi",
+     "ok": true,
+     "note": "entity pointer per index"
+    },
+    {
+     "image": "old",
+     "address": "0x76387e",
+     "instruction": "mov rax, qword ptr [rbx + 0x58]",
+     "ok": true,
+     "note": "held flags"
+    },
+    {
+     "image": "new",
+     "address": "0x76ed0e",
+     "instruction": "mov rax, qword ptr [rbx + 0x58]",
+     "ok": true,
+     "note": "held flags"
+    },
+    {
+     "image": "old",
+     "address": "0x763889",
+     "instruction": "movzx edi, byte ptr [rdx + rax]",
+     "ok": true,
+     "note": "one byte per index"
+    },
+    {
+     "image": "new",
+     "address": "0x76ed19",
+     "instruction": "movzx edi, byte ptr [rdx + rax]",
+     "ok": true,
+     "note": "one byte per index"
+    },
+    {
+     "TRG+0x18": {
+      "TRG+0x18": 6
+     },
+     "TRG+0x40": {
+      "TRG+0x40": 13
+     },
+     "TRG+0x58": {
+      "TRG+0x58": 5
+     }
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L5",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": false
+  },
+  {
+   "id": "atr.charge_layout",
+   "line": [
+    33,
+    483,
+    484,
+    485,
+    486,
+    489,
+    1023,
+    1050,
+    1051,
+    1052
+   ],
+   "symbol": "header at manager+16: count u32 (+16), entities u64 (+56), entries u64 (+64); ENTRY_SIZE 40; entry+4 charge, +8 shot charge, +12 charging flag (byte)",
+   "kind": "charge manager entry array (the charging-flag write target)",
+   "old": "16/56/64/40/4/8/12",
+   "new": "16/56/64/40/4/8/12",
+   "role": "address",
+   "feeds_write": true,
+   "method": "the charge update (old 0x73c8f0 -> new 0x747f20) aligns 908/908 with no operand change; it iterates [m+0x10] entries, entity [m+0x38][i], entry [m+0x40]+40*i, advances +4 while byte +12 is set; the trigger update (old 0x7406a0 -> new 0x74bd1e) sets byte +12 to 1 from the fire command",
+   "witnesses": [
+    {
+     "function_old": "0x73c8f0",
+     "function_new": "0x747f20",
+     "old_insns": 908,
+     "new_insns": 908,
+     "aligned": 908,
+     "ratio": 1.0,
+     "non_target_operand_differences": 0,
+     "explained_differences": [
+      "0x73cd06 mov rbx, qword ptr [rax + 0x2a0] -> 0x748336 mov rbx, qword ptr [rax + 0x2a8]",
+      "0x73cd3c mov rsi, qword ptr [rcx + 0x378] -> 0x74836c mov rsi, qword ptr [rcx + 0x380]",
+      "0x73d287 mov rbx, qword ptr [rax + 0x2c8] -> 0x7488b7 mov rbx, qword ptr [rax + 0x2d0]",
+      "0x73d312 mov r10, qword ptr [r10 + 0x338] -> 0x748942 mov r10, qword ptr [r10 + 0x340]",
+      "0x73d31e mov rcx, qword ptr [rcx + 0x10f8] -> 0x74894e mov rcx, qword ptr [rcx + 0x1178]",
+      "0x73d3f2 mov rdx, qword ptr [rax + 0x1f0] -> 0x748a22 mov rdx, qword ptr [rax + 0x1f8]",
+      "0x73d467 mov r10, qword ptr [r10 + 0x338] -> 0x748a97 mov r10, qword ptr [r10 + 0x340]",
+      "0x73d473 mov rcx, qword ptr [rcx + 0x10f8] -> 0x748aa3 mov rcx, qword ptr [rcx + 0x1178]"
+     ],
+     "ok": true,
+     "note": "charge component update; called by the world update with &world[+charge]"
+    },
+    {
+     "image": "old",
+     "address": "0x73c948",
+     "instruction": "cmp dword ptr [rbx + 0x10], edx",
+     "ok": true,
+     "note": "count"
+    },
+    {
+     "image": "new",
+     "address": "0x747f78",
+     "instruction": "cmp dword ptr [rbx + 0x10], edx",
+     "ok": true,
+     "note": "count"
+    },
+    {
+     "image": "old",
+     "address": "0x73c9e0",
+     "instruction": "mov r15, qword ptr [rbx + 0x40]",
+     "ok": true,
+     "note": "entries"
+    },
+    {
+     "image": "new",
+     "address": "0x748010",
+     "instruction": "mov r15, qword ptr [rbx + 0x40]",
+     "ok": true,
+     "note": "entries"
+    },
+    {
+     "image": "old",
+     "address": "0x73c9f3",
+     "instruction": "mov rax, qword ptr [rbx + 0x38]",
+     "ok": true,
+     "note": "entity pointers"
+    },
+    {
+     "image": "new",
+     "address": "0x748023",
+     "instruction": "mov rax, qword ptr [rbx + 0x38]",
+     "ok": true,
+     "note": "entity pointers"
+    },
+    {
+     "image": "old",
+     "address": "0x73c9f7",
+     "instruction": "lea r14, [rcx + rcx*4]",
+     "ok": true,
+     "note": "stride 5*8 = 40"
+    },
+    {
+     "image": "new",
+     "address": "0x748027",
+     "instruction": "lea r14, [rcx + rcx*4]",
+     "ok": true,
+     "note": "stride 5*8 = 40"
+    },
+    {
+     "image": "old",
+     "address": "0x73cb76",
+     "instruction": "cmp byte ptr [r15 + r14*8 + 0xc], 0",
+     "ok": true,
+     "note": "charging flag"
+    },
+    {
+     "image": "new",
+     "address": "0x7481a6",
+     "instruction": "cmp byte ptr [r15 + r14*8 + 0xc], 0",
+     "ok": true,
+     "note": "charging flag"
+    },
+    {
+     "image": "old",
+     "address": "0x73cbec",
+     "instruction": "addss xmm0, xmm14",
+     "ok": true,
+     "note": "charge += dt"
+    },
+    {
+     "image": "new",
+     "address": "0x74821c",
+     "instruction": "addss xmm0, xmm14",
+     "ok": true,
+     "note": "charge += dt"
+    },
+    {
+     "image": "old",
+     "address": "0x73cc23",
+     "instruction": "movss dword ptr [r15 + r14*8 + 4], xmm0",
+     "ok": true,
+     "note": "charge stored"
+    },
+    {
+     "image": "new",
+     "address": "0x748253",
+     "instruction": "movss dword ptr [r15 + r14*8 + 4], xmm0",
+     "ok": true,
+     "note": "charge stored"
+    },
+    {
+     "image": "old",
+     "address": "0x740a84",
+     "instruction": "lea rdx, [rcx + rcx*4]",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x74c104",
+     "instruction": "lea rdx, [rcx + rcx*4]",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0x740a88",
+     "instruction": "mov byte ptr [rax + rdx*8 + 0xc], 1",
+     "ok": true,
+     "note": "the engine sets the same byte from the fire command"
+    },
+    {
+     "image": "new",
+     "address": "0x74c108",
+     "instruction": "mov byte ptr [rax + rdx*8 + 0xc], 1",
+     "ok": true,
+     "note": "the engine sets the same byte from the fire command"
+    },
+    {
+     "CHG+0x10": {
+      "CHG+0x10": 6
+     },
+     "CHG+0x38": {
+      "CHG+0x38": 5
+     },
+     "CHG+0x40": {
+      "CHG+0x40": 12
+     }
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L4",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": false
+  },
+  {
+   "id": "atr.charge_record",
+   "line": [
+    30,
+    32,
+    516,
+    517,
+    518,
+    519,
+    520,
+    521,
+    522,
+    545,
+    1046
+   ],
+   "symbol": "216-byte charge settings record: floats +0 (1.0), +24 (1.1), +48 (1.2), +72 (0.7), +76 (1.4), fingerprint +168 (16 bytes), AUTO_FIRE_FLAG +184",
+   "kind": "weapon data library record (the auto-fire flag write target)",
+   "old": "216/184/168",
+   "new": "216/184/168",
+   "role": "address+value",
+   "feeds_write": true,
+   "method": "settings getter (old 0x5052c0 -> new 0x50d8b0, 54/54 identical) returns a per-entity copy (charge manager +0x90, imul 0xd8) or the library record (old 0x504d80 -> new 0x50d370: [entities+0xf12ad8 -> +0xf145a0], 20 slots, records at +0x140, imul 0xd8); the charge update reads [record+0xb8] right after the charge reaches full and then fires and zeroes the charge itself (auto fire); +0, +0x18, +0x30 are read as the charge times. The record values and fingerprint are game data (not readable offline): if they changed the scan finds nothing and nothing is written",
+   "witnesses": [
+    {
+     "function_old": "0x5052c0",
+     "function_new": "0x50d8b0",
+     "old_insns": 54,
+     "new_insns": 54,
+     "aligned": 54,
+     "ratio": 1.0,
+     "non_target_operand_differences": 0,
+     "explained_differences": [],
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0x505362",
+     "instruction": "imul rax, rax, 0xd8",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x50d952",
+     "instruction": "imul rax, rax, 0xd8",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0x504dfc",
+     "instruction": "imul rax, rcx, 0xd8",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x50d3ec",
+     "instruction": "imul rax, rcx, 0xd8",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0x504d8f",
+     "instruction": "mov r10, qword ptr [rax + 0xf12ad8]",
+     "ok": true,
+     "note": "library table, +0x1AC8 like the other entities fields"
+    },
+    {
+     "image": "new",
+     "address": "0x50d37f",
+     "instruction": "mov r10, qword ptr [rax + 0xf145a0]",
+     "ok": true,
+     "note": "library table, +0x1AC8 like the other entities fields"
+    },
+    {
+     "image": "old",
+     "address": "0x504e03",
+     "instruction": "add rax, 0x140",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x50d3f3",
+     "instruction": "add rax, 0x140",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0x73cc42",
+     "instruction": "cmp byte ptr [r13 + 0xb8], 0",
+     "ok": true,
+     "note": "auto-fire flag (AUTO_FIRE_FLAG = 184)"
+    },
+    {
+     "image": "new",
+     "address": "0x748272",
+     "instruction": "cmp byte ptr [r13 + 0xb8], 0",
+     "ok": true,
+     "note": "auto-fire flag (AUTO_FIRE_FLAG = 184)"
+    },
+    {
+     "image": "old",
+     "address": "0x73cc5b",
+     "instruction": "movss dword ptr [r15 + r14*8 + 8], xmm0",
+     "ok": true,
+     "note": "shot charge kept in entry+8"
+    },
+    {
+     "image": "new",
+     "address": "0x74828b",
+     "instruction": "movss dword ptr [r15 + r14*8 + 8], xmm0",
+     "ok": true,
+     "note": "shot charge kept in entry+8"
+    },
+    {
+     "image": "old",
+     "address": "0x73cc62",
+     "instruction": "call 0x73d8c0",
+     "ok": true,
+     "note": "fires (old 0x73d8c0 / new 0x748ef0)"
+    },
+    {
+     "image": "new",
+     "address": "0x748292",
+     "instruction": "call 0x748ef0",
+     "ok": true,
+     "note": "fires (old 0x73d8c0 / new 0x748ef0)"
+    },
+    {
+     "image": "old",
+     "address": "0x73cc6d",
+     "instruction": "mov dword ptr [r15 + r14*8 + 4], eax",
+     "ok": true,
+     "note": "charge reset to 0 after the automatic shot"
+    },
+    {
+     "image": "new",
+     "address": "0x74829d",
+     "instruction": "mov dword ptr [r15 + r14*8 + 4], eax",
+     "ok": true,
+     "note": "charge reset to 0 after the automatic shot"
+    },
+    {
+     "image": "old",
+     "address": "0x73cafe",
+     "instruction": "movss xmm12, dword ptr [r13]",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x74812e",
+     "instruction": "movss xmm12, dword ptr [r13]",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0x73cb04",
+     "instruction": "movss xmm10, dword ptr [r13 + 0x18]",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x748134",
+     "instruction": "movss xmm10, dword ptr [r13 + 0x18]",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0x73cb0a",
+     "instruction": "movss xmm11, dword ptr [r13 + 0x30]",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x74813a",
+     "instruction": "movss xmm11, dword ptr [r13 + 0x30]",
+     "ok": true
+    }
+   ],
+   "data_values": "medium: ARC_FINGERPRINT and the five floats are Arc Thrower game data; verify live (L7)",
+   "confidence": "high",
+   "live_check": "L7",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": false
+  },
+  {
+   "id": "atr.ARC_RESOURCE",
+   "line": 31,
+   "symbol": "ARC_RESOURCE",
+   "kind": "Arc Thrower weapon entity type hash (record +0)",
+   "old": "0x96de9cd50f7306e6",
+   "new": "0x96de9cd50f7306e6",
+   "role": "selection",
+   "feeds_write": true,
+   "method": "hash, not an address: present 19 times in both game.dll images; checked live (L6/L7)",
+   "witnesses": [
+    {
+     "arc_old": 19,
+     "arc_new": 19,
+     "avatar_old": 7,
+     "avatar_new": 6
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L7",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": false
+  },
+  {
+   "id": "atr.ARC_FINGERPRINT",
+   "line": 30,
+   "symbol": "ARC_FINGERPRINT",
+   "kind": "16 bytes at charge record +168 (animation variable hashes)",
+   "old": "0fd7d61a96fba229a931ee670e049541",
+   "new": "0fd7d61a96fba229a931ee670e049541",
+   "role": "address",
+   "feeds_write": true,
+   "method": "game data (weapon data library, encrypted on disk); unchanged by assumption, fail-closed: no match, no write",
+   "witnesses": [
+    {
+     "note": "verify live with L7: the record at [[entities+0xf145a0]] for hash 0x96de9cd50f7306e6 carries it"
+    }
+   ],
+   "confidence": "medium",
+   "live_check": "L7",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": false
+  },
+  {
+   "id": "atr.AVATAR_TYPE",
+   "line": 347,
+   "symbol": "AVATAR_TYPE",
+   "kind": "avatar_helldiver entity type hash",
+   "old": "0x4d1c334d294dfa97",
+   "new": "0x4d1c334d294dfa97",
+   "role": "identity",
+   "feeds_write": true,
+   "method": "movabs/cmp immediate in both images (old 0x62c56c, new 0x635bec)",
+   "witnesses": [
+    {
+     "arc_old": 19,
+     "arc_new": 19,
+     "avatar_old": 7,
+     "avatar_new": 6
+    },
+    {
+     "image": "old",
+     "address": "0x62c56c",
+     "instruction": "movabs rax, 0x4d1c334d294dfa97",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x635bec",
+     "instruction": "movabs rax, 0x4d1c334d294dfa97",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L3",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": false
+  },
+  {
+   "id": "atr.mission_layout",
+   "line": [
+    443,
+    446,
+    447
+   ],
+   "symbol": "68-byte record: word +8 set, word +0x40 in 1..7",
+   "kind": "mission record fields",
+   "old": "8/0x40/1..7/68",
+   "new": "8/0x40/1..7/68",
+   "role": "timing",
+   "feeds_write": true,
+   "method": "taint-paired fields (MIS+0x8 x111, MIS+0x40 x88, no disagreement); the game itself tests [rec+0x40] with dec/cmp 6 (1..7) at 55 old and 49 new sites",
+   "witnesses": [
+    {
+     "MIS+0x8": {
+      "MIS+0x8": 111
+     },
+     "MIS+0x40": {
+      "MIS+0x40": 88
+     }
+    },
+    {
+     "image": "old",
+     "address": "0x6058a1",
+     "instruction": "mov edx, dword ptr [rax + 0x40]",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0x60ea71",
+     "instruction": "mov edx, dword ptr [rax + 0x40]",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L2",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": false
+  },
+  {
+   "id": "atr.lookup_format",
+   "line": [
+    335,
+    346
+   ],
+   "symbol": "lookup(): {slots u64, capacity u32, empty u32, multiplier u32}, linear probing from key*multiplier, slot {key u32, index u32}",
+   "kind": "engine hash map format",
+   "old": "unchanged",
+   "new": "unchanged",
+   "role": "identity",
+   "feeds_write": true,
+   "method": "the same probing loop in every reader above (unit lookup, avatar reader, charge update)",
+   "witnesses": [
+    {
+     "image": "old",
+     "address": "0xfdbad2",
+     "instruction": "lea ecx, [rdx + r11]",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0xe6c082",
+     "instruction": "lea ecx, [rdx + r11]",
+     "ok": true
+    },
+    {
+     "image": "old",
+     "address": "0xfdbadd",
+     "instruction": "mov ecx, dword ptr [rbx + rcx*8]",
+     "ok": true
+    },
+    {
+     "image": "new",
+     "address": "0xe6c08d",
+     "instruction": "mov ecx, dword ptr [rbx + rcx*8]",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L3",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": false
+  },
+  {
+   "id": "atr.bounds",
+   "line": [
+    36,
+    339,
+    355,
+    362,
+    370,
+    372,
+    469,
+    470,
+    487
+   ],
+   "symbol": "TRIGGER_LIMIT 4096, CHARGE count 512, entity cap 1048576 / index 262144, avatar cap 64 / count 8, holder cap 8192 / index 4096, players 1..4",
+   "kind": "plausibility bounds (refuse, never write, outside them)",
+   "old": "unchanged",
+   "new": "unchanged",
+   "role": "guard",
+   "feeds_write": false,
+   "method": "sanity limits, not game sizes; live values checked in L3..L6",
+   "witnesses": [],
+   "confidence": "high",
+   "live_check": "L3-L6",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": false
+  },
+  {
+   "id": "atr.windows_constants",
+   "line": [
+    37,
+    94,
+    305,
+    343,
+    596,
+    606
+   ],
+   "symbol": "MEM_COMMIT, MEM_PRIVATE, PAGE_READONLY, PAGE_READWRITE, float mantissa mask, 0xffffffff empty index, user address limit, 1 MiB region minimum",
+   "kind": "Windows / IEEE constants (not build data)",
+   "old": "unchanged",
+   "new": "unchanged",
+   "role": "guard",
+   "feeds_write": true,
+   "method": "not build-specific",
+   "witnesses": [],
+   "confidence": "high",
+   "live_check": "L8",
+   "file": "src/arc_thrower_auto.lua",
+   "changed": false
+  }
+ ]
+}

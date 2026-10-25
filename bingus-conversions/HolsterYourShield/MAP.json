@@ -1,0 +1,2848 @@
+{
+ "mod": "Holster Your Shield v1.0 (Vanilla Plus Megapack option HolsterYourShield)",
+ "source": {
+  "used": "<workspace>/upstream-bingus/VanillaPlusMegapack/components/HolsterYourShield",
+  "lock_revision": "v1.0",
+  "checkout": "<workspace>/upstream-bingus/HolsterYourShield (git tag v1.0, cadfd8c)",
+  "all_lock_hashes_match_pinned_copy": true,
+  "all_lock_hashes_match_checkout": true,
+  "files": {
+   "dependencies.json": {
+    "lock": "F4178E0FA2A27ABD5D5A51273FE4FD3EE57809A8731A5315431D184663003D43",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   },
+   "scripts/build.py": {
+    "lock": "814B6763D0167AAE3E24F522DCE981CDE198AA66704BA3DBBEEE680D5D8AA416",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   },
+   "src/bingus_memory.lua": {
+    "lock": "3973924B1C009CC4E6C863A4EAF87F166899A16DDCB579C3D77AB5465172B416",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   },
+   "src/bingus_runtime.lua": {
+    "lock": "C4450F555F697E583916D18F876412CA96F6963EB1BF4CDAD451EBB906C2F988",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   },
+   "src/holster_your_shield.lua": {
+    "lock": "DD68F63539BE0FFA83EA18B829ABFBFD1F51A95807658ADD0B8D1245FCBC5D0E",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   },
+   "tests/compile_entry.lua": {
+    "lock": "2739B9525CE71CE3D5B2A45B2993D5194F2E898995DD2FF6414688946A077954",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   },
+   "tests/fake_game.lua": {
+    "lock": "CF3E93AF9BFE5501718E1C02D88CE5C231444CB9F179E4DE5E4630D6D134D7EE",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   },
+   "tests/frame_budget.lua": {
+    "lock": "4E1E9F47EE7FCCFD24F6C79D475103ABF77989FC344EBB527869029793654E49",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   },
+   "tests/game_lua.py": {
+    "lock": "C6BBC5F25AB21EFFC4351436826CE89FED0440F022BED0D9C573E5EA82560CDD",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   },
+   "tests/hostile_vm.lua": {
+    "lock": "779B1DFD0A5BB8A2CEAB53EC8729E492838FB90018490A290D1BAFB3D9F938C4",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   },
+   "tests/test_entry.lua": {
+    "lock": "081A485B2EEC8DA06DF82BEAD7CDC180E83696B015C137A219A2C4CAB12BB8D5",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   },
+   "tests/test_hostile.lua": {
+    "lock": "6102EFD3D09634DB1B634123119389CD6FB4220E19A08183760C5B3F6072655D",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   },
+   "tests/test_mod.lua": {
+    "lock": "A2DF5348FD36EDD950A145423EA56F2349424CE31B4EE9ECE655AE094A9D16E8",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   }
+  }
+ },
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "old_image": "<workspace>/native-work/evidence/game-pre1020.dll",
+ "new_image": "<workspace>/native-work/evidence/game-26088801.dll",
+ "counts": {
+  "high": 30,
+  "medium": 1
+ },
+ "rows_total": 31,
+ "rows_feeding_write_or_call": 28,
+ "writes": "none: the mod writes no memory (its sources contain no write API; upstream build.py forbids them)",
+ "calls": [
+  "set_item 0x9BD850",
+  "set_mode 0x9BE500",
+  "send_held 0xC008B0"
+ ],
+ "changed": [
+  "pin.GAME_SHA256",
+  "pin.EXE_SHA256",
+  "layout.players",
+  "layout.owner",
+  "layout.avatars",
+  "layout.inventory",
+  "layout.equipment",
+  "layout.none_item",
+  "layout.none_slot",
+  "layout.set_item",
+  "layout.set_mode",
+  "layout.send_held",
+  "owner.network_map",
+  "owner.entity_map",
+  "owner.records",
+  "owner.settings",
+  "settings.slots",
+  "label.version",
+  "label.build"
+ ],
+ "witness_check_failures": [],
+ "rows": [
+  {
+   "id": "pin.GAME_SHA256",
+   "line": 31,
+   "symbol": "Holster.GAME_SHA256",
+   "kind": "SHA-256 pin (memory.verify_build gate before anything is bound or called)",
+   "old": "2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E",
+   "new": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "role": "gate",
+   "feeds_write": true,
+   "method": "SHA-256 of the installed file (read-only), equal to the brief's hash",
+   "witnesses": [
+    {
+     "file": "<game>/data/game/game.dll",
+     "sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+     "equal": true
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L0",
+   "file": "src/holster_your_shield.lua",
+   "changed": true
+  },
+  {
+   "id": "pin.EXE_SHA256",
+   "line": 32,
+   "symbol": "Holster.EXE_SHA256",
+   "kind": "SHA-256 pin (memory.verify_build gate before anything is bound or called)",
+   "old": "F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06",
+   "new": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "role": "gate",
+   "feeds_write": true,
+   "method": "SHA-256 of the installed file (read-only), equal to the brief's hash",
+   "witnesses": [
+    {
+     "file": "<game>/bin/helldivers2.exe",
+     "sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+     "equal": true
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L0",
+   "file": "src/holster_your_shield.lua",
+   "changed": true
+  },
+  {
+   "id": "layout.players",
+   "line": 36,
+   "symbol": "players",
+   "kind": "game.dll global: player manager",
+   "old": "0x3326468",
+   "new": "0x2ce1618",
+   "role": "address",
+   "feeds_write": true,
+   "method": "RIP-relative reference windows migrated (exact first, field-masked second); every exact witness agrees; the brief lists this value as live-verified on 26088801",
+   "witnesses": [
+    {
+     "kind": "RIP-relative reference windows (tools/map_globals.py, evidence/globals.json)",
+     "old_sites": 1199,
+     "sampled": 64,
+     "witnesses": 47,
+     "votes": {
+      "0x2ce1618": 47
+     },
+     "exact_window_votes": {
+      "0x2ce1618": 45
+     },
+     "agreeing": 47,
+     "disagreeing": 0,
+     "distinct_old_functions": 47,
+     "examples": [
+      {
+       "old": "0x3a4bde",
+       "new": "0x3ab8de",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1618",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2f81883]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2935d33]",
+       "old_function": "0x3a4a20"
+      },
+      {
+       "old": "0x545204",
+       "new": "0x54e054",
+       "window_bytes": 128,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1618",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2de125d]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x27935bd]",
+       "old_function": "0x5451e6"
+      },
+      {
+       "old": "0x606c9a",
+       "new": "0x60fe6a",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1618",
+       "instruction_old": "mov r10, qword ptr [rip + 0x2d1f7c7]",
+       "instruction_new": "mov r10, qword ptr [rip + 0x26d17a7]",
+       "old_function": "0x606c90"
+      },
+      {
+       "old": "0x60be7d",
+       "new": "0x61507d",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1618",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2d1a5e4]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x26cc594]",
+       "old_function": "0x60be70"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L1",
+   "file": "src/holster_your_shield.lua",
+   "changed": true
+  },
+  {
+   "id": "layout.owner",
+   "line": 37,
+   "symbol": "owner",
+   "kind": "game.dll global: entities object",
+   "old": "0x346bf98",
+   "new": "0x2ce41b8",
+   "role": "address",
+   "feeds_write": true,
+   "method": "RIP-relative reference windows migrated (exact first, field-masked second); every exact witness agrees; the brief lists this value as live-verified on 26088801",
+   "witnesses": [
+    {
+     "kind": "RIP-relative reference windows (tools/map_globals.py, evidence/globals.json)",
+     "old_sites": 1449,
+     "sampled": 64,
+     "witnesses": 42,
+     "votes": {
+      "0x2ce41b8": 42
+     },
+     "exact_window_votes": {
+      "0x2ce41b8": 27
+     },
+     "agreeing": 42,
+     "disagreeing": 0,
+     "distinct_old_functions": 42,
+     "examples": [
+      {
+       "old": "0x4536dc",
+       "new": "0x45a4fc",
+       "window_bytes": 48,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce41b8",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x30188b5]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x2889cb5]",
+       "old_function": "0x453680"
+      },
+      {
+       "old": "0x49c4a1",
+       "new": "0x4a3157",
+       "window_bytes": 32,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce41b8",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2fcfaf0]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x284105a]",
+       "old_function": "0x496700"
+      },
+      {
+       "old": "0x4f57fa",
+       "new": "0x4fdb5a",
+       "window_bytes": 32,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce41b8",
+       "instruction_old": "mov rbp, qword ptr [rip + 0x2f76797]",
+       "instruction_new": "mov rbp, qword ptr [rip + 0x27e6657]",
+       "old_function": "0x4f57f2"
+      },
+      {
+       "old": "0x4fb0d2",
+       "new": "0x503452",
+       "window_bytes": 128,
+       "field_displacements_masked": true,
+       "new_global": "0x2ce41b8",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2f70ebf]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x27e0d5f]",
+       "old_function": "0x4faf60"
+      }
+     ]
+    },
+    {
+     "kind": "re-disassembled in the game's own stow/draw/getter/lookup functions",
+     "checks": [
+      {
+       "image": "old",
+       "rva": "0xfd9d50",
+       "instruction": "mov r10, qword ptr [rip + 0x2492241]",
+       "rip_target": "0x346bf98",
+       "expect_rip_target": "0x346bf98",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xe69cf0",
+       "instruction": "mov r10, qword ptr [rip + 0x1e7a4c1]",
+       "rip_target": "0x2ce41b8",
+       "expect_rip_target": "0x2ce41b8",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x511455",
+       "instruction": "mov rax, qword ptr [rip + 0x27d2d5c]",
+       "rip_target": "0x2ce41b8",
+       "expect_rip_target": "0x2ce41b8",
+       "ok": true
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L1",
+   "file": "src/holster_your_shield.lua",
+   "changed": true
+  },
+  {
+   "id": "layout.avatars",
+   "line": 38,
+   "symbol": "avatars",
+   "kind": "game.dll global: avatar manager",
+   "old": "0x3326d20",
+   "new": "0x2ce1ee0",
+   "role": "address",
+   "feeds_write": true,
+   "method": "RIP-relative reference windows migrated (exact first, field-masked second); every exact witness agrees; the brief lists this value as live-verified on 26088801",
+   "witnesses": [
+    {
+     "kind": "RIP-relative reference windows (tools/map_globals.py, evidence/globals.json)",
+     "old_sites": 1644,
+     "sampled": 64,
+     "witnesses": 47,
+     "votes": {
+      "0x2ce1ee0": 47
+     },
+     "exact_window_votes": {
+      "0x2ce1ee0": 43
+     },
+     "agreeing": 47,
+     "disagreeing": 0,
+     "distinct_old_functions": 47,
+     "examples": [
+      {
+       "old": "0x4c38ee",
+       "new": "0x4ca52e",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1ee0",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2e6342a]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x28179aa]",
+       "old_function": "0x4c38e0"
+      },
+      {
+       "old": "0x5e74eb",
+       "new": "0x5efe3b",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1ee0",
+       "instruction_old": "mov rbx, qword ptr [rip + 0x2d3f82e]",
+       "instruction_new": "mov rbx, qword ptr [rip + 0x26f209e]",
+       "old_function": "0x5e74b1"
+      },
+      {
+       "old": "0x60c05e",
+       "new": "0x61525e",
+       "window_bytes": 128,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1ee0",
+       "instruction_old": "mov r11, qword ptr [rip + 0x2d1acbb]",
+       "instruction_new": "mov r11, qword ptr [rip + 0x26ccc7b]",
+       "old_function": "0x60c01b"
+      },
+      {
+       "old": "0x63d1e3",
+       "new": "0x6468e3",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1ee0",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2ce9b36]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x269b5f6]",
+       "old_function": "0x63bc60"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L1",
+   "file": "src/holster_your_shield.lua",
+   "changed": true
+  },
+  {
+   "id": "layout.inventory",
+   "line": 39,
+   "symbol": "inventory",
+   "kind": "game.dll global: inventory (held carryables)",
+   "old": "0x3326738",
+   "new": "0x2ce18e8",
+   "role": "address",
+   "feeds_write": true,
+   "method": "RIP-relative reference windows migrated (exact first, field-masked second); every exact witness agrees; the brief lists this value as live-verified on 26088801",
+   "witnesses": [
+    {
+     "kind": "RIP-relative reference windows (tools/map_globals.py, evidence/globals.json)",
+     "old_sites": 372,
+     "sampled": 64,
+     "witnesses": 47,
+     "votes": {
+      "0x2ce18e8": 47
+     },
+     "exact_window_votes": {
+      "0x2ce18e8": 44
+     },
+     "agreeing": 47,
+     "disagreeing": 0,
+     "distinct_old_functions": 44,
+     "examples": [
+      {
+       "old": "0x3a9e00",
+       "new": "0x3b0b00",
+       "window_bytes": 128,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce18e8",
+       "instruction_old": "mov r8, qword ptr [rip + 0x2f7c931]",
+       "instruction_new": "mov r8, qword ptr [rip + 0x2930de1]",
+       "old_function": "0x3a9d90"
+      },
+      {
+       "old": "0x4b24b4",
+       "new": "0x4b8d74",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce18e8",
+       "instruction_old": "mov r11, qword ptr [rip + 0x2e7427d]",
+       "instruction_new": "mov r11, qword ptr [rip + 0x2828b6d]",
+       "old_function": "0x4b22e0"
+      },
+      {
+       "old": "0x4ba83e",
+       "new": "0x4c0f2e",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce18e8",
+       "instruction_old": "mov r15, qword ptr [rip + 0x2e6bef3]",
+       "instruction_new": "mov r15, qword ptr [rip + 0x28209b3]",
+       "old_function": "0x4ba820"
+      },
+      {
+       "old": "0x4c0b89",
+       "new": "0x4c7569",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce18e8",
+       "instruction_old": "mov r11, qword ptr [rip + 0x2e65ba8]",
+       "instruction_new": "mov r11, qword ptr [rip + 0x281a378]",
+       "old_function": "0x4c0b80"
+      }
+     ]
+    },
+    {
+     "kind": "re-disassembled in the game's own stow/draw/getter/lookup functions",
+     "checks": [
+      {
+       "image": "old",
+       "rva": "0xa959ac",
+       "instruction": "mov rsi, qword ptr [rip + 0x2890d85]",
+       "rip_target": "0x3326738",
+       "expect_rip_target": "0x3326738",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab148c",
+       "instruction": "mov rsi, qword ptr [rip + 0x2230455]",
+       "rip_target": "0x2ce18e8",
+       "expect_rip_target": "0x2ce18e8",
+       "ok": true
+      },
+      {
+       "image": "old",
+       "rva": "0xa95b4a",
+       "instruction": "mov r14, qword ptr [rip + 0x2890be7]",
+       "rip_target": "0x3326738",
+       "expect_rip_target": "0x3326738",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab162a",
+       "instruction": "mov r14, qword ptr [rip + 0x22302b7]",
+       "rip_target": "0x2ce18e8",
+       "expect_rip_target": "0x2ce18e8",
+       "ok": true
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L1",
+   "file": "src/holster_your_shield.lua",
+   "changed": true
+  },
+  {
+   "id": "layout.equipment",
+   "line": 40,
+   "symbol": "equipment",
+   "kind": "game.dll global: EquipmentComponent per-entity copies",
+   "old": "0x3326dc0",
+   "new": "0x2ce1f88",
+   "role": "address",
+   "feeds_write": true,
+   "method": "RIP-relative reference windows migrated (exact first, field-masked second); every exact witness agrees",
+   "witnesses": [
+    {
+     "kind": "RIP-relative reference windows (tools/map_globals.py, evidence/globals.json)",
+     "old_sites": 197,
+     "sampled": 64,
+     "witnesses": 47,
+     "votes": {
+      "0x2ce17c0": 1,
+      "0x2ce1f88": 45,
+      "0x2ce1848": 1
+     },
+     "exact_window_votes": {
+      "0x2ce1f88": 45
+     },
+     "agreeing": 45,
+     "disagreeing": 2,
+     "distinct_old_functions": 40,
+     "examples": [
+      {
+       "old": "0xc30b8",
+       "new": "0x1033b4d",
+       "window_bytes": 48,
+       "field_displacements_masked": true,
+       "new_global": "0x2ce17c0",
+       "instruction_old": "mov rdi, qword ptr [rip + 0x3263d01]",
+       "instruction_new": "mov rdi, qword ptr [rip + 0x1cadc6c]",
+       "old_function": "0xc30b0"
+      },
+      {
+       "old": "0x4b6085",
+       "new": "0x4bc975",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1f88",
+       "instruction_old": "mov rbx, qword ptr [rip + 0x2e70d34]",
+       "instruction_new": "mov rbx, qword ptr [rip + 0x282560c]",
+       "old_function": "0x4b607d"
+      },
+      {
+       "old": "0x53f77a",
+       "new": "0x5485aa",
+       "window_bytes": 64,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1f88",
+       "instruction_old": "mov rbx, qword ptr [rip + 0x2de763f]",
+       "instruction_new": "mov rbx, qword ptr [rip + 0x27999d7]",
+       "old_function": "0x53f770"
+      },
+      {
+       "old": "0x5c700d",
+       "new": "0x5cff0d",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1f88",
+       "instruction_old": "mov rdi, qword ptr [rip + 0x2d5fdab]",
+       "instruction_new": "mov rdi, qword ptr [rip + 0x2712073]",
+       "old_function": "0x5c6f70"
+      }
+     ]
+    },
+    {
+     "kind": "re-disassembled in the game's own stow/draw/getter/lookup functions",
+     "checks": [
+      {
+       "image": "old",
+       "rva": "0x5092d2",
+       "instruction": "mov r11, qword ptr [rip + 0x2e1dae7]",
+       "rip_target": "0x3326dc0",
+       "expect_rip_target": "0x3326dc0",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x511892",
+       "instruction": "mov r11, qword ptr [rip + 0x27d06ef]",
+       "rip_target": "0x2ce1f88",
+       "expect_rip_target": "0x2ce1f88",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab1432",
+       "instruction": "mov rcx, qword ptr [rip + 0x2230b4f]",
+       "rip_target": "0x2ce1f88",
+       "expect_rip_target": "0x2ce1f88",
+       "ok": true
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L1",
+   "file": "src/holster_your_shield.lua",
+   "changed": true
+  },
+  {
+   "id": "layout.none_item",
+   "line": 41,
+   "symbol": "none_item",
+   "kind": "game.dll global: the game's nothing-held id",
+   "old": "0x3483c4c",
+   "new": "0x2e3f0fc",
+   "role": "address",
+   "feeds_write": true,
+   "method": "RIP-relative reference windows migrated (exact first, field-masked second); every exact witness agrees",
+   "witnesses": [
+    {
+     "kind": "RIP-relative reference windows (tools/map_globals.py, evidence/globals.json)",
+     "old_sites": 2202,
+     "sampled": 64,
+     "witnesses": 45,
+     "votes": {
+      "0x2e3f0fc": 45
+     },
+     "exact_window_votes": {
+      "0x2e3f0fc": 44
+     },
+     "agreeing": 45,
+     "disagreeing": 0,
+     "distinct_old_functions": 45,
+     "examples": [
+      {
+       "old": "0x1325d9",
+       "new": "0x1337a5",
+       "window_bytes": 32,
+       "field_displacements_masked": false,
+       "new_global": "0x2e3f0fc",
+       "instruction_old": "cmp eax, dword ptr [rip + 0x335166d]",
+       "instruction_new": "cmp eax, dword ptr [rip + 0x2d0b951]",
+       "old_function": "0x131800"
+      },
+      {
+       "old": "0x532e54",
+       "new": "0x53bf04",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2e3f0fc",
+       "instruction_old": "cmp eax, dword ptr [rip + 0x2f50df2]",
+       "instruction_new": "cmp eax, dword ptr [rip + 0x29031f2]",
+       "old_function": "0x532e40"
+      },
+      {
+       "old": "0x5486ae",
+       "new": "0x55150e",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2e3f0fc",
+       "instruction_old": "cmp edx, dword ptr [rip + 0x2f3b598]",
+       "instruction_new": "cmp edx, dword ptr [rip + 0x28edbe8]",
+       "old_function": "0x548680"
+      },
+      {
+       "old": "0x5e7068",
+       "new": "0x5ef9b8",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2e3f0fc",
+       "instruction_old": "mov edx, dword ptr [rip + 0x2e9cbde]",
+       "instruction_new": "mov edx, dword ptr [rip + 0x284f73e]",
+       "old_function": "0x5e6d2b"
+      }
+     ]
+    },
+    {
+     "kind": "re-disassembled in the game's own stow/draw/getter/lookup functions",
+     "checks": [
+      {
+       "image": "old",
+       "rva": "0xa95a38",
+       "instruction": "mov r8d, dword ptr [rip + 0x29ee20d]",
+       "rip_target": "0x3483c4c",
+       "expect_rip_target": "0x3483c4c",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab1518",
+       "instruction": "mov r8d, dword ptr [rip + 0x238dbdd]",
+       "rip_target": "0x2e3f0fc",
+       "expect_rip_target": "0x2e3f0fc",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x9be5b5",
+       "instruction": "cmp edi, dword ptr [rip + 0x2480b41]",
+       "rip_target": "0x2e3f0fc",
+       "expect_rip_target": "0x2e3f0fc",
+       "ok": true
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L6",
+   "file": "src/holster_your_shield.lua",
+   "changed": true
+  },
+  {
+   "id": "layout.none_slot",
+   "line": 42,
+   "symbol": "none_slot",
+   "kind": "game.dll global: the empty held-carryable id",
+   "old": "0x3483c5c",
+   "new": "0x2e3f10c",
+   "role": "address",
+   "feeds_write": true,
+   "method": "RIP-relative reference windows migrated (exact first, field-masked second); every exact witness agrees",
+   "witnesses": [
+    {
+     "kind": "RIP-relative reference windows (tools/map_globals.py, evidence/globals.json)",
+     "old_sites": 296,
+     "sampled": 64,
+     "witnesses": 31,
+     "votes": {
+      "0x2e3f10c": 31
+     },
+     "exact_window_votes": {
+      "0x2e3f10c": 29
+     },
+     "agreeing": 31,
+     "disagreeing": 0,
+     "distinct_old_functions": 31,
+     "examples": [
+      {
+       "old": "0xa3eeb5",
+       "new": "0xa595e5",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2e3f10c",
+       "instruction_old": "cmp eax, dword ptr [rip + 0x2a44da1]",
+       "instruction_new": "cmp eax, dword ptr [rip + 0x23e5b21]",
+       "old_function": "0xa3edf0"
+      },
+      {
+       "old": "0xa41b93",
+       "new": "0xa5c3a3",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2e3f10c",
+       "instruction_old": "cmp ebx, dword ptr [rip + 0x2a420c3]",
+       "instruction_new": "cmp ebx, dword ptr [rip + 0x23e2d63]",
+       "old_function": "0xa41b50"
+      },
+      {
+       "old": "0xa427e8",
+       "new": "0xa5cff8",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2e3f10c",
+       "instruction_old": "cmp eax, dword ptr [rip + 0x2a4146e]",
+       "instruction_new": "cmp eax, dword ptr [rip + 0x23e210e]",
+       "old_function": "0xa427c1"
+      },
+      {
+       "old": "0xa43569",
+       "new": "0xa5dd79",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2e3f10c",
+       "instruction_old": "mov eax, dword ptr [rip + 0x2a406ed]",
+       "instruction_new": "mov eax, dword ptr [rip + 0x23e138d]",
+       "old_function": "0xa433f0"
+      }
+     ]
+    },
+    {
+     "kind": "re-disassembled in the game's own stow/draw/getter/lookup functions",
+     "checks": [
+      {
+       "image": "old",
+       "rva": "0xa95938",
+       "instruction": "cmp ebx, dword ptr [rip + 0x29ee31e]",
+       "rip_target": "0x3483c5c",
+       "expect_rip_target": "0x3483c5c",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab1418",
+       "instruction": "cmp ebx, dword ptr [rip + 0x238dcee]",
+       "rip_target": "0x2e3f10c",
+       "expect_rip_target": "0x2e3f10c",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab159a",
+       "instruction": "cmp ebx, dword ptr [rip + 0x238db6c]",
+       "rip_target": "0x2e3f10c",
+       "expect_rip_target": "0x2e3f10c",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab16e9",
+       "instruction": "cmp esi, dword ptr [rip + 0x238da1d]",
+       "rip_target": "0x2e3f10c",
+       "expect_rip_target": "0x2e3f10c",
+       "ok": true
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L6",
+   "file": "src/holster_your_shield.lua",
+   "changed": true
+  },
+  {
+   "id": "layout.set_item",
+   "line": 43,
+   "symbol": "set_item",
+   "kind": "game.dll function the mod calls (inventory, avatar entity, item)",
+   "old": "0x9abc30",
+   "new": "0x9bd850",
+   "role": "call",
+   "feeds_write": true,
+   "method": "unique 160-byte instruction window at the entry (unmasked) plus unanimous inner-window votes; the game's own stow (old 0xA95910 / new 0xAB13F0) and draw (old 0xA95A90 / new 0xAB1570), aligned 100/100 and 127/127 with no operand change, call it at the new address; identical 16-byte prologue",
+   "witnesses": [
+    {
+     "kind": "tools/fmap.py + tools/fpair.py",
+     "entry_window_bytes": 160,
+     "masked": false,
+     "alignment": "818 of 819/828 instructions aligned (ratio 0.993); the only changed operands are the avatar-block stride 0x1238->0x1240 and field 0x53e9b8->0x53e9c0 inside the game function, and its own jump table",
+     "listing": "evidence/listings/set_item-9abc30-9bd850.txt"
+    },
+    {
+     "kind": "callers and prologues, re-disassembled",
+     "checks": [
+      {
+       "image": "old",
+       "rva": "0x9abc30",
+       "bytes": "48895c241848894c2408555657415441",
+       "expect_bytes": "48895c241848894c2408555657415441",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x9bd850",
+       "bytes": "48895c241848894c2408555657415441",
+       "expect_bytes": "48895c241848894c2408555657415441",
+       "ok": true
+      },
+      {
+       "image": "old",
+       "rva": "0xa95a44",
+       "instruction": "call 0x9abc30",
+       "expect": "call 0x9abc30",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab1524",
+       "instruction": "call 0x9bd850",
+       "expect": "call 0x9bd850",
+       "ok": true
+      },
+      {
+       "image": "old",
+       "rva": "0xa95c21",
+       "instruction": "call 0x9abc30",
+       "expect": "call 0x9abc30",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab1701",
+       "instruction": "call 0x9bd850",
+       "expect": "call 0x9bd850",
+       "ok": true
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L6",
+   "file": "src/holster_your_shield.lua",
+   "changed": true
+  },
+  {
+   "id": "layout.set_mode",
+   "line": 44,
+   "symbol": "set_mode",
+   "kind": "game.dll function the mod calls (inventory, avatar entity, mode)",
+   "old": "0x9ac8e0",
+   "new": "0x9be500",
+   "role": "call",
+   "feeds_write": true,
+   "method": "unique 160-byte instruction window at the entry (unmasked) plus unanimous inner-window votes; the game's own stow (old 0xA95910 / new 0xAB13F0) and draw (old 0xA95A90 / new 0xAB1570), aligned 100/100 and 127/127 with no operand change, call it at the new address; identical 16-byte prologue",
+   "witnesses": [
+    {
+     "kind": "tools/fmap.py + tools/fpair.py",
+     "entry_window_bytes": 160,
+     "masked": false,
+     "alignment": "461 of 461/462 aligned (ratio 0.999); changed operands: stride 0x1238->0x1240 and 0x53e9b8->0x53e9c0 only",
+     "listing": "evidence/listings/set_mode-9ac8e0-9be500.txt"
+    },
+    {
+     "kind": "callers and prologues, re-disassembled",
+     "checks": [
+      {
+       "image": "old",
+       "rva": "0x9ac8e0",
+       "bytes": "48895c24204489442418555657415441",
+       "expect_bytes": "48895c24204489442418555657415441",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x9be500",
+       "bytes": "48895c24204489442418555657415441",
+       "expect_bytes": "48895c24204489442418555657415441",
+       "ok": true
+      },
+      {
+       "image": "old",
+       "rva": "0xa95a54",
+       "instruction": "call 0x9ac8e0",
+       "expect": "call 0x9ac8e0",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab1534",
+       "instruction": "call 0x9be500",
+       "expect": "call 0x9be500",
+       "ok": true
+      },
+      {
+       "image": "old",
+       "rva": "0xa95c31",
+       "instruction": "call 0x9ac8e0",
+       "expect": "call 0x9ac8e0",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab1711",
+       "instruction": "call 0x9be500",
+       "expect": "call 0x9be500",
+       "ok": true
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L6",
+   "file": "src/holster_your_shield.lua",
+   "changed": true
+  },
+  {
+   "id": "layout.send_held",
+   "line": 45,
+   "symbol": "send_held",
+   "kind": "game.dll function the mod calls (peer, avatar entity, item, mode)",
+   "old": "0xbe20b0",
+   "new": "0xc008b0",
+   "role": "call",
+   "feeds_write": true,
+   "method": "unique 160-byte instruction window at the entry (unmasked) plus unanimous inner-window votes; the game's own stow (old 0xA95910 / new 0xAB13F0) and draw (old 0xA95A90 / new 0xAB1570), aligned 100/100 and 127/127 with no operand change, call it at the new address; identical 16-byte prologue",
+   "witnesses": [
+    {
+     "kind": "tools/fmap.py + tools/fpair.py",
+     "entry_window_bytes": 160,
+     "masked": false,
+     "alignment": "35 of 35 aligned (ratio 1.0), no operand change",
+     "listing": "evidence/listings/send_held-be20b0-c008b0.txt"
+    },
+    {
+     "kind": "callers and prologues, re-disassembled",
+     "checks": [
+      {
+       "image": "old",
+       "rva": "0xbe20b0",
+       "bytes": "48895c241044894c2420574883ec6048",
+       "expect_bytes": "48895c241044894c2420574883ec6048",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xc008b0",
+       "bytes": "48895c241044894c2420574883ec6048",
+       "expect_bytes": "48895c241044894c2420574883ec6048",
+       "ok": true
+      },
+      {
+       "image": "old",
+       "rva": "0xa95a6f",
+       "instruction": "call 0xbe20b0",
+       "expect": "call 0xbe20b0",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab154f",
+       "instruction": "call 0xc008b0",
+       "expect": "call 0xc008b0",
+       "ok": true
+      },
+      {
+       "image": "old",
+       "rva": "0xa95c4f",
+       "instruction": "call 0xbe20b0",
+       "expect": "call 0xbe20b0",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab172f",
+       "instruction": "call 0xc008b0",
+       "expect": "call 0xc008b0",
+       "ok": true
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L6",
+   "file": "src/holster_your_shield.lua",
+   "changed": true
+  },
+  {
+   "id": "layout.prologues",
+   "line": 48,
+   "symbol": "Holster.PROLOGUES",
+   "kind": "first 16 bytes of each called function, compared through ReadProcessMemory before binding",
+   "old": "{\"send_held\": \"48895c241044894c2420574883ec6048\", \"set_item\": \"48895c241848894c2408555657415441\", \"set_mode\": \"48895c24204489442418555657415441\"}",
+   "new": "{\"send_held\": \"48895c241044894c2420574883ec6048\", \"set_item\": \"48895c241848894c2408555657415441\", \"set_mode\": \"48895c24204489442418555657415441\"}",
+   "role": "gate",
+   "feeds_write": true,
+   "method": "bytes at the mapped entries of the new capture",
+   "witnesses": [
+    {
+     "kind": "bytes",
+     "checks": [
+      {
+       "image": "new",
+       "rva": "0x9bd850",
+       "bytes": "48895c241848894c2408555657415441",
+       "expect_bytes": "48895c241848894c2408555657415441",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x9be500",
+       "bytes": "48895c24204489442418555657415441",
+       "expect_bytes": "48895c24204489442418555657415441",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xc008b0",
+       "bytes": "48895c241044894c2420574883ec6048",
+       "expect_bytes": "48895c241044894c2420574883ec6048",
+       "ok": true
+      }
+     ]
+    },
+    {
+     "kind": "note",
+     "text": "send_held's new pdata entry starts at 0xc008ad, 3 padding bytes before the entry its callers use (0xC008B0); the mod uses the call target"
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L6",
+   "file": "src/holster_your_shield.lua",
+   "changed": false
+  },
+  {
+   "id": "calls.semantics",
+   "line": 296,
+   "symbol": "Instance:move / MODE_HELD, MODE_AWAY / peer -2",
+   "kind": "call arguments: set_item(inventory, entity, item), set_mode(inventory, entity, 2 held | 1 away), send_held(-2 everyone, entity, item, mode)",
+   "old": "MODE_HELD 2, MODE_AWAY 1, peer -2, stow item = none_item",
+   "new": "unchanged",
+   "role": "call",
+   "feeds_write": true,
+   "method": "the game's own stow and draw make the same three calls with these arguments, identically in both builds",
+   "witnesses": [
+    {
+     "kind": "stow (new 0xAB13F0)",
+     "checks": [
+      {
+       "image": "new",
+       "rva": "0xab1518",
+       "instruction": "mov r8d, dword ptr [rip + 0x238dbdd]",
+       "expect": "mov r8d, dword ptr [rip + 0x238dbdd]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab1521",
+       "instruction": "mov rcx, rsi",
+       "expect": "mov rcx, rsi",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab1529",
+       "instruction": "mov r8d, 1",
+       "expect": "mov r8d, 1",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab1548",
+       "instruction": "mov rcx, 0xfffffffffffffffe",
+       "expect": "mov rcx, 0xfffffffffffffffe",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab1545",
+       "instruction": "mov r8d, edi",
+       "expect": "mov r8d, edi",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab1542",
+       "instruction": "mov r9d, r14d",
+       "expect": "mov r9d, r14d",
+       "ok": true
+      }
+     ]
+    },
+    {
+     "kind": "draw (new 0xAB1570)",
+     "checks": [
+      {
+       "image": "new",
+       "rva": "0xab16f9",
+       "instruction": "mov r8d, edi",
+       "expect": "mov r8d, edi",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab16fe",
+       "instruction": "mov rcx, r14",
+       "expect": "mov rcx, r14",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab1706",
+       "instruction": "mov r8d, 2",
+       "expect": "mov r8d, 2",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab1728",
+       "instruction": "mov rcx, 0xfffffffffffffffe",
+       "expect": "mov rcx, 0xfffffffffffffffe",
+       "ok": true
+      }
+     ]
+    },
+    {
+     "kind": "listings",
+     "files": [
+      "evidence/listings/stow-a95910-ab13f0.txt",
+      "evidence/listings/draw-a95a90-ab1570.txt"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L6",
+   "changed_note": "unchanged",
+   "file": "src/holster_your_shield.lua",
+   "changed": false
+  },
+  {
+   "id": "owner.network_map",
+   "line": 50,
+   "symbol": "OWNER_NETWORK_MAP",
+   "kind": "entities field: network-id map header {data, capacity, empty, multiplier}",
+   "old": "0xF22EC8",
+   "new": "0xF24990",
+   "role": "address",
+   "feeds_write": true,
+   "method": "aligned value votes over every old site using the displacement; the brief lists 0xF22EC8->0xF24990 as live-verified",
+   "witnesses": [
+    {
+     "kind": "aligned value votes (tools/value_map.py, evidence/value-map.json)",
+     "old_value": "0xf22ec8",
+     "old_sites": 26,
+     "sampled": 26,
+     "votes": {
+      "0xf24990": 15
+     },
+     "examples": [
+      {
+       "old": "0x60658d",
+       "new": "0x60f75d",
+       "old_insn": "mov rdi, qword ptr [rbp + 0xf22ec8]",
+       "new_insn": "mov rdi, qword ptr [rbp + 0xf24990]",
+       "old_function": "0x606520",
+       "new_function": "0x60f6ec",
+       "ratio": 0.986
+      },
+      {
+       "old": "0x7c827c",
+       "new": "0x7d426c",
+       "old_insn": "mov rdi, qword ptr [rcx + 0xf22ec8]",
+       "new_insn": "mov rdi, qword ptr [rcx + 0xf24990]",
+       "old_function": "0x7c8253",
+       "new_function": "0x7d4243",
+       "ratio": 1.0
+      },
+      {
+       "old": "0xfd9687",
+       "new": "0xe69627",
+       "old_insn": "mov rdi, qword ptr [r11 + 0xf22ec8]",
+       "new_insn": "mov rdi, qword ptr [r11 + 0xf24990]",
+       "old_function": "0xfd9660",
+       "new_function": "0xe69600",
+       "ratio": 1.0
+      }
+     ]
+    },
+    {
+     "kind": "aligned operand pairs of functions loading the global (tools/map_fields.py)",
+     "old": "ENT+0xf22ed0",
+     "new_votes": [
+      [
+       "ENT",
+       "0xf24998",
+       1
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0xfdba88",
+       "new": "0xe6c038",
+       "old_function": "0xfdba60",
+       "new_function": "0xe6c010",
+       "old_insn": "mov r10d, dword ptr [r9 + 0xf22ed0]",
+       "new_insn": "mov r10d, dword ptr [r9 + 0xf24998]"
+      }
+     ]
+    },
+    {
+     "kind": "re-disassembled",
+     "checks": [
+      {
+       "image": "old",
+       "rva": "0x7c827c",
+       "instruction": "mov rdi, qword ptr [rcx + 0xf22ec8]",
+       "expect": "mov rdi, qword ptr [rcx + 0xf22ec8]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x7d426c",
+       "instruction": "mov rdi, qword ptr [rcx + 0xf24990]",
+       "expect": "mov rdi, qword ptr [rcx + 0xf24990]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xe69627",
+       "instruction": "mov rdi, qword ptr [r11 + 0xf24990]",
+       "expect": "mov rdi, qword ptr [r11 + 0xf24990]",
+       "ok": true
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L2",
+   "file": "src/holster_your_shield.lua",
+   "changed": true
+  },
+  {
+   "id": "owner.entity_map",
+   "line": 50,
+   "symbol": "OWNER_ENTITY_MAP",
+   "kind": "entities field: entity-id map header",
+   "old": "0xF1AEB0",
+   "new": "0xF1C978",
+   "role": "address",
+   "feeds_write": true,
+   "method": "the game's entity lookup (old 0xFD9D40 / new 0xE69CE0, called by draw and by set_item) reads the header at the new offset; value votes; the brief lists the value as live-verified",
+   "witnesses": [
+    {
+     "kind": "aligned value votes (tools/value_map.py, evidence/value-map.json)",
+     "old_value": "0xf1aeb0",
+     "old_sites": 34,
+     "sampled": 34,
+     "votes": {
+      "0xf1c978": 22
+     },
+     "examples": [
+      {
+       "old": "0x5d318d",
+       "new": "0x5dc6bc",
+       "old_insn": "mov rbx, qword ptr [r11 + 0xf1aeb0]",
+       "new_insn": "mov rdi, qword ptr [r11 + 0xf1c978]",
+       "old_function": "0x5d2da0",
+       "new_function": "0x5dc2f0",
+       "ratio": 0.849
+      },
+      {
+       "old": "0x678836",
+       "new": "0x682406",
+       "old_insn": "mov rdi, qword ptr [r11 + 0xf1aeb0]",
+       "new_insn": "mov rdi, qword ptr [r11 + 0xf1c978]",
+       "old_function": "0x6786a4",
+       "new_function": "0x682274",
+       "ratio": 1.0
+      },
+      {
+       "old": "0x760ac2",
+       "new": "0x76bf02",
+       "old_insn": "mov rdi, qword ptr [r11 + 0xf1aeb0]",
+       "new_insn": "mov rdi, qword ptr [r11 + 0xf1c978]",
+       "old_function": "0x75fdc7",
+       "new_function": "0x76b207",
+       "ratio": 0.999
+      }
+     ]
+    },
+    {
+     "kind": "entity lookup, re-disassembled",
+     "listing": "evidence/listings/entity-lookup-fd9d40-e69ce0.txt",
+     "checks": [
+      {
+       "image": "old",
+       "rva": "0xfd9d83",
+       "instruction": "mov rbx, qword ptr [r10 + 0xf1aeb0]",
+       "expect": "mov rbx, qword ptr [r10 + 0xf1aeb0]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xe69d23",
+       "instruction": "mov rbx, qword ptr [r10 + 0xf1c978]",
+       "expect": "mov rbx, qword ptr [r10 + 0xf1c978]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xe69d08",
+       "instruction": "mov r9d, dword ptr [r10 + 0xf1c980]",
+       "expect": "mov r9d, dword ptr [r10 + 0xf1c980]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xe69d2a",
+       "instruction": "mov edi, dword ptr [r10 + 0xf1c984]",
+       "expect": "mov edi, dword ptr [r10 + 0xf1c984]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xe69d0f",
+       "instruction": "mov r11d, dword ptr [r10 + 0xf1c988]",
+       "expect": "mov r11d, dword ptr [r10 + 0xf1c988]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab16ce",
+       "instruction": "call 0xe69ce0",
+       "expect": "call 0xe69ce0",
+       "ok": true
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L2",
+   "file": "src/holster_your_shield.lua",
+   "changed": true
+  },
+  {
+   "id": "owner.records",
+   "line": 50,
+   "symbol": "OWNER_RECORDS",
+   "kind": "entities field: 24-byte entity records",
+   "old": "0xF32F18",
+   "new": "0xF349E0",
+   "role": "address",
+   "feeds_write": true,
+   "method": "the entity lookup returns entities + 24*(index + 0xA2314) = +0xF349E0 + 24*index (old: 8*(3*index + 0x1E65E3) = +0xF32F18 + 24*index); the brief lists the value as live-verified",
+   "witnesses": [
+    {
+     "kind": "aligned operand pairs of functions loading the global (tools/map_fields.py)",
+     "old": "ENT+0xf32f24[]",
+     "new_votes": [
+      [
+       "ENT",
+       "0xf349ec",
+       4
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x678883",
+       "new": "0x682453",
+       "old_function": "0x6786a4",
+       "new_function": "0x682274",
+       "old_insn": "cmp dword ptr [r11 + rcx*8 + 0xf32f24], 0",
+       "new_insn": "cmp dword ptr [r11 + rcx*8 + 0xf349ec], 0"
+      },
+      {
+       "old": "0x88b361",
+       "new": "0x898a41",
+       "old_function": "0x88ad93",
+       "new_function": "0x898473",
+       "old_insn": "mov ecx, dword ptr [rdi + rcx*8 + 0xf32f24]",
+       "new_insn": "mov ecx, dword ptr [rdi + rcx*8 + 0xf349ec]"
+      },
+      {
+       "old": "0x94a9e8",
+       "new": "0x95bf78",
+       "old_function": "0x94a270",
+       "new_function": "0x95b7e9",
+       "old_insn": "mov ebx, dword ptr [rax + rcx*8 + 0xf32f24]",
+       "new_insn": "mov ebx, dword ptr [rax + rcx*8 + 0xf349ec]"
+      }
+     ]
+    },
+    {
+     "kind": "re-disassembled",
+     "checks": [
+      {
+       "image": "old",
+       "rva": "0xfd9ddb",
+       "instruction": "lea rax, [rax + 0x1e65e3]",
+       "expect": "lea rax, [rax + 0x1e65e3]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xe69d77",
+       "instruction": "add rax, 0xa2314",
+       "expect": "add rax, 0xa2314",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xe69d7d",
+       "instruction": "lea rax, [rax + rax*2]",
+       "expect": "lea rax, [rax + rax*2]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xe69d81",
+       "instruction": "lea rax, [r10 + rax*8]",
+       "expect": "lea rax, [r10 + rax*8]",
+       "ok": true
+      }
+     ],
+     "arithmetic": {
+      "old": "0xf32f18",
+      "new": "0xf349e0"
+     }
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L2",
+   "file": "src/holster_your_shield.lua",
+   "changed": true
+  },
+  {
+   "id": "owner.settings",
+   "line": 50,
+   "symbol": "OWNER_SETTINGS",
+   "kind": "entities field: shared EquipmentComponent settings table pointer",
+   "old": "0xF12BC0",
+   "new": "0xF14688",
+   "role": "value",
+   "feeds_write": true,
+   "method": "the getter's fallback (old 0x508E90, reached by the getter's tail jump; new 0x511450, the new getter's tail jump target) loads the table from entities+0xF14688; 3 of 3 old users map to it",
+   "witnesses": [
+    {
+     "kind": "aligned value votes (tools/value_map.py, evidence/value-map.json)",
+     "old_value": "0xf12bc0",
+     "old_sites": 3,
+     "sampled": 3,
+     "votes": {
+      "0xf14688": 3
+     },
+     "examples": [
+      {
+       "old": "0x575a1f",
+       "new": "0x57e9ff",
+       "old_insn": "mov rax, qword ptr [rcx + 0xf12bc0]",
+       "new_insn": "mov rax, qword ptr [rcx + 0xf14688]",
+       "old_function": "0x574280",
+       "new_function": "0x57d260",
+       "ratio": 0.958
+      },
+      {
+       "old": "0x8c3ed1",
+       "new": "0x8d3f41",
+       "old_insn": "mov rax, qword ptr [rcx + 0xf12bc0]",
+       "new_insn": "mov rax, qword ptr [rcx + 0xf14688]",
+       "old_function": "0x8c3e91",
+       "new_function": "0x8d3f01",
+       "ratio": 1.0
+      },
+      {
+       "old": "0x18d7ba0",
+       "new": "0x1758d90",
+       "old_insn": "mov r10, qword ptr [rax + 0xf12bc0]",
+       "new_insn": "mov r10, qword ptr [rax + 0xf14688]",
+       "old_function": "0x18d7718",
+       "new_function": "0x1758908",
+       "ratio": 0.993
+      }
+     ]
+    },
+    {
+     "kind": "shared settings lookup, re-disassembled",
+     "checks": [
+      {
+       "image": "old",
+       "rva": "0x50936c",
+       "instruction": "jmp 0x508e90",
+       "expect": "jmp 0x508e90",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x51192c",
+       "instruction": "jmp 0x511450",
+       "expect": "jmp 0x511450",
+       "ok": true
+      },
+      {
+       "image": "old",
+       "rva": "0x508e9f",
+       "instruction": "mov r10, qword ptr [rax + 0xf12bc0]",
+       "expect": "mov r10, qword ptr [rax + 0xf12bc0]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x511455",
+       "instruction": "mov rax, qword ptr [rip + 0x27d2d5c]",
+       "rip_target": "0x2ce41b8",
+       "expect_rip_target": "0x2ce41b8",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x51145f",
+       "instruction": "mov r10, qword ptr [rax + 0xf14688]",
+       "expect": "mov r10, qword ptr [rax + 0xf14688]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x1758d90",
+       "instruction": "mov r10, qword ptr [rax + 0xf14688]",
+       "expect": "mov r10, qword ptr [rax + 0xf14688]",
+       "ok": true
+      }
+     ]
+    },
+    {
+     "kind": "note",
+     "text": "a masked window match of 0x508E90 lands on 0x5120E0, a different component table (172 slots, 144-byte records); the getter's own tail jump identifies 0x511450"
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L5",
+   "file": "src/holster_your_shield.lua",
+   "changed": true
+  },
+  {
+   "id": "settings.slots",
+   "line": 53,
+   "symbol": "SETTINGS_SLOTS",
+   "kind": "shared settings table: slot count (probe start = resource hash mod slots, linear probe, records after 16*slots bytes)",
+   "old": "688",
+   "new": "702",
+   "role": "value",
+   "feeds_write": true,
+   "method": "the new lookup computes hash mod 0x2BE, wraps at 0x2BD, probes 0x2BE slots and puts records at +0x2BE0; a second user (new 0x1758908) agrees. Game data grew (as other tables did): 688 -> 702",
+   "witnesses": [
+    {
+     "kind": "re-disassembled",
+     "checks": [
+      {
+       "image": "old",
+       "rva": "0x508eb7",
+       "instruction": "imul eax, edx, 0x2b0",
+       "expect": "imul eax, edx, 0x2b0",
+       "ok": true
+      },
+      {
+       "image": "old",
+       "rva": "0x508ef4",
+       "instruction": "cmp eax, 0x2af",
+       "expect": "cmp eax, 0x2af",
+       "ok": true
+      },
+      {
+       "image": "old",
+       "rva": "0x508f18",
+       "instruction": "add rax, 0x2b00",
+       "expect": "add rax, 0x2b00",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x511483",
+       "instruction": "imul eax, eax, 0x2be",
+       "expect": "imul eax, eax, 0x2be",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x5114b4",
+       "instruction": "cmp eax, 0x2bd",
+       "expect": "cmp eax, 0x2bd",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x5114bd",
+       "instruction": "cmp r9d, 0x2be",
+       "expect": "cmp r9d, 0x2be",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x5114d8",
+       "instruction": "add rax, 0x2be0",
+       "expect": "add rax, 0x2be0",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x1758db4",
+       "instruction": "imul eax, eax, 0x2be",
+       "expect": "imul eax, eax, 0x2be",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x1758e98",
+       "instruction": "lea rax, [r10 + 0x2be0]",
+       "expect": "lea rax, [r10 + 0x2be0]",
+       "ok": true
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L5",
+   "file": "src/holster_your_shield.lua",
+   "changed": true
+  },
+  {
+   "id": "settings.layout",
+   "line": 53,
+   "symbol": "SETTINGS_SIZE, slot {u64 resource, u32 index}",
+   "kind": "shared settings: 16-byte slots {resource u64, index u32}, 232-byte records",
+   "old": "232; slot +0 key, +8 index",
+   "new": "232; slot +0 key, +8 index",
+   "role": "value",
+   "feeds_write": true,
+   "method": "the lookup reads the key at slot+0 and the index at slot+8 and multiplies by 0xE8 in both builds",
+   "witnesses": [
+    {
+     "kind": "re-disassembled",
+     "checks": [
+      {
+       "image": "new",
+       "rva": "0x51149a",
+       "instruction": "mov rdx, qword ptr [rax]",
+       "expect": "mov rdx, qword ptr [rax]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x5114ce",
+       "instruction": "mov ecx, dword ptr [rax + 8]",
+       "expect": "mov ecx, dword ptr [rax + 8]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x5114d1",
+       "instruction": "imul rax, rcx, 0xe8",
+       "expect": "imul rax, rcx, 0xe8",
+       "ok": true
+      },
+      {
+       "image": "old",
+       "rva": "0x508f11",
+       "instruction": "imul rax, rcx, 0xe8",
+       "expect": "imul rax, rcx, 0xe8",
+       "ok": true
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L5",
+   "file": "src/holster_your_shield.lua",
+   "changed": false
+  },
+  {
+   "id": "equipment.copies",
+   "line": 200,
+   "symbol": "copies +80 map, +144 records, 232 bytes",
+   "kind": "EquipmentComponent per-entity copies: map header +80, records +144, 232-byte records",
+   "old": "+80, +144, 232",
+   "new": "+80, +144, 232",
+   "role": "value",
+   "feeds_write": true,
+   "method": "the getter (old 0x5092B0 / new 0x511870) aligns 54/54 with no operand change; draw and set_item call it",
+   "witnesses": [
+    {
+     "kind": "getter, re-disassembled",
+     "listing": "evidence/listings/equipment-getter-5092b0-511870.txt",
+     "checks": [
+      {
+       "image": "new",
+       "rva": "0x5118c4",
+       "instruction": "mov rdi, qword ptr [r11 + 0x50]",
+       "expect": "mov rdi, qword ptr [r11 + 0x50]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x5118ab",
+       "instruction": "mov r9d, dword ptr [r11 + 0x58]",
+       "expect": "mov r9d, dword ptr [r11 + 0x58]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x5118c8",
+       "instruction": "mov esi, dword ptr [r11 + 0x5c]",
+       "expect": "mov esi, dword ptr [r11 + 0x5c]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x5118af",
+       "instruction": "mov ebx, dword ptr [r11 + 0x60]",
+       "expect": "mov ebx, dword ptr [r11 + 0x60]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x511912",
+       "instruction": "imul rax, rax, 0xe8",
+       "expect": "imul rax, rax, 0xe8",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x511919",
+       "instruction": "add rax, qword ptr [r11 + 0x90]",
+       "expect": "add rax, qword ptr [r11 + 0x90]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab16db",
+       "instruction": "call 0x511870",
+       "expect": "call 0x511870",
+       "ok": true
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L5",
+   "file": "src/holster_your_shield.lua",
+   "changed": false
+  },
+  {
+   "id": "equipment.type",
+   "line": 54,
+   "symbol": "TYPE_OFFSET, Holster.SHIELD_TYPE",
+   "kind": "equipment record: type at +0x80; 25 = EquipmentType_BackpackShield",
+   "old": "+0x80, 25",
+   "new": "+0x80, 25",
+   "role": "value",
+   "feeds_write": true,
+   "method": "the game's draw compares the backpack's record +0x80 with 0x19 before drawing the shield (both builds); every mapped getter call site reads +0x80 against the same type constants",
+   "witnesses": [
+    {
+     "kind": "re-disassembled",
+     "checks": [
+      {
+       "image": "old",
+       "rva": "0xa95c00",
+       "instruction": "cmp dword ptr [rax + 0x80], 0x19",
+       "expect": "cmp dword ptr [rax + 0x80], 0x19",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab16e0",
+       "instruction": "cmp dword ptr [rax + 0x80], 0x19",
+       "expect": "cmp dword ptr [rax + 0x80], 0x19",
+       "ok": true
+      }
+     ]
+    },
+    {
+     "kind": "getter call sites (tools/getter_fields.py, evidence/getter-fields.json)",
+     "old_calls": 93,
+     "new_calls": 92,
+     "mapped_sites": 37,
+     "all_mapped_sites_identical": true
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L5",
+   "file": "src/holster_your_shield.lua",
+   "changed": false
+  },
+  {
+   "id": "equipment.one_handed",
+   "line": 54,
+   "symbol": "ONE_HANDED_OFFSET",
+   "kind": "equipment record: one-handed flag byte at +0xC4",
+   "old": "0xC4",
+   "new": "0xC4",
+   "role": "value",
+   "feeds_write": true,
+   "method": "the game's one-handed query (old 0x8C2010 / new 0x8D2030, called by draw before it draws) returns byte [getter(entity) + 0xC4]; 48/48 aligned, no operand change; the only +0xC4 getter read in either build",
+   "witnesses": [
+    {
+     "kind": "re-disassembled",
+     "listing": "evidence/listings/one-handed-8c2010-8d2030.txt",
+     "checks": [
+      {
+       "image": "old",
+       "rva": "0x8c20b1",
+       "instruction": "movzx eax, byte ptr [rax + 0xc4]",
+       "expect": "movzx eax, byte ptr [rax + 0xc4]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x8d20cc",
+       "instruction": "call 0x511870",
+       "expect": "call 0x511870",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x8d20d1",
+       "instruction": "movzx eax, byte ptr [rax + 0xc4]",
+       "expect": "movzx eax, byte ptr [rax + 0xc4]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab1601",
+       "instruction": "call 0x8d2030",
+       "expect": "call 0x8d2030",
+       "ok": true
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L5",
+   "file": "src/holster_your_shield.lua",
+   "changed": false
+  },
+  {
+   "id": "players.fields",
+   "line": 102,
+   "symbol": "players +0x84 counts, +0xE8 local record (+0x14 bit 0 owned), +0x3A8 avatar network id (0x7FFF none)",
+   "kind": "player manager fields",
+   "old": "+0x84, +0xE8, +0x14 bit0, +0x3A8, 0x7FFF",
+   "new": "unchanged",
+   "role": "address",
+   "feeds_write": true,
+   "method": "aligned operand pairs of functions loading the player manager; 0x7FFF sentinel compares unchanged",
+   "witnesses": [
+    {
+     "kind": "aligned operand pairs of functions loading the global (tools/map_fields.py)",
+     "old": "PM+0x84",
+     "new_votes": [
+      [
+       "PM",
+       "0x84",
+       72
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x4b3bbf",
+       "new": "0x4ba47f",
+       "old_function": "0x4b3b80",
+       "new_function": "0x4ba43e",
+       "old_insn": "cmp dword ptr [rcx + 0x84], ebx",
+       "new_insn": "cmp dword ptr [rcx + 0x84], ebx"
+      },
+      {
+       "old": "0x4b3c73",
+       "new": "0x4ba533",
+       "old_function": "0x4b3b80",
+       "new_function": "0x4ba43e",
+       "old_insn": "cmp ebx, dword ptr [rcx + 0x84]",
+       "new_insn": "cmp ebx, dword ptr [rcx + 0x84]"
+      },
+      {
+       "old": "0x4daf2c",
+       "new": "0x4e1ebc",
+       "old_function": "0x4daf10",
+       "new_function": "0x4e1e9f",
+       "old_insn": "mov ebx, dword ptr [rax + 0x84]",
+       "new_insn": "mov ebx, dword ptr [rax + 0x84]"
+      }
+     ]
+    },
+    {
+     "kind": "aligned operand pairs of functions loading the global (tools/map_fields.py)",
+     "old": "PM+0xe8",
+     "new_votes": [
+      [
+       "PM",
+       "0xe8",
+       51
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x3a4bea",
+       "new": "0x3ab8ea",
+       "old_function": "0x3a4a20",
+       "new_function": "0x3ab71c",
+       "old_insn": "mov rcx, qword ptr [rax + 0xe8]",
+       "new_insn": "mov rcx, qword ptr [rax + 0xe8]"
+      },
+      {
+       "old": "0x605626",
+       "new": "0x60e7f6",
+       "old_function": "0x6054f0",
+       "new_function": "0x60e6bb",
+       "old_insn": "lea r10, [rdi + 0xe8]",
+       "new_insn": "lea r10, [rdi + 0xe8]"
+      },
+      {
+       "old": "0x60b1bd",
+       "new": "0x6143bd",
+       "old_function": "0x60b174",
+       "new_function": "0x614374",
+       "old_insn": "mov rax, qword ptr [rbp + 0xe8]",
+       "new_insn": "mov rax, qword ptr [rbp + 0xe8]"
+      }
+     ]
+    },
+    {
+     "kind": "aligned operand pairs of functions loading the global (tools/map_fields.py)",
+     "old": "PM+0x3a8",
+     "new_votes": [
+      [
+       "PM",
+       "0x3a8",
+       55
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x5bd695",
+       "new": "0x5c64d5",
+       "old_function": "0x5bd37e",
+       "new_function": "0x5c61be",
+       "old_insn": "mov edx, dword ptr [rax + 0x3a8]",
+       "new_insn": "mov edx, dword ptr [rax + 0x3a8]"
+      },
+      {
+       "old": "0x60b188",
+       "new": "0x614388",
+       "old_function": "0x60b174",
+       "new_function": "0x614374",
+       "old_insn": "mov edx, dword ptr [rbp + 0x3a8]",
+       "new_insn": "mov edx, dword ptr [rbp + 0x3a8]"
+      },
+      {
+       "old": "0x6928c8",
+       "new": "0x69c958",
+       "old_function": "0x692702",
+       "new_function": "0x69c792",
+       "old_insn": "mov edx, dword ptr [rax + 0x3a8]",
+       "new_insn": "mov edx, dword ptr [rax + 0x3a8]"
+      }
+     ]
+    },
+    {
+     "kind": "aligned operand pairs of functions loading the global (tools/map_fields.py)",
+     "old": "PM->0xe8+0x14",
+     "new_votes": [
+      [
+       "PM->0xe8",
+       "0x14",
+       4
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0xacc8dd",
+       "new": "0xae8b3d",
+       "old_function": "0xacc25f",
+       "new_function": "0xae84bf",
+       "old_insn": "test byte ptr [rax + 0x14], 1",
+       "new_insn": "test byte ptr [rax + 0x14], 1"
+      },
+      {
+       "old": "0xaccafc",
+       "new": "0xae8d5c",
+       "old_function": "0xacc25f",
+       "new_function": "0xae84bf",
+       "old_insn": "test byte ptr [rax + 0x14], 1",
+       "new_insn": "test byte ptr [rax + 0x14], 1"
+      },
+      {
+       "old": "0x14683aa",
+       "new": "0x12fffdc",
+       "old_function": "0x1468320",
+       "new_function": "0x12fff50",
+       "old_insn": "test byte ptr [rax + 0x14], 1",
+       "new_insn": "test byte ptr [rax + 0x14], 1"
+      }
+     ]
+    },
+    {
+     "kind": "re-disassembled",
+     "checks": [
+      {
+       "image": "new",
+       "rva": "0x4ba47f",
+       "instruction": "cmp dword ptr [rcx + 0x84], ebx",
+       "expect": "cmp dword ptr [rcx + 0x84], ebx",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x3ab8ea",
+       "instruction": "mov rcx, qword ptr [rax + 0xe8]",
+       "expect": "mov rcx, qword ptr [rax + 0xe8]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x5c64d5",
+       "instruction": "mov edx, dword ptr [rax + 0x3a8]",
+       "expect": "mov edx, dword ptr [rax + 0x3a8]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xae8b3d",
+       "instruction": "test byte ptr [rax + 0x14], 1",
+       "expect": "test byte ptr [rax + 0x14], 1",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x61009f",
+       "instruction": "mov r8d, dword ptr [rax + rdx + 0x3a8]",
+       "expect": "mov r8d, dword ptr [rax + rdx + 0x3a8]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x6100a7",
+       "instruction": "cmp r8d, 0x7fff",
+       "expect": "cmp r8d, 0x7fff",
+       "ok": true
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L2",
+   "file": "src/holster_your_shield.lua",
+   "changed": false
+  },
+  {
+   "id": "entity.record",
+   "line": 51,
+   "symbol": "AVATAR_TYPE_LOW/HIGH; record {hash u64, id +8, flags +20 bit 0}",
+   "kind": "entity record layout and the avatar resource hash (content/fac_helldivers/cha_avatar/avatar_helldiver)",
+   "old": "0x4D1C334D294DFA97; +8 id; +20 bit0; 24 bytes",
+   "new": "unchanged",
+   "role": "identity",
+   "feeds_write": true,
+   "method": "resource-name hash (build independent; the same 64-bit immediate is in game code of both builds); the lookup returns 24-byte records; the identity test byte [record+0x14] bit 0 in stow/draw",
+   "witnesses": [
+    {
+     "kind": "immediate in code",
+     "old_rva": "0x62c56e",
+     "new_rva": "0x635bee"
+    },
+    {
+     "kind": "re-disassembled",
+     "checks": [
+      {
+       "image": "new",
+       "rva": "0xab14f7",
+       "instruction": "test byte ptr [rcx + 0x14], 1",
+       "expect": "test byte ptr [rcx + 0x14], 1",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x511883",
+       "instruction": "mov eax, dword ptr [rcx + 8]",
+       "expect": "mov eax, dword ptr [rcx + 8]",
+       "ok": true
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L2",
+   "file": "src/holster_your_shield.lua",
+   "changed": false
+  },
+  {
+   "id": "avatars.fields",
+   "line": 132,
+   "symbol": "avatar manager +0xF8 map, +0x6C count, +0x110 entity pointers",
+   "kind": "avatar manager fields",
+   "old": "+0xF8, +0x6C, +0x110",
+   "new": "unchanged",
+   "role": "address",
+   "feeds_write": true,
+   "method": "aligned operand pairs of functions loading the avatar manager",
+   "witnesses": [
+    {
+     "kind": "aligned operand pairs of functions loading the global (tools/map_fields.py)",
+     "old": "AM+0xf8",
+     "new_votes": [
+      [
+       "AM",
+       "0xf8",
+       240
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x5bd643",
+       "new": "0x5c6483",
+       "old_function": "0x5bd37e",
+       "new_function": "0x5c61be",
+       "old_insn": "mov r11, qword ptr [rax + 0xf8]",
+       "new_insn": "mov r11, qword ptr [rax + 0xf8]"
+      },
+      {
+       "old": "0x5d46a1",
+       "new": "0x5ddc52",
+       "old_function": "0x5d3d14",
+       "new_function": "0x5dd230",
+       "old_insn": "mov r10, qword ptr [r11 + 0xf8]",
+       "new_insn": "mov r10, qword ptr [r11 + 0xf8]"
+      },
+      {
+       "old": "0x5d47b3",
+       "new": "0x5ddf73",
+       "old_function": "0x5d3d14",
+       "new_function": "0x5dd230",
+       "old_insn": "mov r10, qword ptr [r11 + 0xf8]",
+       "new_insn": "mov r10, qword ptr [r11 + 0xf8]"
+      }
+     ]
+    },
+    {
+     "kind": "aligned operand pairs of functions loading the global (tools/map_fields.py)",
+     "old": "AM+0x6c",
+     "new_votes": [
+      [
+       "AM",
+       "0x6c",
+       26
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0xad475c",
+       "new": "0xaf087c",
+       "old_function": "0xad4520",
+       "new_function": "0xaf0638",
+       "old_insn": "mov r12d, dword ptr [rcx + 0x6c]",
+       "new_insn": "mov r12d, dword ptr [rcx + 0x6c]"
+      },
+      {
+       "old": "0x13a6b45",
+       "new": "0x123d945",
+       "old_function": "0x13a6af0",
+       "new_function": "0x123d8ef",
+       "old_insn": "cmp dword ptr [rdx + 0x6c], esi",
+       "new_insn": "cmp dword ptr [rdx + 0x6c], esi"
+      },
+      {
+       "old": "0x13a6bde",
+       "new": "0x123d9de",
+       "old_function": "0x13a6af0",
+       "new_function": "0x123d8ef",
+       "old_insn": "cmp esi, dword ptr [rdx + 0x6c]",
+       "new_insn": "cmp esi, dword ptr [rdx + 0x6c]"
+      }
+     ]
+    },
+    {
+     "kind": "aligned operand pairs of functions loading the global (tools/map_fields.py)",
+     "old": "AM+0x110[]",
+     "new_votes": [
+      [
+       "AM",
+       "0x110",
+       72
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x693352",
+       "new": "0x69d3e2",
+       "old_function": "0x692702",
+       "new_function": "0x69c792",
+       "old_insn": "mov rax, qword ptr [r15 + rcx*8 + 0x110]",
+       "new_insn": "mov rax, qword ptr [r15 + rcx*8 + 0x110]"
+      },
+      {
+       "old": "0x81c42a",
+       "new": "0x829148",
+       "old_function": "0x81be70",
+       "new_function": "0x828b8d",
+       "old_insn": "mov rax, qword ptr [r15 + rbp*8 + 0x110]",
+       "new_insn": "mov rax, qword ptr [r15 + rbp*8 + 0x110]"
+      },
+      {
+       "old": "0x81c47d",
+       "new": "0x82919d",
+       "old_function": "0x81be70",
+       "new_function": "0x828b8d",
+       "old_insn": "mov rax, qword ptr [r15 + rbp*8 + 0x110]",
+       "new_insn": "mov rax, qword ptr [r15 + rbp*8 + 0x110]"
+      }
+     ]
+    },
+    {
+     "kind": "re-disassembled",
+     "checks": [
+      {
+       "image": "new",
+       "rva": "0x5c6483",
+       "instruction": "mov r11, qword ptr [rax + 0xf8]",
+       "expect": "mov r11, qword ptr [rax + 0xf8]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xaf087c",
+       "instruction": "mov r12d, dword ptr [rcx + 0x6c]",
+       "expect": "mov r12d, dword ptr [rcx + 0x6c]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x69d3e2",
+       "instruction": "mov rax, qword ptr [r15 + rcx*8 + 0x110]",
+       "expect": "mov rax, qword ptr [r15 + rcx*8 + 0x110]",
+       "ok": true
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L3",
+   "file": "src/holster_your_shield.lua",
+   "changed": false
+  },
+  {
+   "id": "avatars.input",
+   "line": 52,
+   "symbol": "INPUT_SLOTS, INPUT_STRIDE, BACKPACK_FUNCTION; held time at +8",
+   "kind": "avatar input: processed action slots at +0x150+0x1B68 (32 bytes, held time +8), per-avatar stride 0xA7AEC, Backpack Function = action 37",
+   "old": "0x150+0x1B68, 0xA7AEC, 37, +8",
+   "new": "unchanged",
+   "role": "gate",
+   "feeds_write": true,
+   "method": "aligned value votes for the stride, the slot base 0x1CB8 and the held-time field 0x1B70; the action id (kind 2, slot 37: immediate 0x2500000002 passed to the input resolver) occurs at exactly the same two game sites in both builds, which then index [slot*32 + 0x1CB8]",
+   "witnesses": [
+    {
+     "kind": "aligned value votes (tools/value_map.py, evidence/value-map.json)",
+     "old_value": "0xa7aec",
+     "old_sites": 113,
+     "sampled": 60,
+     "votes": {
+      "0xa7aec": 50
+     },
+     "examples": [
+      {
+       "old": "0x53f294",
+       "new": "0x5480c4",
+       "old_insn": "imul rax, rdi, 0xa7aec",
+       "new_insn": "imul rax, rdi, 0xa7aec",
+       "old_function": "0x53f250",
+       "new_function": "0x54807b",
+       "ratio": 0.978
+      },
+      {
+       "old": "0x53f29d",
+       "new": "0x5480cd",
+       "old_insn": "mov r8d, 0xa7aec",
+       "new_insn": "mov r8d, 0xa7aec",
+       "old_function": "0x53f250",
+       "new_function": "0x54807b",
+       "ratio": 0.978
+      },
+      {
+       "old": "0x53f409",
+       "new": "0x548239",
+       "old_insn": "imul rax, rbx, 0xa7aec",
+       "new_insn": "imul rax, rbx, 0xa7aec",
+       "old_function": "0x53f3a0",
+       "new_function": "0x5481cf",
+       "ratio": 0.989
+      }
+     ]
+    },
+    {
+     "kind": "aligned value votes (tools/value_map.py, evidence/value-map.json)",
+     "old_value": "0x1cb8",
+     "old_sites": 30,
+     "sampled": 30,
+     "votes": {
+      "0x1cb8": 18,
+      "0x8c0": 1,
+      "0x1ce0": 1
+     },
+     "examples": [
+      {
+       "old": "0xa435e8",
+       "new": "0xa5ddf8",
+       "old_insn": "cmp byte ptr [r9 + r15 + 0x1cb8], r14b",
+       "new_insn": "cmp byte ptr [r9 + r15 + 0x1cb8], r14b",
+       "old_function": "0xa433f0",
+       "new_function": "0xa5dbfe",
+       "ratio": 0.995
+      },
+      {
+       "old": "0xa46443",
+       "new": "0xa60c53",
+       "old_insn": "cmp byte ptr [r9 + rbx + 0x1cb8], 0",
+       "new_insn": "cmp byte ptr [r9 + rbx + 0x1cb8], 0",
+       "old_function": "0xa4642d",
+       "new_function": "0xa60c3d",
+       "ratio": 1.0
+      },
+      {
+       "old": "0xa46488",
+       "new": "0xa60c98",
+       "old_insn": "cmp byte ptr [r9 + rbx + 0x1cb8], 0",
+       "new_insn": "cmp byte ptr [r9 + rbx + 0x1cb8], 0",
+       "old_function": "0xa46466",
+       "new_function": "0xa60c76",
+       "ratio": 1.0
+      }
+     ]
+    },
+    {
+     "kind": "aligned value votes (tools/value_map.py, evidence/value-map.json)",
+     "old_value": "0x1b70",
+     "old_sites": 13,
+     "sampled": 13,
+     "votes": {
+      "0x1b70": 6,
+      "0x1b58": 1,
+      "0x25f0": 2
+     },
+     "examples": [
+      {
+       "old": "0xa416f0",
+       "new": "0xa5bf00",
+       "old_insn": "mov eax, dword ptr [rcx + rbx + 0x1b70]",
+       "new_insn": "mov eax, dword ptr [rcx + rbx + 0x1b70]",
+       "old_function": "0xa41360",
+       "new_function": "0xa5bb70",
+       "ratio": 1.0
+      },
+      {
+       "old": "0xa63d68",
+       "new": "0xa7f748",
+       "old_insn": "movss xmm1, dword ptr [r10 + rax + 0x1b70]",
+       "new_insn": "movss xmm1, dword ptr [r10 + rax + 0x1b70]",
+       "old_function": "0xa63b10",
+       "new_function": "0xa7f4f0",
+       "ratio": 1.0
+      },
+      {
+       "old": "0xb08b85",
+       "new": "0xb24c85",
+       "old_insn": "mov rdx, qword ptr [rbx + 0x1b70]",
+       "new_insn": "mov rdx, qword ptr [rbx + 0x1b58]",
+       "old_function": "0xb083c0",
+       "new_function": "0xb244bd",
+       "ratio": 0.999
+      }
+     ]
+    },
+    {
+     "kind": "action 37 sites (tools/action_scan.py, evidence/action-37.json)",
+     "old_sites": [
+      [
+       "0xa435d2",
+       "movabs rcx, 0x2500000002",
+       "0xa433f0"
+      ],
+      [
+       "0xa9001f",
+       "movabs rdx, 0x2500000002",
+       "0xa8fb50"
+      ]
+     ],
+     "new_sites": [
+      [
+       "0xa5dde2",
+       "movabs rcx, 0x2500000002",
+       "0xa5dbfe"
+      ],
+      [
+       "0xaaba7f",
+       "movabs rdx, 0x2500000002",
+       "0xaab5af"
+      ]
+     ],
+     "old_to_new": [
+      {
+       "old": "0xa435d2",
+       "old_insn": "movabs rcx, 0x2500000002",
+       "old_function": "0xa433f0",
+       "new": "0xa5dde2",
+       "new_insn": "movabs rcx, 0x2500000002",
+       "window_bytes": 96,
+       "masked": false
+      },
+      {
+       "old": "0xa9001f",
+       "old_insn": "movabs rdx, 0x2500000002",
+       "old_function": "0xa8fb50",
+       "new": "0xaaba7f",
+       "new_insn": "movabs rdx, 0x2500000002",
+       "window_bytes": 96,
+       "masked": false
+      }
+     ]
+    },
+    {
+     "kind": "re-disassembled",
+     "checks": [
+      {
+       "image": "old",
+       "rva": "0xa435d2",
+       "instruction": "movabs rcx, 0x2500000002",
+       "expect": "movabs rcx, 0x2500000002",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xa5dde2",
+       "instruction": "movabs rcx, 0x2500000002",
+       "expect": "movabs rcx, 0x2500000002",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xa5ddf8",
+       "instruction": "cmp byte ptr [r9 + r15 + 0x1cb8], r14b",
+       "expect": "cmp byte ptr [r9 + r15 + 0x1cb8], r14b",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xaaba7f",
+       "instruction": "movabs rdx, 0x2500000002",
+       "expect": "movabs rdx, 0x2500000002",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x5480c4",
+       "instruction": "imul rax, rdi, 0xa7aec",
+       "expect": "imul rax, rdi, 0xa7aec",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xa7f748",
+       "instruction": "movss xmm1, dword ptr [r10 + rax + 0x1b70]",
+       "expect": "movss xmm1, dword ptr [r10 + rax + 0x1b70]",
+       "ok": true
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L4",
+   "file": "src/holster_your_shield.lua",
+   "changed": false
+  },
+  {
+   "id": "inventory.fields",
+   "line": 148,
+   "symbol": "inventory +40 map, +64 identities, +80 rows; row 48 bytes: weapons +0/+4/+8 (slot 1..3), backpack +12, held +20, slot in hand +28, carry mode +32",
+   "kind": "inventory layout",
+   "old": "+40, +64, +80; 48; +0 +4 +8 +12 +20 +28 +32",
+   "new": "unchanged",
+   "role": "address",
+   "feeds_write": true,
+   "method": "the game's stow/draw (100% aligned) read the map, identities, rows, backpack and held carryable at these offsets; set_mode compares/writes carry mode +0x20 and zeroes it when nothing is held; set_item maps the slot in hand (+0x1C) 1/2/3 to +0/+4/+8 through an unchanged jump table",
+   "witnesses": [
+    {
+     "kind": "aligned operand pairs of functions loading the global (tools/map_fields.py)",
+     "old": "INV+0x28",
+     "new_votes": [
+      [
+       "INV",
+       "0x28",
+       75
+      ],
+      [
+       "AM",
+       "0xf8",
+       1
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x97d1e6",
+       "new": "0x98ed72",
+       "old_function": "0x97cfee",
+       "new_function": "0x98eb7a",
+       "old_insn": "lea rcx, [r14 + 0x28]",
+       "new_insn": "lea rcx, [r14 + 0x28]"
+      },
+      {
+       "old": "0x97d76a",
+       "new": "0x98f2f6",
+       "old_function": "0x97cfee",
+       "new_function": "0x98eb7a",
+       "old_insn": "lea rcx, [r14 + 0x28]",
+       "new_insn": "lea rcx, [r14 + 0x28]"
+      },
+      {
+       "old": "0x97d9ed",
+       "new": "0x98f589",
+       "old_function": "0x97cfee",
+       "new_function": "0x98eb7a",
+       "old_insn": "lea rcx, [r13 + 0x28]",
+       "new_insn": "lea rcx, [r13 + 0x28]"
+      }
+     ]
+    },
+    {
+     "kind": "aligned operand pairs of functions loading the global (tools/map_fields.py)",
+     "old": "INV+0x40",
+     "new_votes": [
+      [
+       "INV",
+       "0x40",
+       4
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x541190",
+       "new": "0x549fc0",
+       "old_function": "0x541100",
+       "new_function": "0x549f2e",
+       "old_insn": "mov rax, qword ptr [rbx + 0x40]",
+       "new_insn": "mov rax, qword ptr [rbx + 0x40]"
+      },
+      {
+       "old": "0x9b2650",
+       "new": "0x9c42e0",
+       "old_function": "0x9b25c0",
+       "new_function": "0x9c424a",
+       "old_insn": "mov rax, qword ptr [rbx + 0x40]",
+       "new_insn": "mov rax, qword ptr [rbx + 0x40]"
+      },
+      {
+       "old": "0x9b2da6",
+       "new": "0x9c4a36",
+       "old_function": "0x9b2d20",
+       "new_function": "0x9c49b0",
+       "old_insn": "mov rax, qword ptr [rbp + 0x40]",
+       "new_insn": "mov rax, qword ptr [rbp + 0x40]"
+      }
+     ]
+    },
+    {
+     "kind": "aligned operand pairs of functions loading the global (tools/map_fields.py)",
+     "old": "INV+0x50",
+     "new_votes": [
+      [
+       "INV",
+       "0x50",
+       41
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x97d200",
+       "new": "0x98ed8c",
+       "old_function": "0x97cfee",
+       "new_function": "0x98eb7a",
+       "old_insn": "mov rcx, qword ptr [r14 + 0x50]",
+       "new_insn": "mov rcx, qword ptr [r14 + 0x50]"
+      },
+      {
+       "old": "0x97d78a",
+       "new": "0x98f316",
+       "old_function": "0x97cfee",
+       "new_function": "0x98eb7a",
+       "old_insn": "mov rax, qword ptr [r14 + 0x50]",
+       "new_insn": "mov rax, qword ptr [r14 + 0x50]"
+      },
+      {
+       "old": "0x97da13",
+       "new": "0x98f5af",
+       "old_function": "0x97cfee",
+       "new_function": "0x98eb7a",
+       "old_insn": "add rdi, qword ptr [r13 + 0x50]",
+       "new_insn": "add rdi, qword ptr [r13 + 0x50]"
+      }
+     ]
+    },
+    {
+     "kind": "re-disassembled",
+     "checks": [
+      {
+       "image": "new",
+       "rva": "0xab14ac",
+       "instruction": "mov r10, qword ptr [rsi + 0x28]",
+       "expect": "mov r10, qword ptr [rsi + 0x28]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab1493",
+       "instruction": "mov r8d, dword ptr [rsi + 0x30]",
+       "expect": "mov r8d, dword ptr [rsi + 0x30]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab14b0",
+       "instruction": "mov r11d, dword ptr [rsi + 0x34]",
+       "expect": "mov r11d, dword ptr [rsi + 0x34]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab1497",
+       "instruction": "mov r9d, dword ptr [rsi + 0x38]",
+       "expect": "mov r9d, dword ptr [rsi + 0x38]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab14ef",
+       "instruction": "mov rax, qword ptr [rsi + 0x40]",
+       "expect": "mov rax, qword ptr [rsi + 0x40]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab14fd",
+       "instruction": "mov rax, qword ptr [rsi + 0x50]",
+       "expect": "mov rax, qword ptr [rsi + 0x50]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab1501",
+       "instruction": "lea rcx, [rdx + rdx*2]",
+       "expect": "lea rcx, [rdx + rdx*2]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab1508",
+       "instruction": "mov edi, dword ptr [rax + rcx*8 + 0x14]",
+       "expect": "mov edi, dword ptr [rax + rcx*8 + 0x14]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0xab16b7",
+       "instruction": "mov edi, dword ptr [rcx + rax*8 + 0xc]",
+       "expect": "mov edi, dword ptr [rcx + rax*8 + 0xc]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x9be5a5",
+       "instruction": "cmp dword ptr [r12 + 0x20], eax",
+       "expect": "cmp dword ptr [r12 + 0x20], eax",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x9be5bd",
+       "instruction": "mov dword ptr [r12 + 0x20], r14d",
+       "expect": "mov dword ptr [r12 + 0x20], r14d",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x9bdd32",
+       "instruction": "mov eax, dword ptr [r15 + r12 + 0x1c]",
+       "expect": "mov eax, dword ptr [r15 + r12 + 0x1c]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x9bdd5a",
+       "instruction": "mov ebx, dword ptr [r15 + rdx]",
+       "expect": "mov ebx, dword ptr [r15 + rdx]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x9bdd60",
+       "instruction": "mov ebx, dword ptr [r15 + rdx + 4]",
+       "expect": "mov ebx, dword ptr [r15 + rdx + 4]",
+       "ok": true
+      },
+      {
+       "image": "new",
+       "rva": "0x9bdd67",
+       "instruction": "mov ebx, dword ptr [r15 + rdx + 8]",
+       "expect": "mov ebx, dword ptr [r15 + rdx + 8]",
+       "ok": true
+      }
+     ],
+     "jump_table": {
+      "old": "0x9ac8c8 cases 1,2,3 -> +0,+4,+8",
+      "new": "0x9be4e8 cases 1,2,3 -> +0,+4,+8"
+     }
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L4",
+   "file": "src/holster_your_shield.lua",
+   "changed": false
+  },
+  {
+   "id": "limits",
+   "line": 104,
+   "symbol": "plausibility bounds: map capacities 1048576/65536/64, entity index < 262144, avatar count <= 8, players 1..4",
+   "kind": "refusal bounds only",
+   "old": "1048576, 65536, 64, 262144, 8, 4",
+   "new": "unchanged",
+   "role": "bound",
+   "feeds_write": false,
+   "method": "bounds only make the mod wait or refuse; the map-to-records distance of the entities object is unchanged (old 0xF32F18-0xF22EC8 = new 0xF349E0-0xF24990 = 0x10050)",
+   "witnesses": [
+    {
+     "kind": "arithmetic",
+     "old": "0x10050",
+     "new": "0x10050"
+    }
+   ],
+   "confidence": "medium",
+   "live_check": "L2",
+   "file": "src/holster_your_shield.lua",
+   "changed": false
+  },
+  {
+   "id": "label.version",
+   "line": 24,
+   "symbol": "Holster.VERSION",
+   "kind": "port label (log line \"Holster Your Shield v1.0-26088801 initialized\")",
+   "old": "1.0",
+   "new": "1.0-26088801",
+   "role": "label",
+   "feeds_write": false,
+   "method": "port label, as the other Megapack ports",
+   "witnesses": [],
+   "confidence": "high",
+   "live_check": "L0",
+   "file": "src/holster_your_shield.lua",
+   "changed": true
+  },
+  {
+   "id": "label.build",
+   "line": 543,
+   "symbol": "comments and the refusal message naming the build",
+   "kind": "text only",
+   "old": "25480438",
+   "new": "26088801",
+   "role": "label",
+   "feeds_write": false,
+   "method": "text",
+   "witnesses": [],
+   "confidence": "high",
+   "live_check": "L0",
+   "file": "src/holster_your_shield.lua",
+   "changed": true
+  }
+ ]
+}

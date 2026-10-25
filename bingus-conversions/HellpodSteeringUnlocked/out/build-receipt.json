@@ -1,0 +1,193 @@
+{
+ "mod": "Hellpod Steering Unlocked data-v7.5.1 (Vanilla Plus Megapack option HellpodSteeringUnlocked)",
+ "upstream": "<workspace>/upstream-bingus/HellpodSteeringUnlocked",
+ "upstream_tag": "v7.5.1",
+ "lock_revision": "data-v7.5.1",
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "revision": "data-v7.5.1-26088801",
+ "game_sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+ "exe_sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+ "map": {
+  "path": "<workspace>/native-work/megapack-port/HellpodSteeringUnlocked/MAP.json",
+  "sha256": "ebab1db1e8f639a9a2c1bdddcf30ef6ee93ee96e6b5bd332c8bb13b5943bb420",
+  "counts": {
+   "high": 12
+  }
+ },
+ "replacements": [
+  {
+   "file": "src/steering_patch.lua",
+   "line": 4,
+   "old": "manager_rva = 0x346d578, owner_rva = 0x347cf18,",
+   "new": "manager_rva = 0x2e287d8, owner_rva = 0x2e38250,",
+   "map_rows": [
+    "patch.manager_rva",
+    "patch.owner_rva"
+   ]
+  },
+  {
+   "file": "src/steering_patch.lua",
+   "line": 5,
+   "old": "owner_offset = 0x7c8c90, size = 69688,",
+   "new": "owner_offset = 0x7c8810, size = 69688,",
+   "map_rows": [
+    "patch.owner_offset",
+    "patch.size"
+   ]
+  },
+  {
+   "file": "scripts/archive.py",
+   "line": 10,
+   "old": "EXE_SHA = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+   "new": "EXE_SHA = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'",
+   "map_rows": [
+    "archive.EXE_SHA"
+   ]
+  },
+  {
+   "file": "scripts/archive.py",
+   "line": 11,
+   "old": "GAME_DLL_SHA = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+   "new": "GAME_DLL_SHA = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'",
+   "map_rows": [
+    "archive.GAME_DLL_SHA"
+   ]
+  }
+ ],
+ "wrapper_changes_vs_upstream": [
+  {
+   "line": 660,
+   "what": "replacement",
+   "old": "manager_rva = 0x346d578, owner_rva = 0x347cf18,",
+   "new": "manager_rva = 0x2e287d8, owner_rva = 0x2e38250,"
+  },
+  {
+   "line": 661,
+   "what": "replacement",
+   "old": "owner_offset = 0x7c8c90, size = 69688,",
+   "new": "owner_offset = 0x7c8810, size = 69688,"
+  },
+  {
+   "line": 1009,
+   "what": "install_loader call (revision, exe/game SHA-256 pins)"
+  }
+ ],
+ "reproduction": {
+  "fr1_luajit": "<workspace>/native-work/megapack-port/HellpodSteeringUnlocked/work/luajit-fr1/src/luajit",
+  "fr1_dump_flags": "0",
+  "bytecode_bytes": 20145,
+  "standalone_resource_sha256": "4F9D6D668479220CA192B75128B665C740E24036DC783C0B5D59B25102393078",
+  "lock_resource_sha256": "4F9D6D668479220CA192B75128B665C740E24036DC783C0B5D59B25102393078",
+  "lock_equal": true,
+  "v26_archive": "<hellforge>/mods/Vanilla Plus Megapack - v26/options/HellpodSteeringUnlocked/9ba626afa44a3aa3.patch_0",
+  "v26_option_resource_sha256": "98F9E50A3993329E53F1D2AE4ADC4E3F48136A434279A96329B26C199F1BE1E5",
+  "v26_equal_to_discoverable_of_reproduced_bytecode": true
+ },
+ "compile_step_captured_not_run": [
+  "<workspace>/native-work/megapack-port/HellpodSteeringUnlocked/work/upstream/tools/src/LuaJIT/src/luajit.exe",
+  "-bsdW",
+  "<wrapper>",
+  "<output>"
+ ],
+ "resource_format": "pack discoverable_resource() shape (declaration + loadstring of the escaped payload) with the plaintext wrapper as payload instead of non-GC64 bytecode; type-2 envelope",
+ "resource": {
+  "module": "mods/cowboybingus/hellpod_steering_unlocked",
+  "hash": "71dd3b38d256e5bd",
+  "bytes": 199441
+ },
+ "archive_holds_only": [
+  "mods/cowboybingus/hellpod_steering_unlocked"
+ ],
+ "outputs": {
+  "71dd3b38d256e5bd.lua.main": "43c60087cb1d1910d2e893f2d12612fe998c4633e3271307045b7ccf617e93b3",
+  "9ba626afa44a3aa3.patch_0": "82ceff2f7f74ebcc8e330c57ce5374b6f35c907b2d0b6348ca502a1770227268",
+  "9ba626afa44a3aa3.patch_0.gpu_resources": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "9ba626afa44a3aa3.patch_0.stream": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "option_entry.lua": "10fb171bf3c651958a24bab76c11a9aaec096f053033ef4683b7922889778172",
+  "wrapper.diff": "755635fac9944405d013245faa247898087df2abc0b30c562947478fcf762e8a",
+  "wrapper.lua": "bde2bc221ba437bfcfc4e4ec48db4560643545032970b0397a73c97cb9c34d7b"
+ },
+ "inputs": {
+  "<workspace>/upstream-bingus/HellpodSteeringUnlocked/src/archive_loader.lua": "8912ace8c95374f50cc569c2aa24b9383524d3cc3384a9a2152b15aafeaf791f",
+  "<workspace>/upstream-bingus/HellpodSteeringUnlocked/src/bingus_memory.lua": "3973924b1c009cc4e6c863a4eaf87f166899a16ddcb579c3d77ab5465172b416",
+  "<workspace>/upstream-bingus/HellpodSteeringUnlocked/src/bingus_runtime.lua": "c4450f555f697e583916d18f876412ca96f6963eb1bf4cdad451ebb906c2f988",
+  "<workspace>/upstream-bingus/HellpodSteeringUnlocked/src/bingus_write.lua": "9a0a217811d109418faebb2af8804bfb8301b0eeeb1e6b5bc020fdacbd596160",
+  "<workspace>/upstream-bingus/HellpodSteeringUnlocked/src/steering_patch.lua": "f4852e5b34a6f10bf029fe2b2f4c7094839827771b7ac17a38055babca5d2d15",
+  "<workspace>/upstream-bingus/HellpodSteeringUnlocked/src/windows_api.lua": "4f968b8333d9e12847512139e217c8b5b6656fba3aba4eabaa3869b9f0cf40cd",
+  "<workspace>/upstream-bingus/HellpodSteeringUnlocked/scripts/module.py": "0ffbbc8681043bd9b3050aaf6bae2622b86f7051713a2cef0727e24deddcc4bc",
+  "<workspace>/upstream-bingus/HellpodSteeringUnlocked/scripts/archive.py": "63911a138a51532e5c44a1d77690db80c09f86c4ac003ef3b8a069a46c1e62bb"
+ },
+ "luajit_check": {
+  "luajit": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit",
+  "string_dump_flags": 8,
+  "gc64_fr2": true,
+  "output": [
+   "compile: ok\tLuaJIT 2.1.ROLLING\t8",
+   "entry run: true",
+   "printed: [HellpodSteeringUnlocked] data-v7.5.1-26088801: mods/cowboybingus/hellpod_steering_unlocked:357: libkernel32.so: cannot open shared object file: No such file or directory",
+   "revision: data-v7.5.1-26088801",
+   "active: false",
+   "status: mods/cowboybingus/hellpod_steering_unlocked:357: libkernel32.so: cannot open shared object file: No such file or directory",
+   "update untouched: true"
+  ]
+ },
+ "adapter_text_absent": [
+  "PORT51",
+  "compat51",
+  "require('cffi')",
+  "require(\"cffi\")"
+ ],
+ "tests": {
+  "port": {
+   "passed": true,
+   "runs": [
+    [
+     "luajit tests/test_idle_gate.lua src tests/reference (x20)",
+     0,
+     3
+    ],
+    [
+     "wine luajit.exe tests/test_data.lua src build F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7 ../bounce-src/src",
+     0,
+     15
+    ],
+    [
+     "wine luajit.exe tests/test_api_coexistence.lua src ../bounce-src/src hellpod-first",
+     0,
+     1
+    ],
+    [
+     "wine luajit.exe tests/test_api_coexistence.lua src ../bounce-src/src bounce-first",
+     0,
+     1
+    ]
+   ]
+  },
+  "upstream": {
+   "passed": true,
+   "runs": [
+    [
+     "luajit tests/test_idle_gate.lua src tests/reference (x20)",
+     0,
+     3
+    ],
+    [
+     "wine luajit.exe tests/test_data.lua src build F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7 ../bounce-src/src",
+     0,
+     15
+    ],
+    [
+     "wine luajit.exe tests/test_api_coexistence.lua src ../bounce-src/src hellpod-first",
+     0,
+     1
+    ],
+    [
+     "wine luajit.exe tests/test_api_coexistence.lua src ../bounce-src/src bounce-first",
+     0,
+     1
+    ]
+   ]
+  }
+ }
+}

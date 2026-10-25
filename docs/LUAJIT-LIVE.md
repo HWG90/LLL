@@ -54,11 +54,10 @@ removal.
   VM keep loading. Plain `ffi` is the target once LuaJIT is confirmed everywhere.
 - Hellpod Drop Hold's Lua 5.1 port fails to load (`PORT51` missing in its implementation).
 
-## Test mods
+## Bingus conversions
 
-CowboyBingus's Mod Options Menu 1.2.1 and Match Your Colors 1.5, the original LuaJIT mods with
-their build data remapped for 26088801 and checked in game, are the VM's test material and are not
-part of this repository (they were under `ports/` until 2026-10-25). They live in the Linux HD2
-workspace as `bingus-ports/` (built by `native-work/mom-port` and `native-work/myc-port` there) and
-join the drop-in package only through `--mom`, `--myc` and `--licenses`. See
-`docs/LUAJIT-LIVE-NOTICES.txt` for contents and licences.
+`bingus-conversions/` holds CowboyBingus's mods (the 25 Vanilla Plus Megapack options, Zero-Clause
+BSD) converted to build 26088801 as the original LuaJIT code with build data remapped and checked in
+game; its README gives each option's status. Mod Options Menu and Match Your Colors still join the
+drop-in package only through `--mom`, `--myc` and `--licenses`. See `docs/LUAJIT-LIVE-NOTICES.txt`
+for contents and licences.

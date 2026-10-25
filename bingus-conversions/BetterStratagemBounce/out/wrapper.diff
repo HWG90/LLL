@@ -1,0 +1,43 @@
+--- upstream wrapper
++++ port wrapper
+@@ -656,4 +656,4 @@
+-    buffer_rva = 0x348e8f8,
+-    table_rva = 0x37cb600,
+-    data_size = 80280,
+-    groups = 11,
++    buffer_rva = 0x2e4a228,
++    table_rva = 0x31870e0,
++    data_size = 82384,
++    groups = 12,
+@@ -666 +666 @@
+-    owned_records = 103,
++    owned_records = 105,
+@@ -669,7 +669,7 @@
+-        2, 2, 2, 2, 2, 0, 0, 2, 0, 2, 2, 2, 0, 1, 2, 1, 0, 2, 1, 0, 2,
+-        2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 0, 2,
+-        2, 0, 2, 2, 2, 3, 2, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 3, 0, 2,
+-        3, 2, 2, 0, 2, 3, 0, 2, 1, 0, 2, 2, 2, 1, 2, 2, 2, 0, 2, 2, 2,
+-        0, 0, 2, 3, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 0, 0, 0,
+-        2, 0, 2, 2, 2, 0, 0, 2, 2, 0, 2, 0, 2, 0, 2, 2, 3, 2, 0, 0, 2,
+-        0, 2
++        2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 1, 2, 1, 0, 2, 1, 0,
++        2, 2, 2, 2, 2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2,
++        0, 2, 2, 2, 0, 2, 2, 2, 3, 2, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2,
++        3, 0, 2, 3, 2, 2, 0, 2, 3, 0, 2, 1, 0, 2, 2, 2, 1, 2, 2, 2, 0,
++        2, 2, 2, 0, 0, 2, 3, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0,
++        0, 0, 0, 2, 0, 2, 2, 2, 0, 0, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 3,
++        2, 0, 0, 2, 0, 2
+@@ -736 +736 @@
+-    local table_bytes = assert(api.read(module + patch.table_rva, 150 * 8), 'Cannot read settings table')
++    local table_bytes = assert(api.read(module + patch.table_rva, 154 * 8), 'Cannot read settings table')
+@@ -743,2 +743,2 @@
+-            and u32(source, offset + 8) == 0x30EB6399
+-            and u32(source, offset + 16) == 1 and u32(source, offset + 20) == 0, 'Unexpected settings header')
++            and u32(source, offset + 8) == 0x30EB6399, 'Unexpected settings header')
++        -- 26088801: header bytes +16..+23 are not checked; the game's parser never reads them (MAP patch.header_tail)
+@@ -751 +751 @@
+-    assert(offset == #source and plan.records == 149 and plan.owned == patch.owned_records,
++    assert(offset == #source and plan.records == 153 and plan.owned == patch.owned_records,
+@@ -870 +870 @@
+-install_loader(create_runtime_api, patch, {revision = 'archive-v15.4.1', exe_sha256 = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06', game_sha256 = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'})
++install_loader(create_runtime_api, patch, {revision = 'archive-v15.4.1-26088801', exe_sha256 = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE', game_sha256 = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'})

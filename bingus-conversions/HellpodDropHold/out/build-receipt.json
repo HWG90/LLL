@@ -1,0 +1,224 @@
+{
+ "mod": "Hellpod Drop Hold v1.2.1",
+ "upstream": "<workspace>/upstream-bingus/HellpodDropHold",
+ "upstream_tag": "v1.2.1",
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "revision": "data-v1.2.1-26088801",
+ "game_sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+ "exe_sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+ "map": {
+  "path": "<workspace>/native-work/hdh-port/MAP.json",
+  "sha256": "b448cb88109de9a06ec9770d0e6a85882a9005fae1d8cd778cf09bfe77532703",
+  "counts": {
+   "high": 32,
+   "medium": 1
+  }
+ },
+ "replacements": [
+  {
+   "file": "src/drop_hold.lua",
+   "line": 32,
+   "old": "game_rva = 0x3326340, state_offset = 0xAC21C,",
+   "new": "game_rva = 0x2CE1508, state_offset = 0xAC29C,",
+   "map_rows": [
+    "hold.game_rva",
+    "hold.state_offset"
+   ]
+  },
+  {
+   "file": "src/drop_hold.lua",
+   "line": 33,
+   "old": "ui_state_rva = 0x347CE28, presenters_offset = 0x4290, stack_offset = 0x429C, max_depth = 5,",
+   "new": "ui_state_rva = 0x2E38160, presenters_offset = 0x4290, stack_offset = 0x429C, max_depth = 5,",
+   "map_rows": [
+    "hold.max_depth",
+    "hold.presenters_offset",
+    "hold.stack_offset",
+    "hold.ui_state_rva"
+   ]
+  },
+  {
+   "file": "src/drop_hold.lua",
+   "line": 36,
+   "old": "cutscene_rva = 0x346D530, scene_offset = 6412,",
+   "new": "cutscene_rva = 0x2E28780, scene_offset = 6412,",
+   "map_rows": [
+    "hold.cutscene_rva",
+    "hold.scene_offset"
+   ]
+  },
+  {
+   "file": "src/drop_hold.lua",
+   "line": 37,
+   "old": "session_rva = 0x347CEF0, client_state_offset = 91288, hotjoin_offset = 92135,",
+   "new": "session_rva = 0x2E38228, client_state_offset = 91288, hotjoin_offset = 92143,",
+   "map_rows": [
+    "hold.client_state_offset",
+    "hold.hotjoin_offset",
+    "hold.session_rva"
+   ]
+  },
+  {
+   "file": "src/drop_hold.lua",
+   "line": 38,
+   "old": "manager_rva = 0x3326D58, header_offset = 36, header_size = 84, max_capacity = 4096,",
+   "new": "manager_rva = 0x2CE1F18, header_offset = 36, header_size = 84, max_capacity = 4096,",
+   "map_rows": [
+    "hold.manager_rva",
+    "hold.max_capacity"
+   ]
+  },
+  {
+   "file": "src/drop_hold.lua",
+   "line": 39,
+   "old": "settings_rva = 0x346BF98, settings_table_offset = 15805152, settings_slots = 16,",
+   "new": "settings_rva = 0x2CE41B8, settings_table_offset = 15812008, settings_slots = 16,",
+   "map_rows": [
+    "hold.settings_rva",
+    "hold.settings_table_offset"
+   ]
+  },
+  {
+   "file": "src/drop_hold.lua",
+   "line": 3,
+   "old": "-- docs/TECHNICAL.md has the evidence):",
+   "new": "-- docs/TECHNICAL.md has the evidence; build 26088801 values: hdh-port/MAP.json):",
+   "map_rows": []
+  },
+  {
+   "file": "scripts/archive.py",
+   "line": 10,
+   "old": "EXE_SHA = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+   "new": "EXE_SHA = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'",
+   "map_rows": [
+    "archive.EXE_SHA"
+   ]
+  },
+  {
+   "file": "scripts/archive.py",
+   "line": 11,
+   "old": "GAME_DLL_SHA = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+   "new": "GAME_DLL_SHA = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'",
+   "map_rows": [
+    "archive.GAME_DLL_SHA"
+   ]
+  }
+ ],
+ "implementation_changes_vs_upstream": [
+  {
+   "line": 684,
+   "what": "replacement",
+   "old": "-- docs/TECHNICAL.md has the evidence):",
+   "new": "-- docs/TECHNICAL.md has the evidence; build 26088801 values: hdh-port/MAP.json):"
+  },
+  {
+   "line": 713,
+   "what": "replacement",
+   "old": "game_rva = 0x3326340, state_offset = 0xAC21C,",
+   "new": "game_rva = 0x2CE1508, state_offset = 0xAC29C,"
+  },
+  {
+   "line": 714,
+   "what": "replacement",
+   "old": "ui_state_rva = 0x347CE28, presenters_offset = 0x4290, stack_offset = 0x429C, max_depth = 5,",
+   "new": "ui_state_rva = 0x2E38160, presenters_offset = 0x4290, stack_offset = 0x429C, max_depth = 5,"
+  },
+  {
+   "line": 717,
+   "what": "replacement",
+   "old": "cutscene_rva = 0x346D530, scene_offset = 6412,",
+   "new": "cutscene_rva = 0x2E28780, scene_offset = 6412,"
+  },
+  {
+   "line": 718,
+   "what": "replacement",
+   "old": "session_rva = 0x347CEF0, client_state_offset = 91288, hotjoin_offset = 92135,",
+   "new": "session_rva = 0x2E38228, client_state_offset = 91288, hotjoin_offset = 92143,"
+  },
+  {
+   "line": 719,
+   "what": "replacement",
+   "old": "manager_rva = 0x3326D58, header_offset = 36, header_size = 84, max_capacity = 4096,",
+   "new": "manager_rva = 0x2CE1F18, header_offset = 36, header_size = 84, max_capacity = 4096,"
+  },
+  {
+   "line": 720,
+   "what": "replacement",
+   "old": "settings_rva = 0x346BF98, settings_table_offset = 15805152, settings_slots = 16,",
+   "new": "settings_rva = 0x2CE41B8, settings_table_offset = 15812008, settings_slots = 16,"
+  },
+  {
+   "line": 1397,
+   "what": "install_loader call (revision, exe/game SHA-256 pins)"
+  }
+ ],
+ "upstream_assembly_reproduces_shipped_source": {
+  "path": "<workspace>/runtime-modules/vm-poc/work/legacy/hellpod_31d6851d9f197100.lua",
+  "sha256": "2bc90fbd84a2106f14cafccf9db237460be2683ae108410153853b0c4298d1ac"
+ },
+ "compile_step_captured_not_run": [
+  "<workspace>/native-work/hdh-port/work/tools/src/LuaJIT/src/luajit.exe",
+  "-bsdW",
+  "<wrapper>",
+  "<output>"
+ ],
+ "implementation_format": "plaintext Lua source in the type-2 Lua resource envelope (no bytecode)",
+ "entry_identical_to_upstream": true,
+ "resources": {
+  "mods/cowboybingus/hellpod_drop_hold": {
+   "hash": "d2aba22187eadcbb",
+   "bytes": 194
+  },
+  "mods/cowboybingus/hellpod_drop_hold_impl": {
+   "hash": "31d6851d9f197100",
+   "bytes": 70244
+  }
+ },
+ "outputs": {
+  "entry.lua": "816c392d06ac7696d6d130bb2747e851a02c28b4da114c68dd78864d78a77097",
+  "impl.lua": "55fc604a366231d4b1b048d91073c6da0dc399877766ba8fc1ca2c2603e2d095",
+  "9ba626afa44a3aa3.patch_0": "14ae839dbfc65e3abca678eab94449a396a77b4bfd427ea14b61579bacee83c9",
+  "9ba626afa44a3aa3.patch_0.stream": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "9ba626afa44a3aa3.patch_0.gpu_resources": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+ },
+ "inputs": {
+  "<workspace>/upstream-bingus/HellpodDropHold/src/archive_loader.lua": "f6929f76ef93f12472f8fe0a5d823bb4c0adbbae6c4db09058aa6aadaefa083f",
+  "<workspace>/upstream-bingus/HellpodDropHold/src/bingus_memory.lua": "3973924b1c009cc4e6c863a4eaf87f166899a16ddcb579c3d77ab5465172b416",
+  "<workspace>/upstream-bingus/HellpodDropHold/src/bingus_runtime.lua": "c4450f555f697e583916d18f876412ca96f6963eb1bf4cdad451ebb906c2f988",
+  "<workspace>/upstream-bingus/HellpodDropHold/src/bingus_write.lua": "9a0a217811d109418faebb2af8804bfb8301b0eeeb1e6b5bc020fdacbd596160",
+  "<workspace>/upstream-bingus/HellpodDropHold/src/drop_hold.lua": "a55ab32382c42a6b5e00deae64d4033e7161da0dbd32d3d402cb46f194c64d8c",
+  "<workspace>/upstream-bingus/HellpodDropHold/src/windows_api.lua": "7e0879989d6f611de704051a3c1f5218086b054ec87372f786fea3feb0906dec",
+  "<workspace>/upstream-bingus/HellpodDropHold/scripts/module.py": "874aaf3ecd467581955f220112d87decb9629c7703462a59498deb791e2c2792",
+  "<workspace>/upstream-bingus/HellpodDropHold/scripts/archive.py": "622027f35568b02cc23d2ad9f6b4decd9c78164e7715d4bf8772294d42654989"
+ },
+ "luajit_check": {
+  "luajit": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit",
+  "string_dump_flags": 8,
+  "gc64_fr2": true,
+  "output": [
+   "compile: ok\tLuaJIT 2.1.ROLLING\t8",
+   "[HellpodDropHold] data-v1.2.1-26088801: mods/cowboybingus/hellpod_drop_hold_impl:357: libbcrypt.so: cannot open shared object file: No such file or directory",
+   "entry run: true",
+   "status: mods/cowboybingus/hellpod_drop_hold_impl:357: libbcrypt.so: cannot open shared object file: No such file or directory",
+   "revision: data-v1.2.1-26088801",
+   "active: false"
+  ]
+ },
+ "adapter_text_absent": [
+  "PORT51",
+  "compat51"
+ ],
+ "tests": {
+  "port": {
+   "exit": 0,
+   "passed": true,
+   "pass_count": 18
+  },
+  "upstream": {
+   "exit": 0,
+   "passed": true,
+   "pass_count": 18
+  }
+ }
+}

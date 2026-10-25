@@ -1,0 +1,324 @@
+{
+ "mod": "Clickable Scrollbars v2.15.1",
+ "option": "ClickableScrollbars",
+ "build": 26088801,
+ "resource": "mods/cowboybingus/clickable_scrollbars",
+ "resource_hash": "9a4b654810fa934b",
+ "source": "pinned component upstream-bingus/VanillaPlusMegapack/components/ClickableScrollbars",
+ "archive": "9ba626afa44a3aa3.patch_0",
+ "archive_resources": [
+  "9a4b654810fa934b"
+ ],
+ "archive_sha256": "8F75342C360EDD2BFE54400D39B2146961BDF27A264B422285088168B8F4B5F9",
+ "entry_sha256": "4983DCD17E1FC57CAEEC2F55FA4597BD5A6153E5B2FC9C428B213F46AC72B6D8",
+ "entry_bytes": 139653,
+ "resource_sha256": "6A738660A110D6B4143F0F203D2C5A7FFB83C0EDD0249B7DF0261E127840F189",
+ "upstream_entry_sha256": "C9D381AF8F93737475113BF78D7058F4049A14DF49BF516B2F97B9ED6310D20A",
+ "reproduction": {
+  "upstream_resource_sha256": "C3BFB9CAA876116A3A782BDCDAB39A52C81050A3B8838D6152FCB48B7D5527AC",
+  "lock_resource_sha256": "C3BFB9CAA876116A3A782BDCDAB39A52C81050A3B8838D6152FCB48B7D5527AC",
+  "matches_lock": true,
+  "shipped_v26": "<hellforge>/mods/Vanilla Plus Megapack - v26/options/ClickableScrollbars/9ba626afa44a3aa3.patch_0",
+  "matches_shipped_v26": true
+ },
+ "map_summary": {
+  "rows": 87,
+  "by_confidence": {
+   "high": 86,
+   "medium": 1
+  },
+  "source_edits": 26,
+  "feeds_write": 52
+ },
+ "edits": [
+  {
+   "row": 1,
+   "name": "BUILD.exe_sha256",
+   "file": "src/install.lua",
+   "line": 10,
+   "old_text": "'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+   "new_text": "'0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'",
+   "confidence": "high"
+  },
+  {
+   "row": 2,
+   "name": "BUILD.game_sha256",
+   "file": "src/install.lua",
+   "line": 11,
+   "old_text": "'2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+   "new_text": "'6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'",
+   "confidence": "high"
+  },
+  {
+   "row": 3,
+   "name": "build gate message",
+   "file": "src/install.lua",
+   "line": 27,
+   "old_text": "(needs Steam build 25480438)",
+   "new_text": "(needs Steam build 26088801)",
+   "confidence": "high"
+  },
+  {
+   "row": 4,
+   "name": "global UI root (logged only)",
+   "file": "src/native.lua",
+   "line": 18,
+   "old_text": "0x347cd90",
+   "new_text": "0x2e380c8",
+   "confidence": "high"
+  },
+  {
+   "row": 5,
+   "name": "global dispatch table (ui_bridge, logged only)",
+   "file": "src/native.lua",
+   "line": 19,
+   "old_text": "0x3326e68",
+   "new_text": "0x2ce2040",
+   "confidence": "high"
+  },
+  {
+   "row": 6,
+   "name": "global dispatch table (screen controller registry)",
+   "file": "src/locate.lua",
+   "line": 15,
+   "old_text": "0x3326e68",
+   "new_text": "0x2ce2040",
+   "confidence": "high"
+  },
+  {
+   "row": 7,
+   "name": "global UI state (screen stack owner)",
+   "file": "src/locate.lua",
+   "line": 38,
+   "old_text": "0x347ce28",
+   "new_text": "0x2e38160",
+   "confidence": "high"
+  },
+  {
+   "row": 8,
+   "name": "global UI state (screen stack owner, options route)",
+   "file": "src/locate.lua",
+   "line": 94,
+   "old_text": "0x347ce28",
+   "new_text": "0x2e38160",
+   "confidence": "high"
+  },
+  {
+   "row": 9,
+   "name": "global menu system",
+   "file": "src/locate.lua",
+   "line": 107,
+   "old_text": "0x347ce38",
+   "new_text": "0x2e38170",
+   "confidence": "high"
+  },
+  {
+   "row": 10,
+   "name": "global INPUT_STATE (input owner pointer)",
+   "file": "src/native.lua",
+   "line": 73,
+   "old_text": "0x347cf18",
+   "new_text": "0x2e38250",
+   "confidence": "high"
+  },
+  {
+   "row": 11,
+   "name": "native GRID_SOLVER",
+   "file": "src/native.lua",
+   "line": 72,
+   "old_text": "0x18d2b60",
+   "new_text": "0x1753dc0",
+   "confidence": "high"
+  },
+  {
+   "row": 13,
+   "name": "native SCROLL_SET",
+   "file": "src/native.lua",
+   "line": 72,
+   "old_text": "0x1794530",
+   "new_text": "0x16157c0",
+   "confidence": "high"
+  },
+  {
+   "row": 14,
+   "name": "native SCROLL_SET prologue signature",
+   "file": "src/native.lua",
+   "line": 76,
+   "old_text": "'0f57d20f2fd1770cf30f10153028c300f30f5dd1f30f1081'",
+   "new_text": "'0f57d20f2fd1770cf30f1015c40dc300f30f5dd1f30f1081'",
+   "confidence": "high"
+  },
+  {
+   "row": 15,
+   "name": "native POSITION_SET",
+   "file": "src/native.lua",
+   "line": 72,
+   "old_text": "0x14476a0",
+   "new_text": "0x12df3b0",
+   "confidence": "high"
+  },
+  {
+   "row": 17,
+   "name": "native ANIMATION_STOP",
+   "file": "src/native.lua",
+   "line": 72,
+   "old_text": "0x1439d40",
+   "new_text": "0x12d1a50",
+   "confidence": "high"
+  },
+  {
+   "row": 18,
+   "name": "native ANIMATION_STOP prologue signature",
+   "file": "src/native.lua",
+   "line": 78,
+   "old_text": "'40534883ec40488b05c32220014833c448894424300fb601'",
+   "new_text": "'40534883ec40488b05b3351e014833c448894424300fb601'",
+   "confidence": "high"
+  },
+  {
+   "row": 19,
+   "name": "native INPUT_CONSUME",
+   "file": "src/native.lua",
+   "line": 73,
+   "old_text": "0x12fde90",
+   "new_text": "0x1190e30",
+   "confidence": "high"
+  },
+  {
+   "row": 20,
+   "name": "native INPUT_CONSUME prologue signature",
+   "file": "src/native.lua",
+   "line": 79,
+   "old_text": "'40534883ec204c8bd14c8bca488bcae8dc7c28ff'",
+   "new_text": "'40534883ec204c8bd14c8bca488bcae81cda3fff'",
+   "confidence": "high"
+  },
+  {
+   "row": 25,
+   "name": "controller kind 224 (Ship Armory)",
+   "file": "src/locate.lua",
+   "line": 29,
+   "old_text": "        if kind == 224 then has_armory = true",
+   "new_text": "        if kind == 226 then has_armory = true",
+   "confidence": "high"
+  },
+  {
+   "row": 26,
+   "name": "controller kind 224 (Ship Armory)",
+   "file": "src/locate.lua",
+   "line": 64,
+   "old_text": "        if (kind == 224 or kind == 229) and (not active_kind or kind == active_kind) then",
+   "new_text": "        if (kind == 226 or kind == 231) and (not active_kind or kind == active_kind) then",
+   "confidence": "high"
+  },
+  {
+   "row": 27,
+   "name": "controller kind 224 (Ship Armory)",
+   "file": "src/locate.lua",
+   "line": 67,
+   "old_text": "            local grid_offset = kind == 224 and GRID.offset or LOADOUT_GRID_OFFSET",
+   "new_text": "            local grid_offset = kind == 226 and GRID.offset or LOADOUT_GRID_OFFSET",
+   "confidence": "high"
+  },
+  {
+   "row": 28,
+   "name": "controller kind 224 (Ship Armory)",
+   "file": "src/locate.lua",
+   "line": 70,
+   "old_text": "                            panel = kind == 224 and controller + CAREER.offset or nil}",
+   "new_text": "                            panel = kind == 226 and controller + CAREER.offset or nil}",
+   "confidence": "high"
+  },
+  {
+   "row": 29,
+   "name": "controller kind 224 (Ship Armory)",
+   "file": "src/locate.lua",
+   "line": 50,
+   "old_text": "            if top == 5 then return 224 end",
+   "new_text": "            if top == 5 then return 226 end",
+   "confidence": "high"
+  },
+  {
+   "row": 30,
+   "name": "controller kind 229 (mission loadout picker)",
+   "file": "src/locate.lua",
+   "line": 30,
+   "old_text": "        elseif kind == 229 then has_loadout = true end",
+   "new_text": "        elseif kind == 231 then has_loadout = true end",
+   "confidence": "high"
+  },
+  {
+   "row": 31,
+   "name": "controller kind 229 (mission loadout picker)",
+   "file": "src/locate.lua",
+   "line": 51,
+   "old_text": "            if top == 14 then return 229 end",
+   "new_text": "            if top == 14 then return 231 end",
+   "confidence": "high"
+  },
+  {
+   "row": 63,
+   "name": "LOADOUT_GRID_OFFSET",
+   "file": "src/native.lua",
+   "line": 62,
+   "old_text": "LOADOUT_GRID_OFFSET = 864032",
+   "new_text": "LOADOUT_GRID_OFFSET = 864096",
+   "confidence": "high"
+  },
+  {
+   "name": "comment (build number)",
+   "file": "src/install.lua",
+   "old_text": "-- Build 25480438's module hashes: helldivers2.exe and game.dll.",
+   "new_text": "-- Build 26088801's module hashes: helldivers2.exe and game.dll."
+  },
+  {
+   "name": "comment (build number)",
+   "file": "src/native.lua",
+   "old_text": "-- Anchors are the ones the shipped Armory mods use (game+0x347cd90 is the UI root,\n-- game+0x3326e68 the dispatch table)",
+   "new_text": "-- Anchors are the ones the shipped Armory mods use (game+0x2e380c8 is the UI root,\n-- game+0x2ce2040 the dispatch table; 0x347cd90 / 0x3326e68 in build 25480438)"
+  },
+  {
+   "name": "comment (build number)",
+   "file": "src/locate.lua",
+   "old_text": "-- Ship Armory uses kind 224; the mission loadout picker uses kind 229 and embeds\n-- the same grid at a different controller offset in build 25480438.",
+   "new_text": "-- Ship Armory uses kind 226; the mission loadout picker uses kind 231 and embeds\n-- the same grid at a different controller offset in build 26088801 (224 / 229 in 25480438)."
+  },
+  {
+   "name": "code-page rule: check a not yet readable routine right before its first call",
+   "file": "src/memory.lua",
+   "old_text": "    -- Refuse all native scrolling if any called routine differs from this build.\n    local game = api.module('game.dll')\n    for _, entry in ipairs(module.native_signatures) do\n        local bytes = entry[2]:gsub('..', function(hex) return string.char(tonumber(hex, 16)) end)\n        if not game or api.read(game + entry[1], #bytes) ~= bytes then\n            return nil, 'unsupported native scroll routine'\n        end\n    end\n    return api\n",
+   "new_text": "    -- Refuse all native scrolling if any called routine differs from this build.\n    -- Build 26088801 keeps some game.dll code pages unreadable until the game first runs them: a routine\n    -- whose bytes cannot be read yet is checked again right before its first call (native.lua,\n    -- routines_ready) and never called unchecked; bytes that read and differ refuse everything.\n    local game = api.module('game.dll')\n    if not game then return nil, 'unsupported native scroll routine' end\n    local pending = {}\n    for _, entry in ipairs(module.native_signatures) do\n        local bytes = entry[2]:gsub('..', function(hex) return string.char(tonumber(hex, 16)) end)\n        local now = api.read(game + entry[1], #bytes)\n        if now == nil then\n            pending[entry[1]] = bytes\n        elseif now ~= bytes then\n            return nil, 'unsupported native scroll routine'\n        end\n    end\n    api.pending_signatures = pending\n    return api\n"
+  },
+  {
+   "name": "code-page rule: check a not yet readable routine right before its first call",
+   "file": "src/native.lua",
+   "old_text": "-- Runs under pcall in native_apply (a named function, so no closure per drag frame).\nlocal function apply_native(bridge, model, value, calls)\n    calls = calls or owner_calls(bridge)\n",
+   "new_text": "-- The game routines each route calls. One whose code page was not readable when native_api checked it is\n-- checked here, through the reader, right before its first call; while it still cannot be read nothing\n-- is called, and bytes that differ refuse. Once all are checked this reads nothing.\nlocal ROUTE_ROUTINES = {grid = {ANIMATION_STOP, SCROLL_SET, GRID_SOLVER}, career = {POSITION_SET},\n                        bindings = {SCROLL_SET, POSITION_SET}, settings = {SCROLL_SET, POSITION_SET},\n                        input = {INPUT_CONSUME}}\nlocal function routines_ready(bridge, which)\n    local api = bridge.api\n    local pending = type(api) == 'table' and api.pending_signatures\n    if not pending or next(pending) == nil then return true end\n    local list = ROUTE_ROUTINES[which] or ROUTE_ROUTINES.grid\n    for index = 1, #list do\n        local rva = list[index]\n        local bytes = pending[rva]\n        if bytes then\n            local now = api.read(bridge.game + rva, #bytes)\n            if now == nil then return false end\n            if now ~= bytes then error('unsupported native scroll routine', 0) end\n            pending[rva] = nil\n        end\n    end\n    return true\nend\n\n-- Runs under pcall in native_apply (a named function, so no closure per drag frame).\nlocal function apply_native(bridge, model, value, calls)\n    if not routines_ready(bridge, bridge.route) then error('native routine not resident yet', 0) end\n    calls = calls or owner_calls(bridge)\n"
+  },
+  {
+   "name": "code-page rule: check a not yet readable routine right before its first call",
+   "file": "src/native.lua",
+   "old_text": "    if not input then return false end\n    calls = calls or owner_calls(bridge)\n    return calls.consume(input, UI_SELECT) ~= false\n",
+   "new_text": "    if not input then return false end\n    if not routines_ready(bridge, 'input') then return false end\n    calls = calls or owner_calls(bridge)\n    return calls.consume(input, UI_SELECT) ~= false\n"
+  },
+  {
+   "name": "code-page rule: check a not yet readable routine right before its first call",
+   "file": "src/native.lua",
+   "old_text": "cs.keep_interpreted({module.native_calls, module.native_apply, apply_native, owner_calls, write_targets,\n",
+   "new_text": "cs.keep_interpreted({module.native_calls, module.native_apply, apply_native, owner_calls, write_targets,\n    routines_ready,\n"
+  },
+  {
+   "name": "code-page rule: check a not yet readable routine right before its first call",
+   "file": "src/install.lua",
+   "old_text": "        local written, reason = module.native_apply(state.native, model, value)\n        if not written then\n            native_retire(reason or 'write refused')\n",
+   "new_text": "        local written, reason = module.native_apply(state.native, model, value)\n        if not written then\n            -- A routine on a code page the game has not run yet is never called: drop this gesture only.\n            if reason ~= 'native routine not resident yet' then native_retire(reason or 'write refused') end\n"
+  }
+ ],
+ "entry_changed_lines": 90,
+ "luajit": {
+  "binary": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit",
+  "result": "loadstring OK: 139653 bytes, LuaJIT 2.1.ROLLING"
+ },
+ "compat_adapter": false,
+ "live_tested": false
+}

@@ -1,0 +1,199 @@
+{
+ "upstream": {
+  "tests/test_bingus_text.lua": {
+   "exit": 0,
+   "passed": true,
+   "pass_count": 15,
+   "pass_lines": [
+    "PASS: UTF-8 decoding accepts every well-formed length and rejects overlong, surrogate, truncated and out-of-range bytes",
+    "PASS: display text is any valid UTF-8 without control characters; line feeds only where a text allows them",
+    "PASS: byte caps (the game's fixed text buffers) cut only between characters and keep every whole character",
+    "PASS: character boundaries keep combining marks and ZWJ sequences whole",
+    "PASS: CJK wraps between characters, never before closing or after opening punctuation, nothing lost",
+    "PASS: 400 random mixed-script texts wrap into valid, fitting lines without losing characters",
+    "PASS: placeholders fill by name; pseudo text is longer, accented and keeps placeholders",
+    "PASS: game language picks bundled texts; later packs win; bad entries are refused singly and logged once",
+    "PASS: regional tags fall back to their base language; a forced pack wins, including English and pseudo",
+    "PASS: a broken registry is repaired, malformed packs are skipped, and only force = true forces",
+    "PASS: upper case covers Latin-1, Polish/Czech letters, Greek and Cyrillic; CJK and invalid bytes stay",
+    "PASS: the game's Text Language is read in five reads, mapped, and unreadable memory never guesses",
+    "PASS: two copies share one registry; a pack registered inline reaches every mod",
+    "PASS: refresh() and lookups with nothing changed allocate nothing",
+    "PASS: the Steam language query fails soft outside the game and tolerates several copies"
+   ],
+   "tail": [
+    "PASS: a broken registry is repaired, malformed packs are skipped, and only force = true forces",
+    "PASS: upper case covers Latin-1, Polish/Czech letters, Greek and Cyrillic; CJK and invalid bytes stay",
+    "PASS: the game's Text Language is read in five reads, mapped, and unreadable memory never guesses",
+    "PASS: two copies share one registry; a pack registered inline reaches every mod",
+    "PASS: refresh() and lookups with nothing changed allocate nothing",
+    "PASS: the Steam language query fails soft outside the game and tolerates several copies"
+   ]
+  },
+  "tests/test_dive.lua": {
+   "exit": 0,
+   "passed": true,
+   "pass_count": 13,
+   "pass_lines": [
+    "PASS: idle gate reads one controller and fails on a dive, another avatar id or a NaN timer; a full check follows a new local avatar",
+    "PASS: hash lookups match 64-bit key*mult for real multipliers",
+    "PASS: 300 compiled dive starts keep their leases",
+    "PASS: per-check call budget: 2 reads outside a mission, 1 read (gate) or 14 (full check) idle in a mission, 31 per dive frame",
+    "PASS: one protection query per water-record table: kept across dives and landings, redone after waits, avatar changes, table moves, failed writes and at shutdown",
+    "PASS: no garbage outside a mission, while waiting, idle (full check and gate) or while a dive is held",
+    "PASS: guarded update (loader on the runtime guard), with the menu retry and with after_startup: per frame only the checks' calls (2 reads every 30th frame outside a mission and 5 while dead, 2 idle with 15 every 120th frame, 62 with a dive held) and no garbage outside a mission, idle or with a dive held, interpreted or compiled",
+    "PASS: idle and held-dive checks compile under 32 KB of machine code",
+    "PASS: Windows adapter on Bingus Shared Runtime v1 (core, memory and write files): works after another mod declared 19 Windows names (every one the runtime and the translation module bind, and the tick count) with wrong prototypes (H.clash), buffer reads without garbage and string reads allocating only their string, bad ranges and unreadable memory rejected, whole-page checks counted and allocation-free, image memory refused, module hashes once per session, the runtime's clock in seconds without garbage",
+    "PASS: repeated module loads add no C types",
+    "PASS: dive timeout at the build 25480438 address, old-address fallback and located failure message",
+    "PASS: 20 cm depth limit, no dry/reset-surface assistance, restoration above 20 cm, startup debt, landings, prone/ragdoll/timeout, local ownership and write failures",
+    "PASS: null managers/player pointers, empty records and transient stance/motion wait then recover; invalid pointers and settings still fail"
+   ],
+   "tail": [
+    "PASS: idle and held-dive checks compile under 32 KB of machine code",
+    "PASS: Windows adapter on Bingus Shared Runtime v1 (core, memory and write files): works after another mod declared 19 Windows names (every one the runtime and the translation module bind, and the tick count) with wrong prototypes (H.clash), buffer reads without garbage and string reads allocating only their string, bad ranges and unreadable memory rejected, whole-page checks counted and allocation-free, image memory refused, module hashes once per session, the runtime's clock in seconds without garbage",
+    "PASS: repeated module loads add no C types",
+    "PASS: dive timeout at the build 25480438 address, old-address fallback and located failure message",
+    "PASS: 20 cm depth limit, no dry/reset-surface assistance, restoration above 20 cm, startup debt, landings, prone/ragdoll/timeout, local ownership and write failures",
+    "PASS: null managers/player pointers, empty records and transient stance/motion wait then recover; invalid pointers and settings still fail"
+   ]
+  },
+  "tests/test_loader.lua": {
+   "exit": 0,
+   "passed": true,
+   "pass_count": 8,
+   "pass_lines": [
+    "PASS: Mod Options Menu registration retried when the menu's table or revision changes (looked at every 30 updates, at most 8 attempts); nothing per frame once registered",
+    "PASS: with the loader's after_startup capability the depth slider registers once, after every mod has started and before the first update, and no frame looks at the menu; without it, or when the loader refuses, raises or never runs the callback, the bounded retry runs exactly as with loader v18",
+    "PASS: minimum/newer loader and API gates, duplicate loads, callback tuples, shutdown, update exceptions and failure isolation",
+    "PASS: after-update check only while a lease, retry or local avatar exists",
+    "PASS: idle gate at both boundaries with a full check every 120th frame, polls every 30th frame without a local avatar, full checks at both boundaries on dive frames and after errors",
+    "PASS: silent routine checks, startup/menu/shutdown log reports, throttled opt-in diagnostics",
+    "PASS: Mod Options Menu depth slider registered once on the first update, applied values reach the patch, menu failures stay contained",
+    "PASS: update errors pass through unchanged; the next update pauses (restores and starts afresh) and resumes after 60 clean frames; 8 errors below or 8 own errors in a burst stop; clean minutes clear the counts; refusals stop at once; the first failure survives shutdown; cleanup errors stay contained"
+   ],
+   "tail": [
+    "PASS: minimum/newer loader and API gates, duplicate loads, callback tuples, shutdown, update exceptions and failure isolation",
+    "PASS: after-update check only while a lease, retry or local avatar exists",
+    "PASS: idle gate at both boundaries with a full check every 120th frame, polls every 30th frame without a local avatar, full checks at both boundaries on dive frames and after errors",
+    "PASS: silent routine checks, startup/menu/shutdown log reports, throttled opt-in diagnostics",
+    "PASS: Mod Options Menu depth slider registered once on the first update, applied values reach the patch, menu failures stay contained",
+    "PASS: update errors pass through unchanged; the next update pauses (restores and starts afresh) and resumes after 60 clean frames; 8 errors below or 8 own errors in a burst stop; clean minutes clear the counts; refusals stop at once; the first failure survives shutdown; cleanup errors stay contained"
+   ]
+  },
+  "tests/test_idle_equivalence.lua": {
+   "exit": 0,
+   "passed": true,
+   "pass_count": 2,
+   "pass_lines": [
+    "PASS: idle equivalence with v3.10 over 2650 frames: 40 equal events in order; 4 later than v3.10 by the 120-frame idle check (up to 105 frames; 119 after the change at most, pinned), 5 by the 30-frame poll without an avatar (up to 29, pinned); writes, page checks, logs and water records equal",
+    "PASS: 6 mutants of the gate and the loader fail the comparison"
+   ],
+   "tail": [
+    "PASS: idle equivalence with v3.10 over 2650 frames: 40 equal events in order; 4 later than v3.10 by the 120-frame idle check (up to 105 frames; 119 after the change at most, pinned), 5 by the 30-frame poll without an avatar (up to 29, pinned); writes, page checks, logs and water records equal",
+    "PASS: 6 mutants of the gate and the loader fail the comparison"
+   ]
+  }
+ },
+ "port": {
+  "tests/test_bingus_text.lua": {
+   "exit": 0,
+   "passed": true,
+   "pass_count": 15,
+   "pass_lines": [
+    "PASS: UTF-8 decoding accepts every well-formed length and rejects overlong, surrogate, truncated and out-of-range bytes",
+    "PASS: display text is any valid UTF-8 without control characters; line feeds only where a text allows them",
+    "PASS: byte caps (the game's fixed text buffers) cut only between characters and keep every whole character",
+    "PASS: character boundaries keep combining marks and ZWJ sequences whole",
+    "PASS: CJK wraps between characters, never before closing or after opening punctuation, nothing lost",
+    "PASS: 400 random mixed-script texts wrap into valid, fitting lines without losing characters",
+    "PASS: placeholders fill by name; pseudo text is longer, accented and keeps placeholders",
+    "PASS: game language picks bundled texts; later packs win; bad entries are refused singly and logged once",
+    "PASS: regional tags fall back to their base language; a forced pack wins, including English and pseudo",
+    "PASS: a broken registry is repaired, malformed packs are skipped, and only force = true forces",
+    "PASS: upper case covers Latin-1, Polish/Czech letters, Greek and Cyrillic; CJK and invalid bytes stay",
+    "PASS: the game's Text Language is read in five reads, mapped, and unreadable memory never guesses",
+    "PASS: two copies share one registry; a pack registered inline reaches every mod",
+    "PASS: refresh() and lookups with nothing changed allocate nothing",
+    "PASS: the Steam language query fails soft outside the game and tolerates several copies"
+   ],
+   "tail": [
+    "PASS: a broken registry is repaired, malformed packs are skipped, and only force = true forces",
+    "PASS: upper case covers Latin-1, Polish/Czech letters, Greek and Cyrillic; CJK and invalid bytes stay",
+    "PASS: the game's Text Language is read in five reads, mapped, and unreadable memory never guesses",
+    "PASS: two copies share one registry; a pack registered inline reaches every mod",
+    "PASS: refresh() and lookups with nothing changed allocate nothing",
+    "PASS: the Steam language query fails soft outside the game and tolerates several copies"
+   ]
+  },
+  "tests/test_dive.lua": {
+   "exit": 0,
+   "passed": true,
+   "pass_count": 13,
+   "pass_lines": [
+    "PASS: idle gate reads one controller and fails on a dive, another avatar id or a NaN timer; a full check follows a new local avatar",
+    "PASS: hash lookups match 64-bit key*mult for real multipliers",
+    "PASS: 300 compiled dive starts keep their leases",
+    "PASS: per-check call budget: 2 reads outside a mission, 1 read (gate) or 14 (full check) idle in a mission, 31 per dive frame",
+    "PASS: one protection query per water-record table: kept across dives and landings, redone after waits, avatar changes, table moves, failed writes and at shutdown",
+    "PASS: no garbage outside a mission, while waiting, idle (full check and gate) or while a dive is held",
+    "PASS: guarded update (loader on the runtime guard), with the menu retry and with after_startup: per frame only the checks' calls (2 reads every 30th frame outside a mission and 5 while dead, 2 idle with 15 every 120th frame, 62 with a dive held) and no garbage outside a mission, idle or with a dive held, interpreted or compiled",
+    "PASS: idle and held-dive checks compile under 32 KB of machine code",
+    "PASS: Windows adapter on Bingus Shared Runtime v1 (core, memory and write files): works after another mod declared 19 Windows names (every one the runtime and the translation module bind, and the tick count) with wrong prototypes (H.clash), buffer reads without garbage and string reads allocating only their string, bad ranges and unreadable memory rejected, whole-page checks counted and allocation-free, image memory refused, module hashes once per session, the runtime's clock in seconds without garbage",
+    "PASS: repeated module loads add no C types",
+    "PASS: dive timeout at the build 25480438 address, old-address fallback and located failure message",
+    "PASS: 20 cm depth limit, no dry/reset-surface assistance, restoration above 20 cm, startup debt, landings, prone/ragdoll/timeout, local ownership and write failures",
+    "PASS: null managers/player pointers, empty records and transient stance/motion wait then recover; invalid pointers and settings still fail"
+   ],
+   "tail": [
+    "PASS: idle and held-dive checks compile under 32 KB of machine code",
+    "PASS: Windows adapter on Bingus Shared Runtime v1 (core, memory and write files): works after another mod declared 19 Windows names (every one the runtime and the translation module bind, and the tick count) with wrong prototypes (H.clash), buffer reads without garbage and string reads allocating only their string, bad ranges and unreadable memory rejected, whole-page checks counted and allocation-free, image memory refused, module hashes once per session, the runtime's clock in seconds without garbage",
+    "PASS: repeated module loads add no C types",
+    "PASS: dive timeout at the build 25480438 address, old-address fallback and located failure message",
+    "PASS: 20 cm depth limit, no dry/reset-surface assistance, restoration above 20 cm, startup debt, landings, prone/ragdoll/timeout, local ownership and write failures",
+    "PASS: null managers/player pointers, empty records and transient stance/motion wait then recover; invalid pointers and settings still fail"
+   ]
+  },
+  "tests/test_loader.lua": {
+   "exit": 0,
+   "passed": true,
+   "pass_count": 8,
+   "pass_lines": [
+    "PASS: Mod Options Menu registration retried when the menu's table or revision changes (looked at every 30 updates, at most 8 attempts); nothing per frame once registered",
+    "PASS: with the loader's after_startup capability the depth slider registers once, after every mod has started and before the first update, and no frame looks at the menu; without it, or when the loader refuses, raises or never runs the callback, the bounded retry runs exactly as with loader v18",
+    "PASS: minimum/newer loader and API gates, duplicate loads, callback tuples, shutdown, update exceptions and failure isolation",
+    "PASS: after-update check only while a lease, retry or local avatar exists",
+    "PASS: idle gate at both boundaries with a full check every 120th frame, polls every 30th frame without a local avatar, full checks at both boundaries on dive frames and after errors",
+    "PASS: silent routine checks, startup/menu/shutdown log reports, throttled opt-in diagnostics",
+    "PASS: Mod Options Menu depth slider registered once on the first update, applied values reach the patch, menu failures stay contained",
+    "PASS: update errors pass through unchanged; the next update pauses (restores and starts afresh) and resumes after 60 clean frames; 8 errors below or 8 own errors in a burst stop; clean minutes clear the counts; refusals stop at once; the first failure survives shutdown; cleanup errors stay contained"
+   ],
+   "tail": [
+    "PASS: minimum/newer loader and API gates, duplicate loads, callback tuples, shutdown, update exceptions and failure isolation",
+    "PASS: after-update check only while a lease, retry or local avatar exists",
+    "PASS: idle gate at both boundaries with a full check every 120th frame, polls every 30th frame without a local avatar, full checks at both boundaries on dive frames and after errors",
+    "PASS: silent routine checks, startup/menu/shutdown log reports, throttled opt-in diagnostics",
+    "PASS: Mod Options Menu depth slider registered once on the first update, applied values reach the patch, menu failures stay contained",
+    "PASS: update errors pass through unchanged; the next update pauses (restores and starts afresh) and resumes after 60 clean frames; 8 errors below or 8 own errors in a burst stop; clean minutes clear the counts; refusals stop at once; the first failure survives shutdown; cleanup errors stay contained"
+   ]
+  },
+  "tests/test_idle_equivalence.lua": {
+   "exit": 0,
+   "passed": true,
+   "pass_count": 2,
+   "pass_lines": [
+    "PASS: idle equivalence with v3.10 over 2650 frames: 40 equal events in order; 4 later than v3.10 by the 120-frame idle check (up to 105 frames; 119 after the change at most, pinned), 5 by the 30-frame poll without an avatar (up to 29, pinned); writes, page checks, logs and water records equal",
+    "PASS: 6 mutants of the gate and the loader fail the comparison"
+   ],
+   "tail": [
+    "PASS: idle equivalence with v3.10 over 2650 frames: 40 equal events in order; 4 later than v3.10 by the 120-frame idle check (up to 105 frames; 119 after the change at most, pinned), 5 by the 30-frame poll without an avatar (up to 29, pinned); writes, page checks, logs and water records equal",
+    "PASS: 6 mutants of the gate and the loader fail the comparison"
+   ]
+  }
+ },
+ "luajit_exe_sha256": "f2ab6507b0cb36f01559341c632dcd95e6f8f5d21da220bbd9c80ebf649bdeb7",
+ "note": "Windows LuaJIT under Wine (test_dive and test_idle_equivalence copy memory with kernel32 RtlMoveMemory). The port run uses fixtures remapped with TEST_MAP (tests only).",
+ "not_run": {
+  "tests/test_package.py": "checks a standalone release zip; no release package is built here"
+ }
+}

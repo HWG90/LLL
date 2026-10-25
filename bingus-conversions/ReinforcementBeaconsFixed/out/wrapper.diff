@@ -1,0 +1,42 @@
+--- upstream wrapper
++++ port wrapper
+@@ -674 +674 @@
+-local PLAYER_MANAGER, PENDING = 0x3326468, string.char(2, 0, 0, 0)
++local PLAYER_MANAGER, PENDING = 0x2CE1618, string.char(2, 0, 0, 0)
+@@ -794 +794 @@
+-    read(reader,global(reader,0x33266a0,'mission_mode'),0x44,MODE)
++    read(reader,global(reader,0x2ce1850,'mission_mode'),0x44,MODE)
+@@ -829 +829 @@
+-    read(reader,global(reader,0x33269c0,'reinforcement_manager'),0x58,REINFORCEMENT)
++    read(reader,global(reader,0x2ce1b78,'reinforcement_manager'),0x58,REINFORCEMENT)
+@@ -832 +832 @@
+-    if positioned and active>0 then read(reader,global(reader,0x3326b20,'position_manager'),0x60,POSITIONS) end
++    if positioned and active>0 then read(reader,global(reader,0x2ce1ce0,'position_manager'),0x60,POSITIONS) end
+@@ -865 +865 @@
+-    read(reader,global(reader,0x33266b0,'automatic_anchor_manager'),0x80,STRATAGEMS)
++    read(reader,global(reader,0x2ce1860,'automatic_anchor_manager'),0x80,STRATAGEMS)
+@@ -879,2 +879,2 @@
+-        -- Current automatic-reinforcement producer ACCC96 / ACCEC5.
+-        if u32(rows,base+12)==0x7C then
++        -- Current automatic-reinforcement producer ACCC96 / ACCEC5 (26088801: AE8EF6 / AE9125, type 0x7F).
++        if u32(rows,base+12)==0x7F then
+@@ -892 +892 @@
+-    local engine_ref=u32(read(reader,em+15937304+24*index,24,ENTITY),12)
++    local engine_ref=u32(read(reader,em+15944160+24*index,24,ENTITY),12)
+@@ -894 +894 @@
+-    read(reader,pointer(reader,reader.exe+0x1a100f0),0xA8,REGISTRY)
++    read(reader,pointer(reader,reader.exe+0x1ab76f8),0xA8,REGISTRY)
+@@ -902 +902 @@
+-    assert(reader.api.distance(pointer(reader,vtable+0xE8),reader.exe)==0x2bd870, 'Unsupported unit scene-graph layout')
++    assert(reader.api.distance(pointer(reader,vtable+0xE8),reader.exe)==0x28d3a0, 'Unsupported unit scene-graph layout')
+@@ -910,2 +910,2 @@
+-    local em=global(reader,0x346bf98,'source_entity_manager')
+-    local index=unit_ref~=0x7fff and lookup(reader,read(reader,em+15871688,20,SOURCE_LOOKUP),0,unit_ref) or nil
++    local em=global(reader,0x2ce41b8,'source_entity_manager')
++    local index=unit_ref~=0x7fff and lookup(reader,read(reader,em+15878544,20,SOURCE_LOOKUP),0,unit_ref) or nil
+@@ -913 +913 @@
+-    return vector(read(reader,global(reader,0x346d560,'fallback_position')+0x3C,12,COORDINATES),0)
++    return vector(read(reader,global(reader,0x2e287d0,'fallback_position')+0x3C,12,COORDINATES),0)
+@@ -1371 +1371 @@
+-install_loader(create_runtime_api, patch, {revision = 'data-v4.6.1', exe_sha256 = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06', game_sha256 = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'}, runtime)
++install_loader(create_runtime_api, patch, {revision = 'data-v4.6.1-26088801', exe_sha256 = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE', game_sha256 = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'}, runtime)
