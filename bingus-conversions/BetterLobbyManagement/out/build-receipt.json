@@ -1,0 +1,2007 @@
+{
+ "mod": "Better Lobby Management v1.2.1",
+ "option": "BetterLobbyManagement",
+ "build": 26088801,
+ "source": "upstream-bingus/BetterLobbyManagement (tag v1.2.1; all 41 locked source hashes match; identical to upstream-bingus/VanillaPlusMegapack/components/BetterLobbyManagement)",
+ "resource": "mods/cowboybingus/better_lobby_management",
+ "resource_hash": "b9965a03f28c36ef",
+ "archive": "9ba626afa44a3aa3.patch_0",
+ "archive_sha256": "E2DD69D9B97CC154D0030054BD5F069058DBAA20CEA64EED0DFAB63803D33B01",
+ "resource_sha256": "8E612665FDC2371D03B55355FFE50AD9B6250D9F3F78E846CC91C9EFCCDE82F4",
+ "entry_sha256": "AFCA923E4328A969AA661B87D20541EB37CB73BB80FC31B9E97B97A91CC9F7A4",
+ "entry_bytes": 238726,
+ "upstream_resource_sha256": "BD9B02609CDCE7A994DBA90B78383B80704E1DE4BD105A72D1E8BC21C9B0A571",
+ "upstream_resource_matches_lock": true,
+ "upstream_resource_matches_shipped_v26": true,
+ "pins": {
+  "EXE_SHA": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+  "GAME_DLL_SHA": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F"
+ },
+ "upstream_pins": {
+  "EXE_SHA": "F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06",
+  "GAME_DLL_SHA": "2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E"
+ },
+ "map_summary": {
+  "high": 118,
+  "medium": 4,
+  "unmapped": 5
+ },
+ "map_edits": 99,
+ "code_edits": 35,
+ "entry_lines_changed": 644,
+ "unknown_signatures_shipped_as_nil": [
+  "R.KEYS",
+  "sig.G.native.kick_peer",
+  "sig.C.code.chat message RPC",
+  "sig.R.code.continent filter",
+  "sig.R.code.continent flag check"
+ ],
+ "luajit": {
+  "binary": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit",
+  "output": [
+   "compile: ok\tLuaJIT 2.1.ROLLING\t12",
+   "entry run: true",
+   "status: unsupported: mods/cowboybingus/better_lobby_management:958: libkernel32.so: cannot open shared object file: No such file or directory",
+   "version: v1.2.1"
+  ]
+ },
+ "compat_adapter": false,
+ "live_tested": false,
+ "edits": [
+  {
+   "row": "G.CONTEXT_PTR",
+   "file": "src/game.lua",
+   "line": 7,
+   "old": "G.CONTEXT_PTR = 0x347cef0",
+   "new": "G.CONTEXT_PTR = 0x2e38228",
+   "confidence": "high"
+  },
+  {
+   "row": "G.GAME_STATE_PTR",
+   "file": "src/game.lua",
+   "line": 8,
+   "old": "G.GAME_STATE_PTR = 0x3326340",
+   "new": "G.GAME_STATE_PTR = 0x2ce1508",
+   "confidence": "high"
+  },
+  {
+   "row": "G.ROSTER_PTR",
+   "file": "src/game.lua",
+   "line": 9,
+   "old": "G.ROSTER_PTR = 0x347ced8",
+   "new": "G.ROSTER_PTR = 0x2e38210",
+   "confidence": "high"
+  },
+  {
+   "row": "G.ENGINE_API_PTR",
+   "file": "src/game.lua",
+   "line": 10,
+   "old": "G.ENGINE_API_PTR = 0x3326308",
+   "new": "G.ENGINE_API_PTR = 0x2ce14c8",
+   "confidence": "high"
+  },
+  {
+   "row": "G.MATCHMAKING_PTR",
+   "file": "src/game.lua",
+   "line": 11,
+   "old": "G.MATCHMAKING_PTR = 0x347ce80",
+   "new": "G.MATCHMAKING_PTR = 0x2e381b8",
+   "confidence": "high"
+  },
+  {
+   "row": "M.MENU_SYSTEM_PTR",
+   "file": "src/menu.lua",
+   "line": 17,
+   "old": "M.MENU_SYSTEM_PTR = 0x347ce38",
+   "new": "M.MENU_SYSTEM_PTR = 0x2e38170",
+   "confidence": "high"
+  },
+  {
+   "row": "M.PRESENTERS_PTR",
+   "file": "src/menu.lua",
+   "line": 59,
+   "old": "M.PRESENTERS_PTR = 0x347ce28",
+   "new": "M.PRESENTERS_PTR = 0x2e38160",
+   "confidence": "high"
+  },
+  {
+   "row": "S.CONFIG_PTR_RVA",
+   "file": "src/scanner.lua",
+   "line": 11,
+   "old": "M.CONFIG_PTR_RVA = 0x347cee0",
+   "new": "M.CONFIG_PTR_RVA = 0x2e38218",
+   "confidence": "high"
+  },
+  {
+   "row": "S.MATCHMAKING_PTR_RVA",
+   "file": "src/scanner.lua",
+   "line": 13,
+   "old": "M.MATCHMAKING_PTR_RVA = 0x347ce80",
+   "new": "M.MATCHMAKING_PTR_RVA = 0x2e381b8",
+   "confidence": "high"
+  },
+  {
+   "row": "B.SOS_PTR",
+   "file": "src/sos.lua",
+   "line": 20,
+   "old": "B.SOS_PTR = 0x3326bf0",
+   "new": "B.SOS_PTR = 0x2ce1db0",
+   "confidence": "high"
+  },
+  {
+   "row": "B.PLAYERS_PTR",
+   "file": "src/sos.lua",
+   "line": 36,
+   "old": "B.PLAYERS_PTR = 0x347ce50",
+   "new": "B.PLAYERS_PTR = 0x2e38188",
+   "confidence": "high"
+  },
+  {
+   "row": "B.STRATAGEMS",
+   "file": "src/sos.lua",
+   "line": 40,
+   "old": "B.STRATAGEMS = 0x37cb600",
+   "new": "B.STRATAGEMS = 0x31870e0",
+   "confidence": "high"
+  },
+  {
+   "row": "R.CONFIG_PTR",
+   "file": "src/region.lua",
+   "line": 21,
+   "old": "R.CONFIG_PTR = 0x347cdf8",
+   "new": "R.CONFIG_PTR = 0x2e38128",
+   "confidence": "high"
+  },
+  {
+   "row": "R.CONTINENT_IDS_RVA",
+   "file": "src/region.lua",
+   "line": 36,
+   "old": "R.CONTINENT_IDS_RVA = 0x21d45b0",
+   "new": "R.CONTINENT_IDS_RVA = 0x205d3f0",
+   "confidence": "high"
+  },
+  {
+   "row": "G.MODE",
+   "file": "src/game.lua",
+   "line": 12,
+   "old": "G.MODE = 0xac21c",
+   "new": "G.MODE = 0xac29c",
+   "confidence": "high"
+  },
+  {
+   "row": "G.CS_PARTY_JOIN",
+   "file": "src/game.lua",
+   "line": 20,
+   "old": "G.CS_PARTY_JOIN = 0x521",
+   "new": "G.CS_PARTY_JOIN = 0x529",
+   "confidence": "high"
+  },
+  {
+   "row": "G.JOIN",
+   "file": "src/game.lua",
+   "line": 21,
+   "old": "G.JOIN = 0x171c8",
+   "new": "G.JOIN = 0x171d0",
+   "confidence": "high"
+  },
+  {
+   "row": "G.LOBBY",
+   "file": "src/game.lua",
+   "line": 22,
+   "old": "G.LOBBY = 0x1d470",
+   "new": "G.LOBBY = 0x1d478",
+   "confidence": "high"
+  },
+  {
+   "row": "G.BROWSER",
+   "file": "src/game.lua",
+   "line": 23,
+   "old": "G.BROWSER = 0x1f028",
+   "new": "G.BROWSER = 0x1f030",
+   "confidence": "high"
+  },
+  {
+   "row": "S.RECHARGE",
+   "file": "src/scanner.lua",
+   "line": 12,
+   "old": "M.RECHARGE = 0x3ce4c",
+   "new": "M.RECHARGE = 0x3ceac",
+   "confidence": "high"
+  },
+  {
+   "row": "B.PRIVACY",
+   "file": "src/sos.lua",
+   "line": 23,
+   "old": "B.PRIVACY = 0xac550",
+   "new": "B.PRIVACY = 0xac5d0",
+   "confidence": "high"
+  },
+  {
+   "row": "B.PLAYERS",
+   "file": "src/sos.lua",
+   "line": 37,
+   "old": "B.PLAYER_SIZE, B.PLAYER_COUNT, B.MAX_PLAYERS = 0x1690, 0x2d200, 32",
+   "new": "B.PLAYER_SIZE, B.PLAYER_COUNT, B.MAX_PLAYERS = 0x16c0, 0x2d800, 32",
+   "confidence": "high"
+  },
+  {
+   "row": "B.SOS_STRATAGEM",
+   "file": "src/sos.lua",
+   "line": 42,
+   "old": "B.SOS_STRATAGEM = 0x91",
+   "new": "B.SOS_STRATAGEM = 0x95",
+   "confidence": "high"
+  },
+  {
+   "row": "T.GAME",
+   "file": "src/bingus_text.lua",
+   "line": 357,
+   "old": "M.GAME = {settings = 0x3326340, index = 705500 + 212, table = 0x37C5650, count = 15}",
+   "new": "M.GAME = {settings = 0x2CE1508, index = 705628 + 212, table = 0x3180DE0, count = 15}",
+   "confidence": "high"
+  },
+  {
+   "row": "pin.GAME_DLL_SHA",
+   "file": "scripts/entry.py",
+   "line": 8,
+   "old": "GAME_DLL_SHA = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+   "new": "GAME_DLL_SHA = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'",
+   "confidence": "high"
+  },
+  {
+   "row": "pin.EXE_SHA",
+   "file": "scripts/entry.py",
+   "line": 7,
+   "old": "EXE_SHA = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+   "new": "EXE_SHA = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.G.code.network components",
+   "file": "src/game.lua",
+   "line": 70,
+   "old_rva": "0x13f7858",
+   "new_rva": "0x128ebe4",
+   "new_bytes": "498d9f2022c901488d8b00b40000e8493cefff488d8bb0590100e8edbfc8ff488d8bc8620100e8b14dc8ff488d8b78d40100e89553c9ff488d8bd0710100",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.G.code.host-left check",
+   "file": "src/game.lua",
+   "line": 75,
+   "old_rva": "0x10834ed",
+   "new_rva": "0xf13d3d",
+   "new_bytes": "83b99cc20a00030f85bd000000e831152d00488b15d244f20184db41b90700000041be04000000450f45ce33f68b8240f80100488b8aa8b30000",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.G.code.peer list",
+   "file": "src/game.lua",
+   "line": 79,
+   "old_rva": "0x134fa90",
+   "new_rva": "0x11e5430",
+   "new_bytes": "48895c2410564883ec2033db488bf1399990630100767748897c24300f1f40008bc348c1e005488bbc3098630100483b",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.G.code.quickplay request",
+   "file": "src/game.lua",
+   "line": 83,
+   "old_rva": "0x1337dcc",
+   "new_rva": "0x11cd05c",
+   "new_bytes": "8b9e8c0600004c8d8688060000",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.G.code.scanner request",
+   "file": "src/game.lua",
+   "line": 84,
+   "old_rva": "0x133812a",
+   "new_rva": "0x11cd3ba",
+   "new_bytes": "8b9ee45600004c8d86e0560000",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.G.code.lobby browser",
+   "file": "src/game.lua",
+   "line": 86,
+   "old_rva": "0x133d460",
+   "new_rva": "0x11d27a0",
+   "new_bytes": "40534883ec40488b0d7b5ac601488bda4881c130f00100e8",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.G.code.party join flag",
+   "file": "src/game.lua",
+   "line": 89,
+   "old_rva": "0x1082fe3",
+   "new_rva": "0xf13853",
+   "new_bytes": "488d83380d0000c6832905000001",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.G.exe_code.PlayFab lobby layout",
+   "file": "src/game.lua",
+   "line": 94,
+   "old_rva": "0x8cdf90",
+   "new_rva": "0x9562e0",
+   "new_bytes": "488b46188bcf488b0cc8488b59104863831801000083f8030f8551010000498bd6488d0dd0f3de00e843a7caff488b8b20010000488d9424d00000004c89bc24d0000000",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.G.exe_code.PlayFab lobby members",
+   "file": "src/game.lua",
+   "line": 98,
+   "old_rva": "0x8ce012",
+   "new_rva": "0x956362",
+   "new_bytes": "8b8b00010000488b9340010000",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.G.native.browser_busy",
+   "file": "src/game.lua",
+   "line": 54,
+   "old_rva": "0x1094780",
+   "new_rva": "0xf24fd0",
+   "new_bytes": "4883ec284c8b014d85c0750732c04883c428c3488b052ed0db01",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.G.native.browser_count",
+   "file": "src/game.lua",
+   "line": 56,
+   "old_rva": "0x1094820",
+   "new_rva": "0xf25070",
+   "new_bytes": "4c8b014d85c0750333c0c3488b0596cfdb0180780900",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.G.native.browser_result",
+   "file": "src/game.lua",
+   "line": 58,
+   "old_rva": "0x1094890",
+   "new_rva": "0xf250e0",
+   "new_bytes": "4055565741574881ec38020000488b051cff5801",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.G.native.browser_start",
+   "file": "src/game.lua",
+   "line": 52,
+   "old_rva": "0x1094710",
+   "new_rva": "0xf24f60",
+   "new_bytes": "4c8b114d85d27464488b05a9d0db0180780900741c",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.G.native.filter_string",
+   "file": "src/game.lua",
+   "line": 50,
+   "old_rva": "0x1094df0",
+   "new_rva": "0xf25640",
+   "new_bytes": "405556574883ec50488b05c1f958014833c44889442430",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.G.native.is_friend",
+   "file": "src/game.lua",
+   "line": 63,
+   "old_rva": "0x13efea0",
+   "new_rva": "0x12874b0",
+   "new_bytes": "4883ec58488b053da0a5014c8bc2807828007438",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.G.native.kick_peer",
+   "file": "src/game.lua",
+   "line": 46,
+   "old_rva": "0x108d130",
+   "new_rva": "0xf1d8f0",
+   "new_bytes": null,
+   "confidence": "unmapped"
+  },
+  {
+   "row": "sig.G.native.send_kick",
+   "file": "src/game.lua",
+   "line": 61,
+   "old_rva": "0xbf3950",
+   "new_rva": "0xc12380",
+   "new_bytes": "488bd14533c9b92d3786f74533c0e93da8feff",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.G.native.start_join",
+   "file": "src/game.lua",
+   "line": 48,
+   "old_rva": "0x108ff40",
+   "new_rva": "0xf206f0",
+   "new_bytes": "48895c2420565741564881ec70010000488b0509495901",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.G.engine_slot.clear_filters",
+   "file": "src/game.lua",
+   "line": 103,
+   "old_rva": "0x8c7620",
+   "new_rva": "0x94a5c0",
+   "new_bytes": "33c08981b40000008981b8250000c3",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.G.engine_slot.continent",
+   "file": "src/game.lua",
+   "line": 104,
+   "old_rva": "0x8c5f20",
+   "new_rva": "0x948f50",
+   "new_bytes": "488b0571cbab01488b88a800000033c04885c9740a4883c1443801480f45c1c3",
+   "confidence": "medium"
+  },
+  {
+   "row": "sig.G.package_slot.pause_unloads",
+   "file": "src/game.lua",
+   "line": 116,
+   "old_rva": "0x321750",
+   "new_rva": "0x2f0be0",
+   "new_bytes": "488b05216c7c0185c90f95c2488b8800040000889124320000c3",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.G.package_slot.unload_paused",
+   "file": "src/game.lua",
+   "line": 114,
+   "old_rva": "0x321730",
+   "new_rva": "0x2f0bc0",
+   "new_bytes": "488b05416c7c01488b88000400000fb68124320000c3",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.native.add_child",
+   "file": "src/menu.lua",
+   "line": 64,
+   "old_rva": "0x144c5c0",
+   "new_rva": "0x12e42d0",
+   "new_bytes": "40534883ec204c8bca488bd9488b91e0",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.native.card_state",
+   "file": "src/menu.lua",
+   "line": 89,
+   "old_rva": "0x18f7e00",
+   "new_rva": "0x1778f10",
+   "new_bytes": "48895c242055488bec4883ec40488b05ecc0d3004833c448",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.native.clear_args",
+   "file": "src/menu.lua",
+   "line": 73,
+   "old_rva": "0x143a0f0",
+   "new_rva": "0x12d1e00",
+   "new_bytes": "80b95801000000c68158010000000f97",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.native.dialog_setup",
+   "file": "src/menu.lua",
+   "line": 79,
+   "old_rva": "0x179fdf0",
+   "new_rva": "0x1621080",
+   "new_bytes": "40555657488bec4883ec5083b9ac4b000000",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.native.focus",
+   "file": "src/menu.lua",
+   "line": 87,
+   "old_rva": "0x18fb240",
+   "new_rva": "0x177c420",
+   "new_bytes": "48895c2410574883ec200fb681500f1e00488bf90fb6da3a",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.native.measure_text",
+   "file": "src/menu.lua",
+   "line": 75,
+   "old_rva": "0x144e1a0",
+   "new_rva": "0x12e5eb0",
+   "new_bytes": "40534883ec70488bd98b098bc1c1e812",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.native.rebuild",
+   "file": "src/menu.lua",
+   "line": 81,
+   "old_rva": "0x18fbf50",
+   "new_rva": "0x177d140",
+   "new_bytes": "48895c2410564883ec2032db488bf13899d84f1b00",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.native.set_enabled",
+   "file": "src/menu.lua",
+   "line": 77,
+   "old_rva": "0x14508e0",
+   "new_rva": "0x12e85f0",
+   "new_bytes": "4883ec28448b014c8bd1418bc0458bc8",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.native.set_label",
+   "file": "src/menu.lua",
+   "line": 66,
+   "old_rva": "0x143bf90",
+   "new_rva": "0x12d3ca0",
+   "new_bytes": "4883ec284c8bd93991100100000f8480",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.native.set_label_wrapped",
+   "file": "src/menu.lua",
+   "line": 69,
+   "old_rva": "0x1441720",
+   "new_rva": "0x12d9430",
+   "new_bytes": "4883ec284c8bd93991100100000f8480000000899110010000488b9170020000",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.native.set_marquee",
+   "file": "src/menu.lua",
+   "line": 84,
+   "old_rva": "0x143c400",
+   "new_rva": "0x12d4110",
+   "new_bytes": "4883ec288089a0020000204c8bc9f30f11898c020000",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.native.set_string_arg",
+   "file": "src/menu.lua",
+   "line": 71,
+   "old_rva": "0x143c950",
+   "new_rva": "0x12d4660",
+   "new_bytes": "40534883ec20488bd94881c110010000",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.code.GAME tab dispatch",
+   "file": "src/menu.lua",
+   "line": 96,
+   "old_rva": "0x147476e",
+   "new_rva": "0x130c3e6",
+   "new_bytes": "488d8f884b0400e89ef34600",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.code.GAME tab select",
+   "file": "src/menu.lua",
+   "line": 98,
+   "old_rva": "0x18fad76",
+   "new_rva": "0x177bf56",
+   "new_bytes": "83fa040f82a20200008d42fc4889bc24a00000000fb6bc08d94f1b008bd04c69c2483a0000",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.code.GAME tab select types",
+   "file": "src/menu.lua",
+   "line": 101,
+   "old_rva": "0x18fade7",
+   "new_rva": "0x177bfc7",
+   "new_bytes": "8bcf4084ff747383e901744783e901743583e901742383f901",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.code.GAME tab dialog",
+   "file": "src/menu.lua",
+   "line": 104,
+   "old_rva": "0x18fae6c",
+   "new_rva": "0x177c04c",
+   "new_bytes": "c644243000488d8b70101e00c64424280141b908764bd9c74424200ad4368ae81050eaff",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.code.GAME tab dialog result",
+   "file": "src/menu.lua",
+   "line": 108,
+   "old_rva": "0x18fac55",
+   "new_rva": "0x177be35",
+   "new_bytes": "4438b3135c1e000f84ab0000000fb683500f1e002c043a83d84f1b000f83960000000fb6c00fb68c18d94f1b0085c9747183e902746283e901741583f9017578",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.code.GAME tab buttons",
+   "file": "src/menu.lua",
+   "line": 113,
+   "old_rva": "0x18fb4be",
+   "new_rva": "0x177c69e",
+   "new_bytes": "c744242006cfd742c74424247b94e065488da9d94f1b00c7442428e7c71e80488db1f8301a00c744242c63f86f1f33dbc7442430484193cc",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.code.GAME tab attach",
+   "file": "src/menu.lua",
+   "line": 116,
+   "old_rva": "0x18fb500",
+   "new_rva": "0x177c6e0",
+   "new_bytes": "0fb687d84f1b003bd80f8d980000004863c3488d9770291a004869c8483a00004803d1488d8f60281a00e8c17bb6ff",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.code.GAME tab dialog gate",
+   "file": "src/menu.lua",
+   "line": 120,
+   "old_rva": "0x18fa613",
+   "new_rva": "0x177b7d6",
+   "new_bytes": "80b9b05c1e00000f852307000049897b184881c170101e004d8973204532f64438b3105c1e00",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.code.GAME tab fade gate",
+   "file": "src/menu.lua",
+   "line": 124,
+   "old_rva": "0x18fa5f0",
+   "new_rva": "0x177b7b3",
+   "new_bytes": "f30f1081b45c1e000f57f60f2ec64d8be14c8bfa488bd90f8a360700000f8530070000",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.code.GAME tab panel gate",
+   "file": "src/menu.lua",
+   "line": 127,
+   "old_rva": "0x18fa64c",
+   "new_rva": "0x177b80f",
+   "new_bytes": "83bbbcf61b0002747d",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.code.GAME tab player menu",
+   "file": "src/menu.lua",
+   "line": 128,
+   "old_rva": "0x18fa6b2",
+   "new_rva": "0x177b895",
+   "new_bytes": "0fb683500f1e003c040f83f60000004869c8304e010083bc1998391600020f85e10000004881c190eb14004d8bc44803cbe845c8ffff",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.code.player menu kick hold",
+   "file": "src/menu.lua",
+   "line": 132,
+   "old_rva": "0x18f78b9",
+   "new_rva": "0x17789c9",
+   "new_bytes": "f30f5886104e0100",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.code.player menu kick",
+   "file": "src/menu.lua",
+   "line": 133,
+   "old_rva": "0x18f7992",
+   "new_rva": "0x1778aa2",
+   "new_bytes": "488b9e004e0100488d1558589700488b3d71f76b01488d0d1a5197004c8bc3e86a38e3ff4533c94533c0488bd3b92d3786f7e8f74048ff4533c9488d8fb0590100488bd3458d4101e8614e7aff",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.code.escape menu close",
+   "file": "src/menu.lua",
+   "line": 138,
+   "old_rva": "0x18fa514",
+   "new_rva": "0x177b6da",
+   "new_bytes": "488b1d7fca6b014c8d0550b29d004533",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.M.code.escape menu pending close",
+   "file": "src/menu.lua",
+   "line": 139,
+   "old_rva": "0x18fa53f",
+   "new_rva": "0x177b705",
+   "new_bytes": "488b83884300004885c07410c6401001",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.C.native.send",
+   "file": "src/chat.lua",
+   "line": 23,
+   "old_rva": "0x1097560",
+   "new_rva": "0xf27db0",
+   "new_bytes": "415641574881ec78040000488b054ed258014833c44889842450040000803900",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.C.native.rpc",
+   "file": "src/chat.lua",
+   "line": 26,
+   "old_rva": "0xbde430",
+   "new_rva": "0xbfcbd0",
+   "new_bytes": "4053555657415641574881ec98000000488b0529848b014833c44889",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.C.code.chat box send",
+   "file": "src/chat.lua",
+   "line": 30,
+   "old_rva": "0x186025d",
+   "new_rva": "0x16e163d",
+   "new_bytes": "488b0de46b75014c8d87d41600004881c118c40000e8596784ff",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.C.code.chat message RPC",
+   "file": "src/chat.lua",
+   "line": 33,
+   "old_rva": "0xbeb103",
+   "new_rva": "0xc09ac3",
+   "new_bytes": null,
+   "confidence": "unmapped"
+  },
+  {
+   "row": "sig.C.code.chat history",
+   "file": "src/chat.lua",
+   "line": 35,
+   "old_rva": "0x1097a7c",
+   "new_rva": "0xf282cc",
+   "new_bytes": "8b87949500008b8f90950000",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.C.code.new host notice",
+   "file": "src/chat.lua",
+   "line": 37,
+   "old_rva": "0x108a2dc",
+   "new_rva": "0xf1aa8c",
+   "new_bytes": "488d456748895d6741b901000000488945e74c8d45dfc745df0900000048c7c2ffffffffc745e308000000b9367ce7b9e80f21ceff",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.S.code.recharge reader",
+   "file": "src/scanner.lua",
+   "line": 29,
+   "old_rva": "0x1337fa8",
+   "new_rva": "0x11cd238",
+   "new_bytes": "488b05d9afc601458bce660f6e80acce03008b8628a70000c7863cbd100032000000898640f10c008986d8f20c000f5bc0f30f118674bd1000",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.S.code.countdown update",
+   "file": "src/scanner.lua",
+   "line": 40,
+   "old_rva": "0x133752e",
+   "new_rva": "0x11cc7be",
+   "new_bytes": "f30f108174bd10000f2fc6760cf30f5cc7f30f118174bd1000",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.S.code.matchmaking global",
+   "file": "src/scanner.lua",
+   "line": 47,
+   "old_rva": "0x133e9e0",
+   "new_rva": "0x11d3d30",
+   "new_bytes": "488b058144c60188905dbd1000c3",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.B.native.deactivate",
+   "file": "src/sos.lua",
+   "line": 46,
+   "old_rva": "0x67aa20",
+   "new_rva": "0x684660",
+   "new_bytes": "48895c2408574883ec20488b3db73b7b02488bd9488b87a8b300004885c0741f483b8798b300007416c641080048c70100000000488b5c24304883c4205fc34533c0488d8f78d40100418d5008e8cee68900488b054fce6502ba13000000488bcf448b80d0c50a00e8730fb600c643080048c70300000000488b5c24304883c4205fc3",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.B.native.set_key",
+   "file": "src/sos.lua",
+   "line": 53,
+   "old_rva": "0x10925d0",
+   "new_rva": "0xf22d80",
+   "new_bytes": "4c8bdc49895b20574881ecc0000000488b057a2259014833c448898424b00000000f57c08bfa0f11442430488bd9458bc80f114424404c8d0547ef1a01ba800000000f11442450488d4c24300f114424600f11442470410f1143b8410f1143c8410f1143d8e8362d5dff488d4c243048c7c0ffffffff48ffc0803c010075f7894424204c8d442420488d4424308bd74889442428488bcb0f28442420660f7f442420e859feffff",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.B.code.SOS activate",
+   "file": "src/sos.lua",
+   "line": 64,
+   "old_rva": "0x67a9a0",
+   "new_rva": "0x6845e0",
+   "new_bytes": "48895c2408574883ec20488b1d373c7b02488bf9488b83a8b300004885c07418483b8398b30000740fc6410801488b5c24304883c4205fc3ba08000000488d8b78d40100448d42f9e853e789004533c0488bcb418d5013e80410b600488b05b5ce6502488b5c2430488b481048890fc64708014883c4205fc3",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.B.code.SOS activation event",
+   "file": "src/sos.lua",
+   "line": 70,
+   "old_rva": "0x517fd0",
+   "new_rva": "0x520750",
+   "new_bytes": "803a007422488b0d54167c02488b05c57a910248c7010000000083b890630100040f82693e1600c3",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.B.code.SOS re-arm after a leave",
+   "file": "src/sos.lua",
+   "line": 74,
+   "old_rva": "0xb5f2c3",
+   "new_rva": "0xb7bd77",
+   "new_bytes": "488b89a820000044397918760b443879087505e85188b0ff",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.B.code.SOS re-arm after a new host",
+   "file": "src/sos.lua",
+   "line": 76,
+   "old_rva": "0x10871f3",
+   "new_rva": "0xf179f7",
+   "new_bytes": "488b89a820000044396918760b443869087505e8d1cb76ff",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.B.code.lobby key setter",
+   "file": "src/sos.lua",
+   "line": 79,
+   "old_rva": "0x10924e6",
+   "new_rva": "0xf22c96",
+   "new_bytes": "488d59384869c501010000498bf0488bf94803d8418b0085c075043803745c488b4e084c8bc0488bd3e8bcab030185c07449488b4720488bcb480fabe848894720488b4718480fabe848894718",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.B.code.lobby post countdown",
+   "file": "src/sos.lua",
+   "line": 84,
+   "old_rva": "0x109411d",
+   "new_rva": "0xf2496d",
+   "new_bytes": "f30f1087801b0000488b057ccbdb01f30f5c000f2ff0f30f1187801b00000f93c384db741a488b057f38f101660f6e80c8ce03000f5bc0f30f1187801b0000",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.B.code.stratagem uses",
+   "file": "src/sos.lua",
+   "line": 89,
+   "old_rva": "0x66d3d0",
+   "new_rva": "0x676ed0",
+   "new_bytes": "4883ec28418bc04c8d150202b102488d0c404803c98b84ca8c010000448b84ca88010000488d154d00b10289442440488bc24585c074044b8b04c283b894000000007446837850ff7440",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.B.code.player records",
+   "file": "src/sos.lua",
+   "line": 94,
+   "old_rva": "0x66f060",
+   "new_rva": "0x678b90",
+   "new_bytes": "458b8100d802004585c00f8407010000498bd14c3922741fffc14881c2c0160000413bc872ed488b5c24684883c420415d415c5f5e5dc34c897c24604d8d79388bc14869c8c01600004c03f90f84c0000000",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.B.code.stratagem slots",
+   "file": "src/sos.lua",
+   "line": 99,
+   "old_rva": "0x66f0f8",
+   "new_rva": "0x678c28",
+   "new_bytes": "418bb788070000498bd4488b0d6f8a660283fe10410f43f54533c9488d3c7648c1e7044903ff44898788010000e886dd200089878c010000",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.R.code.continent filter",
+   "file": "src/region.lua",
+   "line": 42,
+   "old_rva": "0x133b1a3",
+   "new_rva": "0x11d0443",
+   "new_bytes": null,
+   "confidence": "unmapped"
+  },
+  {
+   "row": "sig.R.code.continent flag check",
+   "file": "src/region.lua",
+   "line": 46,
+   "old_rva": "0x133b229",
+   "new_rva": "0x11d04c9",
+   "new_bytes": null,
+   "confidence": "unmapped"
+  },
+  {
+   "row": "sig.R.code.override lookup",
+   "file": "src/region.lua",
+   "line": 50,
+   "old_rva": "0x12e7990",
+   "new_rva": "0x117a7a0",
+   "new_bytes": "48895c240848896c2410488974241848897c2420415685d24c8bd1b978200100b8286000000f45c1448bf24903c233d2",
+   "confidence": "high"
+  },
+  {
+   "row": "sig.R.code.override refresh",
+   "file": "src/region.lua",
+   "line": 54,
+   "old_rva": "0x103f61d",
+   "new_rva": "0xecfd0d",
+   "new_bytes": "8b8370200100418b8d2060000089442428894c242c3bc1743e418b4514488d8b70c00000898364c00000498d5520418b451841b800600000898368c00000e8f0010501418b8520600000898370200100",
+   "confidence": "high"
+  },
+  {
+   "file": "src/game.lua",
+   "what": "G.bind through G.code_matches/G.checked_native; helpers added"
+  },
+  {
+   "file": "src/windows_api.lua",
+   "old": "    -- Bytes of mapped image memory (startup verification only).\n    function api.bytes(address, size)\n        return ffi.string(ffi.cast('const char *', address), size)\n    end\n",
+   "new": "    -- Bytes of game code, or nil when unreadable (port to Steam build\n    -- 26088801: some code pages stay no-access until the game first runs them,\n    -- so code is read with ReadProcessMemory, never dereferenced).\n    local code_block = ffi.new('uint8_t[256]')\n    local code_block_address = tonumber(ffi.cast('uintptr_t', code_block))\n    function api.bytes(address, size)\n        if size > 256 or not read_block(address, code_block_address, size) then return nil end\n        return ffi.string(code_block, size)\n    end\n"
+  },
+  {
+   "file": "src/addon.lua",
+   "old": "    local api, game, exe, natives\n",
+   "new": "    local api, game, exe, natives, unchecked\n"
+  },
+  {
+   "file": "src/addon.lua",
+   "old": "        natives = G.bind(api, game, exe)\n",
+   "new": "        natives, unchecked = G.bind(api, game, exe)\n"
+  },
+  {
+   "file": "src/addon.lua",
+   "old": "    local region_ok, region_why = region.verify()\n",
+   "new": "    local region_ok, region_why = region.verify(unchecked)\n"
+  },
+  {
+   "file": "src/addon.lua",
+   "old": "        for _, code in ipairs(S.CODE) do\n            if api.bytes(game + code.rva, #code.bytes) ~= code.bytes then\n                scanner_why = code.name .. ' changed'\n                break\n            end\n        end\n",
+   "new": "        for _, code in ipairs(S.CODE) do\n            local matches = G.code_matches(api, game + code.rva, code.bytes)\n            if matches == false then\n                scanner_why = code.name .. ' changed'\n                break\n            end\n            if matches == nil then unchecked[#unchecked + 1] = code.name end\n        end\n"
+  },
+  {
+   "file": "src/addon.lua",
+   "old": "        for name, native in pairs(M.NATIVES) do\n            if api.bytes(game + native.rva, #native.bytes) ~= native.bytes then\n                ok, menu_why = false, name .. ' changed'\n                break\n            end\n            menu_natives[name] = api.native(native.type, game + native.rva)\n        end\n",
+   "new": "        for name, native in pairs(M.NATIVES) do\n            local bound, why = G.checked_native(api, native.type, game + native.rva, native.bytes, name)\n            if not bound then\n                ok, menu_why = false, why\n                break\n            end\n            if type(bound) == 'table' then unchecked[#unchecked + 1] = name end\n            menu_natives[name] = bound\n        end\n"
+  },
+  {
+   "file": "src/addon.lua",
+   "old": "            local code_ok, why = menu.verify()\n",
+   "new": "            local code_ok, why = menu.verify(unchecked)\n"
+  },
+  {
+   "file": "src/addon.lua",
+   "old": "        local candidate = B.new(api, game, G, state, note)\n        local ok, why = candidate.verify()\n",
+   "new": "        local candidate = B.new(api, game, G, state, note)\n        local ok, why = candidate.verify(unchecked)\n"
+  },
+  {
+   "file": "src/addon.lua",
+   "old": "        local candidate = C.new(api, game, G, note)\n        local ok, why = candidate.verify()\n",
+   "new": "        local candidate = C.new(api, game, G, note)\n        local ok, why = candidate.verify(unchecked)\n"
+  },
+  {
+   "file": "src/addon.lua",
+   "old": "    local ORDER_SHIP, ORDER_SOS = {'disband', 'promote'}, {'cancel_sos'}\n    local function changed(snap, sos_state)\n        if shown.mode ~= snap.mode or shown.count ~= snap.peer_count or shown.chosen ~= chosen\n            or shown.sos ~= sos_state then\n",
+   "new": "    local ORDER_SHIP, ORDER_SOS, ORDER_DISBAND = {'disband', 'promote'}, {'cancel_sos'}, {'disband'}\n    local function changed(snap, sos_state)\n        if shown.mode ~= snap.mode or shown.count ~= snap.peer_count or shown.chosen ~= chosen\n            or shown.sos ~= sos_state or shown.promote ~= lobby.promote_ready() then\n"
+  },
+  {
+   "file": "src/addon.lua",
+   "old": "        shown.mode, shown.count, shown.chosen, shown.sos = snap.mode, snap.peer_count, chosen, sos_state\n",
+   "new": "        shown.mode, shown.count, shown.chosen, shown.sos = snap.mode, snap.peer_count, chosen, sos_state\n        shown.promote = lobby.promote_ready()\n"
+  },
+  {
+   "file": "src/addon.lua",
+   "old": "        if snap.mode ~= G.MODE_SHIP then return end\n",
+   "new": "        if snap.mode ~= G.MODE_SHIP then return end\n        if not shown.promote then\n            -- Port: PROMOTE calls the game's lobby search code, which build\n            -- 26088801 loads on first use; until it checks out, DISBAND alone.\n            order = ORDER_DISBAND\n            offer.disband = tr('button.disband')\n            dialogs.disband = {title = tr('dialog.disband.title'), body = tr('dialog.disband.body')}\n            return\n        end\n"
+  },
+  {
+   "file": "src/addon.lua",
+   "old": "        .. '; CANCEL SOS ' .. state.sos .. (state.diag and '; diagnostics ' .. state.diag or ''))\n",
+   "new": "        .. '; CANCEL SOS ' .. state.sos .. (state.diag and '; diagnostics ' .. state.diag or '')\n        .. (#unchecked > 0 and '; not loaded yet (checked at first use, or skipped): '\n            .. table.concat(unchecked, ', ') or ''))\n"
+  },
+  {
+   "file": "src/menu.lua",
+   "old": "    function self.verify()\n        for _, code in ipairs(M.CODE) do\n            if api.bytes(game + code.rva, #code.bytes) ~= code.bytes then return false, code.name .. ' changed' end\n        end\n",
+   "new": "    function self.verify(unchecked)\n        for _, code in ipairs(M.CODE) do\n            local seen = api.bytes(game + code.rva, #code.bytes)\n            if seen and seen ~= code.bytes then return false, code.name .. ' changed' end\n            if not seen and unchecked then unchecked[#unchecked + 1] = code.name end\n        end\n"
+  },
+  {
+   "file": "src/menu.lua",
+   "old": "    local ACTION_TYPES = {}\n",
+   "new": "    -- Port: true when every menu native can be called now (a stub whose entry\n    -- checks out is replaced by the native; see G.checked_native).\n    local function natives_ready()\n        for name, native in pairs(natives) do\n            if type(native) == 'table' then\n                if not native.resolve() then return false end\n                natives[name] = native.fn\n            end\n        end\n        return true\n    end\n\n    local ACTION_TYPES = {}\n"
+  },
+  {
+   "file": "src/menu.lua",
+   "old": "        if not sync_buttons(content, offer, order) then\n",
+   "new": "        if not natives_ready() then return selected_lo, selected_hi end\n        if not sync_buttons(content, offer, order) then\n"
+  },
+  {
+   "file": "src/menu.lua",
+   "old": "    function self.game_kick(screen, lo, hi)\n        if screen == 0 then return 'menu closed' end\n",
+   "new": "    function self.game_kick(screen, lo, hi)\n        if screen == 0 then return 'menu closed' end\n        if not natives_ready() then return 'busy' end\n"
+  },
+  {
+   "file": "src/chat.lua",
+   "old": "        if api.bytes(game + C.SEND.rva, #C.SEND.bytes) ~= C.SEND.bytes then return false, 'chat send changed' end\n        if api.bytes(game + C.RPC.rva, #C.RPC.bytes) ~= C.RPC.bytes then return false, 'RPC send changed' end\n        for _, code in ipairs(C.CODE) do\n            if api.bytes(game + code.rva, #code.bytes) ~= code.bytes then return false, code.name .. ' changed' end\n        end\n        send = api.native(C.SEND.type, game + C.SEND.rva)\n        rpc = api.native(C.RPC.type, game + C.RPC.rva)\n",
+   "new": "        local why\n        send, why = G.checked_native(api, C.SEND.type, game + C.SEND.rva, C.SEND.bytes, 'chat send')\n        if not send then return false, why end\n        rpc, why = G.checked_native(api, C.RPC.type, game + C.RPC.rva, C.RPC.bytes, 'RPC send')\n        if not rpc then return false, why end\n        for _, code in ipairs(C.CODE) do\n            if not code.bytes then return false, code.name .. ': not known for this game build' end\n            local matches = G.code_matches(api, game + code.rva, code.bytes)\n            if matches == false then return false, code.name .. ' changed' end\n            if matches == nil and unchecked then unchecked[#unchecked + 1] = code.name end\n        end\n        if unchecked and type(send) == 'table' then unchecked[#unchecked + 1] = 'chat send' end\n        if unchecked and type(rpc) == 'table' then unchecked[#unchecked + 1] = 'RPC send' end\n"
+  },
+  {
+   "file": "src/chat.lua",
+   "old": "    function self.verify()\n",
+   "new": "    function self.verify(unchecked)\n"
+  },
+  {
+   "file": "src/chat.lua",
+   "old": "    function self.send(text, verbose)\n        local ctx = api.load64(game + G.CONTEXT_PTR)\n",
+   "new": "    function self.send(text, verbose)\n        if not G.ready(send) then return false, 'the chat code is not loaded yet' end\n        local ctx = api.load64(game + G.CONTEXT_PTR)\n"
+  },
+  {
+   "file": "src/chat.lua",
+   "old": "    function self.new_leader(lo, hi, verbose)\n        local ctx = api.load64(game + G.CONTEXT_PTR)\n",
+   "new": "    function self.new_leader(lo, hi, verbose)\n        if not G.ready(rpc) then return false, 'the RPC code is not loaded yet' end\n        local ctx = api.load64(game + G.CONTEXT_PTR)\n"
+  },
+  {
+   "file": "src/sos.lua",
+   "old": "    function self.verify()\n        if api.bytes(game + B.DEACTIVATE.rva, #B.DEACTIVATE.bytes) ~= B.DEACTIVATE.bytes then\n            return false, 'SOS deactivate changed'\n        end\n        if api.bytes(game + B.SET_KEY.rva, #B.SET_KEY.bytes) ~= B.SET_KEY.bytes then\n            return false, 'lobby number setter changed'\n        end\n        for _, code in ipairs(B.CODE) do\n            if api.bytes(game + code.rva, #code.bytes) ~= code.bytes then return false, code.name .. ' changed' end\n        end\n        deactivate = api.native(B.DEACTIVATE.type, game + B.DEACTIVATE.rva)\n        set_key = api.native(B.SET_KEY.type, game + B.SET_KEY.rva)\n",
+   "new": "    function self.verify(unchecked)\n        local bound_deactivate = G.checked_native(api, B.DEACTIVATE.type, game + B.DEACTIVATE.rva,\n            B.DEACTIVATE.bytes, 'SOS deactivate')\n        if not bound_deactivate then return false, 'SOS deactivate changed' end\n        local bound_set_key = G.checked_native(api, B.SET_KEY.type, game + B.SET_KEY.rva, B.SET_KEY.bytes,\n            'lobby number setter')\n        if not bound_set_key then return false, 'lobby number setter changed' end\n        for _, code in ipairs(B.CODE) do\n            local matches = G.code_matches(api, game + code.rva, code.bytes)\n            if matches == false then return false, code.name .. ' changed' end\n            if matches == nil and unchecked then unchecked[#unchecked + 1] = code.name end\n        end\n        deactivate, set_key = bound_deactivate, bound_set_key\n        if unchecked and type(deactivate) == 'table' then unchecked[#unchecked + 1] = 'SOS deactivate' end\n        if unchecked and type(set_key) == 'table' then unchecked[#unchecked + 1] = 'lobby number setter' end\n"
+  },
+  {
+   "file": "src/sos.lua",
+   "old": "        if not self.active() then return false end\n        return privacy() or false\n",
+   "new": "        if not self.active() then return false end\n        if not (G.ready(deactivate) and G.ready(set_key)) then return false end\n        return privacy() or false\n"
+  },
+  {
+   "file": "src/sos.lua",
+   "old": "        if not deactivate then return refuse('not verified') end\n",
+   "new": "        if not deactivate then return refuse('not verified') end\n        if not (G.ready(deactivate) and G.ready(set_key)) then return refuse('the SOS code is not loaded yet') end\n"
+  },
+  {
+   "file": "src/region.lua",
+   "old": "        local text = tonumber(natives.continent(natives.lobby_api))\n",
+   "new": "        if not G_ready(natives.continent) then return nil end\n        local text = tonumber(natives.continent(natives.lobby_api))\n"
+  },
+  {
+   "file": "src/region.lua",
+   "old": "    function self.verify()\n",
+   "new": "    function self.verify(unchecked)\n"
+  },
+  {
+   "file": "src/region.lua",
+   "old": "        for _, code in ipairs(R.CODE) do\n            if api.bytes(game + code.rva, #code.bytes) ~= code.bytes then return false, code.name .. ' changed' end\n        end\n",
+   "new": "        for _, code in ipairs(R.CODE) do\n            if not code.bytes then return false, code.name .. ': not known for this game build' end\n            local seen = api.bytes(game + code.rva, #code.bytes)\n            if seen and seen ~= code.bytes then return false, code.name .. ' changed' end\n            if not seen and unchecked then unchecked[#unchecked + 1] = code.name end\n        end\n"
+  },
+  {
+   "file": "src/region.lua",
+   "old": "local K = 0x5bd1e995\n",
+   "new": "-- Port: a native stub (see G.checked_native) answers whether it can be called now.\nlocal function G_ready(native)\n    if type(native) ~= 'table' then return true end\n    return (native.resolve())\nend\n\nlocal K = 0x5bd1e995\n"
+  },
+  {
+   "file": "src/lobby.lua",
+   "old": "L.INFO_SIZE, L.INFO_CONNECTION = 256, 72\n",
+   "new": "L.INFO_SIZE, L.INFO_CONNECTION = 256, 72\n-- Port: the natives PROMOTE calls; it starts (and is offered) only when they\n-- all check out (build 26088801 loads some game code on first use).\nL.PROMOTE_NATIVES = {'is_friend', 'clear_filters', 'filter_string', 'browser_start', 'browser_busy',\n                     'browser_count', 'browser_result', 'start_join'}\n"
+  },
+  {
+   "file": "src/lobby.lua",
+   "old": "    function self.promote(target_choice, now)\n        local snap, why = ready('promote')\n        if not snap then return false, why end\n",
+   "new": "    function self.promote_ready() return G.unready(natives, L.PROMOTE_NATIVES) == nil end\n\n    function self.promote(target_choice, now)\n        local missing = G.unready(natives, L.PROMOTE_NATIVES)\n        if missing then return refuse('promote', missing) end\n        local snap, why = ready('promote')\n        if not snap then return false, why end\n"
+  },
+  {
+   "file": "src/game.lua",
+   "old": "-- Game layout for Better Lobby Management (Steam build 25480438): offsets, the code the",
+   "new": "-- Game layout for Better Lobby Management (Steam build 26088801 port): offsets, the code the",
+   "what": "comment"
+  },
+  {
+   "file": "src/scanner.lua",
+   "old": "-- Galactic Map lobby scanner recharge (Steam build 25480438), formerly the",
+   "new": "-- Galactic Map lobby scanner recharge (Steam build 26088801 port), formerly the",
+   "what": "comment"
+  },
+  {
+   "file": "src/region.lua",
+   "old": "-- game.dll code this module depends on (Steam build 25480438).",
+   "new": "-- game.dll code this module depends on (Steam build 26088801 port; values: MAP.json).",
+   "what": "comment"
+  },
+  {
+   "file": "scripts/entry.py",
+   "old": "f'-- Better Lobby Management v{version} for Steam build 25480438. Generated by scripts/build.py from '",
+   "new": "f'-- Better Lobby Management v{version} for Steam build 26088801 (port). Generated by scripts/build.py from '",
+   "what": "comment"
+  }
+ ],
+ "tests": {
+  "variants": {
+   "upstream": {
+    "bingus_text": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: UTF-8 decoding accepts every well-formed length and rejects overlong, surrogate, truncated and out-of-range bytes",
+      "PASS: display text is any valid UTF-8 without control characters; line feeds only where a text allows them",
+      "PASS: byte caps (the game's fixed text buffers) cut only between characters and keep every whole character",
+      "PASS: character boundaries keep combining marks and ZWJ sequences whole",
+      "PASS: CJK wraps between characters, never before closing or after opening punctuation, nothing lost",
+      "PASS: 400 random mixed-script texts wrap into valid, fitting lines without losing characters",
+      "PASS: placeholders fill by name; pseudo text is longer, accented and keeps placeholders",
+      "PASS: game language picks bundled texts; later packs win; bad entries are refused singly and logged once",
+      "PASS: regional tags fall back to their base language; a forced pack wins, including English and pseudo",
+      "PASS: a broken registry is repaired, malformed packs are skipped, and only force = true forces",
+      "PASS: upper case covers Latin-1, Polish/Czech letters, Greek and Cyrillic; CJK and invalid bytes stay",
+      "PASS: the game's Text Language is read in five reads, mapped, and unreadable memory never guesses",
+      "PASS: two copies share one registry; a pack registered inline reaches every mod",
+      "PASS: refresh() and lookups with nothing changed allocate nothing",
+      "PASS: the Steam language query fails soft outside the game and tolerates several copies"
+     ],
+     "tail": []
+    },
+    "locales": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: en.lua holds every text the code shows (27 uses), nothing unused, within Mod Options Menu limits"
+     ],
+     "tail": []
+    },
+    "game": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: binding checks 7 game.dll and 2 exe signatures, every native, both engine lobby slots and both package-unload slots, refusing with a plain reason",
+      "PASS: the context is confirmed once with two guarded reads, then costs one load; bad contexts read as none",
+      "PASS: the session reader fills a reused snapshot (peers, host, mode, sync and join state) with direct loads",
+      "PASS: roster names by peer id, the PlayFab lobby behind the wrapper, and matchmaking state (unreadable = busy)"
+     ],
+     "tail": []
+    },
+    "lobby": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: disband kicks every other player with the game's own kick, one per frame, skipping those who left",
+      "PASS: disband refuses in a mission, as a client, alone, during transitions or joins, and without a session",
+      "PASS: squad messages go out before the first kick, which follows 0.5 s later; a failed message never holds the kick up",
+      "PASS: notice mode leader sends the game's new squad leader notice before PROMOTE's kick; off or failed, the kick is not held up",
+      "PASS: promote closes the escape menu once the successor has left; disband never does",
+      "PASS: package unloads are paused before the first kick and resumed at least 10 s after the last once the session is stable and no kicked client lingers in the lobby (cap 60 s); the game's own pause is left alone; errors and shutdown resume; the Message First, Kick From Render and Plain Kick test modes",
+      "PASS: successor choice takes the picked player, else prefers friends, then the lowest peer id",
+      "PASS: ship promote kicks the successor home, finds its lobby by host id, party-joins it and stays; 15 s after the move one log line says how many of the squad arrived, with no reads before then",
+      "PASS: diagnostic builds log every successor search, why it waits and what it returned, after a control search for the host's own lobby",
+      "PASS: lobby searches start 0.5 s after the successor left, retry every 0.5 s for 15 s, then every 4 s, and give up after 60 s",
+      "PASS: the successor search never overlaps a game search (quickplay, scanner or a busy browser)",
+      "PASS: refused joins, successors that stay, empty results, refused starts, lost sessions and overlaps fail cleanly",
+      "PASS: reset cancels the action, drops queued kicks and the arrival check and releases the unload hold",
+      "PASS: promote is refused in a mission or any other mode"
+     ],
+     "tail": []
+    },
+    "region": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: key combine reproduces the 16 live pair keys, 6 row keys and two config keys; mul32 is exact",
+      "PASS: own continent only flips server flags and adds missing ones in one write, never touches the synced table",
+      "PASS: every continent gets all six exclusions; adding six entries restores cleanly",
+      "PASS: region costs nothing while off and between checks; a check is direct loads only (no system calls)",
+      "PASS: flags survive unchanged downloads, come back after changed ones, and restore to whatever the server sent",
+      "PASS: an unknown continent, refused write, full table or changed layout waits and reports once; changed code disables"
+     ],
+     "tail": []
+    },
+    "menu": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: with the escape menu closed a frame costs two direct loads (one guarded read ever, for the menu system)",
+      "PASS: an open GAME tab gets our two buttons after the game's two with one page check; labels update once",
+      "PASS: the dialog is filled once while hidden when our button has the focus; only a confirmed answer runs the action; our text leaves the dialog before a native one",
+      "PASS: after reset an answer given meanwhile runs nothing; the next confirm runs the action",
+      "PASS: with the game's timing (hidden when answered, fading out) the dialog shows the clicked button's text and a confirm runs that button's action",
+      "PASS: a mission's list takes a third action (type 7) after the game's two: slot, dialog and confirm; an offer without it has the game rebuild the list",
+      "PASS: our labels use the game's marquee at the button's text width (388 px for a 420 px button)",
+      "PASS: after the game's rebuild ours come back (as many as fit); an offer that shrinks rebuilds; a full list, a refused write, other tabs and hidden content add nothing; a reopened menu is confirmed again",
+      "PASS: the squad member whose player menu is open is reported as the choice",
+      "PASS: game_kick focuses the kicked player's card, opens its player menu and completes the KICK hold, only while the GAME tab takes input; it reports why otherwise",
+      "PASS: close sets the escape menu's pending close with one page check and the game closes it in its next update; a closed menu, a refused write and unreadable memory are reported",
+      "PASS: the diagnostic menu trace logs the dialog and focus state once per change",
+      "PASS: each of the 15 code signatures disables the menu when changed"
+     ],
+     "tail": []
+    },
+    "chat": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: squad messages refuse to start when the chat send, the RPC send or the code fixing either changed",
+      "PASS: the new squad leader notice sends the game's own new-host RPC with the leader's peer id to every other peer, with no page checks; no session or nobody else is reported",
+      "PASS: a squad message goes through the game's chat send to every other peer, with no page checks",
+      "PASS: long text is cut to 512 bytes on a UTF-8 boundary, so the game never drops it as invalid",
+      "PASS: chat off, nobody else in the session, an unreadable chat and no session are reported, never raised"
+     ],
+     "tail": []
+    },
+    "scanner": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: boot, first sight, idle, game rewrites, raced countdowns, server value changes, settings, bad values, object changes, unreadable memory, refused writes and stop/restore, with exact call budgets",
+      "PASS: a pause puts the game's value back with one page check and checks nothing; resume applies the setting again on the next check (a game write meanwhile is followed, a refused restore needs no write); a stop stays",
+      "PASS: idle checks allocate nothing (5 windows of 100000 checks; warm: median 0.000 KB, windows 0.000 0.000 0.000 0.000 0.000 KB; after a JIT flush: median 0.000 KB, windows 2.312 0.000 0.000 0.000 0.000 KB)"
+     ],
+     "tail": []
+    },
+    "sos": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: CANCEL SOS refuses to start when the game's SOS off, its key setter or any of the 9 code checks changed",
+      "PASS: the dialog names the privacy setting the lobby returns to (Public: Quickplay still finds it) and says the SOS Beacon can be called in again, within 120 bytes",
+      "PASS: CANCEL SOS is offered only to a host in a mission with an SOS on: no loads on the ship or as a client, two while no SOS is on",
+      "PASS: the game's own SOS off leaves the lobby Public while PlayFab still shows the SOS (vanilla, a full squad)",
+      "PASS: the cancel calls the game's own SOS off and its key setter once each (key 8 off, the privacy setting back), has the game post the lobby in the same frame and gives the SOS Beacon its use back, with two checked writes",
+      "PASS: the SOS Beacon's use comes back only up to its uses per mission, never for a limitless or shared stratagem or another player's record, and the cancel works whatever the stratagem data says",
+      "PASS: after a cancel the SOS Beacon can be called in again: the new SOS lists, the mod lets it, and a second cancel stops it and gives the use back again",
+      "PASS: the cancel refuses, calling and writing nothing, when not hosting, not in a mission, during a transition, without a session or without an SOS",
+      "PASS: a cancel is kept for 6 loads a frame; the game's re-arm after a leave is turned off in the next frame, before the lobby posts it, and a re-arm the lobby already posted is posted again at once",
+      "PASS: a kept cancel ends with a new beacon (it lists again), no beacon left, the mission's end, a new session or SOS object and a lost host; one of two beacons gone keeps it"
+     ],
+     "tail": []
+    },
+    "diag": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: the recorder verifies 6 exe and 1 game.dll signatures and the engine tables, disables itself alone on any mismatch, and exists in test builds only",
+      "PASS: test-build idle frames cost only the gate's loads; an armed frame adds one block read of the in-use table; no page checks",
+      "PASS: Game Kick waits for the dialog to fade, then the game's own player-menu KICK removes the player and the Helldiver; nothing is unloaded while in use",
+      "PASS: promote with Game Kick logs the host's own lobby properties (no continent) and every search, with no control search",
+      "PASS: test builds send the game's new squad leader notice before PROMOTE's kick by default (Chat Line from the option) and close the escape menu once the new host has left",
+      "PASS: a plain kick reproduces the v0.3 crash on the simulated engine; the log shows the kick queuing the loadout unloads and the unload order",
+      "PASS: Hold Unloads keeps the engine from unloading the kicked player's packages until 10 s after the kick; the log shows the despawn, the release and the unloads, then the capture ends",
+      "PASS: a kick whose message is lost (the v0.4-diag1 result) keeps the client in the lobby; the hold waits for it and the recorder shows the lobby never shrinking",
+      "PASS: Message First sends only the kick message; a client that obeys leaves by itself (lobby and session shrink), one that ignores it is reported as still leaving",
+      "PASS: Kick From Render kicks in the render callback with the unload hold",
+      "PASS: an error in the render kicks cancels the action at once and counts as an own error on the next update",
+      "PASS: the game's KICK in a two-player squad and voluntary leaves start a capture with the player's history flags, the queued and processed packages, the in-use changes and the lobby members",
+      "PASS: a failed in-use table copy is reported and never read as every entry gone",
+      "PASS: shutdown resumes the package unloads the mod paused"
+     ],
+     "tail": []
+    },
+    "addon": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: another game.dll or EXE, changed code, missing modules or PlayFab, api failures and no game update leave the game alone; changed menu code disables only the menu",
+      "PASS: idle frames cost 4 direct loads (2 of them the scanner's) in every session state while the escape screen is closed, 12 with it open alone in a mission; no page checks",
+      "PASS: hosting a squad on the ship, the escape menu gets DISBAND SQUAD and PROMOTE (the player menu opened last picks who); confirmed dialogs kick with the game's own kick; missions without an SOS get nothing",
+      "PASS: CANCEL SOS shows in a mission with an SOS on (alone or with a squad), its dialog names the privacy the lobby returns to, a confirm stops the SOS and posts the lobby at once, the button goes, and a re-arm after a player leaves is turned off in the next frame; changed SOS code disables only CANCEL SOS",
+      "PASS: Lua entry points (disband, promote, cancel, cancel_sos) work and refuse cleanly",
+      "PASS: squad messages go out before the kick by default, the option turns them off, and without the chat the actions run silently",
+      "PASS: promote sends the game's new squad leader notice, kicks with the game's KICK and then closes the escape menu as Esc does",
+      "PASS: Lobby Region follows Mod Options Menu (saved or changed) and is restored at shutdown",
+      "PASS: loader v18 (no after_startup): Mod Options Menu registration is retried 1, 3, 7 ... 255 s after the first update while the installed menu leaves anything unregistered (a refusal, an error, a replaced table), each option once per table; 8 retries at most; with no menu at the first update, once registered or out of checks nothing is looked at",
+      "PASS: loader v19 (after_startup): Mod Options Menu options registered once in the event, before the first update (or at once after startup), a refusal or an error never retried and nothing looked at per frame; the capability is tested, not the version; a refused or unrun callback falls back to the first update",
+      "PASS: the scanner recharges in 5 s by default, follows the slider (saved or changed), re-applies after the game's rewrite and logs its counts at shutdown; changed scanner code disables only the scanner",
+      "PASS: a second copy does nothing; the mod's own errors go to the guard (one log line per burst), the next frame cancels the running action and counts them; 8 in a burst stop it (region flags and the scanner's field restored), rare ones never add up",
+      "PASS: an error below passes through unchanged and pauses the mod (action cancelled, region flags and scanner field put back, a kept SOS cancel kept and checked again after it), which reads nothing until 60 clean frames, then applies its settings again; 8 in a burst stop it; the first failure survives shutdown; arguments and returns pass through",
+      "PASS: hostile neighbours: a table error object from below passes unchanged and pauses the mod (paused frames allocate nothing), which resumes; neighbours above that re-hook every frame or call it twice do not disturb it",
+      "PASS: translations: the game's Text Language picks the pack's texts for buttons, dialogs, the chat line and Mod Options Menu (functions for v1.1+, byte-capped strings for v1.0); names upper-cased beyond a-z; bad entries and missing packs fall back to English"
+     ],
+     "tail": []
+    },
+    "idle_gate": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: the guarded step starts no trace that aborts on its return (v1.2: 8 aborts)",
+      "PASS: the idle gate and v1.2 make the same native calls, writes, log lines and status over 4122 frames (ship, mission, no session, client, host, promote, disband, CANCEL SOS, Lua entry points, settings, an error below, shutdown)",
+      "PASS: idle frames allocate nothing (1000 frames each; v1.2 -> now: alone on the ship 0.000 -> 0 KB; alone in a mission 0.000 -> 0 KB; hosting a squad in a mission, menu closed 0.000 -> 0 KB; hosting a squad on the ship, menu closed 0.000 -> 0 KB)",
+      "PASS: a closed escape screen is forgotten whoever closed it: after a disband, closing the menu alone and a player joining with it open, the buttons and the dialog (DISBAND SQUAD) match v1.2; native calls v1.2 -> now: clear_args 2 -> 0; page checks 4 -> 4",
+      "PASS: a menu system that cannot be confirmed leaves the full frame running (as v1.2) and is tried again every 60th frame (2 guarded reads in 120 frames); once readable, idle frames are 4 direct loads"
+     ],
+     "tail": []
+    },
+    "windows_api": {
+     "runner": "wine luajit.exe",
+     "exit": 1,
+     "passed": false,
+     "pass_lines": [],
+     "tail": [
+      "<workspace>\\native-work\\megapack-port\\BetterLobbyManagement\\work\\luajit.exe: tests/test_windows_api.lua:169: run inside the game lua51.dll",
+      "stack traceback:",
+      "\t[C]: in function 'assert'",
+      "\ttests/test_windows_api.lua:169: in main chunk",
+      "\t[C]: at 0x01400020e0"
+     ]
+    },
+    "ffi_names sdk": {
+     "runner": "wine luajit.exe",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: Windows functions under private names (this mod's and the shared runtime's): reads, page checks, a write, module handles, exports and the SHA-256 work after another mod declared the 17 functions as the Windows headers do; its own calls still work"
+     ],
+     "tail": []
+    },
+    "ffi_names hostile": {
+     "runner": "wine luajit.exe",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: Windows functions under private names (this mod's and the shared runtime's): reads, page checks, a write, module handles, exports and the SHA-256 work after another mod declared the 17 real names with unusable prototypes (H.clash)"
+     ],
+     "tail": []
+    },
+    "ffi_names mod-first": {
+     "runner": "wine luajit.exe",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: Windows functions under private names (this mod's and the shared runtime's): reads, page checks, a write, module handles, exports and the SHA-256 work before any other mod: the 17 real names stay undeclared, and a mod declaring them later as the Windows headers do gets its own prototypes"
+     ],
+     "tail": []
+    },
+    "entry entry": {
+     "runner": "wine luajit.exe",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: generated entry loads in the game VM; without game.dll it stays inactive, logs once and loads once"
+     ],
+     "tail": []
+    }
+   },
+   "port": {
+    "bingus_text": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: UTF-8 decoding accepts every well-formed length and rejects overlong, surrogate, truncated and out-of-range bytes",
+      "PASS: display text is any valid UTF-8 without control characters; line feeds only where a text allows them",
+      "PASS: byte caps (the game's fixed text buffers) cut only between characters and keep every whole character",
+      "PASS: character boundaries keep combining marks and ZWJ sequences whole",
+      "PASS: CJK wraps between characters, never before closing or after opening punctuation, nothing lost",
+      "PASS: 400 random mixed-script texts wrap into valid, fitting lines without losing characters",
+      "PASS: placeholders fill by name; pseudo text is longer, accented and keeps placeholders",
+      "PASS: game language picks bundled texts; later packs win; bad entries are refused singly and logged once",
+      "PASS: regional tags fall back to their base language; a forced pack wins, including English and pseudo",
+      "PASS: a broken registry is repaired, malformed packs are skipped, and only force = true forces",
+      "PASS: upper case covers Latin-1, Polish/Czech letters, Greek and Cyrillic; CJK and invalid bytes stay",
+      "PASS: the game's Text Language is read in five reads, mapped, and unreadable memory never guesses",
+      "PASS: two copies share one registry; a pack registered inline reaches every mod",
+      "PASS: refresh() and lookups with nothing changed allocate nothing",
+      "PASS: the Steam language query fails soft outside the game and tolerates several copies"
+     ],
+     "tail": []
+    },
+    "locales": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: en.lua holds every text the code shows (30 uses), nothing unused, within Mod Options Menu limits"
+     ],
+     "tail": []
+    },
+    "game": {
+     "runner": "linux luajit",
+     "exit": 1,
+     "passed": false,
+     "pass_lines": [],
+     "tail": [
+      "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit: tests/test_game.lua:25: kick_peer",
+      "stack traceback:",
+      "\t[C]: in function 'assert'",
+      "\ttests/test_game.lua:25: in main chunk",
+      "\t[C]: at 0x55e0afa35480"
+     ]
+    },
+    "lobby": {
+     "runner": "linux luajit",
+     "exit": 1,
+     "passed": false,
+     "pass_lines": [],
+     "tail": [
+      "\tsrc/lobby.lua:199: in function 'perform'",
+      "\tsrc/lobby.lua:214: in function 'kick'",
+      "\tsrc/lobby.lua:499: in function 'fn'",
+      "\ttests/frame_budget.lua:42: in function 'frame'",
+      "\ttests/test_lobby.lua:51: in main chunk",
+      "\t[C]: at 0x55b27b041480"
+     ]
+    },
+    "region": {
+     "runner": "linux luajit",
+     "exit": 1,
+     "passed": false,
+     "pass_lines": [
+      "PASS: key combine reproduces the 16 live pair keys, 6 row keys and two config keys; mul32 is exact"
+     ],
+     "tail": [
+      "PASS: key combine reproduces the 16 live pair keys, 6 row keys and two config keys; mul32 is exact",
+      "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit: tests/test_region.lua:71: assertion failed!",
+      "stack traceback:",
+      "\t[C]: in function 'assert'",
+      "\ttests/test_region.lua:71: in main chunk",
+      "\t[C]: at 0x56047ce76480"
+     ]
+    },
+    "menu": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: with the escape menu closed a frame costs two direct loads (one guarded read ever, for the menu system)",
+      "PASS: an open GAME tab gets our two buttons after the game's two with one page check; labels update once",
+      "PASS: the dialog is filled once while hidden when our button has the focus; only a confirmed answer runs the action; our text leaves the dialog before a native one",
+      "PASS: after reset an answer given meanwhile runs nothing; the next confirm runs the action",
+      "PASS: with the game's timing (hidden when answered, fading out) the dialog shows the clicked button's text and a confirm runs that button's action",
+      "PASS: a mission's list takes a third action (type 7) after the game's two: slot, dialog and confirm; an offer without it has the game rebuild the list",
+      "PASS: our labels use the game's marquee at the button's text width (388 px for a 420 px button)",
+      "PASS: after the game's rebuild ours come back (as many as fit); an offer that shrinks rebuilds; a full list, a refused write, other tabs and hidden content add nothing; a reopened menu is confirmed again",
+      "PASS: the squad member whose player menu is open is reported as the choice",
+      "PASS: game_kick focuses the kicked player's card, opens its player menu and completes the KICK hold, only while the GAME tab takes input; it reports why otherwise",
+      "PASS: close sets the escape menu's pending close with one page check and the game closes it in its next update; a closed menu, a refused write and unreadable memory are reported",
+      "PASS: the diagnostic menu trace logs the dialog and focus state once per change",
+      "PASS: each of the 15 code signatures disables the menu when changed"
+     ],
+     "tail": []
+    },
+    "chat": {
+     "runner": "linux luajit",
+     "exit": 1,
+     "passed": false,
+     "pass_lines": [],
+     "tail": [
+      "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit: tests/test_chat.lua:37: chat message RPC: not known for this game build",
+      "stack traceback:",
+      "\t[C]: in function 'assert'",
+      "\ttests/test_chat.lua:37: in main chunk",
+      "\t[C]: at 0x55617e0af480"
+     ]
+    },
+    "scanner": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: boot, first sight, idle, game rewrites, raced countdowns, server value changes, settings, bad values, object changes, unreadable memory, refused writes and stop/restore, with exact call budgets",
+      "PASS: a pause puts the game's value back with one page check and checks nothing; resume applies the setting again on the next check (a game write meanwhile is followed, a refused restore needs no write); a stop stays",
+      "PASS: idle checks allocate nothing (5 windows of 100000 checks; warm: median 0.000 KB, windows 0.000 0.000 0.000 0.000 0.000 KB; after a JIT flush: median 0.000 KB, windows 0.402 0.000 0.000 0.000 0.000 KB)"
+     ],
+     "tail": []
+    },
+    "sos": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: CANCEL SOS refuses to start when the game's SOS off, its key setter or any of the 9 code checks changed",
+      "PASS: the dialog names the privacy setting the lobby returns to (Public: Quickplay still finds it) and says the SOS Beacon can be called in again, within 120 bytes",
+      "PASS: CANCEL SOS is offered only to a host in a mission with an SOS on: no loads on the ship or as a client, two while no SOS is on",
+      "PASS: the game's own SOS off leaves the lobby Public while PlayFab still shows the SOS (vanilla, a full squad)",
+      "PASS: the cancel calls the game's own SOS off and its key setter once each (key 8 off, the privacy setting back), has the game post the lobby in the same frame and gives the SOS Beacon its use back, with two checked writes",
+      "PASS: the SOS Beacon's use comes back only up to its uses per mission, never for a limitless or shared stratagem or another player's record, and the cancel works whatever the stratagem data says",
+      "PASS: after a cancel the SOS Beacon can be called in again: the new SOS lists, the mod lets it, and a second cancel stops it and gives the use back again",
+      "PASS: the cancel refuses, calling and writing nothing, when not hosting, not in a mission, during a transition, without a session or without an SOS",
+      "PASS: a cancel is kept for 6 loads a frame; the game's re-arm after a leave is turned off in the next frame, before the lobby posts it, and a re-arm the lobby already posted is posted again at once",
+      "PASS: a kept cancel ends with a new beacon (it lists again), no beacon left, the mission's end, a new session or SOS object and a lost host; one of two beacons gone keeps it"
+     ],
+     "tail": []
+    },
+    "diag": {
+     "runner": "linux luajit",
+     "exit": 1,
+     "passed": false,
+     "pass_lines": [
+      "PASS: the recorder verifies 6 exe and 1 game.dll signatures and the engine tables, disables itself alone on any mismatch, and exists in test builds only",
+      "PASS: test-build idle frames cost only the gate's loads; an armed frame adds one block read of the in-use table; no page checks",
+      "PASS: Game Kick waits for the dialog to fade, then the game's own player-menu KICK removes the player and the Helldiver; nothing is unloaded while in use",
+      "PASS: promote with Game Kick logs the host's own lobby properties (no continent) and every search, with no control search"
+     ],
+     "tail": [
+      "PASS: promote with Game Kick logs the host's own lobby properties (no continent) and every search, with no control search",
+      "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit: tests/test_diag.lua:255: assertion failed!",
+      "stack traceback:",
+      "\t[C]: in function 'assert'",
+      "\ttests/test_diag.lua:255: in main chunk",
+      "\t[C]: at 0x558084252480"
+     ]
+    },
+    "addon": {
+     "runner": "linux luajit",
+     "exit": 1,
+     "passed": false,
+     "pass_lines": [
+      "PASS: another game.dll or EXE, changed code, missing modules or PlayFab, api failures and no game update leave the game alone; changed menu code disables only the menu",
+      "PASS: idle frames cost 4 direct loads (2 of them the scanner's) in every session state while the escape screen is closed, 12 with it open alone in a mission; no page checks",
+      "PASS: hosting a squad on the ship, the escape menu gets DISBAND SQUAD and PROMOTE (the player menu opened last picks who); confirmed dialogs kick with the game's own kick; missions without an SOS get nothing",
+      "PASS: CANCEL SOS shows in a mission with an SOS on (alone or with a squad), its dialog names the privacy the lobby returns to, a confirm stops the SOS and posts the lobby at once, the button goes, and a re-arm after a player leaves is turned off in the next frame; changed SOS code disables only CANCEL SOS",
+      "PASS: Lua entry points (disband, promote, cancel, cancel_sos) work and refuse cleanly"
+     ],
+     "tail": [
+      "PASS: Lua entry points (disband, promote, cancel, cancel_sos) work and refuse cleanly",
+      "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit: tests/test_addon.lua:415: unavailable: chat message RPC: not known for this game build",
+      "stack traceback:",
+      "\t[C]: in function 'assert'",
+      "\ttests/test_addon.lua:415: in main chunk",
+      "\t[C]: at 0x556efac5e480"
+     ]
+    },
+    "idle_gate": {
+     "runner": "linux luajit",
+     "exit": 1,
+     "passed": false,
+     "pass_lines": [
+      "PASS: the guarded step starts no trace that aborts on its return (v1.2: 8 aborts)"
+     ],
+     "tail": [
+      "stack traceback:",
+      "\t[C]: in function 'assert'",
+      "\ttests/test_idle_gate.lua:171: in function 'compare'",
+      "\ttests/test_idle_gate.lua:193: in function 'frames'",
+      "\ttests/test_idle_gate.lua:217: in main chunk",
+      "\t[C]: at 0x55bb7b4d7480"
+     ]
+    },
+    "windows_api": {
+     "runner": "wine luajit.exe",
+     "exit": 1,
+     "passed": false,
+     "pass_lines": [],
+     "tail": [
+      "<workspace>\\native-work\\megapack-port\\BetterLobbyManagement\\work\\luajit.exe: tests/test_windows_api.lua:169: run inside the game lua51.dll",
+      "stack traceback:",
+      "\t[C]: in function 'assert'",
+      "\ttests/test_windows_api.lua:169: in main chunk",
+      "\t[C]: at 0x01400020e0"
+     ]
+    },
+    "ffi_names sdk": {
+     "runner": "wine luajit.exe",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: Windows functions under private names (this mod's and the shared runtime's): reads, page checks, a write, module handles, exports and the SHA-256 work after another mod declared the 17 functions as the Windows headers do; its own calls still work"
+     ],
+     "tail": []
+    },
+    "ffi_names hostile": {
+     "runner": "wine luajit.exe",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: Windows functions under private names (this mod's and the shared runtime's): reads, page checks, a write, module handles, exports and the SHA-256 work after another mod declared the 17 real names with unusable prototypes (H.clash)"
+     ],
+     "tail": []
+    },
+    "ffi_names mod-first": {
+     "runner": "wine luajit.exe",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: Windows functions under private names (this mod's and the shared runtime's): reads, page checks, a write, module handles, exports and the SHA-256 work before any other mod: the 17 real names stay undeclared, and a mod declaring them later as the Windows headers do gets its own prototypes"
+     ],
+     "tail": []
+    },
+    "entry entry": {
+     "runner": "wine luajit.exe",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: generated entry loads in the game VM; without game.dll it stays inactive, logs once and loads once"
+     ],
+     "tail": []
+    }
+   },
+   "port_filled": {
+    "bingus_text": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: UTF-8 decoding accepts every well-formed length and rejects overlong, surrogate, truncated and out-of-range bytes",
+      "PASS: display text is any valid UTF-8 without control characters; line feeds only where a text allows them",
+      "PASS: byte caps (the game's fixed text buffers) cut only between characters and keep every whole character",
+      "PASS: character boundaries keep combining marks and ZWJ sequences whole",
+      "PASS: CJK wraps between characters, never before closing or after opening punctuation, nothing lost",
+      "PASS: 400 random mixed-script texts wrap into valid, fitting lines without losing characters",
+      "PASS: placeholders fill by name; pseudo text is longer, accented and keeps placeholders",
+      "PASS: game language picks bundled texts; later packs win; bad entries are refused singly and logged once",
+      "PASS: regional tags fall back to their base language; a forced pack wins, including English and pseudo",
+      "PASS: a broken registry is repaired, malformed packs are skipped, and only force = true forces",
+      "PASS: upper case covers Latin-1, Polish/Czech letters, Greek and Cyrillic; CJK and invalid bytes stay",
+      "PASS: the game's Text Language is read in five reads, mapped, and unreadable memory never guesses",
+      "PASS: two copies share one registry; a pack registered inline reaches every mod",
+      "PASS: refresh() and lookups with nothing changed allocate nothing",
+      "PASS: the Steam language query fails soft outside the game and tolerates several copies"
+     ],
+     "tail": []
+    },
+    "locales": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: en.lua holds every text the code shows (30 uses), nothing unused, within Mod Options Menu limits"
+     ],
+     "tail": []
+    },
+    "game": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: binding checks 7 game.dll and 2 exe signatures, every native, both engine lobby slots and both package-unload slots, refusing with a plain reason",
+      "PASS: the context is confirmed once with two guarded reads, then costs one load; bad contexts read as none",
+      "PASS: the session reader fills a reused snapshot (peers, host, mode, sync and join state) with direct loads",
+      "PASS: roster names by peer id, the PlayFab lobby behind the wrapper, and matchmaking state (unreadable = busy)"
+     ],
+     "tail": []
+    },
+    "lobby": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: disband kicks every other player with the game's own kick, one per frame, skipping those who left",
+      "PASS: disband refuses in a mission, as a client, alone, during transitions or joins, and without a session",
+      "PASS: squad messages go out before the first kick, which follows 0.5 s later; a failed message never holds the kick up",
+      "PASS: notice mode leader sends the game's new squad leader notice before PROMOTE's kick; off or failed, the kick is not held up",
+      "PASS: promote closes the escape menu once the successor has left; disband never does",
+      "PASS: package unloads are paused before the first kick and resumed at least 10 s after the last once the session is stable and no kicked client lingers in the lobby (cap 60 s); the game's own pause is left alone; errors and shutdown resume; the Message First, Kick From Render and Plain Kick test modes",
+      "PASS: successor choice takes the picked player, else prefers friends, then the lowest peer id",
+      "PASS: ship promote kicks the successor home, finds its lobby by host id, party-joins it and stays; 15 s after the move one log line says how many of the squad arrived, with no reads before then",
+      "PASS: diagnostic builds log every successor search, why it waits and what it returned, after a control search for the host's own lobby",
+      "PASS: lobby searches start 0.5 s after the successor left, retry every 0.5 s for 15 s, then every 4 s, and give up after 60 s",
+      "PASS: the successor search never overlaps a game search (quickplay, scanner or a busy browser)",
+      "PASS: refused joins, successors that stay, empty results, refused starts, lost sessions and overlaps fail cleanly",
+      "PASS: reset cancels the action, drops queued kicks and the arrival check and releases the unload hold",
+      "PASS: promote is refused in a mission or any other mode"
+     ],
+     "tail": []
+    },
+    "region": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: key combine reproduces the 16 live pair keys, 6 row keys and two config keys; mul32 is exact",
+      "PASS: own continent only flips server flags and adds missing ones in one write, never touches the synced table",
+      "PASS: every continent gets all six exclusions; adding six entries restores cleanly",
+      "PASS: region costs nothing while off and between checks; a check is direct loads only (no system calls)",
+      "PASS: flags survive unchanged downloads, come back after changed ones, and restore to whatever the server sent",
+      "PASS: an unknown continent, refused write, full table or changed layout waits and reports once; changed code disables"
+     ],
+     "tail": []
+    },
+    "menu": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: with the escape menu closed a frame costs two direct loads (one guarded read ever, for the menu system)",
+      "PASS: an open GAME tab gets our two buttons after the game's two with one page check; labels update once",
+      "PASS: the dialog is filled once while hidden when our button has the focus; only a confirmed answer runs the action; our text leaves the dialog before a native one",
+      "PASS: after reset an answer given meanwhile runs nothing; the next confirm runs the action",
+      "PASS: with the game's timing (hidden when answered, fading out) the dialog shows the clicked button's text and a confirm runs that button's action",
+      "PASS: a mission's list takes a third action (type 7) after the game's two: slot, dialog and confirm; an offer without it has the game rebuild the list",
+      "PASS: our labels use the game's marquee at the button's text width (388 px for a 420 px button)",
+      "PASS: after the game's rebuild ours come back (as many as fit); an offer that shrinks rebuilds; a full list, a refused write, other tabs and hidden content add nothing; a reopened menu is confirmed again",
+      "PASS: the squad member whose player menu is open is reported as the choice",
+      "PASS: game_kick focuses the kicked player's card, opens its player menu and completes the KICK hold, only while the GAME tab takes input; it reports why otherwise",
+      "PASS: close sets the escape menu's pending close with one page check and the game closes it in its next update; a closed menu, a refused write and unreadable memory are reported",
+      "PASS: the diagnostic menu trace logs the dialog and focus state once per change",
+      "PASS: each of the 15 code signatures disables the menu when changed"
+     ],
+     "tail": []
+    },
+    "chat": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: squad messages refuse to start when the chat send, the RPC send or the code fixing either changed",
+      "PASS: the new squad leader notice sends the game's own new-host RPC with the leader's peer id to every other peer, with no page checks; no session or nobody else is reported",
+      "PASS: a squad message goes through the game's chat send to every other peer, with no page checks",
+      "PASS: long text is cut to 512 bytes on a UTF-8 boundary, so the game never drops it as invalid",
+      "PASS: chat off, nobody else in the session, an unreadable chat and no session are reported, never raised"
+     ],
+     "tail": []
+    },
+    "scanner": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: boot, first sight, idle, game rewrites, raced countdowns, server value changes, settings, bad values, object changes, unreadable memory, refused writes and stop/restore, with exact call budgets",
+      "PASS: a pause puts the game's value back with one page check and checks nothing; resume applies the setting again on the next check (a game write meanwhile is followed, a refused restore needs no write); a stop stays",
+      "PASS: idle checks allocate nothing (5 windows of 100000 checks; warm: median 0.000 KB, windows 0.000 0.000 0.000 0.000 0.000 KB; after a JIT flush: median 0.000 KB, windows 2.312 0.000 0.000 0.000 0.000 KB)"
+     ],
+     "tail": []
+    },
+    "sos": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: CANCEL SOS refuses to start when the game's SOS off, its key setter or any of the 9 code checks changed",
+      "PASS: the dialog names the privacy setting the lobby returns to (Public: Quickplay still finds it) and says the SOS Beacon can be called in again, within 120 bytes",
+      "PASS: CANCEL SOS is offered only to a host in a mission with an SOS on: no loads on the ship or as a client, two while no SOS is on",
+      "PASS: the game's own SOS off leaves the lobby Public while PlayFab still shows the SOS (vanilla, a full squad)",
+      "PASS: the cancel calls the game's own SOS off and its key setter once each (key 8 off, the privacy setting back), has the game post the lobby in the same frame and gives the SOS Beacon its use back, with two checked writes",
+      "PASS: the SOS Beacon's use comes back only up to its uses per mission, never for a limitless or shared stratagem or another player's record, and the cancel works whatever the stratagem data says",
+      "PASS: after a cancel the SOS Beacon can be called in again: the new SOS lists, the mod lets it, and a second cancel stops it and gives the use back again",
+      "PASS: the cancel refuses, calling and writing nothing, when not hosting, not in a mission, during a transition, without a session or without an SOS",
+      "PASS: a cancel is kept for 6 loads a frame; the game's re-arm after a leave is turned off in the next frame, before the lobby posts it, and a re-arm the lobby already posted is posted again at once",
+      "PASS: a kept cancel ends with a new beacon (it lists again), no beacon left, the mission's end, a new session or SOS object and a lost host; one of two beacons gone keeps it"
+     ],
+     "tail": []
+    },
+    "diag": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: the recorder verifies 6 exe and 1 game.dll signatures and the engine tables, disables itself alone on any mismatch, and exists in test builds only",
+      "PASS: test-build idle frames cost only the gate's loads; an armed frame adds one block read of the in-use table; no page checks",
+      "PASS: Game Kick waits for the dialog to fade, then the game's own player-menu KICK removes the player and the Helldiver; nothing is unloaded while in use",
+      "PASS: promote with Game Kick logs the host's own lobby properties (no continent) and every search, with no control search",
+      "PASS: test builds send the game's new squad leader notice before PROMOTE's kick by default (Chat Line from the option) and close the escape menu once the new host has left",
+      "PASS: a plain kick reproduces the v0.3 crash on the simulated engine; the log shows the kick queuing the loadout unloads and the unload order",
+      "PASS: Hold Unloads keeps the engine from unloading the kicked player's packages until 10 s after the kick; the log shows the despawn, the release and the unloads, then the capture ends",
+      "PASS: a kick whose message is lost (the v0.4-diag1 result) keeps the client in the lobby; the hold waits for it and the recorder shows the lobby never shrinking",
+      "PASS: Message First sends only the kick message; a client that obeys leaves by itself (lobby and session shrink), one that ignores it is reported as still leaving",
+      "PASS: Kick From Render kicks in the render callback with the unload hold",
+      "PASS: an error in the render kicks cancels the action at once and counts as an own error on the next update",
+      "PASS: the game's KICK in a two-player squad and voluntary leaves start a capture with the player's history flags, the queued and processed packages, the in-use changes and the lobby members",
+      "PASS: a failed in-use table copy is reported and never read as every entry gone",
+      "PASS: shutdown resumes the package unloads the mod paused"
+     ],
+     "tail": []
+    },
+    "addon": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: another game.dll or EXE, changed code, missing modules or PlayFab, api failures and no game update leave the game alone; changed menu code disables only the menu",
+      "PASS: idle frames cost 4 direct loads (2 of them the scanner's) in every session state while the escape screen is closed, 12 with it open alone in a mission; no page checks",
+      "PASS: hosting a squad on the ship, the escape menu gets DISBAND SQUAD and PROMOTE (the player menu opened last picks who); confirmed dialogs kick with the game's own kick; missions without an SOS get nothing",
+      "PASS: CANCEL SOS shows in a mission with an SOS on (alone or with a squad), its dialog names the privacy the lobby returns to, a confirm stops the SOS and posts the lobby at once, the button goes, and a re-arm after a player leaves is turned off in the next frame; changed SOS code disables only CANCEL SOS",
+      "PASS: Lua entry points (disband, promote, cancel, cancel_sos) work and refuse cleanly",
+      "PASS: squad messages go out before the kick by default, the option turns them off, and without the chat the actions run silently",
+      "PASS: promote sends the game's new squad leader notice, kicks with the game's KICK and then closes the escape menu as Esc does",
+      "PASS: Lobby Region follows Mod Options Menu (saved or changed) and is restored at shutdown",
+      "PASS: loader v18 (no after_startup): Mod Options Menu registration is retried 1, 3, 7 ... 255 s after the first update while the installed menu leaves anything unregistered (a refusal, an error, a replaced table), each option once per table; 8 retries at most; with no menu at the first update, once registered or out of checks nothing is looked at",
+      "PASS: loader v19 (after_startup): Mod Options Menu options registered once in the event, before the first update (or at once after startup), a refusal or an error never retried and nothing looked at per frame; the capability is tested, not the version; a refused or unrun callback falls back to the first update",
+      "PASS: the scanner recharges in 5 s by default, follows the slider (saved or changed), re-applies after the game's rewrite and logs its counts at shutdown; changed scanner code disables only the scanner",
+      "PASS: a second copy does nothing; the mod's own errors go to the guard (one log line per burst), the next frame cancels the running action and counts them; 8 in a burst stop it (region flags and the scanner's field restored), rare ones never add up",
+      "PASS: an error below passes through unchanged and pauses the mod (action cancelled, region flags and scanner field put back, a kept SOS cancel kept and checked again after it), which reads nothing until 60 clean frames, then applies its settings again; 8 in a burst stop it; the first failure survives shutdown; arguments and returns pass through",
+      "PASS: hostile neighbours: a table error object from below passes unchanged and pauses the mod (paused frames allocate nothing), which resumes; neighbours above that re-hook every frame or call it twice do not disturb it",
+      "PASS: translations: the game's Text Language picks the pack's texts for buttons, dialogs, the chat line and Mod Options Menu (functions for v1.1+, byte-capped strings for v1.0); names upper-cased beyond a-z; bad entries and missing packs fall back to English"
+     ],
+     "tail": []
+    },
+    "idle_gate": {
+     "runner": "linux luajit",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: the guarded step starts no trace that aborts on its return (v1.2: 8 aborts)",
+      "PASS: the idle gate and v1.2 make the same native calls, writes, log lines and status over 4122 frames (ship, mission, no session, client, host, promote, disband, CANCEL SOS, Lua entry points, settings, an error below, shutdown)",
+      "PASS: idle frames allocate nothing (1000 frames each; v1.2 -> now: alone on the ship 0.000 -> 0 KB; alone in a mission 0.000 -> 0 KB; hosting a squad in a mission, menu closed 0.000 -> 0 KB; hosting a squad on the ship, menu closed 0.000 -> 0 KB)",
+      "PASS: a closed escape screen is forgotten whoever closed it: after a disband, closing the menu alone and a player joining with it open, the buttons and the dialog (DISBAND SQUAD) match v1.2; native calls v1.2 -> now: clear_args 2 -> 0; page checks 4 -> 4",
+      "PASS: a menu system that cannot be confirmed leaves the full frame running (as v1.2) and is tried again every 60th frame (2 guarded reads in 120 frames); once readable, idle frames are 4 direct loads"
+     ],
+     "tail": []
+    },
+    "windows_api": {
+     "runner": "wine luajit.exe",
+     "exit": 1,
+     "passed": false,
+     "pass_lines": [],
+     "tail": [
+      "<workspace>\\native-work\\megapack-port\\BetterLobbyManagement\\work\\luajit.exe: tests/test_windows_api.lua:169: run inside the game lua51.dll",
+      "stack traceback:",
+      "\t[C]: in function 'assert'",
+      "\ttests/test_windows_api.lua:169: in main chunk",
+      "\t[C]: at 0x01400020e0"
+     ]
+    },
+    "ffi_names sdk": {
+     "runner": "wine luajit.exe",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: Windows functions under private names (this mod's and the shared runtime's): reads, page checks, a write, module handles, exports and the SHA-256 work after another mod declared the 17 functions as the Windows headers do; its own calls still work"
+     ],
+     "tail": []
+    },
+    "ffi_names hostile": {
+     "runner": "wine luajit.exe",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: Windows functions under private names (this mod's and the shared runtime's): reads, page checks, a write, module handles, exports and the SHA-256 work after another mod declared the 17 real names with unusable prototypes (H.clash)"
+     ],
+     "tail": []
+    },
+    "ffi_names mod-first": {
+     "runner": "wine luajit.exe",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: Windows functions under private names (this mod's and the shared runtime's): reads, page checks, a write, module handles, exports and the SHA-256 work before any other mod: the 17 real names stay undeclared, and a mod declaring them later as the Windows headers do gets its own prototypes"
+     ],
+     "tail": []
+    },
+    "entry entry": {
+     "runner": "wine luajit.exe",
+     "exit": 0,
+     "passed": true,
+     "pass_lines": [
+      "PASS: generated entry loads in the game VM; without game.dll it stays inactive, logs once and loads once"
+     ],
+     "tail": []
+    }
+   }
+  },
+  "remap": {
+   "port": [
+    {
+     "file": "tests/test_scanner.lua",
+     "old": "local CONFIG_PTR, MATCHMAKING_PTR = GAME + 0x347cee0, GAME + 0x347ce80",
+     "new": "local CONFIG_PTR, MATCHMAKING_PTR = GAME + 0x2e38218, GAME + 0x2e381b8"
+    },
+    {
+     "file": "tests/test_scanner.lua",
+     "old": "local FIELD, COUNTDOWN = 0x3ce4c, 0x10bd74",
+     "new": "local FIELD, COUNTDOWN = 0x3ceac, 0x10bd74"
+    },
+    {
+     "file": "tests/reference/menu.lua",
+     "row": "M.MENU_SYSTEM_PTR"
+    },
+    {
+     "file": "tests/reference/menu.lua",
+     "row": "M.PRESENTERS_PTR"
+    },
+    {
+     "file": "tests/reference/menu.lua",
+     "signatures": 27
+    }
+   ],
+   "port_filled": [
+    {
+     "file": "tests/test_scanner.lua",
+     "old": "local CONFIG_PTR, MATCHMAKING_PTR = GAME + 0x347cee0, GAME + 0x347ce80",
+     "new": "local CONFIG_PTR, MATCHMAKING_PTR = GAME + 0x2e38218, GAME + 0x2e381b8"
+    },
+    {
+     "file": "tests/test_scanner.lua",
+     "old": "local FIELD, COUNTDOWN = 0x3ce4c, 0x10bd74",
+     "new": "local FIELD, COUNTDOWN = 0x3ceac, 0x10bd74"
+    },
+    {
+     "file": "tests/reference/menu.lua",
+     "row": "M.MENU_SYSTEM_PTR"
+    },
+    {
+     "file": "tests/reference/menu.lua",
+     "row": "M.PRESENTERS_PTR"
+    },
+    {
+     "file": "tests/reference/menu.lua",
+     "signatures": 27
+    }
+   ]
+  },
+  "summary": {
+   "bingus_text": {
+    "upstream": "pass",
+    "port": "pass",
+    "port_filled": "pass"
+   },
+   "locales": {
+    "upstream": "pass",
+    "port": "pass",
+    "port_filled": "pass"
+   },
+   "game": {
+    "upstream": "pass",
+    "port": "FAIL",
+    "port_filled": "pass"
+   },
+   "lobby": {
+    "upstream": "pass",
+    "port": "FAIL",
+    "port_filled": "pass"
+   },
+   "region": {
+    "upstream": "pass",
+    "port": "FAIL",
+    "port_filled": "pass"
+   },
+   "menu": {
+    "upstream": "pass",
+    "port": "pass",
+    "port_filled": "pass"
+   },
+   "chat": {
+    "upstream": "pass",
+    "port": "FAIL",
+    "port_filled": "pass"
+   },
+   "scanner": {
+    "upstream": "pass",
+    "port": "pass",
+    "port_filled": "pass"
+   },
+   "sos": {
+    "upstream": "pass",
+    "port": "pass",
+    "port_filled": "pass"
+   },
+   "diag": {
+    "upstream": "pass",
+    "port": "FAIL",
+    "port_filled": "pass"
+   },
+   "addon": {
+    "upstream": "pass",
+    "port": "FAIL",
+    "port_filled": "pass"
+   },
+   "idle_gate": {
+    "upstream": "pass",
+    "port": "FAIL",
+    "port_filled": "pass"
+   },
+   "windows_api": {
+    "upstream": "FAIL",
+    "port": "FAIL",
+    "port_filled": "FAIL"
+   },
+   "ffi_names sdk": {
+    "upstream": "pass",
+    "port": "pass",
+    "port_filled": "pass"
+   },
+   "ffi_names hostile": {
+    "upstream": "pass",
+    "port": "pass",
+    "port_filled": "pass"
+   },
+   "ffi_names mod-first": {
+    "upstream": "pass",
+    "port": "pass",
+    "port_filled": "pass"
+   },
+   "entry entry": {
+    "upstream": "pass",
+    "port": "pass",
+    "port_filled": "pass"
+   },
+   "check_lazy (linux luajit, port_filled)": "pass",
+   "check_bytes_wine (wine luajit.exe, port)": "pass"
+  },
+  "port_checks": {
+   "check_lazy (linux luajit, port_filled)": {
+    "exit": 0,
+    "output": [
+     "PASS: G.bind: unreadable layout check skipped and named; unreadable native refuses until readable, reads at most once per 30 calls, then binds",
+     "PASS: a native that reads back different is refused (at bind, or for good when it was deferred)",
+     "PASS: bytes = nil (encrypted in every capture): a stub that never calls",
+     "PASS: PROMOTE is refused (and not offered) while a native it calls is unreadable, with nothing called",
+     "PASS: escape menu: no write and no native call while a menu native is unreadable; buttons once it checks out",
+     "PASS: CANCEL SOS is neither offered nor run while the SOS off code is unreadable",
+     "PASS: a squad message is not sent while the chat send code is unreadable (the action itself goes on)",
+     "check_lazy: 7 checks passed"
+    ]
+   },
+   "check_bytes_wine (wine luajit.exe, port)": {
+    "exit": 0,
+    "output": [
+     "PASS: api.bytes reads code through ReadProcessMemory: exact bytes when readable, nil (no fault) on a no-access page, a read crossing into one, an unmapped address"
+    ]
+   }
+  }
+ }
+}

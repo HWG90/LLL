@@ -1,0 +1,22 @@
+--- upstream impl
++++ port impl
+@@ -684 +684 @@
+--- docs/TECHNICAL.md has the evidence):
++-- docs/TECHNICAL.md has the evidence; build 26088801 values: hdh-port/MAP.json):
+@@ -713,2 +713,2 @@
+-    game_rva = 0x3326340, state_offset = 0xAC21C,
+-    ui_state_rva = 0x347CE28, presenters_offset = 0x4290, stack_offset = 0x429C, max_depth = 5,
++    game_rva = 0x2CE1508, state_offset = 0xAC29C,
++    ui_state_rva = 0x2E38160, presenters_offset = 0x4290, stack_offset = 0x429C, max_depth = 5,
+@@ -717,4 +717,4 @@
+-    cutscene_rva = 0x346D530, scene_offset = 6412,
+-    session_rva = 0x347CEF0, client_state_offset = 91288, hotjoin_offset = 92135,
+-    manager_rva = 0x3326D58, header_offset = 36, header_size = 84, max_capacity = 4096,
+-    settings_rva = 0x346BF98, settings_table_offset = 15805152, settings_slots = 16,
++    cutscene_rva = 0x2E28780, scene_offset = 6412,
++    session_rva = 0x2E38228, client_state_offset = 91288, hotjoin_offset = 92143,
++    manager_rva = 0x2CE1F18, header_offset = 36, header_size = 84, max_capacity = 4096,
++    settings_rva = 0x2CE41B8, settings_table_offset = 15812008, settings_slots = 16,
+@@ -1397 +1397 @@
+-install_loader(create_runtime_api, hold, {revision = 'data-v1.2.1', exe_sha256 = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06', game_sha256 = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E', test_hold_seconds = nil}, runtime)
++install_loader(create_runtime_api, hold, {revision = 'data-v1.2.1-26088801', exe_sha256 = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE', game_sha256 = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F', test_hold_seconds = nil}, runtime)

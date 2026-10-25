@@ -1,0 +1,386 @@
+{
+ "port": [
+  {
+   "test": "tests/test_aim.lua",
+   "linux_gc64": {
+    "exit": 0,
+    "tail": [
+     "Replay: 182 samples, 52 held, 8 holds, 8 releases",
+     "PASS: recorded Gatling losses retain aim through fallback and allow reacquisition/scanning",
+     "PASS: 14 aim-retention regression cases"
+    ]
+   },
+   "passed": true
+  },
+  {
+   "test": "tests/test_firing.lua",
+   "linux_gc64": {
+    "exit": 0,
+    "tail": [
+     "Replay: 26 broad-sweep rounds gated; 39 MG target-loss rounds gated; 3 MG rounds retained",
+     "PASS: recorded broad Gatling sweep is suppressed while nearby changes keep firing",
+     "26 firing policy tests passed"
+    ]
+   },
+   "passed": true
+  },
+  {
+   "test": "tests/test_loader.lua",
+   "linux_gc64": {
+    "exit": 1,
+    "tail": [
+     "\ttests/test_loader.lua:25: in function 'test'",
+     "\ttests/test_loader.lua:82: in main chunk",
+     "\t[C]: at 0x561d85045480"
+    ]
+   },
+   "wine_windows_luajit": {
+    "exit": 0,
+    "tail": [
+     "PASS: original update errors, tracebacks and error objects propagate; restore and pause on the next call with full forwarding, resume after 60 clean frames; first failure kept at shutdown; protected own shutdown",
+     "PASS: own errors restore and start afresh, one line per burst, 8 in a burst stop; failed restores stop at once",
+     "PASS: the runtime build check refuses another game build or missing game modules before installing anything"
+    ],
+    "prelude": false
+   },
+   "passed": true
+  },
+  {
+   "test": "tests/test_snapshot.lua",
+   "linux_gc64": {
+    "exit": 1,
+    "tail": [
+     "\ttests/test_snapshot.lua:139: in function 'budget_fixture'",
+     "\ttests/test_snapshot.lua:229: in main chunk",
+     "\t[C]: at 0x55dbdf8b9480"
+    ]
+   },
+   "wine_windows_luajit": {
+    "exit": 0,
+    "tail": [
+     "PASS: per-frame call budget: waiting frames make no api call; on the ship a mission check (2 reads) every 60th frame, in a mission a rescan every 30th; a kept sentry layout; holds query protection only when a target is lost or released; a pause restores once and makes no api call while paused",
+     "PASS: a kept layout follows moved turret and behavior arrays; a hold keeps its saved speeds and restores them at the new address",
+     "PASS: field decoders match ffi on 200000 words, edge values and NaN payloads, without cdata"
+    ],
+    "prelude": false
+   },
+   "passed": true
+  },
+  {
+   "test": "tests/test_idle_gate.lua",
+   "linux_gc64": {
+    "exit": 1,
+    "tail": [
+     "\ttests/test_idle_gate.lua:70: in function 'side'",
+     "\ttests/test_idle_gate.lua:142: in main chunk",
+     "\t[C]: at 0x55a3fc590480"
+    ]
+   },
+   "wine_windows_luajit": {
+    "exit": 0,
+    "tail": [
+     "PASS: 3000 waiting frames allocate 0 bytes outside a mission (no rescan) and in a mission (100 rescans of 40 entries), JIT off and on",
+     "PASS: a failed read while waiting is seen at the next check (15 frames later), then the mod waits again",
+     "PASS: 3000 waiting frames: no trace returns to a lower frame (v1.1.0: 10); aborts in the mod 26 -> 6"
+    ],
+    "prelude": false
+   },
+   "passed": true
+  },
+  {
+   "test": "tests/test_windows_api.lua",
+   "linux_gc64": {
+    "exit": 1,
+    "tail": [
+     "\ttests/test_windows_api.lua:20: in function 'new_memory'",
+     "\ttests/test_windows_api.lua:23: in main chunk",
+     "\t[C]: at 0x55e721a59480"
+    ]
+   },
+   "wine_windows_luajit": {
+    "exit": 5,
+    "tail": [
+     "PASS: the clock is the runtime time(): seconds, never going back, 0 B per call compiled and interpreted",
+     "wine: Unhandled page fault on execute access to 00006FFFFCF01780 at address 00006FFFFCF01780 (thread 0024), starting debugger..."
+    ],
+    "prelude": false
+   },
+   "wine_windows_luajit_with_prelude": {
+    "exit": 1,
+    "tail": [
+     "\t[C]: in function 'assert'",
+     "\ttests/test_windows_api.lua:65: in main chunk",
+     "\t[C]: at 0x01400020e0"
+    ],
+    "prelude": true
+   },
+   "passed": false
+  },
+  {
+   "test": "tests/test_current_game.lua",
+   "linux_gc64": {
+    "exit": 0,
+    "tail": [
+     "PASS: actual Steam 25327279 Gatling behavior/weapon snapshot; no game writes/native calls",
+     "PASS: the captured sentry decodes exactly (59 reads to locate, 26 through its kept layout) and its resource, authority, behavior and root gates reject changed bytes"
+    ]
+   },
+   "passed": true
+  },
+  {
+   "test": "tests/test_module.lua",
+   "linux_gc64": {
+    "exit": 1,
+    "tail": [
+     "\t[C]: in function 'assert'",
+     "\ttests/test_module.lua:23: in main chunk",
+     "\t[C]: at 0x5564e04cc480"
+    ]
+   },
+   "wine_windows_luajit": {
+    "exit": 0,
+    "tail": [
+     "PASS: module wrapper loads every chunk, hands the adapter the extended runtime memory api and refuses a process without the game"
+    ],
+    "prelude": false
+   },
+   "passed": true
+  },
+  {
+   "test": "tests/test_windows_api_wine.lua (derived: 2 hash-counter checks relaxed)",
+   "wine_windows_luajit_with_prelude": {
+    "exit": 0,
+    "tail": [
+     "PASS: exposed crawlers, buried targets, endpoint tolerance, native query arguments and invalid results",
+     "PASS: selected enemy surface permits fire; different obstruction or terrain still pauses",
+     "PASS: recorded non-static blockers cannot veto fire; static ground behind them still does"
+    ]
+   },
+   "passed": true,
+   "pass_lines": [
+    "PASS: the clock is the runtime time(): seconds, never going back, 0 B per call compiled and interpreted",
+    "PASS: destructible fences permit firing; solid terrain beyond cover, same-unit bodies and bounded overflow",
+    "PASS: native destructible filter lookup, solid terrain, invalid/recycled actors and read-time ownership changes",
+    "PASS: Windows adapter repeated initialization, writable data and guarded memory rejection after another mod declared every Windows name it binds",
+    "PASS: muzzle pose identity and bounds; pending queries and each of 24 busy workers prevent native casts",
+    "PASS: repeated adapter creations and binds add no C types",
+    "PASS: exposed crawlers, buried targets, endpoint tolerance, native query arguments and invalid results",
+    "PASS: selected enemy surface permits fire; different obstruction or terrain still pauses",
+    "PASS: recorded non-static blockers cannot veto fire; static ground behind them still does"
+   ]
+  }
+ ],
+ "upstream": [
+  {
+   "test": "tests/test_aim.lua",
+   "linux_gc64": {
+    "exit": 0,
+    "tail": [
+     "Replay: 182 samples, 52 held, 8 holds, 8 releases",
+     "PASS: recorded Gatling losses retain aim through fallback and allow reacquisition/scanning",
+     "PASS: 14 aim-retention regression cases"
+    ]
+   },
+   "passed": true
+  },
+  {
+   "test": "tests/test_firing.lua",
+   "linux_gc64": {
+    "exit": 0,
+    "tail": [
+     "Replay: 26 broad-sweep rounds gated; 39 MG target-loss rounds gated; 3 MG rounds retained",
+     "PASS: recorded broad Gatling sweep is suppressed while nearby changes keep firing",
+     "26 firing policy tests passed"
+    ]
+   },
+   "passed": true
+  },
+  {
+   "test": "tests/test_loader.lua",
+   "linux_gc64": {
+    "exit": 1,
+    "tail": [
+     "\ttests/test_loader.lua:25: in function 'test'",
+     "\ttests/test_loader.lua:82: in main chunk",
+     "\t[C]: at 0x55cb5c2cc480"
+    ]
+   },
+   "wine_windows_luajit": {
+    "exit": 0,
+    "tail": [
+     "PASS: original update errors, tracebacks and error objects propagate; restore and pause on the next call with full forwarding, resume after 60 clean frames; first failure kept at shutdown; protected own shutdown",
+     "PASS: own errors restore and start afresh, one line per burst, 8 in a burst stop; failed restores stop at once",
+     "PASS: the runtime build check refuses another game build or missing game modules before installing anything"
+    ],
+    "prelude": false
+   },
+   "passed": true
+  },
+  {
+   "test": "tests/test_snapshot.lua",
+   "linux_gc64": {
+    "exit": 1,
+    "tail": [
+     "\ttests/test_snapshot.lua:139: in function 'budget_fixture'",
+     "\ttests/test_snapshot.lua:229: in main chunk",
+     "\t[C]: at 0x5581491c6480"
+    ]
+   },
+   "wine_windows_luajit": {
+    "exit": 0,
+    "tail": [
+     "PASS: per-frame call budget: waiting frames make no api call; on the ship a mission check (2 reads) every 60th frame, in a mission a rescan every 30th; a kept sentry layout; holds query protection only when a target is lost or released; a pause restores once and makes no api call while paused",
+     "PASS: a kept layout follows moved turret and behavior arrays; a hold keeps its saved speeds and restores them at the new address",
+     "PASS: field decoders match ffi on 200000 words, edge values and NaN payloads, without cdata"
+    ],
+    "prelude": false
+   },
+   "passed": true
+  },
+  {
+   "test": "tests/test_idle_gate.lua",
+   "linux_gc64": {
+    "exit": 1,
+    "tail": [
+     "\ttests/test_idle_gate.lua:70: in function 'side'",
+     "\ttests/test_idle_gate.lua:142: in main chunk",
+     "\t[C]: at 0x559cc08f2480"
+    ]
+   },
+   "wine_windows_luajit": {
+    "exit": 0,
+    "tail": [
+     "PASS: 3000 waiting frames allocate 0 bytes outside a mission (no rescan) and in a mission (100 rescans of 40 entries), JIT off and on",
+     "PASS: a failed read while waiting is seen at the next check (15 frames later), then the mod waits again",
+     "PASS: 3000 waiting frames: no trace returns to a lower frame (v1.1.0: 10); aborts in the mod 26 -> 6"
+    ],
+    "prelude": false
+   },
+   "passed": true
+  },
+  {
+   "test": "tests/test_windows_api.lua",
+   "linux_gc64": {
+    "exit": 1,
+    "tail": [
+     "\ttests/test_windows_api.lua:20: in function 'new_memory'",
+     "\ttests/test_windows_api.lua:23: in main chunk",
+     "\t[C]: at 0x55b71492c480"
+    ]
+   },
+   "wine_windows_luajit": {
+    "exit": 5,
+    "tail": [
+     "PASS: the clock is the runtime time(): seconds, never going back, 0 B per call compiled and interpreted",
+     "wine: Unhandled page fault on execute access to 00006FFFFCF01780 at address 00006FFFFCF01780 (thread 0024), starting debugger..."
+    ],
+    "prelude": false
+   },
+   "wine_windows_luajit_with_prelude": {
+    "exit": 1,
+    "tail": [
+     "\t[C]: in function 'assert'",
+     "\ttests/test_windows_api.lua:65: in main chunk",
+     "\t[C]: at 0x01400020e0"
+    ],
+    "prelude": true
+   },
+   "passed": false
+  },
+  {
+   "test": "tests/test_current_game.lua",
+   "linux_gc64": {
+    "exit": 0,
+    "tail": [
+     "PASS: actual Steam 25327279 Gatling behavior/weapon snapshot; no game writes/native calls",
+     "PASS: the captured sentry decodes exactly (59 reads to locate, 26 through its kept layout) and its resource, authority, behavior and root gates reject changed bytes"
+    ]
+   },
+   "passed": true
+  },
+  {
+   "test": "tests/test_module.lua",
+   "linux_gc64": {
+    "exit": 1,
+    "tail": [
+     "\t[C]: in function 'assert'",
+     "\ttests/test_module.lua:23: in main chunk",
+     "\t[C]: at 0x55fa3eda7480"
+    ]
+   },
+   "wine_windows_luajit": {
+    "exit": 0,
+    "tail": [
+     "PASS: module wrapper loads every chunk, hands the adapter the extended runtime memory api and refuses a process without the game"
+    ],
+    "prelude": false
+   },
+   "passed": true
+  },
+  {
+   "test": "tests/test_windows_api_wine.lua (derived: 2 hash-counter checks relaxed)",
+   "wine_windows_luajit_with_prelude": {
+    "exit": 0,
+    "tail": [
+     "PASS: exposed crawlers, buried targets, endpoint tolerance, native query arguments and invalid results",
+     "PASS: selected enemy surface permits fire; different obstruction or terrain still pauses",
+     "PASS: recorded non-static blockers cannot veto fire; static ground behind them still does"
+    ]
+   },
+   "passed": true,
+   "pass_lines": [
+    "PASS: the clock is the runtime time(): seconds, never going back, 0 B per call compiled and interpreted",
+    "PASS: destructible fences permit firing; solid terrain beyond cover, same-unit bodies and bounded overflow",
+    "PASS: native destructible filter lookup, solid terrain, invalid/recycled actors and read-time ownership changes",
+    "PASS: Windows adapter repeated initialization, writable data and guarded memory rejection after another mod declared every Windows name it binds",
+    "PASS: muzzle pose identity and bounds; pending queries and each of 24 busy workers prevent native casts",
+    "PASS: repeated adapter creations and binds add no C types",
+    "PASS: exposed crawlers, buried targets, endpoint tolerance, native query arguments and invalid results",
+    "PASS: selected enemy surface permits fire; different obstruction or terrain still pauses",
+    "PASS: recorded non-static blockers cannot veto fire; static ground behind them still does"
+   ]
+  }
+ ],
+ "port_test_fixture_edits": [
+  {
+   "file": "tests/reference/aim_data.lua",
+   "lines_changed": 10
+  },
+  {
+   "file": "tests/test_current_game.lua",
+   "lines_changed": 2
+  },
+  {
+   "file": "tests/test_idle_gate.lua",
+   "lines_changed": 10
+  },
+  {
+   "file": "tests/test_snapshot.lua",
+   "lines_changed": 8
+  },
+  {
+   "file": "tests/test_windows_api.lua",
+   "lines_changed": 5
+  },
+  {
+   "file": "tests/test_snapshot.lua",
+   "behavior_id_edits": 2
+  },
+  {
+   "file": "tests/test_idle_gate.lua",
+   "behavior_id_edits": 1
+  },
+  {
+   "file": "tests/reference/aim_data.lua",
+   "behavior_id_edits": 6
+  },
+  {
+   "file": "tests/current_game_25327279.lua",
+   "behavior_id": "213 -> 214 in the captured behavior record"
+  },
+  {
+   "file": "tests/current_game_25327279.lua",
+   "global_slot_blocks_relocated": 7
+  }
+ ]
+}

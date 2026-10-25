@@ -1,0 +1,196 @@
+{
+ "fixture_remap": {
+  "what": "test fixtures only: the old build values in tests/*.lua replaced by the same map",
+  "replacements": [
+   {
+    "file": "fake_game.lua",
+    "old": "688",
+    "new": "702",
+    "count": 7
+   },
+   {
+    "file": "fake_game.lua",
+    "old": "0xF32F18",
+    "new": "0xF349E0",
+    "count": 2
+   },
+   {
+    "file": "fake_game.lua",
+    "old": "0xF22EC8",
+    "new": "0xF24990",
+    "count": 1
+   },
+   {
+    "file": "fake_game.lua",
+    "old": "0xF1AEB0",
+    "new": "0xF1C978",
+    "count": 1
+   },
+   {
+    "file": "fake_game.lua",
+    "old": "0xF12BC0",
+    "new": "0xF14688",
+    "count": 2
+   },
+   {
+    "file": "fake_game.lua",
+    "old": "25480438",
+    "new": "26088801",
+    "count": 1
+   },
+   {
+    "file": "test_mod.lua",
+    "old": "ffi.new('uint8_t[?]', 0x240000)",
+    "new": "ffi.new('uint8_t[?]', 0x260000)",
+    "count": 1
+   }
+  ]
+ },
+ "linux-gc64": {
+  "luajit": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit",
+  "upstream": {
+   "test_mod": {
+    "exit": 1,
+    "pass_lines": [],
+    "tail": [
+     "\t[C]: in function 'error'",
+     "\ttests/test_mod.lua:12: in function 'check'",
+     "\ttests/test_mod.lua:298: in main chunk",
+     "\t[C]: at 0x556bbb07a480"
+    ]
+   },
+   "test_hostile": {
+    "exit": 1,
+    "pass_lines": [],
+    "tail": [
+     "\t[C]: in function 'error'",
+     "\ttests/test_hostile.lua:17: in function 'check'",
+     "\ttests/test_hostile.lua:44: in main chunk",
+     "\t[C]: at 0x55f8ffe98480"
+    ]
+   },
+   "compile_entry": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: assembled entry compiles"
+    ],
+    "tail": []
+   },
+   "test_entry": {
+    "exit": 1,
+    "pass_lines": [],
+    "tail": [
+     "\t...rt/HolsterYourShield/work/tests/upstream/entry-check.lua:426: in function 'new'",
+     "\t...rt/HolsterYourShield/work/tests/upstream/entry-check.lua:1112: in function 'chunk'",
+     "\ttests/test_entry.lua:14: in main chunk",
+     "\t[C]: at 0x563cd112c480"
+    ]
+   }
+  },
+  "port": {
+   "test_mod": {
+    "exit": 1,
+    "pass_lines": [],
+    "tail": [
+     "\t[C]: in function 'error'",
+     "\ttests/test_mod.lua:12: in function 'check'",
+     "\ttests/test_mod.lua:298: in main chunk",
+     "\t[C]: at 0x564d6d88e480"
+    ]
+   },
+   "test_hostile": {
+    "exit": 1,
+    "pass_lines": [],
+    "tail": [
+     "\t[C]: in function 'error'",
+     "\ttests/test_hostile.lua:17: in function 'check'",
+     "\ttests/test_hostile.lua:44: in main chunk",
+     "\t[C]: at 0x5619040fd480"
+    ]
+   },
+   "compile_entry": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: assembled entry compiles"
+    ],
+    "tail": []
+   },
+   "test_entry": {
+    "exit": 1,
+    "pass_lines": [],
+    "tail": [
+     "\t...k-port/HolsterYourShield/work/tests/port/entry-check.lua:426: in function 'new'",
+     "\t...k-port/HolsterYourShield/work/tests/port/entry-check.lua:1112: in function 'chunk'",
+     "\ttests/test_entry.lua:14: in main chunk",
+     "\t[C]: at 0x55c52f9e3480"
+    ]
+   }
+  }
+ },
+ "wine-windows": {
+  "luajit": "<workspace>/runtime-modules/build/windows/LuaJIT/src/luajit.exe",
+  "upstream": {
+   "test_mod": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: 20 Holster Your Shield checks (LuaJIT 2.1.ROLLING)"
+    ],
+    "tail": []
+   },
+   "test_hostile": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: 4 Holster Your Shield hostile-state checks (LuaJIT 2.1.ROLLING)"
+    ],
+    "tail": []
+   },
+   "compile_entry": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: assembled entry compiles"
+    ],
+    "tail": []
+   },
+   "test_entry": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: assembled entry refuses outside the game and steps aside for an installed copy"
+    ],
+    "tail": []
+   }
+  },
+  "port": {
+   "test_mod": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: 20 Holster Your Shield checks (LuaJIT 2.1.ROLLING)"
+    ],
+    "tail": []
+   },
+   "test_hostile": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: 4 Holster Your Shield hostile-state checks (LuaJIT 2.1.ROLLING)"
+    ],
+    "tail": []
+   },
+   "compile_entry": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: assembled entry compiles"
+    ],
+    "tail": []
+   },
+   "test_entry": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: assembled entry refuses outside the game and steps aside for an installed copy"
+    ],
+    "tail": []
+   }
+  }
+ },
+ "not_run": {
+  "tests/game_lua.py": "runs the suites in the game's own bin/lua51.dll through Windows ctypes; the game VM is now the LuaJIT GC64 build these suites ran on (Windows only)"
+ }
+}

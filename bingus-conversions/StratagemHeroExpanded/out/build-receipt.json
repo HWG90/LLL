@@ -1,0 +1,526 @@
+{
+ "mod": "Stratagem Hero Expanded v1.0 (Vanilla Plus Megapack option)",
+ "slug": "StratagemHeroExpanded",
+ "module": "mods/cowboybingus/stratagem_hero_expanded",
+ "upstream": "<workspace>/upstream-bingus/StratagemHeroExpanded",
+ "upstream_tag": "v1.0",
+ "lock_revision": "v1.0",
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "game_sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+ "exe_sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+ "recipe": "BUILD_ASSEMBLED, entry 'direct': scripts/build.py assemble() in the type-2 envelope (plaintext)",
+ "map": {
+  "path": "<workspace>/native-work/megapack-port/StratagemHeroExpanded/MAP.json",
+  "sha256": "3C684723493B7EA0D1BF0E8998D682B0012327DCDB222FB2503CF63AF6CAA91D",
+  "counts": {
+   "high": 14
+  },
+  "non_data_edits": [
+   "hero.region_type_mapped"
+  ]
+ },
+ "replacements": [
+  {
+   "file": "src/stratagem_hero_expanded.lua",
+   "line": 18,
+   "old": "Mod.EXE_SHA256 = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+   "new": "Mod.EXE_SHA256 = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'",
+   "map_rows": [
+    "hero.EXE_SHA256"
+   ]
+  },
+  {
+   "file": "src/stratagem_hero_expanded.lua",
+   "line": 19,
+   "old": "Mod.GAME_SHA256 = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+   "new": "Mod.GAME_SHA256 = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'",
+   "map_rows": [
+    "hero.GAME_SHA256"
+   ]
+  },
+  {
+   "file": "src/stratagem_hero_expanded.lua",
+   "line": 23,
+   "old": "    tiers_rva = 0x263CCC0,    -- game.dll",
+   "new": "    tiers_rva = 0x24B5CC0,    -- game.dll",
+   "map_rows": [
+    "hero.tiers_rva"
+   ]
+  },
+  {
+   "file": "src/stratagem_hero_expanded.lua",
+   "line": 24,
+   "old": "    groups_rva = 0x263CF70,   -- game.dll",
+   "new": "    groups_rva = 0x24B5F70,   -- game.dll",
+   "map_rows": [
+    "hero.groups_rva"
+   ]
+  },
+  {
+   "file": "src/stratagem_hero_expanded.lua",
+   "line": 25,
+   "old": "    settings_rva = 0x37CB600, -- game.dll",
+   "new": "    settings_rva = 0x31870E0, -- game.dll",
+   "map_rows": [
+    "hero.settings_rva"
+   ]
+  },
+  {
+   "file": "src/stratagem_hero_expanded.lua",
+   "line": 29,
+   "old": "local TYPES = 150 -- StratagemType values",
+   "new": "local TYPES = 154 -- StratagemType values",
+   "map_rows": [
+    "hero.TYPES"
+   ]
+  },
+  {
+   "file": "src/stratagem_hero_expanded.lua",
+   "line": 39,
+   "old": "Mod.PROBE = 124 -- Reinforce",
+   "new": "Mod.PROBE = 127 -- Reinforce",
+   "map_rows": [
+    "hero.PROBE"
+   ]
+  },
+  {
+   "file": "src/stratagem_hero_expanded.lua",
+   "line": 5,
+   "old": "-- picker is game.dll 0x598370, called by the arcade's round logic 0x5970D0).",
+   "new": "-- picker is game.dll 0x5A0F30, called by the arcade's round logic 0x59FC90).",
+   "map_rows": [
+    "hero.comment_picker"
+   ]
+  },
+  {
+   "file": "src/stratagem_hero_expanded.lua",
+   "line": 2,
+   "old": "-- Stratagem Hero Expanded for Helldivers 2 Steam build 25480438.",
+   "new": "-- Stratagem Hero Expanded for Helldivers 2 Steam build 26088801.",
+   "map_rows": [
+    "hero.build_text"
+   ]
+  },
+  {
+   "file": "src/stratagem_hero_expanded.lua",
+   "line": 21,
+   "old": "-- Build 25480438. Tests pass their own layout.",
+   "new": "-- Build 26088801. Tests pass their own layout.",
+   "map_rows": []
+  },
+  {
+   "file": "src/stratagem_hero_expanded.lua",
+   "line": 41,
+   "old": "-- Build 25480438's tables, checked byte for byte",
+   "new": "-- Build 26088801's tables, checked byte for byte",
+   "map_rows": []
+  },
+  {
+   "file": "src/stratagem_hero_expanded.lua",
+   "line": 66,
+   "old": "-- stratagems every squad calls. Stratagem types of build 25480438,",
+   "new": "-- stratagems every squad calls. Stratagem types of build 26088801,",
+   "map_rows": []
+  },
+  {
+   "file": "src/stratagem_hero_expanded.lua",
+   "line": 196,
+   "old": "-- {tiers, groups} as bytes: build 25480438's and the mod's.",
+   "new": "-- {tiers, groups} as bytes: build 26088801's and the mod's.",
+   "map_rows": []
+  },
+  {
+   "file": "src/stratagem_hero_expanded.lua",
+   "line": 303,
+   "old": "Raises when anything differs from build 25480438's data;",
+   "new": "Raises when anything differs from build 26088801's data;",
+   "map_rows": []
+  },
+  {
+   "file": "src/stratagem_hero_expanded.lua",
+   "line": 310,
+   "old": "\"The arcade's tables differ from build 25480438's\"",
+   "new": "\"The arcade's tables differ from build 26088801's\"",
+   "map_rows": []
+  },
+  {
+   "file": "src/stratagem_hero_expanded.lua",
+   "line": 414,
+   "old": "'Unsupported game build (needs Steam build 25480438)'",
+   "new": "'Unsupported game build (needs Steam build 26088801)'",
+   "map_rows": []
+  },
+  {
+   "file": "scripts/build.py",
+   "line": 61,
+   "old": "'-- Stratagem Hero Expanded v%s for Steam build 25480438. Generated by",
+   "new": "'-- Stratagem Hero Expanded v%s for Steam build 26088801. Generated by",
+   "map_rows": []
+  }
+ ],
+ "migrated_tables": [
+  {
+   "file": "src/stratagem_hero_expanded.lua",
+   "line": 53,
+   "table": "Mod.VANILLA_GROUPS",
+   "map_rows": [
+    "hero.VANILLA_GROUPS"
+   ],
+   "lines_changed": 9
+  },
+  {
+   "file": "src/stratagem_hero_expanded.lua",
+   "line": 71,
+   "table": "Mod.GROUPS",
+   "map_rows": [
+    "hero.GROUPS"
+   ],
+   "lines_changed": 8
+  }
+ ],
+ "environment_edits": [
+  {
+   "file": "src/stratagem_hero_expanded.lua",
+   "line": 34,
+   "old": "local MEM_COMMIT, MEM_IMAGE = 0x1000, 0x1000000",
+   "new": "local MEM_COMMIT, MEM_IMAGE, MEM_MAPPED = 0x1000, 0x1000000, 0x40000",
+   "non_data_edit": "hero.region_type_mapped"
+  },
+  {
+   "file": "src/stratagem_hero_expanded.lua",
+   "line": 242,
+   "old": "if not region or region.state ~= MEM_COMMIT or region.type ~= MEM_IMAGE",
+   "new": "if not region or region.state ~= MEM_COMMIT or (region.type ~= MEM_IMAGE and region.type ~= MEM_MAPPED)",
+   "non_data_edit": "hero.region_type_mapped"
+  }
+ ],
+ "test_fixture_changes": [
+  {
+   "fixture": "local LOADOUT = \\{[^}]*\\}",
+   "line": 23
+  },
+  {
+   "fixture": "local MISSION = \\{[^}]*\\}",
+   "line": 30
+  },
+  {
+   "fixture": "local CLASS = \\{.*?\\}\\n",
+   "line": 33
+  },
+  {
+   "fixture": "local VANILLA_POOL = \\{[^}]*\\}",
+   "line": 57
+  },
+  {
+   "fixture": "refuses\\('No settings for stratagem 149'",
+   "line": 379,
+   "new": "refuses('No settings for stratagem 153', {settings = {[153] = {missing = true}}})"
+  },
+  {
+   "fixture": "refuses\\('The code of stratagem 148 does",
+   "line": 383,
+   "new": "refuses('The code of stratagem 152 does not fit the arcade', {settings = {[152] = {no_code = true}}})"
+  },
+  {
+   "fixture": "refuses\\('Unexpected HUD type for strata",
+   "line": 384,
+   "new": "refuses('Unexpected HUD type for stratagem 34', {settings = {[34] = {hud = 5}}})"
+  },
+  {
+   "fixture": "World\\(\\{settings = \\{\\[7\\] = \\{missing ",
+   "line": 399,
+   "new": "World({settings = {[7] = {missing = true}, [41] = {length = 50}}})"
+  },
+  {
+   "fixture": "World\\(\\{settings = \\{\\[149\\] = \\{missin",
+   "line": 517,
+   "new": "World({settings = {[153] = {missing = true}}})"
+  },
+  {
+   "fixture": "'No settings for stratagem 149', 1, true",
+   "line": 518,
+   "new": "'No settings for stratagem 153', 1, true)"
+  },
+  {
+   "fixture": "for stratagem = 1, 149 do",
+   "line": 261,
+   "new": "for stratagem = 1, 153 do"
+  },
+  {
+   "fixture": "-- 1-149. options.settings",
+   "line": 251,
+   "new": "-- 1-153. options.settings"
+  },
+  {
+   "fixture": "refuses(\"The arcade's tables differ from build 25480438's\"",
+   "line": 387,
+   "new": "refuses(\"The arcade's tables differ from build 26088801's\""
+  },
+  {
+   "fixture": "'disabled: Unsupported game build (needs Steam build 25480438)'",
+   "line": 509,
+   "new": "'disabled: Unsupported game build (needs Steam build 26088801)'"
+  },
+  {
+   "fixture": "tests/vanilla_tables.lua groups",
+   "new": "new image 0x24B5F70..+640 (tiers unchanged)"
+  }
+ ],
+ "entry_changes_vs_upstream": [
+  {
+   "line": 2,
+   "old": "-- Stratagem Hero Expanded v1.0 for Steam build 25480438. Generated by scripts/build.py from src/bingus_runtime.lua, src/bingus_memory.lua, src/bingus_write.lua, src/stratagem_hero_expanded.lua; edit those.",
+   "new": "-- Stratagem Hero Expanded v1.0 for Steam build 26088801. Generated by scripts/build.py from src/bingus_runtime.lua, src/bingus_memory.lua, src/bingus_write.lua, src/stratagem_hero_expanded.lua; edit those."
+  },
+  {
+   "line": 635,
+   "old": "-- Stratagem Hero Expanded for Helldivers 2 Steam build 25480438.",
+   "new": "-- Stratagem Hero Expanded for Helldivers 2 Steam build 26088801."
+  },
+  {
+   "line": 638,
+   "old": "-- picker is game.dll 0x598370, called by the arcade's round logic 0x5970D0). Vanilla reaches 27 launch-era",
+   "new": "-- picker is game.dll 0x5A0F30, called by the arcade's round logic 0x59FC90). Vanilla reaches 27 launch-era"
+  },
+  {
+   "line": 651,
+   "old": "Mod.EXE_SHA256 = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+   "new": "Mod.EXE_SHA256 = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'"
+  },
+  {
+   "line": 652,
+   "old": "Mod.GAME_SHA256 = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+   "new": "Mod.GAME_SHA256 = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'"
+  },
+  {
+   "line": 654,
+   "old": "-- Build 25480438. Tests pass their own layout.",
+   "new": "-- Build 26088801. Tests pass their own layout."
+  },
+  {
+   "line": 656,
+   "old": "tiers_rva = 0x263CCC0,    -- game.dll: 9 tiers of 68 bytes {u32 banner, 8 x {u32 group, f32 weight}}",
+   "new": "tiers_rva = 0x24B5CC0,    -- game.dll: 9 tiers of 68 bytes {u32 banner, 8 x {u32 group, f32 weight}}"
+  },
+  {
+   "line": 657,
+   "old": "groups_rva = 0x263CF70,   -- game.dll: 10 groups of 64 bytes, up to 16 u32 stratagem types, 0 ends a group",
+   "new": "groups_rva = 0x24B5F70,   -- game.dll: 10 groups of 64 bytes, up to 16 u32 stratagem types, 0 ends a group"
+  },
+  {
+   "line": 658,
+   "old": "settings_rva = 0x37CB600, -- game.dll: StratagemInfo pointers by stratagem type (8 bytes each)",
+   "new": "settings_rva = 0x31870E0, -- game.dll: StratagemInfo pointers by stratagem type (8 bytes each)"
+  },
+  {
+   "line": 662,
+   "old": "local TYPES = 150 -- StratagemType values of this build, None (0) included",
+   "new": "local TYPES = 154 -- StratagemType values of this build, None (0) included"
+  },
+  {
+   "line": 667,
+   "old": "local MEM_COMMIT, MEM_IMAGE = 0x1000, 0x1000000",
+   "new": "local MEM_COMMIT, MEM_IMAGE, MEM_MAPPED = 0x1000, 0x1000000, 0x40000"
+  },
+  {
+   "line": 672,
+   "old": "Mod.PROBE = 124 -- Reinforce: once its settings pointer is set, the stratagem settings are loaded",
+   "new": "Mod.PROBE = 127 -- Reinforce: once its settings pointer is set, the stratagem settings are loaded"
+  },
+  {
+   "line": 674,
+   "old": "-- Build 25480438's tables, checked byte for byte before anything is written.",
+   "new": "-- Build 26088801's tables, checked byte for byte before anything is written."
+  },
+  {
+   "line": 687,
+   "old": "{83, 136, 33, 30, 119, 66},",
+   "new": "{86, 139, 34, 31, 122, 69},",
+   "what": "migrated stratagem numbers"
+  },
+  {
+   "line": 688,
+   "old": "{3, 140, 125, 107, 92, 130, 42, 147, 53, 117},",
+   "new": "{3, 143, 128, 110, 95, 133, 43, 151, 55, 120},",
+   "what": "migrated stratagem numbers"
+  },
+  {
+   "line": 689,
+   "old": "{43, 73, 134, 25, 141, 144},",
+   "new": "{44, 76, 137, 25, 144, 148},",
+   "what": "migrated stratagem numbers"
+  },
+  {
+   "line": 690,
+   "old": "{30, 3, 140, 18},",
+   "new": "{31, 3, 143, 18},",
+   "what": "migrated stratagem numbers"
+  },
+  {
+   "line": 691,
+   "old": "{137, 66, 117, 53}, -- no tier lists this group",
+   "new": "{140, 69, 120, 55}, -- no tier lists this group",
+   "what": "migrated stratagem numbers"
+  },
+  {
+   "line": 692,
+   "old": "{43, 73, 134},",
+   "new": "{44, 76, 137},",
+   "what": "migrated stratagem numbers"
+  },
+  {
+   "line": 693,
+   "old": "{83, 136, 125, 107},",
+   "new": "{86, 139, 128, 110},",
+   "what": "migrated stratagem numbers"
+  },
+  {
+   "line": 694,
+   "old": "{124},",
+   "new": "{127},",
+   "what": "migrated stratagem numbers"
+  },
+  {
+   "line": 695,
+   "old": "{56, 13, 63},",
+   "new": "{58, 13, 65},",
+   "what": "migrated stratagem numbers"
+  },
+  {
+   "line": 699,
+   "old": "-- stratagems every squad calls. Stratagem types of build 25480438, grouped by the class each stratagem's settings",
+   "new": "-- stratagems every squad calls. Stratagem types of build 26088801, grouped by the class each stratagem's settings"
+  },
+  {
+   "line": 707,
+   "old": "101, 120, 14, 134, 55, 24, 96, 67, 43, 73, 115, 142, 57, 2},",
+   "new": "104, 123, 14, 137, 57, 24, 99, 70, 44, 76, 118, 146, 59, 2},",
+   "what": "migrated stratagem numbers"
+  },
+  {
+   "line": 710,
+   "old": "30, 3, 49, 140, 18, 133, 65, 126, 38},",
+   "new": "31, 3, 51, 143, 18, 136, 68, 129, 39},",
+   "what": "migrated stratagem numbers"
+  },
+  {
+   "line": 714,
+   "old": "118, 83, 4, 136, 106, 125, 21, 62, 107, 58, 41, 74, 34},",
+   "new": "121, 86, 4, 139, 109, 128, 21, 64, 110, 60, 42, 77, 35},",
+   "what": "migrated stratagem numbers"
+  },
+  {
+   "line": 718,
+   "old": "114, 51, 100, 92, 32, 13, 56, 113, 141, 80, 131, 45, 81, 112, 61, 63},",
+   "new": "117, 53, 103, 95, 33, 13, 58, 116, 144, 83, 134, 46, 84, 115, 63, 65},",
+   "what": "migrated stratagem numbers"
+  },
+  {
+   "line": 722,
+   "old": "149, 68, 147, 39, 16, 6, 99, 89, 25, 127, 130, 54, 75, 97, 110, 87},",
+   "new": "153, 71, 151, 40, 16, 6, 102, 92, 25, 130, 133, 56, 78, 100, 113, 90},",
+   "what": "migrated stratagem numbers"
+  },
+  {
+   "line": 726,
+   "old": "121, 66, 8, 23, 53, 137, 117, 44, 52, 59, 22, 144, 9, 104},",
+   "new": "124, 69, 8, 23, 55, 140, 120, 45, 54, 61, 22, 148, 9, 107},",
+   "what": "migrated stratagem numbers"
+  },
+  {
+   "line": 729,
+   "old": "105, 26, 135, 1, 50, 27, 10, 91, 88, 119, 139, 12, 46},",
+   "new": "108, 26, 138, 1, 52, 27, 10, 94, 91, 122, 142, 12, 47},",
+   "what": "migrated stratagem numbers"
+  },
+  {
+   "line": 732,
+   "old": "124, 33, 145, 42, 28, 11, 128, 19, 70, 5, 148, 116, 132},",
+   "new": "127, 34, 149, 43, 29, 11, 131, 19, 73, 5, 152, 119, 135},",
+   "what": "migrated stratagem numbers"
+  },
+  {
+   "line": 829,
+   "old": "-- {tiers, groups} as bytes: build 25480438's and the mod's.",
+   "new": "-- {tiers, groups} as bytes: build 26088801's and the mod's."
+  },
+  {
+   "line": 875,
+   "old": "if not region or region.state ~= MEM_COMMIT or region.type ~= MEM_IMAGE",
+   "new": "if not region or region.state ~= MEM_COMMIT or (region.type ~= MEM_IMAGE and region.type ~= MEM_MAPPED)"
+  },
+  {
+   "line": 936,
+   "old": "-- loaded yet. Raises when anything differs from build 25480438's data; nothing is written then.",
+   "new": "-- loaded yet. Raises when anything differs from build 26088801's data; nothing is written then."
+  },
+  {
+   "line": 943,
+   "old": "need(state == 'vanilla', \"The arcade's tables differ from build 25480438's\")",
+   "new": "need(state == 'vanilla', \"The arcade's tables differ from build 26088801's\")"
+  },
+  {
+   "line": 1047,
+   "old": "need(built, why == 'unsupported game build' and 'Unsupported game build (needs Steam build 25480438)' or why)",
+   "new": "need(built, why == 'unsupported game build' and 'Unsupported game build (needs Steam build 26088801)' or why)"
+  }
+ ],
+ "upstream_reproduces": {
+  "lock_resource_sha256": "4F3304155DAC5C444CAD8A396EF902942EA11AD8C2AB5169D923D0CA9FAEC29C",
+  "shipped_v26_archive": "<hellforge>/mods/Vanilla Plus Megapack - v26/options/StratagemHeroExpanded/9ba626afa44a3aa3.patch_0",
+  "shipped_resource": "a55a78cfbcae38c7"
+ },
+ "resources": {
+  "mods/cowboybingus/stratagem_hero_expanded": {
+   "hash": "a55a78cfbcae38c7",
+   "bytes": 54535,
+   "sha256": "4A199FF3D3E04768AC6BCBD8BE7C50853202C83B3F53FB9DF8E9BB2489BF3D97"
+  }
+ },
+ "archive_holds_only": [
+  "mods/cowboybingus/stratagem_hero_expanded"
+ ],
+ "outputs": {
+  "entry.lua": "0866F615C7892B52C567720BAE2D9EEF8F8E5127392B15514CFCE7F6E27AEA64",
+  "mod.lua.main": "4A199FF3D3E04768AC6BCBD8BE7C50853202C83B3F53FB9DF8E9BB2489BF3D97",
+  "9ba626afa44a3aa3.patch_0": "FAF3655BD0854085458F52FF4B04FCE60BD007D366C57D014FEB5A8AA6ADF2A0",
+  "9ba626afa44a3aa3.patch_0.stream": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+  "9ba626afa44a3aa3.patch_0.gpu_resources": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+ },
+ "inputs": {
+  "<workspace>/upstream-bingus/StratagemHeroExpanded/scripts/build.py": "ACBA4D8D7138B2C19107A00A3EACE5BD83229BFBC4FDF42039B8E153B9CF20F2",
+  "<workspace>/upstream-bingus/StratagemHeroExpanded/src/bingus_memory.lua": "3973924B1C009CC4E6C863A4EAF87F166899A16DDCB579C3D77AB5465172B416",
+  "<workspace>/upstream-bingus/StratagemHeroExpanded/src/bingus_runtime.lua": "C4450F555F697E583916D18F876412CA96F6963EB1BF4CDAD451EBB906C2F988",
+  "<workspace>/upstream-bingus/StratagemHeroExpanded/src/bingus_write.lua": "9A0A217811D109418FAEBB2AF8804BFB8301B0EEEB1E6B5BC020FDACBD596160",
+  "<workspace>/upstream-bingus/StratagemHeroExpanded/src/stratagem_hero_expanded.lua": "609414294A7C7099D3E70C6E3652ECBA62D127A4758511856ECC2D297E704E1B",
+  "<workspace>/upstream-bingus/StratagemHeroExpanded/tests/compile_entry.lua": "F43910D6C6742AD10DDF0E67772CEFB0FFEE4754E9A3386F7DA7F115C7DB1662",
+  "<workspace>/upstream-bingus/StratagemHeroExpanded/tests/frame_budget.lua": "4E1E9F47EE7FCCFD24F6C79D475103ABF77989FC344EBB527869029793654E49",
+  "<workspace>/upstream-bingus/StratagemHeroExpanded/tests/game_lua.py": "C6BBC5F25AB21EFFC4351436826CE89FED0440F022BED0D9C573E5EA82560CDD",
+  "<workspace>/upstream-bingus/StratagemHeroExpanded/tests/hostile_vm.lua": "779B1DFD0A5BB8A2CEAB53EC8729E492838FB90018490A290D1BAFB3D9F938C4",
+  "<workspace>/upstream-bingus/StratagemHeroExpanded/tests/test_entry.lua": "5A2918DEDA2897C6E0C9FC87EA564F8DD0AFAA75C3F03295AD85D0C973F989F4",
+  "<workspace>/upstream-bingus/StratagemHeroExpanded/tests/test_mod.lua": "869A72AA6EA95AF60BF305EB34E656732766A0D355EB04F63F26789AFDB8E676",
+  "<workspace>/upstream-bingus/StratagemHeroExpanded/tests/vanilla_tables.lua": "0060779912BA8E1C1D7D939892B173B581400B80B12677384A9419D1DCABF5F8"
+ },
+ "luajit_check": {
+  "luajit": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit",
+  "string_dump_flags": 8,
+  "gc64_fr2": true,
+  "output": [
+   "compile: ok\tLuaJIT 2.1.ROLLING\t8",
+   "vanilla tiers == image: true",
+   "vanilla groups == image: true",
+   "pool: 108 in 8 groups; probe 127",
+   "entry run: false: mods/cowboybingus/stratagem_hero_expanded:359: libkernel32.so: cannot open shared object file: No such file or directory",
+   "status: nil",
+   "hooked: false"
+  ]
+ },
+ "adapter_text_absent": [
+  "PORT51",
+  "compat51",
+  "require('cffi')",
+  "require(\"cffi\")"
+ ],
+ "tests": "see out/TESTS.json (from an earlier --tests run)"
+}

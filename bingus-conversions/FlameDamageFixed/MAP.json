@@ -1,0 +1,2361 @@
+{
+ "mod": "Flame Damage Fixed v1.2",
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "source": "upstream-bingus/FlameDamageFixed (git v1.2, clean; hashes equal components.lock.json source_sha256)",
+ "images": {
+  "old game.dll": "native-work/evidence/game-pre1020.dll",
+  "new game.dll": "native-work/evidence/game-26088801.dll",
+  "old exe": "r6_reload_exe_20261017.bin (1.8.46015.0)",
+  "new exe": "native-work/evidence/exe-26088801.bin (1.8.46659.0)"
+ },
+ "counts": {
+  "high": 29,
+  "medium": 2,
+  "low": 0,
+  "unmapped": 0,
+  "feeds_write": 22
+ },
+ "rows": [
+  {
+   "id": "spray.manager_rva",
+   "file": "src/flame_damage_fixed.lua",
+   "line": 20,
+   "name": "SPRAY_MANAGER_RVA (SprayWeaponComponent manager)",
+   "old": "0x3326bb0",
+   "new": "0x2ce1d70",
+   "method": "RIP-relative xrefs of the old global migrated by unique instruction windows; all vote",
+   "witnesses": {
+    "global": {
+     "witnesses": 14,
+     "agreeing": 14,
+     "disagreeing": 0,
+     "exact_window_votes": {
+      "0x2ce1d70": 14
+     },
+     "old_sites": 21,
+     "distinct_old_functions": 14,
+     "examples": [
+      {
+       "old": "0x5143a2",
+       "new": "0x51c992",
+       "instruction_old": "mov r11, qword ptr [rip + 0x2e12807]",
+       "instruction_new": "mov r11, qword ptr [rip + 0x27c53d7]",
+       "field_displacements_masked": false
+      },
+      {
+       "old": "0x54fa7a",
+       "new": "0x5588ca",
+       "instruction_old": "mov rsi, qword ptr [rip + 0x2dd712f]",
+       "instruction_new": "mov rsi, qword ptr [rip + 0x278949f]",
+       "field_displacements_masked": false
+      },
+      {
+       "old": "0x54fb2a",
+       "new": "0x55897a",
+       "instruction_old": "mov rsi, qword ptr [rip + 0x2dd707f]",
+       "instruction_new": "mov rsi, qword ptr [rip + 0x27893ef]",
+       "field_displacements_masked": false
+      },
+      {
+       "old": "0x67dc36",
+       "new": "0x6878f6",
+       "instruction_old": "mov rsi, qword ptr [rip + 0x2ca8f73]",
+       "instruction_new": "mov rsi, qword ptr [rip + 0x265a473]",
+       "field_displacements_masked": false
+      }
+     ]
+    }
+   },
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address of the tracked-weapon scan (selects which weapon families and burst instances get group writes)",
+   "live_check": "F2",
+   "notes": null
+  },
+  {
+   "id": "spray.manager_layout",
+   "file": "src/flame_damage_fixed.lua",
+   "line": [
+    753,
+    763
+   ],
+   "name": "manager +0x38 count, +0x60 entity pointers, +0x70 instances (stride 0x218); entity +0 type hash, +0xC unit handle; instance +0 state (1/2 firing), +0x24 burst effect id",
+   "old": "unchanged",
+   "new": "unchanged",
+   "method": "the SprayWeaponComponent update (old 0x67F3D0) aligned instruction by instruction with new 0x689090; the four other changed displacements there are script-API vtable slots and a settings record reached from another pointer (r13 is reassigned at 0x67F574), not the manager, entity or instance",
+   "witnesses": {
+    "update": {
+     "kind": "game",
+     "old_function": "0x67f3d0",
+     "new_function": "0x689090",
+     "old_insns": 1185,
+     "aligned": 1184,
+     "unaligned_old": [
+      "mov rdx, r12 @0x67f81c"
+     ],
+     "unchanged_fields": {
+      "0x0": 80,
+      "0xc": 2,
+      "0x24": 1,
+      "0x38": 14,
+      "0x60": 18,
+      "0x70": 11
+     },
+     "other_differences": [
+      "0x67f846->0x689506 0x378->0x380",
+      "0x67f86f->0x68952f 0x1c8->0x1d0",
+      "0x67f89b->0x68955b 0x378->0x380",
+      "0x68038a->0x68a04a 0x74->0x78",
+      "0x680390->0x68a050 0x76->0x7a",
+      "0x680396->0x68a056 0x76->0x7a"
+     ]
+    },
+    "loop_bound": {
+     "kind": "game",
+     "old": "0x67f40f",
+     "new": "0x6890cf",
+     "old_insn": "cmp dword ptr [rcx + 0x38], esi",
+     "new_insn": "cmp dword ptr [rcx + 0x38], esi",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "entities": {
+     "kind": "game",
+     "old": "0x67f482",
+     "new": "0x689142",
+     "old_insn": "mov rax, qword ptr [r13 + 0x60]",
+     "new_insn": "mov rax, qword ptr [r13 + 0x60]",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "instances": {
+     "kind": "game",
+     "old": "0x67f49f",
+     "new": "0x68915f",
+     "old_insn": "mov r14, qword ptr [r13 + 0x70]",
+     "new_insn": "mov r14, qword ptr [r13 + 0x70]",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "stride": {
+     "kind": "game",
+     "old": "0x67f4a7",
+     "new": "0x689167",
+     "old_insn": "imul rcx, rdi, 0x218",
+     "new_insn": "imul rcx, rdi, 0x218",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "entity_unit_handle": {
+     "kind": "game",
+     "old": "0x67f55e",
+     "new": "0x68921e",
+     "old_insn": "mov ecx, dword ptr [r12 + 0xc]",
+     "new_insn": "mov ecx, dword ptr [r12 + 0xc]",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "state_switch": {
+     "kind": "game",
+     "old": "0x67f8a6",
+     "new": "0x689566",
+     "old_insn": "mov ecx, dword ptr [r14]",
+     "new_insn": "mov ecx, dword ptr [r14]",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "burst_id_functions": [
+     {
+      "kind": "game",
+      "old_function": "0x67eed0",
+      "new_function": "0x688b90",
+      "old_insns": 172,
+      "aligned": 172,
+      "unaligned_old": [],
+      "unchanged_fields": {
+       "0x0": 13,
+       "0x24": 1,
+       "0x70": 3
+      },
+      "other_differences": []
+     },
+     {
+      "kind": "game",
+      "old_function": "0x67f140",
+      "new_function": "0x688e00",
+      "old_insns": 174,
+      "aligned": 174,
+      "unaligned_old": [],
+      "unchanged_fields": {
+       "0x0": 18,
+       "0x24": 1,
+       "0x70": 3
+      },
+      "other_differences": []
+     },
+     {
+      "kind": "game",
+      "old_function": "0x6807b0",
+      "new_function": "0x68a470",
+      "old_insns": 288,
+      "aligned": 288,
+      "unaligned_old": [],
+      "unchanged_fields": {
+       "0x0": 13,
+       "0x24": 2,
+       "0x70": 4
+      },
+      "other_differences": []
+     },
+     {
+      "kind": "game",
+      "old_function": "0x680cf0",
+      "new_function": "0x68a9ae",
+      "old_insns": 149,
+      "aligned": 149,
+      "unaligned_old": [],
+      "unchanged_fields": {
+       "0x0": 3,
+       "0x24": 1,
+       "0x70": 3
+      },
+      "other_differences": []
+     }
+    ]
+   },
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "which instance address is polled for its state and burst id",
+   "live_check": "F2",
+   "notes": null
+  },
+  {
+   "id": "spray.instance_id_offset",
+   "file": "src/flame_damage_fixed.lua",
+   "line": 80,
+   "name": "PHYS.SPRAY_INSTANCE (instance +0x24: burst effect id)",
+   "old": "0x24",
+   "new": "0x24",
+   "method": "see spray.manager_layout (paired unchanged in 5 aligned SprayWeaponComponent functions)",
+   "witnesses": {
+    "see": "spray.manager_layout"
+   },
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "selects the flame instance whose systems are retargeted",
+   "live_check": "F3",
+   "notes": null
+  },
+  {
+   "id": "spray.tracked_hashes",
+   "file": "src/flame_damage_fixed.lua",
+   "line": [
+    23,
+    599
+   ],
+   "name": "Fix.TRACKED / WEAPON_NAMES (entity type hashes of the Lumberer flamethrower arm 0x0736BEE2D6328726 and the Flame Sentry 0x820CC3BAFE962858)",
+   "old": "unchanged",
+   "new": "unchanged (not provable offline)",
+   "method": "game data (entity type hashes, encrypted settings); neither image carries them in code",
+   "witnesses": {
+    "code_occurrences": "none in old or new game.dll/exe"
+   },
+   "confidence": "medium",
+   "feeds_write": false,
+   "role": "gate: only entities with both hash halves are tracked; a renamed entity is simply never tracked (no write)",
+   "live_check": "F2",
+   "notes": null
+  },
+  {
+   "id": "effect.resource_root_rva",
+   "file": "src/flame_damage_fixed.lua",
+   "line": 21,
+   "name": "RESOURCE_ROOT_RVA (EXE object whose +0x3F8 is the resource manager)",
+   "old": "0x23621a8",
+   "new": "0x24099e8",
+   "method": "RIP xrefs of the old EXE global migrated by unique windows (all agree); in the new image every load of the new root that reads +0x3F8 passes it to the counterpart (unique exact window on the callee start) of an old resource-manager function",
+   "witnesses": {
+    "global": {
+     "witnesses": 5,
+     "agreeing": 5,
+     "disagreeing": 0,
+     "exact_window_votes": {
+      "0x24099e8": 3
+     },
+     "old_sites": 64,
+     "distinct_old_functions": 4,
+     "examples": [
+      {
+       "old": "0x3f7cb8",
+       "new": "0x3d0e3d",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x1f6a4e9]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x2038ba4]",
+       "field_displacements_masked": false
+      },
+      {
+       "old": "0x3f7cf6",
+       "new": "0x3d0e7b",
+       "instruction_old": "mov rax, qword ptr [rip + 0x1f6a4ab]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2038b66]",
+       "field_displacements_masked": false
+      },
+      {
+       "old": "0x3f9ee1",
+       "new": "0x3d3d8e",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x1f682c0]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x2035c53]",
+       "field_displacements_masked": true
+      },
+      {
+       "old": "0x3fa841",
+       "new": "0x3d4d5a",
+       "instruction_old": "mov rax, qword ptr [rip + 0x1f67960]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2034c87]",
+       "field_displacements_masked": true
+      }
+     ]
+    },
+    "root_3f8": {
+     "old_fields": {
+      "0x338": 18,
+      "0x3f8": 12,
+      "0x2a8": 5,
+      "0x3c0": 5,
+      "0x2a0": 2,
+      "0x590": 2,
+      "0x280": 2,
+      "0x2b0": 2
+     },
+     "new_fields": {
+      "0x338": 9,
+      "0x2a8": 3,
+      "0x3f8": 3,
+      "0x0": 2,
+      "0x2a0": 2,
+      "0x590": 2,
+      "0x5e0": 2,
+      "0x280": 2,
+      "0x2b0": 2
+     },
+     "old_3f8_callees": {
+      "0x5f2160": 2,
+      "0x5f26f0": 2,
+      "0x5f27d0": 2,
+      "0x5f29b0": 2,
+      "0x5f2a50": 2,
+      "0x5f2290": 2
+     },
+     "new_3f8_callees": {
+      "0x6320e0": 1,
+      "0x632210": 2
+     },
+     "callee_map": {
+      "0x5f2160": "0x6320e0",
+      "0x5f26f0": "0x632670",
+      "0x5f27d0": "0x632750",
+      "0x5f29b0": "0x632930",
+      "0x5f2a50": "0x6329d0",
+      "0x5f2290": "0x632210"
+     },
+     "callees_called_through_new_root_3f8": {
+      "0x5f2160": "0x6320e0",
+      "0x5f2290": "0x632210"
+     }
+    }
+   },
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address chain of the effect-data write",
+   "live_check": "F1",
+   "notes": null
+  },
+  {
+   "id": "effect.manager_offset",
+   "file": "src/flame_damage_fixed.lua",
+   "line": 151,
+   "name": "root +0x3F8 -> resource manager",
+   "old": "0x3f8",
+   "new": "0x3f8",
+   "method": "see effect.resource_root_rva (root_3f8): +0x3F8 is the only field the new image reads from the root before calling the mapped resource-manager functions 0x6320E0 / 0x632210",
+   "witnesses": {
+    "see": "effect.resource_root_rva"
+   },
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address chain of the effect-data write",
+   "live_check": "F1",
+   "notes": null
+  },
+  {
+   "id": "effect.resource_tables",
+   "file": "src/flame_damage_fixed.lua",
+   "line": [
+    153,
+    155,
+    164
+   ],
+   "name": "manager +0x2F0 type table / +0x300 count / +0x304 buckets; type entry stride 0xD0, next +0xC8, +0x20 slots, +0x28 name table, +0x3C name buckets, +0x10 records; name entry stride 24 {u64 name, u32 value +8, next +0x10}; record stride 160 (data +0, size +0x18); empty bucket -2, chain end 0x7FFFFFFF",
+   "old": "unchanged",
+   "new": "unchanged",
+   "method": "the engine resource lookup old 0x5F85A0 (type chain, name chain, record = records + 160*value) aligned completely with new 0x638520 with no field difference; the type lookup old 0xA0680 likewise",
+   "witnesses": {
+    "lookup": {
+     "kind": "exe",
+     "old_function": "0x5f85a0",
+     "new_function": "0x638520",
+     "old_insns": 133,
+     "aligned": 133,
+     "unaligned_old": [],
+     "unchanged_fields": {
+      "0x8": 4,
+      "0x10": 4,
+      "0x20": 6,
+      "0x28": 3,
+      "0x3c": 1,
+      "0xc8": 2,
+      "0x2f0": 2,
+      "0x300": 1,
+      "0x304": 1
+     },
+     "other_differences": []
+    },
+    "type_div": {
+     "kind": "exe",
+     "old": "0x5f8653",
+     "new": "0x6385d3",
+     "old_insn": "div dword ptr [rbp + 0x304]",
+     "new_insn": "div dword ptr [rbp + 0x304]",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "name_div": {
+     "kind": "exe",
+     "old": "0x5f86c3",
+     "new": "0x638643",
+     "old_insn": "div dword ptr [r11 + 0x3c]",
+     "new_insn": "div dword ptr [r11 + 0x3c]",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "name_table": {
+     "kind": "exe",
+     "old": "0x5f86b6",
+     "new": "0x638636",
+     "old_insn": "mov r10, qword ptr [r11 + 0x28]",
+     "new_insn": "mov r10, qword ptr [r11 + 0x28]",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "name_value": {
+     "kind": "exe",
+     "old": "0x5f8713",
+     "new": "0x638693",
+     "old_insn": "mov ecx, dword ptr [rax + rcx*8 + 8]",
+     "new_insn": "mov ecx, dword ptr [rax + rcx*8 + 8]",
+     "window_bytes": 128,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "records": {
+     "kind": "exe",
+     "old": "0x5f8717",
+     "new": "0x638697",
+     "old_insn": "mov rax, qword ptr [r11 + 0x10]",
+     "new_insn": "mov rax, qword ptr [r11 + 0x10]",
+     "window_bytes": 128,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "record_stride_160": {
+     "kind": "exe",
+     "old": "0x5f871f",
+     "new": "0x63869f",
+     "old_insn": "shl rdx, 5",
+     "new_insn": "shl rdx, 5",
+     "window_bytes": 128,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "type_table_xref": {
+     "kind": "exe",
+     "old": "0xa0769",
+     "new": "0xa2889",
+     "old_insn": "div dword ptr [rdi + 0x304]",
+     "new_insn": "div dword ptr [rdi + 0x304]",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "anchor": null
+    }
+   },
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address chain of the effect-data write",
+   "live_check": "F1",
+   "notes": "The record size word (+0x18) is only compared with EFFECT_SIZE (30896); a mismatch refuses the fix."
+  },
+  {
+   "id": "effect.data_constants",
+   "file": "src/flame_damage_fixed.lua",
+   "line": [
+    24,
+    25,
+    26,
+    37,
+    45
+   ],
+   "name": "PARTICLES type, EFFECT name, EFFECT_SIZE, Fix.HEADER, Fix.SYSTEMS, Fix.PATCHES (18 words: offset, shipped value v, target t)",
+   "old": "build 25480438 effect",
+   "new": "unchanged (installed effects are byte-identical)",
+   "method": "both flame effects extracted read-only from the installed slim data (bundles.nxa DSAR/LZ4, tools/slim_extract.py): their SHA-256 equal the pins upstream scripts/patch_table.py carries for the build 25480438 effects",
+   "witnesses": {
+    "effects": {
+     "upstream_pins (build 25480438 effects, scripts/patch_table.py)": {
+      "shared": "1f447c6f5e8807c08210cefe1fddb129cfc60ef099f89d05fbb855011722ff7f",
+      "cremator": "a1cf46aa69383df2ef2804d51dc4448f80bb2348cb62ba1857b2e8af5f9d409f"
+     },
+     "installed_26088801": [
+      {
+       "archive": "0a4bd8a1833f11b2",
+       "name": "e3d15622a42863c4",
+       "type": "a8193123526fad64",
+       "main_offset": 14950768,
+       "main_size": 30896,
+       "stream_size": 0,
+       "gpu_size": 0,
+       "sha256": "1f447c6f5e8807c08210cefe1fddb129cfc60ef099f89d05fbb855011722ff7f",
+       "file": "e3d15622a42863c4.a8193123526fad64"
+      },
+      {
+       "archive": "1577e917ad1f287d",
+       "name": "e3d15622a42863c4",
+       "type": "a8193123526fad64",
+       "main_offset": 1887840,
+       "main_size": 30896,
+       "stream_size": 0,
+       "gpu_size": 0,
+       "sha256": "1f447c6f5e8807c08210cefe1fddb129cfc60ef099f89d05fbb855011722ff7f",
+       "file": "e3d15622a42863c4.a8193123526fad64"
+      },
+      {
+       "archive": "df16f5c644edc2b1",
+       "name": "a4f17daba8ecd8e5",
+       "type": "a8193123526fad64",
+       "main_offset": 5960000,
+       "main_size": 32360,
+       "stream_size": 0,
+       "gpu_size": 0,
+       "sha256": "a1cf46aa69383df2ef2804d51dc4448f80bb2348cb62ba1857b2e8af5f9d409f",
+       "file": "a4f17daba8ecd8e5.a8193123526fad64"
+      }
+     ],
+     "header_layout_and_18_vanilla_words_match_installed_effect": true,
+     "upstream_tests/test_constants.py_on_installed_effects": "PASS (see out/TESTS.json)"
+    }
+   },
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "the effect-data write (its values and offsets)",
+   "live_check": "F1",
+   "notes": null
+  },
+  {
+   "id": "effect.not_loaded",
+   "file": "src/flame_damage_fixed.lua",
+   "line": [
+    27,
+    28
+   ],
+   "name": "NOT_LOADED sentinel / EMPTY_BUCKET -2 / CHAIN_END 0x7FFFFFFF",
+   "old": "unchanged",
+   "new": "unchanged",
+   "method": "the sentinel immediate occurs 9 times in each EXE image (resource manager); the bucket sentinels in the byte-identical lookups above",
+   "witnesses": {
+    "see": "effect.resource_tables"
+   },
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "read guards",
+   "live_check": "F1",
+   "notes": null
+  },
+  {
+   "id": "flame.world_ptr",
+   "file": "src/flame_damage_fixed.lua",
+   "line": 75,
+   "name": "PHYS.WORLD_PTR (game.dll pointer to the engine world)",
+   "old": "0x346BFA0",
+   "new": "0x2E271F8",
+   "method": "RIP xrefs migrated by unique windows (all agree); the world-init store is exact",
+   "witnesses": {
+    "global": {
+     "witnesses": 47,
+     "agreeing": 47,
+     "disagreeing": 0,
+     "exact_window_votes": {
+      "0x2e271f8": 45
+     },
+     "old_sites": 554,
+     "distinct_old_functions": 47,
+     "examples": [
+      {
+       "old": "0x4c5b02",
+       "new": "0x4cc812",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2fa6497]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x295a9df]",
+       "field_displacements_masked": false
+      },
+      {
+       "old": "0x5722bb",
+       "new": "0x57b31b",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2ef9cde]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x28abed6]",
+       "field_displacements_masked": false
+      },
+      {
+       "old": "0x5a8427",
+       "new": "0x5b1007",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2ec3b72]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x28761ea]",
+       "field_displacements_masked": false
+      },
+      {
+       "old": "0x6123c2",
+       "new": "0x61b692",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2e59bd7]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x280bb5f]",
+       "field_displacements_masked": false
+      }
+     ]
+    },
+    "store": {
+     "kind": "game",
+     "old": "0xfda367",
+     "new": "0xe6a2f7",
+     "old_insn": "mov qword ptr [rip + 0x2491c32], r9 ->0x346bfa0",
+     "new_insn": "mov qword ptr [rip + 0x1fbcefa], r9 ->0x2e271f8",
+     "window_bytes": 64,
+     "field_displacements_masked": false,
+     "anchor": null
+    }
+   },
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address chain of the particle-system write (flame slot)",
+   "live_check": "F3",
+   "notes": null
+  },
+  {
+   "id": "flame.particle_manager",
+   "file": "src/flame_damage_fixed.lua",
+   "line": 75,
+   "name": "PHYS.PARTICLE_MANAGER (engine world +0x230888)",
+   "old": "0x230888",
+   "new": "0x230768",
+   "method": "every old EXE instruction carrying the 0x230888 displacement, migrated by a unique window (field displacement masked, since it changed): 32 agree on 0x230768, none disagree. The whole world tail moved by -0x120 (0x23096C->0x23084C, 0x230AC8->0x2309A8, 0x230880->0x230760, 0x230890->0x230770; 0x230588 and 0x230058 unchanged); the particle-manager vtable calls through the new field are the same slots",
+   "witnesses": {
+    "field_scan": {
+     "old_sites": 65,
+     "considered": 65,
+     "unmapped": 33,
+     "votes": {
+      "0x230768": 32
+     },
+     "example": {
+      "kind": "exe",
+      "old": "0xd72f9",
+      "new": "0xd7ee9",
+      "old_insn": "mov rcx, qword ptr [rax + 0x230888]",
+      "new_insn": "mov rcx, qword ptr [rax + 0x230768]",
+      "window_bytes": 64,
+      "field_displacements_masked": true,
+      "anchor": null
+     }
+    },
+    "seeded_vtable_slots": [
+     {
+      "old_path": "SEED",
+      "old_disp": 0,
+      "indexed": false,
+      "scale": 1,
+      "new": [
+       {
+        "path": "SEED",
+        "disp": 0,
+        "count": 25
+       }
+      ],
+      "examples": [
+       {
+        "old": "0xd7300",
+        "new": "0xd7ef0",
+        "old_insn": "mov rax, qword ptr [rcx]",
+        "new_insn": "mov rax, qword ptr [rcx]",
+        "old_function": "0xd72a0",
+        "ratio": 0.695
+       },
+       {
+        "old": "0xda3bc",
+        "new": "0xdafac",
+        "old_insn": "mov rax, qword ptr [rcx]",
+        "new_insn": "mov rax, qword ptr [rcx]",
+        "old_function": "0xd999a",
+        "ratio": 0.88
+       },
+       {
+        "old": "0xe5a7f",
+        "new": "0xe666f",
+        "old_insn": "mov rax, qword ptr [rcx]",
+        "new_insn": "mov rax, qword ptr [rcx]",
+        "old_function": "0xe36a0",
+        "ratio": 0.888
+       },
+       {
+        "old": "0xe7c8d",
+        "new": "0xe887d",
+        "old_insn": "mov rax, qword ptr [rcx]",
+        "new_insn": "mov rax, qword ptr [rcx]",
+        "old_function": "0xe7520",
+        "ratio": 0.889
+       }
+      ]
+     },
+     {
+      "old_path": "SEED->0x0",
+      "old_disp": 0,
+      "indexed": false,
+      "scale": 1,
+      "new": [
+       {
+        "path": "SEED->0x0",
+        "disp": 0,
+        "count": 1
+       }
+      ],
+      "examples": [
+       {
+        "old": "0x1a76a6",
+        "new": "0x1a1716",
+        "old_insn": "mov r8, qword ptr [rcx]",
+        "new_insn": "mov r8, qword ptr [rcx]",
+        "old_function": "0x1a7138",
+        "ratio": 0.896
+       }
+      ]
+     },
+     {
+      "old_path": "SEED->0x0",
+      "old_disp": 8,
+      "indexed": false,
+      "scale": 1,
+      "new": [
+       {
+        "path": "SEED->0x0",
+        "disp": 8,
+        "count": 3
+       }
+      ],
+      "examples": [
+       {
+        "old": "0xe8724",
+        "new": "0xe9314",
+        "old_insn": "call qword ptr [rax + 8]",
+        "new_insn": "call qword ptr [rax + 8]",
+        "old_function": "0xe7d2b",
+        "ratio": 0.869
+       },
+       {
+        "old": "0xe9232",
+        "new": "0xe9e22",
+        "old_insn": "call qword ptr [r9 + 8]",
+        "new_insn": "call qword ptr [r9 + 8]",
+        "old_function": "0xe88e1",
+        "ratio": 0.886
+       },
+       {
+        "old": "0x237216",
+        "new": "0x22d0c6",
+        "old_insn": "call qword ptr [rax + 8]",
+        "new_insn": "call qword ptr [rax + 8]",
+        "old_function": "0x2367f9",
+        "ratio": 0.992
+       }
+      ]
+     },
+     {
+      "old_path": "SEED->0x0",
+      "old_disp": 88,
+      "indexed": false,
+      "scale": 1,
+      "new": [
+       {
+        "path": "SEED->0x0",
+        "disp": 88,
+        "count": 1
+       }
+      ],
+      "examples": [
+       {
+        "old": "0x338231",
+        "new": "0x307651",
+        "old_insn": "call qword ptr [r10 + 0x58]",
+        "new_insn": "call qword ptr [r10 + 0x58]",
+        "old_function": "0x338210",
+        "ratio": 0.5
+       }
+      ]
+     },
+     {
+      "old_path": "SEED->0x0",
+      "old_disp": 96,
+      "indexed": false,
+      "scale": 1,
+      "new": [
+       {
+        "path": "SEED->0x0",
+        "disp": 96,
+        "count": 1
+       }
+      ],
+      "examples": [
+       {
+        "old": "0x3381d3",
+        "new": "0x3075f3",
+        "old_insn": "call qword ptr [rax + 0x60]",
+        "new_insn": "call qword ptr [rax + 0x60]",
+        "old_function": "0x3381c0",
+        "ratio": 0.522
+       }
+      ]
+     },
+     {
+      "old_path": "SEED->0x0",
+      "old_disp": 112,
+      "indexed": false,
+      "scale": 1,
+      "new": [
+       {
+        "path": "SEED->0x0",
+        "disp": 112,
+        "count": 7
+       }
+      ],
+      "examples": [
+       {
+        "old": "0xda3bf",
+        "new": "0xdafaf",
+        "old_insn": "call qword ptr [rax + 0x70]",
+        "new_insn": "call qword ptr [rax + 0x70]",
+        "old_function": "0xd999a",
+        "ratio": 0.88
+       },
+       {
+        "old": "0xe7c90",
+        "new": "0xe8880",
+        "old_insn": "call qword ptr [rax + 0x70]",
+        "new_insn": "call qword ptr [rax + 0x70]",
+        "old_function": "0xe7520",
+        "ratio": 0.889
+       },
+       {
+        "old": "0xe8805",
+        "new": "0xe93f5",
+        "old_insn": "call qword ptr [rax + 0x70]",
+        "new_insn": "call qword ptr [rax + 0x70]",
+        "old_function": "0xe87d8",
+        "ratio": 0.632
+       },
+       {
+        "old": "0xe8899",
+        "new": "0xe9489",
+        "old_insn": "call qword ptr [rax + 0x70]",
+        "new_insn": "call qword ptr [rax + 0x70]",
+        "old_function": "0xe8840",
+        "ratio": 0.841
+       }
+      ]
+     }
+    ]
+   },
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address chain of the particle-system write",
+   "live_check": "F3",
+   "notes": null
+  },
+  {
+   "id": "flame.manager_tables",
+   "file": "src/flame_damage_fixed.lua",
+   "line": [
+    504,
+    516
+   ],
+   "name": "manager +0x1B8 effect hash entries (24 B {u64 key, u32 value +8, next +0x10}), +0x1C8 count, +0x1CC buckets, +0x228 mask, +0x278 instance lists (24 B {u32 count, records +8})",
+   "old": "unchanged",
+   "new": "unchanged",
+   "method": "the effect lookup old 0x17D3C0 is byte-identical at new 0x177460; the instance-list reads (0x17A4D6.., 0x18A0B0..) are exact windows",
+   "witnesses": {
+    "lookup_identical": {
+     "kind": "exe",
+     "old": "0x17d3c0",
+     "new": "0x177460",
+     "bytes_identical": 131
+    },
+    "mask": {
+     "kind": "exe",
+     "old": "0x17a4d6",
+     "new": "0x174576",
+     "old_insn": "mov edx, dword ptr [r14 + 0x228]",
+     "new_insn": "mov edx, dword ptr [r14 + 0x228]",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "lists": {
+     "kind": "exe",
+     "old": "0x17a4e5",
+     "new": "0x174585",
+     "old_insn": "mov rcx, qword ptr [r14 + 0x278]",
+     "new_insn": "mov rcx, qword ptr [r14 + 0x278]",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "list_records": {
+     "kind": "exe",
+     "old": "0x17a4f7",
+     "new": "0x174597",
+     "old_insn": "add rdx, qword ptr [rcx + r8*8 + 8]",
+     "new_insn": "add rdx, qword ptr [rcx + r8*8 + 8]",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "anchor": "0x17a509"
+    },
+    "list_count_and_records_listing": "evidence/listing-find-instance-18a0f9.txt (old 0x18A0DD/0x18A0E6 = new 0x18414E/0x184157)"
+   },
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address chain of the particle-system write",
+   "live_check": "F3",
+   "notes": null
+  },
+  {
+   "id": "flame.instance_records",
+   "file": "src/flame_damage_fixed.lua",
+   "line": [
+    75
+   ],
+   "name": "PHYS.INSTANCE 136 (record stride), INSTANCE_ID +0x10, record +8 simulation",
+   "old": "136 / 0x10 / 8",
+   "new": "unchanged",
+   "method": "the engine find-by-id loop old 0x18A0F0 (stride 0x88, cmp [rec+0x10], id; then [rec+8]) is an exact window at new 0x184160",
+   "witnesses": {
+    "stride": {
+     "kind": "exe",
+     "old": "0x18a0f2",
+     "new": "0x184162",
+     "old_insn": "imul rdx, rax, 0x88",
+     "new_insn": "imul rdx, rax, 0x88",
+     "window_bytes": 64,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "id": {
+     "kind": "exe",
+     "old": "0x18a0f9",
+     "new": "0x184169",
+     "old_insn": "cmp dword ptr [rdx + r11 + 0x10], ebx",
+     "new_insn": "cmp dword ptr [rdx + r11 + 0x10], ebx",
+     "window_bytes": 64,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "sim": {
+     "kind": "exe",
+     "old": "0x18a109",
+     "new": "0x184179",
+     "old_insn": "mov rdx, qword ptr [rdx + r11 + 8]",
+     "new_insn": "mov rdx, qword ptr [rdx + r11 + 8]",
+     "window_bytes": 48,
+     "field_displacements_masked": false,
+     "anchor": null
+    }
+   },
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "selects the flame instance whose systems are retargeted",
+   "live_check": "F3",
+   "notes": null
+  },
+  {
+   "id": "flame.simulation_layout",
+   "file": "src/flame_damage_fixed.lua",
+   "line": [
+    554,
+    555,
+    561
+   ],
+   "name": "simulation +0x20 effect data, +0x28 system count, +0x30 system list (80 B elements, handle +0x34)",
+   "old": "unchanged",
+   "new": "unchanged",
+   "method": "the particle update old 0x182FFD / 0x1845E2 aligned completely (no field difference): [rec+8] -> sim, [sim+0x30] list, [list + 80*i + 0x34] handle, [sim+0x20] effect data (its +0x10 flags read)",
+   "witnesses": {
+    "update_a": {
+     "kind": "exe",
+     "old_function": "0x182ffd",
+     "new_function": "0x17d09d",
+     "old_insns": 779,
+     "aligned": 779,
+     "unaligned_old": [],
+     "unchanged_fields": {
+      "0x8": 22,
+      "0x20": 11,
+      "0x28": 3,
+      "0x30": 16,
+      "0x34": 6,
+      "0x88": 3
+     },
+     "other_differences": [
+      "0x183c93->0x17dd33 0x16765b0->0x17143a0"
+     ]
+    },
+    "update_b": {
+     "kind": "exe",
+     "old_function": "0x1845e2",
+     "new_function": "0x17e682",
+     "old_insns": 2312,
+     "aligned": 2312,
+     "unaligned_old": [],
+     "unchanged_fields": {
+      "0x8": 63,
+      "0x20": 35,
+      "0x28": 15,
+      "0x30": 27,
+      "0x34": 3,
+      "0x88": 3
+     },
+     "other_differences": [
+      "0x18478a->0x17e82a 0x1871d0->0x181270"
+     ]
+    },
+    "list": {
+     "kind": "exe",
+     "old": "0x18338d",
+     "new": "0x17d42d",
+     "old_insn": "mov rax, qword ptr [rax + 0x30]",
+     "new_insn": "mov rax, qword ptr [rax + 0x30]",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "handle": {
+     "kind": "exe",
+     "old": "0x183395",
+     "new": "0x17d435",
+     "old_insn": "mov ecx, dword ptr [rdx + rax + 0x34]",
+     "new_insn": "mov ecx, dword ptr [rdx + rax + 0x34]",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "element_stride_80": {
+     "kind": "exe",
+     "old": "0x183360",
+     "new": "0x17d400",
+     "old_insn": "shl rdx, 4",
+     "new_insn": "shl rdx, 4",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "effect_data": {
+     "kind": "exe",
+     "old": "0x18467e",
+     "new": "0x17e71e",
+     "old_insn": "mov rcx, qword ptr [rax + 0x20]",
+     "new_insn": "mov rcx, qword ptr [rax + 0x20]",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "anchor": null
+    }
+   },
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address chain of the particle-system write",
+   "live_check": "F3",
+   "notes": null
+  },
+  {
+   "id": "flame.system_handle",
+   "file": "src/flame_damage_fixed.lua",
+   "line": 535,
+   "name": "system handle: world bits 30-31, index 0-15 (generation 16-23 checked against the table tag)",
+   "old": "unchanged",
+   "new": "unchanged",
+   "method": "the engine handle resolver old 0x810460 (shr 0x1E world, movzx index) is byte-identical at new 0x897CE0; the table helpers (old 0xDF7120 / 0xDF7490: entries 16 B {ptr, tag +8}, tag 0xFFFFFF free) are exact at new 0xE4FB40 / 0xE4FEB0",
+   "witnesses": {
+    "resolver_identical": {
+     "kind": "exe",
+     "old": "0x810460",
+     "new": "0x897ce0",
+     "bytes_identical": 15
+    },
+    "resolver_decode": {
+     "kind": "exe",
+     "old": "0x810482",
+     "new": "0x897d02",
+     "old_insn": "shr rcx, 0x1e",
+     "new_insn": "shr rcx, 0x1e",
+     "window_bytes": 48,
+     "field_displacements_masked": false,
+     "anchor": "0x810460"
+    },
+    "table_helper": {
+     "kind": "exe",
+     "old": "0xdf7120",
+     "new": "0xe4fb40",
+     "bytes_identical": 39
+    },
+    "table_helper_2": {
+     "kind": "exe",
+     "old": "0xdf74a1",
+     "new": "0xe4fec1",
+     "old_insn": "mov r14, qword ptr [rcx + 8]",
+     "new_insn": "mov r14, qword ptr [rcx + 8]",
+     "window_bytes": 128,
+     "field_displacements_masked": false,
+     "anchor": null
+    }
+   },
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address chain of the particle-system write",
+   "live_check": "F3",
+   "notes": "The code that indexes the world table with a handle (old 0xE26213, 0xDF4206) sits on pages that are encrypted in the new capture (entropy ~7.95, e.g. 0xE4C000-0xE4DFFF), so it is not re-disassembled; the mod checks the tag (index and generation) of every slot before it uses the pointer, and the filter word must hold exactly 11 (or 11 in its own group) before it is written."
+  },
+  {
+   "id": "flame.world_ps_table",
+   "file": "src/flame_damage_fixed.lua",
+   "line": 74,
+   "name": "PHYS.PS_TABLE world +0x498 -> particle-system table, PS_ARRAY +8, PS_FILTER system +0x1684 (query filter info)",
+   "old": "0x498 / 8 / 0x1684",
+   "new": "unchanged",
+   "method": "the physics world constructor old 0xD05870 and destructor old 0xD06D00 align completely with new 0xD5E1A0 / 0xD5F630 with no field difference (+0x498 initialised and released at the same offset); world+0x498 is read by an exact window (old 0xE3C50D -> new 0xE94F2D); +0x1684 by 6 exact windows in the particle-collision code",
+   "witnesses": {
+    "world_ctor": {
+     "kind": "exe",
+     "old_function": "0xd05870",
+     "new_function": "0xd5e1a0",
+     "old_insns": 966,
+     "aligned": 966,
+     "unaligned_old": [],
+     "unchanged_fields": {
+      "0x20": 15,
+      "0x38": 2,
+      "0x40": 3,
+      "0x50": 4,
+      "0x498": 3
+     },
+     "other_differences": []
+    },
+    "world_dtor": {
+     "kind": "exe",
+     "old_function": "0xd06d00",
+     "new_function": "0xd5f630",
+     "old_insns": 408,
+     "aligned": 408,
+     "unaligned_old": [],
+     "unchanged_fields": {
+      "0x20": 2,
+      "0x38": 1,
+      "0x498": 4
+     },
+     "other_differences": []
+    },
+    "table_read": {
+     "kind": "exe",
+     "old": "0xe3c50d",
+     "new": "0xe94f2d",
+     "old_insn": "mov rcx, qword ptr [rax + 0x498]",
+     "new_insn": "mov rcx, qword ptr [rax + 0x498]",
+     "window_bytes": 128,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "filter_info": [
+     {
+      "kind": "exe",
+      "old": "0xe36447",
+      "new": "0xe8ee67",
+      "old_insn": "mov dword ptr [rcx + 0x1684], r13d",
+      "new_insn": "mov dword ptr [rcx + 0x1684], r13d",
+      "window_bytes": 160,
+      "field_displacements_masked": false,
+      "anchor": null
+     }
+    ],
+    "filter_info_scan": {
+     "old_sites": 9,
+     "mapped": 6,
+     "votes": {
+      "0x1684": 6
+     },
+     "unmapped_on_encrypted_pages": [
+      "0xfa60e",
+      "0xd4d5d3"
+     ]
+    }
+   },
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address of the particle-system write",
+   "live_check": "F3",
+   "notes": null
+  },
+  {
+   "id": "phys.filter_ptr",
+   "file": "src/flame_damage_fixed.lua",
+   "line": 72,
+   "name": "PHYS.FILTER_PTR (world collision filter pointer)",
+   "old": "0x27C5E40",
+   "new": "0x286D330",
+   "method": "RIP xrefs migrated by unique exact windows (all agree)",
+   "witnesses": {
+    "global": {
+     "witnesses": 8,
+     "agreeing": 8,
+     "disagreeing": 0,
+     "exact_window_votes": {
+      "0x286d330": 8
+     },
+     "old_sites": 8,
+     "distinct_old_functions": 7,
+     "examples": [
+      {
+       "old": "0x78d71b",
+       "new": "0x814a1b",
+       "instruction_old": "mov rbx, qword ptr [rip + 0x203871e]",
+       "instruction_new": "mov rbx, qword ptr [rip + 0x205890e]",
+       "field_displacements_masked": false
+      },
+      {
+       "old": "0x7a2ab2",
+       "new": "0x829f62",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2023387]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x20433c7]",
+       "field_displacements_masked": false
+      },
+      {
+       "old": "0x7a2e19",
+       "new": "0x82a2c9",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2023020]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2043060]",
+       "field_displacements_masked": false
+      },
+      {
+       "old": "0x7cc2f4",
+       "new": "0x8539d4",
+       "instruction_old": "mov rax, qword ptr [rip + 0x1ff9b45]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2019955]",
+       "field_displacements_masked": false
+      }
+     ]
+    }
+   },
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "gate (check_filter: the filter type and the flame row must match before any group write)",
+   "live_check": "F4",
+   "notes": null
+  },
+  {
+   "id": "phys.filter_vtable",
+   "file": "src/flame_damage_fixed.lua",
+   "line": 72,
+   "name": "PHYS.FILTER_VTABLE (hknpGroupCollisionFilter vtable)",
+   "old": "0x148B938",
+   "new": "0x1521958",
+   "method": "the vtable store (old 0xCE6277) maps by an exact window; 5 of the 16 slots map independently to exactly the new vtable's slots (the rest are thunks/duplicates with the same 0x58930 code shift)",
+   "witnesses": {
+    "global": {
+     "witnesses": 1,
+     "agreeing": 1,
+     "disagreeing": 0,
+     "exact_window_votes": {
+      "0x1521958": 1
+     },
+     "old_sites": 2,
+     "distinct_old_functions": 1,
+     "examples": [
+      {
+       "old": "0xce6277",
+       "new": "0xd3eba7",
+       "instruction_old": "lea rax, [rip + 0x7a56ba]",
+       "instruction_new": "lea rax, [rip + 0x7e2daa]",
+       "field_displacements_masked": false
+      }
+     ]
+    },
+    "store": {
+     "kind": "exe",
+     "old": "0xce6277",
+     "new": "0xd3eba7",
+     "old_insn": "lea rax, [rip + 0x7a56ba] ->0x148b938",
+     "new_insn": "lea rax, [rip + 0x7e2daa] ->0x1521958",
+     "window_bytes": 48,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "slots": [
+     {
+      "slot": 0,
+      "old": "0xcf4520",
+      "new": "0xd4ce50",
+      "window": null,
+      "agrees": false
+     },
+     {
+      "slot": 1,
+      "old": "0xce4d70",
+      "new": "0xd3d6a0",
+      "window": null,
+      "agrees": false
+     },
+     {
+      "slot": 2,
+      "old": "0x99cb00",
+      "new": "0x9f5410",
+      "window": null,
+      "agrees": false
+     },
+     {
+      "slot": 3,
+      "old": "0xce5a10",
+      "new": "0xd3e340",
+      "window": "0xd3e340",
+      "agrees": true
+     },
+     {
+      "slot": 4,
+      "old": "0xce6150",
+      "new": "0xd3ea80",
+      "window": "0xd3ea80",
+      "agrees": true
+     },
+     {
+      "slot": 5,
+      "old": "0xce6140",
+      "new": "0xd3ea70",
+      "window": null,
+      "agrees": false
+     },
+     {
+      "slot": 6,
+      "old": "0xce6030",
+      "new": "0xd3e960",
+      "window": "0xd3e960",
+      "agrees": true
+     },
+     {
+      "slot": 7,
+      "old": "0xce6130",
+      "new": "0xd3ea60",
+      "window": "0x9d3be0",
+      "agrees": false
+     },
+     {
+      "slot": 8,
+      "old": "0x7e5660",
+      "new": "0x86cd40",
+      "window": null,
+      "agrees": false
+     },
+     {
+      "slot": 9,
+      "old": "0x16cca30",
+      "new": "0x17721b0",
+      "window": null,
+      "agrees": false
+     },
+     {
+      "slot": 10,
+      "old": "0xcf4520",
+      "new": "0xd4ce50",
+      "window": null,
+      "agrees": false
+     },
+     {
+      "slot": 11,
+      "old": "0xce4c30",
+      "new": "0xd3d560",
+      "window": null,
+      "agrees": false
+     },
+     {
+      "slot": 12,
+      "old": "0x99cb00",
+      "new": "0x9f5410",
+      "window": null,
+      "agrees": false
+     },
+     {
+      "slot": 13,
+      "old": "0xce55f0",
+      "new": "0xd3df20",
+      "window": "0xd3df20",
+      "agrees": true
+     },
+     {
+      "slot": 14,
+      "old": "0xce5d80",
+      "new": "0xd3e6b0",
+      "window": "0xd3e6b0",
+      "agrees": true
+     },
+     {
+      "slot": 15,
+      "old": "0xce5d70",
+      "new": "0xd3e6a0",
+      "window": null,
+      "agrees": false
+     }
+    ]
+   },
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "gate (check_filter)",
+   "live_check": "F4",
+   "notes": null
+  },
+  {
+   "id": "phys.filter_semantics",
+   "file": "src/flame_damage_fixed.lua",
+   "line": 72,
+   "name": "PHYS.MATRIX +40 (layer rows, 16 B), filter info bits (layer 0-6, subsystem 7-13, don't-collide 14-20, group 21-31), group rule",
+   "old": "40",
+   "new": "40",
+   "method": "the collision check old 0xCE6030 is byte-identical at new 0xD3E960 (body filter info [body+0x6C], row = this + 16*layer + 0x28, the same-group subsystem rule)",
+   "witnesses": {
+    "check_identical": {
+     "kind": "exe",
+     "old": "0xce6030",
+     "new": "0xd3e960",
+     "bytes_identical": 242
+    }
+   },
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "meaning of the group bits the body and particle-system writes set",
+   "live_check": "F4",
+   "notes": null
+  },
+  {
+   "id": "phys.flame_row",
+   "file": "src/flame_damage_fixed.lua",
+   "line": [
+    81,
+    85
+   ],
+   "name": "Fix.FLAME_LAYER 11 and FLAME_ROW (layers the flame can hit)",
+   "old": "build 25480438 live matrix",
+   "new": "unchanged (not provable offline)",
+   "method": "runtime data (the layer matrix is filled from game settings); check_filter compares the live row with FLAME_ROW once per session and turns the self-hit fix off on any difference",
+   "witnesses": {},
+   "confidence": "medium",
+   "feeds_write": false,
+   "role": "gate only: a different row disables the self-hit fix (fail closed)",
+   "live_check": "F4",
+   "notes": null
+  },
+  {
+   "id": "phys.worlds",
+   "file": "src/flame_damage_fixed.lua",
+   "line": 73,
+   "name": "PHYS.WORLDS (4 physics world slots, stride 176)",
+   "old": "0x27BA890 / 176",
+   "new": "0x2861D70 / 176",
+   "method": "RIP xrefs migrated by unique exact windows (22/22 agree); stride 0xB0 and the 4-world bound in the same windows",
+   "witnesses": {
+    "global": {
+     "witnesses": 22,
+     "agreeing": 22,
+     "disagreeing": 0,
+     "exact_window_votes": {
+      "0x2861d70": 22
+     },
+     "old_sites": 22,
+     "distinct_old_functions": 22,
+     "examples": [
+      {
+       "old": "0x77d94a",
+       "new": "0x804bea",
+       "instruction_old": "lea rax, [rip + 0x203cf3f]",
+       "instruction_new": "lea rax, [rip + 0x205d17f]",
+       "field_displacements_masked": false
+      },
+      {
+       "old": "0x77d9ca",
+       "new": "0x804c6a",
+       "instruction_old": "lea rax, [rip + 0x203cebf]",
+       "instruction_new": "lea rax, [rip + 0x205d0ff]",
+       "field_displacements_masked": false
+      },
+      {
+       "old": "0x78f486",
+       "new": "0x816786",
+       "instruction_old": "lea rax, [rip + 0x202b403]",
+       "instruction_new": "lea rax, [rip + 0x204b5e3]",
+       "field_displacements_masked": false
+      },
+      {
+       "old": "0x797498",
+       "new": "0x81e7c8",
+       "instruction_old": "lea r13, [rip + 0x20233f1]",
+       "instruction_new": "lea r13, [rip + 0x20435a1]",
+       "field_displacements_masked": false
+      }
+     ]
+    },
+    "stride": {
+     "kind": "exe",
+     "old": "0x77d7bc",
+     "new": "0x804a5c",
+     "old_insn": "imul rcx, rax, 0xb0",
+     "new_insn": "imul rcx, rax, 0xb0",
+     "window_bytes": 48,
+     "field_displacements_masked": true,
+     "anchor": null
+    }
+   },
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address chain of the body write and of the particle-system table",
+   "live_check": "F5",
+   "notes": null
+  },
+  {
+   "id": "phys.world_vtable",
+   "file": "src/flame_damage_fixed.lua",
+   "line": 73,
+   "name": "PHYS.WORLD_VTABLE (physics world vtable)",
+   "old": "0x14B3148",
+   "new": "0x1549168",
+   "method": "constructor and destructor stores map by exact windows (2/2)",
+   "witnesses": {
+    "global": {
+     "witnesses": 2,
+     "agreeing": 2,
+     "disagreeing": 0,
+     "exact_window_votes": {
+      "0x1549168": 2
+     },
+     "old_sites": 2,
+     "distinct_old_functions": 2,
+     "examples": [
+      {
+       "old": "0xd058ab",
+       "new": "0xd5e1db",
+       "instruction_old": "lea rcx, [rip + 0x7ad896]",
+       "instruction_new": "lea rcx, [rip + 0x7eaf86]",
+       "field_displacements_masked": false
+      },
+      {
+       "old": "0xd06d23",
+       "new": "0xd5f653",
+       "instruction_old": "lea rax, [rip + 0x7ac41e]",
+       "instruction_new": "lea rax, [rip + 0x7e9b0e]",
+       "field_displacements_masked": false
+      }
+     ]
+    }
+   },
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "gate (scan_begin checks it)",
+   "live_check": "F5",
+   "notes": null
+  },
+  {
+   "id": "phys.body_records",
+   "file": "src/flame_damage_fixed.lua",
+   "line": [
+    76,
+    221
+   ],
+   "name": "world +0x38 bodies, +0x40 capacity, +0x50 index bound; body 160 B: flags word 17 (+0x44, live when bit 0 or 1), filter info word 27 (+0x6C), id word 28 (+0x70, low 24 bits = index), actor word 36 (+0x90), unit word 37 (+0x94)",
+   "old": "unchanged",
+   "new": "unchanged",
+   "method": "exact windows in the engine body accessors (old 0x77D7B8.., 0x78CDB1..); the world constructor; 28 aligned physics functions with no field difference other than moved absolute tables (evidence/physics-functions.txt)",
+   "witnesses": {
+    "bodies": {
+     "kind": "exe",
+     "old": "0x77d7db",
+     "new": "0x804a7b",
+     "old_insn": "add rcx, qword ptr [rdx + 0x38]",
+     "new_insn": "add rcx, qword ptr [rdx + 0x38]",
+     "window_bytes": 48,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "stride_160": {
+     "kind": "exe",
+     "old": "0x77d7d7",
+     "new": "0x804a77",
+     "old_insn": "shl rcx, 5",
+     "new_insn": "shl rcx, 5",
+     "window_bytes": 64,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "actor": {
+     "kind": "exe",
+     "old": "0x77d7df",
+     "new": "0x804a7f",
+     "old_insn": "cmp dword ptr [rcx + 0x90], r11d",
+     "new_insn": "cmp dword ptr [rcx + 0x90], r11d",
+     "window_bytes": 48,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "id": {
+     "kind": "exe",
+     "old": "0x77d7e8",
+     "new": "0x804a88",
+     "old_insn": "mov ebx, dword ptr [rcx + 0x70]",
+     "new_insn": "mov ebx, dword ptr [rcx + 0x70]",
+     "window_bytes": 48,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "size_bound": {
+     "kind": "exe",
+     "old": "0x78cdb1",
+     "new": "0x8140b1",
+     "old_insn": "cmp ecx, dword ptr [rsi + 0x40]",
+     "new_insn": "cmp ecx, dword ptr [rsi + 0x40]",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "live_flags": {
+     "kind": "exe",
+     "old": "0x78cdc6",
+     "new": "0x8140c6",
+     "old_insn": "test byte ptr [rdx + r8 + 0x44], 3",
+     "new_insn": "test byte ptr [rdx + r8 + 0x44], 3",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "actor_write_by_index": {
+     "kind": "exe",
+     "old": "0x7a30ec",
+     "new": "0x82a59c",
+     "old_insn": "lea rcx, [rcx + rcx*4]",
+     "new_insn": "lea rcx, [rcx + rcx*4]",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "filter_info": "phys.filter_semantics (0xCE6030 reads [body+0x6C])",
+    "unit_word_and_bound": [
+     {
+      "kind": "exe",
+      "old_function": "0x77d910",
+      "new_function": "0x804bb0",
+      "old_insns": 33,
+      "aligned": 33,
+      "unaligned_old": [],
+      "unchanged_fields": {
+       "0x38": 2,
+       "0x6c": 1,
+       "0x70": 1
+      },
+      "other_differences": []
+     },
+     {
+      "kind": "exe",
+      "old_function": "0x7f41b0",
+      "new_function": "0x87b890",
+      "old_insns": 22,
+      "aligned": 22,
+      "unaligned_old": [],
+      "unchanged_fields": {
+       "0x70": 1
+      },
+      "other_differences": []
+     },
+     {
+      "kind": "exe",
+      "old_function": "0x7e31c0",
+      "new_function": "0x86a8a0",
+      "old_insns": 108,
+      "aligned": 108,
+      "unaligned_old": [],
+      "unchanged_fields": {
+       "0x50": 1,
+       "0x6c": 1,
+       "0x70": 2
+      },
+      "other_differences": []
+     }
+    ]
+   },
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address and layout of the body write (filter info word) and the body scan that selects it",
+   "live_check": "F5",
+   "notes": "Bit meaning of the unit word (+0x94) is the mod's own; its offset is paired unchanged in the aligned physics functions. A wrong unit word would make the scan keep no body (no write)."
+  },
+  {
+   "id": "phys.groups",
+   "file": "src/flame_damage_fixed.lua",
+   "line": [
+    79
+   ],
+   "name": "PHYS.GROUPS (system-group allocator: +0 capacity 2048, +4 summary words, +8 bitmap; set bit = free) and GROUP_TOP/GROUP_LOW",
+   "old": "0x27C5B88 / 2047 / 2040",
+   "new": "0x286D078 / 2047 / 2040",
+   "method": "RIP xrefs migrated by unique exact windows (7/7); the allocator init (capacity 0x800) and the free-bit set path are exact",
+   "witnesses": {
+    "global": {
+     "witnesses": 7,
+     "agreeing": 7,
+     "disagreeing": 0,
+     "exact_window_votes": {
+      "0x286d078": 7
+     },
+     "old_sites": 11,
+     "distinct_old_functions": 6,
+     "examples": [
+      {
+       "old": "0x78b516",
+       "new": "0x812816",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x203a66b]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x205a85b]",
+       "field_displacements_masked": false
+      },
+      {
+       "old": "0x78b52e",
+       "new": "0x81282e",
+       "instruction_old": "mov qword ptr [rip + 0x203a653], rdi",
+       "instruction_new": "mov qword ptr [rip + 0x205a843], rdi",
+       "field_displacements_masked": false
+      },
+      {
+       "old": "0x7a373d",
+       "new": "0x82abed",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2022444]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x2042484]",
+       "field_displacements_masked": false
+      },
+      {
+       "old": "0x7e5ea6",
+       "new": "0x86d586",
+       "instruction_old": "mov rbx, qword ptr [rip + 0x1fdfcdb]",
+       "instruction_new": "mov rbx, qword ptr [rip + 0x1fffaeb]",
+       "field_displacements_masked": false
+      }
+     ]
+    },
+    "capacity": {
+     "kind": "exe",
+     "old": "0x7e5ebf",
+     "new": "0x86d59f",
+     "old_insn": "mov dword ptr [rbx], 0x800",
+     "new_insn": "mov dword ptr [rbx], 0x800",
+     "window_bytes": 32,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "words": {
+     "kind": "exe",
+     "old": "0x7a3752",
+     "new": "0x82ac02",
+     "old_insn": "mov r11d, dword ptr [rcx + 4]",
+     "new_insn": "mov r11d, dword ptr [rcx + 4]",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "anchor": null
+    },
+    "bitmap": {
+     "kind": "exe",
+     "old": "0x7a3756",
+     "new": "0x82ac06",
+     "old_insn": "mov r9, qword ptr [rcx + 8]",
+     "new_insn": "mov r9, qword ptr [rcx + 8]",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "anchor": null
+    }
+   },
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "which group number the writes may use (only groups the allocator marks free)",
+   "live_check": "F6",
+   "notes": null
+  },
+  {
+   "id": "phys.units",
+   "file": "src/flame_damage_fixed.lua",
+   "line": [
+    77
+   ],
+   "name": "PHYS.UNITS (unit registry: +0x88 objects, handle & 0x3FFFFF; unit +8 handle)",
+   "old": "0x1A100F0",
+   "new": "0x1AB76F8",
+   "method": "RIP xrefs migrated by unique windows (44 agree, 42 exact); the registry lookup old 0x9D8C0 is exact at new 0xA06B0",
+   "witnesses": {
+    "global": {
+     "witnesses": 44,
+     "agreeing": 44,
+     "disagreeing": 0,
+     "exact_window_votes": {
+      "0x1ab76f8": 42
+     },
+     "old_sites": 56,
+     "distinct_old_functions": 34,
+     "examples": [
+      {
+       "old": "0x86a75",
+       "new": "0x887b4",
+       "instruction_old": "mov qword ptr [rip + 0x1989674], rax",
+       "instruction_new": "mov qword ptr [rip + 0x1a2ef3d], rax",
+       "field_displacements_masked": true
+      },
+      {
+       "old": "0x9d8cf",
+       "new": "0xa06bf",
+       "instruction_old": "mov rsi, qword ptr [rip + 0x197281a]",
+       "instruction_new": "mov rsi, qword ptr [rip + 0x1a17032]",
+       "field_displacements_masked": false
+      },
+      {
+       "old": "0xd517f",
+       "new": "0xd5d6f",
+       "instruction_old": "mov rsi, qword ptr [rip + 0x193af6a]",
+       "instruction_new": "mov rsi, qword ptr [rip + 0x19e1982]",
+       "field_displacements_masked": false
+      },
+      {
+       "old": "0xd9b37",
+       "new": "0xda727",
+       "instruction_old": "mov r14, qword ptr [rip + 0x19365b2]",
+       "instruction_new": "mov r14, qword ptr [rip + 0x19dcfca]",
+       "field_displacements_masked": false
+      }
+     ]
+    },
+    "mask": {
+     "kind": "exe",
+     "old": "0x9d8e7",
+     "new": "0xa06d7",
+     "old_insn": "and eax, 0x3fffff",
+     "new_insn": "and eax, 0x3fffff",
+     "window_bytes": 96,
+     "field_displacements_masked": false,
+     "anchor": "0x9d8cf"
+    },
+    "objects": {
+     "kind": "exe",
+     "old": "0x9d909",
+     "new": "0xa06f9",
+     "old_insn": "mov rax, qword ptr [rsi + 0x88]",
+     "new_insn": "mov rax, qword ptr [rsi + 0x88]",
+     "window_bytes": 96,
+     "field_displacements_masked": false,
+     "anchor": "0x9d8cf"
+    }
+   },
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "which units count as the weapon's family (selects bodies to group)",
+   "live_check": "F7",
+   "notes": null
+  },
+  {
+   "id": "phys.unit_links",
+   "file": "src/flame_damage_fixed.lua",
+   "line": [
+    77,
+    78
+   ],
+   "name": "unit +0x1D0 parent, +0x1D8 first child, +0x1E0 next sibling",
+   "old": "unchanged",
+   "new": "unchanged",
+   "method": "World.link_unit's implementation old 0x1AF240 (parent/first-child/next-sibling list edit) aligns completely with new 0x1A9380; its only other changed field is the world +0x23096C counter (the -0x120 world tail shift)",
+   "witnesses": {
+    "link": {
+     "kind": "exe",
+     "old_function": "0x1af240",
+     "new_function": "0x1a9380",
+     "old_insns": 144,
+     "aligned": 144,
+     "unaligned_old": [],
+     "unchanged_fields": {
+      "0x1d0": 2,
+      "0x1d8": 2,
+      "0x1e0": 4
+     },
+     "other_differences": [
+      "0x1af25c->0x1a939c 0x23096c->0x23084c"
+     ]
+    },
+    "link_store": {
+     "kind": "exe",
+     "old": "0x1af409",
+     "new": "0x1a9549",
+     "old_insn": "mov rcx, qword ptr [rsi + 0x1d0]",
+     "new_insn": "mov rcx, qword ptr [rsi + 0x1d0]",
+     "window_bytes": 128,
+     "field_displacements_masked": false,
+     "anchor": null
+    }
+   },
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "family walk (selects bodies to group)",
+   "live_check": "F7",
+   "notes": null
+  },
+  {
+   "id": "phys.unit_resource",
+   "file": "src/flame_damage_fixed.lua",
+   "line": [
+    78,
+    86
+   ],
+   "name": "unit +0x358 (unit resource name hash, compared with avatar_helldiver) and Fix.AVATAR",
+   "old": "0x358 / 0x4D1C334D294DFA97",
+   "new": "unchanged",
+   "method": "the unit constructor World.spawn_unit calls (old 0xD7830, 0x438-byte object pushed to the world unit list) aligns completely with new 0xD8420 and stores the same 64-bit argument at +0x358; the avatar_helldiver hash occurs as a code immediate in both game.dll images (7 old, 6 new)",
+   "witnesses": {
+    "ctor": {
+     "kind": "exe",
+     "old_function": "0xd7830",
+     "new_function": "0xd8420",
+     "old_insns": 15,
+     "aligned": 15,
+     "unaligned_old": [],
+     "unchanged_fields": {
+      "0x8": 1
+     },
+     "other_differences": []
+    },
+    "store": {
+     "kind": "exe",
+     "old": "0xd7a7d",
+     "new": "0xd866d",
+     "old_insn": "mov qword ptr [r13 + 0x358], rax",
+     "new_insn": "mov qword ptr [r13 + 0x358], rax",
+     "window_bytes": 160,
+     "field_displacements_masked": false,
+     "anchor": null
+    }
+   },
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "family walk: a seated avatar's bodies are excluded from the group",
+   "live_check": "F7",
+   "notes": null
+  },
+  {
+   "id": "build.pins",
+   "file": "src/flame_damage_fixed.lua",
+   "line": [
+    1003,
+    1004,
+    1131
+   ],
+   "name": "GAME_SHA256 / EXE_SHA256 (memory.verify_build gate; the \"Unsupported game build\" refusal at line 1131)",
+   "old": "2E2C3B7C...F51E / F5FEE03D...5F06",
+   "new": "6D1D4D3B...C08F / 0ACC07DE...EABE",
+   "method": "SHA-256 of the installed game.dll and helldivers2.exe (read-only)",
+   "witnesses": {
+    "game.dll": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+    "helldivers2.exe": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE"
+   },
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "gate",
+   "live_check": "F0",
+   "notes": null
+  },
+  {
+   "id": "adapter.virtualquery",
+   "file": "src/flame_damage_fixed.lua",
+   "line": 1078,
+   "name": "MEM_COMMIT / MEM_PRIVATE / PAGE_READWRITE checked before every write",
+   "old": "Windows constants",
+   "new": "unchanged",
+   "method": "Windows ABI (not game data)",
+   "witnesses": {},
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "write guard",
+   "live_check": "F8",
+   "notes": null
+  },
+  {
+   "id": "code.valid_address",
+   "file": "src/flame_damage_fixed.lua",
+   "line": 115,
+   "name": "user-mode pointer bounds",
+   "old": "generic",
+   "new": "unchanged",
+   "method": "x64 user address space",
+   "witnesses": {},
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "read guard",
+   "live_check": null,
+   "notes": null
+  },
+  {
+   "id": "comments.exe_functions",
+   "file": "src/flame_damage_fixed.lua",
+   "line": [
+    67,
+    70,
+    213
+   ],
+   "name": "comment-only EXE addresses (query check 0xCE6030, particle filter 0xE66F60, crash site 0x16C768)",
+   "old": "0xce6030 / 0xe66f60 / 0x16c768",
+   "new": "0xd3e960 / 0xebf980 / (not mapped)",
+   "method": "comments only, left unedited",
+   "witnesses": {},
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "documentation",
+   "live_check": null,
+   "notes": null
+  }
+ ],
+ "inventory_sites": [
+  {
+   "line": 20,
+   "text": "local SPRAY_MANAGER_RVA = 0x3326bb0 -- game.dll: SprayWeaponComponent manager pointer",
+   "rows": [
+    "spray.manager_rva"
+   ]
+  },
+  {
+   "line": 21,
+   "text": "local RESOURCE_ROOT_RVA = 0x23621a8 -- helldivers2.exe: object whose +0x3f8 is the resource manager",
+   "rows": [
+    "effect.resource_root_rva"
+   ]
+  },
+  {
+   "line": 23,
+   "text": "Fix.TRACKED = {{0xd6328726, 0x0736bee2}, {0xfe962858, 0x820cc3ba}}",
+   "rows": [
+    "spray.tracked_hashes"
+   ]
+  },
+  {
+   "line": 24,
+   "text": "local PARTICLES = {0x526fad64, 0xa8193123} -- resource type \"particles\"",
+   "rows": [
+    "effect.data_constants"
+   ]
+  },
+  {
+   "line": 25,
+   "text": "local EFFECT = {0xa42863c4, 0xe3d15622}    -- shared Lumberer arm / Flame Sentry firing effect",
+   "rows": [
+    "effect.data_constants"
+   ]
+  },
+  {
+   "line": 27,
+   "text": "local NOT_LOADED = 0xfafef0f1",
+   "rows": [
+    "effect.not_loaded"
+   ]
+  },
+  {
+   "line": 28,
+   "text": "local EMPTY_BUCKET, CHAIN_END = 0xfffffffe, 0x7fffffff",
+   "rows": [
+    "effect.not_loaded"
+   ]
+  },
+  {
+   "line": 37,
+   "text": "Fix.HEADER = {0x00000073, 0x501502f9, 0x501502f9, 0x5368d4a5, 0x00000023, 0x00000000, 0x0000000c, 0x00000000,",
+   "rows": [
+    "effect.data_constants"
+   ]
+  },
+  {
+   "line": 38,
+   "text": "0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,",
+   "rows": [
+    "effect.data_constants"
+   ]
+  },
+  {
+   "line": 39,
+   "text": "0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000014, 0x0000000b, 0x00000044, 0x00000010}",
+   "rows": [
+    "effect.data_constants"
+   ]
+  },
+  {
+   "line": 46,
+   "text": "{o=252, v=0x41700000, t=0x40800000}, -- sys0+0xac emitters 15 -> 4",
+   "rows": [
+    "effect.data_constants"
+   ]
+  },
+  {
+   "line": 47,
+   "text": "{o=264, v=0x40a8bd3c, t=0x4060fc50}, -- sys0+0xb8 emitters 5.2731 -> 3.5154",
+   "rows": [
+    "effect.data_constants"
+   ]
+  },
+  {
+   "line": 48,
+   "text": "{o=328, v=0x00000001, t=0x00000000}, -- sys0+0xf8 hide 1 -> 0",
+   "rows": [
+    "effect.data_constants"
+   ]
+  },
+  {
+   "line": 49,
+   "text": "{o=1212, v=0x3c185f07, t=0x2e82e2c8}, -- sys0+0x46c spawn 0.0093 -> 5.952e-11",
+   "rows": [
+    "effect.data_constants"
+   ]
+  },
+  {
+   "line": 50,
+   "text": "{o=1216, v=0x3c185f07, t=0x2e82e2c8}, -- sys0+0x470 spawn 0.0093 -> 5.952e-11",
+   "rows": [
+    "effect.data_constants"
+   ]
+  },
+  {
+   "line": 51,
+   "text": "{o=1292, v=0x3c185f07, t=0x2e82e2c8}, -- sys0+0x4bc spawn 0.0093 -> 5.952e-11",
+   "rows": [
+    "effect.data_constants"
+   ]
+  },
+  {
+   "line": 52,
+   "text": "{o=1296, v=0x3c185f07, t=0x2e82e2c8}, -- sys0+0x4c0 spawn 0.0093 -> 5.952e-11",
+   "rows": [
+    "effect.data_constants"
+   ]
+  },
+  {
+   "line": 53,
+   "text": "{o=3852, v=0x41400000, t=0x40200000}, -- sys1+0xac emitters 12 -> 2.5",
+   "rows": [
+    "effect.data_constants"
+   ]
+  },
+  {
+   "line": 54,
+   "text": "{o=3864, v=0x418f23a3, t=0x41380903}, -- sys1+0xb8 emitters 17.8924 -> 11.5022",
+   "rows": [
+    "effect.data_constants"
+   ]
+  },
+  {
+   "line": 55,
+   "text": "{o=6424, v=0x40e00000, t=0x3f800000}, -- sys2+0xac emitters 7 -> 1",
+   "rows": [
+    "effect.data_constants"
+   ]
+  },
+  {
+   "line": 56,
+   "text": "{o=6436, v=0x4160eecc, t=0x4106f5a3}, -- sys2+0xb8 emitters 14.0583 -> 8.43497",
+   "rows": [
+    "effect.data_constants"
+   ]
+  },
+  {
+   "line": 57,
+   "text": "{o=9508, v=0x40e00000, t=0x40400000}, -- sys3+0xac emitters 7 -> 3",
+   "rows": [
+    "effect.data_constants"
+   ]
+  },
+  {
+   "line": 58,
+   "text": "{o=9520, v=0x40a70f28, t=0x4042e704}, -- sys3+0xb8 emitters 5.2206 -> 3.04535",
+   "rows": [
+    "effect.data_constants"
+   ]
+  },
+  {
+   "line": 59,
+   "text": "{o=9584, v=0x00000001, t=0x00000000}, -- sys3+0xf8 hide 1 -> 0",
+   "rows": [
+    "effect.data_constants"
+   ]
+  },
+  {
+   "line": 60,
+   "text": "{o=10228, v=0x3bcb295f, t=0x2e2e83b6}, -- sys3+0x37c spawn 0.0062 -> 3.968e-11",
+   "rows": [
+    "effect.data_constants"
+   ]
+  },
+  {
+   "line": 61,
+   "text": "{o=10232, v=0x3b4b295f, t=0x2dae83b6}, -- sys3+0x380 spawn 0.0031 -> 1.984e-11",
+   "rows": [
+    "effect.data_constants"
+   ]
+  },
+  {
+   "line": 62,
+   "text": "{o=10308, v=0x3bcb295f, t=0x2e2e83b6}, -- sys3+0x3cc spawn 0.0062 -> 3.968e-11",
+   "rows": [
+    "effect.data_constants"
+   ]
+  },
+  {
+   "line": 63,
+   "text": "{o=10312, v=0x3b4b295f, t=0x2dae83b6}, -- sys3+0x3d0 spawn 0.0031 -> 1.984e-11",
+   "rows": [
+    "effect.data_constants"
+   ]
+  },
+  {
+   "line": 67,
+   "text": "-- group (21-31). The world's hknpGroupCollisionFilter (query check EXE 0xce6030) decides by the layer matrix",
+   "rows": [
+    "comments.exe_functions"
+   ]
+  },
+  {
+   "line": 70,
+   "text": "-- then this one (EXE 0xe66f60), with the particle system's filter info (PS+5764, copied per query).",
+   "rows": [
+    "comments.exe_functions"
+   ]
+  },
+  {
+   "line": 72,
+   "text": "FILTER_PTR = 0x27C5E40, FILTER_VTABLE = 0x148B938, MATRIX = 40,",
+   "rows": [
+    "phys.filter_ptr",
+    "phys.filter_vtable",
+    "phys.filter_semantics"
+   ]
+  },
+  {
+   "line": 73,
+   "text": "WORLDS = 0x27BA890, WORLD_STRIDE = 176, WORLD_VTABLE = 0x14B3148,",
+   "rows": [
+    "phys.worlds",
+    "phys.world_vtable"
+   ]
+  },
+  {
+   "line": 75,
+   "text": "WORLD_PTR = 0x346BFA0, PARTICLE_MANAGER = 0x230888, INSTANCE = 136, INSTANCE_ID = 0x10,",
+   "rows": [
+    "flame.world_ptr",
+    "flame.particle_manager",
+    "flame.instance_records"
+   ]
+  },
+  {
+   "line": 77,
+   "text": "UNITS = 0x1A100F0, UNIT_OBJECTS = 0x88, UNIT_HANDLE = 0x8, UNIT_PARENT = 0x1D0, UNIT_CHILD = 0x1D8,",
+   "rows": [
+    "phys.units",
+    "phys.unit_links"
+   ]
+  },
+  {
+   "line": 79,
+   "text": "GROUPS = 0x27C5B88, GROUP_TOP = 2047, GROUP_LOW = 2040,",
+   "rows": [
+    "phys.groups"
+   ]
+  },
+  {
+   "line": 84,
+   "text": "-- Layer 11's row in the live matrix (the flame's collision filter 0x12d0abf1): the layers the flame can hit.",
+   "rows": [
+    "phys.flame_row"
+   ]
+  },
+  {
+   "line": 86,
+   "text": "Fix.AVATAR = {0x294dfa97, 0x4d1c334d} -- avatar_helldiver unit resource (lo, hi): a seated pilot stays out",
+   "rows": [
+    "phys.unit_resource"
+   ]
+  },
+  {
+   "line": 115,
+   "text": "return type(value) == 'number' and value >= 0x10000 and value < 0x800000000000",
+   "rows": [
+    "code.valid_address"
+   ]
+  },
+  {
+   "line": 213,
+   "text": "-- must never claim one for other bodies (a claimed group 159 crashed the game, exe+0x16c768, 2026-10-04). The mod",
+   "rows": [
+    "comments.exe_functions"
+   ]
+  },
+  {
+   "line": 599,
+   "text": "local WEAPON_NAMES = {[0x0736bee2] = 'Lumberer', [0x820cc3ba] = 'Flame Sentry'}",
+   "rows": [
+    "spray.tracked_hashes"
+   ]
+  },
+  {
+   "line": 1003,
+   "text": "local GAME_SHA256 = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+   "rows": [
+    "build.pins"
+   ]
+  },
+  {
+   "line": 1004,
+   "text": "local EXE_SHA256 = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+   "rows": [
+    "build.pins"
+   ]
+  },
+  {
+   "line": 1078,
+   "text": "if w[8] ~= 0x1000 or w[10] ~= 0x20000 or w[9] ~= 4 then return nil end",
+   "rows": [
+    "adapter.virtualquery"
+   ]
+  },
+  {
+   "line": 1130,
+   "text": "local ok, why = memory.verify_build({exe_sha256 = EXE_SHA256, game_sha256 = GAME_SHA256})",
+   "rows": [
+    "build.pins"
+   ]
+  }
+ ],
+ "inventory_uncovered": [],
+ "witness_check_failures": []
+}

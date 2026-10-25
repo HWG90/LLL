@@ -1,0 +1,501 @@
+{
+ "port": {
+  "runs": [
+   {
+    "suite": "tests/test_module.lua",
+    "wine": {
+     "exit": 0,
+     "pass_lines": [
+      "PASS: module wrapper loads every chunk, passes the generated profiles to the patch and the runtime to the loader, and refuses a process without the game"
+     ],
+     "tail": [
+      "pci id for fd 35: 10de:2b85, driver (null)",
+      "pci id for fd 34: 10de:2b85, driver (null)",
+      "pci id for fd 35: 10de:2b85, driver (null)"
+     ]
+    },
+    "linux": {
+     "exit": 1,
+     "pass_lines": [],
+     "tail": [
+      "\t[C]: in function 'assert'",
+      "\ttests/test_module.lua:18: in main chunk",
+      "\t[C]: at 0x55be89c05480"
+     ]
+    }
+   },
+   {
+    "suite": "tests/test_snapshot.lua",
+    "wine": {
+     "exit": 0,
+     "pass_lines": [
+      "PASS: 21 profile layouts, variable body counts, authored disabled bodies without Havok reads, tripod completion/guards, native snapshots, identity and lifecycle exclusions"
+     ],
+     "tail": [
+      "PASS: 21 profile layouts, variable body counts, authored disabled bodies without Havok reads, tripod completion/guards, native snapshots, identity and lifecycle exclusions"
+     ]
+    },
+    "linux": {
+     "exit": 1,
+     "pass_lines": [],
+     "tail": [
+      "\ttests/test_snapshot.lua:77: in function 'fixture'",
+      "\ttests/test_snapshot.lua:92: in main chunk",
+      "\t[C]: at 0x56130c261480"
+     ]
+    }
+   },
+   {
+    "suite": "tests/test_loader.lua",
+    "wine": {
+     "exit": 0,
+     "pass_lines": [
+      "PASS: dependency/build/binding gates, callback order and tuples, bounded poll frequency, retry, failure isolation, duplicate loads and shutdown",
+      "PASS: diagnostics off by default: no profiler, timed reads, thread cycle queries or log writes during play; opt-in with CowboyBingusDiagnostics = true; startup and shutdown reports kept",
+      "PASS: original update errors, tracebacks and error objects propagate; an error below pauses once, starts afresh with full forwarding and resumes after 60 clean frames; 8 errors below in a burst stop, a burst ends after 3600 clean frames; own raised polls stop only 8 in a row, a pause keeps that count; other own errors stop only 8 in a burst and never reach the game; first failure kept at shutdown; protected own shutdown; a pause forgets what the real patch learned; in a busy mission no log or console line during play without diagnostics"
+     ],
+     "tail": [
+      "PASS: dependency/build/binding gates, callback order and tuples, bounded poll frequency, retry, failure isolation, duplicate loads and shutdown",
+      "PASS: diagnostics off by default: no profiler, timed reads, thread cycle queries or log writes during play; opt-in with CowboyBingusDiagnostics = true; startup and shutdown reports kept",
+      "PASS: original update errors, tracebacks and error objects propagate; an error below pauses once, starts afresh with full forwarding and resumes after 60 clean frames; 8 errors below in a burst stop, a burst ends after 3600 clean frames; own raised polls stop only 8 in a row, a pause keeps that count; other own errors stop only 8 in a burst and never reach the game; first failure kept at shutdown; protected own shutdown; a pause forgets what the real patch learned; in a busy mission no log or console line during play without diagnostics"
+     ]
+    },
+    "linux": {
+     "exit": 1,
+     "pass_lines": [
+      "PASS: dependency/build/binding gates, callback order and tuples, bounded poll frequency, retry, failure isolation, duplicate loads and shutdown",
+      "PASS: diagnostics off by default: no profiler, timed reads, thread cycle queries or log writes during play; opt-in with CowboyBingusDiagnostics = true; startup and shutdown reports kept"
+     ],
+     "tail": [
+      "\tsrc/windows_api.lua:25: in function <src/windows_api.lua:1>",
+      "\ttests/test_loader.lua:313: in main chunk",
+      "\t[C]: at 0x563be9e77480"
+     ]
+    }
+   },
+   {
+    "suite": "tests/test_ffi_names.lua",
+    "wine": {
+     "exit": 5,
+     "pass_lines": [],
+     "tail": [
+      "wine: Unhandled page fault on execute access to 00006FFFFCEFCFD0 at address 00006FFFFCEFCFD0 (thread 0024), starting debugger..."
+     ]
+    },
+    "linux": {
+     "exit": 1,
+     "pass_lines": [],
+     "tail": [
+      "\t[C]: in function 'assert'",
+      "\ttests/test_ffi_names.lua:21: in main chunk",
+      "\t[C]: at 0x556ec0e92480"
+     ]
+    }
+   },
+   {
+    "suite": "tests/test_performance.lua",
+    "wine": {
+     "exit": 1,
+     "pass_lines": [
+      "PASS: scratch read ownership, precise batched guards, living-crowd read cap, bounded work, manager fairness, mission reset and between-command identity races",
+      "PASS: listing kept across polls: no header read for an unchanged array, reallocated entity found within 32 polls, changed header skipped before inspection, mission exit forgets it, a changed array classifies only new addresses",
+      "PASS: corpse re-check backoff: every poll until settled, then 2, 4, 8 ... up to M.corpse_recheck_polls polls apart; waiting polls read and allocate nothing; a displaced collider realigned at the next re-check; a command starts over; mission exit forgets it"
+     ],
+     "tail": [
+      "\ttests/test_performance.lua:413: in function 'check'",
+      "\ttests/test_performance.lua:419: in main chunk",
+      "\t[C]: at 0x01400020e0"
+     ]
+    },
+    "linux": {
+     "exit": 1,
+     "pass_lines": [],
+     "tail": [
+      "\tsrc/windows_api.lua:25: in function <src/windows_api.lua:1>",
+      "\ttests/test_performance.lua:5: in main chunk",
+      "\t[C]: at 0x5583b22b2480"
+     ]
+    }
+   },
+   {
+    "suite": "tests/test_metadata_cache.lua",
+    "wine": {
+     "exit": 0,
+     "pass_lines": [
+      "PASS: bounded pointer decoding, immediate next-poll realignment, world/pool invalidation and unchanged mutation guards"
+     ],
+     "tail": [
+      "PASS: bounded pointer decoding, immediate next-poll realignment, world/pool invalidation and unchanged mutation guards"
+     ]
+    },
+    "linux": {
+     "exit": 1,
+     "pass_lines": [],
+     "tail": [
+      "\tsrc/windows_api.lua:25: in function <src/windows_api.lua:1>",
+      "\ttests/test_metadata_cache.lua:5: in main chunk",
+      "\t[C]: at 0x5557878c4480"
+     ]
+    }
+   },
+   {
+    "suite": "tests/test_repose_cooldown.lua",
+    "wine": {
+     "exit": 0,
+     "pass_lines": [
+      "PASS: repeat realignment cooldown, large-gap and rotation bypass, identity, clock, mission exit and pruning"
+     ],
+     "tail": [
+      "PASS: repeat realignment cooldown, large-gap and rotation bypass, identity, clock, mission exit and pruning"
+     ]
+    },
+    "linux": {
+     "exit": 1,
+     "pass_lines": [],
+     "tail": [
+      "\tsrc/windows_api.lua:25: in function <src/windows_api.lua:1>",
+      "\ttests/test_repose_cooldown.lua:6: in main chunk",
+      "\t[C]: at 0x560a52999480"
+     ]
+    }
+   },
+   {
+    "suite": "tests/test_profiler.lua",
+    "wine": {
+     "exit": 0,
+     "pass_lines": [
+      "PASS: complete read accounting, exclusive phase timing, sampled read timing, hotspot flagging, bounded output and failure isolation"
+     ],
+     "tail": [
+      "PASS: complete read accounting, exclusive phase timing, sampled read timing, hotspot flagging, bounded output and failure isolation"
+     ]
+    },
+    "linux": {
+     "exit": 0,
+     "pass_lines": [
+      "PASS: complete read accounting, exclusive phase timing, sampled read timing, hotspot flagging, bounded output and failure isolation"
+     ],
+     "tail": [
+      "PASS: complete read accounting, exclusive phase timing, sampled read timing, hotspot flagging, bounded output and failure isolation"
+     ]
+    }
+   },
+   {
+    "suite": "tests/test_profiler_detail.lua",
+    "wine": {
+     "exit": 0,
+     "pass_lines": [
+      "PASS: slow-poll context, exclusive sampled subphases, cycles/heap probes, bounded records, lifecycle costs, real late revisits, update-chain timing, windows and failure isolation"
+     ],
+     "tail": [
+      "PASS: slow-poll context, exclusive sampled subphases, cycles/heap probes, bounded records, lifecycle costs, real late revisits, update-chain timing, windows and failure isolation"
+     ]
+    },
+    "linux": {
+     "exit": 0,
+     "pass_lines": [
+      "PASS: slow-poll context, exclusive sampled subphases, cycles/heap probes, bounded records, lifecycle costs, real late revisits, update-chain timing, windows and failure isolation"
+     ],
+     "tail": [
+      "PASS: slow-poll context, exclusive sampled subphases, cycles/heap probes, bounded records, lifecycle costs, real late revisits, update-chain timing, windows and failure isolation"
+     ]
+    }
+   },
+   {
+    "suite": "tests/test_profiler_behavior.lua",
+    "wine": {
+     "exit": 0,
+     "pass_lines": [
+      "PASS: profiling preserves reads, repair poses, verified stops, completion requests, scheduling and mission cleanup"
+     ],
+     "tail": [
+      "PASS: profiling preserves reads, repair poses, verified stops, completion requests, scheduling and mission cleanup"
+     ]
+    },
+    "linux": {
+     "exit": 1,
+     "pass_lines": [],
+     "tail": [
+      "\tsrc/windows_api.lua:25: in function <src/windows_api.lua:1>",
+      "\ttests/test_profiler_behavior.lua:7: in main chunk",
+      "\t[C]: at 0x55be7369a480"
+     ]
+    }
+   },
+   {
+    "suite": "tests/test_profiles.py",
+    "python": {
+     "exit": 0,
+     "tail": [
+      "PASS: 21 reviewed profiles, 680 auxiliary mappings, body/disabled bounds and exact generated catalog"
+     ]
+    }
+   }
+  ],
+  "fixture_value_changes": {
+   "tests/perf_scene.lua:0x33266a0->0x2ce1850": 1,
+   "tests/perf_scene.lua:0x3326948->0x2ce1af8": 1,
+   "tests/perf_scene.lua:0x3326920->0x2ce1ad8": 1,
+   "tests/perf_scene.lua:0x27ba8a8->0x2861d88": 1,
+   "tests/perf_scene.lua:0xd0cfa0->0xd658d0": 1,
+   "tests/perf_scene.lua:0x2369b00->0x2411200": 1,
+   "tests/perf_scene.lua:0x1a100f0->0x1ab76f8": 1,
+   "tests/perf_scene.lua:0x27c5b40->0x286d030": 1,
+   "tests/test_loader.lua:0x3326948->0x2ce1af8": 1,
+   "tests/test_metadata_cache.lua:0x27ba8a8->0x2861d88": 1,
+   "tests/test_metadata_cache.lua:0xd0cfa0->0xd658d0": 1,
+   "tests/test_metadata_cache.lua:0x2369b00->0x2411200": 1,
+   "tests/test_performance.lua:0x33266a0->0x2ce1850": 2,
+   "tests/test_performance.lua:0x3326920->0x2ce1ad8": 1,
+   "tests/test_snapshot.lua:0x33266a0->0x2ce1850": 1,
+   "tests/test_snapshot.lua:0x3326948->0x2ce1af8": 1,
+   "tests/test_snapshot.lua:0x3326920->0x2ce1ad8": 1,
+   "tests/test_snapshot.lua:0x27ba8a8->0x2861d88": 1,
+   "tests/test_snapshot.lua:0xd0cfa0->0xd658d0": 1,
+   "tests/test_snapshot.lua:0x2369b00->0x2411200": 1,
+   "tests/test_snapshot.lua:0x1a100f0->0x1ab76f8": 1,
+   "tests/test_snapshot.lua:0x27c5b40->0x286d030": 1
+  }
+ },
+ "upstream": {
+  "runs": [
+   {
+    "suite": "tests/test_module.lua",
+    "wine": {
+     "exit": 0,
+     "pass_lines": [
+      "PASS: module wrapper loads every chunk, passes the generated profiles to the patch and the runtime to the loader, and refuses a process without the game"
+     ],
+     "tail": [
+      "PASS: module wrapper loads every chunk, passes the generated profiles to the patch and the runtime to the loader, and refuses a process without the game"
+     ]
+    },
+    "linux": {
+     "exit": 1,
+     "pass_lines": [],
+     "tail": [
+      "\t[C]: in function 'assert'",
+      "\ttests/test_module.lua:18: in main chunk",
+      "\t[C]: at 0x55b9503c4480"
+     ]
+    }
+   },
+   {
+    "suite": "tests/test_snapshot.lua",
+    "wine": {
+     "exit": 0,
+     "pass_lines": [
+      "PASS: 21 profile layouts, variable body counts, authored disabled bodies without Havok reads, tripod completion/guards, native snapshots, identity and lifecycle exclusions"
+     ],
+     "tail": [
+      "PASS: 21 profile layouts, variable body counts, authored disabled bodies without Havok reads, tripod completion/guards, native snapshots, identity and lifecycle exclusions"
+     ]
+    },
+    "linux": {
+     "exit": 1,
+     "pass_lines": [],
+     "tail": [
+      "\ttests/test_snapshot.lua:77: in function 'fixture'",
+      "\ttests/test_snapshot.lua:92: in main chunk",
+      "\t[C]: at 0x563f98f44480"
+     ]
+    }
+   },
+   {
+    "suite": "tests/test_loader.lua",
+    "wine": {
+     "exit": 0,
+     "pass_lines": [
+      "PASS: dependency/build/binding gates, callback order and tuples, bounded poll frequency, retry, failure isolation, duplicate loads and shutdown",
+      "PASS: diagnostics off by default: no profiler, timed reads, thread cycle queries or log writes during play; opt-in with CowboyBingusDiagnostics = true; startup and shutdown reports kept",
+      "PASS: original update errors, tracebacks and error objects propagate; an error below pauses once, starts afresh with full forwarding and resumes after 60 clean frames; 8 errors below in a burst stop, a burst ends after 3600 clean frames; own raised polls stop only 8 in a row, a pause keeps that count; other own errors stop only 8 in a burst and never reach the game; first failure kept at shutdown; protected own shutdown; a pause forgets what the real patch learned; in a busy mission no log or console line during play without diagnostics"
+     ],
+     "tail": [
+      "PASS: dependency/build/binding gates, callback order and tuples, bounded poll frequency, retry, failure isolation, duplicate loads and shutdown",
+      "PASS: diagnostics off by default: no profiler, timed reads, thread cycle queries or log writes during play; opt-in with CowboyBingusDiagnostics = true; startup and shutdown reports kept",
+      "PASS: original update errors, tracebacks and error objects propagate; an error below pauses once, starts afresh with full forwarding and resumes after 60 clean frames; 8 errors below in a burst stop, a burst ends after 3600 clean frames; own raised polls stop only 8 in a row, a pause keeps that count; other own errors stop only 8 in a burst and never reach the game; first failure kept at shutdown; protected own shutdown; a pause forgets what the real patch learned; in a busy mission no log or console line during play without diagnostics"
+     ]
+    },
+    "linux": {
+     "exit": 1,
+     "pass_lines": [
+      "PASS: dependency/build/binding gates, callback order and tuples, bounded poll frequency, retry, failure isolation, duplicate loads and shutdown",
+      "PASS: diagnostics off by default: no profiler, timed reads, thread cycle queries or log writes during play; opt-in with CowboyBingusDiagnostics = true; startup and shutdown reports kept"
+     ],
+     "tail": [
+      "\tsrc/windows_api.lua:25: in function <src/windows_api.lua:1>",
+      "\ttests/test_loader.lua:313: in main chunk",
+      "\t[C]: at 0x5559237bb480"
+     ]
+    }
+   },
+   {
+    "suite": "tests/test_ffi_names.lua",
+    "wine": {
+     "exit": 5,
+     "pass_lines": [],
+     "tail": [
+      "wine: Unhandled page fault on execute access to 00006FFFFCEFCFD0 at address 00006FFFFCEFCFD0 (thread 0024), starting debugger..."
+     ]
+    },
+    "linux": {
+     "exit": 1,
+     "pass_lines": [],
+     "tail": [
+      "\t[C]: in function 'assert'",
+      "\ttests/test_ffi_names.lua:21: in main chunk",
+      "\t[C]: at 0x560ff0bbe480"
+     ]
+    }
+   },
+   {
+    "suite": "tests/test_performance.lua",
+    "wine": {
+     "exit": 1,
+     "pass_lines": [
+      "PASS: scratch read ownership, precise batched guards, living-crowd read cap, bounded work, manager fairness, mission reset and between-command identity races",
+      "PASS: listing kept across polls: no header read for an unchanged array, reallocated entity found within 32 polls, changed header skipped before inspection, mission exit forgets it, a changed array classifies only new addresses",
+      "PASS: corpse re-check backoff: every poll until settled, then 2, 4, 8 ... up to M.corpse_recheck_polls polls apart; waiting polls read and allocate nothing; a displaced collider realigned at the next re-check; a command starts over; mission exit forgets it"
+     ],
+     "tail": [
+      "\ttests/test_performance.lua:413: in function 'check'",
+      "\ttests/test_performance.lua:419: in main chunk",
+      "\t[C]: at 0x01400020e0"
+     ]
+    },
+    "linux": {
+     "exit": 1,
+     "pass_lines": [],
+     "tail": [
+      "\tsrc/windows_api.lua:25: in function <src/windows_api.lua:1>",
+      "\ttests/test_performance.lua:5: in main chunk",
+      "\t[C]: at 0x556a63c7a480"
+     ]
+    }
+   },
+   {
+    "suite": "tests/test_metadata_cache.lua",
+    "wine": {
+     "exit": 0,
+     "pass_lines": [
+      "PASS: bounded pointer decoding, immediate next-poll realignment, world/pool invalidation and unchanged mutation guards"
+     ],
+     "tail": [
+      "PASS: bounded pointer decoding, immediate next-poll realignment, world/pool invalidation and unchanged mutation guards"
+     ]
+    },
+    "linux": {
+     "exit": 1,
+     "pass_lines": [],
+     "tail": [
+      "\tsrc/windows_api.lua:25: in function <src/windows_api.lua:1>",
+      "\ttests/test_metadata_cache.lua:5: in main chunk",
+      "\t[C]: at 0x56072a4a6480"
+     ]
+    }
+   },
+   {
+    "suite": "tests/test_repose_cooldown.lua",
+    "wine": {
+     "exit": 0,
+     "pass_lines": [
+      "PASS: repeat realignment cooldown, large-gap and rotation bypass, identity, clock, mission exit and pruning"
+     ],
+     "tail": [
+      "PASS: repeat realignment cooldown, large-gap and rotation bypass, identity, clock, mission exit and pruning"
+     ]
+    },
+    "linux": {
+     "exit": 1,
+     "pass_lines": [],
+     "tail": [
+      "\tsrc/windows_api.lua:25: in function <src/windows_api.lua:1>",
+      "\ttests/test_repose_cooldown.lua:6: in main chunk",
+      "\t[C]: at 0x556a3ced0480"
+     ]
+    }
+   },
+   {
+    "suite": "tests/test_profiler.lua",
+    "wine": {
+     "exit": 0,
+     "pass_lines": [
+      "PASS: complete read accounting, exclusive phase timing, sampled read timing, hotspot flagging, bounded output and failure isolation"
+     ],
+     "tail": [
+      "PASS: complete read accounting, exclusive phase timing, sampled read timing, hotspot flagging, bounded output and failure isolation"
+     ]
+    },
+    "linux": {
+     "exit": 0,
+     "pass_lines": [
+      "PASS: complete read accounting, exclusive phase timing, sampled read timing, hotspot flagging, bounded output and failure isolation"
+     ],
+     "tail": [
+      "PASS: complete read accounting, exclusive phase timing, sampled read timing, hotspot flagging, bounded output and failure isolation"
+     ]
+    }
+   },
+   {
+    "suite": "tests/test_profiler_detail.lua",
+    "wine": {
+     "exit": 0,
+     "pass_lines": [
+      "PASS: slow-poll context, exclusive sampled subphases, cycles/heap probes, bounded records, lifecycle costs, real late revisits, update-chain timing, windows and failure isolation"
+     ],
+     "tail": [
+      "PASS: slow-poll context, exclusive sampled subphases, cycles/heap probes, bounded records, lifecycle costs, real late revisits, update-chain timing, windows and failure isolation"
+     ]
+    },
+    "linux": {
+     "exit": 0,
+     "pass_lines": [
+      "PASS: slow-poll context, exclusive sampled subphases, cycles/heap probes, bounded records, lifecycle costs, real late revisits, update-chain timing, windows and failure isolation"
+     ],
+     "tail": [
+      "PASS: slow-poll context, exclusive sampled subphases, cycles/heap probes, bounded records, lifecycle costs, real late revisits, update-chain timing, windows and failure isolation"
+     ]
+    }
+   },
+   {
+    "suite": "tests/test_profiler_behavior.lua",
+    "wine": {
+     "exit": 0,
+     "pass_lines": [
+      "PASS: profiling preserves reads, repair poses, verified stops, completion requests, scheduling and mission cleanup"
+     ],
+     "tail": [
+      "PASS: profiling preserves reads, repair poses, verified stops, completion requests, scheduling and mission cleanup"
+     ]
+    },
+    "linux": {
+     "exit": 1,
+     "pass_lines": [],
+     "tail": [
+      "\tsrc/windows_api.lua:25: in function <src/windows_api.lua:1>",
+      "\ttests/test_profiler_behavior.lua:7: in main chunk",
+      "\t[C]: at 0x56429dce0480"
+     ]
+    }
+   },
+   {
+    "suite": "tests/test_profiles.py",
+    "python": {
+     "exit": 0,
+     "tail": [
+      "PASS: 21 reviewed profiles, 680 auxiliary mappings, body/disabled bounds and exact generated catalog"
+     ]
+    }
+   }
+  ],
+  "fixture_value_changes": {}
+ },
+ "not_run": {
+  "tests/test_repair.lua": "needs tests/fixtures (private recordings, not in the public source)",
+  "tests/test_fling.lua": "needs tests/fixtures (private recordings, not in the public source)",
+  "tests/test_settlement.lua": "needs tests/fixtures (private recordings, not in the public source)",
+  "tests/test_completion.lua": "needs tests/fixtures (private recordings, not in the public source)",
+  "tests/test_package.py": "checks the standalone release zip (scripts/package.py); no release package is built here",
+  "tests/benchmark.lua, tests/frame_budget.lua, tests/perf_scene.lua, tests/hostile_vm.lua": "benchmark / helpers loaded by the suites"
+ }
+}

@@ -1,0 +1,486 @@
+{
+ "option": "Vanilla Plus Megapack / HolsterYourShield (Holster Your Shield v1.0)",
+ "source": "<workspace>/upstream-bingus/VanillaPlusMegapack/components/HolsterYourShield",
+ "source_match": {
+  "used": "<workspace>/upstream-bingus/VanillaPlusMegapack/components/HolsterYourShield",
+  "lock_revision": "v1.0",
+  "checkout": "<workspace>/upstream-bingus/HolsterYourShield (git tag v1.0, cadfd8c)",
+  "all_lock_hashes_match_pinned_copy": true,
+  "all_lock_hashes_match_checkout": true,
+  "files": {
+   "dependencies.json": {
+    "lock": "F4178E0FA2A27ABD5D5A51273FE4FD3EE57809A8731A5315431D184663003D43",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   },
+   "scripts/build.py": {
+    "lock": "814B6763D0167AAE3E24F522DCE981CDE198AA66704BA3DBBEEE680D5D8AA416",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   },
+   "src/bingus_memory.lua": {
+    "lock": "3973924B1C009CC4E6C863A4EAF87F166899A16DDCB579C3D77AB5465172B416",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   },
+   "src/bingus_runtime.lua": {
+    "lock": "C4450F555F697E583916D18F876412CA96F6963EB1BF4CDAD451EBB906C2F988",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   },
+   "src/holster_your_shield.lua": {
+    "lock": "DD68F63539BE0FFA83EA18B829ABFBFD1F51A95807658ADD0B8D1245FCBC5D0E",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   },
+   "tests/compile_entry.lua": {
+    "lock": "2739B9525CE71CE3D5B2A45B2993D5194F2E898995DD2FF6414688946A077954",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   },
+   "tests/fake_game.lua": {
+    "lock": "CF3E93AF9BFE5501718E1C02D88CE5C231444CB9F179E4DE5E4630D6D134D7EE",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   },
+   "tests/frame_budget.lua": {
+    "lock": "4E1E9F47EE7FCCFD24F6C79D475103ABF77989FC344EBB527869029793654E49",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   },
+   "tests/game_lua.py": {
+    "lock": "C6BBC5F25AB21EFFC4351436826CE89FED0440F022BED0D9C573E5EA82560CDD",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   },
+   "tests/hostile_vm.lua": {
+    "lock": "779B1DFD0A5BB8A2CEAB53EC8729E492838FB90018490A290D1BAFB3D9F938C4",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   },
+   "tests/test_entry.lua": {
+    "lock": "081A485B2EEC8DA06DF82BEAD7CDC180E83696B015C137A219A2C4CAB12BB8D5",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   },
+   "tests/test_hostile.lua": {
+    "lock": "6102EFD3D09634DB1B634123119389CD6FB4220E19A08183760C5B3F6072655D",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   },
+   "tests/test_mod.lua": {
+    "lock": "A2DF5348FD36EDD950A145423EA56F2349424CE31B4EE9ECE655AE094A9D16E8",
+    "pinned_copy": true,
+    "checkout_v1.0": true
+   }
+  }
+ },
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "revision": "v1.0-26088801",
+ "game_sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+ "exe_sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+ "map": {
+  "path": "<workspace>/native-work/megapack-port/HolsterYourShield/MAP.json",
+  "sha256": "ff3de0d892e9576c877706568f25b2a1ff3a1b05adc8e6b291b2c6e2127405c1",
+  "counts": {
+   "high": 30,
+   "medium": 1
+  },
+  "rows": 31
+ },
+ "replacements": [
+  {
+   "file": "components/HolsterYourShield/src/holster_your_shield.lua",
+   "lines": [
+    24
+   ],
+   "old": "local Holster = {VERSION = '1.0'}",
+   "new": "local Holster = {VERSION = '1.0-26088801'}",
+   "map_rows": [
+    "label.version"
+   ]
+  },
+  {
+   "file": "components/HolsterYourShield/src/holster_your_shield.lua",
+   "lines": [
+    2
+   ],
+   "old": "-- Holster Your Shield v1.0 for Helldivers 2 Steam build 25480438.",
+   "new": "-- Holster Your Shield v1.0 for Helldivers 2 Steam build 26088801 (port of the 25480438 release).",
+   "map_rows": [
+    "label.build"
+   ]
+  },
+  {
+   "file": "components/HolsterYourShield/src/holster_your_shield.lua",
+   "lines": [
+    31
+   ],
+   "old": "Holster.GAME_SHA256 = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+   "new": "Holster.GAME_SHA256 = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'",
+   "map_rows": [
+    "pin.GAME_SHA256"
+   ]
+  },
+  {
+   "file": "components/HolsterYourShield/src/holster_your_shield.lua",
+   "lines": [
+    32
+   ],
+   "old": "Holster.EXE_SHA256 = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+   "new": "Holster.EXE_SHA256 = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'",
+   "map_rows": [
+    "pin.EXE_SHA256"
+   ]
+  },
+  {
+   "file": "components/HolsterYourShield/src/holster_your_shield.lua",
+   "lines": [
+    34
+   ],
+   "old": "-- Build 25480438 (KB shield-holster-feasibility; the chain to the inventory row was read live on the ship).",
+   "new": "-- Build 26088801 (remapped from build 25480438; evidence: native-work/megapack-port/HolsterYourShield/MAP.json).",
+   "map_rows": [
+    "label.build"
+   ]
+  },
+  {
+   "file": "components/HolsterYourShield/src/holster_your_shield.lua",
+   "lines": [
+    36
+   ],
+   "old": "players = 0x3326468,",
+   "new": "players = 0x2CE1618,",
+   "map_rows": [
+    "layout.players"
+   ]
+  },
+  {
+   "file": "components/HolsterYourShield/src/holster_your_shield.lua",
+   "lines": [
+    37
+   ],
+   "old": "owner = 0x346BF98,     -- entities: network-id map +0xF22EC8, entity-id map +0xF1AEB0, records +0xF32F18",
+   "new": "owner = 0x2CE41B8,     -- entities: network-id map +0xF24990, entity-id map +0xF1C978, records +0xF349E0",
+   "map_rows": [
+    "layout.owner",
+    "owner.entity_map",
+    "owner.network_map",
+    "owner.records"
+   ]
+  },
+  {
+   "file": "components/HolsterYourShield/src/holster_your_shield.lua",
+   "lines": [
+    38
+   ],
+   "old": "avatars = 0x3326D20,",
+   "new": "avatars = 0x2CE1EE0,",
+   "map_rows": [
+    "layout.avatars"
+   ]
+  },
+  {
+   "file": "components/HolsterYourShield/src/holster_your_shield.lua",
+   "lines": [
+    39
+   ],
+   "old": "inventory = 0x3326738,",
+   "new": "inventory = 0x2CE18E8,",
+   "map_rows": [
+    "layout.inventory"
+   ]
+  },
+  {
+   "file": "components/HolsterYourShield/src/holster_your_shield.lua",
+   "lines": [
+    40
+   ],
+   "old": "equipment = 0x3326DC0,",
+   "new": "equipment = 0x2CE1F88,",
+   "map_rows": [
+    "layout.equipment"
+   ]
+  },
+  {
+   "file": "components/HolsterYourShield/src/holster_your_shield.lua",
+   "lines": [
+    41
+   ],
+   "old": "none_item = 0x3483C4C,",
+   "new": "none_item = 0x2E3F0FC,",
+   "map_rows": [
+    "layout.none_item"
+   ]
+  },
+  {
+   "file": "components/HolsterYourShield/src/holster_your_shield.lua",
+   "lines": [
+    42
+   ],
+   "old": "none_slot = 0x3483C5C,",
+   "new": "none_slot = 0x2E3F10C,",
+   "map_rows": [
+    "layout.none_slot"
+   ]
+  },
+  {
+   "file": "components/HolsterYourShield/src/holster_your_shield.lua",
+   "lines": [
+    43
+   ],
+   "old": "set_item = 0x9ABC30,",
+   "new": "set_item = 0x9BD850,",
+   "map_rows": [
+    "layout.set_item"
+   ]
+  },
+  {
+   "file": "components/HolsterYourShield/src/holster_your_shield.lua",
+   "lines": [
+    44
+   ],
+   "old": "set_mode = 0x9AC8E0,",
+   "new": "set_mode = 0x9BE500,",
+   "map_rows": [
+    "layout.set_mode"
+   ]
+  },
+  {
+   "file": "components/HolsterYourShield/src/holster_your_shield.lua",
+   "lines": [
+    45
+   ],
+   "old": "send_held = 0xBE20B0,",
+   "new": "send_held = 0xC008B0,",
+   "map_rows": [
+    "layout.send_held"
+   ]
+  },
+  {
+   "file": "components/HolsterYourShield/src/holster_your_shield.lua",
+   "lines": [
+    50
+   ],
+   "old": "local OWNER_NETWORK_MAP, OWNER_ENTITY_MAP, OWNER_RECORDS, OWNER_SETTINGS = 0xF22EC8, 0xF1AEB0, 0xF32F18, 0xF12BC0",
+   "new": "local OWNER_NETWORK_MAP, OWNER_ENTITY_MAP, OWNER_RECORDS, OWNER_SETTINGS = 0xF24990, 0xF1C978, 0xF349E0, 0xF14688",
+   "map_rows": [
+    "owner.entity_map",
+    "owner.network_map",
+    "owner.records",
+    "owner.settings"
+   ]
+  },
+  {
+   "file": "components/HolsterYourShield/src/holster_your_shield.lua",
+   "lines": [
+    53
+   ],
+   "old": "local ROW_SIZE, SETTINGS_SLOTS, SETTINGS_SIZE = 48, 688, 232",
+   "new": "local ROW_SIZE, SETTINGS_SLOTS, SETTINGS_SIZE = 48, 702, 232",
+   "map_rows": [
+    "settings.slots"
+   ]
+  },
+  {
+   "file": "components/HolsterYourShield/src/holster_your_shield.lua",
+   "lines": [
+    543
+   ],
+   "old": "'unsupported game build (needs Steam build 25480438)'",
+   "new": "'unsupported game build (needs Steam build 26088801)'",
+   "map_rows": [
+    "label.build"
+   ]
+  },
+  {
+   "file": "components/HolsterYourShield/scripts/build.py",
+   "lines": [
+    73
+   ],
+   "old": "'-- Holster Your Shield v%s for Steam build 25480438. Generated by scripts/build.py from %s; edit those.'",
+   "new": "'-- Holster Your Shield v%s for Steam build 26088801. Generated by scripts/build.py from %s; edit those.'",
+   "map_rows": [
+    "label.build"
+   ]
+  }
+ ],
+ "entry_lines_changed_vs_upstream": [
+  {
+   "line": 2,
+   "old": "-- Holster Your Shield v1.0 for Steam build 25480438. Generated by scripts/build.py from src/bingus_runtime.lua, src/bingus_memory.lua, src/holster_your_shield.lua; edit those.",
+   "new": "-- Holster Your Shield v1.0 for Steam build 26088801. Generated by scripts/build.py from src/bingus_runtime.lua, src/bingus_memory.lua, src/holster_your_shield.lua; edit those."
+  },
+  {
+   "line": 544,
+   "old": "-- Holster Your Shield v1.0 for Helldivers 2 Steam build 25480438.",
+   "new": "-- Holster Your Shield v1.0 for Helldivers 2 Steam build 26088801 (port of the 25480438 release)."
+  },
+  {
+   "line": 566,
+   "old": "local Holster = {VERSION = '1.0'}",
+   "new": "local Holster = {VERSION = '1.0-26088801'}"
+  },
+  {
+   "line": 573,
+   "old": "Holster.GAME_SHA256 = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+   "new": "Holster.GAME_SHA256 = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'"
+  },
+  {
+   "line": 574,
+   "old": "Holster.EXE_SHA256 = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+   "new": "Holster.EXE_SHA256 = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'"
+  },
+  {
+   "line": 576,
+   "old": "-- Build 25480438 (KB shield-holster-feasibility; the chain to the inventory row was read live on the ship).",
+   "new": "-- Build 26088801 (remapped from build 25480438; evidence: native-work/megapack-port/HolsterYourShield/MAP.json)."
+  },
+  {
+   "line": 578,
+   "old": "players = 0x3326468,   -- player manager: +0x84 counts, +0xE8 local player record, +0x3A8 avatar network id",
+   "new": "players = 0x2CE1618,   -- player manager: +0x84 counts, +0xE8 local player record, +0x3A8 avatar network id"
+  },
+  {
+   "line": 579,
+   "old": "owner = 0x346BF98,     -- entities: network-id map +0xF22EC8, entity-id map +0xF1AEB0, records +0xF32F18",
+   "new": "owner = 0x2CE41B8,     -- entities: network-id map +0xF24990, entity-id map +0xF1C978, records +0xF349E0"
+  },
+  {
+   "line": 580,
+   "old": "avatars = 0x3326D20,   -- avatar manager: map +0xF8, count +0x6C, entity pointers +0x110, input slots +0x150",
+   "new": "avatars = 0x2CE1EE0,   -- avatar manager: map +0xF8, count +0x6C, entity pointers +0x110, input slots +0x150"
+  },
+  {
+   "line": 581,
+   "old": "inventory = 0x3326738, -- map +40 by avatar entity id, identity pointers +64, 48-byte rows +80",
+   "new": "inventory = 0x2CE18E8, -- map +40 by avatar entity id, identity pointers +64, 48-byte rows +80"
+  },
+  {
+   "line": 582,
+   "old": "equipment = 0x3326DC0, -- per-entity EquipmentComponent copies: map +80, 232-byte records at +144",
+   "new": "equipment = 0x2CE1F88, -- per-entity EquipmentComponent copies: map +80, 232-byte records at +144"
+  },
+  {
+   "line": 583,
+   "old": "none_item = 0x3483C4C, -- the game's \"nothing held\" id (0 in this build)",
+   "new": "none_item = 0x2E3F0FC, -- the game's \"nothing held\" id (0 in this build)"
+  },
+  {
+   "line": 584,
+   "old": "none_slot = 0x3483C5C, -- the id 0xA95A90 compares an empty held carryable with (0 in this build)",
+   "new": "none_slot = 0x2E3F10C, -- the id 0xA95A90 compares an empty held carryable with (0 in this build)"
+  },
+  {
+   "line": 585,
+   "old": "set_item = 0x9ABC30,   -- (inventory, avatar entity, item): sets the held carryable",
+   "new": "set_item = 0x9BD850,   -- (inventory, avatar entity, item): sets the held carryable"
+  },
+  {
+   "line": 586,
+   "old": "set_mode = 0x9AC8E0,   -- (inventory, avatar entity, mode): 2 held, 1 put away",
+   "new": "set_mode = 0x9BE500,   -- (inventory, avatar entity, mode): 2 held, 1 put away"
+  },
+  {
+   "line": 587,
+   "old": "send_held = 0xBE20B0,  -- (peer, avatar entity, item, mode): rpc_set_held_carryable, peer -2 = everyone",
+   "new": "send_held = 0xC008B0,  -- (peer, avatar entity, item, mode): rpc_set_held_carryable, peer -2 = everyone"
+  },
+  {
+   "line": 592,
+   "old": "local OWNER_NETWORK_MAP, OWNER_ENTITY_MAP, OWNER_RECORDS, OWNER_SETTINGS = 0xF22EC8, 0xF1AEB0, 0xF32F18, 0xF12BC0",
+   "new": "local OWNER_NETWORK_MAP, OWNER_ENTITY_MAP, OWNER_RECORDS, OWNER_SETTINGS = 0xF24990, 0xF1C978, 0xF349E0, 0xF14688"
+  },
+  {
+   "line": 595,
+   "old": "local ROW_SIZE, SETTINGS_SLOTS, SETTINGS_SIZE = 48, 688, 232",
+   "new": "local ROW_SIZE, SETTINGS_SLOTS, SETTINGS_SIZE = 48, 702, 232"
+  },
+  {
+   "line": 1085,
+   "old": "need(ok, why == 'unsupported game build' and 'unsupported game build (needs Steam build 25480438)'",
+   "new": "need(ok, why == 'unsupported game build' and 'unsupported game build (needs Steam build 26088801)'"
+  }
+ ],
+ "upstream_reproduction": {
+  "resource_sha256": "C11AF49F04482A539C45C302C9A42F133D128318BEDF3651090923869998F66D",
+  "equals_lock_resource_sha256": true,
+  "equals_shipped_v26": "<hellforge>/mods/Vanilla Plus Megapack - v26/options/HolsterYourShield/9ba626afa44a3aa3.patch_0 resource 2dc2359512462098",
+  "shipped_lua_file_equals_body": true
+ },
+ "resource_format": "plaintext declaration-bearing entry (the pack's BUILD_ASSEMBLED 'direct' path, unchanged; this option was never bytecode) in the struct.pack('<II', len, 2) envelope; a fixed point of BingusSharedLoader build_addon.entry_source",
+ "resource": {
+  "name": "mods/cowboybingus/holster_your_shield",
+  "hash": "2dc2359512462098",
+  "bytes": 57314
+ },
+ "outputs": {
+  "holster_your_shield.lua": "82a19ccf94e5c3c079c8ec7b66e50d1e2fb6afa643b526801839b98f184c8b79",
+  "9ba626afa44a3aa3.patch_0": "c6edc6c2f36e91134e6e800d76740be65be3e2a717531e2aff23223d030dc963",
+  "9ba626afa44a3aa3.patch_0.stream": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "9ba626afa44a3aa3.patch_0.gpu_resources": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+ },
+ "inputs": {
+  "<workspace>/upstream-bingus/VanillaPlusMegapack/components/HolsterYourShield/src/bingus_memory.lua": "3973924b1c009cc4e6c863a4eaf87f166899a16ddcb579c3d77ab5465172b416",
+  "<workspace>/upstream-bingus/VanillaPlusMegapack/components/HolsterYourShield/src/bingus_runtime.lua": "c4450f555f697e583916d18f876412ca96f6963eb1bf4cdad451ebb906c2f988",
+  "<workspace>/upstream-bingus/VanillaPlusMegapack/components/HolsterYourShield/src/holster_your_shield.lua": "dd68f63539be0ffa83ea18b829abfbfd1f51a95807658add0b8d1245fcbc5d0e"
+ },
+ "luajit_check": {
+  "luajit": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit",
+  "string_dump_flags": 8,
+  "gc64_fr2": true,
+  "output": [
+   "compile: ok\tLuaJIT 2.1.ROLLING\t8",
+   "entry run: false: mods/cowboybingus/holster_your_shield:359: libkernel32.so: cannot open shared object file: No such file or directory",
+   "update untouched: true, installed flag: nil"
+  ]
+ },
+ "adapter_text_absent": [
+  "PORT51",
+  "compat51",
+  "require('cffi')",
+  "require(\"cffi\")"
+ ],
+ "forbidden_upstream_names_absent": [
+  "WriteProcessMemory",
+  "VirtualProtect",
+  "VirtualAlloc",
+  "FlushInstructionCache",
+  "CreateRemoteThread",
+  "LoadLibrary",
+  "Network.",
+  "RPC."
+ ],
+ "pack_archive_pins": "unused by this option, left unchanged",
+ "tests": {
+  "linux-gc64": {
+   "upstream": {
+    "test_mod": 1,
+    "test_hostile": 1,
+    "compile_entry": 0,
+    "test_entry": 1
+   },
+   "port": {
+    "test_mod": 1,
+    "test_hostile": 1,
+    "compile_entry": 0,
+    "test_entry": 1
+   }
+  },
+  "wine-windows": {
+   "upstream": {
+    "test_mod": 0,
+    "test_hostile": 0,
+    "compile_entry": 0,
+    "test_entry": 0
+   },
+   "port": {
+    "test_mod": 0,
+    "test_hostile": 0,
+    "compile_entry": 0,
+    "test_entry": 0
+   }
+  }
+ }
+}

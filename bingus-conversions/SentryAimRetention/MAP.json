@@ -1,0 +1,2601 @@
+{
+ "option": "SentryAimRetention",
+ "module": "mods/cowboybingus/sentry_aim_retention",
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "source": "upstream-bingus/SentryAimRetention (git v1.1.1, clean; all 30 pinned source files match components.lock.json data-v8.6 source_sha256, so it equals the pinned components/SentryAimRetention)",
+ "rows": [
+  {
+   "id": "archive.EXE_SHA",
+   "file": "scripts/archive.py",
+   "lines": [
+    9
+   ],
+   "name": "helldivers2.exe SHA-256 pin (verify_build: \"unsupported game build\")",
+   "old": "F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06",
+   "new": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "method": "hash of the installed exe (brief)",
+   "witnesses": [
+    {
+     "kind": "note",
+     "note": "re-hashed by the brief; the installed status \"unsupported game build\" at sentry_aim_retention:2434 is this gate"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "gate"
+  },
+  {
+   "id": "archive.GAME_DLL_SHA",
+   "file": "scripts/archive.py",
+   "lines": [
+    10
+   ],
+   "name": "game.dll SHA-256 pin",
+   "old": "2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E",
+   "new": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "method": "hash of the installed game.dll (brief)",
+   "witnesses": [
+    {
+     "kind": "note",
+     "note": "matches evidence/game-26088801.manifest.json disk sha256"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "gate"
+  },
+  {
+   "id": "revision",
+   "file": "build.py",
+   "lines": [],
+   "name": "revision string (log first line)",
+   "old": "data-v8.6",
+   "new": "data-v8.6-26088801",
+   "method": "port label",
+   "witnesses": [
+    {
+     "kind": "note",
+     "note": "cosmetic"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "log"
+  },
+  {
+   "id": "native.retention",
+   "file": "src/aim_data.lua + src/windows_api.lua",
+   "lines": [
+    46,
+    193
+   ],
+   "name": "retention flag setter (void*, id, mask=2, enabled): nt[i]+0x10 |= / &= ~mask",
+   "old": "0x6bf390 / 405741574883ec283b158248dc02450fb6f94c8b158779c6",
+   "new": "0x6c9a50 / 405741574883ec283b1572567702450fb6f94c8b15878461",
+   "method": "unique masked window (160 bytes, exact) + whole body instruction-identical; signature = new bytes, same length",
+   "witnesses": [
+    {
+     "kind": "function body",
+     "old": "0x6bf390",
+     "new": "0x6c9a50",
+     "bytes": 289,
+     "role": "called: retention flag setter (aim_data signatures[1], windows_api flag)",
+     "differing_instructions": 0,
+     "listing": "evidence/listings/fcmp-game-0x6bf390.txt"
+    },
+    {
+     "kind": "bytes",
+     "image": "ng",
+     "rva": "0x6c9a50",
+     "hex": "405741574883ec283b1572567702450fb6f94c8b15878461"
+    },
+    {
+     "kind": "note",
+     "note": "body: cmp edx,[invalid id]; r10=[TM global 0x2ce1ef0]; map +0x150/+0x158/+0x15c/+0x160; entity ptrs +0x168, test [e+0x14],1 (authority); nt=[r10+0x180], lea rdx*3*8 (stride 24), or/and [nt+idx*24+0x10],edi; network dirty call 0xe69780 with hash 0x5dd8181b - all identical to the old body"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "write (native): retention bit, network flags +16"
+  },
+  {
+   "id": "native.vertical",
+   "file": "src/aim_data.lua + src/windows_api.lua",
+   "lines": [
+    47,
+    195
+   ],
+   "name": "vertical turret speed setter (entity, float): control[i]+0xC",
+   "old": "0x11cb930 / 4883ec288b41083b05e3822b020f84d00000004c8b1526b4",
+   "new": "0x105cf00 / 4883ec288b41083b05c321de010f84d00000004c8b151650",
+   "method": "unique masked window + whole body (232 bytes) instruction-identical (store +0xC, hash 0x9d5d6cc7, RM global 0x2ce1f30)",
+   "witnesses": [
+    {
+     "kind": "function body",
+     "old": "0x11cb930",
+     "new": "0x105cf00",
+     "bytes": 232,
+     "role": "called: vertical turret speed setter (signatures[2])",
+     "differing_instructions": 0,
+     "listing": "evidence/listings/fcmp-game-0x11cb930.txt"
+    },
+    {
+     "kind": "bytes",
+     "image": "ng",
+     "rva": "0x105cf00",
+     "hex": "4883ec288b41083b05c321de010f84d00000004c8b151650"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "write (native): turret vertical speed"
+  },
+  {
+   "id": "native.horizontal",
+   "file": "src/aim_data.lua + src/windows_api.lua",
+   "lines": [
+    48,
+    194
+   ],
+   "name": "horizontal turret speed setter (entity, float): control[i]+0x8",
+   "old": "0x11cba20 / 4883ec288b41083b05f3812b020f84d00000004c8b1536b3",
+   "new": "0x105cff0 / whole predicted body (232 bytes): 4883ec288b41083b05d320de010f84d00000004c8b15264fc80133d24889742438458b4a30458b5a38440fafd8418d71ff4585c90f84a400000048895c2430498b5a2848897c2420418b7a340f1f40008bce468d041a4c23c1428b0cc33bcf741f3bc8741fffc2413bd172e4488b5c2430488b7c2420488b7424384883c428c33bc87550428b44c30483f8ff74464c8d0cc5000000008bd0498b4240498b0c01f6411401742e498b425848c1e204f30f114c0208498b42404d8b42584983c0084c03c2bae5450bcc498b0c018b4910e8bcc6e0ff488b5c2430488b7c2420488b7424384883c428c3",
+   "method": "twin rule: in the old build the horizontal setter is the vertical one 0xF0 later, byte-identical except RIP/call displacements (-0xF0, same targets), field +0xC -> +0x8 (2 bytes) and hash 0x9d5d6cc7 -> 0xcc0b45e5 (tools/horizontal.py asserts this on the old image). The same transformation of the new vertical body gives the expected new horizontal body at 0x105cf00 + 0xF0. Only its first 16 bytes are readable in any capture (page 0x105d000 is still encrypted in evidence/game-26088801.dll and in the live text dumps); all 16 match. The port therefore uses the WHOLE predicted body as this setter's signature: aim_data.bind_natives reads it with ReadProcessMemory and refuses (Unsupported native sentry setter) unless all 232 bytes match, before any call.",
+   "witnesses": [
+    {
+     "kind": "note",
+     "note": "evidence/horizontal-setter.txt"
+    },
+    {
+     "kind": "prediction",
+     "captured_prefix_bytes": 16,
+     "captured_prefix_matches": true,
+     "old_twin_rule_holds": true
+    },
+    {
+     "kind": "bytes",
+     "image": "ng",
+     "rva": "0x105cff0",
+     "hex": "4883ec288b41083b05d320de010f84d0"
+    }
+   ],
+   "confidence": "medium",
+   "feeds_write": true,
+   "role": "write (native): turret horizontal speed - RUNTIME-GATED by the full-body signature",
+   "live_check": "L9: read 232 bytes at game+0x105cff0 once resident; must equal the predicted body",
+   "runtime_gate": "full 232-byte body compared by the mod before its first call; otherwise the mod refuses to bind"
+  },
+  {
+   "id": "native.fire_mode",
+   "file": "src/aim_data.lua + src/windows_api.lua",
+   "lines": [
+    49,
+    196
+   ],
+   "name": "weapon fire mode setter (manager, id, mode): wm.mode[idx*12]",
+   "old": "0x755f90 / 48894c24085355565741574883ec20",
+   "new": "0x761700 / 48894c24085355565741574883ec20",
+   "method": "unique masked window + whole body (0x641 bytes, 5 fragments) instruction-identical except 4 script-API vtable offsets inside a nested event call (0x288->0x290, 0x10f8->0x1178 x2, 0x338->0x340), not the mode store",
+   "witnesses": [
+    {
+     "kind": "function body",
+     "old": "0x755f90",
+     "new": "0x761700",
+     "bytes": 1601,
+     "role": "called: weapon fire mode setter (signatures[4])",
+     "differing_instructions": 4,
+     "listing": "evidence/listings/fcmp-game-0x755f90.txt"
+    },
+    {
+     "kind": "bytes",
+     "image": "ng",
+     "rva": "0x761700",
+     "hex": "48894c24085355565741574883ec20"
+    },
+    {
+     "kind": "note",
+     "note": "mode store: [rbp+0x60] + idx*12 (lea r15,[rcx+rcx*2]; mov [r12+r15*4],r14d), map +0x30/+0x38/+0x3c/+0x40, entity ptrs +0x48, network dirty hash 0x49c250a6: identical"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "write (native): weapon fire mode (pause fire = 0, restore saved)"
+  },
+  {
+   "id": "engine.pose_getter",
+   "file": "src/aim_data.lua",
+   "lines": [
+    1089,
+    1090
+   ],
+   "name": "UnitApi.world_pose getter signature (checked, never called)",
+   "old": "0x1fd220 / 40534883ec204863dae89206eaff488bc84c8b0041ff90e8",
+   "new": "0x1f30c0 / 40534883ec204863dae8e2d5eaff488bc84c8b0041ff90e8",
+   "method": "unique byte pattern in each exe (one family of 5 getters, same order and spacing 0xdd0) + stored into the same engine-API table slot by the same initializer (old lea 0x1fd220 -> [0x27c8fa0], new lea 0x1f30c0 -> [0x2870470])",
+   "witnesses": [
+    {
+     "kind": "function body",
+     "old": "0x1fd220",
+     "new": "0x1f30c0",
+     "bytes": 47,
+     "role": "checked only: UnitApi.world_pose getter (pose layout +0xe8 -> +0x60, +0x28)",
+     "differing_instructions": 0,
+     "listing": "evidence/listings/fcmp-exe-0x1fd220.txt"
+    },
+    {
+     "kind": "bytes",
+     "image": "ne",
+     "rva": "0x1f30c0",
+     "hex": "40534883ec204863dae8e2d5eaff488bc84c8b0041ff90e8"
+    },
+    {
+     "kind": "note",
+     "note": "body: unit lookup call (0x9d8c0 -> 0xa06b0, identical), vtable +0xe8, shl 6, add [rax+0x28]: matrices 64 bytes each at [object+0x60+0x28] = object+0x88 (windows_api pose path)"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "check (gates the pose read)"
+  },
+  {
+   "id": "engine.world_id",
+   "file": "src/aim_data.lua + src/windows_api.lua",
+   "lines": [
+    1092,
+    197
+   ],
+   "name": "physics world id (const void *world) -> 0..3 or -1",
+   "old": "0x79f860 / 33c04c8d05c7b201020f1f800000000049390cc0740cffc083f80475f3",
+   "new": "0x826d10 / 33c04c8d05f7b203020f1f800000000049390cc0740cffc083f80475f3",
+   "method": "unique masked window (32 bytes) + body identical: scans 4 world pointers at 0x27bab30 -> 0x2862010 (= world table + 4*0xb0)",
+   "witnesses": [
+    {
+     "kind": "function body",
+     "old": "0x79f860",
+     "new": "0x826d10",
+     "bytes": 35,
+     "role": "called: physics world id",
+     "differing_instructions": 0,
+     "listing": "evidence/listings/fcmp-exe-0x79f860.txt"
+    },
+    {
+     "kind": "global",
+     "old_sites": 22,
+     "sampled": 22,
+     "votes": {
+      "0x2862010": 17
+     },
+     "exact_window_votes": {
+      "0x2862010": 17
+     },
+     "example": {
+      "old": "0xd78b8",
+      "new": "0xd84a8",
+      "window_bytes": 160,
+      "field_displacements_masked": false,
+      "new_global": "0x2862010",
+      "instruction_old": "lea rdx, [rip + 0x26e3271]",
+      "instruction_new": "lea rdx, [rip + 0x2789b61]"
+     },
+     "source": "evidence/globals.json (tools/map_globals.py)"
+    },
+    {
+     "kind": "bytes",
+     "image": "ne",
+     "rva": "0x826d10",
+     "hex": "33c04c8d05f7b203020f1f800000000049390cc0740cffc083f80475f3"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "call (read-only query)"
+  },
+  {
+   "id": "engine.raycast",
+   "file": "src/aim_data.lua + src/windows_api.lua",
+   "lines": [
+    1093,
+    198
+   ],
+   "name": "closest-hits raycast (world id, from, dir, length, collection, class, filter, flags, ignore unit, out[11*cap], cap) -> hit count",
+   "old": "0x7f4590 / 488bc4f30f11582089480855535657415441554156415748",
+   "new": "0x87bc70 / 488bc4f30f11582089480855535657415441554156415748",
+   "method": "unique masked window (160 bytes) + whole body (0xad1 bytes, 23 calls) instruction-identical; same world table 0x27ba870 -> 0x2861d50 and filter global 0x27c5cf0 -> 0x286d1d8 (Sticky Grenade Handles' mapped value)",
+   "witnesses": [
+    {
+     "kind": "function body",
+     "old": "0x7f4590",
+     "new": "0x87bc70",
+     "bytes": 2769,
+     "role": "called: closest-hits raycast",
+     "differing_instructions": 0,
+     "listing": "evidence/listings/fcmp-exe-0x7f4590.txt"
+    },
+    {
+     "kind": "global",
+     "old_sites": 94,
+     "sampled": 64,
+     "votes": {
+      "0x2861d50": 51
+     },
+     "exact_window_votes": {
+      "0x2861d50": 51
+     },
+     "example": {
+      "old": "0x1ac314",
+      "new": "0x1a6454",
+      "window_bytes": 160,
+      "field_displacements_masked": false,
+      "new_global": "0x2861d50",
+      "instruction_old": "lea rcx, [rip + 0x260e555]",
+      "instruction_new": "lea rcx, [rip + 0x26bb8f5]"
+     },
+     "source": "evidence/globals.json (tools/map_globals.py)"
+    },
+    {
+     "kind": "bytes",
+     "image": "ne",
+     "rva": "0x87bc70",
+     "hex": "488bc4f30f11582089480855535657415441554156415748"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "call (read-only physics query into private buffers)"
+  },
+  {
+   "id": "engine.raycast_filter",
+   "file": "src/windows_api.lua",
+   "lines": [
+    92,
+    100
+   ],
+   "name": "raycast preset: class 3, collision filter 0x393d9518, flags 0x80000009",
+   "old": "3, 0x393d9518, 0x80000009",
+   "new": "3, 0x393d9518, 0x80000009",
+   "method": "unchanged: raycast body identical; the filter hash and flags are game data, and the game's own collision setup still passes r9d=0x393d9518 with [rsp+0x20]=0x80000009 (old 0x175be90 -> new 0x15d0010, same sequence; the hash occurs at 9 old / 10 new game.dll code sites)",
+   "witnesses": [
+    {
+     "kind": "bytes",
+     "image": "og",
+     "rva": "0x175be90",
+     "hex": "41b918953d39"
+    },
+    {
+     "kind": "bytes",
+     "image": "ng",
+     "rva": "0x15d0010",
+     "hex": "41b918953d39"
+    },
+    {
+     "kind": "bytes",
+     "image": "ng",
+     "rva": "0x15d0018",
+     "hex": "c744242009000080"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "read decision (terrain veto -> fire pause)"
+  },
+  {
+   "id": "engine.destructible_filter",
+   "file": "src/windows_api.lua",
+   "lines": [
+    114
+   ],
+   "name": "destructible cover collision filter name 0x04a8fbf9",
+   "old": "0x04a8fbf9",
+   "new": "0x04a8fbf9",
+   "method": "unchanged (game data, not in code)",
+   "witnesses": [
+    {
+     "kind": "note",
+     "note": "a collision filter name word from the live filter property table; not present in either image. If absent, a fence reads as static obstruction (pauses fire, never a wrong write)"
+    }
+   ],
+   "confidence": "medium",
+   "feeds_write": true,
+   "role": "read decision (terrain veto)",
+   "live_check": "L8: name table at [[exe+0x286d338]+0x100] should contain 0x04a8fbf9 (and the flame filter 0x12d0abf1)"
+  },
+  {
+   "id": "game.targeting",
+   "file": "src/aim_data.lua",
+   "lines": [
+    174,
+    373
+   ],
+   "name": "targeting manager (tm)",
+   "old": "0x3326d30",
+   "new": "0x2ce1ef0",
+   "method": "agreeing RIP-relative instruction windows (exact bytes)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 63,
+     "sampled": 63,
+     "votes": {
+      "0x2ce1ef0": 55
+     },
+     "exact_window_votes": {
+      "0x2ce1ef0": 53
+     },
+     "example": {
+      "old": "0x4a9a2b",
+      "new": "0x4b02eb",
+      "window_bytes": 128,
+      "field_displacements_masked": false,
+      "new_global": "0x2ce1ef0",
+      "instruction_old": "mov rax, qword ptr [rip + 0x2e7d2fe]",
+      "instruction_new": "mov rax, qword ptr [rip + 0x2831bfe]"
+     },
+     "source": "evidence/globals.json (tools/map_globals.py)"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address"
+  },
+  {
+   "id": "game.behavior",
+   "file": "src/aim_data.lua",
+   "lines": [
+    174,
+    373
+   ],
+   "name": "behavior manager (bm)",
+   "old": "0x3326740",
+   "new": "0x2ce18f0",
+   "method": "agreeing RIP-relative instruction windows (exact bytes)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 449,
+     "sampled": 64,
+     "votes": {
+      "0x2ce18f0": 27,
+      "0x2ce1eb8": 1
+     },
+     "exact_window_votes": {
+      "0x2ce18f0": 26
+     },
+     "example": {
+      "old": "0x2887ac",
+      "new": "0x28f44c",
+      "window_bytes": 128,
+      "field_displacements_masked": false,
+      "new_global": "0x2ce18f0",
+      "instruction_old": "mov rcx, qword ptr [rip + 0x309df8d]",
+      "instruction_new": "mov rcx, qword ptr [rip + 0x2a5249d]"
+     },
+     "source": "evidence/globals.json (tools/map_globals.py)"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address"
+  },
+  {
+   "id": "game.turret",
+   "file": "src/aim_data.lua",
+   "lines": [
+    174,
+    373
+   ],
+   "name": "turret manager (rm)",
+   "old": "0x3326d70",
+   "new": "0x2ce1f30",
+   "method": "agreeing RIP-relative instruction windows (exact bytes)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 36,
+     "sampled": 36,
+     "votes": {
+      "0x2ce1f30": 27,
+      "0x2ce1dc8": 1,
+      "0x2ce1810": 1
+     },
+     "exact_window_votes": {
+      "0x2ce1f30": 27,
+      "0x2ce1810": 1
+     },
+     "example": {
+      "old": "0x4b0823",
+      "new": "0x4b70e3",
+      "window_bytes": 96,
+      "field_displacements_masked": false,
+      "new_global": "0x2ce1f30",
+      "instruction_old": "mov rdx, qword ptr [rip + 0x2e76546]",
+      "instruction_new": "mov rdx, qword ptr [rip + 0x282ae46]"
+     },
+     "source": "evidence/globals.json (tools/map_globals.py)"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address"
+  },
+  {
+   "id": "game.target_faction",
+   "file": "src/aim_data.lua",
+   "lines": [
+    186
+   ],
+   "name": "target/faction manager (fm)",
+   "old": "0x3326cb8",
+   "new": "0x2ce1e78",
+   "method": "agreeing RIP-relative instruction windows (exact bytes)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 225,
+     "sampled": 64,
+     "votes": {
+      "0x2ce1e78": 53
+     },
+     "exact_window_votes": {
+      "0x2ce1e78": 52
+     },
+     "example": {
+      "old": "0x4b0c73",
+      "new": "0x4b7533",
+      "window_bytes": 96,
+      "field_displacements_masked": false,
+      "new_global": "0x2ce1e78",
+      "instruction_old": "mov rsi, qword ptr [rip + 0x2e7603e]",
+      "instruction_new": "mov rsi, qword ptr [rip + 0x282a93e]"
+     },
+     "source": "evidence/globals.json (tools/map_globals.py)"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address"
+  },
+  {
+   "id": "game.clock",
+   "file": "src/aim_data.lua",
+   "lines": [
+    199,
+    200,
+    220
+   ],
+   "name": "selection clock root ([root]+24 = microseconds)",
+   "old": "0x3326348",
+   "new": "0x2ce14f8",
+   "method": "agreeing RIP-relative instruction windows (exact bytes)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 5163,
+     "sampled": 64,
+     "votes": {
+      "0x2ce14f8": 26
+     },
+     "exact_window_votes": {
+      "0x2ce14f8": 25
+     },
+     "example": {
+      "old": "0xb9636",
+      "new": "0x37d536",
+      "window_bytes": 48,
+      "field_displacements_masked": false,
+      "new_global": "0x2ce14f8",
+      "instruction_old": "mov rax, qword ptr [rip + 0x326cd0b]",
+      "instruction_new": "mov rax, qword ptr [rip + 0x2963fbb]"
+     },
+     "source": "evidence/globals.json (tools/map_globals.py)"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address"
+  },
+  {
+   "id": "game.weapon",
+   "file": "src/aim_data.lua",
+   "lines": [
+    201,
+    213
+   ],
+   "name": "weapon manager (wm)",
+   "old": "0x3326ce0",
+   "new": "0x2ce1ea0",
+   "method": "agreeing RIP-relative instruction windows (exact bytes)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 340,
+     "sampled": 64,
+     "votes": {
+      "0x2ce1a90": 1,
+      "0x2ce1ea0": 34
+     },
+     "exact_window_votes": {
+      "0x2ce1ea0": 34
+     },
+     "example": {
+      "old": "0x568ea5",
+      "new": "0x571435",
+      "window_bytes": 32,
+      "field_displacements_masked": true,
+      "new_global": "0x2ce1a90",
+      "instruction_old": "mov qword ptr [rip + 0x2dbde34], rax",
+      "instruction_new": "mov qword ptr [rip + 0x2770654], rax"
+     },
+     "source": "evidence/globals.json (tools/map_globals.py)"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address"
+  },
+  {
+   "id": "game.trigger",
+   "file": "src/aim_data.lua",
+   "lines": [
+    214,
+    215
+   ],
+   "name": "weapon trigger manager (cm)",
+   "old": "0x3326660",
+   "new": "0x2ce1810",
+   "method": "agreeing RIP-relative instruction windows (exact bytes)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 221,
+     "sampled": 64,
+     "votes": {
+      "0x2ce1810": 51
+     },
+     "exact_window_votes": {
+      "0x2ce1810": 48
+     },
+     "example": {
+      "old": "0x4bab2d",
+      "new": "0x4c121d",
+      "window_bytes": 160,
+      "field_displacements_masked": false,
+      "new_global": "0x2ce1810",
+      "instruction_old": "mov r11, qword ptr [rip + 0x2e6bb2c]",
+      "instruction_new": "mov r11, qword ptr [rip + 0x28205ec]"
+     },
+     "source": "evidence/globals.json (tools/map_globals.py)"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address"
+  },
+  {
+   "id": "game.mode",
+   "file": "src/aim_data.lua",
+   "lines": [
+    494,
+    501
+   ],
+   "name": "mission mode record pointer (idle gate)",
+   "old": "0x33266a0",
+   "new": "0x2ce1850",
+   "method": "agreeing RIP-relative instruction windows (exact bytes)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 240,
+     "sampled": 64,
+     "votes": {
+      "0x2ce1850": 51
+     },
+     "exact_window_votes": {
+      "0x2ce1850": 46
+     },
+     "example": {
+      "old": "0x38013b",
+      "new": "0x386e3b",
+      "window_bytes": 160,
+      "field_displacements_masked": false,
+      "new_global": "0x2ce1850",
+      "instruction_old": "mov rax, qword ptr [rip + 0x2fa655e]",
+      "instruction_new": "mov rax, qword ptr [rip + 0x295aa0e]"
+     },
+     "source": "evidence/globals.json (tools/map_globals.py)"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "address"
+  },
+  {
+   "id": "game.scheduler",
+   "file": "src/windows_api.lua",
+   "lines": [
+    231
+   ],
+   "name": "ray job scheduler pointer",
+   "old": "0x347d7e0",
+   "new": "0x2e38988",
+   "method": "agreeing windows (4/5 sites, 3 exact) + the initializer is identical: lea rdx,[rsi+...]; [rdx+0x40128]=0; lea rax,[rdx+0x40010]; mov [global],rdx; 0x18 jobs of 12 bytes zeroed",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 5,
+     "sampled": 5,
+     "votes": {
+      "0x2e38988": 4
+     },
+     "exact_window_votes": {
+      "0x2e38988": 3
+     },
+     "example": {
+      "old": "0xab1da5",
+      "new": "0xacda75",
+      "window_bytes": 160,
+      "field_displacements_masked": false,
+      "new_global": "0x2e38988",
+      "instruction_old": "mov qword ptr [rip + 0x29cba34], rdx",
+      "instruction_new": "mov qword ptr [rip + 0x236af0c], rdx"
+     },
+     "source": "evidence/globals.json (tools/map_globals.py)"
+    },
+    {
+     "kind": "bytes",
+     "image": "og",
+     "rva": "0xab1d91",
+     "hex": "41bd180000004489ba28010400488d8210000400"
+    },
+    {
+     "kind": "bytes",
+     "image": "ng",
+     "rva": "0xacda61",
+     "hex": "41bd180000004489ba28010400488d8210000400"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "read gate for the raycast"
+  },
+  {
+   "id": "game.physics_world",
+   "file": "src/windows_api.lua",
+   "lines": [
+    232
+   ],
+   "name": "physics world pointer (argument of world_id)",
+   "old": "0x346bfa0",
+   "new": "0x2e271f8",
+   "method": "agreeing windows",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 554,
+     "sampled": 64,
+     "votes": {
+      "0x2e271f8": 47
+     },
+     "exact_window_votes": {
+      "0x2e271f8": 45
+     },
+     "example": {
+      "old": "0x4c5b02",
+      "new": "0x4cc812",
+      "window_bytes": 160,
+      "field_displacements_masked": false,
+      "new_global": "0x2e271f8",
+      "instruction_old": "mov rcx, qword ptr [rip + 0x2fa6497]",
+      "instruction_new": "mov rcx, qword ptr [rip + 0x295a9df]"
+     },
+     "source": "evidence/globals.json (tools/map_globals.py)"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "read"
+  },
+  {
+   "id": "exe.actor_pools",
+   "file": "src/windows_api.lua",
+   "lines": [
+    138,
+    139,
+    142
+   ],
+   "name": "physics actor pools (64-byte headers, 4 per world, 10 per world index)",
+   "old": "0x2369b00",
+   "new": "0x2411200",
+   "method": "agreeing windows (9/9 exact) + the native actor resolver is identical (pool = base + 64*((a>>28)&3 + 10*(a>>30)); +0x24 count, +0x28 mask, +0x34 mask, +0x1c layout: u16 stride, u8 identity, u8 offset)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 10,
+     "sampled": 10,
+     "votes": {
+      "0x2411200": 9
+     },
+     "exact_window_votes": {
+      "0x2411200": 9
+     },
+     "example": {
+      "old": "0x786f4f",
+      "new": "0x80e24f",
+      "window_bytes": 160,
+      "field_displacements_masked": false,
+      "new_global": "0x2411200",
+      "instruction_old": "lea rax, [rip + 0x1be2baa]",
+      "instruction_new": "lea rax, [rip + 0x1c02faa]"
+     },
+     "source": "evidence/globals.json (tools/map_globals.py)"
+    },
+    {
+     "kind": "function body",
+     "old": "0x7951b0",
+     "new": "0x81c4e0",
+     "bytes": 104,
+     "role": "layout: actor handle -> pool entry (pools +64*k, +0x1c/+0x24/+0x28/+0x34)",
+     "differing_instructions": 0,
+     "listing": "evidence/listings/fcmp-exe-0x7951b0.txt"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "read (terrain veto)"
+  },
+  {
+   "id": "exe.world_slots",
+   "file": "src/windows_api.lua",
+   "lines": [
+    155
+   ],
+   "name": "physics world slots [0x27ba8a8 + 176*world]",
+   "old": "0x27ba8a8",
+   "new": "0x2861d88",
+   "method": "agreeing windows (6/6 exact) + world-slot getter identical (old 0x79f960 / new 0x826e10, next to world_id) + consistent with the raycast world table (+0x38 of the 0xb0 record in both builds)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 13,
+     "sampled": 13,
+     "votes": {
+      "0x2861d88": 6
+     },
+     "exact_window_votes": {
+      "0x2861d88": 6
+     },
+     "example": {
+      "old": "0x77dc68",
+      "new": "0x804f08",
+      "window_bytes": 160,
+      "field_displacements_masked": false,
+      "new_global": "0x2861d88",
+      "instruction_old": "lea rax, [rip + 0x203cc39]",
+      "instruction_new": "lea rax, [rip + 0x205ce79]"
+     },
+     "source": "evidence/globals.json (tools/map_globals.py)"
+    },
+    {
+     "kind": "function body",
+     "old": "0x79f960",
+     "new": "0x826e10",
+     "bytes": 21,
+     "role": "layout: world slot getter ([0x27ba8a8 + 0xb0*w])",
+     "differing_instructions": 0,
+     "listing": "evidence/listings/fcmp-exe-0x79f960.txt"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "read (terrain veto)"
+  },
+  {
+   "id": "exe.filter_properties",
+   "file": "src/windows_api.lua",
+   "lines": [
+    167,
+    180
+   ],
+   "name": "collision filter properties ([..]+0xf8 count, +0x100 names, filter & 0x7f)",
+   "old": "0x27c5e48",
+   "new": "0x286d338",
+   "method": "agreeing windows (60/64 sampled, all exact); 270 instructions after the witness sites identical (count +0xf8, names +0x100, index & 0x7f)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 64,
+     "sampled": 64,
+     "votes": {
+      "0x286d338": 60
+     },
+     "exact_window_votes": {
+      "0x286d338": 60
+     },
+     "example": {
+      "old": "0x77d963",
+      "new": "0x804c03",
+      "window_bytes": 32,
+      "field_displacements_masked": false,
+      "new_global": "0x286d338",
+      "instruction_old": "mov rax, qword ptr [rip + 0x20484de]",
+      "instruction_new": "mov rax, qword ptr [rip + 0x206872e]"
+     },
+     "source": "evidence/globals.json (tools/map_globals.py)"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "read (terrain veto)"
+  },
+  {
+   "id": "exe.units",
+   "file": "src/windows_api.lua",
+   "lines": [
+    245
+   ],
+   "name": "unit table (index < [+0x98], generation bytes [+0xa0], object slots [+0x88])",
+   "old": "0x1a100f0",
+   "new": "0x1ab76f8",
+   "method": "agreeing windows (42 exact) + unit lookup identical (and 0x3fffff, shr 0x16)",
+   "witnesses": [
+    {
+     "kind": "global",
+     "old_sites": 57,
+     "sampled": 57,
+     "votes": {
+      "0x1ab76f8": 44
+     },
+     "exact_window_votes": {
+      "0x1ab76f8": 42
+     },
+     "example": {
+      "old": "0x86a75",
+      "new": "0x887b4",
+      "window_bytes": 160,
+      "field_displacements_masked": true,
+      "new_global": "0x1ab76f8",
+      "instruction_old": "mov qword ptr [rip + 0x1989674], rax",
+      "instruction_new": "mov qword ptr [rip + 0x1a2ef3d], rax"
+     },
+     "source": "evidence/globals.json (tools/map_globals.py)"
+    },
+    {
+     "kind": "function body",
+     "old": "0x9d8c0",
+     "new": "0xa06b0",
+     "bytes": 116,
+     "role": "layout: unit handle -> object (units +0x88/+0x98/+0xa0, 22-bit index, 8-bit generation)",
+     "differing_instructions": 0,
+     "listing": "evidence/listings/fcmp-exe-0x9d8c0.txt"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "read (muzzle pose)"
+  },
+  {
+   "id": "layout.targeting",
+   "file": "src/aim_data.lua",
+   "lines": [
+    172,
+    174,
+    175,
+    232,
+    393,
+    401,
+    403,
+    405,
+    408
+   ],
+   "name": "targeting manager: header +308 (cap, total +12, active +16), map +336 (data, cap +8, empty +12, mul +16), entity pointers +360, runtime +376, network +384",
+   "old": "same",
+   "new": "same",
+   "method": "taint field pairs over 60+ aligned functions loading the global; the retention setter body",
+   "witnesses": [
+    {
+     "kind": "taint field pair",
+     "field": "TM+0x134",
+     "agreeing": 4,
+     "other": [],
+     "example": {
+      "old": "0x53f8ea",
+      "new": "0x54871a",
+      "old_function": "0x53f8b0",
+      "new_function": "0x5486dd",
+      "old_insn": "cmp esi, dword ptr [rdi + 0x134]",
+      "new_insn": "cmp esi, dword ptr [rdi + 0x134]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "TM+0x140",
+     "agreeing": 16,
+     "other": [],
+     "example": {
+      "old": "0x5731f3",
+      "new": "0x57c28a",
+      "old_function": "0x571250",
+      "new_function": "0x57a1f0",
+      "old_insn": "mov r8d, dword ptr [rcx + 0x140]",
+      "new_insn": "mov r8d, dword ptr [rcx + 0x140]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "TM+0x144",
+     "agreeing": 17,
+     "other": [],
+     "example": {
+      "old": "0x6bbe15",
+      "new": "0x6c64d5",
+      "old_function": "0x6bbdc0",
+      "new_function": "0x6c6480",
+      "old_insn": "mov eax, dword ptr [rbx + 0x144]",
+      "new_insn": "mov eax, dword ptr [rbx + 0x144]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "TM+0x150",
+     "agreeing": 23,
+     "other": [],
+     "example": {
+      "old": "0x60a764",
+      "new": "0x613964",
+      "old_function": "0x609288",
+      "new_function": "0x612458",
+      "old_insn": "mov rbx, qword ptr [r10 + 0x150]",
+      "new_insn": "mov rbx, qword ptr [r10 + 0x150]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "TM+0x158",
+     "agreeing": 35,
+     "other": [],
+     "example": {
+      "old": "0x60a745",
+      "new": "0x613945",
+      "old_function": "0x609288",
+      "new_function": "0x612458",
+      "old_insn": "mov r8d, dword ptr [r10 + 0x158]",
+      "new_insn": "mov r8d, dword ptr [r10 + 0x158]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "TM+0x15c",
+     "agreeing": 17,
+     "other": [],
+     "example": {
+      "old": "0x60a76b",
+      "new": "0x61396b",
+      "old_function": "0x609288",
+      "new_function": "0x612458",
+      "old_insn": "mov esi, dword ptr [r10 + 0x15c]",
+      "new_insn": "mov esi, dword ptr [r10 + 0x15c]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "TM+0x160",
+     "agreeing": 24,
+     "other": [],
+     "example": {
+      "old": "0x60a74c",
+      "new": "0x61394c",
+      "old_function": "0x609288",
+      "new_function": "0x612458",
+      "old_insn": "mov r9d, dword ptr [r10 + 0x160]",
+      "new_insn": "mov r9d, dword ptr [r10 + 0x160]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "TM+0x168",
+     "agreeing": 12,
+     "other": [],
+     "example": {
+      "old": "0x6bbe50",
+      "new": "0x6c6510",
+      "old_function": "0x6bbdc0",
+      "new_function": "0x6c6480",
+      "old_insn": "mov rax, qword ptr [rbx + 0x168]",
+      "new_insn": "mov rax, qword ptr [rbx + 0x168]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "TM+0x178",
+     "agreeing": 20,
+     "other": [],
+     "example": {
+      "old": "0x60a7fd",
+      "new": "0x6139fd",
+      "old_function": "0x609288",
+      "new_function": "0x612458",
+      "old_insn": "mov rcx, qword ptr [r10 + 0x178]",
+      "new_insn": "mov rcx, qword ptr [r10 + 0x178]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "TM+0x180",
+     "agreeing": 7,
+     "other": [],
+     "example": {
+      "old": "0x6bbe66",
+      "new": "0x6c6526",
+      "old_function": "0x6bbdc0",
+      "new_function": "0x6c6480",
+      "old_insn": "mov rax, qword ptr [rbx + 0x180]",
+      "new_insn": "mov rax, qword ptr [rbx + 0x180]"
+     },
+     "source": "evidence/field-pairs.json"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "layout"
+  },
+  {
+   "id": "layout.runtime",
+   "file": "src/aim_data.lua",
+   "lines": [
+    244,
+    251,
+    257,
+    322
+   ],
+   "name": "targeting runtime record: stride 208, +0 runtime target, +8 raw aim (12), +20 computed aim (12)",
+   "old": "same",
+   "new": "same",
+   "method": "imul 0xd0 pairs (44, all 0xd0) + the targeting update (old 0x6bbdc0 -> new 0x6c6480, 2999/2999 aligned, ratio 1.000) reads/writes [r14+r13+8]/[+0x10] (raw) and [+0x14]/[+0x18]/[+0x1c] (computed, movsd +0x14 / mov +0x1c) at the same offsets; the target-info copy (0x842d5b -> 0x84fc5b) reads runtime +0/+8/+0x10",
+   "witnesses": [
+    {
+     "kind": "record field pairs",
+     "source": "evidence/record-fields-runtime-208.txt",
+     "disp": "0x8",
+     "agreeing": 2,
+     "other": []
+    },
+    {
+     "kind": "record field pairs",
+     "source": "evidence/record-fields-runtime-208.txt",
+     "disp": "0x10",
+     "agreeing": 2,
+     "other": []
+    },
+    {
+     "kind": "record field pairs",
+     "source": "evidence/record-fields-runtime-208.txt",
+     "disp": "0x0",
+     "agreeing": 4,
+     "other": []
+    },
+    {
+     "kind": "aligned listing",
+     "listing": "evidence/listings/pair-0x6bc802.txt",
+     "note": "targeting update aligned listing"
+    },
+    {
+     "kind": "aligned listing",
+     "listing": "evidence/listings/pair-0x842d69.txt",
+     "note": "target copy"
+    },
+    {
+     "kind": "note",
+     "note": "evidence/strides-tm.txt: imul 0xd0 -> 0xd0 x44"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "WRITE target: raw aim +8 and computed aim +20 (12 bytes each, direct WriteProcessMemory)"
+  },
+  {
+   "id": "layout.network",
+   "file": "src/aim_data.lua",
+   "lines": [
+    245,
+    259,
+    325
+   ],
+   "name": "targeting network record: stride 24, +16 flags (bit 1 = retention)",
+   "old": "same",
+   "new": "same",
+   "method": "retention setter body (lea rdx*3, *8, [nt+0x10]) identical; field pairs TM->0x180",
+   "witnesses": [
+    {
+     "kind": "taint field pair",
+     "field": "TM->0x180+0x10",
+     "agreeing": 1,
+     "other": [],
+     "example": {
+      "old": "0x6bbe8e",
+      "new": "0x6c654e",
+      "old_function": "0x6bbdc0",
+      "new_function": "0x6c6480",
+      "old_insn": "cmp dword ptr [rax + rdi*8 + 0x10], 0",
+      "new_insn": "cmp dword ptr [rax + rdi*8 + 0x10], 0"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "function body",
+     "old": "0x6bf390",
+     "new": "0x6c9a50",
+     "bytes": 289,
+     "role": "called: retention flag setter (aim_data signatures[1], windows_api flag)",
+     "differing_instructions": 0,
+     "listing": "evidence/listings/fcmp-game-0x6bf390.txt"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "write target via native setter"
+  },
+  {
+   "id": "layout.behavior",
+   "file": "src/aim_data.lua",
+   "lines": [
+    149,
+    162,
+    237,
+    240,
+    251,
+    320,
+    321
+   ],
+   "name": "behavior manager: header +32 (count <= 16384), map +64, entity pointers +88, records +96 stride 504 (+0 behavior id, +8 node, +24 target, +28 point (12), +96 source flags, +120 has-target byte)",
+   "old": "same",
+   "new": "same",
+   "method": "taint field pairs (BM+0x20..0x68) + every record-based access in the 44 aligned functions indexing by imul 0x1f8 pairs with the same displacement (no mismatch); new strides 504 x50; record init (0x842200 -> 0x84f100, identical)",
+   "witnesses": [
+    {
+     "kind": "taint field pair",
+     "field": "BM+0x20",
+     "agreeing": 2,
+     "other": [],
+     "example": {
+      "old": "0x549054",
+      "new": "0x551eb4",
+      "old_function": "0x549020",
+      "new_function": "0x551e78",
+      "old_insn": "cmp eax, dword ptr [rdi + 0x20]",
+      "new_insn": "cmp eax, dword ptr [rdi + 0x20]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "BM+0x40",
+     "agreeing": 31,
+     "other": [],
+     "example": {
+      "old": "0x9bca46",
+      "new": "0x9ce7a5",
+      "old_function": "0x9bc897",
+      "new_function": "0x9ce5f7",
+      "old_insn": "mov rbx, qword ptr [r11 + 0x40]",
+      "new_insn": "mov rbx, qword ptr [r11 + 0x40]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "BM+0x48",
+     "agreeing": 34,
+     "other": [],
+     "example": {
+      "old": "0x9bca2e",
+      "new": "0x9ce78d",
+      "old_function": "0x9bc897",
+      "new_function": "0x9ce5f7",
+      "old_insn": "mov r9d, dword ptr [r11 + 0x48]",
+      "new_insn": "mov r9d, dword ptr [r11 + 0x48]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "BM+0x58",
+     "agreeing": 8,
+     "other": [],
+     "example": {
+      "old": "0x5490ce",
+      "new": "0x551f2e",
+      "old_function": "0x549020",
+      "new_function": "0x551e78",
+      "old_insn": "mov rax, qword ptr [rdi + 0x58]",
+      "new_insn": "mov rax, qword ptr [rdi + 0x58]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "BM+0x60",
+     "agreeing": 10,
+     "other": [],
+     "example": {
+      "old": "0x549097",
+      "new": "0x551ef7",
+      "old_function": "0x549020",
+      "new_function": "0x551e78",
+      "old_insn": "add rcx, qword ptr [rdi + 0x60]",
+      "new_insn": "add rcx, qword ptr [rdi + 0x60]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "record field pairs",
+     "source": "evidence/record-fields-behavior-504.txt",
+     "disp": "0x0",
+     "agreeing": 23,
+     "other": []
+    },
+    {
+     "kind": "record field pairs",
+     "source": "evidence/record-fields-behavior-504.txt",
+     "disp": "0x8",
+     "agreeing": 9,
+     "other": []
+    },
+    {
+     "kind": "record field pairs",
+     "source": "evidence/record-fields-behavior-504.txt",
+     "disp": "0x18",
+     "agreeing": 9,
+     "other": []
+    },
+    {
+     "kind": "record field pairs",
+     "source": "evidence/record-fields-behavior-504.txt",
+     "disp": "0x1c",
+     "agreeing": 3,
+     "other": []
+    },
+    {
+     "kind": "record field pairs",
+     "source": "evidence/record-fields-behavior-504.txt",
+     "disp": "0x60",
+     "agreeing": 2,
+     "other": []
+    },
+    {
+     "kind": "record field pairs",
+     "source": "evidence/record-fields-behavior-504.txt",
+     "disp": "0x78",
+     "agreeing": 4,
+     "other": []
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "layout"
+  },
+  {
+   "id": "layout.behavior_deadline",
+   "file": "src/aim_data.lua",
+   "lines": [
+    251,
+    262,
+    301,
+    812,
+    863
+   ],
+   "name": "behavior record +152: target search deadline (u64 microseconds on the selection clock)",
+   "old": "same",
+   "new": "same",
+   "method": "six native behavior nodes compare [ctx+0x98] with [[clock]+0x18] and store now+random there, at the same offset from the same context pointer in both builds (old 0x3b6cc0, 0x3bd7b0, 0x3bf010, 0x3c5a10, 0x3c7270, 0x3cdc70 ...); the aligned new nodes (e.g. 0x3bd9b6, 0x3c44b0, 0x3cdf70) do the same at +0x98 with the mapped clock 0x2ce14f8",
+   "witnesses": [
+    {
+     "kind": "aligned listing",
+     "listing": "evidence/listings/pair-0x3b72c0.txt",
+     "note": "node: cmp [rcx+0x98],now / mov [rax+0x98],now+rand"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "CLK+0x18",
+     "agreeing": 312,
+     "other": [],
+     "example": {
+      "old": "0xb9647",
+      "new": "0x37d547",
+      "old_function": "0xb9630",
+      "new_function": "0x37d527",
+      "old_insn": "mov r8, qword ptr [rax + 0x18]",
+      "new_insn": "mov r8, qword ptr [rax + 0x18]"
+     },
+     "source": "evidence/field-pairs.json"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "WRITE target: selection deadline (8 bytes, direct WriteProcessMemory)"
+  },
+  {
+   "id": "layout.turret",
+   "file": "src/aim_data.lua",
+   "lines": [
+    153,
+    159,
+    160,
+    161,
+    238,
+    241,
+    252
+   ],
+   "name": "turret manager: header +8 (+0,+12,+16 counts), map +40, entity pointers +64, control +88 stride 16 (+0 enabled byte, +8 horizontal, +12 vertical speed)",
+   "old": "same",
+   "new": "same",
+   "method": "field pairs RM+0x8..0x58 and RM->0x58 +0/+4/+8/+0xc; vertical setter body identical (shl 4, [+0x58], store +0xc)",
+   "witnesses": [
+    {
+     "kind": "taint field pair",
+     "field": "RM+0x8",
+     "agreeing": 4,
+     "other": [],
+     "example": {
+      "old": "0x542aea",
+      "new": "0x54b91a",
+      "old_function": "0x542ac0",
+      "new_function": "0x54b8ef",
+      "old_insn": "cmp r8d, dword ptr [rbx + 8]",
+      "new_insn": "cmp r8d, dword ptr [rbx + 8]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "RM+0x28",
+     "agreeing": 16,
+     "other": [
+      [
+       "CM",
+       "0x28",
+       1
+      ]
+     ],
+     "example": {
+      "old": "0x7ef04e",
+      "new": "0x7fb85e",
+      "old_function": "0x7eefe0",
+      "new_function": "0x7fb7f0",
+      "old_insn": "mov r10, qword ptr [rax + 0x28]",
+      "new_insn": "mov r10, qword ptr [rax + 0x28]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "RM+0x40",
+     "agreeing": 4,
+     "other": [],
+     "example": {
+      "old": "0x542b3f",
+      "new": "0x54b96f",
+      "old_function": "0x542ac0",
+      "new_function": "0x54b8ef",
+      "old_insn": "mov rax, qword ptr [rbx + 0x40]",
+      "new_insn": "mov rax, qword ptr [rbx + 0x40]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "RM+0x58",
+     "agreeing": 9,
+     "other": [],
+     "example": {
+      "old": "0x6e020a",
+      "new": "0x6eabba",
+      "old_function": "0x6e01f0",
+      "new_function": "0x6eaba0",
+      "old_insn": "mov rax, qword ptr [r10 + 0x58]",
+      "new_insn": "mov rax, qword ptr [r10 + 0x58]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "RM->0x58+0x8",
+     "agreeing": 2,
+     "other": [],
+     "example": {
+      "old": "0x6e0809",
+      "new": "0x6eb1b9",
+      "old_function": "0x6e06f0",
+      "new_function": "0x6eb097",
+      "old_insn": "mov dword ptr [rcx + rbx*8 + 8], eax",
+      "new_insn": "mov dword ptr [rcx + rbx*8 + 8], eax"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "RM->0x58+0xc",
+     "agreeing": 2,
+     "other": [],
+     "example": {
+      "old": "0x6e0847",
+      "new": "0x6eb1f7",
+      "old_function": "0x6e06f0",
+      "new_function": "0x6eb097",
+      "old_insn": "mov dword ptr [rcx + rbx*8 + 0xc], eax",
+      "new_insn": "mov dword ptr [rcx + rbx*8 + 0xc], eax"
+     },
+     "source": "evidence/field-pairs.json"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "write target via native setters"
+  },
+  {
+   "id": "layout.weapon",
+   "file": "src/aim_data.lua",
+   "lines": [
+    203,
+    205,
+    207,
+    208,
+    209,
+    212
+   ],
+   "name": "weapon manager: map +48, entity pointers +72, records +88 stride 1008 (+120 fire nodes, +216 count, +220 index), mode +96 stride 12",
+   "old": "same",
+   "new": "same",
+   "method": "field pairs WM+0x30..0x60; imul 0x3f0 -> 0x3f0 x8; record disp 0x78/0xd8/0xdc pairs equal; fire-mode setter body",
+   "witnesses": [
+    {
+     "kind": "taint field pair",
+     "field": "WM+0x30",
+     "agreeing": 82,
+     "other": [],
+     "example": {
+      "old": "0x6129ac",
+      "new": "0x61bc7c",
+      "old_function": "0x6128b0",
+      "new_function": "0x61bb80",
+      "old_insn": "mov rbx, qword ptr [r9 + 0x30]",
+      "new_insn": "mov rbx, qword ptr [r9 + 0x30]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "WM+0x48",
+     "agreeing": 11,
+     "other": [],
+     "example": {
+      "old": "0x78556d",
+      "new": "0x790bed",
+      "old_function": "0x785456",
+      "new_function": "0x790ad6",
+      "old_insn": "mov rdx, qword ptr [r11 + 0x48]",
+      "new_insn": "mov rdx, qword ptr [r11 + 0x48]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "WM+0x58",
+     "agreeing": 19,
+     "other": [],
+     "example": {
+      "old": "0x612bea",
+      "new": "0x61beba",
+      "old_function": "0x6128b0",
+      "new_function": "0x61bb80",
+      "old_insn": "mov r11, qword ptr [r9 + 0x58]",
+      "new_insn": "mov r11, qword ptr [r9 + 0x58]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "WM+0x60",
+     "agreeing": 5,
+     "other": [],
+     "example": {
+      "old": "0x612b42",
+      "new": "0x61be12",
+      "old_function": "0x6128b0",
+      "new_function": "0x61bb80",
+      "old_insn": "mov rax, qword ptr [rdi + 0x60]",
+      "new_insn": "mov rax, qword ptr [rdi + 0x60]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "note",
+     "note": "evidence/strides-wm.txt"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "layout (fire mode via native setter)"
+  },
+  {
+   "id": "layout.trigger",
+   "file": "src/aim_data.lua",
+   "lines": [
+    216,
+    217,
+    219,
+    223
+   ],
+   "name": "trigger manager: map +40, trigger bytes +88 (indexed by map index)",
+   "old": "same",
+   "new": "same",
+   "method": "field pairs CM+0x28..0x58",
+   "witnesses": [
+    {
+     "kind": "taint field pair",
+     "field": "CM+0x28",
+     "agreeing": 52,
+     "other": [],
+     "example": {
+      "old": "0x54031b",
+      "new": "0x54914b",
+      "old_function": "0x5402c0",
+      "new_function": "0x5490e4",
+      "old_insn": "lea rcx, [rbx + 0x28]",
+      "new_insn": "lea rcx, [rbx + 0x28]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "CM+0x58",
+     "agreeing": 4,
+     "other": [],
+     "example": {
+      "old": "0x7428e7",
+      "new": "0x74de47",
+      "old_function": "0x742860",
+      "new_function": "0x74ddb4",
+      "old_insn": "mov rax, qword ptr [r10 + 0x58]",
+      "new_insn": "mov rax, qword ptr [r10 + 0x58]"
+     },
+     "source": "evidence/field-pairs.json"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "read"
+  },
+  {
+   "id": "layout.target_faction",
+   "file": "src/aim_data.lua",
+   "lines": [
+    187,
+    190,
+    191,
+    192,
+    194
+   ],
+   "name": "target/faction manager: map +73808, slots +73832; record +8 id, +12 unit",
+   "old": "same",
+   "new": "same",
+   "method": "field pairs FM+0x12050/+0x12068 and FM->0x12068->[]+8/+0xc",
+   "witnesses": [
+    {
+     "kind": "taint field pair",
+     "field": "FM+0x12050",
+     "agreeing": 46,
+     "other": [],
+     "example": {
+      "old": "0x60a3a6",
+      "new": "0x6135a6",
+      "old_function": "0x609288",
+      "new_function": "0x612458",
+      "old_insn": "mov rbx, qword ptr [r11 + 0x12050]",
+      "new_insn": "mov rbx, qword ptr [r11 + 0x12050]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "FM+0x12068",
+     "agreeing": 15,
+     "other": [],
+     "example": {
+      "old": "0x887380",
+      "new": "0x894a10",
+      "old_function": "0x88729a",
+      "new_function": "0x89492a",
+      "old_insn": "mov rax, qword ptr [r13 + 0x12068]",
+      "new_insn": "mov rax, qword ptr [r13 + 0x12068]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "FM->0x12068->0x0[]+0x8",
+     "agreeing": 14,
+     "other": [],
+     "example": {
+      "old": "0x887398",
+      "new": "0x894a28",
+      "old_function": "0x88729a",
+      "new_function": "0x89492a",
+      "old_insn": "mov edx, dword ptr [rcx + 8]",
+      "new_insn": "mov edx, dword ptr [rcx + 8]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "FM->0x12068->0x0[]+0xc",
+     "agreeing": 5,
+     "other": [],
+     "example": {
+      "old": "0x5e76e9",
+      "new": "0x5f0039",
+      "old_function": "0x5e75f4",
+      "new_function": "0x5eff44",
+      "old_insn": "mov ecx, dword ptr [r8 + 0xc]",
+      "new_insn": "mov ecx, dword ptr [r8 + 0xc]"
+     },
+     "source": "evidence/field-pairs.json"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "read (target unit for the terrain query)"
+  },
+  {
+   "id": "layout.clock",
+   "file": "src/aim_data.lua",
+   "lines": [
+    222,
+    294,
+    302
+   ],
+   "name": "selection clock: [root]+24 = u64 microseconds",
+   "old": "same",
+   "new": "same",
+   "method": "field pairs CLK+0x18 (300+)",
+   "witnesses": [
+    {
+     "kind": "taint field pair",
+     "field": "CLK+0x18",
+     "agreeing": 312,
+     "other": [],
+     "example": {
+      "old": "0xb9647",
+      "new": "0x37d547",
+      "old_function": "0xb9630",
+      "new_function": "0x37d527",
+      "old_insn": "mov r8, qword ptr [rax + 0x18]",
+      "new_insn": "mov r8, qword ptr [rax + 0x18]"
+     },
+     "source": "evidence/field-pairs.json"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "read (deadline value)"
+  },
+  {
+   "id": "layout.entity",
+   "file": "src/aim_data.lua",
+   "lines": [
+    192,
+    235,
+    428,
+    431,
+    435
+   ],
+   "name": "entity header: +0 type (8 bytes), +8 id, +12 unit, +20 flags (&3 == 1: this machine controls it)",
+   "old": "same",
+   "new": "same",
+   "method": "field pairs TM->0x168->[]+8/+0x14 (and the setters' test [e+0x14],1)",
+   "witnesses": [
+    {
+     "kind": "taint field pair",
+     "field": "TM->0x168->0x0[]+0x8",
+     "agreeing": 3,
+     "other": [],
+     "example": {
+      "old": "0x6bbe9d",
+      "new": "0x6c655d",
+      "old_function": "0x6bbdc0",
+      "new_function": "0x6c6480",
+      "old_insn": "mov eax, dword ptr [r14 + 8]",
+      "new_insn": "mov eax, dword ptr [r14 + 8]"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "TM->0x168->0x0[]+0x14",
+     "agreeing": 3,
+     "other": [],
+     "example": {
+      "old": "0x6bbe5b",
+      "new": "0x6c651b",
+      "old_function": "0x6bbdc0",
+      "new_function": "0x6c6480",
+      "old_insn": "test byte ptr [r14 + 0x14], 2",
+      "new_insn": "test byte ptr [r14 + 0x14], 2"
+     },
+     "source": "evidence/field-pairs.json"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "authority gate"
+  },
+  {
+   "id": "layout.mode",
+   "file": "src/aim_data.lua",
+   "lines": [
+    494,
+    495,
+    502,
+    510,
+    511
+   ],
+   "name": "mission mode record: 68 bytes, word +8 set and word +0x40 in 1..7",
+   "old": "same",
+   "new": "same",
+   "method": "field pairs MODE+0x8 (106) / +0x40 (87)",
+   "witnesses": [
+    {
+     "kind": "taint field pair",
+     "field": "MODE+0x8",
+     "agreeing": 106,
+     "other": [],
+     "example": {
+      "old": "0x829374",
+      "new": "0x836364",
+      "old_function": "0x828407",
+      "new_function": "0x8353f7",
+      "old_insn": "cmp dword ptr [rax + 8], r9d",
+      "new_insn": "cmp dword ptr [rax + 8], r9d"
+     },
+     "source": "evidence/field-pairs.json"
+    },
+    {
+     "kind": "taint field pair",
+     "field": "MODE+0x40",
+     "agreeing": 87,
+     "other": [],
+     "example": {
+      "old": "0x82937a",
+      "new": "0x83636a",
+      "old_function": "0x828407",
+      "new_function": "0x8353f7",
+      "old_insn": "cmp dword ptr [rax + 0x40], 4",
+      "new_insn": "cmp dword ptr [rax + 0x40], 4"
+     },
+     "source": "evidence/field-pairs.json"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "idle gate"
+  },
+  {
+   "id": "layout.scheduler",
+   "file": "src/windows_api.lua",
+   "lines": [
+    234,
+    235
+   ],
+   "name": "scheduler: u32 +0 (0 = idle), 24 jobs of 12 bytes at +0x40008 (word 2 = 1 consumed)",
+   "old": "same",
+   "new": "same",
+   "method": "initializer identical (24 jobs, 12-byte stride, word +0x40010 zeroed)",
+   "witnesses": [
+    {
+     "kind": "bytes",
+     "image": "ng",
+     "rva": "0xacda61",
+     "hex": "41bd180000004489ba28010400488d8210000400"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "read gate for the raycast"
+  },
+  {
+   "id": "layout.actor_body",
+   "file": "src/windows_api.lua",
+   "lines": [
+    143,
+    146,
+    148,
+    157,
+    159,
+    160
+   ],
+   "name": "actor entry record (+12 unit, +20 body index & 0xffffff); world +24 bodies, body stride 160, +144 actor, +148 unit",
+   "old": "same",
+   "new": "same",
+   "method": "resolver and body-index lookup identical (record +0x14); body accessor (old 0xd0ce80 / new 0xd657b0: and 0xffffff, *160, add [world+0x18]) identical; body +144/+148 not witnessed in code",
+   "witnesses": [
+    {
+     "kind": "function body",
+     "old": "0x7995f0",
+     "new": "0x8209b0",
+     "bytes": 238,
+     "role": "layout: actor -> body index (entry record +0x14)",
+     "differing_instructions": 0,
+     "listing": "evidence/listings/fcmp-exe-0x7995f0.txt"
+    },
+    {
+     "kind": "bytes",
+     "image": "oe",
+     "rva": "0xd0ce80",
+     "hex": "8bc225ffffff00488d048048c1e00548034118c3"
+    },
+    {
+     "kind": "bytes",
+     "image": "ne",
+     "rva": "0xd657b0",
+     "hex": "8bc225ffffff00488d048048c1e00548034118c3"
+    }
+   ],
+   "confidence": "medium",
+   "feeds_write": true,
+   "role": "read (identity checks: a moved field makes the filter unknown, never a wrong write)",
+   "live_check": "L8: for a live body, [body+144]==actor and [body+148]==unit"
+  },
+  {
+   "id": "layout.body_filter",
+   "file": "src/windows_api.lua",
+   "lines": [
+    169
+   ],
+   "name": "body +108 & 127 = collision filter index",
+   "old": "same",
+   "new": "same",
+   "method": "old 0x77d955 / new 0x804bf5: [rax+0x6c] & 0x7f indexes [[0x27c5e48]+0x100] (exact window)",
+   "witnesses": [
+    {
+     "kind": "bytes",
+     "image": "oe",
+     "rva": "0x77d960",
+     "hex": "8b486c"
+    },
+    {
+     "kind": "bytes",
+     "image": "ne",
+     "rva": "0x804c00",
+     "hex": "8b486c"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "read (terrain veto)"
+  },
+  {
+   "id": "layout.units",
+   "file": "src/windows_api.lua",
+   "lines": [
+    212,
+    213,
+    214,
+    215,
+    217,
+    218,
+    219,
+    221,
+    254
+   ],
+   "name": "unit handle (22-bit index, 8-bit generation); object +8 unit id, +0x70 node count, [+0x88] 64-byte matrices; vtable +0xe8 = lea rax,[rcx+0x60]; ret",
+   "old": "same",
+   "new": "same",
+   "method": "unit lookup identical; pose getter identical ([+0x60 + 0x28] = +0x88); a unit-API helper reading the +0x60 sub-object's +0x10 count identical (old 0x1fc600 / new 0x1f24a0); the mod checks the vtable method bytes and [object+8]==unit itself before every read",
+   "witnesses": [
+    {
+     "kind": "function body",
+     "old": "0x9d8c0",
+     "new": "0xa06b0",
+     "bytes": 116,
+     "role": "layout: unit handle -> object (units +0x88/+0x98/+0xa0, 22-bit index, 8-bit generation)",
+     "differing_instructions": 0,
+     "listing": "evidence/listings/fcmp-exe-0x9d8c0.txt"
+    },
+    {
+     "kind": "function body",
+     "old": "0x1fc600",
+     "new": "0x1f24a0",
+     "bytes": 80,
+     "role": "layout: unit API reading scene-graph count (+0x60 sub-object +0x10 = object +0x70)",
+     "differing_instructions": 0,
+     "listing": "evidence/listings/fcmp-exe-0x1fc600.txt"
+    },
+    {
+     "kind": "function body",
+     "old": "0x1fd220",
+     "new": "0x1f30c0",
+     "bytes": 47,
+     "role": "checked only: UnitApi.world_pose getter (pose layout +0xe8 -> +0x60, +0x28)",
+     "differing_instructions": 0,
+     "listing": "evidence/listings/fcmp-exe-0x1fd220.txt"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "read (muzzle pose)"
+  },
+  {
+   "id": "data.behavior_ids",
+   "file": "src/aim_data.lua",
+   "lines": [
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41
+   ],
+   "name": "BehaviorComponent behavior ids of the sentry profiles (Gatling, Machine gun, Laser cannon, Rocket, Flamethrower, Mortar, EMS mortar)",
+   "old": "213, 312, 308, 611, 207, 319, 323",
+   "new": "214, 313, 309, 611, 208, 320, 324",
+   "method": "behavior update dispatcher switch (old 0x472f60 table 0x4795c4 / new 0x479ca0 table 0x4802c4, 693 cases, case = id - 1). (1) Case shape signatures (tools/behavior_enum.py from the Laser Sentry Cooldown port): 207 -> 208 and 308 -> 309 are unique; Gatling and MG share one shape that exists exactly twice in each build (old 213, 312 / new 214, 313); every unique anchor between ids 135 and 457 has shift +1 and between 588 and 693 shift 0. (2) Code layout (tools/behavior_layout.py): every direct call of the case and of each state handler must land at the old callee plus the local code shift measured from uniquely migrated neighbours (or the callee's own unique window); exactly one candidate passes for each id: 213 -> 214 (12/12 calls; the twin 313 fails, its handlers sit where old 312's moved), 312 -> 313, 308 -> 309 (13/13), 319 -> 320, 323 -> 324, 611 -> 611 (one behavior-specific callee each at the exact local shift, the unshifted alternative fails); 207 -> 208: all 10 callees move by one uniform +0x6bd0, unique shape match. (3) State switches of 213/312/308/207 and their new cases are identical in shape, state count (12/12/13/12) and handler order. The ids themselves come from game data (settings lookup, code identical), so a wrong id would only stop at \"Unsupported sentry behavior\" before any write",
+   "witnesses": [
+    {
+     "kind": "note",
+     "note": "evidence/behavior-enum.json, behavior-layout.json, behavior-states.json, behavior-handler-layout-shifts.json"
+    },
+    {
+     "kind": "behavior id migration",
+     "mapping": {
+      "207": 208,
+      "213": 214,
+      "308": 309,
+      "312": 313,
+      "319": 320,
+      "323": 324,
+      "611": 611
+     },
+     "layout_consistent_candidates": {
+      "207": [],
+      "213": [
+       214
+      ],
+      "308": [
+       309
+      ],
+      "312": [
+       313
+      ],
+      "319": [
+       320
+      ],
+      "323": [
+       324
+      ],
+      "611": [
+       611
+      ]
+     }
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "gate (behavior id per profile; mismatch fails closed)",
+   "live_check": "L6: behavior +0 of a deployed Gatling = 214, MG = 313 (others as mapped)"
+  },
+  {
+   "id": "data.profiles",
+   "file": "src/aim_data.lua",
+   "lines": [
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    44
+   ],
+   "name": "sentry resource identities (entity type hashes) and Gatling/MG fire gate angles",
+   "old": "same",
+   "new": "same",
+   "method": "game data (generated entity settings, encrypted offline), not in code; angles are policy. Fails closed: an unknown type is simply not classified as a sentry",
+   "witnesses": [
+    {
+     "kind": "aligned listing",
+     "listing": "evidence/listings/pair-0x8423ff.txt",
+     "note": "behavior id initialised from the settings lookup"
+    }
+   ],
+   "confidence": "medium",
+   "feeds_write": true,
+   "role": "gate (which entities are sentries)",
+   "live_check": "L6: the deployed sentry's entity +0..8 type hash"
+  },
+  {
+   "id": "data.firing_node",
+   "file": "src/aim_data.lua",
+   "lines": [
+    834,
+    846,
+    852,
+    874,
+    885
+   ],
+   "name": "behavior node 12 = firing node (the state the dispatcher switches on: case body `mov rdx,[rcx+8]; mov eax,[rdx]; dec eax; cmp eax,0xb`)",
+   "old": "12",
+   "new": "12",
+   "method": "the Gatling/MG state switches keep 12 states with identical handler shapes in the same order (old 213/312 vs new 214/313); state 12 handler identical",
+   "witnesses": [
+    {
+     "kind": "note",
+     "note": "evidence/behavior-states.json"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "gate (selection request, fire)"
+  },
+  {
+   "id": "data.source_flags",
+   "file": "src/aim_data.lua",
+   "lines": [
+    736,
+    737,
+    875,
+    933
+   ],
+   "name": "behavior source flags bit 0 (target) / bit 5 (scan)",
+   "old": "1, 32",
+   "new": "1, 32",
+   "method": "behavior record +0x60 accesses unchanged (incl. `test byte [rec+0x60],1`, `mov qword [rec+0x60],0x11` pairs); bit 5 not witnessed in code",
+   "witnesses": [
+    {
+     "kind": "record field pairs",
+     "source": "evidence/record-fields-behavior-504.txt",
+     "disp": "0x60",
+     "agreeing": 2,
+     "other": []
+    }
+   ],
+   "confidence": "medium",
+   "feeds_write": true,
+   "role": "gate (hold / scan detection; fails closed: other values only stop holds or requests from triggering)",
+   "live_check": "L6: source +96 while tracking (bit 0) and while scanning (bit 5)"
+  }
+ ],
+ "counts": {
+  "high": 41,
+  "medium": 5,
+  "rows": 46,
+  "feeds_write": 33
+ },
+ "inventory_sites": [
+  {
+   "file": "src/aim_data.lua",
+   "line": 45,
+   "text": "local signatures={",
+   "rows": [
+    "native.retention",
+    "native.vertical",
+    "native.horizontal",
+    "native.fire_mode"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 46,
+   "text": "{0x6bf390,'405741574883ec283b158248dc02450fb6f94c8b158779c6'},",
+   "rows": [
+    "native.retention"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 47,
+   "text": "{0x11cb930,'4883ec288b41083b05e3822b020f84d00000004c8b1526b4'},",
+   "rows": [
+    "native.vertical"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 48,
+   "text": "{0x11cba20,'4883ec288b41083b05f3812b020f84d00000004c8b1536b3'},",
+   "rows": [
+    "native.horizontal"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 49,
+   "text": "{0x755f90,'48894c24085355565741574883ec20'},",
+   "rows": [
+    "native.fire_mode"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 51,
+   "text": "M.signatures=signatures",
+   "rows": [
+    "native.retention",
+    "native.vertical",
+    "native.horizontal",
+    "native.fire_mode"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 174,
+   "text": "for _,g in ipairs({{game+0x3326d30,reg.tmb},{game+0x3326740,reg.bmb},{game+0x3326d70,reg.rmb},",
+   "rows": [
+    "game.targeting",
+    "game.behavior",
+    "game.turret",
+    "layout.targeting"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 186,
+   "text": "local fm=need_pointer(api,need(api,game+0x3326cb8,8))",
+   "rows": [
+    "game.target_faction"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 188,
+   "text": "if not fi or fi==0xffffffff then return nil end",
+   "rows": [
+    "layout.target_faction"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 199,
+   "text": "local clock_root=need(api,game+0x3326348,8)",
+   "rows": [
+    "game.clock"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 200,
+   "text": "local selection_guards={};guard(api,selection_guards,game+0x3326348,clock_root)",
+   "rows": [
+    "game.clock"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 201,
+   "text": "local wm=need_pointer(api,need(api,game+0x3326ce0,8))",
+   "rows": [
+    "game.weapon"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 204,
+   "text": "assert(wi and wi~=0xffffffff and wi<16384,'Weapon data unavailable')",
+   "rows": [
+    "layout.weapon"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 213,
+   "text": "guard(api,guards,game+0x3326ce0,need(api,game+0x3326ce0,8))",
+   "rows": [
+    "game.weapon"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 214,
+   "text": "local cmb=need(api,game+0x3326660,8);local cm=need_pointer(api,cmb)",
+   "rows": [
+    "game.trigger"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 215,
+   "text": "guard(api,guards,game+0x3326660,cmb)",
+   "rows": [
+    "game.trigger"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 217,
+   "text": "assert(ci and ci~=0xffffffff and ci<16384,'Weapon trigger unavailable')",
+   "rows": [
+    "layout.trigger"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 220,
+   "text": "return {wm=wm,cm=cm,wm_header=wm+48,cm_header=cm+40,clock_root_address=game+0x3326348,",
+   "rows": [
+    "game.clock"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 235,
+   "text": "if ti~=e.index or not bi or not ri or bi==0xffffffff or ri==0xffffffff then return nil end",
+   "rows": [
+    "layout.entity"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 373,
+   "text": "c.at={tm=game+0x3326d30,bm=game+0x3326740,rm=game+0x3326d70}",
+   "rows": [
+    "game.targeting",
+    "game.behavior",
+    "game.turret"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 494,
+   "text": "-- Whether a mission runs: the mode record at [game.dll+0x33266a0] (68 bytes;",
+   "rows": [
+    "game.mode",
+    "layout.mode"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 501,
+   "text": "if c.mode_game~=game then c.mode_game,c.mode_global=game,game+0x33266a0 end",
+   "rows": [
+    "game.mode"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 1085,
+   "text": "for _,s in ipairs(signatures) do",
+   "rows": [
+    "native.retention",
+    "native.vertical",
+    "native.horizontal",
+    "native.fire_mode"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 1089,
+   "text": "local pose_signature=fromhex('40534883ec204863dae89206eaff488bc84c8b0041ff90e8')",
+   "rows": [
+    "engine.pose_getter"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 1090,
+   "text": "assert(exe and api.read(exe+0x1fd220,#pose_signature)==pose_signature,'Unsupported engine pose getter')",
+   "rows": [
+    "engine.pose_getter"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 1092,
+   "text": "{0x79f860,'33c04c8d05c7b201020f1f800000000049390cc0740cffc083f80475f3'},",
+   "rows": [
+    "engine.world_id"
+   ]
+  },
+  {
+   "file": "src/aim_data.lua",
+   "line": 1093,
+   "text": "{0x7f4590,'488bc4f30f11582089480855535657415441554156415748'},",
+   "rows": [
+    "engine.raycast"
+   ]
+  },
+  {
+   "file": "src/archive_loader.lua",
+   "line": 68,
+   "text": "-- their signatures are verified once per session.",
+   "rows": [
+    "comment only (no constant)"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 92,
+   "text": "-- class 3, damage filter and flags 0x80000009. The native filter admits",
+   "rows": [
+    "engine.raycast_filter"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 100,
+   "text": "local count=tonumber(raycast(id,from,dir,length,collection,3,0x393d9518,0x80000009,unit,out,capacity))",
+   "rows": [
+    "engine.raycast_filter"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 114,
+   "text": "if detail.filter==0x04a8fbf9 then",
+   "rows": [
+    "engine.destructible_filter"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 138,
+   "text": "local world_index=math.floor(actor/0x40000000)",
+   "rows": [
+    "exe.actor_pools"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 139,
+   "text": "local pool=exe+0x2369b00+64*(math.floor(actor/0x10000000)%4+10*world_index)",
+   "rows": [
+    "exe.actor_pools"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 142,
+   "text": "local identity=math.floor(layout/65536)%256;local offset=math.floor(layout/0x1000000)",
+   "rows": [
+    "exe.actor_pools"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 155,
+   "text": "local world_slot=exe+0x27ba8a8+176*e.world_index;local world=read_pointer(world_slot)",
+   "rows": [
+    "exe.world_slots"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 157,
+   "text": "local bodies=read_pointer(world+24);local body_index=bit.band(word_at(e.record,20),0xffffff)",
+   "rows": [
+    "layout.actor_body"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 167,
+   "text": "local properties=read_pointer(exe+0x27c5e48);if not properties then return nil end",
+   "rows": [
+    "exe.filter_properties"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 180,
+   "text": "and read_pointer(exe+0x27c5e48)==e.properties and read_pointer(e.properties+256)==e.names",
+   "rows": [
+    "exe.filter_properties"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 193,
+   "text": "local flag = ffi.cast('sentry_aim_retention_fn',game+0x6bf390)",
+   "rows": [
+    "native.retention"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 194,
+   "text": "local horizontal = ffi.cast('sentry_aim_speed_fn',game+0x11cba20)",
+   "rows": [
+    "native.horizontal"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 195,
+   "text": "local vertical = ffi.cast('sentry_aim_speed_fn',game+0x11cb930)",
+   "rows": [
+    "native.vertical"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 196,
+   "text": "local mode = ffi.cast('sentry_aim_fire_mode_fn',game+0x755f90)",
+   "rows": [
+    "native.fire_mode"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 197,
+   "text": "local world_id = ffi.cast('sentry_aim_world_id_fn',exe+0x79f860)",
+   "rows": [
+    "engine.world_id"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 198,
+   "text": "local raycast = ffi.cast('sentry_aim_raycast_fn',exe+0x7f4590)",
+   "rows": [
+    "engine.raycast"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 212,
+   "text": "local index=unit%0x400000",
+   "rows": [
+    "layout.units"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 215,
+   "text": "local generation=string.char(math.floor(unit/0x400000)%256)",
+   "rows": [
+    "layout.units"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 231,
+   "text": "local scheduler=api.pointer(api.read(game+0x347d7e0,8))",
+   "rows": [
+    "game.scheduler"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 232,
+   "text": "local world=api.pointer(api.read(game+0x346bfa0,8))",
+   "rows": [
+    "game.physics_world"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 234,
+   "text": "if not api.read_into(scheduler+0x40008,288,jobs) then return nil end",
+   "rows": [
+    "layout.scheduler"
+   ]
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 245,
+   "text": "local units=ptr(exe+0x1a100f0)",
+   "rows": [
+    "exe.units"
+   ]
+  }
+ ],
+ "witness_check_failures": []
+}

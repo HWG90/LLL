@@ -1,0 +1,196 @@
+diff -ruN a/src/api.lua b/src/api.lua
+--- a/src/api.lua	2026-10-18 15:45:17.000000000 -0400
++++ b/src/api.lua	2026-10-24 23:27:24.077009687 -0400
+@@ -177,6 +177,12 @@
+     -- An unchanged value leaves the values file alone.
+     local text, saved = encode(option, value), saved_values()
+     if saved[id] ~= text then saved[id], state.dirty, state.save_timer = text, true, SAVE_DELAY end
++    -- MCM confirms through this API while MOM's native view/update is suspended.
++    -- Persist DBF confirmations here instead of relying on that update timer.
++    if id:sub(1,24)=='native_stratagem_radial.' then
++        mom.save_values()
++        if state.save_failed then return false,'Cannot save DBF settings' end
++    end
+     if state.view then state.queued[id], state.queued_any = true, true end
+     return true
+ end
+diff -ruN a/src/bingus_text.lua b/src/bingus_text.lua
+--- a/src/bingus_text.lua	2026-10-18 15:45:17.000000000 -0400
++++ b/src/bingus_text.lua	2026-10-24 23:27:24.077055077 -0400
+@@ -354,7 +354,7 @@
+ -- settings save 0x102f7a0 writes) holds at +212 an index into the table of
+ -- 15 language records at game.dll+0x37C5650; each record has its code string
+ -- at +8. Unreadable or implausible values mean "unknown", never a guess.
+-M.GAME = {settings = 0x3326340, index = 705500 + 212, table = 0x37C5650, count = 15}
++M.GAME = {settings = 0x2ce1508, index = 705628 + 212, table = 0x3180DE0, count = 15}
+ -- Record codes to BCP 47 tags. Only 'us' is confirmed (English); the others
+ -- are the spellings the game's code tables use. An unlisted code is kept
+ -- as its own tag, so no translation matches it and English shows.
+diff -ruN a/src/mod_options_menu.lua b/src/mod_options_menu.lua
+--- a/src/mod_options_menu.lua	2026-10-18 15:45:17.000000000 -0400
++++ b/src/mod_options_menu.lua	2026-10-24 23:27:24.077068127 -0400
+@@ -1,5 +1,5 @@
+ -- HD2-Addon: mods/cowboybingus/mod_options_menu
+--- Native MODS tab on the Options screen for Steam build 25480438.
++-- Native MODS tab on the Options screen for Steam build 26088801.
+ if rawget(_G, 'ModOptionsMenu') then return end
+ local ffi = require('ffi')
+ -- Texts and translations: mom_text = {module = src/bingus_text.lua, locales =
+diff -ruN a/src/native.lua b/src/native.lua
+--- a/src/native.lua	2026-10-18 15:45:17.000000000 -0400
++++ b/src/native.lua	2026-10-24 23:27:24.077078498 -0400
+@@ -1,74 +1,74 @@
+ -- game.dll's native functions MOM calls and the native labels and setting
+ -- descriptor it relies on, verified once per session against Steam build
+--- 25480438 before MOM touches the menu (initialize).
++-- 26088801 before MOM touches the menu (initialize).
+ local mom = ...
+ local ffi = require('ffi')
+ local memory, note, state, get32 = mom.memory, mom.note, mom.state, mom.get32
+ 
+-local GAME_SHA256 = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'
+-local EXE_SHA256 = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'
++local GAME_SHA256 = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'
++local EXE_SHA256 = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'
+ -- The native labels of the escape menu's three tabs (4 bytes each) and of the
+ -- OPTIONS content's nine categories (one record each, the label at +8).
+-local TAB_LABELS_RVA = 0x33114d0
+-local CATEGORY_TABLE_RVA, CATEGORY_RECORD = 0x32ec990, 48
++local TAB_LABELS_RVA = 0x2cc9f30
++local CATEGORY_TABLE_RVA, CATEGORY_RECORD = 0x2ca50b0, 48
+ -- Rows use setting 139 (a BINDINGS activation type): the settings lookup
+ -- finds it, its value type is none, and no category handler special-cases it,
+ -- so changing a MODS row never reads or writes a game setting.
+-local INERT_SETTING, INERT_DESCRIPTOR_RVA = 139, 0x32ecc60
++local INERT_SETTING, INERT_DESCRIPTOR_RVA = 139, 0x2ca5320
+ -- {RVA, first bytes, C type}; entry points are verified before first use.
+ -- Object addresses pass as integers, so a call creates no pointer object.
+ local NATIVE = {
+-    set_tab_labels = {0x17aac50, '\x48\x89\x54\x24\x10\x53\x56\x48\x83\xec\x68\x0f\x29\x74\x24\x30',
++    set_tab_labels = {0x162bee0, '\x48\x89\x54\x24\x10\x53\x56\x48\x83\xec\x68\x0f\x29\x74\x24\x30',
+                       'void (*)(MOM_u64, const MOM_u32 *, int)'},
+-    select_category = {0x19999c0, '\x40\x53\x48\x83\xec\x20\x48\x8b\xd9\x89\x91\x58\x1e\x14\x00\x39',
++    select_category = {0x181ac40, '\x40\x53\x48\x83\xec\x20\x48\x8b\xd9\x89\x91\x58\x1e\x14\x00\x39',
+                        'void (*)(MOM_u64, int)'},
+-    set_content_hidden = {0x19984c0, '\x48\x89\x5c\x24\x08\x48\x89\x74\x24\x10\x57\x48\x83\xec\x50\x41',
++    set_content_hidden = {0x1819740, '\x48\x89\x5c\x24\x08\x48\x89\x74\x24\x10\x57\x48\x83\xec\x50\x41',
+                           'void (*)(MOM_u64, MOM_u8, MOM_u8)'},
+-    row_reset = {0x17ff700, '\x48\x89\x5c\x24\x10\x48\x89\x74\x24\x18\x48\x89\x7c\x24\x20\x55',
++    row_reset = {0x16809a0, '\x48\x89\x5c\x24\x10\x48\x89\x74\x24\x18\x48\x89\x7c\x24\x20\x55',
+                  'void (*)(MOM_u64, const float *, const float *)'},
+-    row_release = {0x17ff4b0, '\x48\x89\x5c\x24\x08\x57\x48\x83\xec\x20\x8b\x81\xc0\x7a\x00\x00',
++    row_release = {0x1680750, '\x48\x89\x5c\x24\x08\x57\x48\x83\xec\x20\x8b\x81\xc0\x7a\x00\x00',
+                    'void (*)(MOM_u64)'},
+-    row_init = {0x17fe8d0, '\x48\x89\x5c\x24\x08\x57\x48\x83\xec\x70\x48\x8b\xbc\x24\xb0\x00',
++    row_init = {0x167fb70, '\x48\x89\x5c\x24\x08\x57\x48\x83\xec\x70\x48\x8b\xbc\x24\xb0\x00',
+                 'void (*)(MOM_u64, MOM_vec2, MOM_vec2, MOM_vec2, int, MOM_u64, const void *, MOM_u8)'},
+-    add_child = {0x144c5c0, '\x40\x53\x48\x83\xec\x20\x4c\x8b\xca\x48\x8b\xd9\x48\x8b\x91\xe0',
++    add_child = {0x12e42d0, '\x40\x53\x48\x83\xec\x20\x4c\x8b\xca\x48\x8b\xd9\x48\x8b\x91\xe0',
+                  'void (*)(MOM_u64, MOM_u64)'},
+-    set_visible = {0x144cfb0, '\x48\x83\xec\x28\x44\x8b\x01\x4c\x8b\xd1\x41\x8b\xc0\x45\x8b\xc8',
++    set_visible = {0x12e4cc0, '\x48\x83\xec\x28\x44\x8b\x01\x4c\x8b\xd1\x41\x8b\xc0\x45\x8b\xc8',
+                    'void (*)(MOM_u64, MOM_u8)'},
+-    set_label = {0x143bf90, '\x48\x83\xec\x28\x4c\x8b\xd9\x39\x91\x10\x01\x00\x00\x0f\x84\x80',
++    set_label = {0x12d3ca0, '\x48\x83\xec\x28\x4c\x8b\xd9\x39\x91\x10\x01\x00\x00\x0f\x84\x80',
+                  'void (*)(MOM_u64, MOM_u32)'},
+-    set_string_arg = {0x143c950, '\x40\x53\x48\x83\xec\x20\x48\x8b\xd9\x48\x81\xc1\x10\x01\x00\x00',
++    set_string_arg = {0x12d4660, '\x40\x53\x48\x83\xec\x20\x48\x8b\xd9\x48\x81\xc1\x10\x01\x00\x00',
+                       'void (*)(MOM_u64, MOM_u32, const char *)'},
+-    clear_args = {0x143a0f0, '\x80\xb9\x58\x01\x00\x00\x00\xc6\x81\x58\x01\x00\x00\x00\x0f\x97',
++    clear_args = {0x12d1e00, '\x80\xb9\x58\x01\x00\x00\x00\xc6\x81\x58\x01\x00\x00\x00\x0f\x97',
+                   'MOM_u8 (*)(MOM_u64)'},
+-    set_choice = {0x17fe7e0, '\x80\xb9\xf8\x32\x00\x00\x00\x74\x28\x83\xfa\x10\x73\x23\x48\x63',
++    set_choice = {0x167fa80, '\x80\xb9\xf8\x32\x00\x00\x00\x74\x28\x83\xfa\x10\x73\x23\x48\x63',
+                   'void (*)(MOM_u64, MOM_u32)'},
+-    set_slider = {0x17fc2c0, '\x40\x53\x48\x83\xec\x20\xf3\x0f\x10\x91\xac\x08\x00\x00\x48\x8b',
++    set_slider = {0x167d560, '\x40\x53\x48\x83\xec\x20\xf3\x0f\x10\x91\xac\x08\x00\x00\x48\x8b',
+                   'void (*)(MOM_u64, float)'},
+-    finish_simple = {0x1807060, '\x48\x89\x5c\x24\x08\x57\x48\x83\xec\x30\x8b\x81\x10\x0b\x00\x00',
++    finish_simple = {0x1688300, '\x48\x89\x5c\x24\x08\x57\x48\x83\xec\x30\x8b\x81\x10\x0b\x00\x00',
+                      'void (*)(MOM_u64)'},
+-    finish_access = {0x1800fe0, '\x48\x89\x5c\x24\x08\x57\x48\x83\xec\x30\x8b\x81\x50\x57\x00\x00',
++    finish_access = {0x1682280, '\x48\x89\x5c\x24\x08\x57\x48\x83\xec\x30\x8b\x81\x50\x57\x00\x00',
+                      'void (*)(MOM_u64)'},
+-    scroll_thumb = {0x1793f60, '\x48\x89\x5c\x24\x10\x57\x48\x83\xec\x40\x48\x8b\xd9\x0f\x29\x74',
++    scroll_thumb = {0x16151f0, '\x48\x89\x5c\x24\x10\x57\x48\x83\xec\x40\x48\x8b\xd9\x0f\x29\x74',
+                     'void (*)(MOM_u64, float)'},
+-    scroll_extent = {0x1794600, '\xf3\x0f\x10\xa1\xb0\x07\x00\x00\x0f\x28\xd1\x0f\x2e\xe2\x7a\x02',
++    scroll_extent = {0x1615890, '\xf3\x0f\x10\xa1\xb0\x07\x00\x00\x0f\x28\xd1\x0f\x2e\xe2\x7a\x02',
+                      'void (*)(MOM_u64, float)'},
+-    set_opacity = {0x1448ad0, '\x40\x57\x48\x83\xec\x20\xf3\x0f\x10\x41\x44\x48\x8b\xf9\x0f\x2e',
++    set_opacity = {0x12e07e0, '\x40\x57\x48\x83\xec\x20\xf3\x0f\x10\x41\x44\x48\x8b\xf9\x0f\x2e',
+                    'void (*)(MOM_u64, float)'},
+-    scroll_reset = {0x1794570, '\x80\xb9\xb5\x07\x00\x00\x00\x74\x19\xf3\x0f\x10\x89\xbc\x07\x00',
++    scroll_reset = {0x1615800, '\x80\xb9\xb5\x07\x00\x00\x00\x74\x19\xf3\x0f\x10\x89\xbc\x07\x00',
+                     'void (*)(MOM_u64)'},
+-    options_visual = {0x1998590, '\x48\x8b\xc4\x57\x48\x83\xec\x70\x80\xb9\x15\x22\x14\x00\x00\x48',
++    options_visual = {0x1819810, '\x48\x8b\xc4\x57\x48\x83\xec\x70\x80\xb9\x15\x22\x14\x00\x00\x48',
+                       'void (*)(MOM_u64, float)'},
+-    measure_text = {0x144e1a0, '\x40\x53\x48\x83\xec\x70\x48\x8b\xd9\x8b\x09\x8b\xc1\xc1\xe8\x12',
++    measure_text = {0x12e5eb0, '\x40\x53\x48\x83\xec\x70\x48\x8b\xd9\x8b\x09\x8b\xc1\xc1\xe8\x12',
+                     'void (*)(MOM_u64)'},
+     -- Position and size share their first 27 bytes; byte 28 picks the field.
+-    set_position = {0x14476a0, '\x48\x89\x5c\x24\x18\x48\x89\x6c\x24\x20\x48\x89\x54\x24\x10\x56' ..
++    set_position = {0x12df3b0, '\x48\x89\x5c\x24\x18\x48\x89\x6c\x24\x20\x48\x89\x54\x24\x10\x56' ..
+                                '\x57\x41\x57\x48\x83\xec\x20\xf3\x0f\x10\x41\x04', 'void (*)(MOM_u64, MOM_vec2)'},
+-    set_size = {0x1447160, '\x48\x89\x5c\x24\x18\x48\x89\x6c\x24\x20\x48\x89\x54\x24\x10\x56' ..
++    set_size = {0x12dee70, '\x48\x89\x5c\x24\x18\x48\x89\x6c\x24\x20\x48\x89\x54\x24\x10\x56' ..
+                            '\x57\x41\x57\x48\x83\xec\x20\xf3\x0f\x10\x41\x0c', 'void (*)(MOM_u64, MOM_vec2)'},
+-    hide_description = {0x17fab90, '\x48\x89\x5c\x24\x10\x57\x48\x83\xec\x70\x0f\xb6\xda\x48\x8b\xf9',
++    hide_description = {0x167be30, '\x48\x89\x5c\x24\x10\x57\x48\x83\xec\x70\x0f\xb6\xda\x48\x8b\xf9',
+                         'void (*)(MOM_u64, MOM_u8, MOM_u8)'},
+     -- Posts a UI sound event; the first argument is unused.
+-    play_sound = {0x1327f50, '\x48\x89\x5c\x24\x08\x48\x89\x74\x24\x10\x57\x48\x83\xec\x20\x48',
++    play_sound = {0x11bbaf0, '\x48\x89\x5c\x24\x08\x48\x89\x74\x24\x10\x57\x48\x83\xec\x20\x48',
+                   'void (*)(MOM_u64, MOM_u32)'},
+ }
+ local NATIVE_LABELS = {
+@@ -88,10 +88,25 @@
+         assert(verified, why)
+         local base = memory.address(memory.module('game.dll'))
+         local native = {}
++        local deferred = {}
+         for name, entry in pairs(NATIVE) do
+-            assert(ffi.string(ffi.cast('const char *', base + entry[1]), #entry[2]) == entry[2], name .. ' changed')
+-            native[name] = ffi.cast(entry[3], base + entry[1])
++            local at = ffi.cast('const uint8_t *', base + entry[1])
++            local bytes = memory.read(at, #entry[2])
++            if bytes then
++                assert(bytes == entry[2], name .. ' changed')
++                native[name] = ffi.cast(entry[3], base + entry[1])
++            else
++                deferred[#deferred + 1] = name
++                native[name] = function(...)
++                    local now = memory.read(at, #entry[2])
++                    assert(now, name .. ' not resident yet')
++                    assert(now == entry[2], name .. ' changed')
++                    native[name] = ffi.cast(entry[3], base + entry[1])
++                    return native[name](...)
++                end
++            end
+         end
++        if #deferred > 0 then note('Checked at first use (code not resident yet): ' .. table.concat(deferred, ', ')) end
+         for index, label in ipairs(NATIVE_LABELS.tabs) do
+             assert(get32(base + TAB_LABELS_RVA + (index - 1) * 4) == label, 'tab labels changed')
+         end
+diff -ruN a/src/view.lua b/src/view.lua
+--- a/src/view.lua	2026-10-18 15:45:17.000000000 -0400
++++ b/src/view.lua	2026-10-24 23:27:24.077109958 -0400
+@@ -14,7 +14,7 @@
+ local CATEGORIES, MOD_BUTTONS, OPTIONS_TAB = mom.CATEGORIES, mom.MOD_BUTTONS, mom.OPTIONS_TAB
+ local TEXT_TEMPLATE, MAX_CHOICES = mom.TEXT_TEMPLATE, mom.MAX_CHOICES
+ 
+-local MENU_SYSTEM_PTR_RVA, UI_STATE_PTR_RVA = 0x347ce38, 0x347ce28
++local MENU_SYSTEM_PTR_RVA, UI_STATE_PTR_RVA = 0x2e38170, 0x2e38160
+ local UI_STACK, UI_STACK_ENTRIES = 0x429c, 5 -- five screen types, then their count
+ local ESCAPE_MENU_SCREEN, ESCAPE_MENU_TYPE = 200, 1
+ -- Escape menu: one tab bar over the GAME, SOCIAL and OPTIONS contents; the
+@@ -40,7 +40,7 @@
+ local NEUTRAL_MODE = 2
+ -- Input actions evaluated this frame: byte 0 of owner + 808 + 32 * (97 *
+ -- group + action). Apply is Menu.ExtraOption1 (Tab), group 0.
+-local INPUT_OWNER_PTR_RVA, ACTION_STATES, ACTION_STRIDE, GROUP_ACTIONS, ACTION_GROUPS = 0x347cf18, 808, 32, 97, 13
++local INPUT_OWNER_PTR_RVA, ACTION_STATES, ACTION_STRIDE, GROUP_ACTIONS, ACTION_GROUPS = 0x2e38250, 808, 32, 97, 13
+ local MENU_GROUP, APPLY_ACTION, APPLY_SOUND = 0, 12, 1183616600
+ -- Pages: with more mods than MOD_BUTTONS, the buttons show PAGE_MODS mods at a
+ -- time and the last button the page control. Its row is a selector whose

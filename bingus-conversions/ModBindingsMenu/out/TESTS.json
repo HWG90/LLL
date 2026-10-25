@@ -1,0 +1,474 @@
+{
+ "fixture_edits": [
+  "test_idle_gate.lua",
+  "test_keyboard_defaults.lua",
+  "test_mods_tab.lua",
+  "test_panel.lua",
+  "test_poll.lua",
+  "test_sweep.lua",
+  "test_idle_gate.lua (port adaptation: natives are Lua wrappers)",
+  "test_idle_gate.lua (port adaptation: natives are Lua wrappers)",
+  "reference/mod_bindings_menu_v2.3.lua (MAP data edits)"
+ ],
+ "fixture_map": {
+  "2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+  "F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+  "0x347cf18": "0x2e38250",
+  "0x347ce38": "0x2e38170",
+  "0x347ce28": "0x2e38160",
+  "0x26438a0": "0x24bc8a0",
+  "0x33266a0": "0x2ce1850",
+  "0x3310210": "0x2cc8bb0",
+  "0x3772268": "0x312d998",
+  "0x37c5478": "0x3180c08",
+  "0x3772ee8": "0x312e618",
+  "0x3328420": "0x2ce3680",
+  "0x3327550": "0x2ce2738",
+  "0x3328230": "0x2ce3490",
+  "0x3328238": "0x2ce3498",
+  "0x3328248": "0x2ce34a8",
+  "0x3328250": "0x2ce34b0",
+  "0x3328260": "0x2ce34c0",
+  "0x3328268": "0x2ce34c8",
+  "0x3328270": "0x2ce34d0",
+  "0x3328278": "0x2ce34d8",
+  "0x3328280": "0x2ce34e0",
+  "0x3328288": "0x2ce34e8",
+  "0x3328290": "0x2ce34f0",
+  "0x3328298": "0x2ce34f8",
+  "0x33282a0": "0x2ce3500",
+  "0x33282a8": "0x2ce3508",
+  "0x33282b0": "0x2ce3510",
+  "0x33282b8": "0x2ce3518",
+  "0x33282c0": "0x2ce3520",
+  "0x33282c8": "0x2ce3528",
+  "0x33282d0": "0x2ce3530",
+  "0x33282e0": "0x2ce3540",
+  "0x33282e8": "0x2ce3548",
+  "0x33282f0": "0x2ce3550",
+  "0x3328300": "0x2ce3560",
+  "0x3328310": "0x2ce3570",
+  "0x3328318": "0x2ce3578",
+  "0x3328320": "0x2ce3580",
+  "0x3328328": "0x2ce3588",
+  "0x3328340": "0x2ce35a0",
+  "0x3328368": "0x2ce35c8",
+  "0x3328370": "0x2ce35d0",
+  "0x3328390": "0x2ce35f0",
+  "0x3328398": "0x2ce35f8",
+  "0x33283b8": "0x2ce3618",
+  "0x33283c0": "0x2ce3620",
+  "0x33283c8": "0x2ce3628",
+  "0x33283d0": "0x2ce3630",
+  "0x33283d8": "0x2ce3638",
+  "0x33283e0": "0x2ce3640",
+  "0x33283e8": "0x2ce3648",
+  "0x33283f0": "0x2ce3650",
+  "0x33283f8": "0x2ce3658",
+  "0x3328400": "0x2ce3660",
+  "0x3328408": "0x2ce3668",
+  "0x3328410": "0x2ce3670",
+  "0x3328418": "0x2ce3678",
+  "0x3328428": "0x2ce3688",
+  "0x3328430": "0x2ce3690",
+  "0x3328438": "0x2ce3698",
+  "0x3328440": "0x2ce36a0",
+  "0x3328448": "0x2ce36a8",
+  "0x3328450": "0x2ce36b0",
+  "0x3328458": "0x2ce36b8",
+  "0x3328460": "0x2ce36c0",
+  "0x3328468": "0x2ce36c8",
+  "0x3328470": "0x2ce36d0",
+  "0x3328478": "0x2ce36d8",
+  "0x3328480": "0x2ce36e0",
+  "0x3328488": "0x2ce36e8",
+  "0x3310214": "0x2cc8bb4",
+  "0x3310218": "0x2cc8bb8",
+  "menu + 1520": "menu + 1528",
+  "menu + 352": "menu + 360",
+  "menu + 648": "menu + 656"
+ },
+ "port_test_adaptations": [
+  {
+   "file": "test_idle_gate.lua",
+   "old": "    assert(type(st.build_rows) == 'cdata', 'native input activated')\n",
+   "new": "    assert(type(st.build_rows) == 'cdata' or type(st.build_rows) == 'function', 'native input activated')\n    inst.natives_installed = true\n"
+  },
+  {
+   "file": "test_idle_gate.lua",
+   "old": "        if type(inst.state.build_rows) == 'cdata' then install_natives(inst) end\n",
+   "new": "        if type(inst.state.build_rows) == 'cdata' or type(inst.state.build_rows) == 'function'\n           and not inst.natives_installed then install_natives(inst) end\n"
+  }
+ ],
+ "ported": {
+  "test_api.lua": {
+   "exit": 5,
+   "passed": false,
+   "tail": [
+    "A refused registration counts its session, so the reservations of mods that are gone expire OK",
+    "Reported case: two v1.1 addons on slot 2 keep their own actions in any load order, absent or late OK",
+    "A v2.2.1 assignments file: the addon it moved keeps its action, the other becomes slot 2's owner OK",
+    "Slot 2's owner expires after 30 sessions without it; the next caller gets the slot, cleared OK",
+    "Binding categories and string labels OK",
+    "wine: Unhandled page fault on execute access to 00006FFFFCEFCFD0 at address 00006FFFFCEFCFD0 (thread 0024), starting debugger..."
+   ]
+  },
+  "test_assignments.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "Assignments saved through a temporary file and a backup; unchanged assignments not written OK",
+    "Sessions: each binding saves its last session; a session counts once from its first automatic registration, late or not; inert sessions and sessions without one keep every age; v2.1 files load OK",
+    "Slot 2 owner lines: saved, read back with spaces in the id, other slots ignored OK",
+    "Interrupted saves: the complete file, else the backup; a damaged file never replaces a good backup OK",
+    "Failed saves (open, write, close, rename) keep the assignments, log once and retry a minute later OK"
+   ]
+  },
+  "test_bingus_text.lua (linux luajit)": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "PASS: a broken registry is repaired, malformed packs are skipped, and only force = true forces",
+    "PASS: upper case covers Latin-1, Polish/Czech letters, Greek and Cyrillic; CJK and invalid bytes stay",
+    "PASS: the game's Text Language is read in five reads, mapped, and unreadable memory never guesses",
+    "PASS: two copies share one registry; a pack registered inline reaches every mod",
+    "PASS: refresh() and lookups with nothing changed allocate nothing",
+    "PASS: the Steam language query fails soft outside the game and tolerates several copies"
+   ]
+  },
+  "test_bingus_text.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "PASS: a broken registry is repaired, malformed packs are skipped, and only force = true forces",
+    "PASS: upper case covers Latin-1, Polish/Czech letters, Greek and Cyrillic; CJK and invalid bytes stay",
+    "PASS: the game's Text Language is read in five reads, mapped, and unreadable memory never guesses",
+    "PASS: two copies share one registry; a pack registered inline reaches every mod",
+    "PASS: refresh() and lookups with nothing changed allocate nothing",
+    "PASS: the Steam language query fails soft outside the game and tolerates several copies"
+   ]
+  },
+  "test_capture.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "A captured key keeps the binding's trigger OK",
+    "Focus loss, the timeout and page changes cancel; guard failures never leave a capture running OK",
+    "No phantom press after a capture; hold reads at once OK",
+    "Focus from the engine: cancels only after the window was seen focused OK",
+    "The keyboard's mouse entries and double clicks are ignored OK",
+    "Controller page: any connected pad, hot-plug, shoulder chords, keyboard keys kept, X clears its own, B and Escape cancel OK"
+   ]
+  },
+  "test_extended.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "No press from a key held through a change or a key capture; suppression reads false OK",
+    "set_binding clears, restores defaults, refuses unknown buttons and native ids; binding lists names OK",
+    "Controller buttons on any connected pad, one connected check per pad per frame, hot-plug OK",
+    "poll: extended bindings with edges, unknown ids nil OK",
+    "No allocation per frame for extended bindings, interpreted and compiled OK",
+    "Saved bindings persist; extended and native ids keep their backend across sessions OK"
+   ]
+  },
+  "test_extended_store.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "An interrupted save and a damaged file: the backup is used and written back OK",
+    "A damaged file without backup is set aside, never overwritten OK",
+    "A newer format is left untouched; its bindings stay inactive OK",
+    "Unreadable lines are kept verbatim and their bindings stay inactive OK",
+    "A failed save keeps the change, shows why, logs once and retries a minute later OK",
+    "Malformed values are kept as unreadable lines, inactive OK"
+   ]
+  },
+  "test_ffi_names.lua": {
+   "exit": 5,
+   "passed": false,
+   "tail": [
+    "wine: Unhandled page fault on execute access to 00006FFFFCF01780 at address 00006FFFFCF01780 (thread 0024), starting debugger..."
+   ]
+  },
+  "test_ffi_names_hostile_first.lua": {
+   "exit": 5,
+   "passed": false,
+   "tail": [
+    "wine: Unhandled page fault on execute access to 00006FFFFCF01780 at address 00006FFFFCF01780 (thread 0024), starting debugger..."
+   ]
+  },
+  "test_ffi_names_mbm_first.lua": {
+   "exit": 5,
+   "passed": false,
+   "tail": [
+    "wine: Unhandled page fault on execute access to 00006FFFFCF01780 at address 00006FFFFCF01780 (thread 0024), starting debugger..."
+   ]
+  },
+  "test_idle_gate.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "Equivalence with v2.3 over 3000 frames (16 binding pages, 21 device changes with 81 keyboard defaults added again in the live map and 45 in the defaults map, 16 settings resets, 16 extended bindings set, 15 UI moves): maps, writes, native calls, log lines, is_down, poll, extended state, revision, guard and both files equal OK (update reads: v2.3 15891, gated 15043; 853 one-read frames)",
+    "Keyboard defaults after a device change: added again on the same frame as v2.3, by the sweep after 124 frames of 0.016 s (bound: 2 s of frame time, 126 frames), at once when a mod reads its binding; after a settings reset by the sweep after 123 frames OK",
+    "A controller plugged in and out while the gate answers: extended bindings follow it on the next frame, as in v2.3 OK",
+    "UI state moved with a binding page on top: seen on that frame, as in v2.3 OK",
+    "Idle frames: no allocation (interpreted and compiled), no closures; trace aborts in 3000 idle frames: gated 0, v2.3 41 (1083:16 x4, 448:7 x12, 466:7 x6, 584:5 x6, 799:9 x6, 816:8 x7); with sweeps: gated 24 (359:8 x1, 369:8 x1, 584:5 x4, 69:10 x13, 74:9 x1, 75:8 x4), v2.3 55 (1083:16 x4, 276:8 x1, 448:7 x10, 466:7 x5, 584:5 x10, 69:10 x4, 75:8 x5, 78:8 x3, 799:9 x6, 816:8 x7) OK"
+   ]
+  },
+  "test_keyboard_defaults.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "A re-parse of either map: the stock list gets the mod default again on the next sweep, no extra read OK",
+    "Sweep frames allocate nothing and keep their 14 reads OK",
+    "Saved settings, applied before or after: the player's lists stay OK",
+    "An unsupported build: no read, no write, both maps as the game parsed them OK",
+    "An old replacement still deployed: nothing written OK",
+    "Upgrade from and downgrade to the replacement: saved custom keys and mod defaults survive OK"
+   ]
+  },
+  "test_mods_tab.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "Native action state drives is_down OK",
+    "Restored developer defaults removed before is_down answers OK",
+    "Refused memory writes degrade safely OK",
+    "Translations: character limits, upper case in every script, function texts, own texts and the MODS title buffer refreshed when a page opens OK",
+    "Update errors, through the runtime guard: the 8th error of a burst stops the step (3600 error-free frames end a burst, one log line per burst) without a traceback, log line, read or allocation per frame after; an error below pauses the menu (page state reset, a page visit kept for the sweep, the binding maps untouched, no allocation per paused frame) and it resumes after 60 clean frames; 8 errors below stop it; borrowed slots go back unless a binding page is open; shutdown keeps the first failure; every argument and return value pass through OK",
+    "Per-frame calls: idle frames, sweeps, is_down, poll, a binding page and the MODS tab within their pinned budgets, and idle frames, sweeps, is_down and poll without allocation OK"
+   ]
+  },
+  "test_panel.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "Per-frame calls on the MORE MODS tab within their pinned budgets OK",
+    "No allocation on idle MORE MODS frames OK",
+    "Tab change, page close and a vanished world close the panel and cancel captures OK",
+    "MORE MODS only outside missions: four tabs and no Gui call in one, extended bindings still answer OK",
+    "A mission starting with MORE MODS open closes the panel without drawing; the ship offers it again OK",
+    "Mission check: 2 reads per page visit and per 60 page frames, none away from the page OK"
+   ]
+  },
+  "test_poll.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "Arguments: tables only, a refusal writes nothing, the arrays are created at the first poll OK",
+    "down equals is_down (nil without a binding or native input), edges against the previous poll OK",
+    "A re-parse: down as is_down, no edges and last kept for that frame; a binding page: edges as usual OK",
+    "Frames without a poll, re-arming with last, positions after #ids, repeated ids, an unreadable stretch, the stretch read OK",
+    "Differential over 20000 generated frames: poll answers as is_down for each id in order, the same sweeps (273 by the caller), binding maps, swept counts, log lines (359) and assignments files; edges as defined (11888 pressed, 11884 released, 273 frames without edges); 1344 unavailable answers, 295 answers on a binding page after the player's change, 46 records moved, 202 unreadable stretches OK",
+    "No allocation per poll, interpreted and compiled OK"
+   ]
+  },
+  "test_sweep.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "An old saved settings list: cleaned at first use and whenever it comes back OK",
+    "A binding absent or late this session keeps its action and its keys OK",
+    "An action handed over from an expired binding is cleared entirely, also after a restart OK",
+    "revision grows when native input becomes ready OK",
+    "Page entry, an open-page re-parse and late registration prepare only native reset defaults OK",
+    "Failed defaults reads leave live bindings/provenance intact and retry safely OK"
+   ]
+  }
+ },
+ "upstream": {
+  "test_api.lua": {
+   "exit": 5,
+   "passed": false,
+   "tail": [
+    "A refused registration counts its session, so the reservations of mods that are gone expire OK",
+    "Reported case: two v1.1 addons on slot 2 keep their own actions in any load order, absent or late OK",
+    "A v2.2.1 assignments file: the addon it moved keeps its action, the other becomes slot 2's owner OK",
+    "Slot 2's owner expires after 30 sessions without it; the next caller gets the slot, cleared OK",
+    "Binding categories and string labels OK",
+    "wine: Unhandled page fault on execute access to 00006FFFFCF01780 at address 00006FFFFCF01780 (thread 0024), starting debugger..."
+   ]
+  },
+  "test_assignments.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "Assignments saved through a temporary file and a backup; unchanged assignments not written OK",
+    "Sessions: each binding saves its last session; a session counts once from its first automatic registration, late or not; inert sessions and sessions without one keep every age; v2.1 files load OK",
+    "Slot 2 owner lines: saved, read back with spaces in the id, other slots ignored OK",
+    "Interrupted saves: the complete file, else the backup; a damaged file never replaces a good backup OK",
+    "Failed saves (open, write, close, rename) keep the assignments, log once and retry a minute later OK"
+   ]
+  },
+  "test_bingus_text.lua (linux luajit)": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "PASS: a broken registry is repaired, malformed packs are skipped, and only force = true forces",
+    "PASS: upper case covers Latin-1, Polish/Czech letters, Greek and Cyrillic; CJK and invalid bytes stay",
+    "PASS: the game's Text Language is read in five reads, mapped, and unreadable memory never guesses",
+    "PASS: two copies share one registry; a pack registered inline reaches every mod",
+    "PASS: refresh() and lookups with nothing changed allocate nothing",
+    "PASS: the Steam language query fails soft outside the game and tolerates several copies"
+   ]
+  },
+  "test_bingus_text.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "PASS: a broken registry is repaired, malformed packs are skipped, and only force = true forces",
+    "PASS: upper case covers Latin-1, Polish/Czech letters, Greek and Cyrillic; CJK and invalid bytes stay",
+    "PASS: the game's Text Language is read in five reads, mapped, and unreadable memory never guesses",
+    "PASS: two copies share one registry; a pack registered inline reaches every mod",
+    "PASS: refresh() and lookups with nothing changed allocate nothing",
+    "PASS: the Steam language query fails soft outside the game and tolerates several copies"
+   ]
+  },
+  "test_capture.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "A captured key keeps the binding's trigger OK",
+    "Focus loss, the timeout and page changes cancel; guard failures never leave a capture running OK",
+    "No phantom press after a capture; hold reads at once OK",
+    "Focus from the engine: cancels only after the window was seen focused OK",
+    "The keyboard's mouse entries and double clicks are ignored OK",
+    "Controller page: any connected pad, hot-plug, shoulder chords, keyboard keys kept, X clears its own, B and Escape cancel OK"
+   ]
+  },
+  "test_extended.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "No press from a key held through a change or a key capture; suppression reads false OK",
+    "set_binding clears, restores defaults, refuses unknown buttons and native ids; binding lists names OK",
+    "Controller buttons on any connected pad, one connected check per pad per frame, hot-plug OK",
+    "poll: extended bindings with edges, unknown ids nil OK",
+    "No allocation per frame for extended bindings, interpreted and compiled OK",
+    "Saved bindings persist; extended and native ids keep their backend across sessions OK"
+   ]
+  },
+  "test_extended_store.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "An interrupted save and a damaged file: the backup is used and written back OK",
+    "A damaged file without backup is set aside, never overwritten OK",
+    "A newer format is left untouched; its bindings stay inactive OK",
+    "Unreadable lines are kept verbatim and their bindings stay inactive OK",
+    "A failed save keeps the change, shows why, logs once and retries a minute later OK",
+    "Malformed values are kept as unreadable lines, inactive OK"
+   ]
+  },
+  "test_ffi_names.lua": {
+   "exit": 5,
+   "passed": false,
+   "tail": [
+    "wine: Unhandled page fault on execute access to 00006FFFFCF01780 at address 00006FFFFCF01780 (thread 0024), starting debugger..."
+   ]
+  },
+  "test_ffi_names_hostile_first.lua": {
+   "exit": 5,
+   "passed": false,
+   "tail": [
+    "wine: Unhandled page fault on execute access to 00006FFFFCF01780 at address 00006FFFFCF01780 (thread 0024), starting debugger..."
+   ]
+  },
+  "test_ffi_names_mbm_first.lua": {
+   "exit": 5,
+   "passed": false,
+   "tail": [
+    "wine: Unhandled page fault on execute access to 00006FFFFCF01780 at address 00006FFFFCF01780 (thread 0024), starting debugger..."
+   ]
+  },
+  "test_idle_gate.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "Equivalence with v2.3 over 3000 frames (16 binding pages, 21 device changes with 81 keyboard defaults added again in the live map and 45 in the defaults map, 16 settings resets, 16 extended bindings set, 15 UI moves): maps, writes, native calls, log lines, is_down, poll, extended state, revision, guard and both files equal OK (update reads: v2.3 15891, gated 15043; 853 one-read frames)",
+    "Keyboard defaults after a device change: added again on the same frame as v2.3, by the sweep after 124 frames of 0.016 s (bound: 2 s of frame time, 126 frames), at once when a mod reads its binding; after a settings reset by the sweep after 123 frames OK",
+    "A controller plugged in and out while the gate answers: extended bindings follow it on the next frame, as in v2.3 OK",
+    "UI state moved with a binding page on top: seen on that frame, as in v2.3 OK",
+    "Idle frames: no allocation (interpreted and compiled), no closures; trace aborts in 3000 idle frames: gated 0, v2.3 39 (1083:16 x4, 448:7 x10, 466:7 x6, 584:5 x6, 799:9 x6, 816:8 x7); with sweeps: gated 12 (584:5 x4, 69:10 x3, 75:8 x4, 78:8 x1), v2.3 56 (1083:16 x4, 448:7 x10, 466:7 x5, 584:5 x10, 69:10 x9, 75:8 x5, 78:8 x2, 799:9 x5, 816:8 x6) OK"
+   ]
+  },
+  "test_keyboard_defaults.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "A re-parse of either map: the stock list gets the mod default again on the next sweep, no extra read OK",
+    "Sweep frames allocate nothing and keep their 14 reads OK",
+    "Saved settings, applied before or after: the player's lists stay OK",
+    "An unsupported build: no read, no write, both maps as the game parsed them OK",
+    "An old replacement still deployed: nothing written OK",
+    "Upgrade from and downgrade to the replacement: saved custom keys and mod defaults survive OK"
+   ]
+  },
+  "test_mods_tab.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "Native action state drives is_down OK",
+    "Restored developer defaults removed before is_down answers OK",
+    "Refused memory writes degrade safely OK",
+    "Translations: character limits, upper case in every script, function texts, own texts and the MODS title buffer refreshed when a page opens OK",
+    "Update errors, through the runtime guard: the 8th error of a burst stops the step (3600 error-free frames end a burst, one log line per burst) without a traceback, log line, read or allocation per frame after; an error below pauses the menu (page state reset, a page visit kept for the sweep, the binding maps untouched, no allocation per paused frame) and it resumes after 60 clean frames; 8 errors below stop it; borrowed slots go back unless a binding page is open; shutdown keeps the first failure; every argument and return value pass through OK",
+    "Per-frame calls: idle frames, sweeps, is_down, poll, a binding page and the MODS tab within their pinned budgets, and idle frames, sweeps, is_down and poll without allocation OK"
+   ]
+  },
+  "test_panel.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "Per-frame calls on the MORE MODS tab within their pinned budgets OK",
+    "No allocation on idle MORE MODS frames OK",
+    "Tab change, page close and a vanished world close the panel and cancel captures OK",
+    "MORE MODS only outside missions: four tabs and no Gui call in one, extended bindings still answer OK",
+    "A mission starting with MORE MODS open closes the panel without drawing; the ship offers it again OK",
+    "Mission check: 2 reads per page visit and per 60 page frames, none away from the page OK"
+   ]
+  },
+  "test_poll.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "Arguments: tables only, a refusal writes nothing, the arrays are created at the first poll OK",
+    "down equals is_down (nil without a binding or native input), edges against the previous poll OK",
+    "A re-parse: down as is_down, no edges and last kept for that frame; a binding page: edges as usual OK",
+    "Frames without a poll, re-arming with last, positions after #ids, repeated ids, an unreadable stretch, the stretch read OK",
+    "Differential over 20000 generated frames: poll answers as is_down for each id in order, the same sweeps (273 by the caller), binding maps, swept counts, log lines (359) and assignments files; edges as defined (11888 pressed, 11884 released, 273 frames without edges); 1344 unavailable answers, 295 answers on a binding page after the player's change, 46 records moved, 202 unreadable stretches OK",
+    "No allocation per poll, interpreted and compiled OK"
+   ]
+  },
+  "test_sweep.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "An old saved settings list: cleaned at first use and whenever it comes back OK",
+    "A binding absent or late this session keeps its action and its keys OK",
+    "An action handed over from an expired binding is cleared entirely, also after a restart OK",
+    "revision grows when native input becomes ready OK",
+    "Page entry, an open-page re-parse and late registration prepare only native reset defaults OK",
+    "Failed defaults reads leave live bindings/provenance intact and retry safely OK"
+   ]
+  }
+ },
+ "port_tests": {
+  "tests/test_port_code_pages.lua": {
+   "exit": 0,
+   "passed": true,
+   "lines": [
+    "Build check with the consume page not resident: passes, consume deferred OK",
+    "Consume while not resident: not called, one note OK",
+    "Consume page resident with the right bytes: verified OK",
+    "Changed bytes found at first use: refused (guard stopped, bindings inert), not called OK",
+    "Page natives not resident: the binding page is left alone, one note OK",
+    "Resident native with other bytes at the build check: refused as in v2.3 OK"
+   ]
+  }
+ },
+ "not_run": {
+  "test_build.py": "builds the standalone release zip into the source tree (would write under upstream-bingus); out/build-receipt.json covers the archive shape"
+ }
+}

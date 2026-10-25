@@ -1,0 +1,345 @@
+{
+ "fixture_remap_counts": {
+  "reference/hover_data.lua:0x33266a0": 1,
+  "reference/hover_data.lua:0x3326468": 1,
+  "reference/hover_data.lua:0x346bf98": 1,
+  "reference/hover_data.lua:0x3326d20": 1,
+  "reference/hover_data.lua:0x3326738": 1,
+  "reference/hover_data.lua:0x3326bb8": 1,
+  "reference/hover_data.lua:0x3326dc0": 1,
+  "reference/hover_data.lua:0xf22ec8": 1,
+  "reference/hover_data.lua:0xf32f18": 1,
+  "reference/hover_data.lua:ai*0x1238+0xf80": 1,
+  "test_idle_gate.lua:0x33266a0": 1,
+  "test_idle_gate.lua:0x3326468": 1,
+  "test_idle_gate.lua:0x346bf98": 1,
+  "test_idle_gate.lua:0x3326d20": 1,
+  "test_idle_gate.lua:0x3326738": 1,
+  "test_idle_gate.lua:0x3326bb8": 1,
+  "test_idle_gate.lua:0x3326dc0": 1,
+  "test_idle_gate.lua:0xf22ec8": 1,
+  "test_idle_gate.lua:0xf32f18": 1,
+  "test_idle_gate.lua:0x53d900+0x1238+0xf80": 1,
+  "test_settings.lua:0x346bf98": 1,
+  "test_settings.lua:0x3326bb8": 3,
+  "test_settings.lua:0xf12cb8": 1,
+  "test_snapshot.lua:0x33266a0": 1,
+  "test_snapshot.lua:0x3326468": 1,
+  "test_snapshot.lua:0x346bf98": 1,
+  "test_snapshot.lua:0x3326d20": 1,
+  "test_snapshot.lua:0x3326738": 1,
+  "test_snapshot.lua:0x3326bb8": 1,
+  "test_snapshot.lua:0x3326dc0": 1,
+  "test_snapshot.lua:0xf22ec8": 1,
+  "test_snapshot.lua:0xf32f18": 1,
+  "test_snapshot.lua:0x53d900+0x1238+0xf80": 1,
+  "test_windows_api.lua:0x33266a0": 1,
+  "test_windows_api.lua:0x3326468": 1,
+  "test_windows_api.lua:0x346bf98": 1,
+  "test_windows_api.lua:0x3326d20": 1,
+  "test_windows_api.lua:0x3326738": 1,
+  "test_windows_api.lua:0x3326bb8": 1,
+  "test_windows_api.lua:0x3326dc0": 1,
+  "test_windows_api.lua:0xf22ec8": 1,
+  "test_windows_api.lua:0xf32f18": 1,
+  "test_windows_api.lua:0xf12cb8": 1,
+  "test_windows_api.lua:0x53d900+0x1238+0xf80": 1
+ },
+ "port": {
+  "cancel": {
+   "vm": "linux luajit (GC64)",
+   "exit": 0,
+   "pass_lines": [
+    "PASS: activation hold, release/repress, one cancellation per flight, focus/read recovery, replacement, next flight"
+   ],
+   "tail": [
+    "PASS: activation hold, release/repress, one cancellation per flight, focus/read recovery, replacement, next flight"
+   ]
+  },
+  "snapshot": {
+   "vm": "windows luajit.exe under wine",
+   "exit": 1,
+   "pass_lines": [],
+   "tail": [
+    "<workspace>\\native-work\\megapack-port\\ControllableHoverPack\\work\\luajit.exe: (error object is not a string)"
+   ]
+  },
+  "settings": {
+   "vm": "linux luajit (GC64)",
+   "exit": "1 (fault/traceback)",
+   "pass_lines": [],
+   "tail": [
+    "\t[C]: in function 'assert'",
+    "\ttests/test_settings.lua:42: in main chunk",
+    "\t[C]: at 0x561254b23480"
+   ]
+  },
+  "loader": {
+   "vm": "linux luajit (GC64)",
+   "exit": 0,
+   "pass_lines": [
+    "PASS: loader version/hash/runtime gates, single update boundary, return values, duplicate load, failure isolation and shutdown",
+    "PASS: silent default, opt-in diagnostics, shutdown report and callback returns",
+    "PASS: update errors below pass through unchanged and pause the mod (restore, resume after 60 clean frames, stop after 8); own errors counted per burst (stop after 8); the first failure survives shutdown; restore errors stay contained",
+    "PASS: after a stop, a restore that raises or keeps the lease is tried on 10 spaced updates (1st to 512th), logged once and once when given up; a short failure passes"
+   ],
+   "tail": [
+    "PASS: silent default, opt-in diagnostics, shutdown report and callback returns",
+    "PASS: update errors below pass through unchanged and pause the mod (restore, resume after 60 clean frames, stop after 8); own errors counted per burst (stop after 8); the first failure survives shutdown; restore errors stay contained",
+    "PASS: after a stop, a restore that raises or keeps the lease is tried on 10 spaced updates (1st to 512th), logged once and once when given up; a short failure passes"
+   ]
+  },
+  "replay": {
+   "vm": "linux luajit (GC64)",
+   "exit": 0,
+   "pass_lines": [
+    "PASS: captured vanilla hover/input replay requests one cancellation at the first repress, 0.6 seconds into flight"
+   ],
+   "tail": [
+    "PASS: captured vanilla hover/input replay requests one cancellation at the first repress, 0.6 seconds into flight"
+   ]
+  },
+  "windows_api": {
+   "vm": "windows luajit.exe under wine",
+   "exit": "1 (fault/traceback)",
+   "pass_lines": [
+    "PASS: runtime-backed adapter: private Windows names, reads (buffer reads and the focus check allocate nothing), the clock from the runtime in seconds (no garbage, interpreted or compiled), pointers as numbers, protection checks, 280-byte limit, module hash once per session"
+   ],
+   "tail": [
+    "\ttests/test_windows_api.lua:168: in function 'frame'",
+    "\ttests/test_windows_api.lua:177: in main chunk",
+    "\t[C]: at 0x01400020e0"
+   ]
+  },
+  "idle_gate": {
+   "vm": "linux luajit (GC64)",
+   "exit": "1 (fault/traceback)",
+   "pass_lines": [],
+   "tail": [
+    "\ttests/test_idle_gate.lua:104: in function 'frame'",
+    "\ttests/test_idle_gate.lua:159: in main chunk",
+    "\t[C]: at 0x5609ddccc480"
+   ]
+  },
+  "module": {
+   "vm": "windows luajit.exe under wine",
+   "exit": 0,
+   "pass_lines": [
+    "PASS: built module: the embedded runtime creates the memory API; the build check refuses a host without game.dll"
+   ],
+   "tail": [
+    "PASS: built module: the embedded runtime creates the memory API; the build check refuses a host without game.dll"
+   ]
+  }
+ },
+ "upstream": {
+  "cancel": {
+   "vm": "linux luajit (GC64)",
+   "exit": 0,
+   "pass_lines": [
+    "PASS: activation hold, release/repress, one cancellation per flight, focus/read recovery, replacement, next flight"
+   ],
+   "tail": [
+    "PASS: activation hold, release/repress, one cancellation per flight, focus/read recovery, replacement, next flight"
+   ]
+  },
+  "snapshot": {
+   "vm": "windows luajit.exe under wine",
+   "exit": 0,
+   "pass_lines": [
+    "PASS: after an update error below the mod pauses and starts afresh: a jump held through the pause cannot cancel, a release and a new press can",
+    "PASS: per-frame call budget: no protection queries without a cancellation",
+    "PASS: no garbage on idle (hover pack worn, outside a mission, no backpack) or flight frames, interpreted or compiled",
+    "PASS: installed production hook recovers through repeated mission/player/pack transitions without reload",
+    "PASS: production snapshot at local index one, exact pack/holder, input, recovery, focus, ordinary pack, grounded/ragdoll/swim and stale guards"
+   ],
+   "tail": [
+    "PASS: no garbage on idle (hover pack worn, outside a mission, no backpack) or flight frames, interpreted or compiled",
+    "PASS: installed production hook recovers through repeated mission/player/pack transitions without reload",
+    "PASS: production snapshot at local index one, exact pack/holder, input, recovery, focus, ordinary pack, grounded/ragdoll/swim and stale guards"
+   ]
+  },
+  "settings": {
+   "vm": "linux luajit (GC64)",
+   "exit": 0,
+   "pass_lines": [
+    "PASS: an update error below with a cancellation held restores the duration, pauses 60 frames and resumes afresh",
+    "PASS: per-frame call budget: protection queried only on cancellation, restoration and pause frames; none while paused; a stopped mod with an unrestorable lease reads on 10 spaced updates only",
+    "PASS: pending restoration recovers through the installed hook before cancellation in the next mission",
+    "PASS: native timeout/landing predicate, per-pack isolation, restoration/next flight, relocation, later edits, recycled IDs and partial-write rollback"
+   ],
+   "tail": [
+    "PASS: per-frame call budget: protection queried only on cancellation, restoration and pause frames; none while paused; a stopped mod with an unrestorable lease reads on 10 spaced updates only",
+    "PASS: pending restoration recovers through the installed hook before cancellation in the next mission",
+    "PASS: native timeout/landing predicate, per-pack isolation, restoration/next flight, relocation, later edits, recycled IDs and partial-write rollback"
+   ]
+  },
+  "loader": {
+   "vm": "linux luajit (GC64)",
+   "exit": 0,
+   "pass_lines": [
+    "PASS: loader version/hash/runtime gates, single update boundary, return values, duplicate load, failure isolation and shutdown",
+    "PASS: silent default, opt-in diagnostics, shutdown report and callback returns",
+    "PASS: update errors below pass through unchanged and pause the mod (restore, resume after 60 clean frames, stop after 8); own errors counted per burst (stop after 8); the first failure survives shutdown; restore errors stay contained",
+    "PASS: after a stop, a restore that raises or keeps the lease is tried on 10 spaced updates (1st to 512th), logged once and once when given up; a short failure passes"
+   ],
+   "tail": [
+    "PASS: silent default, opt-in diagnostics, shutdown report and callback returns",
+    "PASS: update errors below pass through unchanged and pause the mod (restore, resume after 60 clean frames, stop after 8); own errors counted per burst (stop after 8); the first failure survives shutdown; restore errors stay contained",
+    "PASS: after a stop, a restore that raises or keeps the lease is tried on 10 spaced updates (1st to 512th), logged once and once when given up; a short failure passes"
+   ]
+  },
+  "replay": {
+   "vm": "linux luajit (GC64)",
+   "exit": 0,
+   "pass_lines": [
+    "PASS: captured vanilla hover/input replay requests one cancellation at the first repress, 0.6 seconds into flight"
+   ],
+   "tail": [
+    "PASS: captured vanilla hover/input replay requests one cancellation at the first repress, 0.6 seconds into flight"
+   ]
+  },
+  "windows_api": {
+   "vm": "windows luajit.exe under wine",
+   "exit": 0,
+   "pass_lines": [
+    "PASS: runtime-backed adapter: private Windows names, reads (buffer reads and the focus check allocate nothing), the clock from the runtime in seconds (no garbage, interpreted or compiled), pointers as numbers, protection checks, 280-byte limit, module hash once per session",
+    "PASS: real modules on real memory: no query while idle, 5 on the first cancel, 1 per reuse and restore, a refused destination writes nothing"
+   ],
+   "tail": [
+    "PASS: runtime-backed adapter: private Windows names, reads (buffer reads and the focus check allocate nothing), the clock from the runtime in seconds (no garbage, interpreted or compiled), pointers as numbers, protection checks, 280-byte limit, module hash once per session",
+    "PASS: real modules on real memory: no query while idle, 5 on the first cancel, 1 per reuse and restore, a refused destination writes nothing"
+   ]
+  },
+  "idle_gate": {
+   "vm": "linux luajit (GC64)",
+   "exit": 0,
+   "pass_lines": [
+    "PASS: idle gate equals v1.8 over 26326 frames (13992 answered by the gate, 80 cancellations, 6 update errors below): every settings call and line identical; 2730 status differences, all on gated frames within 60 frames of a change the gate does not read",
+    "PASS: a flight right after a registry move is seen at the next full check (23 frames late here, at most 29)",
+    "PASS: the loader and the idle gate start no root trace that aborts (the v1.8 loader: 12, at archive_loader.lua:86 archive_loader.lua:14 archive_loader.lua:86 archive_loader.lua:14 archive_loader.lua:86 archive_loader.lua:14 archive_loader.lua:86 archive_loader.lua:14)"
+   ],
+   "tail": [
+    "PASS: idle gate equals v1.8 over 26326 frames (13992 answered by the gate, 80 cancellations, 6 update errors below): every settings call and line identical; 2730 status differences, all on gated frames within 60 frames of a change the gate does not read",
+    "PASS: a flight right after a registry move is seen at the next full check (23 frames late here, at most 29)",
+    "PASS: the loader and the idle gate start no root trace that aborts (the v1.8 loader: 12, at archive_loader.lua:86 archive_loader.lua:14 archive_loader.lua:86 archive_loader.lua:14 archive_loader.lua:86 archive_loader.lua:14 archive_loader.lua:86 archive_loader.lua:14)"
+   ]
+  },
+  "module": {
+   "vm": "windows luajit.exe under wine",
+   "exit": 0,
+   "pass_lines": [
+    "PASS: built module: the embedded runtime creates the memory API; the build check refuses a host without game.dll"
+   ],
+   "tail": [
+    "PASS: built module: the embedded runtime creates the memory API; the build check refuses a host without game.dll"
+   ]
+  }
+ },
+ "port_fixtures_remapped": {
+  "cancel": {
+   "vm": "linux luajit (GC64)",
+   "exit": 0,
+   "pass_lines": [
+    "PASS: activation hold, release/repress, one cancellation per flight, focus/read recovery, replacement, next flight"
+   ],
+   "tail": [
+    "PASS: activation hold, release/repress, one cancellation per flight, focus/read recovery, replacement, next flight"
+   ]
+  },
+  "snapshot": {
+   "vm": "windows luajit.exe under wine",
+   "exit": 0,
+   "pass_lines": [
+    "PASS: after an update error below the mod pauses and starts afresh: a jump held through the pause cannot cancel, a release and a new press can",
+    "PASS: per-frame call budget: no protection queries without a cancellation",
+    "PASS: no garbage on idle (hover pack worn, outside a mission, no backpack) or flight frames, interpreted or compiled",
+    "PASS: installed production hook recovers through repeated mission/player/pack transitions without reload",
+    "PASS: production snapshot at local index one, exact pack/holder, input, recovery, focus, ordinary pack, grounded/ragdoll/swim and stale guards"
+   ],
+   "tail": [
+    "PASS: no garbage on idle (hover pack worn, outside a mission, no backpack) or flight frames, interpreted or compiled",
+    "PASS: installed production hook recovers through repeated mission/player/pack transitions without reload",
+    "PASS: production snapshot at local index one, exact pack/holder, input, recovery, focus, ordinary pack, grounded/ragdoll/swim and stale guards"
+   ]
+  },
+  "settings": {
+   "vm": "linux luajit (GC64)",
+   "exit": 0,
+   "pass_lines": [
+    "PASS: an update error below with a cancellation held restores the duration, pauses 60 frames and resumes afresh",
+    "PASS: per-frame call budget: protection queried only on cancellation, restoration and pause frames; none while paused; a stopped mod with an unrestorable lease reads on 10 spaced updates only",
+    "PASS: pending restoration recovers through the installed hook before cancellation in the next mission",
+    "PASS: native timeout/landing predicate, per-pack isolation, restoration/next flight, relocation, later edits, recycled IDs and partial-write rollback"
+   ],
+   "tail": [
+    "PASS: per-frame call budget: protection queried only on cancellation, restoration and pause frames; none while paused; a stopped mod with an unrestorable lease reads on 10 spaced updates only",
+    "PASS: pending restoration recovers through the installed hook before cancellation in the next mission",
+    "PASS: native timeout/landing predicate, per-pack isolation, restoration/next flight, relocation, later edits, recycled IDs and partial-write rollback"
+   ]
+  },
+  "loader": {
+   "vm": "linux luajit (GC64)",
+   "exit": 0,
+   "pass_lines": [
+    "PASS: loader version/hash/runtime gates, single update boundary, return values, duplicate load, failure isolation and shutdown",
+    "PASS: silent default, opt-in diagnostics, shutdown report and callback returns",
+    "PASS: update errors below pass through unchanged and pause the mod (restore, resume after 60 clean frames, stop after 8); own errors counted per burst (stop after 8); the first failure survives shutdown; restore errors stay contained",
+    "PASS: after a stop, a restore that raises or keeps the lease is tried on 10 spaced updates (1st to 512th), logged once and once when given up; a short failure passes"
+   ],
+   "tail": [
+    "PASS: silent default, opt-in diagnostics, shutdown report and callback returns",
+    "PASS: update errors below pass through unchanged and pause the mod (restore, resume after 60 clean frames, stop after 8); own errors counted per burst (stop after 8); the first failure survives shutdown; restore errors stay contained",
+    "PASS: after a stop, a restore that raises or keeps the lease is tried on 10 spaced updates (1st to 512th), logged once and once when given up; a short failure passes"
+   ]
+  },
+  "replay": {
+   "vm": "linux luajit (GC64)",
+   "exit": 0,
+   "pass_lines": [
+    "PASS: captured vanilla hover/input replay requests one cancellation at the first repress, 0.6 seconds into flight"
+   ],
+   "tail": [
+    "PASS: captured vanilla hover/input replay requests one cancellation at the first repress, 0.6 seconds into flight"
+   ]
+  },
+  "windows_api": {
+   "vm": "windows luajit.exe under wine",
+   "exit": 0,
+   "pass_lines": [
+    "PASS: runtime-backed adapter: private Windows names, reads (buffer reads and the focus check allocate nothing), the clock from the runtime in seconds (no garbage, interpreted or compiled), pointers as numbers, protection checks, 280-byte limit, module hash once per session",
+    "PASS: real modules on real memory: no query while idle, 5 on the first cancel, 1 per reuse and restore, a refused destination writes nothing"
+   ],
+   "tail": [
+    "PASS: runtime-backed adapter: private Windows names, reads (buffer reads and the focus check allocate nothing), the clock from the runtime in seconds (no garbage, interpreted or compiled), pointers as numbers, protection checks, 280-byte limit, module hash once per session",
+    "PASS: real modules on real memory: no query while idle, 5 on the first cancel, 1 per reuse and restore, a refused destination writes nothing"
+   ]
+  },
+  "idle_gate": {
+   "vm": "linux luajit (GC64)",
+   "exit": 0,
+   "pass_lines": [
+    "PASS: idle gate equals v1.8 over 26326 frames (13992 answered by the gate, 80 cancellations, 6 update errors below): every settings call and line identical; 2730 status differences, all on gated frames within 60 frames of a change the gate does not read",
+    "PASS: a flight right after a registry move is seen at the next full check (23 frames late here, at most 29)",
+    "PASS: the loader and the idle gate start no root trace that aborts (the v1.8 loader: 12, at archive_loader.lua:14 archive_loader.lua:86 archive_loader.lua:86 archive_loader.lua:14 archive_loader.lua:86 archive_loader.lua:14 archive_loader.lua:86 archive_loader.lua:14)"
+   ],
+   "tail": [
+    "PASS: idle gate equals v1.8 over 26326 frames (13992 answered by the gate, 80 cancellations, 6 update errors below): every settings call and line identical; 2730 status differences, all on gated frames within 60 frames of a change the gate does not read",
+    "PASS: a flight right after a registry move is seen at the next full check (23 frames late here, at most 29)",
+    "PASS: the loader and the idle gate start no root trace that aborts (the v1.8 loader: 12, at archive_loader.lua:14 archive_loader.lua:86 archive_loader.lua:86 archive_loader.lua:14 archive_loader.lua:86 archive_loader.lua:14 archive_loader.lua:86 archive_loader.lua:14)"
+   ]
+  },
+  "module": {
+   "vm": "windows luajit.exe under wine",
+   "exit": 0,
+   "pass_lines": [
+    "PASS: built module: the embedded runtime creates the memory API; the build check refuses a host without game.dll"
+   ],
+   "tail": [
+    "PASS: built module: the embedded runtime creates the memory API; the build check refuses a host without game.dll"
+   ]
+  }
+ },
+ "luajit_exe_sha256": "F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7",
+ "environment_shim": "local ffi = require('ffi')\nffi.cdef[[uint32_t GetModuleFileNameW(void *module, uint16_t *path, uint32_t capacity);]]\nlocal path = ffi.new('uint16_t[32768]')\nlocal length = ffi.load('kernel32').GetModuleFileNameW(nil, path, 32768)\nassert(length > 0 and length < 32768)\nBingusRuntime = {hashes = {['sha256:' .. ffi.string(path, length * 2)] = arg[2]}}"
+}

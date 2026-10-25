@@ -1,0 +1,2 @@
+2026-10-25, at the user's request: removed `and type(loader.jit) == 'table'` from loader_ok (Bingus Shared Loader's JIT-budget table; LLL does not provide it and nothing else here uses it). API 1 and open_log are still required.
+Applied to out/ only; rerunning build.py reverts it unless the same edit is added there.

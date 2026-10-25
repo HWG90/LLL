@@ -1,0 +1,841 @@
+{
+ "mod": "Better Stratagem Bounce archive-v15.4.1 (upstream-bingus/BetterStratagemBounce, git tag v15.4.1)",
+ "source": {
+  "used": "upstream-bingus/BetterStratagemBounce",
+  "why": "checkout is at tag v15.4.1 and every file in components.lock.json source_sha256 matches it (the pinned copy in VanillaPlusMegapack/components/BetterStratagemBounce is identical too)",
+  "lock_revision": "archive-v15.4.1",
+  "module": "mods/cowboybingus/better_stratagem_bounce"
+ },
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "old_image": "<workspace>/native-work/evidence/game-pre1020.dll",
+ "new_image": "<workspace>/native-work/evidence/game-26088801.dll",
+ "capture": {
+  "json": "<workspace>/native-work/evidence/stratagem-settings-26088801.json",
+  "bin": "<workspace>/native-work/evidence/stratagem-settings-26088801.bin",
+  "sha256": "e7c661fe2ba48d64581e3ac32fc337f15b56208bb03e32b0fc275bf61f097727",
+  "read_only": true
+ },
+ "counts": {
+  "high": 14
+ },
+ "rows_total": 14,
+ "rows_feeding_write": 14,
+ "changed": [
+  "archive.EXE_SHA",
+  "archive.GAME_DLL_SHA",
+  "patch.buffer_rva",
+  "patch.table_rva",
+  "patch.table_bytes",
+  "patch.header_tail",
+  "patch.vanilla_flags",
+  "patch.owned_records",
+  "patch.records",
+  "patch.groups",
+  "patch.data_size"
+ ],
+ "non_data_edits": [
+  "patch.header_tail"
+ ],
+ "writes": [
+  {
+   "site": "navigation_patch.lua write() via api.write_batch (line 109)",
+   "address": "[game.dll+0x2E4A228] + record + 0x170 for each of the 105 owned records",
+   "bytes": "1 per record (105), one protection query for the whole 82384-byte buffer",
+   "value": "the current flags byte with bit 0x02 cleared; other bits as found",
+   "rows": [
+    "patch.buffer_rva",
+    "patch.table_rva",
+    "patch.data_size",
+    "patch.flag_offset",
+    "patch.vanilla_flags",
+    "patch.owned_records",
+    "patch.record_size",
+    "patch.group_layout"
+   ]
+  },
+  {
+   "site": "patch.restore (line 138), also the partial-write recovery in patch.apply (line 155)",
+   "address": "same bytes",
+   "bytes": "1 per record this mod cleared",
+   "value": "bit 0x02 set again, only where still clear and the record still holds the same kind",
+   "rows": [
+    "patch.buffer_rva",
+    "patch.flag_offset"
+   ]
+  }
+ ],
+ "not_build_data": [
+  "u32 helper / bounds checks",
+  "with_changes / plan logic",
+  "status text 'navigation_settings_ready'"
+ ],
+ "witness_check_failures": [],
+ "rows": [
+  {
+   "id": "archive.EXE_SHA",
+   "file": "scripts/archive.py",
+   "line": 10,
+   "symbol": "EXE_SHA",
+   "kind": "SHA-256 pin (archive_loader.lua refuses another build before patch.apply)",
+   "old": "F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06",
+   "new": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "change_kind": "build data",
+   "method": "SHA-256 of the installed file (read-only), equal to the coordinator hash",
+   "witnesses": [
+    {
+     "file": "<game>/bin/helldivers2.exe",
+     "sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+     "equal": true,
+     "verified": true
+    }
+   ],
+   "agreeing": 1,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "B0"
+  },
+  {
+   "id": "archive.GAME_DLL_SHA",
+   "file": "scripts/archive.py",
+   "line": 11,
+   "symbol": "GAME_DLL_SHA",
+   "kind": "SHA-256 pin (archive_loader.lua refuses another build before patch.apply)",
+   "old": "2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E",
+   "new": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "change_kind": "build data",
+   "method": "SHA-256 of the installed file (read-only), equal to the coordinator hash",
+   "witnesses": [
+    {
+     "file": "<game>/data/game/game.dll",
+     "sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+     "equal": true,
+     "verified": true
+    }
+   ],
+   "agreeing": 1,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "B0"
+  },
+  {
+   "id": "patch.buffer_rva",
+   "file": "src/navigation_patch.lua",
+   "line": 2,
+   "symbol": "buffer_rva",
+   "kind": "game.dll global: pointer to the loaded StratagemInfo settings buffer",
+   "old": "0x348e8f8",
+   "new": "0x2e4a228",
+   "change_kind": "build data",
+   "method": "paired instruction witnesses in the same functions + window vote + live read",
+   "witnesses": [
+    {
+     "image": "game.dll",
+     "old_insn_rva": "0x11f20e7",
+     "new_insn_rva": "0x1083907",
+     "operand": "rip",
+     "old_value": "0x348e8f8",
+     "new_value": "0x2e4a228",
+     "note": "table builder (old 0x11F2080 / new 0x10838A0) stores the loaded generated_stratagem_settings.dl_bin buffer (name hash 0x021263D523BF283A, same movabs both builds) right after lea of the StratagemInfo table",
+     "old_insn": "mov qword ptr [rip + 0x229c80a], rbx",
+     "new_insn": "mov qword ptr [rip + 0x1dc691a], rbx",
+     "verified": true
+    },
+    {
+     "image": "game.dll",
+     "old_insn_rva": "0x11f2279",
+     "new_insn_rva": "0x1083a99",
+     "operand": "rip",
+     "old_value": "0x348e8f8",
+     "new_value": "0x2e4a228",
+     "note": "unload (old 0x11F2270 / new 0x1083A89): load",
+     "old_insn": "mov rcx, qword ptr [rip + 0x229c678]",
+     "new_insn": "mov rcx, qword ptr [rip + 0x1dc6788]",
+     "verified": true
+    },
+    {
+     "image": "game.dll",
+     "old_insn_rva": "0x11f2296",
+     "new_insn_rva": "0x1083ab6",
+     "operand": "rip",
+     "old_value": "0x348e8f8",
+     "new_value": "0x2e4a228",
+     "note": "unload: clear",
+     "old_insn": "mov qword ptr [rip + 0x229c657], 0",
+     "new_insn": "mov qword ptr [rip + 0x1dc6767], 0",
+     "verified": true
+    },
+    {
+     "image": "game.dll",
+     "old_insn_rva": "0x136ae6f",
+     "new_insn_rva": "0x12007cf",
+     "operand": "rip",
+     "old_value": "0x348e8f8",
+     "new_value": "0x2e4a228",
+     "note": "settings reload function 1 of 4: load",
+     "old_insn": "mov rcx, qword ptr [rip + 0x2123a82]",
+     "new_insn": "mov rcx, qword ptr [rip + 0x1c49a52]",
+     "verified": true
+    },
+    {
+     "image": "game.dll",
+     "old_insn_rva": "0x136afbf",
+     "new_insn_rva": "0x120091f",
+     "operand": "rip",
+     "old_value": "0x348e8f8",
+     "new_value": "0x2e4a228",
+     "note": "reload function 2 of 4: load",
+     "old_insn": "mov rcx, qword ptr [rip + 0x2123932]",
+     "new_insn": "mov rcx, qword ptr [rip + 0x1c49902]",
+     "verified": true
+    },
+    {
+     "image": "game.dll",
+     "old_insn_rva": "0x136b0ff",
+     "new_insn_rva": "0x1200a5f",
+     "operand": "rip",
+     "old_value": "0x348e8f8",
+     "new_value": "0x2e4a228",
+     "note": "reload function 3 of 4: load",
+     "old_insn": "mov rcx, qword ptr [rip + 0x21237f2]",
+     "new_insn": "mov rcx, qword ptr [rip + 0x1c497c2]",
+     "verified": true
+    },
+    {
+     "image": "game.dll",
+     "old_insn_rva": "0x136b213",
+     "new_insn_rva": "0x1200b73",
+     "operand": "rip",
+     "old_value": "0x348e8f8",
+     "new_value": "0x2e4a228",
+     "note": "reload function 4 of 4: load",
+     "old_insn": "mov rcx, qword ptr [rip + 0x21236de]",
+     "new_insn": "mov rcx, qword ptr [rip + 0x1c496ae]",
+     "verified": true
+    },
+    {
+     "image": "game.dll",
+     "old_insn_rva": "0x136b230",
+     "new_insn_rva": "0x1200b90",
+     "operand": "rip",
+     "old_value": "0x348e8f8",
+     "new_value": "0x2e4a228",
+     "note": "reload function 4 of 4: store",
+     "old_insn": "mov qword ptr [rip + 0x21236c1], rbx",
+     "new_insn": "mov qword ptr [rip + 0x1c49691], rbx",
+     "verified": true
+    },
+    {
+     "method": "masked instruction windows (tools/lib.py migrate) at every old RIP xref of the global",
+     "old_sites": 13,
+     "unique_windows": 4,
+     "unresolved": 9,
+     "votes": {
+      "0x2e4a228": 3,
+      "0x2e48dc8": 1
+     },
+     "unmasked_windows_of_64_bytes_or_more": {},
+     "examples": [],
+     "verified": true,
+     "note": "the one window that votes elsewhere is a 32-byte displacement-masked match of the old shutdown free-all list (old 0x13F6302), a generic free/clear pattern repeated for many globals; that function no longer references this global in 26088801 (old has 13 RIP xrefs, new 11: the 8 load/store sites above plus builder/unload, paired one to one)"
+    },
+    {
+     "live_capture": "<workspace>/native-work/evidence/stratagem-settings-26088801.json",
+     "read": "[game.dll+0x2E4A228] = 0x2783f0000, 12 LDLD groups, 153 StratagemInfo records whose table pointers all point into it",
+     "verified": true
+    }
+   ],
+   "agreeing": 10,
+   "disagreeing": 1,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "B1"
+  },
+  {
+   "id": "patch.table_rva",
+   "file": "src/navigation_patch.lua",
+   "line": 3,
+   "symbol": "table_rva",
+   "kind": "game.dll global array: StratagemInfo pointer by stratagem kind (8 bytes each)",
+   "old": "0x37cb600",
+   "new": "0x31870e0",
+   "change_kind": "build data",
+   "method": "paired instruction witnesses + window vote over every old xref + live read",
+   "witnesses": [
+    {
+     "image": "game.dll",
+     "old_insn_rva": "0x11f20db",
+     "new_insn_rva": "0x10838fb",
+     "operand": "rip",
+     "old_value": "0x37cb600",
+     "new_value": "0x31870e0",
+     "note": "table builder: lea r13, table",
+     "old_insn": "lea r13, [rip + 0x25d951e]",
+     "new_insn": "lea r13, [rip + 0x21037de]",
+     "verified": true
+    },
+    {
+     "image": "game.dll",
+     "old_insn_rva": "0x11f22b7",
+     "new_insn_rva": "0x1083ad7",
+     "operand": "rip",
+     "old_value": "0x37cb600",
+     "new_value": "0x31870e0",
+     "note": "unload: lea rcx, table (memset)",
+     "old_insn": "lea rcx, [rip + 0x25d9342]",
+     "new_insn": "lea rcx, [rip + 0x2103602]",
+     "verified": true
+    },
+    {
+     "image": "game.dll",
+     "old_insn_rva": "0x6a401a",
+     "new_insn_rva": "0x6ae24a",
+     "operand": "rip",
+     "old_value": "0x37cb600",
+     "new_value": "0x31870e0",
+     "note": "lea r15, table; next: mov r15,[r15+r8*8]; test byte [r15+0x170],2",
+     "old_insn": "lea r15, [rip + 0x31275df]",
+     "new_insn": "lea r15, [rip + 0x2ad8e8f]",
+     "verified": true
+    },
+    {
+     "image": "game.dll",
+     "old_insn_rva": "0x6a141e",
+     "new_insn_rva": "0x6ab63e",
+     "operand": "disp",
+     "old_value": "0x37cb600",
+     "new_value": "0x31870e0",
+     "note": "mov rax,[rdx+rax*8+table] (rdx = image base) then test byte [rax+0x170],2",
+     "old_insn": "mov rax, qword ptr [rdx + rax*8 + 0x37cb600]",
+     "new_insn": "mov rax, qword ptr [rdx + rax*8 + 0x31870e0]",
+     "verified": true
+    },
+    {
+     "method": "masked instruction windows (tools/lib.py migrate) at every old RIP xref of the global",
+     "old_sites": 169,
+     "unique_windows": 126,
+     "unresolved": 43,
+     "votes": {
+      "0x31870e0": 126
+     },
+     "unmasked_windows_of_64_bytes_or_more": {
+      "0x31870e0": 96
+     },
+     "examples": [
+      {
+       "old_insn_rva": "0x5979c7",
+       "new_insn_rva": "0x5a0587",
+       "window_bytes": 160
+      },
+      {
+       "old_insn_rva": "0x598074",
+       "new_insn_rva": "0x5a0c34",
+       "window_bytes": 160
+      },
+      {
+       "old_insn_rva": "0x5db927",
+       "new_insn_rva": "0x5e45f7",
+       "window_bytes": 160
+      },
+      {
+       "old_insn_rva": "0x5dbead",
+       "new_insn_rva": "0x5e4b7d",
+       "window_bytes": 160
+      }
+     ],
+     "verified": true
+    },
+    {
+     "live_capture": "<workspace>/native-work/evidence/stratagem-settings-26088801.json",
+     "read": "[game.dll+0x31870E0 + 8*kind] -> buffer + record offset with u32 kind at record+0, kinds 1..153",
+     "verified": true
+    }
+   ],
+   "agreeing": 6,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "B2"
+  },
+  {
+   "id": "patch.table_bytes",
+   "file": "src/navigation_patch.lua",
+   "line": 82,
+   "symbol": "150 * 8 (read size of the table)",
+   "kind": "table length in bytes",
+   "old": "150 * 8",
+   "new": "154 * 8",
+   "change_kind": "build data",
+   "method": "the game clears exactly this many bytes of the table before rebuilding / on unload",
+   "witnesses": [
+    {
+     "image": "game.dll",
+     "old_insn_rva": "0x11f20fe",
+     "new_insn_rva": "0x108391e",
+     "operand": "imm",
+     "old_value": "0x4b0",
+     "new_value": "0x4d0",
+     "note": "builder: mov r8d, table bytes (memset)",
+     "old_insn": "mov r8d, 0x4b0",
+     "new_insn": "mov r8d, 0x4d0",
+     "verified": true
+    },
+    {
+     "image": "game.dll",
+     "old_insn_rva": "0x11f22b1",
+     "new_insn_rva": "0x1083ad1",
+     "operand": "imm",
+     "old_value": "0x4b0",
+     "new_value": "0x4d0",
+     "note": "unload: mov r8d, table bytes (memset)",
+     "old_insn": "mov r8d, 0x4b0",
+     "new_insn": "mov r8d, 0x4d0",
+     "verified": true
+    },
+    {
+     "live_capture": "highest kind 153 (index 153 of 154 slots)",
+     "verified": true
+    }
+   ],
+   "agreeing": 3,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "B2"
+  },
+  {
+   "id": "patch.record_size",
+   "file": "src/navigation_patch.lua",
+   "line": 6,
+   "symbol": "record_size",
+   "kind": "StratagemInfo record stride",
+   "old": "400",
+   "new": "400",
+   "change_kind": "build data",
+   "method": "the game indexes records with this stride when filling the table",
+   "witnesses": [
+    {
+     "image": "game.dll",
+     "old_insn_rva": "0x11f2216",
+     "new_insn_rva": "0x1083a36",
+     "operand": "imm",
+     "old_value": "0x190",
+     "new_value": "0x190",
+     "note": "imul rdx, rax, 0x190 (record index -> offset)",
+     "old_insn": "imul rdx, rax, 0x190",
+     "new_insn": "imul rdx, rax, 0x190",
+     "verified": true
+    },
+    {
+     "note": "kind at record+0: mov eax,[rdx]; mov [r13+rax*8],rdx (old 0x11F2223/0x11F2225, new 0x1083A43/0x1083A45)",
+     "verified": true
+    }
+   ],
+   "agreeing": 2,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false
+  },
+  {
+   "id": "patch.group_layout",
+   "file": "src/navigation_patch.lua",
+   "line": 91,
+   "symbol": "u32(source,0)=groups; header 'LDLD',1,type,size; root=+24; items=[root]; count=[root+8]",
+   "kind": "settings group layout (unchanged)",
+   "old": "as upstream",
+   "new": "as upstream",
+   "change_kind": "build data",
+   "method": "the game's own group parser (old 0x11F2127 / new 0x1083947, a chained fragment of the table builder) is instruction-for-instruction the same in both builds",
+   "witnesses": [
+    {
+     "old_insn_rva": "0x11f20e2",
+     "new_insn_rva": "0x1083902",
+     "insn": "mov edi, dword ptr [rbx]",
+     "verified": true
+    },
+    {
+     "old_insn_rva": "0x11f20ee",
+     "new_insn_rva": "0x108390e",
+     "insn": "add rbx, 4",
+     "verified": true
+    },
+    {
+     "image": "game.dll",
+     "old_insn_rva": "0x11f2152",
+     "new_insn_rva": "0x1083972",
+     "operand": "imm",
+     "old_value": "0x444c444c",
+     "new_value": "0x444c444c",
+     "note": "header +0: 'LDLD' magic",
+     "old_insn": "cmp eax, 0x444c444c",
+     "new_insn": "cmp eax, 0x444c444c",
+     "verified": true
+    },
+    {
+     "image": "game.dll",
+     "old_insn_rva": "0x11f218d",
+     "new_insn_rva": "0x10839ad",
+     "operand": "imm",
+     "old_value": "0x1",
+     "new_value": "0x1",
+     "note": "header +4: version 1",
+     "old_insn": "cmp dword ptr [rbx + 4], 1",
+     "new_insn": "cmp dword ptr [rbx + 4], 1",
+     "verified": true
+    },
+    {
+     "old_insn_rva": "0x11f2193",
+     "new_insn_rva": "0x10839b3",
+     "insn": "mov r8d, dword ptr [rbx + 8]",
+     "verified": true
+    },
+    {
+     "old_insn_rva": "0x11f21e6",
+     "new_insn_rva": "0x1083a06",
+     "insn": "mov r11d, dword ptr [rbx + 0xc]",
+     "verified": true
+    },
+    {
+     "old_insn_rva": "0x11f21f1",
+     "new_insn_rva": "0x1083a11",
+     "insn": "add r11, 0x18",
+     "verified": true
+    },
+    {
+     "old_insn_rva": "0x11f21d2",
+     "new_insn_rva": "0x10839f2",
+     "insn": "lea rdi, [rbx + 0x18]",
+     "verified": true
+    },
+    {
+     "old_insn_rva": "0x11f2220",
+     "new_insn_rva": "0x1083a40",
+     "insn": "add rdx, qword ptr [rdi]",
+     "verified": true
+    },
+    {
+     "old_insn_rva": "0x11f222a",
+     "new_insn_rva": "0x1083a4a",
+     "insn": "cmp r8d, dword ptr [rdi + 8]",
+     "verified": true
+    }
+   ],
+   "agreeing": 10,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false,
+   "live_check": "B3"
+  },
+  {
+   "id": "patch.header_tail",
+   "file": "src/navigation_patch.lua",
+   "line": 90,
+   "symbol": "u32(source, offset + 16) == 1 and u32(source, offset + 20) == 0",
+   "kind": "group header bytes +0x10..+0x17 (gate check, not data the mod uses)",
+   "old": "+16 == 1 and +20 == 0 checked",
+   "new": "not checked (as the game parser)",
+   "change_kind": "layout (non-data edit): one clause removed from the header assert; the magic, version and type-hash checks and every size/identity/count check stay",
+   "method": "code: the game parser never reads these bytes (both builds); capture: groups 10 and 11 hold non-zero bytes there in 26088801 (upstream check fails); log: an exact-bytes check from one capture fails in a later session",
+   "witnesses": [
+    {
+     "old_parser_reads": [
+      "+0 magic",
+      "+4 version",
+      "+8 type hash",
+      "+0xC size"
+     ],
+     "payload_at": "+0x18",
+     "reads_header_0x10_to_0x17": false,
+     "note": "every header access in the parser fragments above ([rbx], [rbx+4], [rbx+8], [rbx+0xC], then rbx+0x18 to the payload fix-up 0xAAEDD0 / 0xACABC0); no access to +0x10..+0x17 in either build",
+     "verified": true
+    },
+    {
+     "live_capture": "<workspace>/native-work/evidence/stratagem-settings-26088801.json",
+     "headers": [
+      {
+       "group": 1,
+       "offset": 4,
+       "tail_hex": "0100000000000000",
+       "upstream_check_passes": true
+      },
+      {
+       "group": 2,
+       "offset": 7208,
+       "tail_hex": "0100000000000000",
+       "upstream_check_passes": true
+      },
+      {
+       "group": 3,
+       "offset": 8392,
+       "tail_hex": "0100000000000000",
+       "upstream_check_passes": true
+      },
+      {
+       "group": 4,
+       "offset": 14252,
+       "tail_hex": "0100000000000000",
+       "upstream_check_passes": true
+      },
+      {
+       "group": 5,
+       "offset": 19480,
+       "tail_hex": "0100000000000000",
+       "upstream_check_passes": true
+      },
+      {
+       "group": 6,
+       "offset": 20596,
+       "tail_hex": "0100000000000000",
+       "upstream_check_passes": true
+      },
+      {
+       "group": 7,
+       "offset": 39748,
+       "tail_hex": "0100000000000000",
+       "upstream_check_passes": true
+      },
+      {
+       "group": 8,
+       "offset": 46788,
+       "tail_hex": "0100000000000000",
+       "upstream_check_passes": true
+      },
+      {
+       "group": 9,
+       "offset": 50620,
+       "tail_hex": "0100000000000000",
+       "upstream_check_passes": true
+      },
+      {
+       "group": 10,
+       "offset": 69952,
+       "tail_hex": "01d2626e4c5b023a",
+       "upstream_check_passes": false
+      },
+      {
+       "group": 11,
+       "offset": 74836,
+       "tail_hex": "015d000000000000",
+       "upstream_check_passes": false
+      },
+      {
+       "group": 12,
+       "offset": 75940,
+       "tail_hex": "0100000000000000",
+       "upstream_check_passes": true
+      }
+     ],
+     "groups_failing_upstream_check": [
+      10,
+      11
+     ],
+     "low_byte_at_16_is_1_in_all": true,
+     "verified": true
+    },
+    {
+     "installed_log": "<prefix-user>/AppData/Local/LLL/Helldivers2/Logs/BetterStratagemBounce.log",
+     "text": "CFFI-26088801\nmods/cowboybingus/better_stratagem_bounce:1018: mods/cowboybingus/better_stratagem_bounce:913: Unexpected settings header",
+     "note": "the installed CFFI-26088801 package checks the exact 24 header bytes of that one capture (CURRENT_HEADERS); a later session (2026-10-24 23:31) refused at that check, so the tail bytes are not stable across sessions",
+     "verified": true
+    }
+   ],
+   "agreeing": 3,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "B3",
+   "note": "this is the only edit that is not a value replacement; it relaxes the upstream gate to exactly what the game itself checks. Live probe B3 prints all 12 headers each session to confirm the tail varies."
+  },
+  {
+   "id": "patch.flag_offset",
+   "file": "src/navigation_patch.lua",
+   "line": 7,
+   "symbol": "flag_offset = 0x170, owned_bit = 0x02",
+   "kind": "StratagemInfo navigation flags byte and the deploy_on_navmesh_only bit (unchanged)",
+   "old": "0x170 / 0x02",
+   "new": "0x170 / 0x02",
+   "change_kind": "build data",
+   "method": "table-indexed StratagemInfo -> test byte [+0x170], 2, same in both builds; captured flags at +0x170 equal every migrated old vanilla flag",
+   "witnesses": [
+    {
+     "image": "game.dll",
+     "old_insn_rva": "0x6a4025",
+     "new_insn_rva": "0x6ae255",
+     "operand": "disp",
+     "old_value": "0x170",
+     "new_value": "0x170",
+     "note": "test byte ptr [r15 + 0x170], 2 (r15 = table[kind])",
+     "old_insn": "test byte ptr [r15 + 0x170], 2",
+     "new_insn": "test byte ptr [r15 + 0x170], 2",
+     "verified": true
+    },
+    {
+     "image": "game.dll",
+     "old_insn_rva": "0x6a1426",
+     "new_insn_rva": "0x6ab646",
+     "operand": "disp",
+     "old_value": "0x170",
+     "new_value": "0x170",
+     "note": "test byte ptr [rax + 0x170], 2 (rax = table[kind])",
+     "old_insn": "test byte ptr [rax + 0x170], 2",
+     "new_insn": "test byte ptr [rax + 0x170], 2",
+     "verified": true
+    },
+    {
+     "capture_flags_equal_migrated_old_flags": "149/149",
+     "verified": true
+    }
+   ],
+   "agreeing": 3,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": false,
+   "live_check": "B4"
+  },
+  {
+   "id": "patch.vanilla_flags",
+   "file": "src/navigation_patch.lua",
+   "line": 13,
+   "symbol": "vanilla_flags (by kind)",
+   "kind": "supported-build navigation flags of every stratagem kind",
+   "old": "149 entries",
+   "new": "153 entries: [2, 2, 0, 0, 2, 2, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 3, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 1, 2, 1, 0, 2, 1, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 0, 2, 2, 2, 0, 2, 2, 2, 3, 2, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 3, 0, 2, 3, 2, 2, 0, 2, 3, 0, 2, 1, 0, 2, 2, 2, 1, 2, 2, 2, 0, 2, 2, 2, 0, 0, 2, 3, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 2, 2, 2, 0, 0, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 3, 2, 0, 0, 2, 0, 2]",
+   "change_kind": "build data",
+   "method": "read-only capture of this build, verified vanilla: every one of the 149 old kinds (migrated by stratagem-enum-migration.json, its own descriptor-identity checks) has exactly its old flag; the 4 kinds new in this build ([28, 50, 66, 145]) carry [2, 0, 2, 0]",
+   "witnesses": [
+    {
+     "agree": 149,
+     "disagree": [],
+     "added_kinds": [
+      28,
+      50,
+      66,
+      145
+     ],
+     "added_flags": [
+      2,
+      0,
+      2,
+      0
+     ],
+     "capture_internally_consistent": true,
+     "verified": true
+    }
+   ],
+   "agreeing": 1,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "B4"
+  },
+  {
+   "id": "patch.owned_records",
+   "file": "src/navigation_patch.lua",
+   "line": 12,
+   "symbol": "owned_records",
+   "kind": "records whose vanilla flags set the owned bit",
+   "old": "103",
+   "new": "105",
+   "change_kind": "build data",
+   "method": "count of the bit in vanilla_flags (103 old + 2 added kinds)",
+   "witnesses": [
+    {
+     "old_owned_check": true,
+     "new_owned": 105,
+     "installed_live_apply_restore": "105 owned flags applied and restored with the exact archive (installed PORT-PROVENANCE.json live_test)",
+     "verified": true
+    }
+   ],
+   "agreeing": 1,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "B4"
+  },
+  {
+   "id": "patch.records",
+   "file": "src/navigation_patch.lua",
+   "line": 97,
+   "symbol": "plan.records == 149",
+   "kind": "records across all groups",
+   "old": "149",
+   "new": "153",
+   "change_kind": "build data",
+   "method": "capture walk",
+   "witnesses": [
+    {
+     "records_walked": 153,
+     "verified": true
+    }
+   ],
+   "agreeing": 1,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "B3"
+  },
+  {
+   "id": "patch.groups",
+   "file": "src/navigation_patch.lua",
+   "line": 5,
+   "symbol": "groups",
+   "kind": "settings group count (u32 at buffer+0)",
+   "old": "11",
+   "new": "12",
+   "change_kind": "build data",
+   "method": "capture walk",
+   "witnesses": [
+    {
+     "u32_at_0": 12,
+     "verified": true
+    }
+   ],
+   "agreeing": 1,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "B3"
+  },
+  {
+   "id": "patch.data_size",
+   "file": "src/navigation_patch.lua",
+   "line": 4,
+   "symbol": "data_size",
+   "kind": "settings buffer length (sum of the groups; read, written and verified whole)",
+   "old": "80280",
+   "new": "82384",
+   "change_kind": "build data",
+   "method": "capture walk ends exactly at the buffer end (the parser rule offset == #source)",
+   "witnesses": [
+    {
+     "walk_end": 82384,
+     "capture_bytes": 82384,
+     "capture_sha256": "e7c661fe2ba48d64581e3ac32fc337f15b56208bb03e32b0fc275bf61f097727",
+     "installed_live_apply_restore": "full 82384-byte buffer identical after apply/restore (installed PORT-PROVENANCE.json)",
+     "verified": true
+    }
+   ],
+   "agreeing": 1,
+   "disagreeing": 0,
+   "confidence": "high",
+   "feeds_write": true,
+   "changed": true,
+   "live_check": "B3"
+  }
+ ]
+}

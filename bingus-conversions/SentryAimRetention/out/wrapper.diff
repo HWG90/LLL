@@ -1,0 +1,103 @@
+--- upstream wrapper
++++ port wrapper
+@@ -773 +773 @@
+-        local pool=exe+0x2369b00+64*(math.floor(actor/0x10000000)%4+10*world_index)
++        local pool=exe+0x2411200+64*(math.floor(actor/0x10000000)%4+10*world_index)
+@@ -789 +789 @@
+-        local world_slot=exe+0x27ba8a8+176*e.world_index;local world=read_pointer(world_slot)
++        local world_slot=exe+0x2861d88+176*e.world_index;local world=read_pointer(world_slot)
+@@ -801 +801 @@
+-        local properties=read_pointer(exe+0x27c5e48);if not properties then return nil end
++        local properties=read_pointer(exe+0x286d338);if not properties then return nil end
+@@ -814 +814 @@
+-            and read_pointer(exe+0x27c5e48)==e.properties and read_pointer(e.properties+256)==e.names
++            and read_pointer(exe+0x286d338)==e.properties and read_pointer(e.properties+256)==e.names
+@@ -827,6 +827,6 @@
+-        local flag = ffi.cast('sentry_aim_retention_fn',game+0x6bf390)
+-        local horizontal = ffi.cast('sentry_aim_speed_fn',game+0x11cba20)
+-        local vertical = ffi.cast('sentry_aim_speed_fn',game+0x11cb930)
+-        local mode = ffi.cast('sentry_aim_fire_mode_fn',game+0x755f90)
+-        local world_id = ffi.cast('sentry_aim_world_id_fn',exe+0x79f860)
+-        local raycast = ffi.cast('sentry_aim_raycast_fn',exe+0x7f4590)
++        local flag = ffi.cast('sentry_aim_retention_fn',game+0x6c9a50)
++        local horizontal = ffi.cast('sentry_aim_speed_fn',game+0x105cff0)
++        local vertical = ffi.cast('sentry_aim_speed_fn',game+0x105cf00)
++        local mode = ffi.cast('sentry_aim_fire_mode_fn',game+0x761700)
++        local world_id = ffi.cast('sentry_aim_world_id_fn',exe+0x826d10)
++        local raycast = ffi.cast('sentry_aim_raycast_fn',exe+0x87bc70)
+@@ -865,2 +865,2 @@
+-                local scheduler=api.pointer(api.read(game+0x347d7e0,8))
+-                local world=api.pointer(api.read(game+0x346bfa0,8))
++                local scheduler=api.pointer(api.read(game+0x2e38988,8))
++                local world=api.pointer(api.read(game+0x2e271f8,8))
+@@ -879 +879 @@
+-                local units=ptr(exe+0x1a100f0)
++                local units=ptr(exe+0x1ab76f8)
+@@ -933,3 +933,3 @@
+-    [fromhex('701de358cfd685ef')]={name='Gatling',behavior=213,fire_gate={pause=16,resume=4}},
+-    [fromhex('bb26ba7638e4cd37')]={name='Machine gun',behavior=312,fire_gate={pause=14,resume=3}},
+-    [fromhex('a8a8ffcf360f0756')]={name='Laser cannon',behavior=308},
++    [fromhex('701de358cfd685ef')]={name='Gatling',behavior=214,fire_gate={pause=16,resume=4}},
++    [fromhex('bb26ba7638e4cd37')]={name='Machine gun',behavior=313,fire_gate={pause=14,resume=3}},
++    [fromhex('a8a8ffcf360f0756')]={name='Laser cannon',behavior=309},
+@@ -937,3 +937,3 @@
+-    [fromhex('582896febac30c82')]={name='Flamethrower',behavior=207},
+-    [fromhex('742dce3b2e81a051')]={name='Mortar',behavior=319},
+-    [fromhex('8b2f0938183a05b2')]={name='EMS mortar',behavior=323},
++    [fromhex('582896febac30c82')]={name='Flamethrower',behavior=208},
++    [fromhex('742dce3b2e81a051')]={name='Mortar',behavior=320},
++    [fromhex('8b2f0938183a05b2')]={name='EMS mortar',behavior=324},
+@@ -944,4 +944,4 @@
+-    {0x6bf390,'405741574883ec283b158248dc02450fb6f94c8b158779c6'},
+-    {0x11cb930,'4883ec288b41083b05e3822b020f84d00000004c8b1526b4'},
+-    {0x11cba20,'4883ec288b41083b05f3812b020f84d00000004c8b1536b3'},
+-    {0x755f90,'48894c24085355565741574883ec20'},
++    {0x6c9a50,'405741574883ec283b1572567702450fb6f94c8b15878461'},
++    {0x105cf00,'4883ec288b41083b05c321de010f84d00000004c8b151650'},
++    {0x105cff0,'4883ec288b41083b05d320de010f84d00000004c8b15264fc80133d24889742438458b4a30458b5a38440fafd8418d71ff4585c90f84a400000048895c2430498b5a2848897c2420418b7a340f1f40008bce468d041a4c23c1428b0cc33bcf741f3bc8741fffc2413bd172e4488b5c2430488b7c2420488b7424384883c428c33bc87550428b44c30483f8ff74464c8d0cc5000000008bd0498b4240498b0c01f6411401742e498b425848c1e204f30f114c0208498b42404d8b42584983c0084c03c2bae5450bcc498b0c018b4910e8bcc6e0ff488b5c2430488b7c2420488b7424384883c428c3'},
++    {0x761700,'48894c24085355565741574883ec20'},
+@@ -1072 +1072 @@
+-    for _,g in ipairs({{game+0x3326d30,reg.tmb},{game+0x3326740,reg.bmb},{game+0x3326d70,reg.rmb},
++    for _,g in ipairs({{game+0x2ce1ef0,reg.tmb},{game+0x2ce18f0,reg.bmb},{game+0x2ce1f30,reg.rmb},
+@@ -1084 +1084 @@
+-    local fm=need_pointer(api,need(api,game+0x3326cb8,8))
++    local fm=need_pointer(api,need(api,game+0x2ce1e78,8))
+@@ -1097,3 +1097,3 @@
+-    local clock_root=need(api,game+0x3326348,8)
+-    local selection_guards={};guard(api,selection_guards,game+0x3326348,clock_root)
+-    local wm=need_pointer(api,need(api,game+0x3326ce0,8))
++    local clock_root=need(api,game+0x2ce14f8,8)
++    local selection_guards={};guard(api,selection_guards,game+0x2ce14f8,clock_root)
++    local wm=need_pointer(api,need(api,game+0x2ce1ea0,8))
+@@ -1111,3 +1111,3 @@
+-    guard(api,guards,game+0x3326ce0,need(api,game+0x3326ce0,8))
+-    local cmb=need(api,game+0x3326660,8);local cm=need_pointer(api,cmb)
+-    guard(api,guards,game+0x3326660,cmb)
++    guard(api,guards,game+0x2ce1ea0,need(api,game+0x2ce1ea0,8))
++    local cmb=need(api,game+0x2ce1810,8);local cm=need_pointer(api,cmb)
++    guard(api,guards,game+0x2ce1810,cmb)
+@@ -1118 +1118 @@
+-    return {wm=wm,cm=cm,wm_header=wm+48,cm_header=cm+40,clock_root_address=game+0x3326348,
++    return {wm=wm,cm=cm,wm_header=wm+48,cm_header=cm+40,clock_root_address=game+0x2ce14f8,
+@@ -1271 +1271 @@
+-        c.at={tm=game+0x3326d30,bm=game+0x3326740,rm=game+0x3326d70}
++        c.at={tm=game+0x2ce1ef0,bm=game+0x2ce18f0,rm=game+0x2ce1f30}
+@@ -1392 +1392 @@
+--- Whether a mission runs: the mode record at [game.dll+0x33266a0] (68 bytes;
++-- Whether a mission runs: the mode record at [game.dll+0x2ce1850] (68 bytes;
+@@ -1399 +1399 @@
+-    if c.mode_game~=game then c.mode_game,c.mode_global=game,game+0x33266a0 end
++    if c.mode_game~=game then c.mode_game,c.mode_global=game,game+0x2ce1850 end
+@@ -1987,2 +1987,2 @@
+-    local pose_signature=fromhex('40534883ec204863dae89206eaff488bc84c8b0041ff90e8')
+-    assert(exe and api.read(exe+0x1fd220,#pose_signature)==pose_signature,'Unsupported engine pose getter')
++    local pose_signature=fromhex('40534883ec204863dae8e2d5eaff488bc84c8b0041ff90e8')
++    assert(exe and api.read(exe+0x1f30c0,#pose_signature)==pose_signature,'Unsupported engine pose getter')
+@@ -1990,2 +1990,2 @@
+-        {0x79f860,'33c04c8d05c7b201020f1f800000000049390cc0740cffc083f80475f3'},
+-        {0x7f4590,'488bc4f30f11582089480855535657415441554156415748'},
++        {0x826d10,'33c04c8d05f7b203020f1f800000000049390cc0740cffc083f80475f3'},
++        {0x87bc70,'488bc4f30f11582089480855535657415441554156415748'},
+@@ -2251 +2251 @@
+-install_loader(function() return create_api(runtime, runtime_write.extend(runtime_memory.new(runtime))) end, patch, {revision = 'data-v8.6', exe_sha256 = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06', game_sha256 = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'}, runtime)
++install_loader(function() return create_api(runtime, runtime_write.extend(runtime_memory.new(runtime))) end, patch, {revision = 'data-v8.6-26088801', exe_sha256 = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE', game_sha256 = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'}, runtime)

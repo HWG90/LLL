@@ -1,0 +1,4693 @@
+{
+ "mod": "Consistent Vaulting data-v8.9.1 (Vanilla Plus Megapack option)",
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "source": {
+  "lock_revision": "data-v8.9.1",
+  "lock_resource_sha256": "F7086B62BCF3484C406110911FDB1B8769D142417C7D85E8575E10C8E19140FF",
+  "used": "<workspace>/upstream-bingus/VanillaPlusMegapack/components/ConsistentVaulting",
+  "pinned_copy_matches_lock": true,
+  "checkout": "<workspace>/upstream-bingus/ConsistentVaulting",
+  "checkout_tag": "v8.9.1 (git tag at HEAD c0b42df)",
+  "checkout_matches_lock": true,
+  "note": "both copies hold the locked bytes; the build copies the pinned component the pack builds from"
+ },
+ "old_images": {
+  "game": "<workspace>/native-work/evidence/game-pre1020.dll",
+  "exe": "<hellforge>/mods-retired/localappdata-1019/LocalAppData/LinksLinkToMemory/r6_reload_exe_20261017.bin"
+ },
+ "new_images": {
+  "game": "<workspace>/native-work/evidence/game-26088801.dll",
+  "exe": "<workspace>/native-work/evidence/exe-26088801.bin"
+ },
+ "counts": {
+  "high": 56,
+  "medium": 3
+ },
+ "rows_total": 59,
+ "rows_feeding_write": 52,
+ "changed": [
+  "archive.EXE_SHA",
+  "archive.GAME_DLL_SHA",
+  "g.mode",
+  "g.players",
+  "g.entities",
+  "g.avatars",
+  "g.movement",
+  "g.camera",
+  "g.world",
+  "g.table_actor",
+  "g.table_mover",
+  "g.table_world",
+  "entities.unit_map",
+  "entities.records",
+  "entities.avatar_settings",
+  "avatars.stride",
+  "avatars.flags",
+  "avatars.override_map",
+  "avatars.override_count",
+  "avatars.override_records",
+  "query.unit",
+  "query.capacity",
+  "query.count",
+  "query.type",
+  "exe.handle_pools",
+  "exe.controller_vtable",
+  "exe.table_actor",
+  "exe.table_mover",
+  "exe.table_world",
+  "exe.valid",
+  "exe.flags",
+  "exe.motion",
+  "exe.mover",
+  "exe.position",
+  "exe.dimensions",
+  "exe.world_id",
+  "exe.world_68",
+  "exe.query",
+  "game.classify",
+  "game.drive",
+  "game.detect",
+  "game.approach",
+  "game.override",
+  "game.basis",
+  "game.rotation"
+ ],
+ "blocked": [],
+ "witness_check_failures": [],
+ "rows": [
+  {
+   "id": "archive.EXE_SHA",
+   "name": "archive.EXE_SHA",
+   "file": "scripts/archive.py (pack)",
+   "line": 9,
+   "kind": "SHA-256 pin (pack scripts/archive.py; module.py passes it into install_loader)",
+   "old": "F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06",
+   "new": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "changed": true,
+   "method": "SHA-256 of the installed bin/helldivers2.exe (read-only)",
+   "witnesses": [
+    {
+     "sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "gate",
+   "sites": [
+    {
+     "file": "scripts/archive.py (pack)",
+     "line": 9,
+     "text": "EXE_SHA = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'"
+    }
+   ]
+  },
+  {
+   "id": "archive.GAME_DLL_SHA",
+   "name": "archive.GAME_DLL_SHA",
+   "file": "scripts/archive.py (pack)",
+   "line": 10,
+   "kind": "SHA-256 pin (pack scripts/archive.py)",
+   "old": "2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E",
+   "new": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "changed": true,
+   "method": "SHA-256 of the installed data/game/game.dll (read-only)",
+   "witnesses": [
+    {
+     "sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "gate",
+   "sites": [
+    {
+     "file": "scripts/archive.py (pack)",
+     "line": 10,
+     "text": "GAME_DLL_SHA = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'"
+    }
+   ]
+  },
+  {
+   "id": "g.mode",
+   "name": "g.mode",
+   "file": "src/vault_data.lua",
+   "line": 139,
+   "kind": "game.dll global: mission gate: game mode record pointer",
+   "old": "0x33266a0",
+   "new": "0x2ce1850",
+   "changed": true,
+   "method": "RIP-relative references of the old global migrated by unique instruction windows (exact first, field displacements masked second); every witness points at the same new global",
+   "witnesses": [
+    {
+     "kind": "RIP-relative reference windows (evidence/globals.json)",
+     "old_sites": 240,
+     "sampled": 64,
+     "agreeing": 51,
+     "disagreeing": 0,
+     "exact_window_votes": 46,
+     "distinct_old_functions": 50,
+     "examples": [
+      {
+       "old": "0x38013b",
+       "new": "0x386e3b",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2fa655e]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x295aa0e]"
+      },
+      {
+       "old": "0x461c76",
+       "new": "0x468a96",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2ec4a23]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2878db3]"
+      },
+      {
+       "old": "0x4b012a",
+       "new": "0x4b69ea",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2e7656f]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x282ae5f]"
+      }
+     ],
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "gate",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 139,
+     "text": "if game~=gate_game then gate_game,gate_global=game,game+0x33266a0 end"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 141,
+     "text": "local mode=light_read(api,light_global(api,base,0x33266a0,CHAIN),0x44,CHAIN)"
+    }
+   ],
+   "live_check": "L1"
+  },
+  {
+   "id": "g.players",
+   "name": "g.players",
+   "file": "src/vault_data.lua",
+   "line": 158,
+   "kind": "game.dll global: player manager",
+   "old": "0x3326468",
+   "new": "0x2ce1618",
+   "changed": true,
+   "method": "RIP-relative references of the old global migrated by unique instruction windows (exact first, field displacements masked second); every witness points at the same new global",
+   "witnesses": [
+    {
+     "kind": "RIP-relative reference windows (evidence/globals.json)",
+     "old_sites": 1199,
+     "sampled": 64,
+     "agreeing": 47,
+     "disagreeing": 0,
+     "exact_window_votes": 45,
+     "distinct_old_functions": 47,
+     "examples": [
+      {
+       "old": "0x3a4bde",
+       "new": "0x3ab8de",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2f81883]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2935d33]"
+      },
+      {
+       "old": "0x545204",
+       "new": "0x54e054",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2de125d]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x27935bd]"
+      },
+      {
+       "old": "0x606c9a",
+       "new": "0x60fe6a",
+       "instruction_old": "mov r10, qword ptr [rip + 0x2d1f7c7]",
+       "instruction_new": "mov r10, qword ptr [rip + 0x26d17a7]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "citation",
+     "text": "brief: live-verified player manager 0x3326468->0x2CE1618"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 158,
+     "text": "local pm=global(api,s,game,0x3326468,true)"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 148,
+     "text": "local pm=light_global(api,base,0x3326468,OWNED)"
+    }
+   ],
+   "live_check": "L1"
+  },
+  {
+   "id": "g.entities",
+   "name": "g.entities",
+   "file": "src/vault_data.lua",
+   "line": 406,
+   "kind": "game.dll global: entities object",
+   "old": "0x346bf98",
+   "new": "0x2ce41b8",
+   "changed": true,
+   "method": "RIP-relative references of the old global migrated by unique instruction windows (exact first, field displacements masked second); every witness points at the same new global",
+   "witnesses": [
+    {
+     "kind": "RIP-relative reference windows (evidence/globals.json)",
+     "old_sites": 1449,
+     "sampled": 64,
+     "agreeing": 42,
+     "disagreeing": 0,
+     "exact_window_votes": 27,
+     "distinct_old_functions": 42,
+     "examples": [
+      {
+       "old": "0x4536dc",
+       "new": "0x45a4fc",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x30188b5]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x2889cb5]"
+      },
+      {
+       "old": "0x49c4a1",
+       "new": "0x4a3157",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2fcfaf0]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x284105a]"
+      },
+      {
+       "old": "0x4f57fa",
+       "new": "0x4fdb5a",
+       "instruction_old": "mov rbp, qword ptr [rip + 0x2f76797]",
+       "instruction_new": "mov rbp, qword ptr [rip + 0x27e6657]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "citation",
+     "text": "brief: live-verified entities 0x346BF98->0x2CE41B8"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 406,
+     "text": "local owner=global(api,s,game,0x346bf98,true)"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 205,
+     "text": "local owner,manager=light_global(api,base,0x346bf98,OWNED),light_global(api,base,0x3326d20,OWNED)"
+    }
+   ],
+   "live_check": "L1"
+  },
+  {
+   "id": "g.avatars",
+   "name": "g.avatars",
+   "file": "src/vault_data.lua",
+   "line": 409,
+   "kind": "game.dll global: avatar manager (controller, flags, input, settings overrides)",
+   "old": "0x3326d20",
+   "new": "0x2ce1ee0",
+   "changed": true,
+   "method": "RIP-relative references of the old global migrated by unique instruction windows (exact first, field displacements masked second); every witness points at the same new global",
+   "witnesses": [
+    {
+     "kind": "RIP-relative reference windows (evidence/globals.json)",
+     "old_sites": 1644,
+     "sampled": 64,
+     "agreeing": 47,
+     "disagreeing": 0,
+     "exact_window_votes": 43,
+     "distinct_old_functions": 47,
+     "examples": [
+      {
+       "old": "0x4c38ee",
+       "new": "0x4ca52e",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2e6342a]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x28179aa]"
+      },
+      {
+       "old": "0x5e74eb",
+       "new": "0x5efe3b",
+       "instruction_old": "mov rbx, qword ptr [rip + 0x2d3f82e]",
+       "instruction_new": "mov rbx, qword ptr [rip + 0x26f209e]"
+      },
+      {
+       "old": "0x60c05e",
+       "new": "0x61525e",
+       "instruction_old": "mov r11, qword ptr [rip + 0x2d1acbb]",
+       "instruction_new": "mov r11, qword ptr [rip + 0x26ccc7b]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "citation",
+     "text": "brief: live-verified avatars 0x3326D20->0x2CE1EE0"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 409,
+     "text": "local manager=global(api,s,game,0x3326d20,true)"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 205,
+     "text": "local owner,manager=light_global(api,base,0x346bf98,OWNED),light_global(api,base,0x3326d20,OWNED)"
+    }
+   ],
+   "live_check": "L1"
+  },
+  {
+   "id": "g.movement",
+   "name": "g.movement",
+   "file": "src/vault_data.lua",
+   "line": 365,
+   "kind": "game.dll global: movement manager (move/mover records)",
+   "old": "0x3326558",
+   "new": "0x2ce1708",
+   "changed": true,
+   "method": "RIP-relative references of the old global migrated by unique instruction windows (exact first, field displacements masked second); every witness points at the same new global",
+   "witnesses": [
+    {
+     "kind": "RIP-relative reference windows (evidence/globals.json)",
+     "old_sites": 426,
+     "sampled": 64,
+     "agreeing": 46,
+     "disagreeing": 1,
+     "exact_window_votes": 46,
+     "distinct_old_functions": 46,
+     "examples": [
+      {
+       "old": "0xbad7c",
+       "new": "0x42bf3c",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x326b7d5]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x28b57c5]"
+      },
+      {
+       "old": "0xdb710",
+       "new": "0xddeb0",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x324ae41]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x2c03851]"
+      },
+      {
+       "old": "0x140322",
+       "new": "0x13ffd2",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x31e622f]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x2ba172f]"
+      }
+     ],
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 365,
+     "text": "local movement=global(api,s,game,0x3326558)"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 294,
+     "text": "local mm=global(api,s,game,0x3326558)"
+    }
+   ],
+   "live_check": "L1"
+  },
+  {
+   "id": "g.camera",
+   "name": "g.camera",
+   "file": "src/vault_data.lua",
+   "line": 388,
+   "kind": "game.dll global: camera (view forward at +0x1c)",
+   "old": "0x346d560",
+   "new": "0x2e287d0",
+   "changed": true,
+   "method": "RIP-relative references of the old global migrated by unique instruction windows (exact first, field displacements masked second); every witness points at the same new global",
+   "witnesses": [
+    {
+     "kind": "RIP-relative reference windows (evidence/globals.json)",
+     "old_sites": 342,
+     "sampled": 64,
+     "agreeing": 52,
+     "disagreeing": 0,
+     "exact_window_votes": 44,
+     "distinct_old_functions": 51,
+     "examples": [
+      {
+       "old": "0x4d54d3",
+       "new": "0x4dc493",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2f98086]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x294c336]"
+      },
+      {
+       "old": "0x5bd6f0",
+       "new": "0x5c6530",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2eafe68]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2862298]"
+      },
+      {
+       "old": "0x6016fb",
+       "new": "0x60a81b",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2e6be5e]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x281dfae]"
+      }
+     ],
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 388,
+     "text": "local camera=vector(read(api,s,global(api,s,game,0x346d560)+0x1c,12),0)"
+    }
+   ],
+   "live_check": "L1"
+  },
+  {
+   "id": "g.world",
+   "name": "g.world",
+   "file": "src/vault_data.lua",
+   "line": 249,
+   "kind": "game.dll global: physics world passed to the world-id/query natives",
+   "old": "0x346bfa0",
+   "new": "0x2e271f8",
+   "changed": true,
+   "method": "RIP-relative references of the old global migrated by unique instruction windows (exact first, field displacements masked second); every witness points at the same new global",
+   "witnesses": [
+    {
+     "kind": "RIP-relative reference windows (evidence/globals.json)",
+     "old_sites": 554,
+     "sampled": 64,
+     "agreeing": 47,
+     "disagreeing": 0,
+     "exact_window_votes": 45,
+     "distinct_old_functions": 47,
+     "examples": [
+      {
+       "old": "0x4c5b02",
+       "new": "0x4cc812",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2fa6497]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x295a9df]"
+      },
+      {
+       "old": "0x5722bb",
+       "new": "0x57b31b",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2ef9cde]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x28abed6]"
+      },
+      {
+       "old": "0x5a8427",
+       "new": "0x5b1007",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2ec3b72]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x28761ea]"
+      }
+     ],
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 249,
+     "text": "s.world=global(api,s,game,0x346bfa0,true)"
+    }
+   ],
+   "live_check": "L1"
+  },
+  {
+   "id": "g.table_actor",
+   "name": "g.table_actor",
+   "file": "src/windows_api.lua",
+   "line": 22,
+   "kind": "game.dll global: game global holding the exe physics-actor function table",
+   "old": "0x3326338",
+   "new": "0x2ce1500",
+   "changed": true,
+   "method": "RIP-relative references of the old global migrated by unique instruction windows (exact first, field displacements masked second); every witness points at the same new global",
+   "witnesses": [
+    {
+     "kind": "RIP-relative reference windows (evidence/globals.json)",
+     "old_sites": 568,
+     "sampled": 64,
+     "agreeing": 55,
+     "disagreeing": 0,
+     "exact_window_votes": 48,
+     "distinct_old_functions": 53,
+     "examples": [
+      {
+       "old": "0xba61b",
+       "new": "0xbcd5b",
+       "instruction_old": "mov rax, qword ptr [rip + 0x326bd16]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2c2479e]"
+      },
+      {
+       "old": "0x5a0c1f",
+       "new": "0x5a975f",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2d85712]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2737d9a]"
+      },
+      {
+       "old": "0x5a2579",
+       "new": "0x5ab0b9",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2d83db8]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2736440]"
+      }
+     ],
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "sites": [
+    {
+     "file": "src/windows_api.lua",
+     "line": 22,
+     "text": "{0x3326338,0x27cd910,{{0x18,0x7972f0},{0x38,0x7993d0},{0xa8,0x799540}}},"
+    }
+   ],
+   "live_check": "L1"
+  },
+  {
+   "id": "g.table_mover",
+   "name": "g.table_mover",
+   "file": "src/windows_api.lua",
+   "line": 23,
+   "kind": "game.dll global: game global holding the exe mover function table",
+   "old": "0x3326388",
+   "new": "0x2ce1548",
+   "changed": true,
+   "method": "RIP-relative references of the old global migrated by unique instruction windows (exact first, field displacements masked second); every witness points at the same new global",
+   "witnesses": [
+    {
+     "kind": "RIP-relative reference windows (evidence/globals.json)",
+     "old_sites": 54,
+     "sampled": 54,
+     "agreeing": 53,
+     "disagreeing": 0,
+     "exact_window_votes": 53,
+     "distinct_old_functions": 26,
+     "examples": [
+      {
+       "old": "0x4edbfe",
+       "new": "0x4f5ead",
+       "instruction_old": "mov qword ptr [rip + 0x2e38783], rax",
+       "instruction_new": "mov qword ptr [rip + 0x27eb694], rax"
+      },
+      {
+       "old": "0x59bd23",
+       "new": "0x5a4943",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2d8a65e]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x273cbfe]"
+      },
+      {
+       "old": "0x59cfbf",
+       "new": "0x5a5bdf",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2d893c2]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x273b962]"
+      }
+     ],
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "sites": [
+    {
+     "file": "src/windows_api.lua",
+     "line": 23,
+     "text": "{0x3326388,0x27cdc30,{{0,0x7ce220},{0x28,0x7cf050},{0x68,0x7cfe10}}},"
+    }
+   ],
+   "live_check": "L1"
+  },
+  {
+   "id": "g.table_world",
+   "name": "g.table_world",
+   "file": "src/windows_api.lua",
+   "line": 24,
+   "kind": "game.dll global: game global holding the exe world/query function table",
+   "old": "0x3326328",
+   "new": "0x2ce14e8",
+   "changed": true,
+   "method": "RIP-relative references of the old global migrated by unique instruction windows (exact first, field displacements masked second); every witness points at the same new global",
+   "witnesses": [
+    {
+     "kind": "RIP-relative reference windows (evidence/globals.json)",
+     "old_sites": 334,
+     "sampled": 64,
+     "agreeing": 50,
+     "disagreeing": 0,
+     "exact_window_votes": 37,
+     "distinct_old_functions": 41,
+     "examples": [
+      {
+       "old": "0x4b3f31",
+       "new": "0x4ba7f1",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2e723f0]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2826cf0]"
+      },
+      {
+       "old": "0x4d5c99",
+       "new": "0x4dcc59",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2e50687]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2804887]"
+      },
+      {
+       "old": "0x5a4a50",
+       "new": "0x5ad590",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2d818d0]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2733f50]"
+      }
+     ],
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "sites": [
+    {
+     "file": "src/windows_api.lua",
+     "line": 24,
+     "text": "{0x3326328,0x27cdb40,{{0,0x79f860},{0x68,0x77dec0},{0x80,0x7f9070}}},"
+    }
+   ],
+   "live_check": "L1"
+  },
+  {
+   "id": "mode.fields",
+   "name": "mode.fields",
+   "file": "src/vault_data.lua",
+   "line": 149,
+   "kind": "mode record: +8 non-zero and +0x40 in 1..7 in a mission; 0x44 bytes read",
+   "old": "+0x8,+0x40",
+   "new": "+0x8,+0x40",
+   "changed": false,
+   "method": "aligned operands of MODE-derived registers",
+   "witnesses": [
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "MODE",
+     "old": "0x8",
+     "new": "0x8",
+     "agreeing": 114,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x60589b",
+       "new": "0x60ea6b",
+       "old_insn": "cmp dword ptr [rax + 8], 0",
+       "new_insn": "cmp dword ptr [rax + 8], 0"
+      },
+      {
+       "old": "0x7f9b20",
+       "new": "0x806440",
+       "old_insn": "cmp dword ptr [rax + 8], 0",
+       "new_insn": "cmp dword ptr [rax + 8], 0"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "MODE",
+     "old": "0x40",
+     "new": "0x40",
+     "agreeing": 89,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x6058a1",
+       "new": "0x60ea71",
+       "old_insn": "mov edx, dword ptr [rax + 0x40]",
+       "new_insn": "mov edx, dword ptr [rax + 0x40]"
+      },
+      {
+       "old": "0x7f9b26",
+       "new": "0x806446",
+       "old_insn": "mov eax, dword ptr [rax + 0x40]",
+       "new_insn": "mov eax, dword ptr [rax + 0x40]"
+      }
+     ],
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "gate",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 149,
+     "text": "return gate_words[4]~=0 and gate_words[18]>=1 and gate_words[18]<=7"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 142,
+     "text": "return word(mode,8)~=0 and word(mode,0x40)>=1 and word(mode,0x40)<=7"
+    }
+   ],
+   "live_check": "L1"
+  },
+  {
+   "id": "players.fields",
+   "name": "players.fields",
+   "file": "src/vault_data.lua",
+   "line": 159,
+   "kind": "player manager: +0x84/+0x88 counts, +0xe8 local player record (+0x14 bit 0 owned), +0x3a8 local unit reference (0x7fff none)",
+   "old": "+0x84,+0x88,+0xe8,+0x3a8",
+   "new": "+0x84,+0x88,+0xe8,+0x3a8",
+   "changed": false,
+   "method": "aligned operands of PM-derived registers",
+   "witnesses": [
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "PM",
+     "old": "0x84",
+     "new": "0x84",
+     "agreeing": 103,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x6a18c2",
+       "new": "0x6abae2",
+       "old_insn": "mov r8d, dword ptr [r9 + 0x84]",
+       "new_insn": "mov r8d, dword ptr [r9 + 0x84]"
+      },
+      {
+       "old": "0x6ab517",
+       "new": "0x6b59f7",
+       "old_insn": "mov r8d, dword ptr [r10 + 0x84]",
+       "new_insn": "mov r8d, dword ptr [r10 + 0x84]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "PM",
+     "old": "0x88",
+     "new": "0x88",
+     "agreeing": 90,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x6a228b",
+       "new": "0x6ac4ba",
+       "old_insn": "cmp dword ptr [rax + 0x88], 0",
+       "new_insn": "cmp dword ptr [rax + 0x88], 0"
+      },
+      {
+       "old": "0x821baa",
+       "new": "0x82ebba",
+       "old_insn": "cmp dword ptr [rcx + 0x88], 0",
+       "new_insn": "cmp dword ptr [rcx + 0x88], 0"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "PM",
+     "old": "0xe8",
+     "new": "0xe8",
+     "agreeing": 49,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x821a46",
+       "new": "0x82ea56",
+       "old_insn": "mov rax, qword ptr [rbx + 0xe8]",
+       "new_insn": "mov rax, qword ptr [rbx + 0xe8]"
+      },
+      {
+       "old": "0x821ab9",
+       "new": "0x82eac9",
+       "old_insn": "mov rax, qword ptr [rbx + 0xe8]",
+       "new_insn": "mov rax, qword ptr [rbx + 0xe8]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "PM",
+     "old": "0x3a8",
+     "new": "0x3a8",
+     "agreeing": 44,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x6a2294",
+       "new": "0x6ac4c3",
+       "old_insn": "mov edx, dword ptr [rax + 0x3a8]",
+       "new_insn": "mov edx, dword ptr [rax + 0x3a8]"
+      },
+      {
+       "old": "0x821bb3",
+       "new": "0x82ebc3",
+       "old_insn": "mov edx, dword ptr [rcx + 0x3a8]",
+       "new_insn": "mov edx, dword ptr [rcx + 0x3a8]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "PM->0xe8",
+     "old": "0x14",
+     "new": "0x14",
+     "agreeing": 8,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x11d68cc",
+       "new": "0x1067e3c",
+       "old_insn": "mov ecx, dword ptr [rdx + 0x14]",
+       "new_insn": "mov ecx, dword ptr [rdx + 0x14]"
+      },
+      {
+       "old": "0x11d68db",
+       "new": "0x1067e4b",
+       "old_insn": "mov ecx, dword ptr [rdx + 0x14]",
+       "new_insn": "mov ecx, dword ptr [rdx + 0x14]"
+      }
+     ],
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 159,
+     "text": "local counts=read(api,s,pm+0x84,8)"
+    },
+    {
+     "file": "src/vault_data.lua",
+     "line": 162,
+     "text": "local player=read(api,s,pointer(api,read(api,s,pm+0xe8,8,true)),24,true)"
+    },
+    {
+     "file": "src/vault_data.lua",
+     "line": 164,
+     "text": "local unit_ref=u32(read(api,s,pm+0x3a8,4,true),0)"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 149,
+     "text": "local counts=light_read(api,pm+0x84,8,VAULT)"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 152,
+     "text": "if bit.band(byte_at(light_read(api,light_pointer(light_read(api,pm+0xe8,8,OWNED),0),24,OWNED),20),1)==0 then"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 156,
+     "text": "return word(light_read(api,pm+0x3a8,4,OWNED),0)"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 251,
+     "text": "if word(light_read(api,kept_pm+0x3a8,4,OWNED),0)~=kept_ref then return false end"
+    }
+   ],
+   "live_check": "L2"
+  },
+  {
+   "id": "entities.unit_map",
+   "name": "entities.unit_map",
+   "file": "src/vault_data.lua",
+   "line": 171,
+   "kind": "entities: unit-reference -> entity index map header",
+   "old": "0xF22EC8",
+   "new": "0xF24990",
+   "changed": true,
+   "method": "aligned ENT-derived operands; brief live-verified 0xF22EC8->0xF24990",
+   "witnesses": [
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "ENT",
+     "old": "0xf22ec8",
+     "new": "0xf24990",
+     "agreeing": 1,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x60658d",
+       "new": "0x60f75d",
+       "old_insn": "mov rdi, qword ptr [rbp + 0xf22ec8]",
+       "new_insn": "mov rdi, qword ptr [rbp + 0xf24990]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "ENT",
+     "old": "0xf22ed0",
+     "new": "0xf24998",
+     "agreeing": 2,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x606570",
+       "new": "0x60f740",
+       "old_insn": "mov r10d, dword ptr [rbp + 0xf22ed0]",
+       "new_insn": "mov r10d, dword ptr [rbp + 0xf24998]"
+      },
+      {
+       "old": "0xfdbed5",
+       "new": "0xe6c475",
+       "old_insn": "mov r9d, dword ptr [rdi + 0xf22ed0]",
+       "new_insn": "mov r9d, dword ptr [rdi + 0xf24998]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "ENT",
+     "old": "0xf22ed8",
+     "new": "0xf249a0",
+     "agreeing": 2,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x606579",
+       "new": "0x60f749",
+       "old_insn": "mov r11d, dword ptr [rbp + 0xf22ed8]",
+       "new_insn": "mov r11d, dword ptr [rbp + 0xf249a0]"
+      },
+      {
+       "old": "0xfdbede",
+       "new": "0xe6c47e",
+       "old_insn": "mov r10d, dword ptr [rdi + 0xf22ed8]",
+       "new_insn": "mov r10d, dword ptr [rdi + 0xf249a0]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "citation",
+     "text": "brief: entities field 0xF22EC8->0xF24990 live-verified"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 171,
+     "text": "local ei=lookup(api,s,read(api,s,owner+0xf22ec8,20),unit_ref,1048576)"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 167,
+     "text": "local ei=light_lookup(api,owner+0xf22ec8,ref,1048576)"
+    }
+   ],
+   "live_check": "L3"
+  },
+  {
+   "id": "entities.records",
+   "name": "entities.records",
+   "file": "src/vault_data.lua",
+   "line": 174,
+   "kind": "entities: 24-byte entity records (hash +0, id +8, unit +12, flags +20 bit 0)",
+   "old": "0xF32F18",
+   "new": "0xF349E0",
+   "changed": true,
+   "method": "brief live-verified 0xF32F18->0xF349E0; record fields aligned through the avatar registry (AV->0x110[] +8/+0x10/+0x14 unchanged)",
+   "witnesses": [
+    {
+     "kind": "citation",
+     "text": "brief: entities field 0xF32F18->0xF349E0 live-verified"
+    },
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "AV->0x110[]",
+     "old": "0x8",
+     "new": "0x8",
+     "agreeing": 50,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0xa84370",
+       "new": "0xa9fdd0",
+       "old_insn": "mov ecx, dword ptr [r12 + 8]",
+       "new_insn": "mov ecx, dword ptr [r12 + 8]"
+      },
+      {
+       "old": "0xa860f4",
+       "new": "0xaa1b54",
+       "old_insn": "mov ecx, dword ptr [r13 + 8]",
+       "new_insn": "mov ecx, dword ptr [r13 + 8]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "AV->0x110[]",
+     "old": "0x14",
+     "new": "0x14",
+     "agreeing": 9,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x979ecd",
+       "new": "0x98ba4d",
+       "old_insn": "test byte ptr [rax + 0x14], 1",
+       "new_insn": "test byte ptr [rax + 0x14], 1"
+      },
+      {
+       "old": "0x97a357",
+       "new": "0x98bed7",
+       "old_insn": "test byte ptr [rax + 0x14], 1",
+       "new_insn": "test byte ptr [rax + 0x14], 1"
+      }
+     ],
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 174,
+     "text": "local entity_address=owner+0xf32f18+ei*24"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 170,
+     "text": "local address=owner+0xf32f18+ei*24"
+    }
+   ],
+   "live_check": "L3"
+  },
+  {
+   "id": "entities.avatar_settings",
+   "name": "entities.avatar_settings",
+   "file": "src/vault_data.lua",
+   "line": 345,
+   "kind": "entities: AvatarComponent shared settings table pointer",
+   "old": "0xF12BB8",
+   "new": "0xF14680",
+   "changed": true,
+   "method": "aligned operands (incl. the override routine 0x83c420/0x8492a0 itself)",
+   "witnesses": [
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "ENT",
+     "old": "0xf12bb8",
+     "new": "0xf14680",
+     "agreeing": 2,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x5757f9",
+       "new": "0x57e7d9",
+       "old_insn": "mov rax, qword ptr [r8 + 0xf12bb8]",
+       "new_insn": "mov rax, qword ptr [r8 + 0xf14680]"
+      },
+      {
+       "old": "0x83c513",
+       "new": "0x849393",
+       "old_insn": "mov rax, qword ptr [r8 + 0xf12bb8]",
+       "new_insn": "mov rax, qword ptr [r8 + 0xf14680]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned instruction operand votes (field_map.py)",
+     "what": "AvatarComponent table",
+     "old": "0xf12bb8",
+     "new": "0xf14680",
+     "old_sites": 2,
+     "functions": 2,
+     "votes": {
+      "0xf14680": 2
+     },
+     "examples": [
+      {
+       "old": "0x5757f9",
+       "new": "0x57e7d9",
+       "old_function": "0x574280",
+       "new_function": "0x57d260",
+       "ratio": 0.958,
+       "old_insn": "mov rax, qword ptr [r8 + 0xf12bb8]",
+       "new_insn": "mov rax, qword ptr [r8 + 0xf14680]"
+      },
+      {
+       "old": "0x83c513",
+       "new": "0x849393",
+       "old_function": "0x83c420",
+       "new_function": "0x8492a0",
+       "ratio": 1.0,
+       "old_insn": "mov rax, qword ptr [r8 + 0xf12bb8]",
+       "new_insn": "mov rax, qword ptr [r8 + 0xf14680]"
+      }
+     ],
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 345,
+     "text": "local component=pointer(api,read(api,s,owner+0xf12bb8,8))"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 346,
+     "text": "local component=ptr(api,read(api,s,s.key.owner+0xf12bb8,8,true))"
+    }
+   ],
+   "live_check": "L5"
+  },
+  {
+   "id": "avatars.registry",
+   "name": "avatars.registry",
+   "file": "src/vault_data.lua",
+   "line": 184,
+   "kind": "avatar manager: id map +0xf8 (header +0x100/+0x104/+0x108), count +0x6c, entity pointers +0x110",
+   "old": "+0xf8,+0x6c,+0x110",
+   "new": "+0xf8,+0x6c,+0x110",
+   "changed": false,
+   "method": "aligned AV-derived operands",
+   "witnesses": [
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "AV",
+     "old": "0xf8",
+     "new": "0xf8",
+     "agreeing": 206,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x6a0e49",
+       "new": "0x6ab069",
+       "old_insn": "mov r10, qword ptr [rax + 0xf8]",
+       "new_insn": "mov r10, qword ptr [rax + 0xf8]"
+      },
+      {
+       "old": "0x6a22e2",
+       "new": "0x6ac511",
+       "old_insn": "mov r11, qword ptr [rax + 0xf8]",
+       "new_insn": "mov r11, qword ptr [rax + 0xf8]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "AV",
+     "old": "0x6c",
+     "new": "0x6c",
+     "agreeing": 35,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0xac7558",
+       "new": "0xae3778",
+       "old_insn": "mov ecx, dword ptr [rax + 0x6c]",
+       "new_insn": "mov ecx, dword ptr [rax + 0x6c]"
+      },
+      {
+       "old": "0xad475c",
+       "new": "0xaf087c",
+       "old_insn": "mov r12d, dword ptr [rcx + 0x6c]",
+       "new_insn": "mov r12d, dword ptr [rcx + 0x6c]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "AV",
+     "old": "0x110",
+     "new": "0x110",
+     "agreeing": 48,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x979ec5",
+       "new": "0x98ba45",
+       "old_insn": "mov rax, qword ptr [r13 + rax*8 + 0x110]",
+       "new_insn": "mov rax, qword ptr [r13 + rax*8 + 0x110]"
+      },
+      {
+       "old": "0x97a34f",
+       "new": "0x98becf",
+       "old_insn": "mov rax, qword ptr [r13 + rax*8 + 0x110]",
+       "new_insn": "mov rax, qword ptr [r13 + rax*8 + 0x110]"
+      }
+     ],
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 184,
+     "text": "local ai=lookup(api,s,read(api,s,manager+0xf8,20),id,64)"
+    },
+    {
+     "file": "src/vault_data.lua",
+     "line": 186,
+     "text": "local n=u32(read(api,s,manager+0x6c,4),0)"
+    },
+    {
+     "file": "src/vault_data.lua",
+     "line": 188,
+     "text": "assert(read(api,s,pointer(api,read(api,s,manager+0x110+ai*8,8,true)),24,true)==entity,'Avatar registry mismatch')"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 188,
+     "text": "local ai=light_lookup(api,manager+0xf8,id,64)"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 190,
+     "text": "assert(ai<word(light_read(api,manager+0x6c,4,VAULT),0) and ai<8,'Unsupported avatar index')"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 191,
+     "text": "found_registry=light_pointer(light_read(api,manager+0x110+ai*8,8,OWNED),0)"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 254,
+     "text": "if not holds(light_read(api,kept_manager+0x110+kept_ai*8,8,OWNED),0,kept_registry) then return false end"
+    }
+   ],
+   "live_check": "L4"
+  },
+  {
+   "id": "avatars.scheduler",
+   "name": "avatars.scheduler",
+   "file": "src/vault_data.lua",
+   "line": 238,
+   "kind": "avatar manager +0x28: query scheduler pointer (records of 128 bytes, jobs at +0x40000)",
+   "old": "+0x28",
+   "new": "+0x28",
+   "changed": false,
+   "method": "aligned AV operands; the vault producer 0xa9be10 (identical in the new build) loads [manager+0x28] before calling the submit routine",
+   "witnesses": [
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "AV",
+     "old": "0x28",
+     "new": "0x28",
+     "agreeing": 3,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0xa9e48e",
+       "new": "0xab9f6e",
+       "old_insn": "mov r14, qword ptr [rax + 0x28]",
+       "new_insn": "mov r14, qword ptr [rax + 0x28]"
+      },
+      {
+       "old": "0xa9e68c",
+       "new": "0xaba16c",
+       "old_insn": "mov rbp, qword ptr [rax + 0x28]",
+       "new_insn": "mov rbp, qword ptr [rax + 0x28]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "scheduler job dispatch (old 0x175b9c0, new 0x15cfab0): count at +0x40000, 8 jobs of 12 bytes, state at +0x4000c+12j, start/finish at -8/-4 from it",
+     "old": [
+      "mov r11d, dword ptr [rcx + 0x40000]",
+      "lea rbx, [rcx + 0x4000c]",
+      "shr r11d, 3",
+      "mov r8, rcx",
+      "inc r11d",
+      "mov rax, rbx",
+      "xor ebp, ebp",
+      "mov edx, 8",
+      "mov r9d, ebp",
+      "nop ",
+      "mov dword ptr [rax], 1",
+      "lea rax, [rax + 0xc]",
+      "sub rdx, 1",
+      "jne 0x175ba10"
+     ],
+     "new": [
+      "mov ebx, dword ptr [rcx + 0x40000]",
+      "lea r11, [rcx + 0x4000c]",
+      "shr ebx, 3",
+      "mov r8, rcx",
+      "inc ebx",
+      "mov rax, r11",
+      "xor ebp, ebp",
+      "mov edx, 8",
+      "mov r9d, ebp",
+      "nop dword ptr [rax + rax]",
+      "mov dword ptr [rax], 1",
+      "lea rax, [rax + 0xc]",
+      "sub rdx, 1",
+      "jne 0x15cfb00"
+     ],
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 238,
+     "text": "local scheduler=pointer(api,read(api,s,manager+0x28,8,true))"
+    },
+    {
+     "file": "src/vault_data.lua",
+     "line": 239,
+     "text": "local jobs=read(api,s,scheduler+0x40000,100,true)"
+    }
+   ],
+   "live_check": "L6"
+  },
+  {
+   "id": "avatars.input",
+   "name": "avatars.input",
+   "file": "src/vault_data.lua",
+   "line": 199,
+   "kind": "avatar input: base +0x150, per-avatar stride 0xA7AEC, action slots +0x1B68 (32 bytes each), climb action 14; motion direction at +0x150+171698*4",
+   "old": "0x150+ai*0xa7aec+0x1b68+14*32",
+   "new": "unchanged",
+   "changed": false,
+   "method": "aligned operand votes for the stride, the slot base and the direction field; action id witnessed in the vault driver and the approach detector",
+   "witnesses": [
+    {
+     "kind": "aligned instruction operand votes (field_map.py)",
+     "what": "input stride",
+     "old": "0xa7aec",
+     "new": "0xa7aec",
+     "old_sites": 113,
+     "functions": 25,
+     "votes": {
+      "0xa7aec": 38
+     },
+     "examples": [
+      {
+       "old": "0x53f294",
+       "new": "0x5480c4",
+       "old_function": "0x53f250",
+       "new_function": "0x548080",
+       "ratio": 1.0,
+       "old_insn": "imul rax, rdi, 0xa7aec",
+       "new_insn": "imul rax, rdi, 0xa7aec"
+      },
+      {
+       "old": "0x53f29d",
+       "new": "0x5480cd",
+       "old_function": "0x53f250",
+       "new_function": "0x548080",
+       "ratio": 1.0,
+       "old_insn": "mov r8d, 0xa7aec",
+       "new_insn": "mov r8d, 0xa7aec"
+      },
+      {
+       "old": "0x53f409",
+       "new": "0x548239",
+       "old_function": "0x53f3a0",
+       "new_function": "0x5481d0",
+       "ratio": 0.994,
+       "old_insn": "imul rax, rbx, 0xa7aec",
+       "new_insn": "imul rax, rbx, 0xa7aec"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned instruction operand votes (field_map.py)",
+     "what": "slot base",
+     "old": "0x1cb8",
+     "new": "0x1cb8",
+     "old_sites": 30,
+     "functions": 25,
+     "votes": {
+      "0x1cb8": 19,
+      "0x1ce0": 3
+     },
+     "examples": [
+      {
+       "old": "0x66ca76",
+       "new": "0x6764e5",
+       "old_function": "0x66c920",
+       "new_function": "0x67638f",
+       "ratio": 0.845,
+       "old_insn": "mov eax, dword ptr [rsi + 0x1cb8]",
+       "new_insn": "mov eax, dword ptr [rsi + 0x1ce0]"
+      },
+      {
+       "old": "0xa435e8",
+       "new": "0xa5ddf8",
+       "old_function": "0xa433f0",
+       "new_function": "0xa5dc00",
+       "ratio": 0.997,
+       "old_insn": "cmp byte ptr [r9 + r15 + 0x1cb8], r14b",
+       "new_insn": "cmp byte ptr [r9 + r15 + 0x1cb8], r14b"
+      },
+      {
+       "old": "0xa46443",
+       "new": "0xa60c53",
+       "old_function": "0xa4642d",
+       "new_function": "0xa60c3d",
+       "ratio": 1.0,
+       "old_insn": "cmp byte ptr [r9 + rbx + 0x1cb8], 0",
+       "new_insn": "cmp byte ptr [r9 + rbx + 0x1cb8], 0"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned instruction operand votes (field_map.py)",
+     "what": "motion direction",
+     "old": "0xa7c18",
+     "new": "0xa7c18",
+     "old_sites": 52,
+     "functions": 25,
+     "votes": {
+      "0xa7c18": 31
+     },
+     "examples": [
+      {
+       "old": "0x821170",
+       "new": "0x82e180",
+       "old_function": "0x821150",
+       "new_function": "0x82e160",
+       "ratio": 1.0,
+       "old_insn": "movss xmm0, dword ptr [r12 + rbp + 0xa7c18]",
+       "new_insn": "movss xmm0, dword ptr [r12 + rbp + 0xa7c18]"
+      },
+      {
+       "old": "0x8211b3",
+       "new": "0x82e1c3",
+       "old_function": "0x821150",
+       "new_function": "0x82e160",
+       "ratio": 1.0,
+       "old_insn": "movsd xmm0, qword ptr [r12 + rbp + 0xa7c18]",
+       "new_insn": "movsd xmm0, qword ptr [r12 + rbp + 0xa7c18]"
+      },
+      {
+       "old": "0x82c200",
+       "new": "0x839090",
+       "old_function": "0x82a01a",
+       "new_function": "0x837007",
+       "ratio": 0.947,
+       "old_insn": "movss xmm6, dword ptr [rax + r13 + 0xa7c18]",
+       "new_insn": "movss xmm6, dword ptr [rax + r13 + 0xa7c18]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "avatar action id 14 (resolver 0x585b80 kind 2 returns the high word = input slot) in the vault driver 0xa9a0c0, the approach detector 0xa9c3e0 and 0xa73ad0, unchanged; the slot array (+0x150 base, +0x1b68, stride 32) read as [slot*32 + reg + 0x1cb8]",
+     "sites": [
+      {
+       "old": "0xa9af2c",
+       "new": "0xab6a0c",
+       "old_insn": "movabs rcx, 0xe00000002",
+       "new_insn": "movabs rcx, 0xe00000002"
+      },
+      {
+       "old": "0xa9cb84",
+       "new": "0xab8664",
+       "old_insn": "movabs rcx, 0xe00000002",
+       "new_insn": "movabs rcx, 0xe00000002"
+      },
+      {
+       "old": "0xa73db5",
+       "new": "0xa8f7b5",
+       "old_insn": "movabs rcx, 0xe00000002",
+       "new_insn": "movabs rcx, 0xe00000002"
+      }
+     ],
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 199,
+     "text": "s.input_address=manager+0x150+ai*0xa7aec+0x1b68+14*32"
+    },
+    {
+     "file": "src/vault_data.lua",
+     "line": 394,
+     "text": "direction=normalize(vector(read(api,s,manager+0x150+ai*0xa7aec+171698*4,12),0))"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 266,
+     "text": "local function input_address(manager,ai) return manager+0x150+ai*0xa7aec+0x1b68+14*32 end"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 375,
+     "text": "s.manual=read(api,s,manager+0x150+ai*0xa7aec+0x1b68+14*32,1,true):byte()~=0"
+    }
+   ],
+   "live_check": "L4"
+  },
+  {
+   "id": "avatars.stride",
+   "name": "avatars.stride",
+   "file": "src/vault_data.lua",
+   "line": 223,
+   "kind": "avatar manager per-avatar block stride (controller, direction state, flags)",
+   "old": "0x1238",
+   "new": "0x1240",
+   "changed": true,
+   "method": "aligned operand votes across 25 functions, incl. the approach detector, the driver eligibility code and the override routine",
+   "witnesses": [
+    {
+     "kind": "aligned instruction operand votes (field_map.py)",
+     "what": "per-avatar stride",
+     "old": "0x1238",
+     "new": "0x1240",
+     "old_sites": 695,
+     "functions": 25,
+     "votes": {
+      "0x1240": 25
+     },
+     "examples": [
+      {
+       "old": "0x53f2ab",
+       "new": "0x5480db",
+       "old_function": "0x53f250",
+       "new_function": "0x548080",
+       "ratio": 1.0,
+       "old_insn": "imul rax, rdi, 0x1238",
+       "new_insn": "imul rax, rdi, 0x1240"
+      },
+      {
+       "old": "0x53f2be",
+       "new": "0x5480ee",
+       "old_function": "0x53f250",
+       "new_function": "0x548080",
+       "ratio": 1.0,
+       "old_insn": "mov r8d, 0x1238",
+       "new_insn": "mov r8d, 0x1240"
+      },
+      {
+       "old": "0x53f420",
+       "new": "0x548250",
+       "old_function": "0x53f3a0",
+       "new_function": "0x5481d0",
+       "ratio": 0.994,
+       "old_insn": "imul rax, rbx, 0x1238",
+       "new_insn": "imul rax, rbx, 0x1240"
+      }
+     ],
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 223,
+     "text": "s.flags_address=manager+ai*0x1238+0x53e880"
+    },
+    {
+     "file": "src/vault_data.lua",
+     "line": 393,
+     "text": "assert(u32(read(api,s,manager+ai*0x1238+0x53e15c,4),0)==id,'Direction state identity mismatch')"
+    },
+    {
+     "file": "src/vault_data.lua",
+     "line": 433,
+     "text": "s.controller=manager+0x53e1b8+ai*0x1238"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 376,
+     "text": "local flags=read(api,s,manager+0x53e880+ai*0x1238,24,true)"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 400,
+     "text": "IDLE.vault_phase=api_address(found_manager+0x53e1b8+found_ai*0x1238+4)"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 418,
+     "text": "local vault_phase=api_address(found_manager+0x53e1b8+found_ai*0x1238+4)"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 429,
+     "text": "assert(u(read(api,s,manager+0x53e1b8+ai*0x1238+0x2ac,4,true))==id,'Vault identity mismatch')"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 430,
+     "text": "local direction=manager+0x53e134+ai*0x1238"
+    }
+   ],
+   "live_check": "L4"
+  },
+  {
+   "id": "avatars.block_layout",
+   "name": "avatars.block_layout",
+   "file": "src/vault_data.lua",
+   "line": 393,
+   "kind": "per-avatar block: direction state 0x53E134 (+8 speed cap, +0x28 id = 0x53E15C), vault controller 0x53E1B8 (0x2B0 bytes: +4 phase, +8 ten query ids, +0x30 ten 44-byte hits, +0x1E8.. geometry, +0x215/+0x216 flags, +0x2AC id) unchanged; 8 bytes inserted between 0x53E83C and 0x53E848",
+   "old": "0x53e134,0x53e1b8",
+   "new": "unchanged",
+   "changed": false,
+   "method": "avatar-block displacement scan of every old field in [0x53E100, 0x53F400); the driver 0xa9a0c0 and detector 0xa9c3e0 align 801/801 and 881/881 with no controller operand change; the speed-cap setter 0x11a3b90/0x1034330 still stores [ai*0x1240 + 0x53E13C]",
+   "witnesses": [
+    {
+     "kind": "avatar-block displacement scan (evidence/avatar-block-scan.jsonl)",
+     "old": "0x53e134",
+     "new": "0x53e134",
+     "votes": {
+      "0x53e134": 4
+     },
+     "functions": 4,
+     "ok": true
+    },
+    {
+     "kind": "avatar-block displacement scan (evidence/avatar-block-scan.jsonl)",
+     "old": "0x53e1b8",
+     "new": "0x53e1b8",
+     "votes": {
+      "0x53e1b8": 2
+     },
+     "functions": 3,
+     "ok": true
+    },
+    {
+     "kind": "avatar-block displacement scan (evidence/avatar-block-scan.jsonl)",
+     "old": "0x53e458",
+     "new": "0x53e458",
+     "votes": {
+      "0x53e458": 1
+     },
+     "functions": 1,
+     "ok": true
+    },
+    {
+     "kind": "avatar-block displacement scan (evidence/avatar-block-scan.jsonl)",
+     "old": "0x53e468",
+     "new": "0x53e468",
+     "votes": {
+      "0x53e468": 3
+     },
+     "functions": 3,
+     "ok": true
+    },
+    {
+     "kind": "avatar-block layout: all scanned fields",
+     "unchanged_at_or_below_0x53e83c": 57,
+     "moved_plus_8_from_0x53e848": 70,
+     "exceptions": [],
+     "ok": true
+    },
+    {
+     "kind": "speed cap setter",
+     "old": "0x11a3c64 movss dword ptr [rax + r10 + 0x53e13c], xmm1",
+     "new": "0x1034404 movss dword ptr [rax + r10 + 0x53e13c], xmm1 (after imul rcx, 0x1240)",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 393,
+     "text": "assert(u32(read(api,s,manager+ai*0x1238+0x53e15c,4),0)==id,'Direction state identity mismatch')"
+    },
+    {
+     "file": "src/vault_data.lua",
+     "line": 433,
+     "text": "s.controller=manager+0x53e1b8+ai*0x1238"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 400,
+     "text": "IDLE.vault_phase=api_address(found_manager+0x53e1b8+found_ai*0x1238+4)"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 418,
+     "text": "local vault_phase=api_address(found_manager+0x53e1b8+found_ai*0x1238+4)"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 429,
+     "text": "assert(u(read(api,s,manager+0x53e1b8+ai*0x1238+0x2ac,4,true))==id,'Vault identity mismatch')"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 430,
+     "text": "local direction=manager+0x53e134+ai*0x1238"
+    }
+   ],
+   "live_check": "L4"
+  },
+  {
+   "id": "avatars.flags",
+   "name": "avatars.flags",
+   "file": "src/vault_data.lua",
+   "line": 223,
+   "kind": "per-avatar movement flags (24 bytes; masks 0x404000/0x8000000/0x20084000/0x5181c/9, climbing 0x200 at +12, ground bits)",
+   "old": "0x53E880",
+   "new": "0x53E888",
+   "changed": true,
+   "method": "aligned operand votes; the eligibility routines 0xa8a520/0xa8a0a0 read the same three qwords at +0xf88/+0xf90/+0xf98 (were +0xf80..) and the driver/eligibility code has no immediate change",
+   "witnesses": [
+    {
+     "kind": "aligned instruction operand votes (field_map.py)",
+     "what": "flags",
+     "old": "0x53e880",
+     "new": "0x53e888",
+     "old_sites": 210,
+     "functions": 25,
+     "votes": {
+      "0x53e888": 24
+     },
+     "examples": [
+      {
+       "old": "0x604267",
+       "new": "0x60d3f7",
+       "old_function": "0x603f38",
+       "new_function": "0x60d0c8",
+       "ratio": 1.0,
+       "old_insn": "mov rax, qword ptr [rcx + rbx + 0x53e880]",
+       "new_insn": "mov rax, qword ptr [rcx + rbx + 0x53e888]"
+      },
+      {
+       "old": "0x6042ff",
+       "new": "0x60d48f",
+       "old_function": "0x603f38",
+       "new_function": "0x60d0c8",
+       "ratio": 1.0,
+       "old_insn": "mov r9, qword ptr [rax + rbx + 0x53e880]",
+       "new_insn": "mov r9, qword ptr [rax + rbx + 0x53e888]"
+      },
+      {
+       "old": "0x658173",
+       "new": "0x661a03",
+       "old_function": "0x657fd0",
+       "new_function": "0x661860",
+       "ratio": 0.996,
+       "old_insn": "lea rdx, [rdi + 0x53e880]",
+       "new_insn": "lea rdx, [rdi + 0x53e888]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "avatar-block displacement scan (evidence/avatar-block-scan.jsonl)",
+     "old": "0x53e888",
+     "new": "0x53e890",
+     "votes": {
+      "0x53e890": 1
+     },
+     "functions": 4,
+     "ok": true
+    },
+    {
+     "kind": "avatar-block displacement scan (evidence/avatar-block-scan.jsonl)",
+     "old": "0x53e890",
+     "new": "0x53e898",
+     "votes": {
+      "0x53e898": 1
+     },
+     "functions": 4,
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "value",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 223,
+     "text": "s.flags_address=manager+ai*0x1238+0x53e880"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 376,
+     "text": "local flags=read(api,s,manager+0x53e880+ai*0x1238,24,true)"
+    }
+   ],
+   "live_check": "L4"
+  },
+  {
+   "id": "avatars.override_map",
+   "name": "avatars.override_map",
+   "file": "src/vault_data.lua",
+   "line": 340,
+   "kind": "avatar settings override map header",
+   "old": "0x547C70",
+   "new": "0x547CB0",
+   "changed": true,
+   "method": "aligned operand votes (override routine and users)",
+   "witnesses": [
+    {
+     "kind": "aligned instruction operand votes (field_map.py)",
+     "what": "override map",
+     "old": "0x547c70",
+     "new": "0x547cb0",
+     "old_sites": 7,
+     "functions": 4,
+     "votes": {
+      "0x547cb0": 5
+     },
+     "examples": [
+      {
+       "old": "0x83a544",
+       "new": "0x8473b4",
+       "old_function": "0x83a530",
+       "new_function": "0x8473a0",
+       "ratio": 1.0,
+       "old_insn": "lea r14, [rcx + 0x547c70]",
+       "new_insn": "lea r14, [rcx + 0x547cb0]"
+      },
+      {
+       "old": "0x83b538",
+       "new": "0x8483b8",
+       "old_function": "0x83b52a",
+       "new_function": "0x8483aa",
+       "ratio": 1.0,
+       "old_insn": "mov r11, qword ptr [rbx + 0x547c70]",
+       "new_insn": "mov r11, qword ptr [rbx + 0x547cb0]"
+      },
+      {
+       "old": "0x83b599",
+       "new": "0x848419",
+       "old_function": "0x83b52a",
+       "new_function": "0x8483aa",
+       "ratio": 1.0,
+       "old_insn": "lea r15, [rbx + 0x547c70]",
+       "new_insn": "lea r15, [rbx + 0x547cb0]"
+      }
+     ],
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 340,
+     "text": "local override=lookup(api,s,read(api,s,manager+0x547c70,20),id,64)"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 338,
+     "text": "local oi=lookup(api,s,manager+0x547c70,s.key.id,64)"
+    }
+   ],
+   "live_check": "L5"
+  },
+  {
+   "id": "avatars.override_count",
+   "name": "avatars.override_count",
+   "file": "src/slope_assist.lua",
+   "line": 358,
+   "kind": "avatar settings override count (capacity 8)",
+   "old": "0x547D20",
+   "new": "0x547D60",
+   "changed": true,
+   "method": "aligned operand votes",
+   "witnesses": [
+    {
+     "kind": "aligned instruction operand votes (field_map.py)",
+     "what": "override count",
+     "old": "0x547d20",
+     "new": "0x547d60",
+     "old_sites": 4,
+     "functions": 2,
+     "votes": {
+      "0x547d60": 4
+     },
+     "examples": [
+      {
+       "old": "0x83b587",
+       "new": "0x848407",
+       "old_function": "0x83b52a",
+       "new_function": "0x8483aa",
+       "ratio": 1.0,
+       "old_insn": "mov ebp, dword ptr [rbx + 0x547d20]",
+       "new_insn": "mov ebp, dword ptr [rbx + 0x547d60]"
+      },
+      {
+       "old": "0x83b5a3",
+       "new": "0x848423",
+       "old_function": "0x83b52a",
+       "new_function": "0x8483aa",
+       "ratio": 1.0,
+       "old_insn": "mov dword ptr [rbx + 0x547d20], ebp",
+       "new_insn": "mov dword ptr [rbx + 0x547d60], ebp"
+      },
+      {
+       "old": "0x83c5c1",
+       "new": "0x849441",
+       "old_function": "0x83c420",
+       "new_function": "0x8492a0",
+       "ratio": 1.0,
+       "old_insn": "mov edi, dword ptr [rbp + 0x547d20]",
+       "new_insn": "mov edi, dword ptr [rbp + 0x547d60]"
+      }
+     ],
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "value",
+   "sites": [
+    {
+     "file": "src/slope_assist.lua",
+     "line": 358,
+     "text": "s.override_count=u(read(api,s,s.key.manager+0x547d20,4,true))"
+    }
+   ],
+   "live_check": "L5"
+  },
+  {
+   "id": "avatars.override_records",
+   "name": "avatars.override_records",
+   "file": "src/vault_data.lua",
+   "line": 343,
+   "kind": "avatar settings override records (852 bytes each)",
+   "old": "0x547D24",
+   "new": "0x547D64",
+   "changed": true,
+   "method": "aligned operand votes; record size 0x354 unchanged",
+   "witnesses": [
+    {
+     "kind": "aligned instruction operand votes (field_map.py)",
+     "what": "override records",
+     "old": "0x547d24",
+     "new": "0x547d64",
+     "old_sites": 7,
+     "functions": 6,
+     "votes": {
+      "0x547d64": 6
+     },
+     "examples": [
+      {
+       "old": "0x508e69",
+       "new": "0x511429",
+       "old_function": "0x508e5a",
+       "new_function": "0x51141a",
+       "ratio": 1.0,
+       "old_insn": "lea rax, [r11 + 0x547d24]",
+       "new_insn": "lea rax, [r11 + 0x547d64]"
+      },
+      {
+       "old": "0x83a580",
+       "new": "0x8473f0",
+       "old_function": "0x83a530",
+       "new_function": "0x8473a0",
+       "ratio": 1.0,
+       "old_insn": "lea r9, [rdi + 0x547d24]",
+       "new_insn": "lea r9, [rdi + 0x547d64]"
+      },
+      {
+       "old": "0x83a58f",
+       "new": "0x8473ff",
+       "old_function": "0x83a587",
+       "new_function": "0x8473f7",
+       "ratio": 1.0,
+       "old_insn": "lea rcx, [rdi + 0x547d24]",
+       "new_insn": "lea rcx, [rdi + 0x547d64]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned instruction operand votes (field_map.py)",
+     "what": "record size",
+     "old": "0x354",
+     "new": "0x354",
+     "old_sites": 116,
+     "functions": 25,
+     "votes": {
+      "0x354": 18,
+      "0x374": 1
+     },
+     "examples": [
+      {
+       "old": "0x508e62",
+       "new": "0x511422",
+       "old_function": "0x508e5a",
+       "new_function": "0x51141a",
+       "ratio": 1.0,
+       "old_insn": "imul rcx, rax, 0x354",
+       "new_insn": "imul rcx, rax, 0x354"
+      },
+      {
+       "old": "0x5757b1",
+       "new": "0x57e791",
+       "old_function": "0x574280",
+       "new_function": "0x57d260",
+       "ratio": 0.958,
+       "old_insn": "imul rcx, rax, 0x354",
+       "new_insn": "imul rcx, rax, 0x354"
+      },
+      {
+       "old": "0x5758d9",
+       "new": "0x57e8b9",
+       "old_function": "0x574280",
+       "new_function": "0x57d260",
+       "ratio": 0.958,
+       "old_insn": "imul rcx, rbx, 0x354",
+       "new_insn": "imul rcx, rbx, 0x354"
+      }
+     ],
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 343,
+     "text": "return read(api,s,manager+0x547d24+override*0x354,852)"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 341,
+     "text": "local base=manager+0x547d24+oi*852"
+    }
+   ],
+   "live_check": "L5"
+  },
+  {
+   "id": "settings.fields",
+   "name": "settings.fields",
+   "file": "src/vault_data.lua",
+   "line": 358,
+   "kind": "AvatarComponent settings record fields: +12 walk speed, +0x98 slide entry / surface angle, +0xAC slide exit, +0x104/+0x108 vault heights (ground/air), +0x10C ground reach",
+   "old": "unchanged",
+   "new": "unchanged",
+   "changed": false,
+   "method": "the approach detector, the driver and the eligibility code read +0x98/+0x104/+0x108 from the same register with identical displacements (aligned 1.0)",
+   "witnesses": [
+    {
+     "kind": "function pair",
+     "name": "approach detector",
+     "old": "0xa9c3e0",
+     "new": "0xab7ec0",
+     "start_window": {
+      "new": "0xab7ec0",
+      "window_bytes": 160
+     },
+     "inner_windows_mapped": 9,
+     "inner_windows_consistent": true,
+     "old_insns": 881,
+     "new_insns": 881,
+     "aligned": 881,
+     "align_ratio": 1.0,
+     "operand_changes": [
+      "imul rcx, r8, 0x1238 -> imul rcx, r8, 0x1240",
+      "mov r10, qword ptr [r12 + r15 + 0x53e888] -> mov r10, qword ptr [r12 + r15 + 0x53e890]",
+      "mov r9, qword ptr [r12 + r15 + 0x53e880] -> mov r9, qword ptr [r12 + r15 + 0x53e888]",
+      "mov r11, qword ptr [r12 + r15 + 0x53e890] -> mov r11, qword ptr [r12 + r15 + 0x53e898]",
+      "imul rax, rcx, 0x1238 -> imul rax, rcx, 0x1240",
+      "test byte ptr [rax + r13 + 0x53e890], 0xc -> test byte ptr [rax + r13 + 0x53e898], 0xc",
+      "mov r8, qword ptr [rax + r13 + 0x53e888] -> mov r8, qword ptr [rax + r13 + 0x53e890]",
+      "mov rdx, qword ptr [rax + r13 + 0x53e880] -> mov rdx, qword ptr [rax + r13 + 0x53e888]",
+      "mov ecx, dword ptr [rcx + 0xac] -> mov ecx, dword ptr [rcx + 0xb4]"
+     ],
+     "operand_change_count": 9,
+     "direct_callers_old_new": [
+      1,
+      1
+     ],
+     "pdata_begin_new": "0xab7ec0",
+     "unwind_codes_equal_shifted_by_entry_padding": true,
+     "entry_padding_bytes": 0,
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "value",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 358,
+     "text": "local angle=number(settings,0x98)"
+    },
+    {
+     "file": "src/vault_data.lua",
+     "line": 376,
+     "text": "s.max_height=number(settings,ground and 0x104 or 0x108)"
+    },
+    {
+     "file": "src/vault_data.lua",
+     "line": 380,
+     "text": "s.ground_reach=number(settings,0x10c)"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 335,
+     "text": "local SETTINGS={walk=0,enter=152-12,exit=172-12,height=260-12}"
+    }
+   ],
+   "live_check": "L5"
+  },
+  {
+   "id": "movement.fields",
+   "name": "movement.fields",
+   "file": "src/vault_data.lua",
+   "line": 366,
+   "kind": "movement manager: map +0x48A0, move records +0x48C8 (132 bytes), mover records +0x48D0 (164 bytes; +76 name, +88 handle)",
+   "old": "unchanged",
+   "new": "unchanged",
+   "changed": false,
+   "method": "aligned MOVE-derived operands and stride immediates in the movement functions",
+   "witnesses": [
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "MOVE",
+     "old": "0x48a0",
+     "new": "0x48a0",
+     "agreeing": 83,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x6ff1e8",
+       "new": "0x70a338",
+       "old_insn": "mov r11, qword ptr [r13 + 0x48a0]",
+       "new_insn": "mov r11, qword ptr [r13 + 0x48a0]"
+      },
+      {
+       "old": "0x6ff321",
+       "new": "0x70a471",
+       "old_insn": "mov r10, qword ptr [r13 + 0x48a0]",
+       "new_insn": "mov r10, qword ptr [r13 + 0x48a0]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "MOVE",
+     "old": "0x48c8",
+     "new": "0x48c8",
+     "agreeing": 15,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0xa675dd",
+       "new": "0xa82fbd",
+       "old_insn": "mov rax, qword ptr [r10 + 0x48c8]",
+       "new_insn": "mov rax, qword ptr [r10 + 0x48c8]"
+      },
+      {
+       "old": "0x88d834",
+       "new": "0x89af14",
+       "old_insn": "mov rax, qword ptr [r9 + 0x48c8]",
+       "new_insn": "mov rax, qword ptr [r9 + 0x48c8]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "MOVE",
+     "old": "0x48d0",
+     "new": "0x48d0",
+     "agreeing": 48,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x7d4764",
+       "new": "0x7e0764",
+       "old_insn": "mov rax, qword ptr [r8 + 0x48d0]",
+       "new_insn": "mov rax, qword ptr [r8 + 0x48d0]"
+      },
+      {
+       "old": "0xa9cf4d",
+       "new": "0xab8a2d",
+       "old_insn": "mov rax, qword ptr [r9 + 0x48d0]",
+       "new_insn": "mov rax, qword ptr [r9 + 0x48d0]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "MOVE->0x48d0",
+     "old": "0x4c",
+     "new": "0x4c",
+     "agreeing": 1,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x59bd8e",
+       "new": "0x5a49ae",
+       "old_insn": "mov dword ptr [rdx + rsi + 0x4c], ecx",
+       "new_insn": "mov dword ptr [rdx + rsi + 0x4c], ecx"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "MOVE->0x48d0",
+     "old": "0x58",
+     "new": "0x58",
+     "agreeing": 1,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x59bd7c",
+       "new": "0x5a499c",
+       "old_insn": "mov dword ptr [rcx + rsi + 0x58], 0xffffffff",
+       "new_insn": "mov dword ptr [rcx + rsi + 0x58], 0xffffffff"
+      }
+     ],
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 366,
+     "text": "local mi=lookup(api,s,read(api,s,movement+0x48a0,20),id,1048576)"
+    },
+    {
+     "file": "src/vault_data.lua",
+     "line": 368,
+     "text": "local move=read(api,s,pointer(api,read(api,s,movement+0x48c8,8))+mi*132,132)"
+    },
+    {
+     "file": "src/vault_data.lua",
+     "line": 369,
+     "text": "local mover=read(api,s,pointer(api,read(api,s,movement+0x48d0,8))+mi*164,164)"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 295,
+     "text": "local mi=lookup(api,s,mm+0x48a0,id,1048576)"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 297,
+     "text": "local move=read(api,s,ptr(api,read(api,s,mm+0x48c8,8,true))+mi*132,132)"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 298,
+     "text": "local mover_address=ptr(api,read(api,s,mm+0x48d0,8,true))+mi*164"
+    }
+   ],
+   "live_check": "L7"
+  },
+  {
+   "id": "camera.forward",
+   "name": "camera.forward",
+   "file": "src/vault_data.lua",
+   "line": 388,
+   "kind": "camera +0x1c view forward",
+   "old": "+0x1c",
+   "new": "+0x1c",
+   "changed": false,
+   "method": "aligned CAM operands",
+   "witnesses": [
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "CAM",
+     "old": "0x1c",
+     "new": "0x1c",
+     "agreeing": 13,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x827e91",
+       "new": "0x834e81",
+       "old_insn": "movsd xmm0, qword ptr [r13 + 0x1c]",
+       "new_insn": "movsd xmm0, qword ptr [r13 + 0x1c]"
+      },
+      {
+       "old": "0x828036",
+       "new": "0x835026",
+       "old_insn": "movsd xmm6, qword ptr [r13 + 0x1c]",
+       "new_insn": "movsd xmm6, qword ptr [r13 + 0x1c]"
+      }
+     ],
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "value",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 388,
+     "text": "local camera=vector(read(api,s,global(api,s,game,0x346d560)+0x1c,12),0)"
+    }
+   ],
+   "live_check": "L1"
+  },
+  {
+   "id": "query.unit",
+   "name": "query.unit",
+   "file": "src/vault_data.lua",
+   "line": 303,
+   "kind": "scheduler query record: ignored unit (vault_data template/check; windows_api descriptor tail[12])",
+   "old": "0x70",
+   "new": "0x74",
+   "changed": true,
+   "method": "old/new submit and worker field stores and loads",
+   "witnesses": [
+    {
+     "kind": "query record layout: the scheduler submit routine (called by the vault query producer 0xa9be10/0xab78f0) and the scheduler worker that passes each record to the world query ([TWORLD table+0x80])",
+     "submit_old": "0x175bb40",
+     "submit_new": "0x15cfcc0",
+     "worker_old": "0x175b830 (loop at 0x175b840)",
+     "worker_new": "0x15cf930 (loop at 0x15cf940)",
+     "record_size": "128 (shl 7) both builds",
+     "old_stores": [
+      "mov dword ptr [rbx + 0x68], eax",
+      "mov eax, dword ptr [rsp + 0x158]",
+      "mov dword ptr [rbx + 0x6c], eax",
+      "xor eax, eax",
+      "mov dword ptr [rbx + 0x76], eax",
+      "mov eax, dword ptr [rsp + 0x148]",
+      "mov dword ptr [rbx + 0x70], eax",
+      "mov rax, qword ptr [rsp + 0x150]",
+      "mov byte ptr [rbx + 0x7c], bpl",
+      "mov rbp, qword ptr [r11 + 0x28]",
+      "mov word ptr [rbx + 0x74], si",
+      "mov rsi, qword ptr [r11 + 0x30]",
+      "mov qword ptr [rbx + 8], rax",
+      "mov byte ptr [rbx + 0x7a], r15b",
+      "mov byte ptr [rbx + 0x7b], r14b"
+     ],
+     "new_stores": [
+      "mov dword ptr [rbx + 0x68], eax",
+      "mov eax, dword ptr [rsp + 0x158]",
+      "mov dword ptr [rbx + 0x6c], eax",
+      "xor eax, eax",
+      "mov word ptr [rbx + 0x7a], ax",
+      "mov dword ptr [rbx + 0x70], eax",
+      "mov eax, dword ptr [rsp + 0x148]",
+      "mov dword ptr [rbx + 0x74], eax",
+      "mov rax, qword ptr [rsp + 0x150]",
+      "mov byte ptr [rbx + 0x7e], bpl",
+      "mov rbp, qword ptr [r11 + 0x28]",
+      "mov word ptr [rbx + 0x78], si",
+      "mov rsi, qword ptr [r11 + 0x30]",
+      "mov qword ptr [rbx + 8], rax",
+      "mov byte ptr [rbx + 0x7c], r15b",
+      "mov byte ptr [rbx + 0x7d], r14b"
+     ],
+     "old_worker": [
+      "mov eax, dword ptr [rbx + 0x6c]",
+      "mov ecx, dword ptr [rbx + 0x70]",
+      "test ecx, ecx",
+      "movzx r9d, byte ptr [rbx + 0x7c]",
+      "movzx r8d, byte ptr [rbx + 0x7b]",
+      "movzx edx, byte ptr [rbx + 0x7a]",
+      "mov dword ptr [rsp + 0x74], eax",
+      "mov eax, r15d",
+      "cmovne eax, ecx",
+      "mov ecx, r14d",
+      "mov dword ptr [rsp + 0x70], eax",
+      "mov rax, qword ptr [rip + 0x1bcaa4e]",
+      "mov r10, qword ptr [rax + 0x80]",
+      "movzx eax, word ptr [rbx + 0x74]",
+      "mov dword ptr [rsp + 0x38], eax",
+      "mov rax, qword ptr [rbx]",
+      "mov qword ptr [rsp + 0x30], rax",
+      "lea rax, [rsp + 0x40]",
+      "mov qword ptr [rsp + 0x28], rax",
+      "mov eax, dword ptr [rbx + 0x68]",
+      "mov dword ptr [rsp + 0x20], eax",
+      "call r10",
+      "mov ecx, 0xffff",
+      "cmp eax, ecx",
+      "cmovb cx, ax",
+      "mov word ptr [rbx + 0x78], cx",
+      "movzx ecx, word ptr [rbx + 0x74]",
+      "cmp eax, ecx",
+      "cmovb cx, ax",
+      "inc edi",
+      "mov word ptr [rbx + 0x76], cx"
+     ],
+     "new_worker": [
+      "mov eax, dword ptr [rbx + 0x6c]",
+      "mov ecx, dword ptr [rbx + 0x74]",
+      "test ecx, ecx",
+      "movzx r9d, byte ptr [rbx + 0x7e]",
+      "movzx r8d, byte ptr [rbx + 0x7d]",
+      "movzx edx, byte ptr [rbx + 0x7c]",
+      "mov dword ptr [rsp + 0x74], eax",
+      "mov eax, r15d",
+      "cmovne eax, ecx",
+      "mov ecx, r14d",
+      "mov dword ptr [rsp + 0x70], eax",
+      "mov rax, qword ptr [rip + 0x1711b0e]",
+      "mov r10, qword ptr [rax + 0x80]",
+      "movzx eax, word ptr [rbx + 0x78]",
+      "mov dword ptr [rsp + 0x38], eax",
+      "mov rax, qword ptr [rbx]",
+      "mov qword ptr [rsp + 0x30], rax",
+      "lea rax, [rsp + 0x40]",
+      "mov qword ptr [rsp + 0x28], rax",
+      "mov eax, dword ptr [rbx + 0x68]",
+      "mov dword ptr [rsp + 0x20], eax",
+      "call r10",
+      "movzx ecx, word ptr [rbx + 0x78]",
+      "cmp eax, ecx",
+      "mov dword ptr [rbx + 0x70], eax",
+      "cmovb cx, ax",
+      "inc edi",
+      "mov word ptr [rbx + 0x7a], cx"
+     ],
+     "layout_old": {
+      "0x68": "filter u32",
+      "0x6c": "options u32 (descriptor tail[13])",
+      "0x70": "ignored unit u32 (descriptor tail[12])",
+      "0x74": "capacity u16",
+      "0x76": "result count u16 (min(count, capacity))",
+      "0x78": "total u16",
+      "0x7a/0x7b/0x7c": "type bytes (2,1,5 for the vault queries)"
+     },
+     "layout_new": {
+      "0x68": "filter u32",
+      "0x6c": "options u32 (descriptor tail[13])",
+      "0x70": "total u32 (new field)",
+      "0x74": "ignored unit u32 (descriptor tail[12])",
+      "0x78": "capacity u16",
+      "0x7a": "result count u16 (min(count, capacity))",
+      "0x7c/0x7d/0x7e": "type bytes"
+     },
+     "unchanged": "+0 output pointer, +8 options qword, +0x10 matrix (64), +0x50 size (12), +0x5c target, +0x68 filter, +0x6c options; job table at +0x40000 (count) and 8 x 12-byte jobs from +0x40004",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "value",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 303,
+     "text": "ffi.cast('uint32_t *',template+0x70)[0]=u32(entity,12)"
+    },
+    {
+     "file": "src/vault_data.lua",
+     "line": 313,
+     "text": "assert(u32(record,0x68)==0x05a5271a and u32(record,0x70)==u32(entity,12), 'Query identity mismatch')"
+    },
+    {
+     "file": "src/windows_api.lua",
+     "line": 193,
+     "text": "tail[12]=ffi.cast('uint32_t *',copy+112)[0]"
+    }
+   ],
+   "live_check": "L6"
+  },
+  {
+   "id": "query.capacity",
+   "name": "query.capacity",
+   "file": "src/vault_data.lua",
+   "line": 304,
+   "kind": "scheduler query record: capacity u16",
+   "old": "0x74",
+   "new": "0x78",
+   "changed": true,
+   "method": "as query.unit",
+   "witnesses": [
+    {
+     "kind": "query record layout: the scheduler submit routine (called by the vault query producer 0xa9be10/0xab78f0) and the scheduler worker that passes each record to the world query ([TWORLD table+0x80])",
+     "submit_old": "0x175bb40",
+     "submit_new": "0x15cfcc0",
+     "worker_old": "0x175b830 (loop at 0x175b840)",
+     "worker_new": "0x15cf930 (loop at 0x15cf940)",
+     "record_size": "128 (shl 7) both builds",
+     "old_stores": [
+      "mov dword ptr [rbx + 0x68], eax",
+      "mov eax, dword ptr [rsp + 0x158]",
+      "mov dword ptr [rbx + 0x6c], eax",
+      "xor eax, eax",
+      "mov dword ptr [rbx + 0x76], eax",
+      "mov eax, dword ptr [rsp + 0x148]",
+      "mov dword ptr [rbx + 0x70], eax",
+      "mov rax, qword ptr [rsp + 0x150]",
+      "mov byte ptr [rbx + 0x7c], bpl",
+      "mov rbp, qword ptr [r11 + 0x28]",
+      "mov word ptr [rbx + 0x74], si",
+      "mov rsi, qword ptr [r11 + 0x30]",
+      "mov qword ptr [rbx + 8], rax",
+      "mov byte ptr [rbx + 0x7a], r15b",
+      "mov byte ptr [rbx + 0x7b], r14b"
+     ],
+     "new_stores": [
+      "mov dword ptr [rbx + 0x68], eax",
+      "mov eax, dword ptr [rsp + 0x158]",
+      "mov dword ptr [rbx + 0x6c], eax",
+      "xor eax, eax",
+      "mov word ptr [rbx + 0x7a], ax",
+      "mov dword ptr [rbx + 0x70], eax",
+      "mov eax, dword ptr [rsp + 0x148]",
+      "mov dword ptr [rbx + 0x74], eax",
+      "mov rax, qword ptr [rsp + 0x150]",
+      "mov byte ptr [rbx + 0x7e], bpl",
+      "mov rbp, qword ptr [r11 + 0x28]",
+      "mov word ptr [rbx + 0x78], si",
+      "mov rsi, qword ptr [r11 + 0x30]",
+      "mov qword ptr [rbx + 8], rax",
+      "mov byte ptr [rbx + 0x7c], r15b",
+      "mov byte ptr [rbx + 0x7d], r14b"
+     ],
+     "old_worker": [
+      "mov eax, dword ptr [rbx + 0x6c]",
+      "mov ecx, dword ptr [rbx + 0x70]",
+      "test ecx, ecx",
+      "movzx r9d, byte ptr [rbx + 0x7c]",
+      "movzx r8d, byte ptr [rbx + 0x7b]",
+      "movzx edx, byte ptr [rbx + 0x7a]",
+      "mov dword ptr [rsp + 0x74], eax",
+      "mov eax, r15d",
+      "cmovne eax, ecx",
+      "mov ecx, r14d",
+      "mov dword ptr [rsp + 0x70], eax",
+      "mov rax, qword ptr [rip + 0x1bcaa4e]",
+      "mov r10, qword ptr [rax + 0x80]",
+      "movzx eax, word ptr [rbx + 0x74]",
+      "mov dword ptr [rsp + 0x38], eax",
+      "mov rax, qword ptr [rbx]",
+      "mov qword ptr [rsp + 0x30], rax",
+      "lea rax, [rsp + 0x40]",
+      "mov qword ptr [rsp + 0x28], rax",
+      "mov eax, dword ptr [rbx + 0x68]",
+      "mov dword ptr [rsp + 0x20], eax",
+      "call r10",
+      "mov ecx, 0xffff",
+      "cmp eax, ecx",
+      "cmovb cx, ax",
+      "mov word ptr [rbx + 0x78], cx",
+      "movzx ecx, word ptr [rbx + 0x74]",
+      "cmp eax, ecx",
+      "cmovb cx, ax",
+      "inc edi",
+      "mov word ptr [rbx + 0x76], cx"
+     ],
+     "new_worker": [
+      "mov eax, dword ptr [rbx + 0x6c]",
+      "mov ecx, dword ptr [rbx + 0x74]",
+      "test ecx, ecx",
+      "movzx r9d, byte ptr [rbx + 0x7e]",
+      "movzx r8d, byte ptr [rbx + 0x7d]",
+      "movzx edx, byte ptr [rbx + 0x7c]",
+      "mov dword ptr [rsp + 0x74], eax",
+      "mov eax, r15d",
+      "cmovne eax, ecx",
+      "mov ecx, r14d",
+      "mov dword ptr [rsp + 0x70], eax",
+      "mov rax, qword ptr [rip + 0x1711b0e]",
+      "mov r10, qword ptr [rax + 0x80]",
+      "movzx eax, word ptr [rbx + 0x78]",
+      "mov dword ptr [rsp + 0x38], eax",
+      "mov rax, qword ptr [rbx]",
+      "mov qword ptr [rsp + 0x30], rax",
+      "lea rax, [rsp + 0x40]",
+      "mov qword ptr [rsp + 0x28], rax",
+      "mov eax, dword ptr [rbx + 0x68]",
+      "mov dword ptr [rsp + 0x20], eax",
+      "call r10",
+      "movzx ecx, word ptr [rbx + 0x78]",
+      "cmp eax, ecx",
+      "mov dword ptr [rbx + 0x70], eax",
+      "cmovb cx, ax",
+      "inc edi",
+      "mov word ptr [rbx + 0x7a], cx"
+     ],
+     "layout_old": {
+      "0x68": "filter u32",
+      "0x6c": "options u32 (descriptor tail[13])",
+      "0x70": "ignored unit u32 (descriptor tail[12])",
+      "0x74": "capacity u16",
+      "0x76": "result count u16 (min(count, capacity))",
+      "0x78": "total u16",
+      "0x7a/0x7b/0x7c": "type bytes (2,1,5 for the vault queries)"
+     },
+     "layout_new": {
+      "0x68": "filter u32",
+      "0x6c": "options u32 (descriptor tail[13])",
+      "0x70": "total u32 (new field)",
+      "0x74": "ignored unit u32 (descriptor tail[12])",
+      "0x78": "capacity u16",
+      "0x7a": "result count u16 (min(count, capacity))",
+      "0x7c/0x7d/0x7e": "type bytes"
+     },
+     "unchanged": "+0 output pointer, +8 options qword, +0x10 matrix (64), +0x50 size (12), +0x5c target, +0x68 filter, +0x6c options; job table at +0x40000 (count) and 8 x 12-byte jobs from +0x40004",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "value",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 304,
+     "text": "ffi.cast('uint16_t *',template+0x74)[0]=1"
+    },
+    {
+     "file": "src/vault_data.lua",
+     "line": 315,
+     "text": "assert(u16(record,0x74)==1 and u16(record,0x76)<=1,'Unsupported query capacity')"
+    }
+   ],
+   "live_check": "L6"
+  },
+  {
+   "id": "query.count",
+   "name": "query.count",
+   "file": "src/vault_data.lua",
+   "line": 315,
+   "kind": "scheduler query record: result count u16 (min(count, capacity))",
+   "old": "0x76",
+   "new": "0x7A",
+   "changed": true,
+   "method": "as query.unit",
+   "witnesses": [
+    {
+     "kind": "query record layout: the scheduler submit routine (called by the vault query producer 0xa9be10/0xab78f0) and the scheduler worker that passes each record to the world query ([TWORLD table+0x80])",
+     "submit_old": "0x175bb40",
+     "submit_new": "0x15cfcc0",
+     "worker_old": "0x175b830 (loop at 0x175b840)",
+     "worker_new": "0x15cf930 (loop at 0x15cf940)",
+     "record_size": "128 (shl 7) both builds",
+     "old_stores": [
+      "mov dword ptr [rbx + 0x68], eax",
+      "mov eax, dword ptr [rsp + 0x158]",
+      "mov dword ptr [rbx + 0x6c], eax",
+      "xor eax, eax",
+      "mov dword ptr [rbx + 0x76], eax",
+      "mov eax, dword ptr [rsp + 0x148]",
+      "mov dword ptr [rbx + 0x70], eax",
+      "mov rax, qword ptr [rsp + 0x150]",
+      "mov byte ptr [rbx + 0x7c], bpl",
+      "mov rbp, qword ptr [r11 + 0x28]",
+      "mov word ptr [rbx + 0x74], si",
+      "mov rsi, qword ptr [r11 + 0x30]",
+      "mov qword ptr [rbx + 8], rax",
+      "mov byte ptr [rbx + 0x7a], r15b",
+      "mov byte ptr [rbx + 0x7b], r14b"
+     ],
+     "new_stores": [
+      "mov dword ptr [rbx + 0x68], eax",
+      "mov eax, dword ptr [rsp + 0x158]",
+      "mov dword ptr [rbx + 0x6c], eax",
+      "xor eax, eax",
+      "mov word ptr [rbx + 0x7a], ax",
+      "mov dword ptr [rbx + 0x70], eax",
+      "mov eax, dword ptr [rsp + 0x148]",
+      "mov dword ptr [rbx + 0x74], eax",
+      "mov rax, qword ptr [rsp + 0x150]",
+      "mov byte ptr [rbx + 0x7e], bpl",
+      "mov rbp, qword ptr [r11 + 0x28]",
+      "mov word ptr [rbx + 0x78], si",
+      "mov rsi, qword ptr [r11 + 0x30]",
+      "mov qword ptr [rbx + 8], rax",
+      "mov byte ptr [rbx + 0x7c], r15b",
+      "mov byte ptr [rbx + 0x7d], r14b"
+     ],
+     "old_worker": [
+      "mov eax, dword ptr [rbx + 0x6c]",
+      "mov ecx, dword ptr [rbx + 0x70]",
+      "test ecx, ecx",
+      "movzx r9d, byte ptr [rbx + 0x7c]",
+      "movzx r8d, byte ptr [rbx + 0x7b]",
+      "movzx edx, byte ptr [rbx + 0x7a]",
+      "mov dword ptr [rsp + 0x74], eax",
+      "mov eax, r15d",
+      "cmovne eax, ecx",
+      "mov ecx, r14d",
+      "mov dword ptr [rsp + 0x70], eax",
+      "mov rax, qword ptr [rip + 0x1bcaa4e]",
+      "mov r10, qword ptr [rax + 0x80]",
+      "movzx eax, word ptr [rbx + 0x74]",
+      "mov dword ptr [rsp + 0x38], eax",
+      "mov rax, qword ptr [rbx]",
+      "mov qword ptr [rsp + 0x30], rax",
+      "lea rax, [rsp + 0x40]",
+      "mov qword ptr [rsp + 0x28], rax",
+      "mov eax, dword ptr [rbx + 0x68]",
+      "mov dword ptr [rsp + 0x20], eax",
+      "call r10",
+      "mov ecx, 0xffff",
+      "cmp eax, ecx",
+      "cmovb cx, ax",
+      "mov word ptr [rbx + 0x78], cx",
+      "movzx ecx, word ptr [rbx + 0x74]",
+      "cmp eax, ecx",
+      "cmovb cx, ax",
+      "inc edi",
+      "mov word ptr [rbx + 0x76], cx"
+     ],
+     "new_worker": [
+      "mov eax, dword ptr [rbx + 0x6c]",
+      "mov ecx, dword ptr [rbx + 0x74]",
+      "test ecx, ecx",
+      "movzx r9d, byte ptr [rbx + 0x7e]",
+      "movzx r8d, byte ptr [rbx + 0x7d]",
+      "movzx edx, byte ptr [rbx + 0x7c]",
+      "mov dword ptr [rsp + 0x74], eax",
+      "mov eax, r15d",
+      "cmovne eax, ecx",
+      "mov ecx, r14d",
+      "mov dword ptr [rsp + 0x70], eax",
+      "mov rax, qword ptr [rip + 0x1711b0e]",
+      "mov r10, qword ptr [rax + 0x80]",
+      "movzx eax, word ptr [rbx + 0x78]",
+      "mov dword ptr [rsp + 0x38], eax",
+      "mov rax, qword ptr [rbx]",
+      "mov qword ptr [rsp + 0x30], rax",
+      "lea rax, [rsp + 0x40]",
+      "mov qword ptr [rsp + 0x28], rax",
+      "mov eax, dword ptr [rbx + 0x68]",
+      "mov dword ptr [rsp + 0x20], eax",
+      "call r10",
+      "movzx ecx, word ptr [rbx + 0x78]",
+      "cmp eax, ecx",
+      "mov dword ptr [rbx + 0x70], eax",
+      "cmovb cx, ax",
+      "inc edi",
+      "mov word ptr [rbx + 0x7a], cx"
+     ],
+     "layout_old": {
+      "0x68": "filter u32",
+      "0x6c": "options u32 (descriptor tail[13])",
+      "0x70": "ignored unit u32 (descriptor tail[12])",
+      "0x74": "capacity u16",
+      "0x76": "result count u16 (min(count, capacity))",
+      "0x78": "total u16",
+      "0x7a/0x7b/0x7c": "type bytes (2,1,5 for the vault queries)"
+     },
+     "layout_new": {
+      "0x68": "filter u32",
+      "0x6c": "options u32 (descriptor tail[13])",
+      "0x70": "total u32 (new field)",
+      "0x74": "ignored unit u32 (descriptor tail[12])",
+      "0x78": "capacity u16",
+      "0x7a": "result count u16 (min(count, capacity))",
+      "0x7c/0x7d/0x7e": "type bytes"
+     },
+     "unchanged": "+0 output pointer, +8 options qword, +0x10 matrix (64), +0x50 size (12), +0x5c target, +0x68 filter, +0x6c options; job table at +0x40000 (count) and 8 x 12-byte jobs from +0x40004",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "value",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 315,
+     "text": "assert(u16(record,0x74)==1 and u16(record,0x76)<=1,'Unsupported query capacity')"
+    },
+    {
+     "file": "src/vault_data.lua",
+     "line": 320,
+     "text": "return record,u16(record,0x76)"
+    }
+   ],
+   "live_check": "L6"
+  },
+  {
+   "id": "query.type",
+   "name": "query.type",
+   "file": "src/vault_data.lua",
+   "line": 305,
+   "kind": "scheduler query record: type bytes (2,1,5); Lua byte() indices 0x7B/0x7C/0x7D -> 0x7D/0x7E/0x7F",
+   "old": "0x7a,0x7b,0x7c",
+   "new": "0x7c,0x7d,0x7e",
+   "changed": true,
+   "method": "as query.unit",
+   "witnesses": [
+    {
+     "kind": "query record layout: the scheduler submit routine (called by the vault query producer 0xa9be10/0xab78f0) and the scheduler worker that passes each record to the world query ([TWORLD table+0x80])",
+     "submit_old": "0x175bb40",
+     "submit_new": "0x15cfcc0",
+     "worker_old": "0x175b830 (loop at 0x175b840)",
+     "worker_new": "0x15cf930 (loop at 0x15cf940)",
+     "record_size": "128 (shl 7) both builds",
+     "old_stores": [
+      "mov dword ptr [rbx + 0x68], eax",
+      "mov eax, dword ptr [rsp + 0x158]",
+      "mov dword ptr [rbx + 0x6c], eax",
+      "xor eax, eax",
+      "mov dword ptr [rbx + 0x76], eax",
+      "mov eax, dword ptr [rsp + 0x148]",
+      "mov dword ptr [rbx + 0x70], eax",
+      "mov rax, qword ptr [rsp + 0x150]",
+      "mov byte ptr [rbx + 0x7c], bpl",
+      "mov rbp, qword ptr [r11 + 0x28]",
+      "mov word ptr [rbx + 0x74], si",
+      "mov rsi, qword ptr [r11 + 0x30]",
+      "mov qword ptr [rbx + 8], rax",
+      "mov byte ptr [rbx + 0x7a], r15b",
+      "mov byte ptr [rbx + 0x7b], r14b"
+     ],
+     "new_stores": [
+      "mov dword ptr [rbx + 0x68], eax",
+      "mov eax, dword ptr [rsp + 0x158]",
+      "mov dword ptr [rbx + 0x6c], eax",
+      "xor eax, eax",
+      "mov word ptr [rbx + 0x7a], ax",
+      "mov dword ptr [rbx + 0x70], eax",
+      "mov eax, dword ptr [rsp + 0x148]",
+      "mov dword ptr [rbx + 0x74], eax",
+      "mov rax, qword ptr [rsp + 0x150]",
+      "mov byte ptr [rbx + 0x7e], bpl",
+      "mov rbp, qword ptr [r11 + 0x28]",
+      "mov word ptr [rbx + 0x78], si",
+      "mov rsi, qword ptr [r11 + 0x30]",
+      "mov qword ptr [rbx + 8], rax",
+      "mov byte ptr [rbx + 0x7c], r15b",
+      "mov byte ptr [rbx + 0x7d], r14b"
+     ],
+     "old_worker": [
+      "mov eax, dword ptr [rbx + 0x6c]",
+      "mov ecx, dword ptr [rbx + 0x70]",
+      "test ecx, ecx",
+      "movzx r9d, byte ptr [rbx + 0x7c]",
+      "movzx r8d, byte ptr [rbx + 0x7b]",
+      "movzx edx, byte ptr [rbx + 0x7a]",
+      "mov dword ptr [rsp + 0x74], eax",
+      "mov eax, r15d",
+      "cmovne eax, ecx",
+      "mov ecx, r14d",
+      "mov dword ptr [rsp + 0x70], eax",
+      "mov rax, qword ptr [rip + 0x1bcaa4e]",
+      "mov r10, qword ptr [rax + 0x80]",
+      "movzx eax, word ptr [rbx + 0x74]",
+      "mov dword ptr [rsp + 0x38], eax",
+      "mov rax, qword ptr [rbx]",
+      "mov qword ptr [rsp + 0x30], rax",
+      "lea rax, [rsp + 0x40]",
+      "mov qword ptr [rsp + 0x28], rax",
+      "mov eax, dword ptr [rbx + 0x68]",
+      "mov dword ptr [rsp + 0x20], eax",
+      "call r10",
+      "mov ecx, 0xffff",
+      "cmp eax, ecx",
+      "cmovb cx, ax",
+      "mov word ptr [rbx + 0x78], cx",
+      "movzx ecx, word ptr [rbx + 0x74]",
+      "cmp eax, ecx",
+      "cmovb cx, ax",
+      "inc edi",
+      "mov word ptr [rbx + 0x76], cx"
+     ],
+     "new_worker": [
+      "mov eax, dword ptr [rbx + 0x6c]",
+      "mov ecx, dword ptr [rbx + 0x74]",
+      "test ecx, ecx",
+      "movzx r9d, byte ptr [rbx + 0x7e]",
+      "movzx r8d, byte ptr [rbx + 0x7d]",
+      "movzx edx, byte ptr [rbx + 0x7c]",
+      "mov dword ptr [rsp + 0x74], eax",
+      "mov eax, r15d",
+      "cmovne eax, ecx",
+      "mov ecx, r14d",
+      "mov dword ptr [rsp + 0x70], eax",
+      "mov rax, qword ptr [rip + 0x1711b0e]",
+      "mov r10, qword ptr [rax + 0x80]",
+      "movzx eax, word ptr [rbx + 0x78]",
+      "mov dword ptr [rsp + 0x38], eax",
+      "mov rax, qword ptr [rbx]",
+      "mov qword ptr [rsp + 0x30], rax",
+      "lea rax, [rsp + 0x40]",
+      "mov qword ptr [rsp + 0x28], rax",
+      "mov eax, dword ptr [rbx + 0x68]",
+      "mov dword ptr [rsp + 0x20], eax",
+      "call r10",
+      "movzx ecx, word ptr [rbx + 0x78]",
+      "cmp eax, ecx",
+      "mov dword ptr [rbx + 0x70], eax",
+      "cmovb cx, ax",
+      "inc edi",
+      "mov word ptr [rbx + 0x7a], cx"
+     ],
+     "layout_old": {
+      "0x68": "filter u32",
+      "0x6c": "options u32 (descriptor tail[13])",
+      "0x70": "ignored unit u32 (descriptor tail[12])",
+      "0x74": "capacity u16",
+      "0x76": "result count u16 (min(count, capacity))",
+      "0x78": "total u16",
+      "0x7a/0x7b/0x7c": "type bytes (2,1,5 for the vault queries)"
+     },
+     "layout_new": {
+      "0x68": "filter u32",
+      "0x6c": "options u32 (descriptor tail[13])",
+      "0x70": "total u32 (new field)",
+      "0x74": "ignored unit u32 (descriptor tail[12])",
+      "0x78": "capacity u16",
+      "0x7a": "result count u16 (min(count, capacity))",
+      "0x7c/0x7d/0x7e": "type bytes"
+     },
+     "unchanged": "+0 output pointer, +8 options qword, +0x10 matrix (64), +0x50 size (12), +0x5c target, +0x68 filter, +0x6c options; job table at +0x40000 (count) and 8 x 12-byte jobs from +0x40004",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "value",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 305,
+     "text": "template[0x7a],template[0x7b],template[0x7c]=2,1,5"
+    },
+    {
+     "file": "src/vault_data.lua",
+     "line": 314,
+     "text": "assert(record:byte(0x7b)==2 and record:byte(0x7c)==1 and record:byte(0x7d)==5,'Unsupported query type')"
+    }
+   ],
+   "live_check": "L6"
+  },
+  {
+   "id": "query.unchanged",
+   "name": "query.unchanged",
+   "file": "src/vault_data.lua",
+   "line": 302,
+   "kind": "scheduler query record: +0 output, +8 options, +0x10 matrix, +0x50 size, +0x5c target, +0x68 filter 0x05A5271A, +0x6c options, 128-byte records; job table",
+   "old": "unchanged",
+   "new": "unchanged",
+   "changed": false,
+   "method": "as query.unit; the vault producer 0xa9be10/0xab78f0 aligns 288/288 with no operand change (filter 0x05A5271A and type 2,1,5 included)",
+   "witnesses": [
+    {
+     "kind": "query record layout: the scheduler submit routine (called by the vault query producer 0xa9be10/0xab78f0) and the scheduler worker that passes each record to the world query ([TWORLD table+0x80])",
+     "submit_old": "0x175bb40",
+     "submit_new": "0x15cfcc0",
+     "worker_old": "0x175b830 (loop at 0x175b840)",
+     "worker_new": "0x15cf930 (loop at 0x15cf940)",
+     "record_size": "128 (shl 7) both builds",
+     "old_stores": [
+      "mov dword ptr [rbx + 0x68], eax",
+      "mov eax, dword ptr [rsp + 0x158]",
+      "mov dword ptr [rbx + 0x6c], eax",
+      "xor eax, eax",
+      "mov dword ptr [rbx + 0x76], eax",
+      "mov eax, dword ptr [rsp + 0x148]",
+      "mov dword ptr [rbx + 0x70], eax",
+      "mov rax, qword ptr [rsp + 0x150]",
+      "mov byte ptr [rbx + 0x7c], bpl",
+      "mov rbp, qword ptr [r11 + 0x28]",
+      "mov word ptr [rbx + 0x74], si",
+      "mov rsi, qword ptr [r11 + 0x30]",
+      "mov qword ptr [rbx + 8], rax",
+      "mov byte ptr [rbx + 0x7a], r15b",
+      "mov byte ptr [rbx + 0x7b], r14b"
+     ],
+     "new_stores": [
+      "mov dword ptr [rbx + 0x68], eax",
+      "mov eax, dword ptr [rsp + 0x158]",
+      "mov dword ptr [rbx + 0x6c], eax",
+      "xor eax, eax",
+      "mov word ptr [rbx + 0x7a], ax",
+      "mov dword ptr [rbx + 0x70], eax",
+      "mov eax, dword ptr [rsp + 0x148]",
+      "mov dword ptr [rbx + 0x74], eax",
+      "mov rax, qword ptr [rsp + 0x150]",
+      "mov byte ptr [rbx + 0x7e], bpl",
+      "mov rbp, qword ptr [r11 + 0x28]",
+      "mov word ptr [rbx + 0x78], si",
+      "mov rsi, qword ptr [r11 + 0x30]",
+      "mov qword ptr [rbx + 8], rax",
+      "mov byte ptr [rbx + 0x7c], r15b",
+      "mov byte ptr [rbx + 0x7d], r14b"
+     ],
+     "old_worker": [
+      "mov eax, dword ptr [rbx + 0x6c]",
+      "mov ecx, dword ptr [rbx + 0x70]",
+      "test ecx, ecx",
+      "movzx r9d, byte ptr [rbx + 0x7c]",
+      "movzx r8d, byte ptr [rbx + 0x7b]",
+      "movzx edx, byte ptr [rbx + 0x7a]",
+      "mov dword ptr [rsp + 0x74], eax",
+      "mov eax, r15d",
+      "cmovne eax, ecx",
+      "mov ecx, r14d",
+      "mov dword ptr [rsp + 0x70], eax",
+      "mov rax, qword ptr [rip + 0x1bcaa4e]",
+      "mov r10, qword ptr [rax + 0x80]",
+      "movzx eax, word ptr [rbx + 0x74]",
+      "mov dword ptr [rsp + 0x38], eax",
+      "mov rax, qword ptr [rbx]",
+      "mov qword ptr [rsp + 0x30], rax",
+      "lea rax, [rsp + 0x40]",
+      "mov qword ptr [rsp + 0x28], rax",
+      "mov eax, dword ptr [rbx + 0x68]",
+      "mov dword ptr [rsp + 0x20], eax",
+      "call r10",
+      "mov ecx, 0xffff",
+      "cmp eax, ecx",
+      "cmovb cx, ax",
+      "mov word ptr [rbx + 0x78], cx",
+      "movzx ecx, word ptr [rbx + 0x74]",
+      "cmp eax, ecx",
+      "cmovb cx, ax",
+      "inc edi",
+      "mov word ptr [rbx + 0x76], cx"
+     ],
+     "new_worker": [
+      "mov eax, dword ptr [rbx + 0x6c]",
+      "mov ecx, dword ptr [rbx + 0x74]",
+      "test ecx, ecx",
+      "movzx r9d, byte ptr [rbx + 0x7e]",
+      "movzx r8d, byte ptr [rbx + 0x7d]",
+      "movzx edx, byte ptr [rbx + 0x7c]",
+      "mov dword ptr [rsp + 0x74], eax",
+      "mov eax, r15d",
+      "cmovne eax, ecx",
+      "mov ecx, r14d",
+      "mov dword ptr [rsp + 0x70], eax",
+      "mov rax, qword ptr [rip + 0x1711b0e]",
+      "mov r10, qword ptr [rax + 0x80]",
+      "movzx eax, word ptr [rbx + 0x78]",
+      "mov dword ptr [rsp + 0x38], eax",
+      "mov rax, qword ptr [rbx]",
+      "mov qword ptr [rsp + 0x30], rax",
+      "lea rax, [rsp + 0x40]",
+      "mov qword ptr [rsp + 0x28], rax",
+      "mov eax, dword ptr [rbx + 0x68]",
+      "mov dword ptr [rsp + 0x20], eax",
+      "call r10",
+      "movzx ecx, word ptr [rbx + 0x78]",
+      "cmp eax, ecx",
+      "mov dword ptr [rbx + 0x70], eax",
+      "cmovb cx, ax",
+      "inc edi",
+      "mov word ptr [rbx + 0x7a], cx"
+     ],
+     "layout_old": {
+      "0x68": "filter u32",
+      "0x6c": "options u32 (descriptor tail[13])",
+      "0x70": "ignored unit u32 (descriptor tail[12])",
+      "0x74": "capacity u16",
+      "0x76": "result count u16 (min(count, capacity))",
+      "0x78": "total u16",
+      "0x7a/0x7b/0x7c": "type bytes (2,1,5 for the vault queries)"
+     },
+     "layout_new": {
+      "0x68": "filter u32",
+      "0x6c": "options u32 (descriptor tail[13])",
+      "0x70": "total u32 (new field)",
+      "0x74": "ignored unit u32 (descriptor tail[12])",
+      "0x78": "capacity u16",
+      "0x7a": "result count u16 (min(count, capacity))",
+      "0x7c/0x7d/0x7e": "type bytes"
+     },
+     "unchanged": "+0 output pointer, +8 options qword, +0x10 matrix (64), +0x50 size (12), +0x5c target, +0x68 filter, +0x6c options; job table at +0x40000 (count) and 8 x 12-byte jobs from +0x40004",
+     "ok": true
+    },
+    {
+     "kind": "function pair",
+     "name": "vault query producer",
+     "old": "0xa9be10",
+     "new": "0xab78f0",
+     "start_window": {
+      "new": "0xab78f0",
+      "window_bytes": 160
+     },
+     "inner_windows_mapped": 10,
+     "inner_windows_consistent": true,
+     "old_insns": 288,
+     "new_insns": 288,
+     "aligned": 288,
+     "align_ratio": 1.0,
+     "operand_changes": [],
+     "operand_change_count": 0,
+     "direct_callers_old_new": [
+      1,
+      1
+     ],
+     "pdata_begin_new": "0xab78f0",
+     "unwind_codes_equal_shifted_by_entry_padding": true,
+     "entry_padding_bytes": 0,
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "value",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 302,
+     "text": "ffi.cast('uint32_t *',template+0x68)[0]=0x05a5271a"
+    },
+    {
+     "file": "src/vault_data.lua",
+     "line": 313,
+     "text": "assert(u32(record,0x68)==0x05a5271a and u32(record,0x70)==u32(entity,12), 'Query identity mismatch')"
+    },
+    {
+     "file": "src/windows_api.lua",
+     "line": 195,
+     "text": "local count=tonumber(query(world_id(world),2,1,5,0x05a5271a,descriptor,out,1))"
+    }
+   ],
+   "live_check": "L6"
+  },
+  {
+   "id": "exe.handle_pools",
+   "name": "exe.handle_pools",
+   "file": "src/slope_assist.lua",
+   "line": 308,
+   "kind": "exe handle pools (handle >> 30 selects pool, stride 0x810)",
+   "old": "0x27C3298",
+   "new": "0x286A768",
+   "changed": true,
+   "method": "exact RIP windows of every old reference; identical decode in the mover lookup",
+   "witnesses": [
+    {
+     "kind": "exe RIP-relative references by exact windows",
+     "old": "0x27c3298",
+     "new": "0x286a768",
+     "old_sites": 6,
+     "agreeing": 6,
+     "rows": [
+      {
+       "old": "0x789b68",
+       "new": "0x810e68",
+       "new_target": "0x286a768"
+      },
+      {
+       "old": "0x7cbfd7",
+       "new": "0x8536b7",
+       "new_target": "0x286a768"
+      },
+      {
+       "old": "0x7cd5bf",
+       "new": "0x854c9f",
+       "new_target": "0x286a768"
+      },
+      {
+       "old": "0x7ce27a",
+       "new": "0x85595a",
+       "new_target": "0x286a768"
+      },
+      {
+       "old": "0x7cf6cd",
+       "new": "0x856dad",
+       "new_target": "0x286a768"
+      },
+      {
+       "old": "0x7cf8f5",
+       "new": "0x856fd5",
+       "new_target": "0x286a768"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "mover lookup 0x7ce220 / 0x855900: handle >> 30 selects a pool at pools + 0x810 * k; header +0 rows, +0x1c layout, +0x24 count, +0x28 index mask, +0x34 generation mask; record +0x10 definition",
+     "differing_bytes": 5,
+     "note": "only the call displacement and the RIP displacement differ",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "sites": [
+    {
+     "file": "src/slope_assist.lua",
+     "line": 308,
+     "text": "local pool=ptr(api,read(api,s,exe+0x27c3298+bit.rshift(handle,30)*0x810,8,true))"
+    }
+   ],
+   "live_check": "L8"
+  },
+  {
+   "id": "exe.controller_vtable",
+   "name": "exe.controller_vtable",
+   "file": "src/slope_assist.lua",
+   "line": 320,
+   "kind": "exe character controller vtable (guard before the slope write)",
+   "old": "0x16A16D8",
+   "new": "0x17430A0",
+   "changed": true,
+   "method": "exact RIP windows of every old reference (constructor, copy constructor, destructors); slot-by-slot method pairs",
+   "witnesses": [
+    {
+     "kind": "exe RIP-relative references by exact windows",
+     "old": "0x16a16d8",
+     "new": "0x17430a0",
+     "old_sites": 4,
+     "agreeing": 4,
+     "rows": [
+      {
+       "old": "0x7cdade",
+       "new": "0x8551be",
+       "new_target": "0x17430a0"
+      },
+      {
+       "old": "0x89ccc5",
+       "new": "0x924555",
+       "new_target": "0x17430a0"
+      },
+      {
+       "old": "0x89cd41",
+       "new": "0x9245d1",
+       "new_target": "0x17430a0"
+      },
+      {
+       "old": "0x89ce3c",
+       "new": "0x9246cc",
+       "new_target": "0x17430a0"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "character controller vtable: each of the first 7 old slots aligns with the new slot",
+     "slots": [
+      {
+       "slot": 0,
+       "old": "0x9aee20",
+       "new": "0xa07750",
+       "align_ratio": 0.708
+      },
+      {
+       "slot": 1,
+       "old": "0x89cd30",
+       "new": "0x9245c0",
+       "align_ratio": 0.927
+      },
+      {
+       "slot": 2,
+       "old": "0x99cb00",
+       "new": "0x9f5410",
+       "align_ratio": 0.704
+      },
+      {
+       "slot": 3,
+       "old": "0x89db00",
+       "new": "0x925390",
+       "align_ratio": 0.989
+      },
+      {
+       "slot": 4,
+       "old": "0xd6a090",
+       "new": "0xdc29c0",
+       "align_ratio": 0.901
+      },
+      {
+       "slot": 5,
+       "old": "0x89e3b0",
+       "new": "0x925c40",
+       "align_ratio": 0.988
+      },
+      {
+       "slot": 6,
+       "old": "0x89d9f0",
+       "new": "0x925280",
+       "align_ratio": 0.941
+      }
+     ],
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "value",
+   "sites": [
+    {
+     "file": "src/slope_assist.lua",
+     "line": 320,
+     "text": "assert(api.distance(ptr(api,read(api,s,object,8,true)),exe+0x16a16d8)==0,'Unsupported character controller')"
+    }
+   ],
+   "live_check": "L8"
+  },
+  {
+   "id": "exe.controller_fields",
+   "name": "exe.controller_fields",
+   "file": "src/slope_assist.lua",
+   "line": 321,
+   "kind": "character controller object: +80 up vector, +96 slope-limit cosine (written), +100 contact-limit cosine",
+   "old": "unchanged",
+   "new": "unchanged",
+   "changed": false,
+   "method": "controller setup code (exact window)",
+   "witnesses": [
+    {
+     "kind": "controller setup (old exe 0xd699e2, new 0xdc2312, exact window): +0x50 up vector from the definition, +0x60 = cos(definition slope angle), +0x64 = cos(definition contact angle)",
+     "stores": [
+      "movaps xmmword ptr [rbx + 0x50], xmm0",
+      "movss dword ptr [rbx + 0x60], xmm0",
+      "movss dword ptr [rbx + 0x64], xmm0"
+     ],
+     "align_ratio": 0.966,
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "sites": [
+    {
+     "file": "src/slope_assist.lua",
+     "line": 321,
+     "text": "local up=vec(read(api,s,object+80,12,true),0)"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 326,
+     "text": "assert(math.abs(f(read(api,s,object+100,4,true))-math.cos(70*math.pi/180))<0.001,'Unsupported support filter')"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 435,
+     "text": "s.cells={cap=direction+8,slope=object+96}"
+    }
+   ],
+   "live_check": "L8"
+  },
+  {
+   "id": "exe.table_actor",
+   "name": "exe.table_actor",
+   "file": "src/windows_api.lua",
+   "line": 22,
+   "kind": "exe native function table (identity guard: distance(table, exe))",
+   "old": "0x27cd910",
+   "new": "0x2874ed0",
+   "changed": true,
+   "method": "pointer value in the new game capture minus the preferred exe base",
+   "witnesses": [
+    {
+     "kind": "runtime pointer held by the game global in each capture, minus the exe base",
+     "old_capture_value": "0x7ff7b610d910",
+     "old_value_minus_table": "0x7ff7b3940000",
+     "new_capture_value": "0x142874ed0",
+     "assumed_new_exe_base": "0x140000000",
+     "caveat": "the new game capture session exe base is not recorded; the value is consistent with the preferred base 0x140000000 (Wine/Proton does not randomize the exe) and with the old layout (three tables at the end of .data in the same order, world->mover gap 0xf0 in both builds). A wrong value only makes the mod refuse (Unsupported native table); live check L10 confirms.",
+     "ok": true
+    }
+   ],
+   "confidence": "medium",
+   "feeds_write": false,
+   "role": "guard",
+   "sites": [
+    {
+     "file": "src/windows_api.lua",
+     "line": 22,
+     "text": "{0x3326338,0x27cd910,{{0x18,0x7972f0},{0x38,0x7993d0},{0xa8,0x799540}}},"
+    }
+   ],
+   "live_check": "L10"
+  },
+  {
+   "id": "exe.table_mover",
+   "name": "exe.table_mover",
+   "file": "src/windows_api.lua",
+   "line": 23,
+   "kind": "exe native function table (identity guard: distance(table, exe))",
+   "old": "0x27cdc30",
+   "new": "0x2875170",
+   "changed": true,
+   "method": "pointer value in the new game capture minus the preferred exe base",
+   "witnesses": [
+    {
+     "kind": "runtime pointer held by the game global in each capture, minus the exe base",
+     "old_capture_value": "0x7ff7b610dc30",
+     "old_value_minus_table": "0x7ff7b3940000",
+     "new_capture_value": "0x142875170",
+     "assumed_new_exe_base": "0x140000000",
+     "caveat": "the new game capture session exe base is not recorded; the value is consistent with the preferred base 0x140000000 (Wine/Proton does not randomize the exe) and with the old layout (three tables at the end of .data in the same order, world->mover gap 0xf0 in both builds). A wrong value only makes the mod refuse (Unsupported native table); live check L10 confirms.",
+     "ok": true
+    }
+   ],
+   "confidence": "medium",
+   "feeds_write": false,
+   "role": "guard",
+   "sites": [
+    {
+     "file": "src/windows_api.lua",
+     "line": 23,
+     "text": "{0x3326388,0x27cdc30,{{0,0x7ce220},{0x28,0x7cf050},{0x68,0x7cfe10}}},"
+    }
+   ],
+   "live_check": "L10"
+  },
+  {
+   "id": "exe.table_world",
+   "name": "exe.table_world",
+   "file": "src/windows_api.lua",
+   "line": 24,
+   "kind": "exe native function table (identity guard: distance(table, exe))",
+   "old": "0x27cdb40",
+   "new": "0x2875080",
+   "changed": true,
+   "method": "pointer value in the new game capture minus the preferred exe base",
+   "witnesses": [
+    {
+     "kind": "runtime pointer held by the game global in each capture, minus the exe base",
+     "old_capture_value": "0x7ff7b610db40",
+     "old_value_minus_table": "0x7ff7b3940000",
+     "new_capture_value": "0x142875080",
+     "assumed_new_exe_base": "0x140000000",
+     "caveat": "the new game capture session exe base is not recorded; the value is consistent with the preferred base 0x140000000 (Wine/Proton does not randomize the exe) and with the old layout (three tables at the end of .data in the same order, world->mover gap 0xf0 in both builds). A wrong value only makes the mod refuse (Unsupported native table); live check L10 confirms.",
+     "ok": true
+    }
+   ],
+   "confidence": "medium",
+   "feeds_write": false,
+   "role": "guard",
+   "sites": [
+    {
+     "file": "src/windows_api.lua",
+     "line": 24,
+     "text": "{0x3326328,0x27cdb40,{{0,0x79f860},{0x68,0x77dec0},{0x80,0x7f9070}}},"
+    }
+   ],
+   "live_check": "L10"
+  },
+  {
+   "id": "tables.slots",
+   "name": "tables.slots",
+   "file": null,
+   "line": null,
+   "kind": "native table slots: actor 0x18/0x38/0xA8, mover 0/0x28/0x68, world 0/0x68/0x80",
+   "old": "unchanged",
+   "new": "unchanged",
+   "changed": false,
+   "method": "game call sites through each table aligned old/new (the actor table gained a slot after 0xA8; 0xB0.. moved +8, not used)",
+   "witnesses": [
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "TACTOR",
+     "old": "0x18",
+     "new": "0x18",
+     "agreeing": 46,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x815eb6",
+       "new": "0x822b76",
+       "old_insn": "mov rdx, qword ptr [rax + 0x18]",
+       "new_insn": "mov rdx, qword ptr [rax + 0x18]"
+      },
+      {
+       "old": "0x92e702",
+       "new": "0x93f8b4",
+       "old_insn": "mov rdx, qword ptr [rax + 0x18]",
+       "new_insn": "mov rdx, qword ptr [rax + 0x18]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "TACTOR",
+     "old": "0x38",
+     "new": "0x38",
+     "agreeing": 3,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0xa8456b",
+       "new": "0xa9ffcb",
+       "old_insn": "mov rdx, qword ptr [rax + 0x38]",
+       "new_insn": "mov rdx, qword ptr [rax + 0x38]"
+      },
+      {
+       "old": "0xa9e584",
+       "new": "0xaba064",
+       "old_insn": "mov rdx, qword ptr [rax + 0x38]",
+       "new_insn": "mov rdx, qword ptr [rax + 0x38]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "TACTOR",
+     "old": "0xa8",
+     "new": "0xa8",
+     "agreeing": 18,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x6a099c",
+       "new": "0x6aabbc",
+       "old_insn": "call qword ptr [rax + 0xa8]",
+       "new_insn": "call qword ptr [rax + 0xa8]"
+      },
+      {
+       "old": "0x7160f6",
+       "new": "0x721741",
+       "old_insn": "call qword ptr [rax + 0xa8]",
+       "new_insn": "call qword ptr [rax + 0xa8]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "TMOVER",
+     "old": "0x0",
+     "new": "0x0",
+     "agreeing": 5,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x59cfff",
+       "new": "0x5a5c1f",
+       "old_insn": "mov r8, qword ptr [rax]",
+       "new_insn": "mov r8, qword ptr [rax]"
+      },
+      {
+       "old": "0x59e584",
+       "new": "0x5a71a4",
+       "old_insn": "mov r8, qword ptr [rax]",
+       "new_insn": "mov r8, qword ptr [rax]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "TMOVER",
+     "old": "0x28",
+     "new": "0x28",
+     "agreeing": 4,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x59dd30",
+       "new": "0x5a6950",
+       "old_insn": "call qword ptr [rax + 0x28]",
+       "new_insn": "call qword ptr [rax + 0x28]"
+      },
+      {
+       "old": "0x59eed3",
+       "new": "0x5a7af3",
+       "old_insn": "call qword ptr [rax + 0x28]",
+       "new_insn": "call qword ptr [rax + 0x28]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "TMOVER",
+     "old": "0x68",
+     "new": "0x68",
+     "agreeing": 10,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x6904bf",
+       "new": "0x69a52f",
+       "old_insn": "mov rdx, qword ptr [rax + 0x68]",
+       "new_insn": "mov rdx, qword ptr [rax + 0x68]"
+      },
+      {
+       "old": "0x696b2e",
+       "new": "0x6a0c7e",
+       "old_insn": "mov rdx, qword ptr [rax + 0x68]",
+       "new_insn": "mov rdx, qword ptr [rax + 0x68]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "TWORLD",
+     "old": "0x0",
+     "new": "0x0",
+     "agreeing": 8,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x8cac7e",
+       "new": "0x8dae8d",
+       "old_insn": "mov rbx, qword ptr [rax]",
+       "new_insn": "mov rbx, qword ptr [rax]"
+      },
+      {
+       "old": "0x8cc145",
+       "new": "0x8dc399",
+       "old_insn": "mov rbx, qword ptr [rax]",
+       "new_insn": "mov rbx, qword ptr [rax]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "TWORLD",
+     "old": "0x68",
+     "new": "0x68",
+     "agreeing": 45,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x4b3f71",
+       "new": "0x4ba831",
+       "old_insn": "mov r9, qword ptr [rax + 0x68]",
+       "new_insn": "mov r9, qword ptr [rax + 0x68]"
+      },
+      {
+       "old": "0x5a4c1a",
+       "new": "0x5ad75a",
+       "old_insn": "call qword ptr [rax + 0x68]",
+       "new_insn": "call qword ptr [rax + 0x68]"
+      }
+     ],
+     "ok": true
+    },
+    {
+     "kind": "aligned global-derived operand pairs (evidence/field-pairs.json)",
+     "path": "TWORLD",
+     "old": "0x80",
+     "new": "0x80",
+     "agreeing": 5,
+     "other": 0,
+     "examples": [
+      {
+       "old": "0x68c482",
+       "new": "0x696382",
+       "old_insn": "mov r10, qword ptr [rax + 0x80]",
+       "new_insn": "mov r10, qword ptr [rax + 0x80]"
+      },
+      {
+       "old": "0x8cacb6",
+       "new": "0x8daec5",
+       "old_insn": "mov r10, qword ptr [rcx + 0x80]",
+       "new_insn": "mov r10, qword ptr [rcx + 0x80]"
+      }
+     ],
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "guard",
+   "sites": [],
+   "live_check": "L10"
+  },
+  {
+   "id": "exe.valid",
+   "name": "exe.valid",
+   "file": "src/windows_api.lua",
+   "line": 22,
+   "kind": "exe function: actor validity",
+   "old": "0x7972f0",
+   "new": "0x81e620",
+   "changed": true,
+   "method": "unique masked byte match + callee agreement; the mod also checks the live table slot against it before any call",
+   "witnesses": [
+    {
+     "kind": "exe function: unique masked byte match over the whole old function, call targets mapping to the counterparts of the old callees; old runtime table slot holds the old function",
+     "name": "actor validity",
+     "old": "0x7972f0",
+     "new": "0x81e620",
+     "old_length": 24,
+     "old_table_slot_value": "0x7972f0",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "call",
+   "sites": [
+    {
+     "file": "src/windows_api.lua",
+     "line": 22,
+     "text": "{0x3326338,0x27cd910,{{0x18,0x7972f0},{0x38,0x7993d0},{0xa8,0x799540}}},"
+    },
+    {
+     "file": "src/windows_api.lua",
+     "line": 38,
+     "text": "local valid=ffi.cast('uint64_t (*)(uint32_t)',exe+0x7972f0)"
+    }
+   ],
+   "live_check": "L10"
+  },
+  {
+   "id": "exe.flags",
+   "name": "exe.flags",
+   "file": "src/windows_api.lua",
+   "line": 22,
+   "kind": "exe function: actor flags",
+   "old": "0x7993d0",
+   "new": "0x820700",
+   "changed": true,
+   "method": "unique masked byte match + callee agreement; the mod also checks the live table slot against it before any call",
+   "witnesses": [
+    {
+     "kind": "exe function: unique masked byte match over the whole old function, call targets mapping to the counterparts of the old callees; old runtime table slot holds the old function",
+     "name": "actor flags",
+     "old": "0x7993d0",
+     "new": "0x820700",
+     "old_length": 27,
+     "old_table_slot_value": "0x7993d0",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "call",
+   "sites": [
+    {
+     "file": "src/windows_api.lua",
+     "line": 22,
+     "text": "{0x3326338,0x27cd910,{{0x18,0x7972f0},{0x38,0x7993d0},{0xa8,0x799540}}},"
+    },
+    {
+     "file": "src/windows_api.lua",
+     "line": 39,
+     "text": "local flags=ffi.cast('uint32_t (*)(uint32_t)',exe+0x7993d0)"
+    }
+   ],
+   "live_check": "L10"
+  },
+  {
+   "id": "exe.motion",
+   "name": "exe.motion",
+   "file": "src/windows_api.lua",
+   "line": 22,
+   "kind": "exe function: actor motion",
+   "old": "0x799540",
+   "new": "0x820870",
+   "changed": true,
+   "method": "unique masked byte match + callee agreement; the mod also checks the live table slot against it before any call",
+   "witnesses": [
+    {
+     "kind": "exe function: unique masked byte match over the whole old function, call targets mapping to the counterparts of the old callees; old runtime table slot holds the old function",
+     "name": "actor motion",
+     "old": "0x799540",
+     "new": "0x820870",
+     "old_length": 176,
+     "old_table_slot_value": "0x799540",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "call",
+   "sites": [
+    {
+     "file": "src/windows_api.lua",
+     "line": 22,
+     "text": "{0x3326338,0x27cd910,{{0x18,0x7972f0},{0x38,0x7993d0},{0xa8,0x799540}}},"
+    },
+    {
+     "file": "src/windows_api.lua",
+     "line": 40,
+     "text": "local motion=ffi.cast('void (*)(uint32_t,float *,float *)',exe+0x799540)"
+    }
+   ],
+   "live_check": "L10"
+  },
+  {
+   "id": "exe.mover",
+   "name": "exe.mover",
+   "file": "src/windows_api.lua",
+   "line": 23,
+   "kind": "exe function: mover lookup",
+   "old": "0x7ce220",
+   "new": "0x855900",
+   "changed": true,
+   "method": "unique masked byte match + callee agreement; the mod also checks the live table slot against it before any call",
+   "witnesses": [
+    {
+     "kind": "exe function: unique masked byte match over the whole old function, call targets mapping to the counterparts of the old callees; old runtime table slot holds the old function",
+     "name": "mover lookup",
+     "old": "0x7ce220",
+     "new": "0x855900",
+     "old_length": 235,
+     "old_table_slot_value": "0x7ce220",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "call",
+   "sites": [
+    {
+     "file": "src/windows_api.lua",
+     "line": 23,
+     "text": "{0x3326388,0x27cdc30,{{0,0x7ce220},{0x28,0x7cf050},{0x68,0x7cfe10}}},"
+    },
+    {
+     "file": "src/windows_api.lua",
+     "line": 41,
+     "text": "local mover=ffi.cast('uint32_t (*)(uint32_t,uint32_t)',exe+0x7ce220)"
+    }
+   ],
+   "live_check": "L10"
+  },
+  {
+   "id": "exe.position",
+   "name": "exe.position",
+   "file": "src/windows_api.lua",
+   "line": 23,
+   "kind": "exe function: mover position",
+   "old": "0x7cf050",
+   "new": "0x856730",
+   "changed": true,
+   "method": "unique masked byte match + callee agreement; the mod also checks the live table slot against it before any call",
+   "witnesses": [
+    {
+     "kind": "exe function: unique masked byte match over the whole old function, call targets mapping to the counterparts of the old callees; old runtime table slot holds the old function",
+     "name": "mover position",
+     "old": "0x7cf050",
+     "new": "0x856730",
+     "old_length": 66,
+     "old_table_slot_value": "0x7cf050",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "call",
+   "sites": [
+    {
+     "file": "src/windows_api.lua",
+     "line": 23,
+     "text": "{0x3326388,0x27cdc30,{{0,0x7ce220},{0x28,0x7cf050},{0x68,0x7cfe10}}},"
+    },
+    {
+     "file": "src/windows_api.lua",
+     "line": 43,
+     "text": "local position=ffi.cast('void (*)(uint32_t,float *)',exe+0x7cf050)"
+    }
+   ],
+   "live_check": "L10"
+  },
+  {
+   "id": "exe.dimensions",
+   "name": "exe.dimensions",
+   "file": "src/windows_api.lua",
+   "line": 23,
+   "kind": "exe function: mover dimensions",
+   "old": "0x7cfe10",
+   "new": "0x8574f0",
+   "changed": true,
+   "method": "unique masked byte match + callee agreement; the mod also checks the live table slot against it before any call",
+   "witnesses": [
+    {
+     "kind": "exe function: unique masked byte match over the whole old function, call targets mapping to the counterparts of the old callees; old runtime table slot holds the old function",
+     "name": "mover dimensions",
+     "old": "0x7cfe10",
+     "new": "0x8574f0",
+     "old_length": 28,
+     "old_table_slot_value": "0x7cfe10",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "call",
+   "sites": [
+    {
+     "file": "src/windows_api.lua",
+     "line": 23,
+     "text": "{0x3326388,0x27cdc30,{{0,0x7ce220},{0x28,0x7cf050},{0x68,0x7cfe10}}},"
+    },
+    {
+     "file": "src/windows_api.lua",
+     "line": 42,
+     "text": "local dimensions=ffi.cast('void *(*)(uint32_t)',exe+0x7cfe10)"
+    }
+   ],
+   "live_check": "L10"
+  },
+  {
+   "id": "exe.world_id",
+   "name": "exe.world_id",
+   "file": "src/windows_api.lua",
+   "line": 24,
+   "kind": "exe function: world id",
+   "old": "0x79f860",
+   "new": "0x826d10",
+   "changed": true,
+   "method": "unique masked byte match + callee agreement; the mod also checks the live table slot against it before any call",
+   "witnesses": [
+    {
+     "kind": "exe function: unique masked byte match over the whole old function, call targets mapping to the counterparts of the old callees; old runtime table slot holds the old function",
+     "name": "world id",
+     "old": "0x79f860",
+     "new": "0x826d10",
+     "old_length": null,
+     "old_table_slot_value": "0x79f860",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "call",
+   "sites": [
+    {
+     "file": "src/windows_api.lua",
+     "line": 24,
+     "text": "{0x3326328,0x27cdb40,{{0,0x79f860},{0x68,0x77dec0},{0x80,0x7f9070}}},"
+    },
+    {
+     "file": "src/windows_api.lua",
+     "line": 48,
+     "text": "local world_id=ffi.cast('uint32_t (*)(const void *)',exe+0x79f860)"
+    }
+   ],
+   "live_check": "L10"
+  },
+  {
+   "id": "exe.world_68",
+   "name": "exe.world_68",
+   "file": "src/windows_api.lua",
+   "line": 24,
+   "kind": "exe function: world table slot 0x68 (verified only, not called)",
+   "old": "0x77dec0",
+   "new": "0x805160",
+   "changed": true,
+   "method": "unique masked byte match + callee agreement; the mod also checks the live table slot against it before any call",
+   "witnesses": [
+    {
+     "kind": "exe function: unique masked byte match over the whole old function, call targets mapping to the counterparts of the old callees; old runtime table slot holds the old function",
+     "name": "world table slot 0x68 (verified only, not called)",
+     "old": "0x77dec0",
+     "new": "0x805160",
+     "old_length": 169,
+     "old_table_slot_value": "0x77dec0",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "guard",
+   "sites": [
+    {
+     "file": "src/windows_api.lua",
+     "line": 24,
+     "text": "{0x3326328,0x27cdb40,{{0,0x79f860},{0x68,0x77dec0},{0x80,0x7f9070}}},"
+    }
+   ],
+   "live_check": "L10"
+  },
+  {
+   "id": "exe.query",
+   "name": "exe.query",
+   "file": "src/windows_api.lua",
+   "line": 24,
+   "kind": "exe function: synchronous shape query",
+   "old": "0x7f9070",
+   "new": "0x880750",
+   "changed": true,
+   "method": "unique masked byte match + callee agreement; the mod also checks the live table slot against it before any call",
+   "witnesses": [
+    {
+     "kind": "exe function: unique masked byte match over the whole old function, call targets mapping to the counterparts of the old callees; old runtime table slot holds the old function",
+     "name": "synchronous shape query",
+     "old": "0x7f9070",
+     "new": "0x880750",
+     "old_length": 142,
+     "old_table_slot_value": "0x7f9070",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "call",
+   "sites": [
+    {
+     "file": "src/windows_api.lua",
+     "line": 24,
+     "text": "{0x3326328,0x27cdb40,{{0,0x79f860},{0x68,0x77dec0},{0x80,0x7f9070}}},"
+    },
+    {
+     "file": "src/windows_api.lua",
+     "line": 49,
+     "text": "local query=ffi.cast('uint32_t (*)(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,const void *,void *,uint32_t)',exe+0x7f9070)"
+    }
+   ],
+   "live_check": "L10"
+  },
+  {
+   "id": "game.classify",
+   "name": "game.classify",
+   "file": "src/windows_api.lua",
+   "line": 33,
+   "kind": "game.dll function: exit classifier",
+   "old": "0xa9d560",
+   "new": "0xab9040",
+   "changed": true,
+   "method": "function pair: exact start window (or inner windows), instruction alignment, unwind codes equal shifted by the new entry padding, same direct-caller count, prologue bytes; call sites in the game's own callers map old target -> new target",
+   "witnesses": [
+    {
+     "kind": "function pair",
+     "name": "exit classifier",
+     "old": "0xa9d560",
+     "new": "0xab9040",
+     "start_window": {
+      "new": "0xab9040",
+      "window_bytes": 160
+     },
+     "inner_windows_mapped": 9,
+     "inner_windows_consistent": true,
+     "old_insns": 196,
+     "new_insns": 197,
+     "aligned": 196,
+     "align_ratio": 0.9975,
+     "operand_changes": [
+      "mov ecx, dword ptr [rcx + 0xac] -> mov ecx, dword ptr [rcx + 0xb4]"
+     ],
+     "operand_change_count": 1,
+     "direct_callers_old_new": [
+      1,
+      1
+     ],
+     "pdata_begin_new": "0xab9040",
+     "unwind_codes_equal_shifted_by_entry_padding": true,
+     "entry_padding_bytes": 0,
+     "prologue_old": "488bc4488958084889682056",
+     "prologue_new": "488bc4488958084889682056",
+     "ok": true
+    },
+    {
+     "kind": "aligned call sites in a game caller",
+     "caller_old": "0xa9c3e0",
+     "caller_new": "0xab7ec0",
+     "align_ratio": 1.0,
+     "calls": {
+      "0x173f150": [
+       "0x15b3180"
+      ],
+      "0x173a750": [
+       "0x15ae780"
+      ],
+      "0xa9d560": [
+       "0xab9040"
+      ],
+      "0xa9dd90": [
+       "0xab9870"
+      ]
+     },
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "call",
+   "sites": [
+    {
+     "file": "src/windows_api.lua",
+     "line": 33,
+     "text": "assert(api.read(game+0xa9d560,12)=='\\072\\139\\196\\072\\137\\088\\008\\072\\137\\104\\032\\086',"
+    },
+    {
+     "file": "src/windows_api.lua",
+     "line": 47,
+     "text": "local classify=ffi.cast('int32_t (*)(void *,const void *,const float *,const float *)',game+0xa9d560)"
+    }
+   ],
+   "live_check": "L9"
+  },
+  {
+   "id": "game.drive",
+   "name": "game.drive",
+   "file": "src/windows_api.lua",
+   "line": 35,
+   "kind": "game.dll function: local vault driver (called on the live controller with dt 0)",
+   "old": "0xa9a0c0",
+   "new": "0xab5ba0",
+   "changed": true,
+   "method": "function pair: exact start window (or inner windows), instruction alignment, unwind codes equal shifted by the new entry padding, same direct-caller count, prologue bytes; call sites in the game's own callers map old target -> new target",
+   "witnesses": [
+    {
+     "kind": "function pair",
+     "name": "local vault driver (called on the live controller with dt 0)",
+     "old": "0xa9a0c0",
+     "new": "0xab5ba0",
+     "start_window": {
+      "new": "0xab5ba0",
+      "window_bytes": 160
+     },
+     "inner_windows_mapped": 10,
+     "inner_windows_consistent": true,
+     "old_insns": 801,
+     "new_insns": 801,
+     "aligned": 801,
+     "align_ratio": 1.0,
+     "operand_changes": [
+      "cmp dword ptr [rax + 0xac21c], 4 -> cmp dword ptr [rax + 0xac29c], 4",
+      "add rcx, 0x3925b8 -> add rcx, 0x392138"
+     ],
+     "operand_change_count": 2,
+     "direct_callers_old_new": [
+      1,
+      1
+     ],
+     "pdata_begin_new": "0xab5ba0",
+     "unwind_codes_equal_shifted_by_entry_padding": true,
+     "entry_padding_bytes": 0,
+     "prologue_old": "4055535657415441564157488d6c24d0",
+     "prologue_new": "4055535657415441564157488d6c24d0",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "call",
+   "sites": [
+    {
+     "file": "src/windows_api.lua",
+     "line": 35,
+     "text": "assert(api.read(game+0xa9a0c0,16)=='\\064\\085\\083\\086\\087\\065\\084\\065\\086\\065\\087\\072\\141\\108\\036\\208',"
+    },
+    {
+     "file": "src/windows_api.lua",
+     "line": 50,
+     "text": "local drive=ffi.cast('void (*)(void *,float)',game+0xa9a0c0)"
+    }
+   ],
+   "live_check": "L9"
+  },
+  {
+   "id": "game.detect",
+   "name": "game.detect",
+   "file": "src/windows_api.lua",
+   "line": 51,
+   "kind": "game.dll function: approach detector (private controller copy)",
+   "old": "0xa9c3e0",
+   "new": "0xab7ec0",
+   "changed": true,
+   "method": "function pair: exact start window (or inner windows), instruction alignment, unwind codes equal shifted by the new entry padding, same direct-caller count, prologue bytes; call sites in the game's own callers map old target -> new target",
+   "witnesses": [
+    {
+     "kind": "function pair",
+     "name": "approach detector (private controller copy)",
+     "old": "0xa9c3e0",
+     "new": "0xab7ec0",
+     "start_window": {
+      "new": "0xab7ec0",
+      "window_bytes": 160
+     },
+     "inner_windows_mapped": 9,
+     "inner_windows_consistent": true,
+     "old_insns": 881,
+     "new_insns": 881,
+     "aligned": 881,
+     "align_ratio": 1.0,
+     "operand_changes": [
+      "imul rcx, r8, 0x1238 -> imul rcx, r8, 0x1240",
+      "mov r10, qword ptr [r12 + r15 + 0x53e888] -> mov r10, qword ptr [r12 + r15 + 0x53e890]",
+      "mov r9, qword ptr [r12 + r15 + 0x53e880] -> mov r9, qword ptr [r12 + r15 + 0x53e888]",
+      "mov r11, qword ptr [r12 + r15 + 0x53e890] -> mov r11, qword ptr [r12 + r15 + 0x53e898]",
+      "imul rax, rcx, 0x1238 -> imul rax, rcx, 0x1240",
+      "test byte ptr [rax + r13 + 0x53e890], 0xc -> test byte ptr [rax + r13 + 0x53e898], 0xc",
+      "mov r8, qword ptr [rax + r13 + 0x53e888] -> mov r8, qword ptr [rax + r13 + 0x53e890]",
+      "mov rdx, qword ptr [rax + r13 + 0x53e880] -> mov rdx, qword ptr [rax + r13 + 0x53e888]",
+      "mov ecx, dword ptr [rcx + 0xac] -> mov ecx, dword ptr [rcx + 0xb4]"
+     ],
+     "operand_change_count": 9,
+     "direct_callers_old_new": [
+      1,
+      1
+     ],
+     "pdata_begin_new": "0xab7ec0",
+     "unwind_codes_equal_shifted_by_entry_padding": true,
+     "entry_padding_bytes": 0,
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "call",
+   "sites": [
+    {
+     "file": "src/windows_api.lua",
+     "line": 51,
+     "text": "local detect=ffi.cast('uint32_t (*)(void *,float)',game+0xa9c3e0)"
+    }
+   ],
+   "live_check": "L9"
+  },
+  {
+   "id": "game.approach",
+   "name": "game.approach",
+   "file": "src/windows_api.lua",
+   "line": 52,
+   "kind": "game.dll function: five-slice approach geometry (private buffers)",
+   "old": "0xa9dd90",
+   "new": "0xab9870",
+   "changed": true,
+   "method": "function pair: exact start window (or inner windows), instruction alignment, unwind codes equal shifted by the new entry padding, same direct-caller count, prologue bytes; call sites in the game's own callers map old target -> new target",
+   "witnesses": [
+    {
+     "kind": "function pair",
+     "name": "five-slice approach geometry (private buffers)",
+     "old": "0xa9dd90",
+     "new": "0xab9870",
+     "start_window": {
+      "new": "0xab9870",
+      "window_bytes": 160
+     },
+     "inner_windows_mapped": 10,
+     "inner_windows_consistent": true,
+     "old_insns": 357,
+     "new_insns": 358,
+     "aligned": 357,
+     "align_ratio": 0.9986,
+     "operand_changes": [],
+     "operand_change_count": 0,
+     "direct_callers_old_new": [
+      1,
+      1
+     ],
+     "pdata_begin_new": "0xab986f",
+     "unwind_codes_equal_shifted_by_entry_padding": true,
+     "entry_padding_bytes": 1,
+     "prologue_old": "488bc448895808555657415441554156",
+     "prologue_new": "488bc448895808555657415441554156",
+     "ok": true
+    },
+    {
+     "kind": "aligned call sites in a game caller",
+     "caller_old": "0xa9c3e0",
+     "caller_new": "0xab7ec0",
+     "align_ratio": 1.0,
+     "calls": {
+      "0x173f150": [
+       "0x15b3180"
+      ],
+      "0x173a750": [
+       "0x15ae780"
+      ],
+      "0xa9d560": [
+       "0xab9040"
+      ],
+      "0xa9dd90": [
+       "0xab9870"
+      ]
+     },
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "call",
+   "sites": [
+    {
+     "file": "src/windows_api.lua",
+     "line": 52,
+     "text": "assert(api.read(game+0xa9dd90,16)=='\\072\\139\\196\\072\\137\\088\\008\\085\\086\\087\\065\\084\\065\\085\\065\\086',"
+    },
+    {
+     "file": "src/windows_api.lua",
+     "line": 55,
+     "text": "local approach=ffi.cast('uint8_t (*)(void *,const void *,float *,float *,float *,float *)',game+0xa9dd90)"
+    }
+   ],
+   "live_check": "L9"
+  },
+  {
+   "id": "game.override",
+   "name": "game.override",
+   "file": "src/windows_api.lua",
+   "line": 56,
+   "kind": "game.dll function: AvatarComponent modifier routine (creates the local override)",
+   "old": "0x83c420",
+   "new": "0x8492a0",
+   "changed": true,
+   "method": "function pair: exact start window (or inner windows), instruction alignment, unwind codes equal shifted by the new entry padding, same direct-caller count, prologue bytes; call sites in the game's own callers map old target -> new target",
+   "witnesses": [
+    {
+     "kind": "function pair",
+     "name": "AvatarComponent modifier routine (creates the local override)",
+     "old": "0x83c420",
+     "new": "0x8492a0",
+     "start_window": null,
+     "inner_windows_mapped": 2,
+     "inner_windows_consistent": true,
+     "old_insns": 161,
+     "new_insns": 161,
+     "aligned": 161,
+     "align_ratio": 1.0,
+     "operand_changes": [
+      "mov r10d, dword ptr [rcx + 0x547c78] -> mov r10d, dword ptr [rcx + 0x547cb8]",
+      "mov r11d, dword ptr [rcx + 0x547c80] -> mov r11d, dword ptr [rcx + 0x547cc0]",
+      "mov rbx, qword ptr [rcx + 0x547c70] -> mov rbx, qword ptr [rcx + 0x547cb0]",
+      "mov edi, dword ptr [rcx + 0x547c7c] -> mov edi, dword ptr [rcx + 0x547cbc]",
+      "mov r8, qword ptr [r8 + 0xf12e98] -> mov r8, qword ptr [r8 + 0xf14960]",
+      "add rcx, 0x547d24 -> add rcx, 0x547d64",
+      "mov rax, qword ptr [r8 + 0xf12bb8] -> mov rax, qword ptr [r8 + 0xf14680]",
+      "mov r8, qword ptr [r8 + 0xf12e98] -> mov r8, qword ptr [r8 + 0xf14960]"
+     ],
+     "operand_change_count": 8,
+     "direct_callers_old_new": [
+      0,
+      0
+     ],
+     "pdata_begin_new": "0x84929d",
+     "unwind_codes_equal_shifted_by_entry_padding": true,
+     "entry_padding_bytes": 3,
+     "prologue_old": "48895c240848896c2410488974241857",
+     "prologue_new": "48895c240848896c2410488974241857",
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "call",
+   "sites": [
+    {
+     "file": "src/windows_api.lua",
+     "line": 56,
+     "text": "local override=ffi.cast('void (*)(void *,const void *,const void *)',game+0x83c420)"
+    },
+    {
+     "file": "src/windows_api.lua",
+     "line": 64,
+     "text": "assert(api.read(game+0x83c420,16)=='\\072\\137\\092\\036\\008\\072\\137\\108\\036\\016\\072\\137\\116\\036\\024\\087',"
+    }
+   ],
+   "live_check": "L9"
+  },
+  {
+   "id": "game.basis",
+   "name": "game.basis",
+   "file": "src/windows_api.lua",
+   "line": 44,
+   "kind": "game.dll function: forward/up basis matrix",
+   "old": "0x173f150",
+   "new": "0x15b3180",
+   "changed": true,
+   "method": "function pair: exact start window (or inner windows), instruction alignment, unwind codes equal shifted by the new entry padding, same direct-caller count, prologue bytes; call sites in the game's own callers map old target -> new target",
+   "witnesses": [
+    {
+     "kind": "function pair",
+     "name": "forward/up basis matrix",
+     "old": "0x173f150",
+     "new": "0x15b3180",
+     "start_window": {
+      "new": "0x15b3180",
+      "window_bytes": 160
+     },
+     "inner_windows_mapped": 8,
+     "inner_windows_consistent": true,
+     "old_insns": 172,
+     "new_insns": 172,
+     "aligned": 172,
+     "align_ratio": 1.0,
+     "operand_changes": [],
+     "operand_change_count": 0,
+     "direct_callers_old_new": [
+      165,
+      142
+     ],
+     "pdata_begin_new": "0x15b317c",
+     "unwind_codes_equal_shifted_by_entry_padding": true,
+     "entry_padding_bytes": 4,
+     "ok": true
+    },
+    {
+     "kind": "aligned call sites in a game caller",
+     "caller_old": "0xa9c3e0",
+     "caller_new": "0xab7ec0",
+     "align_ratio": 1.0,
+     "calls": {
+      "0x173f150": [
+       "0x15b3180"
+      ],
+      "0x173a750": [
+       "0x15ae780"
+      ],
+      "0xa9d560": [
+       "0xab9040"
+      ],
+      "0xa9dd90": [
+       "0xab9870"
+      ]
+     },
+     "ok": true
+    },
+    {
+     "kind": "aligned call sites in a game caller",
+     "caller_old": "0xa9be10",
+     "caller_new": "0xab78f0",
+     "align_ratio": 1.0,
+     "calls": {
+      "0x173f150": [
+       "0x15b3180"
+      ],
+      "0x173a750": [
+       "0x15ae780"
+      ],
+      "0x175bb40": [
+       "0x15cfcc0"
+      ]
+     },
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "call",
+   "sites": [
+    {
+     "file": "src/windows_api.lua",
+     "line": 44,
+     "text": "local basis=ffi.cast('void *(*)(void *,const float *,const float *)',game+0x173f150)"
+    }
+   ],
+   "live_check": "L9"
+  },
+  {
+   "id": "game.rotation",
+   "name": "game.rotation",
+   "file": "src/windows_api.lua",
+   "line": 45,
+   "kind": "game.dll function: matrix -> quaternion",
+   "old": "0x173a750",
+   "new": "0x15ae780",
+   "changed": true,
+   "method": "function pair: exact start window (or inner windows), instruction alignment, unwind codes equal shifted by the new entry padding, same direct-caller count, prologue bytes; call sites in the game's own callers map old target -> new target",
+   "witnesses": [
+    {
+     "kind": "function pair",
+     "name": "matrix -> quaternion",
+     "old": "0x173a750",
+     "new": "0x15ae780",
+     "start_window": {
+      "new": "0x15ae780",
+      "window_bytes": 160
+     },
+     "inner_windows_mapped": 6,
+     "inner_windows_consistent": true,
+     "old_insns": 118,
+     "new_insns": 118,
+     "aligned": 118,
+     "align_ratio": 1.0,
+     "operand_changes": [],
+     "operand_change_count": 0,
+     "direct_callers_old_new": [
+      137,
+      126
+     ],
+     "pdata_begin_new": "0x15ae778",
+     "unwind_codes_equal_shifted_by_entry_padding": true,
+     "entry_padding_bytes": 8,
+     "ok": true
+    },
+    {
+     "kind": "aligned call sites in a game caller",
+     "caller_old": "0xa9c3e0",
+     "caller_new": "0xab7ec0",
+     "align_ratio": 1.0,
+     "calls": {
+      "0x173f150": [
+       "0x15b3180"
+      ],
+      "0x173a750": [
+       "0x15ae780"
+      ],
+      "0xa9d560": [
+       "0xab9040"
+      ],
+      "0xa9dd90": [
+       "0xab9870"
+      ]
+     },
+     "ok": true
+    },
+    {
+     "kind": "aligned call sites in a game caller",
+     "caller_old": "0xa9be10",
+     "caller_new": "0xab78f0",
+     "align_ratio": 1.0,
+     "calls": {
+      "0x173f150": [
+       "0x15b3180"
+      ],
+      "0x173a750": [
+       "0x15ae780"
+      ],
+      "0x175bb40": [
+       "0x15cfcc0"
+      ]
+     },
+     "ok": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "call",
+   "sites": [
+    {
+     "file": "src/windows_api.lua",
+     "line": 45,
+     "text": "local rotation=ffi.cast('void (*)(float *,const void *)',game+0x173a750)"
+    }
+   ],
+   "live_check": "L9"
+  },
+  {
+   "id": "game.prologues",
+   "name": "game.prologues",
+   "file": "src/windows_api.lua",
+   "line": 33,
+   "kind": "entry bytes the mod checks before binding (0xA9D560 12 bytes, 0xA9A0C0/0xA9DD90/0x83C420 16 bytes)",
+   "old": "unchanged",
+   "new": "unchanged",
+   "changed": false,
+   "method": "byte comparison at the mapped entries (game.* rows)",
+   "witnesses": [],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "guard",
+   "sites": [
+    {
+     "file": "src/windows_api.lua",
+     "line": 33,
+     "text": "assert(api.read(game+0xa9d560,12)=='\\072\\139\\196\\072\\137\\088\\008\\072\\137\\104\\032\\086',"
+    },
+    {
+     "file": "src/windows_api.lua",
+     "line": 52,
+     "text": "assert(api.read(game+0xa9dd90,16)=='\\072\\139\\196\\072\\137\\088\\008\\085\\086\\087\\065\\084\\065\\085\\065\\086',"
+    }
+   ],
+   "live_check": "L9"
+  },
+  {
+   "id": "avatar.resource",
+   "name": "avatar.resource",
+   "file": "src/vault_data.lua",
+   "line": 177,
+   "kind": "avatar resource hash 0x4D1C334D294DFA97 (content/fac_helldivers/cha_avatar/avatar_helldiver)",
+   "old": "0x4d1c334d294dfa97",
+   "new": "0x4d1c334d294dfa97",
+   "changed": false,
+   "method": "resource-name hash: build independent; live check L3 reads it from the local entity record",
+   "witnesses": [],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "value",
+   "sites": [
+    {
+     "file": "src/vault_data.lua",
+     "line": 177,
+     "text": "assert(entity:sub(1,8)=='\\151\\250\\077\\041\\077\\051\\028\\077','Unsupported avatar resource')"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 160,
+     "text": "local AVATAR_LOW,AVATAR_HIGH=0x294dfa97,0x4d1c334d"
+    },
+    {
+     "file": "src/slope_assist.lua",
+     "line": 172,
+     "text": "if word(entity,0)~=AVATAR_LOW or word(entity,4)~=AVATAR_HIGH then return nil,'gone' end"
+    }
+   ],
+   "live_check": "L3"
+  }
+ ]
+}

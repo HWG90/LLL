@@ -1,0 +1,369 @@
+{
+ "luajit": "<workspace>/runtime-modules/build/windows/LuaJIT/src/luajit.exe",
+ "runner": "wine",
+ "fixture_edits": [
+  {
+   "file": "test_frame_budget.lua",
+   "old": "solver = 0x18d2b60, scroll = 0x1794530, position = 0x14476a0, stop = 0x1439d40",
+   "new": "solver = 0x1753dc0, scroll = 0x16157c0, position = 0x12df3b0, stop = 0x12d1a50",
+   "count": 1
+  },
+  {
+   "file": "test_frame_budget.lua",
+   "old": "consume = 0x12fde90, dispatch = 0x3326e68, stack = 0x347ce28, menu = 0x347ce38",
+   "new": "consume = 0x1190e30, dispatch = 0x2ce2040, stack = 0x2e38160, menu = 0x2e38170",
+   "count": 1
+  },
+  {
+   "file": "test_frame_budget.lua",
+   "old": "input = 0x347cf18}",
+   "new": "input = 0x2e38250}",
+   "count": 1
+  },
+  {
+   "file": "test_frame_budget.lua",
+   "old": "LOADOUT_OFFSET, PANEL = 523752, 864032, 318472",
+   "new": "LOADOUT_OFFSET, PANEL = 523752, 864096, 318472",
+   "count": 1
+  },
+  {
+   "file": "test_frame_budget.lua",
+   "old": "{controller, 224}",
+   "new": "{controller, 226}",
+   "count": 1
+  },
+  {
+   "file": "test_frame_budget.lua",
+   "old": "{controller, 229}",
+   "new": "{controller, 231}",
+   "count": 1
+  },
+  {
+   "file": "test_frame_budget.lua",
+   "old": "put_u32(w.dispatch, 5744 + 8, 229)",
+   "new": "put_u32(w.dispatch, 5744 + 8, 231)",
+   "count": 1
+  },
+  {
+   "file": "test_frame_budget.lua",
+   "old": "'disabled: unsupported game build (needs Steam build 25480438)'",
+   "new": "'disabled: unsupported game build (needs Steam build 26088801)'",
+   "count": 1
+  },
+  {
+   "file": "test_frame_budget.lua",
+   "old": "local KINDS = {grid = 224, career = 224, loadout = 229}",
+   "new": "local KINDS = {grid = 226, career = 226, loadout = 231}",
+   "count": 1
+  },
+  {
+   "file": "test_native.lua",
+   "old": "GAME + 0x3326e68",
+   "new": "GAME + 0x2ce2040",
+   "count": 2
+  },
+  {
+   "file": "test_native.lua",
+   "old": "GAME + 0x347ce28",
+   "new": "GAME + 0x2e38160",
+   "count": 1
+  },
+  {
+   "file": "test_native.lua",
+   "old": "GAME + 0x347ce38",
+   "new": "GAME + 0x2e38170",
+   "count": 1
+  },
+  {
+   "file": "test_native.lua",
+   "old": "GAME + 0x347cf18",
+   "new": "GAME + 0x2e38250",
+   "count": 2
+  },
+  {
+   "file": "test_native.lua",
+   "old": "u32(DISPATCH + 5768, 224)",
+   "new": "u32(DISPATCH + 5768, 226)",
+   "count": 1
+  },
+  {
+   "file": "test_native.lua",
+   "old": "cells[DISPATCH+5752+63*16]=pack_u32(224)",
+   "new": "cells[DISPATCH+5752+63*16]=pack_u32(226)",
+   "count": 1
+  },
+  {
+   "file": "test_native_types.lua",
+   "old": "local RVAS = {0x18d2b60, 0x1794530, 0x14476a0, 0x1439d40, 0x12fde90}",
+   "new": "local RVAS = {0x1753dc0, 0x16157c0, 0x12df3b0, 0x12d1a50, 0x1190e30}",
+   "count": 1
+  },
+  {
+   "file": "test_native_types.lua",
+   "old": "local SIZE = 0x18d2b60 + 0x1000",
+   "new": "local SIZE = 0x1753dc0 + 0x1000",
+   "count": 1
+  },
+  {
+   "file": "runtime_fixture.lua",
+   "old": "0x0D000000+0x347cf18",
+   "new": "0x0D000000+0x2e38250",
+   "count": 1
+  },
+  {
+   "file": "fixtures/ui_armory_25327279.lua",
+   "old": "{address=140720160206440,",
+   "new": "{address=140720153632832,",
+   "count": 1
+  },
+  {
+   "file": "fixtures/ui_armory_25327279.lua",
+   "old": "8000ac3ed5010000e000000000000000",
+   "new": "8000ac3ed5010000e200000000000000",
+   "count": 1
+  },
+  {
+   "file": "reference/clickable_scrollbars_v2.15.1.lua",
+   "new": "pinned source + MAP.json build-data edits only (data-only entry)"
+  }
+ ],
+ "ported": {
+  "test_entry.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "entry: 27 checks passed (9 source files: bingus_runtime, bingus_memory, native, memory, locate, model, settings, platform, install)"
+   ]
+  },
+  "test_detector.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "detector: 55 passed, 0 failed"
+   ]
+  },
+  "test_install.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "install: 61 native-only regression checks passed"
+   ]
+  },
+  "test_native.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "ok input handler errors cancel capture",
+    "ok unreadable input state cannot capture or call native code",
+    "native grid tests passed",
+    "PASS: full registry batching, hidden/absent owners and truncated read refusal"
+   ]
+  },
+  "test_platform.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "SKIP desktop capture: interactive Windows desktop unavailable; not verified",
+    "platform: 42 passed, 0 failed"
+   ]
+  },
+  "test_ffi_names.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "ffi names: 13 passed, 0 failed"
+   ]
+  },
+  "test_performance.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "performance: 1000 gameplay clicks, zero captures/writes/logs",
+    "performance: 1000 menu-content clicks, zero captures/writes/logs",
+    "performance: 20000 idle/held frames, zero repeated searches or capture/file IO"
+   ]
+  },
+  "test_profile.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "  analyse 96x920 dense artwork                       259.8 us/call",
+    "  analyse 96x920 plain panel + bar                   255.5 us/call",
+    "  find_thumb 96x920 plain panel                      238.5 us/call",
+    "profile: 17 passed, 0 failed"
+   ]
+  },
+  "test_ui_sim.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "  scale 1.000: thumb 160.0 px for 160.0 px of pointer, stalls=0 activations=0",
+    "  scale 1.500: thumb 240.0 px for 240.0 px of pointer, stalls=0 activations=0",
+    "  track click: offset 2380 -> 116, thumb centre 1088.0 -> 540.0, captures=0",
+    "ui simulator: 85 passed, 0 failed"
+   ]
+  },
+  "test_settings_input.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "PASS: Display thumb/track drags across rows and tabs, native timer updates, release, cancellation and fresh clicks"
+   ]
+  },
+  "test_native_types.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "test_native_types.lua: 20010 passed (LuaJIT 2.1.ROLLING)"
+   ]
+  },
+  "test_frame_budget.lua": {
+   "exit": 1,
+   "passed": false,
+   "tail": [
+    "stack traceback:",
+    "\t[C]: in function 'assert'",
+    "\ttests/test_frame_budget.lua:535: in main chunk",
+    "\t[C]: at 0x01400020e0"
+   ]
+  },
+  "test_current_ui.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "PASS: actual build 25327279 Armory controller, grid and scrollbar geometry"
+   ]
+  }
+ },
+ "upstream": {
+  "test_entry.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "entry: 27 checks passed (9 source files: bingus_runtime, bingus_memory, native, memory, locate, model, settings, platform, install)"
+   ]
+  },
+  "test_detector.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "detector: 55 passed, 0 failed"
+   ]
+  },
+  "test_install.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "install: 61 native-only regression checks passed"
+   ]
+  },
+  "test_native.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "ok input handler errors cancel capture",
+    "ok unreadable input state cannot capture or call native code",
+    "native grid tests passed",
+    "PASS: full registry batching, hidden/absent owners and truncated read refusal"
+   ]
+  },
+  "test_platform.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "SKIP desktop capture: interactive Windows desktop unavailable; not verified",
+    "platform: 42 passed, 0 failed"
+   ]
+  },
+  "test_ffi_names.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "ffi names: 13 passed, 0 failed"
+   ]
+  },
+  "test_performance.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "performance: 1000 gameplay clicks, zero captures/writes/logs",
+    "performance: 1000 menu-content clicks, zero captures/writes/logs",
+    "performance: 20000 idle/held frames, zero repeated searches or capture/file IO"
+   ]
+  },
+  "test_profile.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "  analyse 96x920 dense artwork                       275.8 us/call",
+    "  analyse 96x920 plain panel + bar                   233.1 us/call",
+    "  find_thumb 96x920 plain panel                      217.8 us/call",
+    "profile: 17 passed, 0 failed"
+   ]
+  },
+  "test_ui_sim.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "  scale 1.000: thumb 160.0 px for 160.0 px of pointer, stalls=0 activations=0",
+    "  scale 1.500: thumb 240.0 px for 240.0 px of pointer, stalls=0 activations=0",
+    "  track click: offset 2380 -> 116, thumb centre 1088.0 -> 540.0, captures=0",
+    "ui simulator: 85 passed, 0 failed"
+   ]
+  },
+  "test_settings_input.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "PASS: Display thumb/track drags across rows and tabs, native timer updates, release, cancellation and fresh clicks"
+   ]
+  },
+  "test_native_types.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "test_native_types.lua: 20010 passed (LuaJIT 2.1.ROLLING)"
+   ]
+  },
+  "test_frame_budget.lua": {
+   "exit": 1,
+   "passed": false,
+   "tail": [
+    "stack traceback:",
+    "\t[C]: in function 'assert'",
+    "\ttests/test_frame_budget.lua:535: in main chunk",
+    "\t[C]: at 0x01400020e0"
+   ]
+  },
+  "test_current_ui.lua": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "PASS: actual build 25327279 Armory controller, grid and scrollbar geometry"
+   ]
+  }
+ },
+ "diagnostic_gc64_budget_x4": {
+  "note": "test_frame_budget.lua with MOVING_INTERPRETED x4 (GC64 LuaJIT); not a pass criterion",
+  "ported": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "held drags: 37 changes between held frames cancel the drag before it writes, or keep it when only the reads behind its owner changed",
+    "held garbage: 20 held-frame measurements within budget (still: 0 B; moving: at most the game routine wrappers' 16-48 B, interpreted or compiled)",
+    "release garbage: 10 release measurements (5 routes, interpreted and compiled) within budget: 0 B per release frame, median of 9 releases of a drag that wrote",
+    "model reads: 512 models read in blocks equal the same models read field by field, refilled or new, with every field set to values that fail each bound"
+   ]
+  },
+  "upstream": {
+   "exit": 0,
+   "passed": true,
+   "tail": [
+    "held drags: 37 changes between held frames cancel the drag before it writes, or keep it when only the reads behind its owner changed",
+    "held garbage: 20 held-frame measurements within budget (still: 0 B; moving: at most the game routine wrappers' 16-48 B, interpreted or compiled)",
+    "release garbage: 10 release measurements (5 routes, interpreted and compiled) within budget: 0 B per release frame, median of 9 releases of a drag that wrote",
+    "model reads: 512 models read in blocks equal the same models read field by field, refilled or new, with every field set to values that fail each bound"
+   ]
+  }
+ }
+}
