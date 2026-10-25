@@ -12,7 +12,9 @@ e0c2f6b48225c07cc612d9f412c9b050abcf5c04093dd5f2b9b425d8878d0841) as LLL's Steam
 and carries the runtime inside its boot chunk. This required preservation is disclosed; no claim of
 a licence grant over the game's code or assets is made.
 
-ports/ModOptionsMenu and ports/MatchYourColors are CowboyBingus mods (Zero-Clause BSD, see each
-LICENSE) with only build data remapped for Steam build 26088801.
+When the drop-in package is built with them (--mom, --myc, --licenses), its Mod Options Menu and
+Match Your Colors options are CowboyBingus mods (Zero-Clause BSD; their LICENSE files travel under
+LICENSES/) with only build data remapped for Steam build 26088801. They are the VM's test mods and
+are not part of this repository.
 
 LLL itself: see CONTENTS-NOTICES.txt. No repository-wide open-source licence has been selected.

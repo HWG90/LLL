@@ -6,14 +6,19 @@ Options of the one Arsenal mod:
                                written to data/hd2_luajit_runtime_<hash>.dll, checked byte for byte
                                and loaded. The outcome goes to %LOCALAPPDATA%/HD2-LuaJIT-boot-result.txt.
                                If the load is refused, R35 boots in Lua 5.1 exactly as its own patch.
-  Mod Options Menu 1.2.1       ports/ModOptionsMenu (plain LuaJIT, build 26088801)
-  Match Your Colors 1.5        ports/MatchYourColors (plain LuaJIT, build 26088801)
+  Mod Options Menu 1.2.1       optional (--mom): CowboyBingus's mod with its build data remapped to 26088801,
+  Match Your Colors 1.5        optional (--myc): the same. Both are LuaJIT VM test mods kept outside this
+                               repository (the Linux HD2 workspace's bingus-ports/, built by its
+                               native-work/mom-port and native-work/myc-port); --licenses names the folder
+                               holding ModOptionsMenu/LICENSE and MatchYourColors/LICENSE. Without the three
+                               options the package carries the LuaJIT VM and LLL alone.
 
 The R35 boot source must compile (32-bit stock Lua 5.1.4, chunk '@native-font-repair') to the
 R35 boot archive's chunk byte for byte; the prologue is then compiled in front of it.
 
 usage: build_luajit_live_package.py --lll-archive <R35 9ba626afa44a3aa3.patch_0> --lll-source <R35 boot source.lua>
-         --lua51-32 <lua 5.1.4 32-bit> --runtime <hd2 LuaJIT runtime DLL> --mom <archive> --myc <archive> --output <zip>
+         --lua51-32 <lua 5.1.4 32-bit> --runtime <hd2 LuaJIT runtime DLL> --output <zip>
+         [--mom <archive> --myc <archive> --licenses <folder with ModOptionsMenu/LICENSE, MatchYourColors/LICENSE>]
 """
 from pathlib import Path
 import argparse, hashlib, json, struct, subprocess, tempfile, zipfile, zlib
@@ -105,9 +110,16 @@ def png(size=64):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
-    for name in ('lll-archive', 'lll-source', 'lua51-32', 'runtime', 'mom', 'myc', 'output'):
+    for name in ('lll-archive', 'lll-source', 'lua51-32', 'runtime', 'output'):
         parser.add_argument('--' + name, type=Path, required=True)
+    # The CowboyBingus test mods, kept outside this repository: both archives and the folder with their LICENSE
+    # files, or none of the three.
+    for name in ('mom', 'myc', 'licenses'):
+        parser.add_argument('--' + name, type=Path)
     args = parser.parse_args()
+    bundled = [n for n in ('mom', 'myc', 'licenses') if getattr(args, n)]
+    if bundled and len(bundled) != 3:
+        parser.error('--mom, --myc and --licenses go together')
     original, lll, dll = args.lll_archive.read_bytes(), args.lll_source.read_bytes(), args.runtime.read_bytes()
     if dll[:2] != b'MZ':
         raise ValueError('The runtime must be a Windows DLL')
@@ -128,28 +140,43 @@ def main():
     if chunk[:12] != installed[:12] or dll not in chunk:
         raise ValueError('Boot chunk header or embedded runtime unexpected')
     patch, _ = boot_archive(original, chunk)
-    files = {'LuaJIT-LLL/' + ARCHIVE: patch, 'ModOptionsMenu/' + ARCHIVE: args.mom.read_bytes(),
-             'MatchYourColors/' + ARCHIVE: args.myc.read_bytes()}
-    for folder in ('LuaJIT-LLL', 'ModOptionsMenu', 'MatchYourColors'):
+    files, folders = {'LuaJIT-LLL/' + ARCHIVE: patch}, ['LuaJIT-LLL']
+    options = [{'Name': 'LuaJIT VM + Live Lua Loader', 'Include': ['LuaJIT-LLL'],
+                'Description': 'Required. LLL R35 boot patch carrying the LuaJIT runtime; falls back to LLL in Lua 5.1 if the runtime is refused.'}]
+    licenses = [('LuaJIT-COPYRIGHT.txt', ROOT / 'docs/LUAJIT-COPYRIGHT.txt'), ('LUAJIT-LIVE-NOTICES.txt', ROOT / 'docs/LUAJIT-LIVE-NOTICES.txt'),
+                ('LLL-CONTENTS-NOTICES.txt', ROOT / 'docs/CONTENTS-NOTICES.txt')]
+    readme = README
+    if bundled:
+        files['ModOptionsMenu/' + ARCHIVE] = args.mom.read_bytes()
+        files['MatchYourColors/' + ARCHIVE] = args.myc.read_bytes()
+        folders += ['ModOptionsMenu', 'MatchYourColors']
+        options += [{'Name': 'Mod Options Menu 1.2.1 (LuaJIT)', 'Include': ['ModOptionsMenu'],
+                     'Description': 'Native MODS tab on the Options screen. Needs the LuaJIT VM.'},
+                    {'Name': 'Match Your Colors 1.5 (LuaJIT)', 'Include': ['MatchYourColors'],
+                     'Description': 'Helmet, armor, cape and weapon recoloring. Needs the LuaJIT VM.'}]
+        licenses += [('ModOptionsMenu-0BSD.txt', args.licenses / 'ModOptionsMenu/LICENSE'),
+                     ('MatchYourColors-0BSD.txt', args.licenses / 'MatchYourColors/LICENSE')]
+    else:
+        for old, new in (("In Arsenal disable any other Live Lua Loader, and the Megapack's\n"
+                          "   Mod Options Menu and Match Your Colors options if you have them.",
+                          'In Arsenal disable any other Live Lua Loader.'),
+                         ('LICENSES/ holds the notices for LuaJIT, the two CowboyBingus mods and this package\'s contents.',
+                          'LICENSES/ holds the notices for LuaJIT and this package\'s contents.')):
+            if readme.count(old) != 1:
+                raise ValueError('README text to adapt not found: ' + old[:40])
+            readme = readme.replace(old, new)
+    for folder in folders:
         for suffix in ('.stream', '.gpu_resources'):
             files[folder + '/' + ARCHIVE + suffix] = b''
     manifest = {'Version': 1, 'Guid': GUID, 'Name': 'HD2 LuaJIT VM - LuaJIT Live (26088801)',
                 'Description': 'The game Lua VM as LuaJIT, with Live Lua Loader in LuaJIT. Writes the boot result to '
                                '%LOCALAPPDATA%\\HD2-LuaJIT-boot-result.txt. See README.txt.',
-                'IconPath': 'icon.png', 'Options': [
-                    {'Name': 'LuaJIT VM + Live Lua Loader', 'Include': ['LuaJIT-LLL'],
-                     'Description': 'Required. LLL R35 boot patch carrying the LuaJIT runtime; falls back to LLL in Lua 5.1 if the runtime is refused.'},
-                    {'Name': 'Mod Options Menu 1.2.1 (LuaJIT)', 'Include': ['ModOptionsMenu'],
-                     'Description': 'Native MODS tab on the Options screen. Needs the LuaJIT VM.'},
-                    {'Name': 'Match Your Colors 1.5 (LuaJIT)', 'Include': ['MatchYourColors'],
-                     'Description': 'Helmet, armor, cape and weapon recoloring. Needs the LuaJIT VM.'}]}
+                'IconPath': 'icon.png', 'Options': options}
     files['manifest.json'] = (json.dumps(manifest, indent=2) + '\n').encode()
     files['icon.png'] = png()
-    files['README.txt'] = README.replace('\n', '\r\n').encode()
-    for target, source in (('LuaJIT-COPYRIGHT.txt', 'docs/LUAJIT-COPYRIGHT.txt'), ('LUAJIT-LIVE-NOTICES.txt', 'docs/LUAJIT-LIVE-NOTICES.txt'),
-                           ('LLL-CONTENTS-NOTICES.txt', 'docs/CONTENTS-NOTICES.txt'),
-                           ('ModOptionsMenu-0BSD.txt', 'ports/ModOptionsMenu/LICENSE'), ('MatchYourColors-0BSD.txt', 'ports/MatchYourColors/LICENSE')):
-        files['LICENSES/' + target] = (ROOT / source).read_bytes()
+    files['README.txt'] = readme.replace('\n', '\r\n').encode()
+    for target, source in licenses:
+        files['LICENSES/' + target] = source.read_bytes()
     files['SHA256SUMS.txt'] = ''.join('%s  %s\n' % (sha(data), n) for n, data in sorted(files.items())).encode()
     with zipfile.ZipFile(args.output, 'w', zipfile.ZIP_DEFLATED) as z:
         for n, data in sorted(files.items()):

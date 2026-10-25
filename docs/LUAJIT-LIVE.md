@@ -31,7 +31,8 @@ Measured on Proton against PUC (same session layout): engine callbacks 14.5 vs 2
 ```
 python tools/build_luajit_live.py --game "<Helldivers 2>" --capture-helper mcm_input_d5c4d9333fc3.dll --output lll_luajit_26088801.lua
 python tools/build_luajit_live_package.py --lll-archive <R35 boot patch_0> --lll-source <R35 boot source> \
-  --lua51-32 <32-bit Lua 5.1.4> --runtime <runtime DLL> --mom <MOM archive> --myc <MYC archive> --output <zip>
+  --lua51-32 <32-bit Lua 5.1.4> --runtime <runtime DLL> --output <zip> \
+  [--mom <MOM archive> --myc <MYC archive> --licenses <folder with their LICENSE files>]
 ```
 
 The first prints SHA-256 `76f43c365fa86e951144b303811ea0beb8d9026caf0719f97108e4a6b5339710` for the
@@ -40,9 +41,10 @@ LLL build in runtime `hd2_luajit_runtime_0aa7ada7ec5a86ce.dll`. `steam_resources
 
 ## Installing
 
-Import the release zip into HD2 Arsenal, enable "LuaJIT VM + Live Lua Loader" (and the ports you
-want), disable any other LLL and the Megapack's copies of the same mods, then Purge / Deploy. Its
-README covers the result file and removal.
+Import the release zip into HD2 Arsenal, enable "LuaJIT VM + Live Lua Loader" (and, when the
+package was built with them, the test mods you want), disable any other LLL (and the Megapack's
+copies of any mod the package carries), then Purge / Deploy. Its README covers the result file and
+removal.
 
 ## Known limits
 
@@ -52,8 +54,11 @@ README covers the result file and removal.
   VM keep loading. Plain `ffi` is the target once LuaJIT is confirmed everywhere.
 - Hellpod Drop Hold's Lua 5.1 port fails to load (`PORT51` missing in its implementation).
 
-## Ports
+## Test mods
 
-`ports/ModOptionsMenu` and `ports/MatchYourColors`: the original LuaJIT mods with build data
-remapped for 26088801 and checked in game. See `docs/LUAJIT-LIVE-NOTICES.txt` for contents and
-licences.
+CowboyBingus's Mod Options Menu 1.2.1 and Match Your Colors 1.5, the original LuaJIT mods with
+their build data remapped for 26088801 and checked in game, are the VM's test material and are not
+part of this repository (they were under `ports/` until 2026-10-25). They live in the Linux HD2
+workspace as `bingus-ports/` (built by `native-work/mom-port` and `native-work/myc-port` there) and
+join the drop-in package only through `--mom`, `--myc` and `--licenses`. See
+`docs/LUAJIT-LIVE-NOTICES.txt` for contents and licences.
