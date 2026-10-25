@@ -8,7 +8,7 @@ LuaJIT 2.1 at boot, so the stock scripts, Live Lua Loader and mods run with JIT,
 | | |
 |---|---|
 | Linux / Proton | Working since 2026-10-24: stock scripts boot in LuaJIT, LLL runs, 53–55 mods load, original native callbacks served through a bridge to the engine's PUC VM. |
-| Native Windows | Untested. The game has refused other custom DLLs there with system error 577 (`ERROR_INVALID_IMAGE_HASH`), so a refusal is expected. The package only reports the outcome. |
+| Native Windows | Refused (tested 2026-10-25 with the release zip): the game rejects the runtime DLL at `package.loadlib` with system error 577 (`ERROR_INVALID_IMAGE_HASH`), as it rejected other custom DLLs, and LLL falls back to Lua 5.1. This package does not try to get around that. |
 | Drop-in package on Proton | Verified 2026-10-24: the boot patch wrote the runtime to `data/`, "LuaJIT boot taken", handoff complete, LLL's LuaJIT build loaded 53 mods. |
 
 Measured on Proton against PUC (same session layout): engine callbacks 14.5 vs 23.2 ms/s, mods
