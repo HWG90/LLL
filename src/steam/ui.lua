@@ -270,7 +270,6 @@ return function(loader, platform, controls, report, input_driver)
                     local bounds=g and {x=g.x,y=g.y,w=g.width*g.scale,h=g.height*g.scale}
                     for _,command in ipairs(console_surface.compose(width,height,bounds,menu.visible)) do commands[#commands+1]=command end
                 end
-                view.refresh_font()
                 view.draw(commands)
             end)
             if not ok then self.close();menu.recover();report('LLL UI',tostring(why)) end

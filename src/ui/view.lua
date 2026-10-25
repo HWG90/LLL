@@ -99,6 +99,7 @@ function M.new(sr, preview_only)
         gui, world = nil, nil
     end
     function self.draw(commands)
+        self.refresh_font()
         if preview_view then
             local menu, preview, popup = {}, {}, {}
             for _, c in ipairs(commands) do
