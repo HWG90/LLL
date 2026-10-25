@@ -1,5 +1,10 @@
 # Live Lua Loader (LLL)
 
+> **Branch `LLL_JIT_Live`:** the game's Lua VM as LuaJIT 2.1 at boot, LLL in its own LuaJIT build
+> (no helper, no cffi DLL). Working on Linux/Proton; native Windows refuses the runtime DLL (error
+> 577). See [docs/LUAJIT-LIVE.md](docs/LUAJIT-LIVE.md). The CowboyBingus mods used to test the VM
+> (Mod Options Menu, Match Your Colors on build 26088801) are kept outside this repository.
+
 Lua loader and in-game mod manager for Helldivers 2.
 
 > **NOT FOR THE LIVE GAME UNLESS YOU ARE ON LINUX. IT WILL NOT WORK ON WINDOWS.**
