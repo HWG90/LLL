@@ -57,9 +57,9 @@ function F.new(memory,game,at)
             local function read(offset,count) return read_address(base+offset,count) end
             local pe=u32(read(0x3c,4))
             if not pe or pe<0x40 or pe>0x1000 or u32(read(pe,4))~=0x4550
-                or u32(read(pe+8,4))~=0x6AD7C05D
+                or u32(read(pe+8,4))~=0x6AE0E5FF
                 or u32(read(pe+80,4))~=0x3382000
-                or u32(read(pe+88,4))~=0x2ED14F0 then return nil end
+                or u32(read(pe+88,4))~=0x2ED103A then return nil end
             local font,atlas=hash(read(0x312D998,8)),hash(read(0x312E618,8))
             local owner=pointer(read(0x3180C08,8))
             local material=owner and hash(read_address(owner+24,8))
