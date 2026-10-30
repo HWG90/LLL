@@ -146,6 +146,7 @@ for name, v in pairs(PROLOGUES) do
   local rg = region(G + v[1])
   out('HYS_L6', name, h(G + v[1]), bytes == v[2] and 'prologue ok' or ('prologue ' .. tostring(bytes) .. ' expected ' .. v[2]),
       rg and fmt('protect 0x%X state 0x%X type 0x%X', rg.protection or -1, rg.state or -1, rg.type or -1) or 'region nil',
-      '(expect protect 0x20 PAGE_EXECUTE_READ; 0x1 PAGE_NOACCESS = not yet decrypted: the mod would disable itself)')
+      '(expect protect 0x20 PAGE_EXECUTE_READ; 0x1 PAGE_NOACCESS = not yet decrypted: the port refuses moves until the '
+      .. 'game has run it, then checks and binds it)')
 end
 return true

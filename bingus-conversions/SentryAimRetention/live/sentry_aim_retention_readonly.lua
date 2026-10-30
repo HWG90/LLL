@@ -1,4 +1,4 @@
--- Sentry Aim Retention port, read-only live checks L1-L10 (build 26088801). Reads only, through Link's Link to Memory
+-- Sentry Aim Retention port, read-only live checks L1-L11 (build 26088801). Reads only, through Link's Link to Memory
 -- (read/ptr/get/hashmap/region; nothing here writes or calls a game function; code bytes are read with read(), i.e.
 -- ReadProcessMemory, which simply fails on a page the game has not decrypted yet). Every pointer is range-checked
 -- before it is followed. Run it once on the ship, then in a mission with your own Gatling or Machine Gun sentry
@@ -34,10 +34,13 @@ for _, k in ipairs({'TM', 'BM', 'RM', 'FM', 'CLK', 'WM', 'CM', 'MODE', 'SCH', 'P
   V[k] = P(G + GL[k])
   out('SAR_L1', k, 'game+' .. h(GL[k]), '->', h(V[k]), '| old game+' .. h(OLD[k]), 'holds', h(ptr(G + OLD[k])))
 end
--- L2 code signatures (the port's expected bytes); 'unreadable' = page not decrypted yet (the mod then refuses to bind)
+-- L2 code signatures (the port's expected bytes); 'unreadable' = page not mapped yet (the mod then waits and checks
+-- again every second). The port does not call the two speed setters (setter emulation, NOTES.md): the vertical one is
+-- listed for information only; the replication routine they end with is checked in full instead.
 local SIG = {
   {'game', 0x6C9A50, '405741574883ec283b1572567702450fb6f94c8b15878461', 'retention flag setter'},
-  {'game', 0x105CF00, '4883ec288b41083b05c321de010f84d00000004c8b151650', 'vertical speed setter'},
+  {'game', 0xE69780, '48896c241856415641574883ec30488b0523aae7014d8bf0448bfa8be9488b700880be1d300000000f85a000000048897c2458488b7e1081f9ff7f00000f84860000004c8b0dfe7ce70148895c2450498b4140488b9868010000498b4138ff5008488bc88bd5ffd385c07e588b074803c0896c242044897c24244c897424280f104424200f1144c7088b07ffc0890780be1c3000000074073d000800007525488b1e488b05777de701488bcbff5070488bd7e8294c0000488b05627de701488bcbff5078488b5c2450488b7c2458488b6c24604883c430415f415e5ec3', 'replication routine (221 bytes)'},
+  {'game', 0x105CF00, '4883ec288b41083b05c321de010f84d00000004c8b151650', 'vertical speed setter (not called: information)'},
   {'game', 0x761700, '48894c24085355565741574883ec20', 'fire mode setter'},
   {'exe', 0x1F30C0, '40534883ec204863dae8e2d5eaff488bc84c8b0041ff90e8', 'world_pose getter'},
   {'exe', 0x826D10, '33c04c8d05f7b203020f1f800000000049390cc0740cffc083f80475f3', 'world id'},
@@ -48,7 +51,7 @@ for _, s in ipairs(SIG) do
   local got = b and hex(b)
   out('SAR_L2', s[4], s[1] .. '+' .. h(s[2]), got == s[3] and 'MATCH' or (b and ('DIFFERS ' .. got) or 'unreadable'))
 end
--- L9 horizontal setter: the whole predicted body (the port's signature for it)
+-- L9 horizontal setter: the whole predicted body (information: the port does not call it; confirmed live 2026-10-29)
 local HB = '4883ec288b41083b05d320de010f84d00000004c8b15264fc80133d24889742438458b4a30458b5a38440fafd8418d71ff4585c90f84a400000048895c2430498b5a2848897c2420418b7a340f1f40008bce468d041a4c23c1428b0cc33bcf741f3bc8741fffc2413bd172e4488b5c2430488b7c2420488b7424384883c428c33bc87550428b44c30483f8ff74464c8d0cc5000000008bd0498b4240498b0c01f6411401742e498b425848c1e204f30f114c0208498b42404d8b42584983c0084c03c2bae5450bcc498b0c018b4910e8bcc6e0ff488b5c2430488b7c2420488b7424384883c428c3'
 do
   local b = read(G + 0x105CFF0, #HB / 2)
@@ -69,6 +72,10 @@ local PROFILES = {['58e31d70']= {'ef85d6cf', 'Gatling', 214}, ['76ba26bb'] = {'3
   ['fe962858'] = {'820cc3ba', 'Flamethrower', 208}, ['3bce2d74'] = {'51a0812e', 'Mortar', 320},
   ['38092f8b'] = {'b2053a18', 'EMS mortar', 324}}
 local TM, BM, RM, WM, CM, CLK = V.TM, V.BM, V.RM, V.WM, V.CM, V.CLK
+-- L11 the invalid entity id the setters compare with first (setter emulation)
+local SENTINEL = U32(G + 0x2E3F0D0)
+out('SAR_L11 invalid id u32 [game+0x2E3F0D0]', h(SENTINEL), '| turret map: cap +0x30', U32(RM and RM + 0x30),
+    'empty +0x34', h(U32(RM and RM + 0x34)), 'mul +0x38', U32(RM and RM + 0x38), 'count +0x14', U32(RM and RM + 0x14))
 local now_lo, now_hi = U64(CLK and CLK + 0x18)
 out('SAR_L6 clock [root]+0x18 (us)', now_lo and fmt('%.0f', now_hi * 4294967296 + now_lo) or 'nil')
 if TM then
@@ -100,6 +107,33 @@ if TM then
       local C = ri and P(RM + 0x58) and P(RM + 0x58) + 16 * ri
       if C then out('SAR_L6   turret', ri, 'enabled +0', U8(C), 'horizontal +8', F32(C + 8), 'vertical +12', F32(C + 12),
                     '| rm entity ptr ok', tostring(P(P(RM + 0x40) and P(RM + 0x40) + 8 * ri) == e)) end
+      -- L11 the setter emulation's own lookup (windows_api set_speed): the map walk as the setters do it, the
+      -- owner bit, the network id and both write targets.
+      if RM then
+        local slots, mcap, empty, mul = P(RM + 0x28), U32(RM + 0x30), U32(RM + 0x34), U32(RM + 0x38)
+        local count = U32(RM + 0x14)
+        local index, probes
+        if slots and mcap and mcap > 0 and mcap <= 8192 and BAND(mcap, mcap - 1) == 0 and id ~= SENTINEL then
+          local start = (id * (mul or 0)) % 4294967296
+          for probe = 0, math.min(mcap, 128) - 1 do
+            local slot = slots + 8 * BAND(start + probe, mcap - 1)
+            local k = U32(slot)
+            if k == id then index, probes = U32(slot + 4), probe + 1 break end
+            if k == empty or k == nil then probes = probe + 1 break end
+          end
+        end
+        local rec = index and index ~= 0xFFFFFFFF and index < (count or 0) and P(RM + 0x40) and P(P(RM + 0x40) + 8 * index)
+        local ctl = index and index ~= 0xFFFFFFFF and P(RM + 0x58) and P(RM + 0x58) + 16 * index
+        out('SAR_L11   setter lookup: map cap', mcap, 'empty', h(empty), 'mul', mul, 'count', count, 'probes', probes,
+            'index', h(index), '(= turret row', ri, index == ri and 'ok)' or 'MISMATCH)', 'record', h(rec),
+            rec == e and '(= entity ok)' or '(entity MISMATCH)', 'owned +0x14 bit0', rec and BAND(U8(rec + 0x14) or 0, 1),
+            'net id +0x10', h(U32(rec and rec + 0x10)))
+        for _, t in ipairs({{'horizontal +8 (hash 0xCC0B45E5)', ctl and ctl + 8}, {'vertical +12 (hash 0x9D5D6CC7)', ctl and ctl + 12}}) do
+          local rg = t[2] and region(t[2])
+          out('SAR_L11   write target', t[1], h(t[2]), 'value', F32(t[2]), rg and fmt('protect 0x%X state 0x%X type 0x%X',
+              rg.protection or -1, rg.state or -1, rg.type or -1) or 'nil', '(expect 0x4 / 0x1000 / 0x20000)')
+        end
+      end
       if rt and nt then
         local R, N = rt + 208 * i, nt + 24 * i
         out('SAR_L6   runtime target +0', U32(R), 'raw +8', f3(R + 8), 'computed +20', f3(R + 20), 'net flags +16', U32(N + 16))

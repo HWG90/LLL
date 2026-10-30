@@ -405,6 +405,59 @@
    "what": "install_loader call (revision, exe/game SHA-256 pins)"
   }
  ],
+ "logic_patches": [
+  {
+   "file": "src/windows_api.lua",
+   "line": 158,
+   "why": "setter prologue checks moved from load to first use"
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 166,
+   "why": "stop routine check moved from load to first use"
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 171,
+   "why": "completion routine check moved from load to first use; ready(kind)"
+  },
+  {
+   "file": "src/windows_api.lua",
+   "line": 207,
+   "why": "native.ready exported"
+  },
+  {
+   "file": "src/corpse_data.lua",
+   "line": 72,
+   "why": "native_ready helper"
+  },
+  {
+   "file": "src/corpse_data.lua",
+   "line": 1380,
+   "why": "pose/disable wait for their routines"
+  },
+  {
+   "file": "src/corpse_data.lua",
+   "line": 1416,
+   "why": "handoff stop waits for the stop routine"
+  },
+  {
+   "file": "src/corpse_data.lua",
+   "line": 1424,
+   "why": "completion request waits for its routine"
+  },
+  {
+   "file": "src/corpse_data.lua",
+   "line": 1435,
+   "why": "fling stop waits for the stop routine"
+  },
+  {
+   "file": "src/archive_loader.lua",
+   "line": 26,
+   "why": "native_waits in the status log"
+  }
+ ],
+ "logic_patches_why": "build 26088801 keeps code pages unreadable until the game first runs them; the four command routines are compared right before first use instead of at load (out/logic.diff)",
  "reproduction": {
   "fr1_luajit": "<workspace>/native-work/megapack-port/EnemyCollisionSynchronized/work/luajit-fr1/src/luajit",
   "fr1_dump_flags": "0",
@@ -426,19 +479,20 @@
  "resource": {
   "module": "mods/cowboybingus/corpse_collision_repair",
   "hash": "985c9039ef17db8e",
-  "bytes": 723357
+  "bytes": 730493
  },
  "archive_holds_only": [
   "mods/cowboybingus/corpse_collision_repair"
  ],
  "outputs": {
-  "985c9039ef17db8e.lua.main": "23e677abb6b8dd64d83c82babff31360330e4d5014f73a091768f80ee80c2a8b",
-  "9ba626afa44a3aa3.patch_0": "e363646f410349ea5387df5ae1b376d2e33bf17e8c696c8229b9057db0ff9f5f",
+  "985c9039ef17db8e.lua.main": "c2cbd885bea0f17de3cb60b636426ffb6c4c28274726fdc149085215b29b66f8",
+  "9ba626afa44a3aa3.patch_0": "259c510b5c8639722deda6343a33753ddcf19403fce4520e4f8d3d0c2b4fc7ff",
   "9ba626afa44a3aa3.patch_0.gpu_resources": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
   "9ba626afa44a3aa3.patch_0.stream": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "option_entry.lua": "ecfd0e10d12762de1d0a402ad77c696751a15ee1b067d3f65a2147b21125504a",
-  "wrapper.diff": "4f4a4c86862218b7d6c1c859ff30b62671bb50de992aac4402e51d2c8714c217",
-  "wrapper.lua": "9529ba4655b303844506bb82687c1adaa00b33c50c23cb5b95753763e59c5237"
+  "logic.diff": "f76e84994748218137bc061564e3e46aadfe375fa1172d77e7c00f6769b0258b",
+  "option_entry.lua": "43f1e4eb063efa1319d4950518cfbd70fdd75385ed5674da051445cb2d2c0066",
+  "wrapper.diff": "a1b1d78ce7a2da5b887b1c7b60c687640ae574d2627942bef295f3c3d34a45c9",
+  "wrapper.lua": "171ad1c49b1d6430f61228ac14437d0fe365b5d1fe1f956717c308d231e76afb"
  },
  "inputs": {
   "<workspace>/upstream-bingus/EnemyCollisionSynchronized/src/archive_loader.lua": "218e13b2ef34fd767b81c5c7973c1f14de4e4be9525f5a2399de3318547eb871",
@@ -472,7 +526,7 @@
   "require(\"cffi\")"
  ],
  "install_gate": {
-  "data.filters": "L4 (collision layers of main/registered bodies are still 52/48/83)"
+  "data.filters": "L4 (collision layers of main/registered bodies are still 52/48/83). Answered 2026-10-29 from live reads: layer 11 (flame) row of the collision matrix equals the build-25480438 row in all 128 bits (FlameDamageFixed F4, it names layers 48 and 83), so the one layer 26088801 added (103 -> 104) sits at 102 or 103; destructible is layer 14 in both builds. L4b in live/ecs_readonly.lua reads the layer names for the record."
  },
  "medium_runtime_guarded_rows": [
   "data.body_fields",
@@ -1223,5 +1277,125 @@
   "profile.766",
   "profile.767"
  ],
- "tests": "see out/TESTS.json (from an earlier --tests run)"
+ "tests": {
+  "port": [
+   [
+    "tests/test_module.lua",
+    0,
+    1
+   ],
+   [
+    "tests/test_snapshot.lua",
+    0,
+    1
+   ],
+   [
+    "tests/test_loader.lua",
+    0,
+    1
+   ],
+   [
+    "tests/test_ffi_names.lua",
+    5,
+    1
+   ],
+   [
+    "tests/test_performance.lua",
+    1,
+    1
+   ],
+   [
+    "tests/test_metadata_cache.lua",
+    0,
+    1
+   ],
+   [
+    "tests/test_repose_cooldown.lua",
+    0,
+    1
+   ],
+   [
+    "tests/test_profiler.lua",
+    0,
+    0
+   ],
+   [
+    "tests/test_profiler_detail.lua",
+    0,
+    0
+   ],
+   [
+    "tests/test_profiler_behavior.lua",
+    0,
+    1
+   ],
+   [
+    "tests/test_deferred_bind.lua",
+    0,
+    1
+   ],
+   [
+    "tests/test_profiles.py",
+    0,
+    null
+   ]
+  ],
+  "upstream": [
+   [
+    "tests/test_module.lua",
+    0,
+    1
+   ],
+   [
+    "tests/test_snapshot.lua",
+    0,
+    1
+   ],
+   [
+    "tests/test_loader.lua",
+    0,
+    1
+   ],
+   [
+    "tests/test_ffi_names.lua",
+    5,
+    1
+   ],
+   [
+    "tests/test_performance.lua",
+    1,
+    1
+   ],
+   [
+    "tests/test_metadata_cache.lua",
+    0,
+    1
+   ],
+   [
+    "tests/test_repose_cooldown.lua",
+    0,
+    1
+   ],
+   [
+    "tests/test_profiler.lua",
+    0,
+    0
+   ],
+   [
+    "tests/test_profiler_detail.lua",
+    0,
+    0
+   ],
+   [
+    "tests/test_profiler_behavior.lua",
+    0,
+    1
+   ],
+   [
+    "tests/test_profiles.py",
+    0,
+    null
+   ]
+  ]
+ }
 }

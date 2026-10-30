@@ -9,12 +9,12 @@
  "exe_sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
  "map": {
   "path": "<workspace>/native-work/megapack-port/SentryAimRetention/MAP.json",
-  "sha256": "510758e6c9e7ceeb656a3d472afd7afed38150f33ffabf1557712aa41058dd86",
+  "sha256": "0474ffe01e861d97e7262c777a70d25556c7a58c742d68462ca345e20508b48e",
   "counts": {
-   "high": 41,
-   "medium": 5,
-   "rows": 46,
-   "feeds_write": 33
+   "high": 46,
+   "medium": 4,
+   "rows": 50,
+   "feeds_write": 35
   }
  },
  "replacements": [
@@ -632,6 +632,74 @@
    "what": "install_loader call (revision, exe/game SHA-256 pins)"
   }
  ],
+ "logic_patches": {
+  "why": "setter emulation and wait-for-readable native binding (NOTES.md \"Setter emulation\")",
+  "applied": [
+   {
+    "file": "src/aim_data.lua",
+    "line": 47,
+    "old_lines": 2,
+    "new_lines": 6,
+    "map_rows": [
+     "emulation.replicate"
+    ]
+   },
+   {
+    "file": "src/aim_data.lua",
+    "line": 1086,
+    "old_lines": 18,
+    "new_lines": 29,
+    "map_rows": [
+     "engine.pose_getter",
+     "engine.raycast",
+     "engine.world_id"
+    ]
+   },
+   {
+    "file": "src/aim_data.lua",
+    "line": 1163,
+    "old_lines": 1,
+    "new_lines": 9,
+    "map_rows": []
+   },
+   {
+    "file": "src/windows_api.lua",
+    "line": 26,
+    "old_lines": 3,
+    "new_lines": 9,
+    "map_rows": [
+     "emulation.replicate"
+    ]
+   },
+   {
+    "file": "src/windows_api.lua",
+    "line": 200,
+    "old_lines": 2,
+    "new_lines": 1,
+    "map_rows": [
+     "emulation.replicate"
+    ]
+   },
+   {
+    "file": "src/windows_api.lua",
+    "line": 228,
+    "old_lines": 4,
+    "new_lines": 48,
+    "map_rows": [
+     "emulation.hashes",
+     "emulation.registry",
+     "emulation.sentinel",
+     "game.turret"
+    ]
+   }
+  ],
+  "diff": "out/logic.diff",
+  "replication_signature": {
+   "rva": "0xe69780",
+   "bytes": 221,
+   "equals_evidence_image": true
+  }
+ },
  "reproduction": {
   "unmodified_resource_sha256": "C66E3164AEA01AE1877FDB6F3D380999CD00281FE3001B83C94279B2613E2483",
   "lock_resource_sha256": "C66E3164AEA01AE1877FDB6F3D380999CD00281FE3001B83C94279B2613E2483",
@@ -640,21 +708,20 @@
   "shipped_v26_archive": "<hellforge>/mods/Vanilla Plus Megapack - v26/options/SentryAimRetention/9ba626afa44a3aa3.patch_0"
  },
  "format": "declaration line + plaintext wrapper assembled by build_module(), type-2 Lua resource envelope (no bytecode)",
- "runtime_gated_rows": [
-  "native.horizontal"
- ],
+ "runtime_gated_rows": [],
  "resource": {
   "name": "mods/cowboybingus/sentry_aim_retention",
   "hash": "5b268e629ad0619d",
-  "bytes": 115133
+  "bytes": 119566
  },
  "outputs": {
-  "5b268e629ad0619d.lua": "baa8d5d9a41ea179167e7d8da71537d47d3ce6dc53ed637b3ebb20e40b938724",
-  "9ba626afa44a3aa3.patch_0": "12d1ee81131c154b530c1d07d3b668eb173082b6c16d00cb2f34449b31402888",
+  "5b268e629ad0619d.lua": "a2572037ab66aecfe5795b14a658cd752463fc0dc96fe6423847d16ebc3f0712",
+  "9ba626afa44a3aa3.patch_0": "3964e8ec12027cbe52bd15265890582de4a0f93163d4b2325891d42160dfc102",
   "9ba626afa44a3aa3.patch_0.gpu_resources": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
   "9ba626afa44a3aa3.patch_0.stream": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "sentry_aim_retention.lua": "baa8d5d9a41ea179167e7d8da71537d47d3ce6dc53ed637b3ebb20e40b938724",
-  "wrapper.diff": "1aff9f0a09f64c480109f14b8f15cfe9b210ee6c43ab5c97c840614d7dc1c674"
+  "logic.diff": "999925bf647d93b3880df0925d0eb426527fd70e538f638f3a51a8754cf5b060",
+  "sentry_aim_retention.lua": "a2572037ab66aecfe5795b14a658cd752463fc0dc96fe6423847d16ebc3f0712",
+  "wrapper.diff": "d0b3468b45e5f9ca694254b4f69e4d658431d62f5234ea849781a78d0588f832"
  },
  "inputs": {
   "src/aim_data.lua": "3c9b17c3b794b00ca5636cc7172cbc7b1201007c3713c5dce90bb6b51cdc53cc",
@@ -670,9 +737,9 @@
   "gc64_fr2": true,
   "output": [
    "compile: ok\tLuaJIT 2.1.ROLLING\t8",
-   "[SentryAimRetention] data-v8.6-26088801: mods/cowboybingus/sentry_aim_retention:358: libbcrypt.so: cannot open shared object file: No such file or directory",
+   "[SentryAimRetention] data-v8.6-26088801: mods/cowboybingus/sentry_aim_retention:358: libkernel32.so: cannot open shared object file: No such file or directory",
    "chunk run: true",
-   "status: mods/cowboybingus/sentry_aim_retention:358: libbcrypt.so: cannot open shared object file: No such file or directory",
+   "status: mods/cowboybingus/sentry_aim_retention:358: libkernel32.so: cannot open shared object file: No such file or directory",
    "revision: data-v8.6-26088801",
    "active: false"
   ]
@@ -723,6 +790,16 @@
   {
    "file": "tests/current_game_25327279.lua",
    "global_slot_blocks_relocated": 7
+  },
+  {
+   "file": "tests/test_snapshot.lua",
+   "logic_test_edit": "assert(not pcall(M.apply,api,g,nil,{})) -- no setter signatures, so no binding or mutation",
+   "lines_added": 15
+  },
+  {
+   "file": "tests/test_windows_api.lua",
+   "logic_test_edit": "-- Declarations are made once per game and api.bind casts to named",
+   "lines_added": 68
   }
  ],
  "tests": {

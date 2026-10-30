@@ -7,64 +7,114 @@
 +        local binding=pointer(game+0x2ce1500)
 +        assert(api.distance(binding,exe)==0x2874ed0,'Unsupported physics API')
 +        for _,entry in ipairs({{8,0x806790},{0x60,0x820c40},{0x68,0x820f60}}) do
-@@ -159,2 +159,2 @@
+@@ -159,2 +159,4 @@
 -        assert(api.read(exe+0x799880,8)=='\x48\x89\x5c\x24\x08\x48\x89\x6c','Position setter changed')
 -        assert(api.read(exe+0x799ba0,8)=='\x48\x89\x5c\x24\x08\x48\x89\x6c','Rotation setter changed')
-+        assert(api.read(exe+0x820c40,8)=='\x48\x89\x5c\x24\x08\x48\x89\x6c','Position setter changed')
-+        assert(api.read(exe+0x820f60,8)=='\x48\x89\x5c\x24\x08\x48\x89\x6c','Rotation setter changed')
-@@ -163 +163 @@
++        -- Build 26088801: code pages stay unreadable until the game first runs
++        -- them, so these comparisons run right before each command's first use
++        -- (ready below) instead of at load.
++        local setter_prologue='\x48\x89\x5c\x24\x08\x48\x89\x6c'
+@@ -163 +165 @@
 -        local stop_hex='48895c2408574883ec60488b4138448bc24969d8b82b00004a8b3cc048035948488bcfe86822d5ff80b8c40600000074558b4f08e807e082004885c07448f64014017442448b480c33d2c6442450000f57c0f30f11442448448bc1488b0d9e17cc02895424408954243888542430488d542478f30f11442428c744242001000000e8ba3dc100c683a42b000000488b5c24704883c4605fc3'
 +        local stop_hex='48895c2408574883ec60488b4138448bc24969d8b82b00004a8b3cc048035948488bcfe838e0d4ff80b8c40600000074558b4f08e807266b004885c07448f64014017442448b480c33d2c6442450000f57c0f30f11442448448bc1488b0d56106702895424408954243888542430488d542478f30f11442428c744242001000000e86af4a900c683a42b000000488b5c24704883c4605fc3'
-@@ -165 +165 @@
+@@ -165 +167 @@
 -        assert(api.read(game+0x7abd00,#stop_bytes)==stop_bytes,'Ragdoll stop routine changed')
-+        assert(api.read(game+0x7b76a0,#stop_bytes)==stop_bytes,'Ragdoll stop routine changed')
-@@ -168 +168 @@
++        -- Compared before the first stop (ready('stop')).
+@@ -168 +170 @@
 -        local completion_hex='48895c24184889542410564883ec70488bf1418bd8418bc8e8d399c1ff4885c00f8472010000f64014014889bc24800000000f84f20000008b501081faff7f0000742e488b05febb0a02488b4808e8eddfc1ff84c0741a488b0d42cb0b028bd3488b89a8b30000e8340c82ffe91f010000488b0dc062f6018bd3e8816c56ff84c00f840901000033ff488d461c8bcf9039180f84f8000000ffc14883c04083f92072ed8bcf488d86240800000f1f400039180f84d8000000ffc14883c04081f98000000072ea8bcbe82399c1ff4885c00f84ba000000f64014010f84b0000000448b480c488d94248800000040887c24500f57c0f30f11442448448bc3f30f100507630001488bce897c2440897c2438c644243001f30f11442428c744242001000000e8c8f6ffffeb668b701081feff7f0000750433ffeb23488b0d785ef601488b4140488bb860010000488b4138ff5008488bc88bd6ffd7488bf88bcbe88d95c1ff41b901000000c7442460010000004c8d442460c744246404000000488bd74889442468b9326c6621e850df81ff488bbc2480000000488b9c24900000004883c4705ec3'
 +        local completion_hex='48895c24184889542410564883ec70488bf1418bd8418bc8e82329c1ff4885c00f8472010000f64014014889bc24800000000f84f20000008b501081faff7f0000742e488b05cecda801488b4808e83d75c1ff84c0741a488b0d2a0ebe018bd3488b89a8b30000e884839affe91f010000488b0d20a4a8018bd3e8710a6eff84c00f840901000033ff488d461c8bcf9039180f84f8000000ffc14883c04083f92072ed8bcf488d86240800000f1f400039180f84d8000000ffc14883c04081f98000000072ea8bcbe87328c1ff4885c00f84ba000000f64014010f84b0000000448b480c488d94248800000040887c24500f57c0f30f11442448448bc3f30f1005afeafe00488bce897c2440897c2438c644243001f30f11442428c744242001000000e8c8f6ffffeb668b701081feff7f0000750433ffeb23488b0de89fa801488b4140488bb860010000488b4138ff5008488bc88bd6ffd7488bf88bcbe8dd24c1ff41b901000000c7442460010000004c8d442460c744246404000000488bd74889442468b9326c6621e8a0569aff488bbc2480000000488b9c24900000004883c4705ec3'
-@@ -170,6 +170,6 @@
+@@ -170,6 +172,27 @@
 -        assert(api.read(game+0x13c0350,#completion_bytes)==completion_bytes,'Corpse completion request changed')
 -        local request_completion=ffi.cast('void (*)(void *,uintptr_t,uint32_t)',game+0x13c0350)
 -        local stop_sync=ffi.cast('void (*)(void *,uint32_t)',game+0x7abd00)
 -        local position=ffi.cast('void (*)(uint32_t,const float *)',exe+0x799880)
 -        local rotation=ffi.cast('void (*)(uint32_t,const float *)',exe+0x799ba0)
 -        local enabled=ffi.cast('void (*)(const uint32_t *,uint32_t,uint32_t)',exe+0x77f4f0)
-+        assert(api.read(game+0x12573a0,#completion_bytes)==completion_bytes,'Corpse completion request changed')
++        -- Each command's routines, compared right before its first use: an
++        -- unreadable page (not resident yet) makes that command wait, uncalled,
++        -- and is read again at most once a second; different bytes refuse it.
++        local checks={
++            pose={{exe+0x820c40,setter_prologue,'Position setter changed'},
++                {exe+0x820f60,setter_prologue,'Rotation setter changed'}},
++            stop={{game+0x7b76a0,stop_bytes,'Ragdoll stop routine changed'}},
++            completion={{game+0x12573a0,completion_bytes,'Corpse completion request changed'}},
++        }
++        local verified,refused,retry={disable=true},{},{}
++        local function ready(kind)
++            if verified[kind] then return true end
++            if refused[kind] then error(refused[kind],0) end
++            local now=api.time()
++            if retry[kind] and now<retry[kind] then return false end
++            for _,check in ipairs(checks[kind]) do
++                local bytes=api.read(check[1],#check[2])
++                if bytes==nil then retry[kind]=now+1;return false end
++                if bytes~=check[2] then refused[kind]=check[3];error(check[3],0) end
++            end
++            verified[kind]=true;return true
++        end
 +        local request_completion=ffi.cast('void (*)(void *,uintptr_t,uint32_t)',game+0x12573a0)
 +        local stop_sync=ffi.cast('void (*)(void *,uint32_t)',game+0x7b76a0)
 +        local position=ffi.cast('void (*)(uint32_t,const float *)',exe+0x820c40)
 +        local rotation=ffi.cast('void (*)(uint32_t,const float *)',exe+0x820f60)
 +        local enabled=ffi.cast('void (*)(const uint32_t *,uint32_t,uint32_t)',exe+0x806790)
-@@ -189 +189 @@
+@@ -185,0 +209 @@
++            ready=ready,
+@@ -189 +213 @@
 -                local service=pointer(game+0x346d500)
 +                local service=pointer(game+0x2e28758)
-@@ -1454,3 +1454,3 @@
+@@ -1052,0 +1077,8 @@
++-- Build 26088801 port: a command runs only once its routines compared equal
++-- (native.ready); a native table without ready (the offline fixtures) counts
++-- as compared, as upstream's load-time check did.
++local function native_ready(state,kind)
++    local ready=state.native.ready
++    if ready==nil or ready(kind) then return true end
++    state.native_waits=(state.native_waits or 0)+1;return false
++end
+@@ -1454,3 +1486,3 @@
 -    based_game,based_exe,mode_slot=game,exe,game+0x33266a0
 -    manager_slots[false],manager_slots[true]=game+0x3326948,game+0x3326920
 -    for index=0,3 do world_slots[index]=exe+0x27ba8a8+176*index end
 +    based_game,based_exe,mode_slot=game,exe,game+0x2ce1850
 +    manager_slots[false],manager_slots[true]=game+0x2ce1af8,game+0x2ce1ad8
 +    for index=0,3 do world_slots[index]=exe+0x2861d88+176*index end
-@@ -1462 +1462 @@
+@@ -1462 +1494 @@
 -    local reference=read(world_slots[index] or exe+0x27ba8a8+176*index,8)
 +    local reference=read(world_slots[index] or exe+0x2861d88+176*index,8)
-@@ -1469 +1469 @@
+@@ -1469 +1501 @@
 -    if offset~=0xd0cfa0 then
 +    if offset~=0xd658d0 then
-@@ -1473 +1473 @@
+@@ -1473 +1505 @@
 -            index,api.address(world),api.address(vt),api.address(getter),api.address(exe+0xd0cfa0),offset)
 +            index,api.address(world),api.address(vt),api.address(getter),api.address(exe+0xd658d0),offset)
-@@ -1548 +1548 @@
+@@ -1548 +1580 @@
 -            local b=cached(exe+0x2369b00+64*index,56)
 +            local b=cached(exe+0x2411200+64*index,56)
-@@ -1651 +1651 @@
+@@ -1651 +1683 @@
 -        local registry=pointer(guard(u.guards,exe+0x1a100f0,8))
 +        local registry=pointer(guard(u.guards,exe+0x1ab76f8,8))
-@@ -1669 +1669 @@
+@@ -1669 +1701 @@
 -        local list=pointer(guard(u.guards,exe+0x27c5b40,8))+slot_index*24
 +        local list=pointer(guard(u.guards,exe+0x286d030,8))+slot_index*24
-@@ -2195 +2195 @@
+@@ -2195 +2227 @@
 -        slot_bytes[true]=slot_from(0x280,true,slot_bytes[true])
 +        slot_bytes[true]=slot_from(0x288,true,slot_bytes[true])
-@@ -3509 +3509 @@
+@@ -2353 +2385,2 @@
+-                if holds(u) and same(api,action.actor.guards) then
++                if holds(u) and same(api,action.actor.guards)
++                    and native_ready(state,action.kind=='disable' and 'disable' or 'pose') then
+@@ -2388 +2421 @@
+-            if finish_handoff and holds(u) then
++            if finish_handoff and holds(u) and native_ready(state,'stop') then
+@@ -2396 +2429 @@
+-            elseif request_completion and holds(u) then
++            elseif request_completion and holds(u) and native_ready(state,'completion') then
+@@ -2407 +2440 @@
+-            elseif stop and holds(u) and same(api,u.main_pose_guards or EMPTY) then
++            elseif stop and holds(u) and same(api,u.main_pose_guards or EMPTY) and native_ready(state,'stop') then
+@@ -3338 +3371 @@
+-                'mission_flag','mode_field_40',
++                'mission_flag','mode_field_40','native_waits',
+@@ -3509 +3542 @@
 -install_loader(create_api, patch, {revision = 'v2.13.0', exe_sha256 = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06', game_sha256 = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'}, runtime, runtime_memory)
 +install_loader(create_api, patch, {revision = 'v2.13.0-26088801', exe_sha256 = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE', game_sha256 = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'}, runtime, runtime_memory)

@@ -5,6 +5,23 @@ Source: `upstream-bingus/HellpodDropHold` (git `v1.2.1`, clean). Old build 25480
 Nothing here touched the network, the game folder, `~/.config/hd2arsenal`, anything under `<steam-library>`
 (read only), the upstream checkouts, or the running game. Nothing was installed.
 
+## 2026-10-29: the "unexpected pod type hash" was other pods (no re-map needed)
+
+The 2026-10-25 mission probe (`live/hdh_readonly.live.log`) listed 5 landed, owned pods, all with type hash
+`0x73F8498BFFDCF415`, and was read as "live pods carry a type hash the mod does not expect". Statically:
+- `0x73F8498BFFDCF415` occurs once in each game.dll (old 0x79EC8B, new 0x7AA4FB), as the fallback of a seeded random
+  pick (PCG constants 0x5851F42D4C957F2D / 0x14057B7EF767814F beside it, a weighted sum over a 0x58-stride table) in
+  a function unrelated to the avatar spawn. It is an existing pod type in both builds, not a renamed player pod.
+- The player-pod hashes the mod expects keep their only sites in the avatar-spawn code: new 0xAA3AA9 (`movabs rdi,
+  0xE58163E71928D3E2`) and 0xAA3BF5 (`0xEF9EB729A9D6D849`) in 0xAA27D0, and 0xAA49C2 compares a record's `[rec]`
+  with `0xE58163E7…` exactly as the mod does (old 0xA8804B / 0xA88190 / 0xA88F64).
+- The same probe found both expected hashes in the settings table with the expected records (L7: variant 2,
+  400/500/100/1.0; variant 1, 350/350/100/1.0).
+So the probe ran while no player pod existed (sentries were out: those were stratagem pods). The map stands and the
+port goes in as built (it fails closed on any unrecognized pod; the installed copy failed to load on `PORT51`).
+Behaviour check still due: a slow mission load or a join, where the log should show `holding initial spawn pod …`
+then `released pod …`.
+
 ## Deliverables
 
 | Path | What |

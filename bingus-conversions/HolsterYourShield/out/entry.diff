@@ -45,6 +45,84 @@
 @@ -595 +595 @@
 -local ROW_SIZE, SETTINGS_SLOTS, SETTINGS_SIZE = 48, 688, 232
 +local ROW_SIZE, SETTINGS_SLOTS, SETTINGS_SIZE = 48, 702, 232
-@@ -1085 +1085 @@
+@@ -837 +837,2 @@
+--- The three calls of one move, exactly as the game makes them, then the check on the next frame.
++-- The three calls of one move, exactly as the game makes them, then the check on the next frame. Returns false,
++-- calling nothing, while the game's functions are not readable yet (an adapter without ready is always ready).
+@@ -839,0 +841,5 @@
++    if api.ready and not api.ready() then
++        self:refuse(label, 'the game functions are not readable yet (the game runs them the first time it draws or '
++                    .. 'stows a shield)')
++        return false
++    end
+@@ -845,0 +852 @@
++    return true
+@@ -889 +896,4 @@
+-        return self:move(kept, shield, MODE_AWAY, 'Shield to the back')
++        if not self:move(kept, shield, MODE_AWAY, 'Shield to the back') then
++            self.toggled, self.toggled_for = false, nil -- the shield stayed in hand
++        end
++        return
+@@ -900,0 +911 @@
++    local toggled_for = self.toggled_for
+@@ -904 +915,6 @@
+-    if one_handed then return self:move(kept, shield, MODE_HELD, 'Shield to the hand') end
++    if one_handed then
++        if not self:move(kept, shield, MODE_HELD, 'Shield to the hand') then
++            self.toggled, self.toggled_for = true, toggled_for -- the shield stayed on the back
++        end
++        return
++    end
+@@ -920,0 +937,3 @@
++    if not self:move(kept, shield, MODE_AWAY, 'Shield back to the back after the game drew it') then
++        return self:untoggle('the game functions are not readable yet, so it stays in hand')
++    end
+@@ -923 +941,0 @@
+-    self:move(kept, shield, MODE_AWAY, 'Shield back to the back after the game drew it')
+@@ -1016 +1034,4 @@
+-    -- Binds the game's three functions after checking their first bytes; raises when one differs.
++    -- Build 26088801 port: the game's code pages stay unreadable until the game first runs them (it runs these
++    -- three the first time it draws or stows a shield), so bind only keeps the base. ready() checks the first bytes
++    -- of the three functions right before a move and binds them then: false while one is unreadable (nothing is
++    -- called), and it raises when one differs, for the rest of the session.
+@@ -1018,13 +1039,24 @@
+-        local L = Holster.LAYOUT
+-        for name, expected in pairs(Holster.PROLOGUES) do
+-            need(api.view(game + L[name], 16), 'game function unreadable: ' .. name)
+-            local got = {}
+-            for i = 0, 15 do got[#got + 1] = format('%02x', view[i]) end
+-            need(table.concat(got) == expected, 'game function differs: ' .. name)
+-        end
+-        local set_item = ffi.cast('hys1_set_item', game + L.set_item)
+-        local set_mode = ffi.cast('hys1_set_mode', game + L.set_mode)
+-        local send_held = ffi.cast('hys1_send_held', game + L.send_held)
+-        api.set_item = function(inventory, avatar, item) set_item(inventory, avatar, item) end
+-        api.set_mode = function(inventory, avatar, mode) set_mode(inventory, avatar, mode) end
+-        api.send_held = function(peer, avatar, item, mode) send_held(peer, avatar, item, mode) end
++        local L, bound, differs = Holster.LAYOUT, false, nil
++        function api.ready()
++            if bound then return true end
++            need(differs == nil, differs)
++            for name, expected in pairs(Holster.PROLOGUES) do
++                if not api.view(game + L[name], 16) then return false end
++                local got = {}
++                for i = 0, 15 do got[#got + 1] = format('%02x', view[i]) end
++                if table.concat(got) ~= expected then differs = 'game function differs: ' .. name end
++                need(differs == nil, differs)
++            end
++            local set_item = ffi.cast('hys1_set_item', game + L.set_item)
++            local set_mode = ffi.cast('hys1_set_mode', game + L.set_mode)
++            local send_held = ffi.cast('hys1_send_held', game + L.send_held)
++            api.set_item = function(inventory, avatar, item) set_item(inventory, avatar, item) end
++            api.set_mode = function(inventory, avatar, mode) set_mode(inventory, avatar, mode) end
++            api.send_held = function(peer, avatar, item, mode) send_held(peer, avatar, item, mode) end
++            -- Interpreted, like everything bound at install (Holster.interpreted_but_step ran before them).
++            if type(jit) == 'table' and type(jit.off) == 'function' then
++                for _, fn in ipairs({api.set_item, api.set_mode, api.send_held}) do pcall(jit.off, fn, true) end
++            end
++            bound = true
++            return true
++        end
+@@ -1085 +1117 @@
 -        need(ok, why == 'unsupported game build' and 'unsupported game build (needs Steam build 25480438)'
 +        need(ok, why == 'unsupported game build' and 'unsupported game build (needs Steam build 26088801)'
