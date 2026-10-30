@@ -6,21 +6,28 @@ Old build 25480438, new build 26088801 (game.dll `6D1D4D3B…C08F`, helldivers2.
 touched the network, the game folder, `~/.config/hd2arsenal`, `<steam-library>` (not even read), the upstream checkouts or
 the running game. Nothing was installed.
 
+**2026-10-29: setter emulation (beyond build data).** The game never runs its two turret speed setters in play, so their
+code pages stay unreadable and the mod's byte check of them could never pass: the port as first built would have
+raised at the first own sentry and been stopped by the loader's guard. The port now does the setters' work itself and
+waits instead of raising while a native's code cannot be read yet (section "Setter emulation" below, `out/logic.diff`).
+Status: built and tested offline; not installed; live acceptance (L11, then holds in play) pending.
+
 ## Deliverables
 
 | Path | What |
 |---|---|
-| `MAP.json` | 46 rows (41 high, 5 medium, 0 low/unmapped; 33 feed a write or a write decision). Every witness re-checked by `tools/build_map.py`; `witness_check_failures` is empty. `inventory_sites` maps all 50 inventory lines to rows. |
-| `build.py` | `python3 -I -B build.py [--tests]`. Copies upstream `src/ scripts/ tests/` to `work/upstream` and `work/port`, applies 40 exact replacements (build data only), assembles both with upstream `scripts/module.py build_module()`, archives, compiles, smoke-runs. |
-| `out/sentry_aim_retention.lua` (= `out/5b268e629ad0619d.lua`) | sha256 `baa8d5d9…8724`. `-- HD2-Addon: mods/cowboybingus/sentry_aim_retention` + the plaintext wrapper `build_module()` assembles. |
-| `out/9ba626afa44a3aa3.patch_0` | sha256 `12d1ee81…2888`, `make_archive` from BingusSharedLoader, round-tripped. One resource only: `5b268e629ad0619d` (type `a14e8dfa2cd117e2`, version-2 envelope, 115133 bytes). No shared Megapack stub. Empty `.stream` / `.gpu_resources` beside it. |
-| `out/wrapper.diff` | Port wrapper vs the unmodified upstream assembly (40 changed lines: 39 replacements + the `install_loader` line). |
+| `MAP.json` | 50 rows (46 high, 4 medium, 0 low/unmapped; 35 feed a write or a write decision), incl. the four `emulation.*` rows. Every witness re-checked by `tools/build_map.py`; `witness_check_failures` is empty. `inventory_sites` maps all 50 inventory lines to rows. |
+| `build.py` | `python3 -I -B build.py [--tests]`. Copies upstream `src/ scripts/ tests/` to `work/upstream` and `work/port`, applies 40 exact replacements (build data only; assembled once alone as `work/port-data` for the line-for-line check), then the 6 `LOGIC_PATCHES` (setter emulation, wait-for-readable binding; the port wrapper must equal the build-data wrapper with exactly these applied), assembles with upstream `scripts/module.py build_module()`, archives, compiles, smoke-runs. |
+| `out/sentry_aim_retention.lua` (= `out/5b268e629ad0619d.lua`) | sha256 `a2572037…0712`. `-- HD2-Addon: mods/cowboybingus/sentry_aim_retention` + the plaintext wrapper `build_module()` assembles. |
+| `out/9ba626afa44a3aa3.patch_0` | sha256 `3964e8ec…c102`, `make_archive` from BingusSharedLoader, round-tripped. One resource only: `5b268e629ad0619d` (type `a14e8dfa2cd117e2`, version-2 envelope, 119566 bytes). No shared Megapack stub. Empty `.stream` / `.gpu_resources` beside it. |
+| `out/wrapper.diff` | Port wrapper vs the unmodified upstream assembly. The build-data part alone is 40 changed lines (39 replacements + the `install_loader` line). |
+| `out/logic.diff` | Port wrapper vs the build-data-only wrapper: exactly the 6 `LOGIC_PATCHES`. |
 | `out/build-receipt.json`, `out/TESTS.json` | Hashes, every replacement, reproduction proof, LuaJIT check, test results. |
-| `live/sentry_aim_retention_readonly.lua` | Read-only live probe (L0–L10 below). `tools/mock_llm_probe.lua` runs it against mocked memory. |
-| `tools/` | `lib.py`/`align.py`/`show_pair.py`/`imm_scan.py`/… (from hdh-port), `map_globals.py`, `map_fields.py`, `fcmp.py`/`save_fcmp.py` (whole-function old/new comparisons), `record_fields.py`, `strides.py`, `horizontal.py`, `behavior_enum.py` (copied from the Laser Sentry Cooldown port), `behavior_ids.py`, `behavior_runs.py`, `behavior_layout.py`, `build_map.py`. |
-| `evidence/` | `globals.json`, `old-global-xrefs.json`, `field-pairs.json`, `functions.json`, `record-fields-*.txt`, `strides-*.txt`, `horizontal-setter.txt`, `listings/`. |
+| `live/sentry_aim_retention_readonly.lua` | Read-only live probe (L0–L11 below). `tools/mock_llm_probe.lua` runs it against mocked memory. |
+| `tools/` | `lib.py`/`align.py`/`show_pair.py`/`imm_scan.py`/… (from hdh-port), `map_globals.py`, `map_fields.py`, `fcmp.py`/`save_fcmp.py` (whole-function old/new comparisons), `record_fields.py`, `strides.py`, `horizontal.py`, `behavior_enum.py` (copied from the Laser Sentry Cooldown port), `behavior_ids.py`, `behavior_runs.py`, `behavior_layout.py`, `setter_emulation.py` (setter emulation evidence), `build_map.py`. |
+| `evidence/` | `globals.json`, `old-global-xrefs.json`, `field-pairs.json`, `functions.json`, `record-fields-*.txt`, `strides-*.txt`, `horizontal-setter.txt`, `setter-emulation.txt`, `live-game-26088801-page-105D000.bin` (page 0x105d000 read live in a mission, 2026-10-29), `listings/`. |
 
-Rebuild: `cd tools && python3 -I -B map_globals.py && python3 -I -B map_fields.py 150 && python3 -I -B save_fcmp.py && python3 -I -B record_fields.py 0x1f8 > ../evidence/record-fields-behavior-504.txt && python3 -I -B record_fields.py 0xd0 > ../evidence/record-fields-runtime-208.txt && python3 -I -B horizontal.py > ../evidence/horizontal-setter.txt && python3 -I -B build_map.py`, then `cd .. && python3 -I -B build.py --tests`.
+Rebuild: `cd tools && python3 -I -B map_globals.py && python3 -I -B map_fields.py 150 && python3 -I -B save_fcmp.py && python3 -I -B record_fields.py 0x1f8 > ../evidence/record-fields-behavior-504.txt && python3 -I -B record_fields.py 0xd0 > ../evidence/record-fields-runtime-208.txt && python3 -I -B horizontal.py > ../evidence/horizontal-setter.txt && python3 -I -B setter_emulation.py > ../evidence/setter-emulation.txt && python3 -I -B build_map.py`, then `cd .. && python3 -I -B build.py --tests`.
 
 ## Packaging (GC64)
 
@@ -44,6 +51,7 @@ Rebuild: `cd tools && python3 -I -B map_globals.py && python3 -I -B map_fields.p
 | archive.EXE_SHA / GAME_DLL_SHA | build pins | F5FEE03D… / 2E2C3B7C… | 0ACC07DE… / 6D1D4D3B… |
 | native.retention | flag setter + 24-byte signature | 0x6bf390 | **0x6c9a50** |
 | native.vertical | vertical speed setter + signature | 0x11cb930 | **0x105cf00** |
+| emulation.* (beyond build data) | invalid id / replication routine / field hashes | 0x3483c20 / 0xfd97e0 / same | **0x2e3f0d0 / 0xe69780 (221-byte signature) / same**; the two setters above are no longer called |
 | native.horizontal | horizontal speed setter + signature | 0x11cba20 (24 bytes) | **0x105cff0 (whole predicted 232-byte body)** — medium, runtime-gated |
 | native.fire_mode | fire mode setter + signature | 0x755f90 | **0x761700** (signature bytes unchanged) |
 | engine.pose_getter | exe world_pose getter signature | 0x1fd220 | **0x1f30c0** |
@@ -82,9 +90,10 @@ every exact window agrees). 0x2861d88 = raycast world table 0x2861d50 + 0x38, th
 | world_pose getter (checked only) | exe 0x1fd220 → 0x1f30c0 | 0 differing; unique pattern; same engine-API table slot initializer |
 
 The mod reads every signature with `memory.read` (ReadProcessMemory) once per session before binding and never calls a
-native whose bytes did not match, so a non-resident (still encrypted, PAGE_NOACCESS) page makes it refuse, not crash.
+native whose bytes did not match, so a non-resident (still encrypted, PAGE_NOACCESS) page makes it wait (since the
+setter emulation; before: refuse), never crash.
 
-**Horizontal setter (medium, runtime-gated).** In build 25480438 the horizontal setter is the vertical one 0xF0 later,
+**Horizontal setter (high since 2026-10-29; no longer called, see "Setter emulation").** In build 25480438 the horizontal setter is the vertical one 0xF0 later,
 byte-identical except: RIP/call displacements −0xF0 (same targets), the stored field +0xC→+0x8 (2 bytes) and the
 network hash 0x9D5D6CC7→0xCC0B45E5 (`tools/horizontal.py` asserts this on the old image). The new vertical setter is
 instruction-identical to the old one, so the same transformation predicts the new horizontal body at 0x105cf00+0xF0.
@@ -94,6 +103,56 @@ with the **whole 232-byte predicted body**: the mod calls it only if all 232 byt
 prediction, which proves address and semantics at that moment. If the page is not yet decrypted when the first own
 sentry is seen, `bind_natives` raises "Unsupported native sentry setter"; the loader's guard then counts errors and
 stops the mod after 8 in a burst — a clean refusal, but it would disable the option for that session (L2/L9 show this).
+That is what the live checks then showed would happen every session (next section), so the port no longer calls
+this setter. **Live 2026-10-29** (mission): page 0x105d000 became readable and was dumped
+(`evidence/live-game-26088801-page-105D000.bin`, sha256 `adaee096…e479`); the disk's 16 bytes at 0x105cff0 plus that
+page are the predicted 232-byte body byte for byte (store +8, hash 0xCC0B45E5, manager 0x2CE1F30, call 0xE69780).
+Page 0x105c000 (the vertical setter, and this setter's first 16 bytes) was still unreadable at the same time.
+
+## Setter emulation (beyond build data; build.py `LOGIC_PATCHES`, `out/logic.diff`)
+
+**Why.** In both builds the direct setters' only callers are a family of turret event handlers (old 0x10cfdb0… five
+482-byte siblings + 0x10d1b40: event 0 zeroes both speeds, event 300 restores them from constants; in 26088801 one
+sibling is visible at 0xf60eaf, the others sit on encrypted pages). Normal sentry play never raises those events: on
+2026-10-25 with a Laser, a Flamethrower and a Gatling sentry firing, both setter pages were unreadable (L2/L9), and on
+2026-10-29 page 0x105c000 still was. Build 26088801 maps such pages only once the game runs code on them, so the
+vertical signature check, and the horizontal full-body check, could not pass in a session where no sentry raised
+those events: `bind_natives` raised "Unsupported native sentry setter" at the first own sentry, and the loader's guard
+would stop the mod after 8 errors. Calling a function whose page cannot be read is never done (it cannot be checked).
+
+**What the port does instead** (`windows_api.lua` `set_speed`, used by `native.horizontal` / `native.vertical`): the
+setters' own work, step for step (`evidence/setter-emulation.txt`): the entity id at +8, nothing for the invalid id
+(u32 at game+0x2E3F0D0, live 0); the turret registry [game+0x2CE1F30]'s id map (+0x28 slots of {u32 key, u32 index},
++0x30 capacity, +0x34 empty key, +0x38 multiplier; start (id×mul) & (cap−1), linear probe; live: 512 / 0 / 2); index
+−1 or absent = nothing; nothing unless the registry's entity (+0x40 pointers) has +0x14 bit 0 (owned by this machine);
+the speed into control record +0x58 + 16·index (+8 horizontal, +0xC vertical) through `api.write` (VirtualQuery:
+committed private read-write, then WriteProcessMemory) and read back; only then the routine the setters end with,
+game+0xE69780(entity +0x10 network id, field hash, field address), hash 0xCC0B45E5 horizontal / 0x9D5D6CC7 vertical.
+Stricter than the setters: the probe is bounded at 128 (as the mod's own map lookup), the index must be below the
+registry count (+0x14), the capacity a power of two ≤ 8192, and the registry's entity must be the entity the row
+located (`Component identity mismatch` otherwise).
+
+**Evidence** (MAP rows `emulation.replicate`, `emulation.sentinel`, `emulation.registry`, `emulation.hashes`, all
+high; `tools/setter_emulation.py` asserts every item on the images):
+- the direct vertical setter 0x105cf00 (plaintext page), the direct horizontal one (live page), and the readable
+  handle-taking twins of both (new 0x4d5870 / 0x4d5960, old 0x4cea40 / 0x4ceb30): each loads the invalid id (new
+  0x2E3F0D0, old 0x3483C20) and the turret manager (new 0x2CE1F30, old 0x3326D70), walks the map as above, tests
+  +0x14 bit 0, stores at +0xC / +8 with hash 0x9D5D6CC7 / 0xCC0B45E5 and calls the replication routine with +0x10;
+- the replicated-field registration (old 0x6e06f0 / new 0x6eb097) lists 0x9611C029, 0xCC0B45E5, 0x9D5D6CC7 in that
+  order in both builds;
+- the replication routine: old 0xfd97e0 / new 0xe69780, 58 = 58 instructions identical apart from displacements, 221
+  bytes through its ret, no base relocation inside (so live bytes = image bytes), 1183 call sites (old 1272). Live
+  2026-10-29: readable in a mission and its 221 bytes equal the image. The mod checks all 221 bytes with
+  ReadProcessMemory in `bind_natives` (it replaced the two setter rows of `signatures`) and calls it only after that.
+
+**Waiting instead of raising.** `bind_natives` returns nil while any native's code cannot be read (a read that
+fails); bytes that read differently still raise. `M.apply` then returns `waiting_for_natives` (no hold, fire pause or
+search request: the sentries keep the game's own behavior) and checks again after 1 s. Once bound, the natives stay
+bound for the session, as upstream.
+
+**Not changed:** every other native (retention flag, fire mode, pose, world id, raycast), every snapshot read, every
+decision, every other write. The direct setters are not called at all (the build refuses a source that still casts
+or lists them).
 
 **Layouts** (taint-paired field displacements over 630 aligned functions that load the globals; record-field pairs in
 every function indexing by the stride):
@@ -119,8 +178,8 @@ every function indexing by the stride):
 | # | Write | How | Evidence | Confidence |
 |---|---|---|---|---|
 | W1 | retention bit (network record +16, bit 1), set and cleared | native 0x6c9a50 | whole body identical (stride 24, +0x10, authority test, sync hash) | high |
-| W2 | turret horizontal speed (control +8) → 0 and back | native 0x105cff0 | twin rule + 16 matching bytes; **called only after the full 232-byte body matched live** | medium offline / runtime-gated |
-| W3 | turret vertical speed (control +0xC) → 0 and back | native 0x105cf00 | whole body identical | high |
+| W2 | turret horizontal speed (control +8) → 0 and back | WriteProcessMemory (private RW checked, read back), then replication call game+0xE69780(net id, 0xCC0B45E5, field) | the setter's own work (setter emulation): direct horizontal body (live page) + readable twin 0x4d5960; replication routine 221 bytes checked before binding | high |
+| W3 | turret vertical speed (control +0xC) → 0 and back | WriteProcessMemory (private RW checked, read back), then replication call game+0xE69780(net id, 0x9D5D6CC7, field) | direct vertical body 0x105cf00 + twin 0x4d5870; same routine | high |
 | W4 | raw aim (runtime record +8, 12 bytes) | WriteProcessMemory, private RW checked | stride 0xd0 ×44; targeting update identical at +8/+0x10 | high |
 | W5 | computed aim (runtime record +20, 12 bytes) | WriteProcessMemory | targeting update identical at +0x14/+0x1c (movsd/mov) | high |
 | W6 | weapon fire mode → 0 and back | native 0x761700 | whole body identical except an unrelated nested vtable call | high |
@@ -161,7 +220,20 @@ out/TESTS.json; test results are unchanged.
   `test_idle_gate`, `test_module` PASS.
 - `test_windows_api` fails on **both** (environment): Wine's bcrypt faults in BCryptDestroyHash (same as hdh-port); the
   hash-cache prelude cannot satisfy its "hash read once" counter. A derived copy with only those two counter checks
-  relaxed PASSES on both (9 PASS lines: actor filter, pose binding, terrain path, native query arguments).
+  relaxed PASSES on both (upstream 9 PASS lines: actor filter, pose binding, terrain path, native query arguments;
+  the port 10: the same 9 plus the setter emulation test).
+- Setter emulation (2026-10-29), port tests only (build.py `TEST_LOGIC_PATCHES`):
+  - `test_windows_api` gains a block that runs `set_speed` for real under Wine: the replication routine is a 33-byte
+    executable stub that records its arguments, the registry/entity/control records are VirtualAlloc'd memory. Both
+    axes write and replicate with the right network id, hash and field address; nothing is written or replicated
+    for an entity this machine does not own, the invalid id, an id not in the map, a slot holding index −1, or a
+    read-only control record; another entity with the same id is refused. The "binds add no C types" check still
+    passes with the new typedef.
+  - `test_snapshot` line 85 (upstream: unreadable signatures make apply raise) becomes: unreadable code →
+    `waiting_for_natives`, no binding, no read again before 1 s, a read again at 1 s; readable but different code →
+    "Unsupported native sentry setter".
+  - Results 2026-10-29: port and upstream identical (8 suites + the derived one pass on both; `test_windows_api`
+    fails on both for the bcrypt reason above).
 - The port's copy of the tests gets the same old→new global map applied to its fixtures (synthetic memory at
   game/exe+RVA, `tests/reference/aim_data.lua`, and the global-slot blocks of the build-25327279 capture), recorded in
   TESTS.json; the capture test then decodes the real captured sentry through the port's code with the new globals.
@@ -181,10 +253,13 @@ target dies). G = game.dll base, E = exe base.
 - **L0**: log first line `data-v8.6-26088801`, second `waiting_for_sentries` (not "unsupported game build").
 - **L1**: `[G+0x2CE1EF0]`, `[G+0x2CE18F0]`, `[G+0x2CE1F30]`, `[G+0x2CE1EA0]`, `[G+0x2CE1810]`, `[G+0x2CE14F8]`,
   `[G+0x2CE1850]` non-null in a mission (managers); scheduler `[G+0x2E38988]` and world `[G+0x2E271F8]` non-null in a mission.
-- **L2**: retention/vertical/fire-mode/pose/world-id/raycast signatures print MATCH (or `unreadable` before the game ran
-  that code — then the mod waits/refuses; it never calls it).
-- **L9**: `G+0x105CFF0`, 232 bytes, must print "MATCHES the predicted 232-byte body" once readable (after your sentry
-  has turned). DIFFERS = horizontal setter wrong → do not install; unreadable = not decrypted yet.
+- **L2**: retention / replication routine (221 bytes) / fire-mode / pose / world-id / raycast signatures print MATCH (or
+  `unreadable` before the game ran that code — then the mod waits and checks again every second; it never calls it). The
+  vertical setter line is information only (not called; `unreadable` expected).
+- **L9** (information; not called): `G+0x105CFF0`, 232 bytes print "MATCHES the predicted 232-byte body" once readable.
+- **L11** (setter emulation): invalid id `[G+0x2E3F0D0]` (live 0); turret map cap / empty / mul (live 512 / 0 / 2); per
+  own sentry: the setters' map walk finds `index` = the turret row (`ok`), `record` = the entity (`ok`), owned bit 1,
+  a network id, and both write targets (+8 / +12, current speeds e.g. 80 / 50) protect 0x4, state 0x1000, type 0x20000.
 - **L5**: mode record `+8` ≠ 0 and `+0x40` in 1..7 in a mission; outside, not.
 - **L6**: targeting `cap ≤ 8192`, `active ≤ total ≤ cap`; your sentry listed with the right type, `flags & 3 == 1`,
   `tm map … ok`; behavior id **214** (Gatling) / **313** (MG) / 309 / 611 / 208 / 320 / 324 (row data.behavior_ids; the old 213/312 would mean the migration is wrong);
@@ -197,10 +272,13 @@ target dies). G = game.dll base, E = exe base.
 - **L8**: filter property count ≤ 128 with `destructible@k` (0x04a8fbf9) present; three bodies with actor/unit print
   CONSISTENT (pool entry key = actor, record unit = body+148, record body index = body) — this verifies body +144/+148.
 - **L6b**: scheduler word +0 is 0 most of the time; jobs consumed 24/24 between physics steps.
-- Behaviour after installing: holds/fire pauses in SentryAimRetention.log, no "Unsupported native sentry setter".
+- Behaviour after installing: holds/fire pauses in SentryAimRetention.log, no "Unsupported native sentry setter"; with
+  diagnostics on, the status reads `waiting_for_natives` only until the natives check out (normally never in a
+  mission, since all of them were readable there).
 
 ## Installing (not done here)
 
 The installed Megapack option archive holds two resources (`79e4f54aa542ec98` shared stub + `5b268e629ad0619d`). The port
 replaces `5b268e629ad0619d` only and must keep the stub (`runtime-modules/original-mods/install_option.py SentryAimRetention
---port out/…`, with the game and HD2 Arsenal closed). Do it only after L2/L9 match.
+--port out/…`, with the game and HD2 Arsenal closed). Do it once L2 matches (replication routine included) and L11 shows
+the expected lookup; L9 no longer gates it.

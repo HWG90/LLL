@@ -6,6 +6,42 @@ lock row, and MAP.json records it. Old build 25480438, new build 26088801 (game.
 both re-hashed read-only from the install). Nothing here touched the network, the game folder, `~/.config/hd2arsenal`,
 anything under `<steam-library>` (read only), the upstream checkouts or the running game. Nothing was installed.
 
+## 2026-10-29: prologue check moved from install to the first move (logic change)
+
+**Why:** the installed port (since 2026-10-25 04:08) logged `Disabled: game function unreadable: send_held` at the
+2026-10-28 22:24 launch (`LLL/Helldivers2/Logs/HolsterYourShield.log`). In 26088801 the game's code pages stay
+PAGE_NOACCESS until the game first runs them, and at install it has not yet drawn or stowed a shield, so the
+ReadProcessMemory of a prologue fails and upstream's bind disabled the mod for the session. (The 2026-10-25 L6
+read found all three readable only because it ran mid-mission.)
+
+**What** (`build.py` `LOGIC_PATCHES`, 6 exact match-once edits, `out/logic.diff`, receipt `logic_patches`):
+- `api.bind(game)` only keeps the base and defines `api.ready()`. `ready()` reads the three 16-byte prologues
+  (ReadProcessMemory, as before): one unreadable → `false`, nothing bound or called; one different → raises
+  `game function differs: <name>` and keeps raising for the session (never calls it); all equal → binds the three
+  exactly as upstream did (and keeps the wrappers interpreted), then `true` without further reads.
+- `Instance:move` asks `api.ready` first (an adapter without `ready`, the offline fakes, counts as ready). Refused, it
+  calls nothing and logs `<move> refused: the game functions are not readable yet (…)`; it returns `false`.
+- The toggle follows the shield on a refusal: a refused stow leaves the toggle off (the shield stayed in hand; the
+  next press tries again), a refused draw keeps it on (the shield stayed on the back; the next press draws), a refused
+  re-stow ends the toggle (`Shield toggle off: the game functions are not readable yet, so it stays in hand.`), so
+  nothing retries per frame. In play the re-stow case cannot occur: the game drew the shield, which runs all three.
+- Checks kept: the data-only entry still differs from upstream on the 19 replaced lines only (`diff_check`); the
+  final entry must equal it with each logic patch applied once (`logic_check`); fixed point of the loader's
+  `entry_source`; forbidden names absent.
+- The v26 reference moved to `<hellforge>/…` (capital F; the ntfs3 mount is case-sensitive).
+
+**Tests:** the port's `test_mod.lua` adapter case now checks the lazy bind (bind reads nothing; `ready` binds on
+matching bytes; an unreadable prologue binds nothing until readable; changed `set_mode` bytes raise and stay refused)
+and two new cases check refused moves (no calls, toggle kept consistent, no per-frame retries). Results
+(`out/TESTS.json`): Wine (Windows LuaJIT GC64) upstream 20 + 4 + 1 + 1 PASS, port 22 + 4 + 1 + 1 PASS (the 2 new
+cases); Linux GC64 identical for both (only `compile_entry` passes; the rest need kernel32).
+
+**Outputs:** `out/holster_your_shield.lua` sha256 `023ebbdc…98b6`; `out/9ba626afa44a3aa3.patch_0` sha256
+`b55df30877577073754f9a297150cff23b582177e271e4e07f6f434ef565755c`, holding only `2dc2359512462098` (59 025 bytes,
+resource sha256 `aa19aa457d3880a43e6fe50920dd3cfef982423c9f867c4f9e014005b65326df`). Not installed here. After
+install, expect `Holster Your Shield v1.0-26088801 initialized` at boot instead of the refusal; a press before the
+game has drawn or stowed a shield logs the "not readable yet" refusal once and changes nothing.
+
 ## Deliverables
 
 | Path | What |
@@ -99,7 +135,7 @@ still PAGE_NOACCESS makes the prologue read fail. The mod then logs `Disabled: g
 nothing, so it never calls unchecked code.
 
 If L6 shows that happening at load, the remedy is a lazy bind like myc-port's: check and bind right before the first call.
-That is a code change, not build data, so it is not applied here.
+**Done 2026-10-29** (it happened at the 2026-10-28 launch): see the logic change at the top.
 
 ## Offline tests (`out/TESTS.json`)
 

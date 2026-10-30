@@ -156,18 +156,41 @@ return function()
         for _,entry in ipairs({{8,0x806790},{0x60,0x820c40},{0x68,0x820f60}}) do
             assert(api.distance(pointer(binding+entry[1]),exe)==entry[2],'Unsupported physics function')
         end
-        assert(api.read(exe+0x820c40,8)=='\x48\x89\x5c\x24\x08\x48\x89\x6c','Position setter changed')
-        assert(api.read(exe+0x820f60,8)=='\x48\x89\x5c\x24\x08\x48\x89\x6c','Rotation setter changed')
+        -- Build 26088801: code pages stay unreadable until the game first runs
+        -- them, so these comparisons run right before each command's first use
+        -- (ready below) instead of at load.
+        local setter_prologue='\x48\x89\x5c\x24\x08\x48\x89\x6c'
         -- Entire captured routine, including its ownership gate and final
         -- update-byte store. Full comparison rejects a changed/detoured body.
         local stop_hex='48895c2408574883ec60488b4138448bc24969d8b82b00004a8b3cc048035948488bcfe838e0d4ff80b8c40600000074558b4f08e807266b004885c07448f64014017442448b480c33d2c6442450000f57c0f30f11442448448bc1488b0d56106702895424408954243888542430488d542478f30f11442428c744242001000000e86af4a900c683a42b000000488b5c24704883c4605fc3'
         local stop_bytes=stop_hex:gsub('..',function(pair)return string.char(tonumber(pair,16)) end)
-        assert(api.read(game+0x7b76a0,#stop_bytes)==stop_bytes,'Ragdoll stop routine changed')
+        -- Compared before the first stop (ready('stop')).
         -- Existing owner-routed completion request. Verify all chained unwind
         -- fragments, including the remote branch and owned queue checks.
         local completion_hex='48895c24184889542410564883ec70488bf1418bd8418bc8e82329c1ff4885c00f8472010000f64014014889bc24800000000f84f20000008b501081faff7f0000742e488b05cecda801488b4808e83d75c1ff84c0741a488b0d2a0ebe018bd3488b89a8b30000e884839affe91f010000488b0d20a4a8018bd3e8710a6eff84c00f840901000033ff488d461c8bcf9039180f84f8000000ffc14883c04083f92072ed8bcf488d86240800000f1f400039180f84d8000000ffc14883c04081f98000000072ea8bcbe87328c1ff4885c00f84ba000000f64014010f84b0000000448b480c488d94248800000040887c24500f57c0f30f11442448448bc3f30f1005afeafe00488bce897c2440897c2438c644243001f30f11442428c744242001000000e8c8f6ffffeb668b701081feff7f0000750433ffeb23488b0de89fa801488b4140488bb860010000488b4138ff5008488bc88bd6ffd7488bf88bcbe8dd24c1ff41b901000000c7442460010000004c8d442460c744246404000000488bd74889442468b9326c6621e8a0569aff488bbc2480000000488b9c24900000004883c4705ec3'
         local completion_bytes=completion_hex:gsub('..',function(pair)return string.char(tonumber(pair,16)) end)
-        assert(api.read(game+0x12573a0,#completion_bytes)==completion_bytes,'Corpse completion request changed')
+        -- Each command's routines, compared right before its first use: an
+        -- unreadable page (not resident yet) makes that command wait, uncalled,
+        -- and is read again at most once a second; different bytes refuse it.
+        local checks={
+            pose={{exe+0x820c40,setter_prologue,'Position setter changed'},
+                {exe+0x820f60,setter_prologue,'Rotation setter changed'}},
+            stop={{game+0x7b76a0,stop_bytes,'Ragdoll stop routine changed'}},
+            completion={{game+0x12573a0,completion_bytes,'Corpse completion request changed'}},
+        }
+        local verified,refused,retry={disable=true},{},{}
+        local function ready(kind)
+            if verified[kind] then return true end
+            if refused[kind] then error(refused[kind],0) end
+            local now=api.time()
+            if retry[kind] and now<retry[kind] then return false end
+            for _,check in ipairs(checks[kind]) do
+                local bytes=api.read(check[1],#check[2])
+                if bytes==nil then retry[kind]=now+1;return false end
+                if bytes~=check[2] then refused[kind]=check[3];error(check[3],0) end
+            end
+            verified[kind]=true;return true
+        end
         local request_completion=ffi.cast('void (*)(void *,uintptr_t,uint32_t)',game+0x12573a0)
         local stop_sync=ffi.cast('void (*)(void *,uint32_t)',game+0x7b76a0)
         local position=ffi.cast('void (*)(uint32_t,const float *)',exe+0x820c40)
@@ -183,6 +206,7 @@ return function()
             return storage,pointer
         end
         return {
+            ready=ready,
             stop_sync=function(manager,index)stop_sync(manager,index) end,
             request_completion=function(entity)
                 -- Resolve each time; never keep a scene/service pointer.
@@ -1049,6 +1073,14 @@ end
 M.floats=floats -- for tests: the decoder poses use
 local function phase(api,name)
     if api.profiler then return api.profiler.phase(name) end
+end
+-- Build 26088801 port: a command runs only once its routines compared equal
+-- (native.ready); a native table without ready (the offline fixtures) counts
+-- as compared, as upstream's load-time check did.
+local function native_ready(state,kind)
+    local ready=state.native.ready
+    if ready==nil or ready(kind) then return true end
+    state.native_waits=(state.native_waits or 0)+1;return false
 end
 local function detail(api,name)
     if api.profiler then api.profiler.detail(name) end
@@ -2350,7 +2382,8 @@ do
         if not planned then state.guard_passes_skipped=(state.guard_passes_skipped or 0)+1 end
         if not planned or holds(u) then
             for _,action in ipairs(actions) do
-                if holds(u) and same(api,action.actor.guards) then
+                if holds(u) and same(api,action.actor.guards)
+                    and native_ready(state,action.kind=='disable' and 'disable' or 'pose') then
                     u.verified=nil
                     if action.kind=='disable' then
                         phase(api,'native');state.native.disable(action.actor.id)
@@ -2385,7 +2418,7 @@ do
                 phase(api,'motion')
                 stop=M.fling_action(u,state,now)
             else state.fling_history[u.unit]=nil end
-            if finish_handoff and holds(u) then
+            if finish_handoff and holds(u) and native_ready(state,'stop') then
                 -- The component's runtime is copied unchanged when ownership
                 -- moves (native 0x7a4b30). Finish ONLY a stop we previously
                 -- made, through the routine's normal owned-Corpse branch.
@@ -2393,7 +2426,7 @@ do
                 phase(api,'native');state.native.stop_sync(u.manager,u.index)
                 state.fling_handoffs=(state.fling_handoffs or 0)+1
                 state.fling_stopped[u.unit]=nil
-            elseif request_completion and holds(u) then
+            elseif request_completion and holds(u) and native_ready(state,'completion') then
                 -- A remote stop never requests Corpse conversion. Ask its
                 -- owner through the existing engine path once, after a grace
                 -- period. No ownership, timer, or replication storage edits.
@@ -2404,7 +2437,7 @@ do
                 phase(api,'native');state.native.request_completion(u.id)
                 -- Native completion may invalidate entity storage. Read none
                 -- of this snapshot again after the request.
-            elseif stop and holds(u) and same(api,u.main_pose_guards or EMPTY) then
+            elseif stop and holds(u) and same(api,u.main_pose_guards or EMPTY) and native_ready(state,'stop') then
                 -- Run last: this routine changes update_enabled, invalidating
                 -- this snapshot's guards. The remote-only gate avoids its
                 -- locally-owned force-Corpse branch. No pose is rewound.
@@ -3335,7 +3368,7 @@ return function(create_api,patch,build,runtime,runtime_memory)
             file:write(build.revision..'\n'..status..'\n')
             for _,key in ipairs({'updates','polls','observed','realignments','claws_disabled','skipped','retries','pauses',
                 'accepted_units','guard_passes_skipped','preflight_getter','getter_checks','getter_failures','last_getter_failure',
-                'mission_flag','mode_field_40',
+                'mission_flag','mode_field_40','native_waits',
                 'max_gap','last_unit','last_actor','read_bytes','read_calls','last_skip','profiler_failures',
                 'fling_armed','fling_stops','fling_stops_verified','fling_handoffs','max_fling_distance',
                 'last_fling_unit','last_fling_entity','last_fling_type','last_fling_reason',

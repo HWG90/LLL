@@ -403,6 +403,39 @@
    "new": "need(ok, why == 'unsupported game build' and 'unsupported game build (needs Steam build 26088801)'"
   }
  ],
+ "logic_patches": [
+  {
+   "file": "components/HolsterYourShield/src/holster_your_shield.lua",
+   "line": 474,
+   "why": "bind keeps the base; ready() checks the prologues and binds before the first move"
+  },
+  {
+   "file": "components/HolsterYourShield/src/holster_your_shield.lua",
+   "line": 295,
+   "why": "a move checks ready first and is refused while unreadable"
+  },
+  {
+   "file": "components/HolsterYourShield/src/holster_your_shield.lua",
+   "line": 308,
+   "why": "move returns true when made"
+  },
+  {
+   "file": "components/HolsterYourShield/src/holster_your_shield.lua",
+   "line": 352,
+   "why": "a refused stow leaves the toggle off"
+  },
+  {
+   "file": "components/HolsterYourShield/src/holster_your_shield.lua",
+   "line": 369,
+   "why": "a refused draw keeps the toggle on"
+  },
+  {
+   "file": "components/HolsterYourShield/src/holster_your_shield.lua",
+   "line": 395,
+   "why": "a refused re-stow ends the toggle"
+  }
+ ],
+ "logic_patches_why": "build 26088801 keeps code pages unreadable until the game first runs them (2026-10-28 22:24 launch: \"Disabled: game function unreadable: send_held\"); the three prologues are checked and bound right before the first move instead of at install (out/logic.diff)",
  "upstream_reproduction": {
   "resource_sha256": "C11AF49F04482A539C45C302C9A42F133D128318BEDF3651090923869998F66D",
   "equals_lock_resource_sha256": true,
@@ -413,11 +446,11 @@
  "resource": {
   "name": "mods/cowboybingus/holster_your_shield",
   "hash": "2dc2359512462098",
-  "bytes": 57314
+  "bytes": 59025
  },
  "outputs": {
-  "holster_your_shield.lua": "82a19ccf94e5c3c079c8ec7b66e50d1e2fb6afa643b526801839b98f184c8b79",
-  "9ba626afa44a3aa3.patch_0": "c6edc6c2f36e91134e6e800d76740be65be3e2a717531e2aff23223d030dc963",
+  "holster_your_shield.lua": "023ebbdc1463066704787621738f08cee57b64525f7433d8d8ca52fa4a1e98b6",
+  "9ba626afa44a3aa3.patch_0": "b55df30877577073754f9a297150cff23b582177e271e4e07f6f434ef565755c",
   "9ba626afa44a3aa3.patch_0.stream": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
   "9ba626afa44a3aa3.patch_0.gpu_resources": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
  },
@@ -432,7 +465,7 @@
   "gc64_fr2": true,
   "output": [
    "compile: ok\tLuaJIT 2.1.ROLLING\t8",
-   "entry run: false: mods/cowboybingus/holster_your_shield:359: libkernel32.so: cannot open shared object file: No such file or directory",
+   "entry run: false: mods/cowboybingus/holster_your_shield:359: libbcrypt.so: cannot open shared object file: No such file or directory",
    "update untouched: true, installed flag: nil"
   ]
  },

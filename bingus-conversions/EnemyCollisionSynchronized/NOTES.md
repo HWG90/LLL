@@ -5,7 +5,53 @@ binaries hashed, data folder listed) and `upstream-bingus/` were not written; th
 Source: `upstream-bingus/EnemyCollisionSynchronized` (tag `v2.13.0`; every pinned file equals the lock; the pack copy
 is identical).
 
-**Status: built; not cleared for install until live checks L1, L4 and L5 pass** (install gate below).
+**Status (2026-10-29): cleared for install.** Live checks L1–L5 passed in a mission (below), and the port now
+compares its command routines right before their first use instead of at load (logic change below).
+
+## 2026-10-29: routine checks moved from load to first use (logic change)
+
+Upstream `api.bind` byte-compares the stop routine (152 B), the completion request (422 B) and the two exe setter
+prologues when the mod loads. In 26088801 those code pages stay unreadable until the game first runs them
+(see the code-page rule in BRIEF.md), so at boot the reads fail and the mod would disable itself every session. The
+2026-10-25 probe only saw them readable because it ran mid-mission.
+
+`build.py` `LOGIC_PATCHES` (10 exact, match-once edits; `out/logic.diff`, receipt `logic_patches`):
+- `api.bind` still checks the binding table pointer and its three slots at load (data, always readable); the code
+  comparisons move into `native.ready(kind)` for `pose` (both prologues), `stop`, `completion` (`disable` needs only
+  its slot, as upstream).
+- `ready`: unreadable page → `false` (the command is not called, `native_waits` counts it, the next read of that
+  routine is at least 1 s later); readable but different → raises the same message upstream used ("Ragdoll stop
+  routine changed", …) and keeps refusing for the session; equal → `true` and never read again.
+- The five dispatch sites in `corpse_data.lua` (pose, claw disable, handoff stop, completion request, fling stop)
+  add `native_ready(state, kind)` to their existing conditions. A native table without `ready` (the offline
+  fixtures) counts as compared, which is upstream's behaviour after its load-time check.
+- `native_waits` is added to the status log keys.
+- The data-only wrapper is still checked against upstream exactly as before (26 replaced lines + pins); the final
+  wrapper must equal that wrapper with each logic patch applied once (`logic_check`).
+- New port-only suite `tests/test_deferred_bind.lua` (from `tools/`): bind reads no code; pose waits until both
+  prologues read equal, no re-read within a second, a ready command is not read again; a changed completion routine
+  is refused and stays refused; the dispatch site leaves a needed correction uncalled while `ready` is false and
+  applies it once true. PASS under Wine.
+- Tests (out/TESTS.json): every upstream suite gives the same result on the port as on unmodified upstream
+  (`test_ffi_names` Wine page fault and `test_performance` fail on both: environment).
+- `out/9ba626afa44a3aa3.patch_0` sha256 `259c510b5c8639722deda6343a33753ddcf19403fce4520e4f8d3d0c2b4fc7ff`.
+- The v26 reference archive moved: `<hellforge>/…` (capital F; the ntfs3 mount is case-sensitive).
+
+## 2026-10-29 live checks (mission as a client, read-only, `live/ecs_readonly.live.log`)
+
+- **L1:** binding exe+0x2874ED0, slots 0x806790/0x820C40/0x820F60 with the expected prologues, stop and completion
+  routines readable and equal (mid-mission), completion service non-null.
+- **L2/L3:** mission +8 = 1 (+0x40 = 1 here: upstream does not use it as a selector); ragdoll manager 86 active,
+  corpse manager 30; world 2 getter exe+0xD658D0. Seven ragdolls and four corpses matched profiles (Bile Titan,
+  Charger tier 2, Impaler): **the 21 profiles' resource keys are unchanged in 26088801**. Unmatched keys are listed now.
+- **L4 (the install gate):** layer histogram `main:52=90`, aux on 20/22/37/76, so main bodies are on the excluded set
+  and repaired aux bodies outside it. **L4b:** filter table count 104; 11 = 0x12D0ABF1 (flame), 14 = 0x04A8FBF9
+  (destructible), 55 = 0xA0D00A12, all as in build 25480438. With FlameDamageFixed's F4 (layer 11's 128-bit matrix row
+  equals the old row, and it names layers 48 and 83), the layer 26088801 added sits at 102 or 103: 48/52/83 kept
+  their numbers. Names recorded: 48 = 0xE5727F8E, 52 = 0xA3DC6584, 83 = 0x5C02DA8F, 102 = 0xC75E3D25,
+  103 = 0x78EFC1AA.
+- **L5:** every listed unit: main names 15 of 15, aux node hash equal = aux mapped (54/54 Bile Titan, 35/35 Charger,
+  28/28 Impaler); node counts equal the profiles; registry object ids and generations match.
 
 Rebuild: `python3 -I tools/scan_assets.py && python3 -I tools/build_map.py && python3 -I -B build.py --tests &&
 python3 -I tools/make_probe.py` (build_map ≈ 1 min).
@@ -91,7 +137,7 @@ consistent with the known build changes (entity component table, session block +
 * **Code pages at load:** `api.bind` reads the stop (152 B) and completion (422 B) routines and the two setter
   prologues with ReadProcessMemory when the mod loads (upstream logic, kept). If those game.dll/exe pages are not yet
   resident at boot, the read fails and the mod disables itself for the session (safe, but inactive). L1 reports
-  readability. Changing that to a check right before first use would be a logic change, not done here.
+  readability. **Done 2026-10-29:** the checks run right before first use (logic change above).
 * Gameplay effect, multiplayer authority and contact damage remain unverified (as upstream).
 
 ## Tests (`out/TESTS.json`)

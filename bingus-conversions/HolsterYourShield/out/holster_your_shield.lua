@@ -834,15 +834,22 @@ function Instance:backpack_changed(backpack)
     if self.shield then self.note(format('Shield backpack %d worn: Backpack Function toggles it.', backpack)) end
 end
 
--- The three calls of one move, exactly as the game makes them, then the check on the next frame.
+-- The three calls of one move, exactly as the game makes them, then the check on the next frame. Returns false,
+-- calling nothing, while the game's functions are not readable yet (an adapter without ready is always ready).
 function Instance:move(kept, shield, mode, label)
     local api, avatar = self.api, kept.avatar.entity
+    if api.ready and not api.ready() then
+        self:refuse(label, 'the game functions are not readable yet (the game runs them the first time it draws or '
+                    .. 'stows a shield)')
+        return false
+    end
     api.set_item(kept.inventory, avatar, mode == MODE_HELD and shield or self.none_item)
     api.set_mode(kept.inventory, avatar, mode)
     api.send_held(-2, avatar, shield, mode)
     self.pending = {mode = mode, shield = shield, label = label}
     local count = mode == MODE_HELD and 'draws' or 'holsters'
     self.counts[count] = self.counts[count] + 1
+    return true
 end
 
 -- The check of the last move: the row must show it. A draw holds the shield in mode 2. A stow leaves nothing
@@ -886,7 +893,10 @@ function Instance:press(shield)
     if not kept then return self:refuse('Press', held) end
     if held == shield then
         self.toggled, self.toggled_for = true, kept.avatar.entity
-        return self:move(kept, shield, MODE_AWAY, 'Shield to the back')
+        if not self:move(kept, shield, MODE_AWAY, 'Shield to the back') then
+            self.toggled, self.toggled_for = false, nil -- the shield stayed in hand
+        end
+        return
     end
     if not self:is_none(held) then
         self.toggled = not self.toggled
@@ -898,10 +908,16 @@ function Instance:press(shield)
         self.toggled, self.toggled_for = true, kept.avatar.entity
         return self.note('Press with the shield on the back: it stays there.')
     end
+    local toggled_for = self.toggled_for
     self:untoggle()
     local weapon = weapon_in_hand(self.api, kept.row, slot)
     local one_handed = weapon and select(2, Holster.equipment(self.api, self.game, weapon))
-    if one_handed then return self:move(kept, shield, MODE_HELD, 'Shield to the hand') end
+    if one_handed then
+        if not self:move(kept, shield, MODE_HELD, 'Shield to the hand') then
+            self.toggled, self.toggled_for = true, toggled_for -- the shield stayed on the back
+        end
+        return
+    end
     self.note('Shield toggle off: it returns with the next one-handed weapon.')
 end
 
@@ -918,9 +934,11 @@ function Instance:restow(shield)
     if not kept then return self:refuse('Re-stow', held) end
     if kept.avatar.entity ~= self.toggled_for then return self:untoggle('a new Helldiver') end
     if held ~= shield then return end
+    if not self:move(kept, shield, MODE_AWAY, 'Shield back to the back after the game drew it') then
+        return self:untoggle('the game functions are not readable yet, so it stays in hand')
+    end
     restows[#restows + 1] = frame
     self.counts.restows = self.counts.restows + 1
-    self:move(kept, shield, MODE_AWAY, 'Shield back to the back after the game drew it')
 end
 
 -- Action 37's held time, as its float bits: 0 when released, positive below infinity while held.
@@ -1013,21 +1031,35 @@ function Holster.adapter()
         return pair[0] + pair[1] * HIGH
     end
 
-    -- Binds the game's three functions after checking their first bytes; raises when one differs.
+    -- Build 26088801 port: the game's code pages stay unreadable until the game first runs them (it runs these
+    -- three the first time it draws or stows a shield), so bind only keeps the base. ready() checks the first bytes
+    -- of the three functions right before a move and binds them then: false while one is unreadable (nothing is
+    -- called), and it raises when one differs, for the rest of the session.
     function api.bind(game)
-        local L = Holster.LAYOUT
-        for name, expected in pairs(Holster.PROLOGUES) do
-            need(api.view(game + L[name], 16), 'game function unreadable: ' .. name)
-            local got = {}
-            for i = 0, 15 do got[#got + 1] = format('%02x', view[i]) end
-            need(table.concat(got) == expected, 'game function differs: ' .. name)
+        local L, bound, differs = Holster.LAYOUT, false, nil
+        function api.ready()
+            if bound then return true end
+            need(differs == nil, differs)
+            for name, expected in pairs(Holster.PROLOGUES) do
+                if not api.view(game + L[name], 16) then return false end
+                local got = {}
+                for i = 0, 15 do got[#got + 1] = format('%02x', view[i]) end
+                if table.concat(got) ~= expected then differs = 'game function differs: ' .. name end
+                need(differs == nil, differs)
+            end
+            local set_item = ffi.cast('hys1_set_item', game + L.set_item)
+            local set_mode = ffi.cast('hys1_set_mode', game + L.set_mode)
+            local send_held = ffi.cast('hys1_send_held', game + L.send_held)
+            api.set_item = function(inventory, avatar, item) set_item(inventory, avatar, item) end
+            api.set_mode = function(inventory, avatar, mode) set_mode(inventory, avatar, mode) end
+            api.send_held = function(peer, avatar, item, mode) send_held(peer, avatar, item, mode) end
+            -- Interpreted, like everything bound at install (Holster.interpreted_but_step ran before them).
+            if type(jit) == 'table' and type(jit.off) == 'function' then
+                for _, fn in ipairs({api.set_item, api.set_mode, api.send_held}) do pcall(jit.off, fn, true) end
+            end
+            bound = true
+            return true
         end
-        local set_item = ffi.cast('hys1_set_item', game + L.set_item)
-        local set_mode = ffi.cast('hys1_set_mode', game + L.set_mode)
-        local send_held = ffi.cast('hys1_send_held', game + L.send_held)
-        api.set_item = function(inventory, avatar, item) set_item(inventory, avatar, item) end
-        api.set_mode = function(inventory, avatar, mode) set_mode(inventory, avatar, mode) end
-        api.send_held = function(peer, avatar, item, mode) send_held(peer, avatar, item, mode) end
     end
 
     return api
@@ -1036,6 +1068,7 @@ end
 -- Bingus Shared Loader v18+ with API 1, recognized by what it offers, never by its internal version.
 function Holster.loader_ok(loader)
     return type(loader) == 'table' and loader.api == 1 and type(loader.open_log) == 'function'
+        and type(loader.jit) == 'table'
 end
 
 -- Everything stays interpreted, the per-frame row and key reads included: they are two calls and a few

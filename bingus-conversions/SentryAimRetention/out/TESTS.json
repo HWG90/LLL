@@ -31,7 +31,7 @@
     "tail": [
      "\ttests/test_loader.lua:25: in function 'test'",
      "\ttests/test_loader.lua:82: in main chunk",
-     "\t[C]: at 0x561d85045480"
+     "\t[C]: at 0x55b2e27d6480"
     ]
    },
    "wine_windows_luajit": {
@@ -50,9 +50,9 @@
    "linux_gc64": {
     "exit": 1,
     "tail": [
-     "\ttests/test_snapshot.lua:139: in function 'budget_fixture'",
-     "\ttests/test_snapshot.lua:229: in main chunk",
-     "\t[C]: at 0x55dbdf8b9480"
+     "\ttests/test_snapshot.lua:154: in function 'budget_fixture'",
+     "\ttests/test_snapshot.lua:244: in main chunk",
+     "\t[C]: at 0x55c581938480"
     ]
    },
    "wine_windows_luajit": {
@@ -73,7 +73,7 @@
     "tail": [
      "\ttests/test_idle_gate.lua:70: in function 'side'",
      "\ttests/test_idle_gate.lua:142: in main chunk",
-     "\t[C]: at 0x55a3fc590480"
+     "\t[C]: at 0x559d5453f480"
     ]
    },
    "wine_windows_luajit": {
@@ -81,7 +81,7 @@
     "tail": [
      "PASS: 3000 waiting frames allocate 0 bytes outside a mission (no rescan) and in a mission (100 rescans of 40 entries), JIT off and on",
      "PASS: a failed read while waiting is seen at the next check (15 frames later), then the mod waits again",
-     "PASS: 3000 waiting frames: no trace returns to a lower frame (v1.1.0: 10); aborts in the mod 26 -> 6"
+     "PASS: 3000 waiting frames: no trace returns to a lower frame (v1.1.0: 10); aborts in the mod 25 -> 6"
     ],
     "prelude": false
    },
@@ -94,7 +94,7 @@
     "tail": [
      "\ttests/test_windows_api.lua:20: in function 'new_memory'",
      "\ttests/test_windows_api.lua:23: in main chunk",
-     "\t[C]: at 0x55e721a59480"
+     "\t[C]: at 0x55565f2e9480"
     ]
    },
    "wine_windows_luajit": {
@@ -134,7 +134,7 @@
     "tail": [
      "\t[C]: in function 'assert'",
      "\ttests/test_module.lua:23: in main chunk",
-     "\t[C]: at 0x5564e04cc480"
+     "\t[C]: at 0x55ce75c16480"
     ]
    },
    "wine_windows_luajit": {
@@ -163,6 +163,7 @@
     "PASS: native destructible filter lookup, solid terrain, invalid/recycled actors and read-time ownership changes",
     "PASS: Windows adapter repeated initialization, writable data and guarded memory rejection after another mod declared every Windows name it binds",
     "PASS: muzzle pose identity and bounds; pending queries and each of 24 busy workers prevent native casts",
+    "PASS: turret speeds set through the setters' work: map, owner bit, checked write, replication call",
     "PASS: repeated adapter creations and binds add no C types",
     "PASS: exposed crawlers, buried targets, endpoint tolerance, native query arguments and invalid results",
     "PASS: selected enemy surface permits fire; different obstruction or terrain still pauses",
@@ -202,7 +203,7 @@
     "tail": [
      "\ttests/test_loader.lua:25: in function 'test'",
      "\ttests/test_loader.lua:82: in main chunk",
-     "\t[C]: at 0x55cb5c2cc480"
+     "\t[C]: at 0x5592b74c1480"
     ]
    },
    "wine_windows_luajit": {
@@ -223,7 +224,7 @@
     "tail": [
      "\ttests/test_snapshot.lua:139: in function 'budget_fixture'",
      "\ttests/test_snapshot.lua:229: in main chunk",
-     "\t[C]: at 0x5581491c6480"
+     "\t[C]: at 0x558c7c0c3480"
     ]
    },
    "wine_windows_luajit": {
@@ -244,7 +245,7 @@
     "tail": [
      "\ttests/test_idle_gate.lua:70: in function 'side'",
      "\ttests/test_idle_gate.lua:142: in main chunk",
-     "\t[C]: at 0x559cc08f2480"
+     "\t[C]: at 0x55e704992480"
     ]
    },
    "wine_windows_luajit": {
@@ -252,7 +253,7 @@
     "tail": [
      "PASS: 3000 waiting frames allocate 0 bytes outside a mission (no rescan) and in a mission (100 rescans of 40 entries), JIT off and on",
      "PASS: a failed read while waiting is seen at the next check (15 frames later), then the mod waits again",
-     "PASS: 3000 waiting frames: no trace returns to a lower frame (v1.1.0: 10); aborts in the mod 26 -> 6"
+     "PASS: 3000 waiting frames: no trace returns to a lower frame (v1.1.0: 10); aborts in the mod 27 -> 5"
     ],
     "prelude": false
    },
@@ -265,7 +266,7 @@
     "tail": [
      "\ttests/test_windows_api.lua:20: in function 'new_memory'",
      "\ttests/test_windows_api.lua:23: in main chunk",
-     "\t[C]: at 0x55b71492c480"
+     "\t[C]: at 0x559a70acc480"
     ]
    },
    "wine_windows_luajit": {
@@ -305,7 +306,7 @@
     "tail": [
      "\t[C]: in function 'assert'",
      "\ttests/test_module.lua:23: in main chunk",
-     "\t[C]: at 0x55fa3eda7480"
+     "\t[C]: at 0x563045a4b480"
     ]
    },
    "wine_windows_luajit": {
@@ -381,6 +382,16 @@
   {
    "file": "tests/current_game_25327279.lua",
    "global_slot_blocks_relocated": 7
+  },
+  {
+   "file": "tests/test_snapshot.lua",
+   "logic_test_edit": "assert(not pcall(M.apply,api,g,nil,{})) -- no setter signatures, so no binding or mutation",
+   "lines_added": 15
+  },
+  {
+   "file": "tests/test_windows_api.lua",
+   "logic_test_edit": "-- Declarations are made once per game and api.bind casts to named",
+   "lines_added": 68
   }
  ]
 }

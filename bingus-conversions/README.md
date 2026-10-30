@@ -34,9 +34,18 @@ Status on Proton, 2026-10-25 (read-only checks on the ship, in menus and in a mi
 | ArcThrowerRevamped | installed, charge record ready |
 | ConsistentVaulting | installed |
 | ShallowWaterDiving | installed, depth option registered |
-| FoliagePassThrough | installed, applied (95 projectiles; 4 left out) |
-| FlameDamageFixed, HolsterYourShield, LaserSentryCooldown | built; Bingus Shared Loader's `loader.jit` check removed (`LOADER-CHECK-EDIT.txt`), install pending |
-| ControllableHoverPack | built; hover duration +0x9C confirmed 6.0 s live, rebuild with it accepted pending |
-| HellpodDropHold | built; live pods carry a type hash it does not expect: re-map pending |
-| SentryAimRetention | built; behavior ids confirmed live (309/208/214); speed setters never decrypted in play: binds only after their byte check |
-| EnemyCollisionSynchronized | built; collision-layer check unconfirmed: do not install yet |
+| FoliagePassThrough | installed, applied (95 projectiles; 4 left out). 2026-10-28: refuses at load while SHODAN Stat Editor's offline Foliage Pass-Through edit is in the game data (it set one rocket to template 2, the build-25480438 value; 2 is the back-face query in 26088801) |
+| FlameDamageFixed, LaserSentryCooldown | installed 2026-10-25 (Bingus Shared Loader's `loader.jit` check removed, `LOADER-CHECK-EDIT.txt`); both initialize, the Laser Sentry heat record applies |
+| ControllableHoverPack | installed 2026-10-25 with the hover duration +0x9C (6.0 s, confirmed live); accepted in game |
+
+Updated 2026-10-29 (all four installed 2026-10-28 22:59 local into the Megapack package and its deployed archives; not yet run in game):
+
+| Option | Status |
+|---|---|
+| HellpodDropHold | the "unexpected type hash" was stratagem pods (`0x73F8498B…` is an existing pod type in both builds; the player-pod hashes keep their avatar-spawn sites): no re-map; the port is installed as built |
+| EnemyCollisionSynchronized | live L1–L5 passed (profile keys unchanged, main bodies on layer 52, layer names 11/14/55 as in 25480438); its routine checks now run right before first use instead of at load (`out/logic.diff`) |
+| SentryAimRetention | the game never runs its two turret speed setters, so it now does their work itself (registry lookup, owner bit, verified write, then the replication routine `0xE69780`, checked in full); the horizontal setter's body was read live and equals the prediction (`out/logic.diff`) |
+| HolsterYourShield | installed 2026-10-25, but disabled itself at load ("game function unreadable: send_held"): its three game functions are now checked right before the first move instead of at load |
+
+On 2026-10-29 at 06:19 Steam updated the game to build 26251122. Every option here checks the 26088801 exe and
+game.dll hashes and refuses to run on the new build. The 26251122 ports are not published here.

@@ -125,11 +125,15 @@
      "image": "ng",
      "rva": "0x105cf00",
      "hex": "4883ec288b41083b05c321de010f84d00000004c8b151650"
+    },
+    {
+     "kind": "note",
+     "note": "NOT CALLED by the port (build.py LOGIC_PATCHES): the game never runs this setter in play, so its page stays unreadable live (L2, 2026-10-25 and 2026-10-29) and no byte check can pass. api.bind does its work (rows emulation.*); this row is the evidence for that work"
     }
    ],
    "confidence": "high",
-   "feeds_write": true,
-   "role": "write (native): turret vertical speed"
+   "feeds_write": false,
+   "role": "evidence for the setter emulation (vertical: control +0xC, hash 0x9d5d6cc7)"
   },
   {
    "id": "native.horizontal",
@@ -141,7 +145,7 @@
    "name": "horizontal turret speed setter (entity, float): control[i]+0x8",
    "old": "0x11cba20 / 4883ec288b41083b05f3812b020f84d00000004c8b1536b3",
    "new": "0x105cff0 / whole predicted body (232 bytes): 4883ec288b41083b05d320de010f84d00000004c8b15264fc80133d24889742438458b4a30458b5a38440fafd8418d71ff4585c90f84a400000048895c2430498b5a2848897c2420418b7a340f1f40008bce468d041a4c23c1428b0cc33bcf741f3bc8741fffc2413bd172e4488b5c2430488b7c2420488b7424384883c428c33bc87550428b44c30483f8ff74464c8d0cc5000000008bd0498b4240498b0c01f6411401742e498b425848c1e204f30f114c0208498b42404d8b42584983c0084c03c2bae5450bcc498b0c018b4910e8bcc6e0ff488b5c2430488b7c2420488b7424384883c428c3",
-   "method": "twin rule: in the old build the horizontal setter is the vertical one 0xF0 later, byte-identical except RIP/call displacements (-0xF0, same targets), field +0xC -> +0x8 (2 bytes) and hash 0x9d5d6cc7 -> 0xcc0b45e5 (tools/horizontal.py asserts this on the old image). The same transformation of the new vertical body gives the expected new horizontal body at 0x105cf00 + 0xF0. Only its first 16 bytes are readable in any capture (page 0x105d000 is still encrypted in evidence/game-26088801.dll and in the live text dumps); all 16 match. The port therefore uses the WHOLE predicted body as this setter's signature: aim_data.bind_natives reads it with ReadProcessMemory and refuses (Unsupported native sentry setter) unless all 232 bytes match, before any call.",
+   "method": "twin rule: in the old build the horizontal setter is the vertical one 0xF0 later, byte-identical except RIP/call displacements (-0xF0, same targets), field +0xC -> +0x8 (2 bytes) and hash 0x9d5d6cc7 -> 0xcc0b45e5 (tools/horizontal.py asserts this on the old image). The same transformation of the new vertical body gives the expected new horizontal body at 0x105cf00 + 0xF0. Offline only its first 16 bytes are readable (page 0x105d000 is encrypted in evidence/game-26088801.dll). CONFIRMED LIVE 2026-10-29: page 0x105d000 read in a mission (evidence/live-game-26088801-page-105D000.bin) completes the body, and it equals the prediction byte for byte (store +8, hash 0xcc0b45e5, manager 0x2ce1f30, call 0xe69780).",
    "witnesses": [
     {
      "kind": "note",
@@ -158,13 +162,115 @@
      "image": "ng",
      "rva": "0x105cff0",
      "hex": "4883ec288b41083b05d320de010f84d0"
+    },
+    {
+     "kind": "live page",
+     "file": "evidence/live-game-26088801-page-105D000.bin",
+     "sha256": "adaee096291a7c1b7c3cb917726a894bc0f987178cf57a9c52dbcabe72f3e479",
+     "completes_predicted_body": true
+    },
+    {
+     "kind": "note",
+     "note": "NOT CALLED by the port (build.py LOGIC_PATCHES): the game does not run it in play (page 0x105c000, with its first 16 bytes, was still unreadable live on 2026-10-29). api.bind does its work (rows emulation.*)"
     }
    ],
-   "confidence": "medium",
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "evidence for the setter emulation (horizontal: control +8, hash 0xcc0b45e5)",
+   "live_check": "L9: once resident, 232 bytes at game+0x105cff0 equal the predicted body (informational: not called)"
+  },
+  {
+   "id": "emulation.replicate",
+   "file": "src/aim_data.lua + src/windows_api.lua",
+   "lines": [],
+   "name": "replication routine (network id, field hash, field address): queues a replicated field; the call both turret speed setters end with",
+   "old": "0xfd97e0",
+   "new": "0xe69780 / full body (221 bytes, through its ret): 48896c241856415641574883ec30488b0523aae7014d8bf0448bfa8be9488b700880be1d300000000f85a000000048897c2458488b7e1081f9ff7f00000f84860000004c8b0dfe7ce70148895c2450498b4140488b9868010000498b4138ff5008488bc88bd5ffd385c07e588b074803c0896c242044897c24244c897424280f104424200f1144c7088b07ffc0890780be1c3000000074073d000800007525488b1e488b05777de701488bcbff5070488bd7e8294c0000488b05627de701488bcbff5078488b5c2450488b7c2458488b6c24604883c430415f415e5ec3",
+   "method": "called by both direct setters and both twins in each build (setter-emulation.txt); 58 = 58 instructions, identical apart from displacements; no base relocation inside the 221 bytes, so the live bytes equal the image; 1183 call sites (old 1272), so it is resident in any mission. The mod checks all 221 bytes with ReadProcessMemory before binding (aim_data signatures) and never calls it otherwise",
+   "witnesses": [
+    {
+     "kind": "note",
+     "note": "evidence/setter-emulation.txt (tools/setter_emulation.py): the direct vertical setter 0x105cf00, the direct horizontal one 0x105cff0 (live page), and the readable handle-taking twins of both (new 0x4d5870 / 0x4d5960, old 0x4cea40 / 0x4ceb30): each loads the invalid id and the turret manager, probes the map, tests the owner bit, stores, and calls the replication routine"
+    },
+    {
+     "kind": "bytes",
+     "image": "ng",
+     "rva": "0xe69780",
+     "hex": "48896c241856415641574883ec30488b0523aae7014d8bf0448bfa8be9488b700880be1d300000000f85a000000048897c2458488b7e1081f9ff7f00000f84860000004c8b0dfe7ce70148895c2450498b4140488b9868010000498b4138ff5008488bc88bd5ffd385c07e588b074803c0896c242044897c24244c897424280f104424200f1144c7088b07ffc0890780be1c3000000074073d000800007525488b1e488b05777de701488bcbff5070488bd7e8294c0000488b05627de701488bcbff5078488b5c2450488b7c2458488b6c24604883c430415f415e5ec3"
+    },
+    {
+     "kind": "note",
+     "note": "LIVE 2026-10-29 (mission): readable, 221 bytes equal the image"
+    }
+   ],
+   "confidence": "high",
    "feeds_write": true,
-   "role": "write (native): turret horizontal speed - RUNTIME-GATED by the full-body signature",
-   "live_check": "L9: read 232 bytes at game+0x105cff0 once resident; must equal the predicted body",
-   "runtime_gate": "full 232-byte body compared by the mod before its first call; otherwise the mod refuses to bind"
+   "role": "call (native): replication of the written turret speed field",
+   "live_check": "L11: 221 bytes at game+0xe69780 MATCH"
+  },
+  {
+   "id": "emulation.sentinel",
+   "file": "src/windows_api.lua",
+   "lines": [],
+   "name": "invalid entity id (u32 global) the setters compare with first: no work for it",
+   "old": "0x3483c20",
+   "new": "0x2e3f0d0",
+   "method": "first RIP-relative global of every setter body and twin (cmp eax,[rip+X]; je return)",
+   "witnesses": [
+    {
+     "kind": "note",
+     "note": "evidence/setter-emulation.txt (tools/setter_emulation.py): the direct vertical setter 0x105cf00, the direct horizontal one 0x105cff0 (live page), and the readable handle-taking twins of both (new 0x4d5870 / 0x4d5960, old 0x4cea40 / 0x4ceb30): each loads the invalid id and the turret manager, probes the map, tests the owner bit, stores, and calls the replication routine"
+    },
+    {
+     "kind": "note",
+     "note": "LIVE 2026-10-29: u32 [game+0x2e3f0d0] = 0"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "gate (no write for the invalid id)",
+   "live_check": "L11: u32 [game+0x2e3f0d0]"
+  },
+  {
+   "id": "emulation.registry",
+   "file": "src/windows_api.lua",
+   "lines": [],
+   "name": "turret registry fields the setters read: id map +0x28 slots (8-byte {key, index}), +0x30 capacity, +0x34 empty key, +0x38 multiplier (start (id*mul)&(cap-1), linear probe), +0x40 entity pointers, +0x58 control records (16 bytes); entity +0x10 network id, +0x14 bit 0 owner; count +0x14 (bound, layout.turret)",
+   "old": "same",
+   "new": "same",
+   "method": "every setter body and twin, both builds; the same fields the snapshot reads (layout.turret: map +40, entities +64, control +88 stride 16)",
+   "witnesses": [
+    {
+     "kind": "note",
+     "note": "evidence/setter-emulation.txt (tools/setter_emulation.py): the direct vertical setter 0x105cf00, the direct horizontal one 0x105cff0 (live page), and the readable handle-taking twins of both (new 0x4d5870 / 0x4d5960, old 0x4cea40 / 0x4ceb30): each loads the invalid id and the turret manager, probes the map, tests the owner bit, stores, and calls the replication routine"
+    },
+    {
+     "kind": "note",
+     "note": "LIVE 2026-10-29: map capacity 512, empty key 0, multiplier 2"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address (control +8 / +12 write)",
+   "live_check": "L11: per own sentry, map index = turret row index, record = entity"
+  },
+  {
+   "id": "emulation.hashes",
+   "file": "src/windows_api.lua",
+   "lines": [],
+   "name": "replicated field hashes: horizontal speed 0xcc0b45e5 (control +8), vertical speed 0x9d5d6cc7 (control +0xC)",
+   "old": "0xcc0b45e5 / 0x9d5d6cc7",
+   "new": "0xcc0b45e5 / 0x9d5d6cc7",
+   "method": "the setters pass them to the replication routine (both builds, both twins, the live horizontal body); the replicated-field registration (old 0x6e06f0 / new 0x6eb097) lists 0x9611c029, 0xcc0b45e5, 0x9d5d6cc7 in that order in both builds",
+   "witnesses": [
+    {
+     "kind": "note",
+     "note": "evidence/setter-emulation.txt (tools/setter_emulation.py): the direct vertical setter 0x105cf00, the direct horizontal one 0x105cff0 (live page), and the readable handle-taking twins of both (new 0x4d5870 / 0x4d5960, old 0x4cea40 / 0x4ceb30): each loads the invalid id and the turret manager, probes the map, tests the owner bit, stores, and calls the replication routine"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "value (replication of the written field)"
   },
   {
    "id": "native.fire_mode",
@@ -2175,10 +2281,10 @@
   }
  ],
  "counts": {
-  "high": 41,
-  "medium": 5,
-  "rows": 46,
-  "feeds_write": 33
+  "high": 46,
+  "medium": 4,
+  "rows": 50,
+  "feeds_write": 35
  },
  "inventory_sites": [
   {

@@ -43,7 +43,7 @@ end
 local st, cp = read(G + 0x7B76A0, 152), read(G + 0x12573A0, 422)
 out('ECS_L1 stop routine readable', tostring(st ~= nil), 'equal', tostring(st ~= nil and hex(st) == "48895c2408574883ec60488b4138448bc24969d8b82b00004a8b3cc048035948488bcfe838e0d4ff80b8c40600000074558b4f08e807266b004885c07448f64014017442448b480c33d2c6442450000f57c0f30f11442448448bc1488b0d56106702895424408954243888542430488d542478f30f11442428c744242001000000e86af4a900c683a42b000000488b5c24704883c4605fc3"))
 out('ECS_L1 completion routine readable', tostring(cp ~= nil), 'equal', tostring(cp ~= nil and hex(cp) == "48895c24184889542410564883ec70488bf1418bd8418bc8e82329c1ff4885c00f8472010000f64014014889bc24800000000f84f20000008b501081faff7f0000742e488b05cecda801488b4808e83d75c1ff84c0741a488b0d2a0ebe018bd3488b89a8b30000e884839affe91f010000488b0d20a4a8018bd3e8710a6eff84c00f840901000033ff488d461c8bcf9039180f84f8000000ffc14883c04083f92072ed8bcf488d86240800000f1f400039180f84d8000000ffc14883c04081f98000000072ea8bcbe87328c1ff4885c00f84ba000000f64014010f84b0000000448b480c488d94248800000040887c24500f57c0f30f11442448448bc3f30f1005afeafe00488bce897c2440897c2438c644243001f30f11442428c744242001000000e8c8f6ffffeb668b701081feff7f0000750433ffeb23488b0de89fa801488b4140488bb860010000488b4138ff5008488bc88bd6ffd7488bf88bcbe8dd24c1ff41b901000000c7442460010000004c8d442460c744246404000000488bd74889442468b9326c6621e8a0569aff488bbc2480000000488b9c24900000004883c4705ec3"),
-    '(a refused read = page not resident yet: the mod then disables itself at load; note when it becomes readable)')
+    '(a refused read = page not resident yet: the port compares it right before the first command and waits until then)')
 out('ECS_L1 completion service', h(P(G + 0x2E28758)))
 -- L3 physics worlds and the body getter
 for i = 0, 3 do
@@ -62,10 +62,14 @@ local function manager(label, slot, corpse)
   out('ECS_L2', label, h(m), 'capacity', cap, 'count', cnt, 'active', act, corpse and '' or ('owned ' .. tostring(U32(m + 20)))
       , '(active <= count <= capacity <= 8192)')
   local ents, rt, sy = P(m + (corpse and 64 or 56)), P(m + 72), P(m + 80)
-  local listed = {}
+  local listed, others = {}, {}
   for i = 0, math.min((cnt or 0), corpse and 512 or 2048) - 1 do
     local e = ents and P(ents + 8 * i)
     local pf = e and profile(e)
+    if e and not pf then
+      local key = h(U32(e)) .. ':' .. h(U32(e + 4))
+      others[key] = (others[key] or 0) + 1
+    end
     if pf then
       local meta = (not corpse and rt) and (rt + i * 11192 + 11160) or nil
       out('ECS_L2', label, i, pf.name, 'id', U32(e + 8), 'unit', h(U32(e + 12)), 'owned', (U32(e + 20) or 0) % 2,
@@ -75,6 +79,11 @@ local function manager(label, slot, corpse)
       listed[#listed + 1] = {e = e, pf = pf}
     end
   end
+  local parts = {}
+  for k, v in pairs(others) do parts[#parts + 1] = k .. '=' .. v end
+  table.sort(parts)
+  out('ECS_L2', label, 'listed', #listed, 'not in the 21 profiles (resource key:variant=count)', table.concat(parts, ' '),
+      '(small enemies are expected here; a Charger/Titan/Impaler/Spewer/walker/tripod you killed showing here = its key changed)')
   return listed
 end
 local units = {}
@@ -140,6 +149,16 @@ table.sort(parts)
 out('ECS_L4 body layers (kind:layer=count)', table.concat(parts, ' '),
     '(the mod never acts on bodies on layers 52 / 48 / 83 (build 25480438 numbering): expect main / ragdoll bodies '
     .. 'on that set and the repaired aux bodies outside it; anything else means the layer numbering moved)')
+-- L4b collision layer names (filter property table): 26088801 has one layer more than 25480438 (103 -> 104)
+local FP = P(X + 0x286D338)
+local fcount, fnames = FP and U32(FP + 248), FP and P(FP + 256)
+local named = {}
+for _, i in ipairs({11, 14, 48, 52, 55, 83, 101, 102, 103}) do
+  named[#named + 1] = i .. '=' .. h(fnames and fcount and i < fcount and U32(fnames + 4 * i))
+end
+out('ECS_L4b filter table', h(FP), 'count', fcount, '(expect 104)', 'names', table.concat(named, ' '),
+    '(expect 11=0x12D0ABF1 flame, 14=0x4A8FBF9 destructible as in 25480438; record 48/52/83)')
 local okk, st = pcall(function() return rawget(_G, 'CorpseCollisionRepair') end)
 if okk and type(st) == 'table' then out('ECS_L0 status', st.status, 'getter', st.preflight_getter, 'stops', st.fling_stops,
-  'realignments', st.realignments) else out('ECS_L0 CorpseCollisionRepair not visible here; read CorpseCollisionRepair.log') end
+  'realignments', st.realignments, 'native_waits', st.native_waits)
+else out('ECS_L0 CorpseCollisionRepair not visible here; read CorpseCollisionRepair.log') end

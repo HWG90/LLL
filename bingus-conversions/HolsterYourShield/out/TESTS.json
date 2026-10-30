@@ -46,6 +46,21 @@
    }
   ]
  },
+ "logic_test_patches": {
+  "what": "port tests only: the adapter test checks the lazy bind; two new cases check refused moves (build.py LOGIC_TEST_PATCHES)",
+  "applied": [
+   {
+    "file": "test_mod.lua",
+    "line": 313,
+    "why": "adapter test: lazy bind"
+   },
+   {
+    "file": "test_mod.lua",
+    "line": 339,
+    "why": "move-gating cases"
+   }
+  ]
+ },
  "linux-gc64": {
   "luajit": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit",
   "upstream": {
@@ -56,7 +71,7 @@
      "\t[C]: in function 'error'",
      "\ttests/test_mod.lua:12: in function 'check'",
      "\ttests/test_mod.lua:298: in main chunk",
-     "\t[C]: at 0x556bbb07a480"
+     "\t[C]: at 0x56025419c480"
     ]
    },
    "test_hostile": {
@@ -66,7 +81,7 @@
      "\t[C]: in function 'error'",
      "\ttests/test_hostile.lua:17: in function 'check'",
      "\ttests/test_hostile.lua:44: in main chunk",
-     "\t[C]: at 0x55f8ffe98480"
+     "\t[C]: at 0x55623fc76480"
     ]
    },
    "compile_entry": {
@@ -83,7 +98,7 @@
      "\t...rt/HolsterYourShield/work/tests/upstream/entry-check.lua:426: in function 'new'",
      "\t...rt/HolsterYourShield/work/tests/upstream/entry-check.lua:1112: in function 'chunk'",
      "\ttests/test_entry.lua:14: in main chunk",
-     "\t[C]: at 0x563cd112c480"
+     "\t[C]: at 0x5608bc853480"
     ]
    }
   },
@@ -95,7 +110,7 @@
      "\t[C]: in function 'error'",
      "\ttests/test_mod.lua:12: in function 'check'",
      "\ttests/test_mod.lua:298: in main chunk",
-     "\t[C]: at 0x564d6d88e480"
+     "\t[C]: at 0x563833bfb480"
     ]
    },
    "test_hostile": {
@@ -105,7 +120,7 @@
      "\t[C]: in function 'error'",
      "\ttests/test_hostile.lua:17: in function 'check'",
      "\ttests/test_hostile.lua:44: in main chunk",
-     "\t[C]: at 0x5619040fd480"
+     "\t[C]: at 0x55d1ef2ac480"
     ]
    },
    "compile_entry": {
@@ -120,9 +135,9 @@
     "pass_lines": [],
     "tail": [
      "\t...k-port/HolsterYourShield/work/tests/port/entry-check.lua:426: in function 'new'",
-     "\t...k-port/HolsterYourShield/work/tests/port/entry-check.lua:1112: in function 'chunk'",
+     "\t...k-port/HolsterYourShield/work/tests/port/entry-check.lua:1144: in function 'chunk'",
      "\ttests/test_entry.lua:14: in main chunk",
-     "\t[C]: at 0x55c52f9e3480"
+     "\t[C]: at 0x55daef0fb480"
     ]
    }
   }
@@ -163,7 +178,7 @@
    "test_mod": {
     "exit": 0,
     "pass_lines": [
-     "PASS: 20 Holster Your Shield checks (LuaJIT 2.1.ROLLING)"
+     "PASS: 22 Holster Your Shield checks (LuaJIT 2.1.ROLLING)"
     ],
     "tail": []
    },

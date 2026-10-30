@@ -9,9 +9,7 @@
       "PASS: module wrapper loads every chunk, passes the generated profiles to the patch and the runtime to the loader, and refuses a process without the game"
      ],
      "tail": [
-      "pci id for fd 35: 10de:2b85, driver (null)",
-      "pci id for fd 34: 10de:2b85, driver (null)",
-      "pci id for fd 35: 10de:2b85, driver (null)"
+      "PASS: module wrapper loads every chunk, passes the generated profiles to the patch and the runtime to the loader, and refuses a process without the game"
      ]
     },
     "linux": {
@@ -20,7 +18,7 @@
      "tail": [
       "\t[C]: in function 'assert'",
       "\ttests/test_module.lua:18: in main chunk",
-      "\t[C]: at 0x55be89c05480"
+      "\t[C]: at 0x55d9129dd480"
      ]
     }
    },
@@ -41,7 +39,7 @@
      "tail": [
       "\ttests/test_snapshot.lua:77: in function 'fixture'",
       "\ttests/test_snapshot.lua:92: in main chunk",
-      "\t[C]: at 0x56130c261480"
+      "\t[C]: at 0x56049c025480"
      ]
     }
    },
@@ -69,7 +67,7 @@
      "tail": [
       "\tsrc/windows_api.lua:25: in function <src/windows_api.lua:1>",
       "\ttests/test_loader.lua:313: in main chunk",
-      "\t[C]: at 0x563be9e77480"
+      "\t[C]: at 0x556be6e24480"
      ]
     }
    },
@@ -88,7 +86,7 @@
      "tail": [
       "\t[C]: in function 'assert'",
       "\ttests/test_ffi_names.lua:21: in main chunk",
-      "\t[C]: at 0x556ec0e92480"
+      "\t[C]: at 0x555b901d6480"
      ]
     }
    },
@@ -113,7 +111,7 @@
      "tail": [
       "\tsrc/windows_api.lua:25: in function <src/windows_api.lua:1>",
       "\ttests/test_performance.lua:5: in main chunk",
-      "\t[C]: at 0x5583b22b2480"
+      "\t[C]: at 0x558a95736480"
      ]
     }
    },
@@ -134,7 +132,7 @@
      "tail": [
       "\tsrc/windows_api.lua:25: in function <src/windows_api.lua:1>",
       "\ttests/test_metadata_cache.lua:5: in main chunk",
-      "\t[C]: at 0x5557878c4480"
+      "\t[C]: at 0x5642d8685480"
      ]
     }
    },
@@ -155,7 +153,7 @@
      "tail": [
       "\tsrc/windows_api.lua:25: in function <src/windows_api.lua:1>",
       "\ttests/test_repose_cooldown.lua:6: in main chunk",
-      "\t[C]: at 0x560a52999480"
+      "\t[C]: at 0x56502ef55480"
      ]
     }
    },
@@ -218,7 +216,28 @@
      "tail": [
       "\tsrc/windows_api.lua:25: in function <src/windows_api.lua:1>",
       "\ttests/test_profiler_behavior.lua:7: in main chunk",
-      "\t[C]: at 0x55be7369a480"
+      "\t[C]: at 0x564ce8643480"
+     ]
+    }
+   },
+   {
+    "suite": "tests/test_deferred_bind.lua",
+    "wine": {
+     "exit": 0,
+     "pass_lines": [
+      "PASS: no code read at load, pose/stop/completion compared before first use (wait, retry after 1 s, refuse on change), dispatch waits uncalled"
+     ],
+     "tail": [
+      "PASS: no code read at load, pose/stop/completion compared before first use (wait, retry after 1 s, refuse on change), dispatch waits uncalled"
+     ]
+    },
+    "linux": {
+     "exit": 1,
+     "pass_lines": [],
+     "tail": [
+      "\tsrc/windows_api.lua:25: in function <src/windows_api.lua:1>",
+      "\ttests/test_deferred_bind.lua:8: in main chunk",
+      "\t[C]: at 0x55fb6c8a5480"
      ]
     }
    },
@@ -276,7 +295,7 @@
      "tail": [
       "\t[C]: in function 'assert'",
       "\ttests/test_module.lua:18: in main chunk",
-      "\t[C]: at 0x55b9503c4480"
+      "\t[C]: at 0x56211e4b3480"
      ]
     }
    },
@@ -297,7 +316,7 @@
      "tail": [
       "\ttests/test_snapshot.lua:77: in function 'fixture'",
       "\ttests/test_snapshot.lua:92: in main chunk",
-      "\t[C]: at 0x563f98f44480"
+      "\t[C]: at 0x563216e0b480"
      ]
     }
    },
@@ -325,7 +344,7 @@
      "tail": [
       "\tsrc/windows_api.lua:25: in function <src/windows_api.lua:1>",
       "\ttests/test_loader.lua:313: in main chunk",
-      "\t[C]: at 0x5559237bb480"
+      "\t[C]: at 0x55e5bc85d480"
      ]
     }
    },
@@ -344,7 +363,7 @@
      "tail": [
       "\t[C]: in function 'assert'",
       "\ttests/test_ffi_names.lua:21: in main chunk",
-      "\t[C]: at 0x560ff0bbe480"
+      "\t[C]: at 0x55a3e9849480"
      ]
     }
    },
@@ -369,7 +388,7 @@
      "tail": [
       "\tsrc/windows_api.lua:25: in function <src/windows_api.lua:1>",
       "\ttests/test_performance.lua:5: in main chunk",
-      "\t[C]: at 0x556a63c7a480"
+      "\t[C]: at 0x55ab84fcb480"
      ]
     }
    },
@@ -390,7 +409,7 @@
      "tail": [
       "\tsrc/windows_api.lua:25: in function <src/windows_api.lua:1>",
       "\ttests/test_metadata_cache.lua:5: in main chunk",
-      "\t[C]: at 0x56072a4a6480"
+      "\t[C]: at 0x558fb5c77480"
      ]
     }
    },
@@ -411,7 +430,7 @@
      "tail": [
       "\tsrc/windows_api.lua:25: in function <src/windows_api.lua:1>",
       "\ttests/test_repose_cooldown.lua:6: in main chunk",
-      "\t[C]: at 0x556a3ced0480"
+      "\t[C]: at 0x55c93a73d480"
      ]
     }
    },
@@ -474,7 +493,7 @@
      "tail": [
       "\tsrc/windows_api.lua:25: in function <src/windows_api.lua:1>",
       "\ttests/test_profiler_behavior.lua:7: in main chunk",
-      "\t[C]: at 0x56429dce0480"
+      "\t[C]: at 0x562202d63480"
      ]
     }
    },
