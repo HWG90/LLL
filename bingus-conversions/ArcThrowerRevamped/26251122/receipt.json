@@ -1,0 +1,39 @@
+{
+ "option": "ArcThrowerRevamped",
+ "from": "26088801",
+ "to": "26251122",
+ "resources": {
+  "eafc48b0c362fb8a": {
+   "wrapped": false,
+   "lines_changed": 5,
+   "sha256_26088801": "787c207e1d3ea946aa2792e6e7b09923e696b0a5d57bcd86cf73777a12e53a14",
+   "sha256": "d823bc8c08684d93883bdea874ac46ee4dd1d952ad82515a42e86d8da77ecec1"
+  }
+ },
+ "edits": [
+  {
+   "resource": "eafc48b0c362fb8a",
+   "kind": "string",
+   "old": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "new": "257FD7DE21A04E8668E02E5C820EDF3435176FBDE3569765255CC52A5EA20F9D",
+   "count": 1
+  },
+  {
+   "resource": "eafc48b0c362fb8a",
+   "kind": "string",
+   "old": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "new": "61DCFCD201DACBF3545C97BEB8A5A6186E9850D2670BF60B0E058320B477F6DF",
+   "count": 1
+  },
+  {
+   "resource": "eafc48b0c362fb8a",
+   "kind": "string",
+   "old": "26088801",
+   "new": "26251122",
+   "count": 3
+  }
+ ],
+ "witnesses": [],
+ "source": "original-mods/backups/20261029-170002-ArcThrowerRevamped/0-9ba626afa44a3aa3.patch_0",
+ "archive_sha256": "05c75cb890057eb4202c5e5501611fd853f3a460693257981e5e440060e48c92"
+}

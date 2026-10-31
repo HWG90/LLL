@@ -1,0 +1,46 @@
+{
+ "option": "SoundSystemsRebalanced",
+ "from": "26088801",
+ "to": "26251122",
+ "resources": {
+  "7b87e79ef2f3fa5a": {
+   "wrapped": false,
+   "lines_changed": 4,
+   "sha256_26088801": "a8ce5d171975a929a794776699a76b8e38436ec044c129638dde05ac2af210de",
+   "sha256": "58a9de3ce40aac047ae96a10beb6099a92e5861ca293f2a99aff43148da49e62"
+  }
+ },
+ "edits": [
+  {
+   "resource": "7b87e79ef2f3fa5a",
+   "kind": "string",
+   "old": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "new": "257FD7DE21A04E8668E02E5C820EDF3435176FBDE3569765255CC52A5EA20F9D",
+   "count": 1
+  },
+  {
+   "resource": "7b87e79ef2f3fa5a",
+   "kind": "string",
+   "old": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "new": "61DCFCD201DACBF3545C97BEB8A5A6186E9850D2670BF60B0E058320B477F6DF",
+   "count": 1
+  },
+  {
+   "resource": "7b87e79ef2f3fa5a",
+   "kind": "string",
+   "old": "26088801",
+   "new": "26251122",
+   "count": 1
+  },
+  {
+   "resource": "7b87e79ef2f3fa5a",
+   "kind": "address",
+   "old": "rva = 0xDA120,",
+   "new": "rva = 0xDA130,",
+   "count": 1
+  }
+ ],
+ "witnesses": [],
+ "source": "original-mods/backups/20261029-170003-SoundSystemsRebalanced/0-9ba626afa44a3aa3.patch_0",
+ "archive_sha256": "5d8f54344a190e1ad531008b435da38833255af7b29f710879be38b3915d0f23"
+}

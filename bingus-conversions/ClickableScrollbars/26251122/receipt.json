@@ -1,0 +1,53 @@
+{
+ "option": "ClickableScrollbars",
+ "from": "26088801",
+ "to": "26251122",
+ "resources": {
+  "9a4b654810fa934b": {
+   "wrapped": false,
+   "lines_changed": 4,
+   "sha256_26088801": "4983dcd17e1fc57caeec2f55fa4597bd5a6153e5b2fc9c428b213f46ac72b6d8",
+   "sha256": "554981e6c408c8121c10d603ab04123a72666b1f505524e581cf5ff32c13e3ff"
+  }
+ },
+ "edits": [
+  {
+   "resource": "9a4b654810fa934b",
+   "kind": "string",
+   "old": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "new": "257FD7DE21A04E8668E02E5C820EDF3435176FBDE3569765255CC52A5EA20F9D",
+   "count": 1
+  },
+  {
+   "resource": "9a4b654810fa934b",
+   "kind": "string",
+   "old": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "new": "61DCFCD201DACBF3545C97BEB8A5A6186E9850D2670BF60B0E058320B477F6DF",
+   "count": 1
+  },
+  {
+   "resource": "9a4b654810fa934b",
+   "kind": "string",
+   "old": "26088801",
+   "new": "26251122",
+   "count": 1
+  }
+ ],
+ "witnesses": [
+  {
+   "resource": "9a4b654810fa934b",
+   "module": "game",
+   "old_rva": "0x16157c0",
+   "new_rva": "0x16157c0",
+   "size": 24,
+   "old": "0f57d20f2fd1770cf30f1015c40dc300f30f5dd1f30f1081",
+   "new": "0f57d20f2fd1770cf30f1015e40dc300f30f5dd1f30f1081",
+   "explained": [
+    "0x16157c8 movss mem: 0x2246594 -> 0x22465b4 (+0x20) .rdata, same 4-byte value"
+   ],
+   "accepted": {}
+  }
+ ],
+ "source": "original-mods/backups/20261029-170002-ClickableScrollbars/0-9ba626afa44a3aa3.patch_0",
+ "archive_sha256": "9f2b32330ddcaa05fb1e46843dfb43dfaf76b40c717f1331688a87ddd930e922"
+}

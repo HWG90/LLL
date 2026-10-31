@@ -1,0 +1,22 @@
+--- 26088801/5895ed9013effd40.lua
++++ 26251122/5895ed9013effd40.lua
+@@ -1389 +1389 @@
+-local DIVE_TIMEOUT_RVAS={0x2246948,0x2246938}
++local DIVE_TIMEOUT_RVAS={0x2246968,0x2246958}
+@@ -1651 +1651 @@
+-            local window,two=reader.read(base+0x22468b8,0x100) or '',packed(2)
++            local window,two=reader.read(base+0x22468d8,0x100) or '',packed(2)
+@@ -1653 +1653 @@
+-            for o=0,#window-4,4 do if window:sub(o+1,o+4)==two then found[#found+1]=string.format('0x%x',0x22468b8+o) end end
++            for o=0,#window-4,4 do if window:sub(o+1,o+4)==two then found[#found+1]=string.format('0x%x',0x22468d8+o) end end
+@@ -1657 +1657 @@
+-        local prone=read(base+0x22464ec,4);if not prone then return nil,wait end
++        local prone=read(base+0x224650c,4);if not prone then return nil,wait end
+@@ -1659 +1659 @@
+-        local crouch=read(base+0x2246210,4);if not crouch then return nil,wait end
++        local crouch=read(base+0x2246230,4);if not crouch then return nil,wait end
+@@ -2175,2 +2175,2 @@
+-install_loader(function() return create_api(runtime, runtime_write.extend(runtime_memory.new(runtime))) end, patch, {revision = 'data-v3.10.1-26088801', exe_sha256 = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE', game_sha256 = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'}, text, locales, runtime)
+-
++install_loader(function() return create_api(runtime, runtime_write.extend(runtime_memory.new(runtime))) end, patch, {revision = 'data-v3.10.1-26251122', exe_sha256 = '257FD7DE21A04E8668E02E5C820EDF3435176FBDE3569765255CC52A5EA20F9D', game_sha256 = '61DCFCD201DACBF3545C97BEB8A5A6186E9850D2670BF60B0E058320B477F6DF'}, text, locales, runtime)
++

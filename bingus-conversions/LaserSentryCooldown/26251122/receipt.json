@@ -1,0 +1,39 @@
+{
+ "option": "LaserSentryCooldown",
+ "from": "26088801",
+ "to": "26251122",
+ "resources": {
+  "eca1c2278f17bc65": {
+   "wrapped": false,
+   "lines_changed": 4,
+   "sha256_26088801": "38846c17cee9641247e04b7e823eec37f3de3e970718c2eaeeb599c80df78bd4",
+   "sha256": "2e1ec5d854f6b2c7a7ab213fc8c6b43bb9cc77d6c42b50dd275d87adaefe3151"
+  }
+ },
+ "edits": [
+  {
+   "resource": "eca1c2278f17bc65",
+   "kind": "string",
+   "old": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "new": "257FD7DE21A04E8668E02E5C820EDF3435176FBDE3569765255CC52A5EA20F9D",
+   "count": 1
+  },
+  {
+   "resource": "eca1c2278f17bc65",
+   "kind": "string",
+   "old": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "new": "61DCFCD201DACBF3545C97BEB8A5A6186E9850D2670BF60B0E058320B477F6DF",
+   "count": 1
+  },
+  {
+   "resource": "eca1c2278f17bc65",
+   "kind": "string",
+   "old": "26088801",
+   "new": "26251122",
+   "count": 2
+  }
+ ],
+ "witnesses": [],
+ "source": "original-mods/backups/20261029-170003-LaserSentryCooldown/0-9ba626afa44a3aa3.patch_0",
+ "archive_sha256": "2372e82c8f15eaf0e57ff921332791baf9cc2f9c5d66f3d86dec6e107fa3a08f"
+}

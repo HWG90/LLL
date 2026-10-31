@@ -1,0 +1,13 @@
+--- 26088801/1d106bd89d3a79ac.lua
++++ 26251122/1d106bd89d3a79ac.lua
+@@ -1916 +1916 @@
+-        local b = read(game + 0x2069D50, 33 * 4, hash_bytes)
++        local b = read(game + 0x2069D70, 33 * 4, hash_bytes)
+@@ -2303 +2303 @@
+-build='26088801',
++build='26251122',
+@@ -3888,2 +3888,2 @@
+-install({create_api=create_api,mission=mission,resolve=resolve,roster=roster,roster_data=roster_data,model=model,panel=panel,presentation=presentation,text=text,locales=locales,runtime=runtime,runtime_memory=runtime_memory,build={revision='v4.1.1',game_sha256='6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F',exe_sha256='0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'}})
+-
++install({create_api=create_api,mission=mission,resolve=resolve,roster=roster,roster_data=roster_data,model=model,panel=panel,presentation=presentation,text=text,locales=locales,runtime=runtime,runtime_memory=runtime_memory,build={revision='v4.1.1',game_sha256='61DCFCD201DACBF3545C97BEB8A5A6186E9850D2670BF60B0E058320B477F6DF',exe_sha256='257FD7DE21A04E8668E02E5C820EDF3435176FBDE3569765255CC52A5EA20F9D'}})
++

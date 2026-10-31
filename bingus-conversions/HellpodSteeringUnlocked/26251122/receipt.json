@@ -1,0 +1,39 @@
+{
+ "option": "HellpodSteeringUnlocked",
+ "from": "26088801",
+ "to": "26251122",
+ "resources": {
+  "71dd3b38d256e5bd": {
+   "wrapped": true,
+   "lines_changed": 2,
+   "sha256_26088801": "10fb171bf3c651958a24bab76c11a9aaec096f053033ef4683b7922889778172",
+   "sha256": "fd1506baaba5bc9a2404d78f4382ea56d7a090bf3d74ac82b954692bf1daa4d7"
+  }
+ },
+ "edits": [
+  {
+   "resource": "71dd3b38d256e5bd",
+   "kind": "string",
+   "old": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "new": "257FD7DE21A04E8668E02E5C820EDF3435176FBDE3569765255CC52A5EA20F9D",
+   "count": 1
+  },
+  {
+   "resource": "71dd3b38d256e5bd",
+   "kind": "string",
+   "old": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "new": "61DCFCD201DACBF3545C97BEB8A5A6186E9850D2670BF60B0E058320B477F6DF",
+   "count": 1
+  },
+  {
+   "resource": "71dd3b38d256e5bd",
+   "kind": "string",
+   "old": "26088801",
+   "new": "26251122",
+   "count": 1
+  }
+ ],
+ "witnesses": [],
+ "source": "original-mods/backups/20261029-170003-HellpodSteeringUnlocked/0-9ba626afa44a3aa3.patch_0",
+ "archive_sha256": "1fd9016a795ca3b0df5d8051bdb1818ebe1b6b1d8781680a53e02cacdca9f555"
+}

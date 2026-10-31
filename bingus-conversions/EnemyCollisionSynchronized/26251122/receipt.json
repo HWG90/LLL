@@ -1,0 +1,109 @@
+{
+ "option": "EnemyCollisionSynchronized",
+ "from": "26088801",
+ "to": "26251122",
+ "resources": {
+  "985c9039ef17db8e": {
+   "wrapped": true,
+   "lines_changed": 11,
+   "sha256_26088801": "43f1e4eb063efa1319d4950518cfbd70fdd75385ed5674da051445cb2d2c0066",
+   "sha256": "bf2415e63cea796f9deb17bba3eb88e6cd4d34d4d1724717a7d5dc740ab6c5bb"
+  }
+ },
+ "edits": [
+  {
+   "resource": "985c9039ef17db8e",
+   "kind": "string",
+   "old": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "new": "257FD7DE21A04E8668E02E5C820EDF3435176FBDE3569765255CC52A5EA20F9D",
+   "count": 1
+  },
+  {
+   "resource": "985c9039ef17db8e",
+   "kind": "string",
+   "old": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "new": "61DCFCD201DACBF3545C97BEB8A5A6186E9850D2670BF60B0E058320B477F6DF",
+   "count": 1
+  },
+  {
+   "resource": "985c9039ef17db8e",
+   "kind": "string",
+   "old": "26088801",
+   "new": "26251122",
+   "count": 1
+  },
+  {
+   "resource": "985c9039ef17db8e",
+   "kind": "address",
+   "old": "{{8,0x806790},{0x60,0x820c40},{0x68,0x820f60}}",
+   "new": "{{8,0x806640},{0x60,0x820af0},{0x68,0x820e10}}",
+   "count": 1
+  },
+  {
+   "resource": "985c9039ef17db8e",
+   "kind": "address",
+   "old": "{exe+0x820c40,setter_prologue",
+   "new": "{exe+0x820af0,setter_prologue",
+   "count": 1
+  },
+  {
+   "resource": "985c9039ef17db8e",
+   "kind": "address",
+   "old": "{exe+0x820f60,setter_prologue",
+   "new": "{exe+0x820e10,setter_prologue",
+   "count": 1
+  },
+  {
+   "resource": "985c9039ef17db8e",
+   "kind": "address",
+   "old": "',exe+0x820c40)",
+   "new": "',exe+0x820af0)",
+   "count": 1
+  },
+  {
+   "resource": "985c9039ef17db8e",
+   "kind": "address",
+   "old": "',exe+0x820f60)",
+   "new": "',exe+0x820e10)",
+   "count": 1
+  },
+  {
+   "resource": "985c9039ef17db8e",
+   "kind": "address",
+   "old": "',exe+0x806790)",
+   "new": "',exe+0x806640)",
+   "count": 1
+  },
+  {
+   "resource": "985c9039ef17db8e",
+   "kind": "address",
+   "old": "if offset~=0xd658d0 then",
+   "new": "if offset~=0xd65790 then",
+   "count": 1
+  },
+  {
+   "resource": "985c9039ef17db8e",
+   "kind": "address",
+   "old": "api.address(exe+0xd658d0)",
+   "new": "api.address(exe+0xd65790)",
+   "count": 1
+  }
+ ],
+ "witnesses": [
+  {
+   "resource": "985c9039ef17db8e",
+   "module": "game",
+   "old_rva": "0x12573a0",
+   "new_rva": "0x12573a0",
+   "size": 422,
+   "old": "48895c24184889542410564883ec70488bf1418bd8418bc8e82329c1ff4885c00f8472010000f64014014889bc24800000000f84f20000008b501081faff7f0000742e488b05cecda801488b4808e83d75c1ff84c0741a488b0d2a0ebe018bd3488b89a8b30000e884839affe91f010000488b0d20a4a8018bd3e8710a6eff84c00f840901000033ff488d461c8bcf9039180f84f8000000ffc14883c04083f92072ed8bcf488d86240800000f1f400039180f84d8000000ffc14883c04081f98000000072ea8bcbe87328c1ff4885c00f84ba000000f64014010f84b0000000448b480c488d94248800000040887c24500f57c0f30f11442448448bc3f30f1005afeafe00488bce897c2440897c2438c644243001f30f11442428c744242001000000e8c8f6ffffeb668b701081feff7f0000750433ffeb23488b0de89fa801488b4140488bb860010000488b4138ff5008488bc88bd6ffd7488bf88bcbe8dd24c1ff41b901000000c7442460010000004c8d442460c744246404000000488bd74889442468b9326c6621e8a0569aff488bbc2480000000488b9c24900000004883c4705ec3",
+   "new": "48895c24184889542410564883ec70488bf1418bd8418bc8e82329c1ff4885c00f8472010000f64014014889bc24800000000f84f20000008b501081faff7f0000742e488b05cecda801488b4808e83d75c1ff84c0741a488b0d2a0ebe018bd3488b89a8b30000e884839affe91f010000488b0d20a4a8018bd3e8710a6eff84c00f840901000033ff488d461c8bcf9039180f84f8000000ffc14883c04083f92072ed8bcf488d86240800000f1f400039180f84d8000000ffc14883c04081f98000000072ea8bcbe87328c1ff4885c00f84ba000000f64014010f84b0000000448b480c488d94248800000040887c24500f57c0f30f11442448448bc3f30f1005cfeafe00488bce897c2440897c2438c644243001f30f11442428c744242001000000e8c8f6ffffeb668b701081feff7f0000750433ffeb23488b0de89fa801488b4140488bb860010000488b4138ff5008488bc88bd6ffd7488bf88bcbe8dd24c1ff41b901000000c7442460010000004c8d442460c744246404000000488bd74889442468b9326c6621e8a0569aff488bbc2480000000488b9c24900000004883c4705ec3",
+   "explained": [
+    "0x125749d movss mem: 0x2245f54 -> 0x2245f74 (+0x20) .rdata, same 4-byte value"
+   ],
+   "accepted": {}
+  }
+ ],
+ "source": "original-mods/backups/20261029-170003-EnemyCollisionSynchronized/0-9ba626afa44a3aa3.patch_0",
+ "archive_sha256": "3f4948ecf23530d2d6c51240c4f3195ca66288416d35a0ed731343169f58faed"
+}

@@ -1,0 +1,32 @@
+{
+ "option": "GalacticMenuHotkey",
+ "from": "26088801",
+ "to": "26251122",
+ "resources": {
+  "9ee275c2bd559175": {
+   "wrapped": false,
+   "lines_changed": 2,
+   "sha256_26088801": "4fff29b304ae2a2246b5e6a186a38281b087a3a2d77848a14ee13fc2a272da6b",
+   "sha256": "c478ccb4fb5908d8d3138d0239f88fad0b844cc7a0ef42ba384b2ffa5c65a3d1"
+  }
+ },
+ "edits": [
+  {
+   "resource": "9ee275c2bd559175",
+   "kind": "string",
+   "old": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "new": "257FD7DE21A04E8668E02E5C820EDF3435176FBDE3569765255CC52A5EA20F9D",
+   "count": 1
+  },
+  {
+   "resource": "9ee275c2bd559175",
+   "kind": "string",
+   "old": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "new": "61DCFCD201DACBF3545C97BEB8A5A6186E9850D2670BF60B0E058320B477F6DF",
+   "count": 1
+  }
+ ],
+ "witnesses": [],
+ "source": "original-mods/backups/20261029-170003-GalacticMenuHotkey/0-9ba626afa44a3aa3.patch_0",
+ "archive_sha256": "554f751f986756f7f3f400a77d7ae13a5cdbb3e9520280f28c4033fc712616b9"
+}

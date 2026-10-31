@@ -1,0 +1,39 @@
+{
+ "option": "FlameDamageFixed",
+ "from": "26088801",
+ "to": "26251122",
+ "resources": {
+  "af1003f292e2726b": {
+   "wrapped": false,
+   "lines_changed": 3,
+   "sha256_26088801": "84134889a3bc2ca3f03bf75280450295d4837107443310082ad787f5a71fcefa",
+   "sha256": "be5f804f7310e29cbe26d3303eb3e71f9207b44fb0852f2373c79e78ca50b425"
+  }
+ },
+ "edits": [
+  {
+   "resource": "af1003f292e2726b",
+   "kind": "string",
+   "old": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "new": "257FD7DE21A04E8668E02E5C820EDF3435176FBDE3569765255CC52A5EA20F9D",
+   "count": 1
+  },
+  {
+   "resource": "af1003f292e2726b",
+   "kind": "string",
+   "old": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "new": "61DCFCD201DACBF3545C97BEB8A5A6186E9850D2670BF60B0E058320B477F6DF",
+   "count": 1
+  },
+  {
+   "resource": "af1003f292e2726b",
+   "kind": "string",
+   "old": "26088801",
+   "new": "26251122",
+   "count": 1
+  }
+ ],
+ "witnesses": [],
+ "source": "original-mods/backups/20261029-170003-FlameDamageFixed/0-9ba626afa44a3aa3.patch_0",
+ "archive_sha256": "02ce8628e50ccfd0483b27a825b29c2335bffcc7dad8546360ecee8e2beb1ae9"
+}

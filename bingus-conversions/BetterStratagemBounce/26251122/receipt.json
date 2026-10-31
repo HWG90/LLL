@@ -1,0 +1,46 @@
+{
+ "option": "BetterStratagemBounce",
+ "from": "26088801",
+ "to": "26251122",
+ "resources": {
+  "19170ca4b0725ff0": {
+   "wrapped": true,
+   "lines_changed": 3,
+   "sha256_26088801": "d5998ba89e062e33cb2c80cc84bbf3a41d7c4c2c5aeda79aa2f3bbded00c732e",
+   "sha256": "ae6b1018f7c7cb0e4e24f25445c2aadc3a259a40b792561545c630eb852b6744"
+  }
+ },
+ "edits": [
+  {
+   "resource": "19170ca4b0725ff0",
+   "kind": "string",
+   "old": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "new": "257FD7DE21A04E8668E02E5C820EDF3435176FBDE3569765255CC52A5EA20F9D",
+   "count": 1
+  },
+  {
+   "resource": "19170ca4b0725ff0",
+   "kind": "string",
+   "old": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "new": "61DCFCD201DACBF3545C97BEB8A5A6186E9850D2670BF60B0E058320B477F6DF",
+   "count": 1
+  },
+  {
+   "resource": "19170ca4b0725ff0",
+   "kind": "string",
+   "old": "26088801",
+   "new": "26251122",
+   "count": 1
+  },
+  {
+   "resource": "19170ca4b0725ff0",
+   "kind": "address",
+   "old": "data_size = 82384,",
+   "new": "data_size = 82376,",
+   "count": 1
+  }
+ ],
+ "witnesses": [],
+ "source": "original-mods/backups/20261029-170002-BetterStratagemBounce/0-9ba626afa44a3aa3.patch_0",
+ "archive_sha256": "40fb50eb6ec0ab3e630ddf1627ace919b50ef32e71b6c1dd76967bfbbcdba93f"
+}

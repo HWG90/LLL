@@ -1,0 +1,39 @@
+{
+ "option": "StratagemHeroExpanded",
+ "from": "26088801",
+ "to": "26251122",
+ "resources": {
+  "a55a78cfbcae38c7": {
+   "wrapped": false,
+   "lines_changed": 4,
+   "sha256_26088801": "0866f615c7892b52c567720bae2d9eef8f8e5127392b15514cfce7f6e27aea64",
+   "sha256": "6e22372f17b371e1ff211ca4844c8b6046a8c9dca8389694ace9259285fc13fd"
+  }
+ },
+ "edits": [
+  {
+   "resource": "a55a78cfbcae38c7",
+   "kind": "string",
+   "old": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "new": "257FD7DE21A04E8668E02E5C820EDF3435176FBDE3569765255CC52A5EA20F9D",
+   "count": 1
+  },
+  {
+   "resource": "a55a78cfbcae38c7",
+   "kind": "string",
+   "old": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "new": "61DCFCD201DACBF3545C97BEB8A5A6186E9850D2670BF60B0E058320B477F6DF",
+   "count": 1
+  },
+  {
+   "resource": "a55a78cfbcae38c7",
+   "kind": "string",
+   "old": "26088801",
+   "new": "26251122",
+   "count": 2
+  }
+ ],
+ "witnesses": [],
+ "source": "original-mods/backups/20261029-170003-StratagemHeroExpanded/0-9ba626afa44a3aa3.patch_0",
+ "archive_sha256": "407abd476dfe129fa3aa9beaec8c1c22b9300877a1ff507cc3f7f32400eb9bad"
+}
