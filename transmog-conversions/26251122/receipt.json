@@ -1,0 +1,188 @@
+{
+  "format": "Stingray patch archives",
+  "vm": "LuaJIT 2.1 (LLL LuaJIT boot), plain sources, no PORT51/cffi adapter",
+  "game_build": "26251122 (exe 0x6ae0964a, game.dll 0x6ae0e5ff)",
+  "archive_options_preserved": true,
+  "original_source": "HD2 Transmog Foundation 0.2.4 (Experimental) release package (tyrypyrking/HD2-Transmog v0.2.4)",
+  "original_guid": "46b51e90-d243-457a-ae92-8d7e6875c0ea",
+  "replaces_cffi_candidate_guid": "0458badd-e774-57a6-9935-079f9e31c989",
+  "guid": "cc08f326-3b32-5471-b930-ecd8e1a72ce6",
+  "option_archive_count": 11,
+  "files": [
+    {
+      "option_folder": "Addon",
+      "resource": "d42a76efa2beb2e3",
+      "original_source_sha256": "3e54bb6f3f6fe2070dcd2d6293ae60f3192a1fc0b48e38d827e69e91f386f6c3",
+      "source_sha256": "667981024d364b08462d1ba74ee1be1e65c0db17a82cfdb502a20551083b02a0",
+      "source": "native-work/transmog-port",
+      "archive_sha256": "cd183d5e172b5dc1a771ff6bfe6924c2c8f46d0da357d2594d22aec174b846cb",
+      "archive_roundtrip_verified": true,
+      "luajit_compiles": true
+    },
+    {
+      "option_folder": "ArmoryInterface",
+      "resource": "29541cbc088af816",
+      "original_source_sha256": "1a5ce3eb501baeb1964bc398e873806c9a16b56ec3b562a1d51609b31d65e45e",
+      "source_sha256": "2d4c785c56b09dc2709a674f530a37f1d5a6c7178dd30918efb6385f34560d7b",
+      "source": "native-work/transmog-port",
+      "archive_sha256": "f425d58c087b2df136acb8bf9e79769d61caffa98cbc88b59c8783787a53bbd5",
+      "archive_roundtrip_verified": true,
+      "luajit_compiles": true
+    },
+    {
+      "option_folder": "ArmoryInterfaceOff",
+      "resource": "b06251b94f099b3d",
+      "original_source_sha256": "3332b1961c15707dd5503c8208026d9082256682f0a3decf371cf39817dc378a",
+      "source_sha256": "3332b1961c15707dd5503c8208026d9082256682f0a3decf371cf39817dc378a",
+      "source": "original",
+      "archive_sha256": "9a6edb7a90e1fe4389624ba02f0f93d5441b3584f1dcc9944beb8160537f7e79",
+      "archive_roundtrip_verified": true,
+      "luajit_compiles": true
+    },
+    {
+      "option_folder": "DeveloperTools",
+      "resource": "84f27fb19e2084df",
+      "original_source_sha256": "6e07c9228eb3255fffb2ef5b2de2304959b651daa0f1862b0e98ab95638a9692",
+      "source_sha256": "6e07c9228eb3255fffb2ef5b2de2304959b651daa0f1862b0e98ab95638a9692",
+      "source": "original",
+      "archive_sha256": "4d6cdd2d1006f879b7dd3914bd23a7bafb423b870a297871bdc0c30ac2547233",
+      "archive_roundtrip_verified": true,
+      "luajit_compiles": true
+    },
+    {
+      "option_folder": "DeveloperToolsOff",
+      "resource": "5056771a37cf4558",
+      "original_source_sha256": "3332b1961c15707dd5503c8208026d9082256682f0a3decf371cf39817dc378a",
+      "source_sha256": "3332b1961c15707dd5503c8208026d9082256682f0a3decf371cf39817dc378a",
+      "source": "original",
+      "archive_sha256": "c9eb27b2bce426a4142bab2cfe0b179f075f2661666f1b21e5f151e047e11cf5",
+      "archive_roundtrip_verified": true,
+      "luajit_compiles": true
+    },
+    {
+      "option_folder": "HelmetOff",
+      "resource": "93ccc0a4a92fe32f",
+      "original_source_sha256": "3332b1961c15707dd5503c8208026d9082256682f0a3decf371cf39817dc378a",
+      "source_sha256": "3332b1961c15707dd5503c8208026d9082256682f0a3decf371cf39817dc378a",
+      "source": "original",
+      "archive_sha256": "0721da901d2d0c6b0bb601b0c83ecfcd50fd862851fc013c1c8a489f2853d06d",
+      "archive_roundtrip_verified": true,
+      "luajit_compiles": true
+    },
+    {
+      "option_folder": "HelmetOn",
+      "resource": "93ccc0a4a92fe32f",
+      "original_source_sha256": "df597d1ebbbf5255ef2c6d327f154359710fd36ce728e637379d0f15adc2c353",
+      "source_sha256": "df597d1ebbbf5255ef2c6d327f154359710fd36ce728e637379d0f15adc2c353",
+      "source": "original",
+      "archive_sha256": "e43e28abf59245b13cd84a323a826387171db57897c0d8500077a196be22eea4",
+      "archive_roundtrip_verified": true,
+      "luajit_compiles": true
+    },
+    {
+      "option_folder": "IndependentStats",
+      "resource": "b66277dcb748a633",
+      "original_source_sha256": "3332b1961c15707dd5503c8208026d9082256682f0a3decf371cf39817dc378a",
+      "source_sha256": "3332b1961c15707dd5503c8208026d9082256682f0a3decf371cf39817dc378a",
+      "source": "original",
+      "archive_sha256": "14aebe81813ccfb31fdca2f14ee114f653a1b6726e4cc4cc1480f72e1b92124d",
+      "archive_roundtrip_verified": true,
+      "luajit_compiles": true
+    },
+    {
+      "option_folder": "LookStats",
+      "resource": "b66277dcb748a633",
+      "original_source_sha256": "df597d1ebbbf5255ef2c6d327f154359710fd36ce728e637379d0f15adc2c353",
+      "source_sha256": "df597d1ebbbf5255ef2c6d327f154359710fd36ce728e637379d0f15adc2c353",
+      "source": "original",
+      "archive_sha256": "9e1df491ca06618c4af2478b111f87944ac260b39cbb65b59a37ce2f10deba2d",
+      "archive_roundtrip_verified": true,
+      "luajit_compiles": true
+    },
+    {
+      "option_folder": "PassiveIconsOff",
+      "resource": "f45f75e9e1e9a499",
+      "original_source_sha256": "3332b1961c15707dd5503c8208026d9082256682f0a3decf371cf39817dc378a",
+      "source_sha256": "3332b1961c15707dd5503c8208026d9082256682f0a3decf371cf39817dc378a",
+      "source": "original",
+      "archive_sha256": "cbd1c443fb5d2c10b97237182406d4dcf569137de066bca97e788343a985ec13",
+      "archive_roundtrip_verified": true,
+      "luajit_compiles": true
+    },
+    {
+      "option_folder": "PassiveIconsOn",
+      "resource": "f45f75e9e1e9a499",
+      "original_source_sha256": "df597d1ebbbf5255ef2c6d327f154359710fd36ce728e637379d0f15adc2c353",
+      "source_sha256": "df597d1ebbbf5255ef2c6d327f154359710fd36ce728e637379d0f15adc2c353",
+      "source": "original",
+      "archive_sha256": "bc7892f7c687401310700874b04b4b5d6cd07154968a00c940520cb5bdbf234b",
+      "archive_roundtrip_verified": true,
+      "luajit_compiles": true
+    }
+  ],
+  "cold_page_fixture": {
+    "test": "native-work/transmog-luajit/tests/cold_pages.lua",
+    "pass": true,
+    "checks": 150,
+    "reads": 22108,
+    "failed_reads": 2178,
+    "images": {
+      "game": "evidence/game-26251122.dll",
+      "text_overlay": "-",
+      "exe": "evidence/exe-26251122.bin",
+      "sha256": {
+        "game": "57baccc0cf4656580114c06a11ab2ffc6548b069ba25d8efab1ac89827d856c8",
+        "exe": "6e2751f8690b6aa49060ca4b8d3476d502232d89de93a1b478722b07cb18a92c"
+      }
+    }
+  },
+  "unnamed_armor_fixture": {
+    "test": "native-work/transmog-luajit/tests/presentation_unknown.lua",
+    "pass": true,
+    "checks": 11
+  },
+  "mapped_code_fixture": {
+    "test": "native-work/transmog-luajit/tests/process_mapped.lua",
+    "pass": true,
+    "checks": 9
+  },
+  "archive_launch_accepted": false,
+  "full_feature_live_accepted": false,
+  "replaces_luajit_guid": "f450aeee-b33a-5078-9517-2227cb72d04b",
+  "port": {
+    "from": "26088801",
+    "maps": "porting workspace: builds/26251122/maps/transmog (the map is MAP.json here)",
+    "map": "transmog-26251122.map.json",
+    "rewrite": "apply_26251122.py",
+    "map_sha256": "ea9ec7dabed141b5beed389c1d9de3ef2e6c09b3326e7a9ecce30f0a2b0a963e",
+    "rows": 104
+  },
+  "native_code_addresses_verified": "offline: every witness against the merged live capture; live read pending",
+  "history_26088801": {
+    "live_symbol_probe": {
+      "batch": 2325,
+      "read_only": true,
+      "staged_symbols": 42,
+      "match": 40,
+      "unreadable_cold": 2,
+      "log": "native-work/transmog-luajit/live/transmog_symbols_probe.decoded.txt"
+    },
+    "live_bridge_run": {
+      "logs": "native-work/transmog-luajit/live/run3-HD2Transmog.log",
+      "contract": "extras 19/19, packages 3/3, previews 16/16, render 8/8, model 8/8 once loaded",
+      "variants_created": 2,
+      "variant_equipped": "native_armor_and_passive_cache_verified",
+      "clean_disable": true
+    },
+    "pod_join_fix": {
+      "watch": "LLtM tm_join_watch (read-only): join at slot 2, 114 -> 117 list items with variants",
+      "cause": "HD2Transmog.log 2026-10-29 04:29: grid waited on cold selection until the ship Armory ran"
+    }
+  },
+  "pending": [
+    "live read of the remapped exe witnesses and game.dll re-derived witnesses (port README)",
+    "fresh game launch with this package deployed through Arsenal: game-contract.txt all capabilities pass",
+    "Armory: catalogue ready (catalog-observed.txt rewritten with pe_timestamp 1793123839), variants, Apply",
+    "fresh launch straight into a mission-in-progress join: variants in the pod, Apply, worn variant"
+  ]
+}

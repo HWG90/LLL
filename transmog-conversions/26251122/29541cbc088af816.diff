@@ -1,0 +1,628 @@
+--- 0.2.4/ArmoryInterface/29541cbc088af816.lua
++++ 26251122/ArmoryInterface/29541cbc088af816.lua
+@@ -47,6 +47,7 @@
+ local ClothingCatalog = HD2TM_CORE.ClothingCatalog
+ local RespawnRestore = HD2TM_CORE.RespawnRestore
+ local GameDecode = HD2TM_CORE.GameDecode
++local GameContract = HD2TM_CORE.GameContract
+ local ArmorRefresh = HD2TM_CORE.ArmorRefresh
+ local CreatorController = (function()
+ -- Pure, owned-choice creator navigation. No native calls or cursor emulation.
+@@ -751,7 +752,10 @@
+ 
+ end)()
+ local ArmorStatSemantics = (function()
+--- Generated address-free semantic recipes; no callable/data RVA fallback.
++-- Current address-free coefficient gather: explicit count/record role swap,
++-- piece indexes use112 bytes; all other operations/branches/fields identical.
++-- Exact arithmetic recipes plus a complete current UI function witness.
++-- The witness selects a function; every helper/data target is still derived.
+ -- fullmix-debug-native-armor.txt SHA256 78ebd0379368682b9ab880ad3fdcf6d14dd02c1a5c39fce16de89c605b77dd56
+ -- native-stats-011d9203.txt SHA256 e98aaab1dd2d650d914df5a16d7b77c3627361c99db1d89f9a9738034e0980ac
+ -- native-stats-011d9472.txt SHA256 0dbd9f9bcea7654f0dad69717d9ffdf4db869d2ecee908cbbd5a68b35da944d1
+@@ -759,6 +763,7 @@
+ -- ui-proof-020bbb78.txt SHA256 8aa8284ec87d07ca5a333ea5d70bf730887c7101f24abcb03eb8b0b613cbc506
+ -- ui-rounding-leaf.txt SHA256 b48fe51b81e136ae17baedccee40bd41aa09401baace8a0d5e87a2878b606116
+ return {
++["current_native_witness"]={first=24736102,label=24736315,last=24737767,build="26251122",hex="4889bc24180200004c89b424c80100004c89bc24c00100000f29b424b00100000f29bc24a0010000440f29842490010000440f298c2480010000440f29942470010000440f299c2460010000440f29a42450010000440f29ac2440010000440f29b42430010000440f29bc2420010000e8f5b20efff3440f1005d0f3aa00448bf88b4328450f57c983f8010f85a8010000c745f00000c842c745f40000c842c745f80000c842c745e00000c842c745e40000c842c745e80000c84233c048894500894508488d8ec0160000c7860863000003000000bac143b781e85bcab3ff488d8e78190000baeb0c2d5ce84acab3ff488d8e301c0000ba3b89fb10e839cab3fff3440f101550ecaa004c8db6c0520000f3440f101d58f2aa00488dbe78530000f3440f1025e4edaa004c8dbea0210000f3440f102db8fbaa00498bf4c74424380000803fc744243c0000803ff2440f10742438c7442448b2b1313fc744244cb2b1313ff2440f107c24484c89742420c74424400000803fc7442450b2b1313fc7442458b2b1313fc744245cb2b1313fc7442460b2b1313f4c896424300f1f4000660f1f840000000000410f28c8498d8e00c4ffffe8c094b4ff498bcee8b894b4ff8b442440488d542470498bce89442478f2440f11742470e85c90b4ff8b442450488d5580498d8e00c4ffff894588f2440f117d80e83f90b4ffba3cb35272498bcee832c9b3fff30f104c3500410f2fc98b5c2460f20f107424580f86e1010000410f28f2c745a8e7e6e63e8b5da8410f14f3e9e201000085c07522493bdd7515448bc2488d542420e8abc20eff418b7d008b18eb0e8b1b418b7d00eb06418bdc418bfc41837d2802c745f00000c842c745f40000c842c745f80000c842c745e00000c842c745e40000c842c745e80000c8420f8421fefffff30f103d64fbaa004c8d75f0f30f1035f8f8aa00418bf4660f1f84000000000033c9448bce458bc78bd3e8f1328dfff3410f102e0f28e085f67528488b44242841b8473baeaf0f28c88b481ce83f438dff0f28e0f3410f5ce0f30f59e7f30f58e5eb0d83fe02741af30f59e6f30f59e5f3410f1126ffc64983c60483fe0372a0eb1bf3410f5ce0410f28c1f30f5cc4f3410f58c0f30f59c5f3410f1106418bf4498bdc4c8b6424280f1f84000000000033c9448bce458bc78bd7e861328dff0f28e085f67529418b4d1c41b8473baeaf0f28c8e8b8428dfff3410f5cc0f30f59c7f30f58441de0f30f11441de0eb3a83fe027520f3410f5ce0410f28c1f30f5cc4f3410f58c0f30f59441de0f30f11441de0eb1583fe017510f30f59e6f30f59641de0f30f11641de0f30f104c1df0f30f10441de04d3be57506f30f5cc1eb07f30f5cc80f28c1f30f11441d00ffc64883c30483fe030f8254ffffff488b7424684533e4e9c1fcffff440f2fc97616410f28f0c745b8c9c8483e8b5db8410f14f4440f2fc9488b4c2468410f97c1410f2fc9418bd4410f97c0e882e3fffff30f107c35e00f28c7f3410f5ec5e8e7c07a00f34c0f2cf0be0a0000000f1f440000453bf4760ef20f1175d0488d45d0895dd8eb19c745c0cdcccc3e488d45c0c745c4cdcccc3ec745c8cdcccc3ef20f1000488d55908b4008498bcff20f114590894598e8998db4ff410f28c8498bcfe8cd91b4ff498bcfe8c591b4ff4981c7180100004883ee0175984c396c2428750f0f28c7e861c07a00488b742430eb10488b742430f30f104435f0e84ac07a00f30f2cd883fb637e144c8b742420baa724aa2b498bcee837c6b3ffeb7b4533c0488d4f58bada7d7c6441b91030000083fb097f0641b920300000e883a9b3ff84c074508b178bc283c80289073bc27443f7d223d081e2ff2fffff7411488b4f284885c9740841b001e855cab4ff8b8f48ffffff8bc1c1e802a801751783c904898f48ffffff488b4f384885c97405e82fd8b4ff4c8b742420488d4f584533c9448bc3ba357b2aabe816a9b3ff84c074508b178bc283c80289073bc27443f7d223d081e2ff2fffff7411488b4f284885c9740841b001e8e8c9b4ff8b8f48ffffff8bc1c1e802a801751783c904898f48ffffff488b4f384885c97405e8c2d7b4ff4981c6b80200004883c60441ffc44c897424204881c7b802000048897424304183fc030f8299fbffff440f28bc2420010000440f28b42430010000440f28ac2440010000440f28a42450010000440f289c2460010000440f28942470010000440f288c2480010000440f288424900100000f28bc24a00100000f28b424b00100004c8bbc24c00100004c8bb424c8010000488bbc2418020000"},
+ ["ui"]={
+ "cmp dword [r13+0x28], +0x02",
+ "mov dword [rbp-0x10], initial_float",
+@@ -872,20 +877,20 @@
+ "mov [r11-0x20], r14",
+ "mov [r11-0x28], r15",
+ "mov r15, [catalog]",
+-"mov ebp, [r15+0x8]",
+-"test ebp, ebp",
++"mov r14d, [r15+0x8]",
++"test r14d, r14d",
+ "jz row:92",
+ "mov r9, [r15]",
+ "mov rax, [r9+r10*8]",
+ "cmp [rax], ecx",
+ "jz row:27",
+ "inc r10d",
+-"cmp r10d, ebp",
++"cmp r10d, r14d",
+ "jb row:18",
+ "xorps xmm2, xmm2",
+ "xorps xmm1, xmm1",
+ "jmp row:96",
+-"mov r14, rax",
++"mov rbp, rax",
+ "test rax, rax",
+ "jz row:92",
+ "mov esi, [rax+0x38]",
+@@ -895,7 +900,7 @@
+ "jz row:92",
+ "cmp r8d, +0x1e",
+ "jnb row:61",
+-"mov r11, [r14+0x30]",
++"mov r11, [rbp+0x30]",
+ "lea r10, [rdi+rdi*2]",
+ "mov eax, [r11+r10*8]",
+ "cmp eax, r12d",
+@@ -908,9 +913,9 @@
+ "jz row:58",
+ "cmp r8d, +0x1e",
+ "jnb row:58",
+-"lea rcx, [r9+r9*2]",
++"mov eax, r9d",
+ "inc r9d",
+-"shl rcx, 0x05",
++"imul rcx, rax, +0x70",
+ "add rcx, [r11+r10*8+0x8]",
+ "mov [rsp+r8*8], rcx",
+ "inc r8d",
+@@ -952,7 +957,7 @@
+ "jmp row:96",
+ "xorps xmm2, xmm2",
+ "xorps xmm1, xmm1",
+-"test ebp, ebp",
++"test r14d, r14d",
+ "jz row:173",
+ "mov r9, [r15]",
+ "xor ecx, ecx",
+@@ -960,7 +965,7 @@
+ "cmp [rax], edx",
+ "jz row:105",
+ "inc ecx",
+-"cmp ecx, ebp",
++"cmp ecx, r14d",
+ "jb row:98",
+ "jmp row:173",
+ "mov rsi, rax",
+@@ -986,9 +991,9 @@
+ "jz row:136",
+ "cmp edx, +0x1e",
+ "jnb row:136",
+-"lea rcx, [r8+r8*2]",
++"mov eax, r8d",
+ "inc r8d",
+-"shl rcx, 0x05",
++"imul rcx, rax, +0x70",
+ "add rcx, [r10+r9*8+0x8]",
+ "mov [rsp+rdx*8], rcx",
+ "inc edx",
+@@ -1187,7 +1192,19 @@
+ local ArmorStatResolver = (function()
+ -- Optional read-only, current-image Armor-card formula capability.
+ -- Labels discover the UI; validated relative calls discover its helpers.
+--- PE timestamps are provenance only. No game calls, writes or RVA fallback.
++-- PE timestamps are provenance only. A qualified full native function plus
++-- registered metadata selects the current candidate. No game calls or writes.
++-- Private stock-Lua51 relay preserves bounded validation yields under protection.
++local function yieldable_pcall(fn,...)
++ local function pack(...)return {n=select('#',...),...}end
++ local worker=coroutine.create(fn)
++ local args=pack(...)
++ while true do
++  local result=pack(coroutine.resume(worker,unpack(args,1,args.n)))
++  if not result[1]or coroutine.status(worker)=='dead'then return unpack(result,1,result.n)end
++  args=pack(coroutine.yield(unpack(result,2,result.n)))
++ end
++end
+ local M={}
+ local decoder=GameDecode or error('module is not bundled: src.game.decode')
+ local recipes=ArmorStatSemantics or error('module is not bundled: src.game.armor_stat_semantics')
+@@ -1442,11 +1459,11 @@
+   assert(core and core<=16 and counter==1 and counter_zero and stack_base,'coefficient gather initialization changed')
+   local coefficient=normalize(slice(coefficient_rows,core,#recipes.coefficient),'coefficient')
+   assert(#coefficient.coefficients==3,'three native coefficient tables required')
+-  local modifier=normalize(code(ui.calls[2],256),'modifier')
++  local modifier=normalize(slice(code(ui.calls[2],256),1,#recipes.modifier),'modifier')
+   assert(modifier.scalars[1]==1,'native passive multiplier identity changed')
+-  local rounding=normalize(code(round_target,128),'rounding')
++  local rounding=normalize(slice(code(round_target,128),1,#recipes.rounding),'rounding')
+   assert(#rounding.calls==1 and rounding.scalars[1]==-1 and rounding.scalars[2]==1,'native rounding sign steps changed')
+-  local truncation=normalize(code(rounding.calls[1],256),'truncation')
++  local truncation=normalize(slice(code(rounding.calls[1],256),1,#recipes.truncation),'truncation')
+   assert(truncation.masks_verified and truncation.indices_verified,'native rounding lookup proof unavailable')
+   return {initial_value=ui.initial_value,armor_scale=ui.scalars[1],speed_scale=ui.scalars[2],one=one,zero=zero,
+    coefficients={armor_rating=coefficient.coefficients[3],speed=coefficient.coefficients[2],stamina_regen=coefficient.coefficients[1]},
+@@ -1463,35 +1480,26 @@
+    sections[#sections+1]=section;if section.read and section.exec then executable=executable+section.len end
+   end
+   assert(executable>0 and executable<=134217728,'stat executable scan budget exceeded')
+-  pdata=image.exception.rva;local plen=image.exception.size
+-  if image.directories<Image.EXCEPTION_DIRECTORY+1 or(pdata==0 and plen==0)then
+-   assert(type(bridge.function_bounds)=='function','stat function metadata unavailable: PE directory absent and OS lookup unavailable')
+-   pdata=nil;report('armor_stats.function_metadata','registered_functions')
+-  else
+-   assert(plen>=12 and plen<=2400000 and plen%12==0 and contains(pdata,plen),'stat function metadata unavailable')
+-   pdata_count=plen/12
+-  end
+-  local candidates,seen={},{};local literal=packed(Catalog.stat_labels[1])
+-  for _,s in ipairs(sections)do if s.read and s.exec then
+-   local tail=''
+-   for offset=0,s.len-1,262144 do
+-    assert(bridge.verify(),'stat adapter proof changed during scan')
+-    local chunk=read(s.at+offset,math.min(262144,s.len-offset));scan_bytes=scan_bytes+#chunk
+-    local raw=tail..chunk;local origin=s.at+offset-#tail;local cursor=1
+-    while true do
+-     local hit=raw:find(literal,cursor,true);if not hit then break end
+-     if hit>1 and raw:byte(hit-1)==0xba then
+-      local at=origin+hit-2
+-      if not seen[at]then seen[at]=true;candidates[#candidates+1]=at;assert(#candidates<=32,'too many stat label candidates')end
+-     end
+-     cursor=hit+1
+-    end
+-    tail=raw:sub(-4);coroutine.yield()
+-   end
+-  end end
++  -- Current protected builds seal unrelated .text pages as PAGE_NOACCESS.
++  -- A complete independently qualified UI function selects the candidate;
++  -- all arithmetic, continuations, helper calls and tables are still proved.
++  local witness=recipes.current_native_witness
++  assert(type(witness)=='table'and type(witness.first)=='number'and type(witness.last)=='number'
++   and witness.first<witness.label and witness.label<witness.last and type(witness.hex)=='string',
++   'current native stat witness unavailable')
++  assert(type(bridge.function_bounds)=='function','current stat proof requires OS registered function metadata')
++  pdata=nil;report('armor_stats.function_metadata','registered_functions')
++  local first,last=fragment(witness.label)
++  assert(first==witness.first and last==witness.last,'current stat function envelope differs from the qualified witness')
++  local expected=(witness.hex:gsub('%x%x',function(v)return string.char(tonumber(v,16))end))
++  assert(#expected==last-first and contains(first,#expected,'code'),'current stat witness extent rejected')
++  local actual=observed(first,#expected);scan_bytes=#actual
++  assert(actual==expected,'current stat full-function witness changed')
++  assert(bridge.verify(),'stat adapter proof changed before semantic validation')
++  local candidates={witness.label}
+   local accepted,errors={},{}
+   for _,at in ipairs(candidates)do
+-   local ok,value=pcall(validate,at)
++   local ok,value=yieldable_pcall(validate,at)
+    if ok then accepted[#accepted+1]=value else errors[#errors+1]=tostring(value)end
+    coroutine.yield()
+   end
+@@ -1510,7 +1518,7 @@
+   end
+   self.result={contract=accepted[1],verify=verify,provenance={image_timestamp=self.image_timestamp,scan_bytes=scan_bytes,
+    label_candidates=#candidates,semantic_matches=#accepted,read_only=true,
+-   function_metadata=pdata and 'pe_directory'or 'registered_functions'}}
++   function_metadata='registered_functions',discovery='qualified_current_full_function',native_witness_build=witness.build,native_witness_first=witness.first,native_witness_last=witness.last}}
+   self.phase='ready';report('armor_stats.status','current_image_semantics_verified')
+  end
+  local worker=coroutine.create(run)
+@@ -2068,6 +2076,9 @@
+ -- No fixed native call addresses, unlock writes, or list insertion. Selected kit
+ -- identity is optional and requires the current category/offer mapping proof.
+ -- Code entry points are scanned and semantically checked in the current image.
++-- An optional proof that lay on code the game had not run yet is left out and
++-- named in `cold_parts`; NativeGridRenewal makes the grid again once the game
++-- may have run that code. A required one fails the grid as `cold`.
+ local M={}
+ local decoder=GameDecode or error('module is not bundled: src.game.decode')
+ local Layout=GameGridLayout or error('module is not bundled: src.game.grid_layout')
+@@ -2129,8 +2140,14 @@
+  assert(type(bridge)=='table'and type(bridge.read)=='function'and type(bridge.verify)=='function','verified UI bridge required')
+  assert(type(bridge.base)=='number'and type(bridge.manager_global)=='number'and type(bridge.menu_global)=='number','UI global proof required')
+  report=report or function()end
+- local self={phase='resolving'};local base=bridge.base
++ local self={phase='resolving',cold_parts={}};local base=bridge.base
+  local proofs,sections,targets={}, {}, {};local input_global,progression_global,thumbnail_global,commit_info;local deadline=0
++ local progression_conflict
++ -- Whether an optional part was left out because its code could not be read yet.
++ function self:cold(name)
++  for _,part in ipairs(self.cold_parts)do if part==name then return true end end
++  return false
++ end
+  local snapshots=setmetatable({}, {__mode='k'});local movement
+  local creator_actions,creator_bounds
+  local commit_snapshots=setmetatable({}, {__mode='k'});local commit_session,commit_session_key
+@@ -2147,6 +2164,21 @@
+   end
+   return false
+  end
++ -- A chunk of code to scan. The game keeps pages it has not run yet
++ -- unreadable; those are zeros here, so nothing is found on them, and a
++ -- function that lay on one is named as not loaded yet, for a later scan.
++ local PAGE=4096;local ZERO=string.rep('\0',PAGE)
++ local function code(at,n)
++  local raw=bridge.read(at,n);if type(raw)=='string'and #raw==n then return raw end
++  local parts,stop={},at+n
++  while at<stop do
++   local size=math.min(PAGE-at%PAGE,stop-at)
++   local page=bridge.read(at,size)
++   if type(page)~='string'or #page~=size then page=size==PAGE and ZERO or ZERO:sub(1,size);self.cold_pages=(self.cold_pages or 0)+1 end
++   parts[#parts+1]=page;at=at+size
++  end
++  return table.concat(parts)
++ end
+  -- Whether memory still holds bytes read earlier: compared in place when the
+  -- bridge can, with no string made of the reading.
+  local function same(at,bytes)
+@@ -2189,7 +2221,7 @@
+    assert(section.read,'unreadable code section');total=total+section.size;assert(total<=134217728,'grid scan budget exceeded')
+    local tail=''
+    for offset=0,section.size-1,262144 do
+-    local raw=tail..read(base+section.rva+offset,math.min(262144,section.size-offset))
++    local raw=tail..code(base+section.rva+offset,math.min(262144,section.size-offset))
+     local origin=section.rva+offset-#tail
+     for _,p in ipairs(patterns)do
+      local start,hits=1,0
+@@ -2212,8 +2244,17 @@
+   end end
+   assert(total>0,'no executable image section')
+   for _,p in ipairs(patterns)do
+-   if p.spec.optional and (not p.found or p.ambiguous)then report('grid.'..p.spec.name,'optional proof unavailable')
++   -- The ship Armory alone runs some of this code (selection, commit_source,
++   -- thumbnail): a player who joins a mission in progress never gets there.
++   -- What the code that can be read proves is a grid now.
++   if p.spec.optional and not p.found and self.cold_pages then
++    self.cold_parts[#self.cold_parts+1]=p.spec.name
++   elseif p.spec.optional and (not p.found or p.ambiguous)then report('grid.'..p.spec.name,'optional proof unavailable')
+    else
++   if not p.found and self.cold_pages then
++    self.cold=true
++    error('native grid function '..p.spec.name..' is not loaded yet ('..self.cold_pages..' code pages unread)',0)
++   end
+    assert(p.found,'native grid function unavailable: '..p.spec.name)
+    local proof_count=#proofs
+    local valid,reason=pcall(function()
+@@ -2299,7 +2340,14 @@
+      local stated=image.exception or{rva=0,size=0}
+      local table_rva,table_size=stated.rva,stated.size
+      local start,finish,bounds,registered
+-     if image.directories<Image.EXCEPTION_DIRECTORY+1 or(table_rva==0 and table_size==0)then
++     local direct=Symbols.DIRECTION
++     if direct and direction==direct.rva then
++      local expected=bytes(direct.bytes)
++      assert(#expected>0 and #expected<=4096 and inside(direction,#expected,true),'direction proof outside code')
++      assert(read(base+direction,#expected)==expected,'current direction reader code changed')
++      start,finish=direction,direction+#expected
++      bounds={rva=direction,bytes=expected}
++     elseif image.directories<Image.EXCEPTION_DIRECTORY+1 or(table_rva==0 and table_size==0)then
+       assert(type(bridge.function_bounds)=='function','menu unwind directory is absent and OS lookup unavailable')
+       local why;registered,why=bridge.function_bounds(direction)
+       assert(registered,why or 'registered menu function metadata unavailable')
+@@ -2585,6 +2633,8 @@
+      end
+     end
+     assert(count==1,'progression mapping ambiguous')
++    progression_conflict=bridge.progression_global~=nil and bridge.progression_global~=progression_global
++    assert(not progression_conflict,'progression global differs from the catalogue resolver\'s')
+     -- The preceding native branch must explicitly route category 1 here.
+     local first=math.max(4096,p.found-512);assert(inside(first,p.found-first,true),'selection branch outside code')
+     local prior=read(base+first,p.found-first);local anchor=bytes(Symbols.CATEGORY_BRANCH);local at,hits=1,0
+@@ -2648,14 +2698,29 @@
+    end
+    end)
+    if not valid then
++    local unreadable=tostring(reason):find('unreadable',1,true)~=nil
++    if unreadable and not p.spec.optional then
++     self.cold=true
++     error('grid function '..p.spec.name..' is not loaded yet: '..tostring(reason),0)
++    end
+     if not p.spec.optional then error(reason)end
+     while #proofs>proof_count do table.remove(proofs)end
+     targets[p.spec.name]=nil
+     if p.spec.name=='selection'then progression_global=nil elseif p.spec.name=='thumbnail'then thumbnail_global=nil elseif p.spec.name=='commit_source'then commit_info=nil end
++    if unreadable then self.cold_parts[#self.cold_parts+1]=p.spec.name end
+     report('grid.'..p.spec.name,tostring(reason))
+    else report('grid.'..p.spec.name,'semantic proof verified')end
+    end
+   end
++  -- The catalogue resolver proves the same progression global from code the
++  -- game runs at startup (progression_owned_layout pins the same offer count
++  -- and offer table). Either proof serves; two that differ serve neither.
++  local supplied=bridge.progression_global
++  if progression_global then report('grid.progression',supplied and 'selection and catalog'or'selection')
++  elseif supplied and not progression_conflict and inside(supplied-base,8,false)and not inside(supplied-base,8,true)then
++   progression_global=supplied;report('grid.progression','catalog')
++  else report('grid.progression','unavailable')end
++  if #self.cold_parts>0 then report('grid.cold_parts',table.concat(self.cold_parts,','))end
+   assert(code_current(),'grid code changed during resolution')
+   self.phase='ready';report('grid.bridge','resolved_current_image')
+  end
+@@ -3275,7 +3340,7 @@
+   bridge_out.append=function(t,entry)
+    assert(active==t and t.updating and not t.finished and owns(t),'presentation append lease changed')
+    local n=u32(read(t.grid+Grid.item_count,4),0);assert(n<Grid.item_capacity,'presentation item cap')
+-   local checkpoint=t.screen..':index='..n..':offer='..entry.offer_id..':kit='..entry.kit_id..':group='..entry.group_key
++   local checkpoint=t.screen..':index='..n..':offer='..entry.offer_id..':kit='..tostring(entry.kit_id)..':group='..entry.group_key
+    report('grid.list_append.begin',checkpoint)
+    calls.list_append(targets.list_append,t.grid,entry.offer_id,entry.group_key,entry.flag_a,entry.flag_b)
+    report('grid.list_append.returned',checkpoint);changed(t)
+@@ -4525,6 +4590,49 @@
+ return M
+ 
+ end)()
++local NativeGridRenewal = (function()
++-- When a grid made without its cold parts is made again, and which grid is
++-- kept. The game runs a picker's code when the picker opens, so an opening is
++-- the moment to scan again: once per opening, while the new grid resolves the
++-- picker waits for it as it does for the first one. A new grid with fewer
++-- cold parts, or as few, is kept; a failed one gives the previous grid back.
++-- A screen whose renewal found nothing new while its picker stayed open is
++-- not renewed again, and no screen more than ATTEMPTS times. A picker that
++-- closed before the new grid resolved gave the game no time to run its code.
++-- No game reads; the grids are the caller's.
++local M={ATTEMPTS=3}
++function M.new()
++ local self={}
++ local previous,previous_kind,opening_used
++ local tried,spent={}, {}
++ -- `bridge` the grid in use, `open` whether a picker of screen kind `kind` is
++ -- up, `make()` a new resolving grid. Returns the grid to use and, when the
++ -- choice changed, a line for the log.
++ function self:step(bridge,open,kind,make)
++  if not open then opening_used=nil end
++  if previous then
++   if bridge.phase=='resolving'then return bridge end
++   local old,where=previous,previous_kind;previous=nil;previous_kind=nil
++   if bridge.phase=='ready'and #bridge.cold_parts<=#old.cold_parts then
++    if #bridge.cold_parts==#old.cold_parts and opening_used then tried[where]=true end
++    return bridge,#bridge.cold_parts==0 and'complete'or'still cold: '..table.concat(bridge.cold_parts,',')
++   end
++   if opening_used then tried[where]=true end
++   return old,'kept the previous grid: '..tostring(bridge.failure or'the new one has more cold parts')
++  end
++  if open and kind and not opening_used and bridge and bridge.phase=='ready'and #bridge.cold_parts>0
++   and not tried[kind]and(spent[kind]or 0)<M.ATTEMPTS then
++   opening_used=true;spent[kind]=(spent[kind]or 0)+1
++   previous,previous_kind=bridge,kind
++   return make(),'scanning again for '..table.concat(bridge.cold_parts,',')
++  end
++  return bridge
++ end
++ return self
++end
++return M
++
++end)()
+ local NativeGridPresentation = (function()
+ -- Presentation-only construction policy. No FFI, addresses or native bindings.
+ -- The reviewed native bridge is injected by the Armory controller.
+@@ -4538,12 +4646,16 @@
+ end
+ local function check(value,message)assert(value==true,message)end
+ local function near(a,b)return type(a)=='number'and type(b)=='number'and a==a and b==b and math.abs(a-b)<.05 end
+-local function entry(value)
++-- `original` admits an item of the game's own list that the catalogue cannot
++-- name (an armor newer than its reference data): it is replayed exactly as
++-- the game listed it and is never a donor or an ownership claim.
++local function entry(value,original)
+  assert(type(value)=='table'and integer(value.offer_id,1,0xffffffff),'real nonzero offer required')
+- assert(type(value.kit_id)=='string'and value.kit_id:match('^armor:%x%x%x%x%x%x%x%x$')and value.owned==true,'owned Armor identity required')
++ local known=type(value.kit_id)=='string'and value.kit_id:match('^armor:%x%x%x%x%x%x%x%x$')~=nil and value.owned==true
++ assert(known or(original and value.kit_id==nil and value.owned==false),'owned Armor identity required')
+  assert(integer(value.group_key,0,0xffffffff),'u32 presentation group required')
+  assert(integer(value.flag_a,0,255)and integer(value.flag_b,0,255),'two exact native flag bytes required')
+- return {offer_id=value.offer_id,kit_id=value.kit_id,owned=true,group_key=value.group_key,
++ return {offer_id=value.offer_id,kit_id=value.kit_id,owned=known,group_key=value.group_key,
+   flag_a=value.flag_a,flag_b=value.flag_b}
+ end
+ local function layout(entries,source)
+@@ -4582,7 +4694,7 @@
+   or type(actual.groups)~='table'or #actual.groups~=#expected.groups then return false end
+  for i,value in ipairs(expected.entries)do
+   local a=actual.entries[i]
+-  if type(a)~='table'or a.owned~=true then return false end
++  if type(a)~='table'or a.owned~=value.owned then return false end
+   for _,key in ipairs({'offer_id','kit_id','group_key','flag_a','flag_b'})do if a[key]~=value[key]then return false end end
+  end
+  for i,row in ipairs(expected.rows)do local a=actual.rows[i]
+@@ -4608,10 +4720,12 @@
+  assert(type(cards)=='table'and #cards>=1 and #cards<=Grid.item_capacity and #cards+#source.entries<=Grid.item_capacity,'custom item capacity rejected')
+  local originals,offers,by_kit,keys,owned_ids,owned_seen={}, {}, {}, {}, {}, {}
+  for _,value in ipairs(source.entries)do
+-  local v=entry(value);assert(not offers[v.offer_id],'original native offers must be unique')
++  local v=entry(value,true);assert(not offers[v.offer_id],'original native offers must be unique')
+   offers[v.offer_id]=true;keys[v.group_key]=true;originals[#originals+1]=v
+-  by_kit[v.kit_id]=by_kit[v.kit_id]or v
+-  if not owned_seen[v.kit_id]then owned_ids[#owned_ids+1]=v.kit_id;owned_seen[v.kit_id]=true end
++  if v.owned then
++   by_kit[v.kit_id]=by_kit[v.kit_id]or v
++   if not owned_seen[v.kit_id]then owned_ids[#owned_ids+1]=v.kit_id;owned_seen[v.kit_id]=true end
++  end
+  end
+  for _,value in ipairs(policy and policy.registered_entries or {})do
+   local v=entry(value)
+@@ -9376,7 +9490,10 @@
+  assert(submit_at==n.at('render_world_submit')and n.intact('render_world_submit'),'render submission changed')
+  assert(update_at==n.at('render_world_update')and n.intact('render_world_update'),'render-world update changed')
+  assert(n.intact('ui_render_world_update_call'),'native update caller changed')
+- assert(n.intact('lua_render_world_update_call'),'Lua update caller changed')
++ -- The current publicLua update API is a stub. Prove the real dispatch
++ -- through the nativeApplication table and independent UI caller instead.
++ assert(n.ptr(n.ptr(n.at('engine_api'))+Layout.engine_api.application)==app,'render dispatch root moved')
++ assert(n.ptr(app+Api.update)==update_at,'render update dispatch moved')
+  local calls=n.api.calls or{}
+  local submit=calls.preview_submit or Calls.fn(api,'render_world_submit',submit_at)
+  local update=calls.preview_update or Calls.fn(api,'render_world_update',update_at)
+@@ -10892,7 +11009,8 @@
+  -- label -> the look its card stands for, from the last list build.
+  local function refresh_looks(tab)
+   local rows=host.rows(tab.catalog)
+-  if rows==looks_rows then return end
++  -- No saved variant yet gives no rows (nil): the first call still makes the tables.
++  if looks and rows==looks_rows then return end
+   looks_rows=rows;looks={};contents={};styles={}
+   for _,row in ipairs(rows or{})do
+    local uuid,word=row.key:match('^(%x+):(%x+)$')
+@@ -11097,7 +11215,7 @@
+   local cards=tab and type(tab.cards)=='table'and n:cards(c)or nil
+   if not cards then if job then stop('the picker left the list')end;return end
+   local current_style=host.style_revision and host.style_revision()or 0
+-  if current_style~=style_revision then looks_rows=nil;style_revision=current_style end
++  if current_style~=style_revision then looks_rows,looks=nil,nil;style_revision=current_style end
+   refresh_looks(tab)
+   local frame,frame_error=presentation(tab.slot)
+   self.visible_cards=#cards;self.visible_looks=0;self.preview_body=host.body()
+@@ -11991,6 +12109,11 @@
+ M.CAPTURE='preview-render.dds'
+ M.IDLE_FRAMES=1           -- first update on entry; no delayed model takeover
+ M.MODEL_FRAMES=1
++-- Build 26088801 keeps code it has not run yet unreadable; the game contract
++-- names such code with this phrase. Native entry points that are not loaded
++-- yet are asked for again every COLD_FRAMES, never switched off for it.
++local COLD=GameContract and GameContract.COLD or'not loaded yet'
++M.COLD_FRAMES=120
+ function M.files(fs,io_)
+  io_=io_ or io
+  local function path(name)return fs.directory..'/'..name end
+@@ -12025,6 +12148,7 @@
+  local batch_keys,renderer_initializations={},0
+  local preview_style,style_revision,capability_checked=nil,0,false
+  local inside,frame,idle=nil,0,0
++ local cold_until,cold_said=0,false
+  local root_inside
+  local failures,stopped,failure_reasons={},{},{}
+  local tile_sides,render_size={},nil -- back-buffer width -> height -> tile side (false: none)
+@@ -12364,6 +12488,8 @@
+   if stopped[name]then return end
+   local ok,why=pcall(fn,...)
+   if ok then return why end
++  -- Code the game has not run yet is no fault of the part: it is asked again.
++  if tostring(why):find(COLD,1,true)then return end
+   failures[name]=(failures[name]or 0)+1
+   if failures[name]>=3 then stopped[name]=true;failure_reasons[name]=tostring(why);report('armory_extras.'..name..'_off',tostring(why))end
+  end
+@@ -12386,7 +12512,13 @@
+   if off then return end
+   frame=frame+1
+   if not n then
++   if frame<cold_until then return end
+    local ok,why=pcall(start)
++   if not ok and tostring(why):find(COLD,1,true)then
++    -- Started again once the game has run that code; said once.
++    if not cold_said then cold_said=true;report('armory_extras.waiting',tostring(why))end
++    cold_until=frame+M.COLD_FRAMES;return
++   end
+    if not ok then off=tostring(why);report('armory_extras.off',off);return end
+    report('armory_extras.ready','native entry points verified')
+   end
+@@ -13992,6 +14124,10 @@
+   startup.next_sample=now+500
+   local grid=host.grid()
+   if not(grid and grid.phase=='ready')then return false end
++  -- The armor setter is proven from the Equipment Apply code. While the game
++  -- has not run that code the grid is made without it; restoring then would
++  -- fail for good, so the restore waits for it like for the grid itself.
++  if grid:cold('deployment_apply')then return false end
+   -- Nothing is timed before the caller can read a catalog at all, nor while
+   -- its read is held for another mod's values: the time starts over.
+   if host.restore_ready and not host.restore_ready()then startup.deadline=nil;return false end
+@@ -14129,7 +14265,7 @@
+      if not st.startup.finished or st.startup.active then return'startup restoration'end
+      if host.locked()then return'saved state needs recovery'end
+      local grid=host.grid()
+-     if not(host.catalog()and grid and grid.phase=='ready')then return'not ready'end
++     if not(host.catalog()and grid and grid.phase=='ready')or grid:cold('deployment_apply')then return'not ready'end
+      if host.armory_open and host.armory_open()then return'the Armory is open'end
+      if grid:idle_menu()~=true then return'a menu is open'end
+      return nil
+@@ -16549,18 +16685,56 @@
+  function armory.adapter()return ui_adapter end
+  function armory.stopped()return stopped end
+  function armory.latch_capture()screen.capture_latched=true end
+- function armory.ensure_grid()
+-  if not bridge then
+-   local found=ui_adapter:debug_bridge()
+-   -- Two globals the resolver found by signature are also in the fixed tables.
+-   local game=k:service('game')
+-   if game then game.alias('ui_manager',found.manager_global);game.alias('menu',found.menu_global)end
+-   bridge=mods.NativeGrid.new(found,report,nil,k:need('process'))
+-   -- The detail text of a modded piece is rewritten in the same update.
+-   bridge.on_preview=function(id,offer)
+-    local extras=k:service('extras');if extras then extras:selected(id,offer)end
+-   end
++ -- A grid that failed only on required code the game has not run yet is made
++ -- again while the Armory picker is open (`open`), where the game runs that
++ -- code: at once, then after 5, 10, 20... seconds. A grid that is ready
++ -- without some optional parts is made again by `renewal` when a picker of
++ -- screen kind `kind` opens.
++ local grid_cold={attempts=0}
++ local renewal=mods.NativeGridRenewal.new()
++ -- The adapter resolution (its cold_retries) the grid was made from. Once the
++ -- adapter has resolved again, from pristine state, because the mission
++ -- Equipment screen's code could be read, the grid is made again from it.
++ local grid_resolution
++ local function make_grid()
++  local found=ui_adapter:debug_bridge()
++  grid_resolution=ui_adapter.cold_retries
++  -- The catalogue resolver's progression global stands in for the grid's own
++  -- selection proof, whose code only the ship Armory runs.
++  local ok,data=pcall(catalog.bridge)
++  found.progression_global=ok and type(data)=='table'and data.progression or nil
++  -- Two globals the resolver found by signature are also in the fixed tables.
++  local game=k:service('game')
++  if game then game.alias('ui_manager',found.manager_global);game.alias('menu',found.menu_global)end
++  local made=mods.NativeGrid.new(found,report,nil,k:need('process'))
++  -- The detail text of a modded piece is rewritten in the same update.
++  made.on_preview=function(id,offer)
++   local extras=k:service('extras');if extras then extras:selected(id,offer)end
++  end
++  return made
++ end
++ function armory.ensure_grid(open,kind)
++  if bridge and grid_resolution~=ui_adapter.cold_retries then
++   if bridge.release_view then bridge:release_view()end
++   report('grid.renewal','the Armory layout was resolved again')
++   bridge=nil;grid_cold={attempts=0};renewal=mods.NativeGridRenewal.new()
++  end
++  if bridge then
++   local line;bridge,line=renewal:step(bridge,open,kind,make_grid)
++   if line then report('grid.renewal',line)end
++  end
++  if bridge and bridge.phase=='failed'and bridge.cold then
++   if not open then grid_cold.at=nil;return bridge end
++   local now=os.clock()
++   if not grid_cold.at then
++    grid_cold.at=now+(grid_cold.attempts==0 and 0 or 5*2^(grid_cold.attempts-1))
++    report('grid.cold_retry',tostring(bridge.failure))
++   end
++   if now<grid_cold.at then return bridge end
++   grid_cold.at=nil;grid_cold.attempts=grid_cold.attempts+1
++   bridge=nil
+   end
++  if not bridge then bridge=make_grid()end
+   return bridge
+  end
+  if mods.VariantThumbnails then
+@@ -16921,7 +17095,7 @@
+    runtime.compat_ready=true;status('READY - open ship Armory Equipment')
+   end
+   if mods.NativeGrid and ui_adapter.phase=='ready' then
+-   armory.ensure_grid()
++   armory.ensure_grid(sample~=nil,sample and sample.kind)
+    if bridge.phase=='resolving'or(bridge.producer_status and bridge:producer_status()=='scanning')then
+     bridge:step()
+    end
+@@ -17092,6 +17266,7 @@
+  end})
+  k.health:define('game.grid',{owner='src/game/grid_symbols.lua',requires={'game.ui'},check=function()
+   if not bridge then return 'unknown','the equipment grid has not been read'end
++  if bridge.phase=='failed'and bridge.cold then return 'unknown','waiting for game code: '..tostring(bridge.failure)end
+   if bridge.phase=='failed'then return 'degraded','equipment grid resolution failed: '..tostring(bridge.failure)end
+   if bridge.phase~='ready'then return 'unknown','the equipment grid is still resolving'end
+   if bridge.code_failure then return 'degraded',tostring(bridge.code_failure)end
+@@ -17740,7 +17915,7 @@
+ return M
+ 
+ end)()
+-local HD2TM_OWN = {CreatorController=CreatorController, ClothingCompare=ClothingCompare, DebugArmory=DebugArmory, ArmorStatSemantics=ArmorStatSemantics, ArmorStatResolver=ArmorStatResolver, NativeGridModel=NativeGridModel, NativeGridFocus=NativeGridFocus, NativeGridProducers=NativeGridProducers, NativeGrid=NativeGrid, NativeGridPresentation=NativeGridPresentation, ArmorySection=ArmorySection, ArmorRefreshBridge=ArmorRefreshBridge, VariantSession=VariantSession, DiverKitCompat=DiverKitCompat, DiverKitBridge=DiverKitBridge, VariantLayout=VariantLayout, VariantWizard=VariantWizard, VariantCards=VariantCards, VariantThumbnails=VariantThumbnails, PreviewPixels=PreviewPixels, PreviewStore=PreviewStore, NativePreviewPixels=NativePreviewPixels, PreviewRebuild=PreviewRebuild, PreviewSubjects=PreviewSubjects, PreviewService=PreviewService, PreviewActorPool=PreviewActorPool, PreviewWorldGate=PreviewWorldGate, PreviewWorldFlush=PreviewWorldFlush, PreviewActor=PreviewActor, PreviewNativeEnvironment=PreviewNativeEnvironment, PreviewNativeProfiles=PreviewNativeProfiles, PreviewFullBackend=PreviewFullBackend, PreviewColour=PreviewColour, PreviewSettings=PreviewSettings, ConstConfig=ConstConfig, RenderConfig=RenderConfig, RenderHook=RenderHook, RenderCutout=RenderCutout, PreviewRender=PreviewRender, ArmoryNative=ArmoryNative, ArmoryPreviews=ArmoryPreviews, NativeText=NativeText, ArmoryModelRender=ArmoryModelRender, ArmoryExtras=ArmoryExtras, ArmorySlot=ArmorySlot, ArmorBaseStats=ArmorBaseStats, PassiveIconGeometry=PassiveIconGeometry, PassiveIconDraw=PassiveIconDraw, UiLayout=UiLayout, WizardPanel=WizardPanel, UiWorkflow=UiWorkflow, Panel=Panel, AccessoryUi=AccessoryUi, BootArmory=BootArmory, BootExtras=BootExtras, BootDiverKit=BootDiverKit, BootPanel=BootPanel}
++local HD2TM_OWN = {CreatorController=CreatorController, ClothingCompare=ClothingCompare, DebugArmory=DebugArmory, ArmorStatSemantics=ArmorStatSemantics, ArmorStatResolver=ArmorStatResolver, NativeGridModel=NativeGridModel, NativeGridFocus=NativeGridFocus, NativeGridProducers=NativeGridProducers, NativeGrid=NativeGrid, NativeGridRenewal=NativeGridRenewal, NativeGridPresentation=NativeGridPresentation, ArmorySection=ArmorySection, ArmorRefreshBridge=ArmorRefreshBridge, VariantSession=VariantSession, DiverKitCompat=DiverKitCompat, DiverKitBridge=DiverKitBridge, VariantLayout=VariantLayout, VariantWizard=VariantWizard, VariantCards=VariantCards, VariantThumbnails=VariantThumbnails, PreviewPixels=PreviewPixels, PreviewStore=PreviewStore, NativePreviewPixels=NativePreviewPixels, PreviewRebuild=PreviewRebuild, PreviewSubjects=PreviewSubjects, PreviewService=PreviewService, PreviewActorPool=PreviewActorPool, PreviewWorldGate=PreviewWorldGate, PreviewWorldFlush=PreviewWorldFlush, PreviewActor=PreviewActor, PreviewNativeEnvironment=PreviewNativeEnvironment, PreviewNativeProfiles=PreviewNativeProfiles, PreviewFullBackend=PreviewFullBackend, PreviewColour=PreviewColour, PreviewSettings=PreviewSettings, ConstConfig=ConstConfig, RenderConfig=RenderConfig, RenderHook=RenderHook, RenderCutout=RenderCutout, PreviewRender=PreviewRender, ArmoryNative=ArmoryNative, ArmoryPreviews=ArmoryPreviews, NativeText=NativeText, ArmoryModelRender=ArmoryModelRender, ArmoryExtras=ArmoryExtras, ArmorySlot=ArmorySlot, ArmorBaseStats=ArmorBaseStats, PassiveIconGeometry=PassiveIconGeometry, PassiveIconDraw=PassiveIconDraw, UiLayout=UiLayout, WizardPanel=WizardPanel, UiWorkflow=UiWorkflow, Panel=Panel, AccessoryUi=AccessoryUi, BootArmory=BootArmory, BootExtras=BootExtras, BootDiverKit=BootDiverKit, BootPanel=BootPanel}
+ -- Last lines of the Armory addon (tools/build.py puts its modules above, as
+ -- locals, and lists them in HD2TM_OWN). The addon's modules join the
+ -- foundation's by name, its stages are declared and started, and the checks of

@@ -4,6 +4,7 @@
 > (no helper, no cffi DLL). Working on Linux/Proton; native Windows refuses the runtime DLL (error
 > 577). See [docs/LUAJIT-LIVE.md](docs/LUAJIT-LIVE.md). CowboyBingus's mods converted to build
 > 26088801 for the LuaJIT VM (the whole Vanilla Plus Megapack) are in [bingus-conversions/](bingus-conversions/).
+> tyrypyrking's HD2 Transmog Foundation converted to build 26251122 is in [transmog-conversions/](transmog-conversions/).
 
 Lua loader and in-game mod manager for Helldivers 2.
 
