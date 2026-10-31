@@ -1,0 +1,35 @@
+--- 26088801/38ec9f6555859108.lua
++++ 26251122/38ec9f6555859108.lua
+@@ -657,3 +657,3 @@
+-            {0x2ce1500,0x2874ed0,{{0x18,0x81e620},{0x38,0x820700},{0xa8,0x820870}}},
+-            {0x2ce1548,0x2875170,{{0,0x855900},{0x28,0x856730},{0x68,0x8574f0}}},
+-            {0x2ce14e8,0x2875080,{{0,0x826d10},{0x68,0x805160},{0x80,0x880750}}},
++            {0x2ce1500,0x2874ed0,{{0x18,0x81e4d0},{0x38,0x8205b0},{0xa8,0x820720}}},
++            {0x2ce1548,0x2875170,{{0,0x8557b0},{0x28,0x8565e0},{0x68,0x8573a0}}},
++            {0x2ce14e8,0x2875080,{{0,0x826bc0},{0x68,0x805010},{0x80,0x880600}}},
+@@ -673,6 +673,6 @@
+-        local valid=ffi.cast('uint64_t (*)(uint32_t)',exe+0x81e620)
+-        local flags=ffi.cast('uint32_t (*)(uint32_t)',exe+0x820700)
+-        local motion=ffi.cast('void (*)(uint32_t,float *,float *)',exe+0x820870)
+-        local mover=ffi.cast('uint32_t (*)(uint32_t,uint32_t)',exe+0x855900)
+-        local dimensions=ffi.cast('void *(*)(uint32_t)',exe+0x8574f0)
+-        local position=ffi.cast('void (*)(uint32_t,float *)',exe+0x856730)
++        local valid=ffi.cast('uint64_t (*)(uint32_t)',exe+0x81e4d0)
++        local flags=ffi.cast('uint32_t (*)(uint32_t)',exe+0x8205b0)
++        local motion=ffi.cast('void (*)(uint32_t,float *,float *)',exe+0x820720)
++        local mover=ffi.cast('uint32_t (*)(uint32_t,uint32_t)',exe+0x8557b0)
++        local dimensions=ffi.cast('void *(*)(uint32_t)',exe+0x8573a0)
++        local position=ffi.cast('void (*)(uint32_t,float *)',exe+0x8565e0)
+@@ -683,2 +683,2 @@
+-        local world_id=ffi.cast('uint32_t (*)(const void *)',exe+0x826d10)
+-        local query=ffi.cast('uint32_t (*)(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,const void *,void *,uint32_t)',exe+0x880750)
++        local world_id=ffi.cast('uint32_t (*)(const void *)',exe+0x826bc0)
++        local query=ffi.cast('uint32_t (*)(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,const void *,void *,uint32_t)',exe+0x880600)
+@@ -2413 +2413 @@
+-    assert(api.distance(ptr(api,read(api,s,object,8,true)),exe+0x17430a0)==0,'Unsupported character controller')
++    assert(api.distance(ptr(api,read(api,s,object,8,true)),exe+0x17430a8)==0,'Unsupported character controller')
+@@ -3081,2 +3081,2 @@
+-install_loader(function() return create_api(runtime, runtime_write.extend(runtime_memory.new(runtime))) end, patch, {revision = 'data-v8.9.1-26088801', exe_sha256 = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE', game_sha256 = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'}, runtime)
+-
++install_loader(function() return create_api(runtime, runtime_write.extend(runtime_memory.new(runtime))) end, patch, {revision = 'data-v8.9.1-26251122', exe_sha256 = '257FD7DE21A04E8668E02E5C820EDF3435176FBDE3569765255CC52A5EA20F9D', game_sha256 = '61DCFCD201DACBF3545C97BEB8A5A6186E9850D2670BF60B0E058320B477F6DF'}, runtime)
++

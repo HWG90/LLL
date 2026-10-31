@@ -1,0 +1,123 @@
+{
+ "option": "ConsistentVaulting",
+ "from": "26088801",
+ "to": "26251122",
+ "resources": {
+  "38ec9f6555859108": {
+   "wrapped": false,
+   "lines_changed": 14,
+   "sha256_26088801": "0426f18ffc0026055da4c5ec28e404983563e677106f8d430305976bb615dbb3",
+   "sha256": "11d94b8f86f0178921bcfefb946972182b603b9b6bc40aee73d3b33ff02fbf62"
+  }
+ },
+ "edits": [
+  {
+   "resource": "38ec9f6555859108",
+   "kind": "string",
+   "old": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "new": "257FD7DE21A04E8668E02E5C820EDF3435176FBDE3569765255CC52A5EA20F9D",
+   "count": 1
+  },
+  {
+   "resource": "38ec9f6555859108",
+   "kind": "string",
+   "old": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "new": "61DCFCD201DACBF3545C97BEB8A5A6186E9850D2670BF60B0E058320B477F6DF",
+   "count": 1
+  },
+  {
+   "resource": "38ec9f6555859108",
+   "kind": "string",
+   "old": "26088801",
+   "new": "26251122",
+   "count": 1
+  },
+  {
+   "resource": "38ec9f6555859108",
+   "kind": "address",
+   "old": "{{0x18,0x81e620},{0x38,0x820700},{0xa8,0x820870}}",
+   "new": "{{0x18,0x81e4d0},{0x38,0x8205b0},{0xa8,0x820720}}",
+   "count": 1
+  },
+  {
+   "resource": "38ec9f6555859108",
+   "kind": "address",
+   "old": "{{0,0x855900},{0x28,0x856730},{0x68,0x8574f0}}",
+   "new": "{{0,0x8557b0},{0x28,0x8565e0},{0x68,0x8573a0}}",
+   "count": 1
+  },
+  {
+   "resource": "38ec9f6555859108",
+   "kind": "address",
+   "old": "{{0,0x826d10},{0x68,0x805160},{0x80,0x880750}}",
+   "new": "{{0,0x826bc0},{0x68,0x805010},{0x80,0x880600}}",
+   "count": 1
+  },
+  {
+   "resource": "38ec9f6555859108",
+   "kind": "address",
+   "old": "',exe+0x81e620)",
+   "new": "',exe+0x81e4d0)",
+   "count": 1
+  },
+  {
+   "resource": "38ec9f6555859108",
+   "kind": "address",
+   "old": "',exe+0x820700)",
+   "new": "',exe+0x8205b0)",
+   "count": 1
+  },
+  {
+   "resource": "38ec9f6555859108",
+   "kind": "address",
+   "old": "',exe+0x820870)",
+   "new": "',exe+0x820720)",
+   "count": 1
+  },
+  {
+   "resource": "38ec9f6555859108",
+   "kind": "address",
+   "old": "',exe+0x855900)",
+   "new": "',exe+0x8557b0)",
+   "count": 1
+  },
+  {
+   "resource": "38ec9f6555859108",
+   "kind": "address",
+   "old": "',exe+0x8574f0)",
+   "new": "',exe+0x8573a0)",
+   "count": 1
+  },
+  {
+   "resource": "38ec9f6555859108",
+   "kind": "address",
+   "old": "',exe+0x856730)",
+   "new": "',exe+0x8565e0)",
+   "count": 1
+  },
+  {
+   "resource": "38ec9f6555859108",
+   "kind": "address",
+   "old": "',exe+0x826d10)",
+   "new": "',exe+0x826bc0)",
+   "count": 1
+  },
+  {
+   "resource": "38ec9f6555859108",
+   "kind": "address",
+   "old": "',exe+0x880750)",
+   "new": "',exe+0x880600)",
+   "count": 1
+  },
+  {
+   "resource": "38ec9f6555859108",
+   "kind": "address",
+   "old": "exe+0x17430a0)==0",
+   "new": "exe+0x17430a8)==0",
+   "count": 1
+  }
+ ],
+ "witnesses": [],
+ "source": "original-mods/backups/20261029-170002-ConsistentVaulting/0-9ba626afa44a3aa3.patch_0",
+ "archive_sha256": "51dd5ad7cb9a2cd25f1f75ceae985c4f82e2f74e8cdbf146db94b85b1d510f72"
+}

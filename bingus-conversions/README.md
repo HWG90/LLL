@@ -1,4 +1,39 @@
-# Bingus conversions — Steam build 26088801 (LuaJIT)
+# Bingus conversions — Steam build 26251122 (LuaJIT)
+
+CowboyBingus's Helldivers 2 mods (each Zero-Clause BSD, see its `LICENSE`), converted for the LuaJIT VM
+(`docs/LUAJIT-LIVE.md`). Steam delivered build 26251122 on 2026-10-29. Each option's `26251122/` folder is its port
+from the 26088801 conversion below, changing build data only unless noted:
+
+- `<resource>.lua`: the built entry as plain Lua. Some are installed wrapped in a `loadstring` blob; the receipt's
+  `sha256` is the installed body either way.
+- `<resource>.diff`: against the 26088801 entry.
+- `receipt.json`: every edit (kind, old, new, count), both builds' hashes and the re-derived code checks.
+- `live/`: the option's own read-only probes, run through Link's Link to Memory.
+
+`26251122-live/megapack_26251122_readonly.lua` checks every changed value in game.
+
+Status on Proton, 2026-10-31. All 24 were installed on 2026-10-29 at 17:00 with the game closed. The 18:21 launch's
+read-only check gave ok=46 bad=0 wait=2; the two waits are Better Lobby Management checks on lobby pages the game had
+not run yet.
+
+| Option | 26251122 |
+|---|---|
+| All 24 | exe and game.dll SHA-256 gates; the build number in revision and message strings |
+| EnemyCollisionSynchronized | enabled/position/rotation 0x806640/0x820AF0/0x820E10, body getter 0xD65790. **Accepted in game on 2026-10-31**: over a 2.5-hour session it accepted 810 units and realigned 246, with no skips or retries |
+| SentryAimRetention | pose getter 0x1F3020, raycast 0x87BB20, world id 0x826BC0. The first port left the world-id call at the old address (a bare `ret` on this build), so the raycast read an empty physics world and a mission crashed on 2026-10-30. Fixed the same night (data-v8.6): a 2.5-hour session ran without an error, holding aim 291 times and pausing fire 341 times. data-v8.7 (2026-10-31) also skips the terrain check while the game world's physics slot is empty |
+| BetterStratagemBounce | the settings buffer is 82376 bytes (was 82384); the 82384 build refused with "Incomplete stratagem settings", the new one plans all 105 flags. Reinstalled at 18:32 |
+| ArmoryPreviewCache | package acquire/release 0x2F01E0/0x2F0440, image create/destroy/register 0x2EA520/0x2EA930/0x2ED540, texture formats 0x16F48B0; 5 code checks re-derived |
+| BetterLobbyManagement | PlayFab layout and members 0x9561B0/0x956232, continent ids 0x205D100; 7 code checks re-derived |
+| ConsistentVaulting | 9 physics functions moved; `flags` 0x8205B0; controller vtable 0x17430A8 |
+| KnowYourConstellation | tag hash table 0x2069D70, byte-identical; rosters unchanged |
+| ReinforcementBeaconsFixed | scene-graph getter 0x28D310 |
+| ShallowWaterDiving | 5 `.rdata` floats, each +0x20 |
+| SoundSystemsRebalanced | the Wwise plugin's `SetState` export is at 0xDA130, prologue unchanged |
+| ClickableScrollbars | 1 code check re-derived |
+| ArcThrowerRevamped, ControllableHoverPack, FlameDamageFixed, FoliagePassThrough, GalacticMenuHotkey, HellpodDropHold, HellpodSteeringUnlocked, HolsterYourShield, LaserSentryCooldown, ModBindingsMenu, ModOptionsMenu, StickyGrenadeHandles, StratagemHeroExpanded | hash gates and build strings only |
+| MatchYourColors | not here yet: its 26251122 build (with backpack recolouring) is still being tested |
+
+## Steam build 26088801: the base
 
 CowboyBingus's Helldivers 2 mods (each Zero-Clause BSD, see its `LICENSE`), converted from Steam
 build 25480438 to 26088801 for the LuaJIT VM (`docs/LUAJIT-LIVE.md`). Each is the upstream LuaJIT
@@ -47,5 +82,6 @@ Updated 2026-10-29 (all four installed 2026-10-28 22:59 local into the Megapack 
 | SentryAimRetention | the game never runs its two turret speed setters, so it now does their work itself (registry lookup, owner bit, verified write, then the replication routine `0xE69780`, checked in full); the horizontal setter's body was read live and equals the prediction (`out/logic.diff`) |
 | HolsterYourShield | installed 2026-10-25, but disabled itself at load ("game function unreadable: send_held"): its three game functions are now checked right before the first move instead of at load |
 
-On 2026-10-29 at 06:19 Steam updated the game to build 26251122. Every option here checks the 26088801 exe and
-game.dll hashes and refuses to run on the new build. The 26251122 ports are not published here.
+On 2026-10-29 at 06:19 Steam updated the game to build 26251122. Every option in this section checks the 26088801
+exe and game.dll hashes and refuses to run on the new build; the 26251122 ports are in each option's `26251122/`
+folder (top of this file).

@@ -1,0 +1,39 @@
+{
+ "option": "HolsterYourShield",
+ "from": "26088801",
+ "to": "26251122",
+ "resources": {
+  "2dc2359512462098": {
+   "wrapped": false,
+   "lines_changed": 4,
+   "sha256_26088801": "29fb5aaab4bd8271285f2e432c73c2395a2f076122ffa5130c8d43dbc084dd3e",
+   "sha256": "c4348055a509d628ff221eecf66c562f42e72905c467f130363151b3f78f503b"
+  }
+ },
+ "edits": [
+  {
+   "resource": "2dc2359512462098",
+   "kind": "string",
+   "old": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "new": "257FD7DE21A04E8668E02E5C820EDF3435176FBDE3569765255CC52A5EA20F9D",
+   "count": 1
+  },
+  {
+   "resource": "2dc2359512462098",
+   "kind": "string",
+   "old": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "new": "61DCFCD201DACBF3545C97BEB8A5A6186E9850D2670BF60B0E058320B477F6DF",
+   "count": 1
+  },
+  {
+   "resource": "2dc2359512462098",
+   "kind": "string",
+   "old": "26088801",
+   "new": "26251122",
+   "count": 2
+  }
+ ],
+ "witnesses": [],
+ "source": "original-mods/backups/20261029-170003-HolsterYourShield/0-9ba626afa44a3aa3.patch_0",
+ "archive_sha256": "d1efc95e12d24997c59dc406f45a66de3785d5f4c0531127cb1d4978af648060"
+}

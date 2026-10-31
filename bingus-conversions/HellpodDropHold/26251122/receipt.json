@@ -1,0 +1,45 @@
+{
+ "option": "HellpodDropHold",
+ "from": "26088801",
+ "to": "26251122",
+ "resources": {
+  "31d6851d9f197100": {
+   "wrapped": false,
+   "lines_changed": 2,
+   "sha256_26088801": "55fc604a366231d4b1b048d91073c6da0dc399877766ba8fc1ca2c2603e2d095",
+   "sha256": "16f6e2bd4b271fdd4b2dc9bbeb4fe15da3c6d27fe7bf55c4c690cf809c7e61fa"
+  },
+  "d2aba22187eadcbb": {
+   "wrapped": false,
+   "lines_changed": 0,
+   "sha256_26088801": "816c392d06ac7696d6d130bb2747e851a02c28b4da114c68dd78864d78a77097",
+   "sha256": "816c392d06ac7696d6d130bb2747e851a02c28b4da114c68dd78864d78a77097"
+  }
+ },
+ "edits": [
+  {
+   "resource": "31d6851d9f197100",
+   "kind": "string",
+   "old": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "new": "257FD7DE21A04E8668E02E5C820EDF3435176FBDE3569765255CC52A5EA20F9D",
+   "count": 1
+  },
+  {
+   "resource": "31d6851d9f197100",
+   "kind": "string",
+   "old": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "new": "61DCFCD201DACBF3545C97BEB8A5A6186E9850D2670BF60B0E058320B477F6DF",
+   "count": 1
+  },
+  {
+   "resource": "31d6851d9f197100",
+   "kind": "string",
+   "old": "26088801",
+   "new": "26251122",
+   "count": 1
+  }
+ ],
+ "witnesses": [],
+ "source": "original-mods/backups/20261029-170003-HellpodDropHold/0-9ba626afa44a3aa3.patch_0",
+ "archive_sha256": "60f8483696ca50b0b24a133693d695e6de333e3c369253e47960c2923a7307e1"
+}

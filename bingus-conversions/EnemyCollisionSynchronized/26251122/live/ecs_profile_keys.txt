@@ -1,0 +1,21 @@
+3BEEFB1242E7F8DC Impaler nodes=139 bodies=15
+94EBD3071CA181A3 Burrowing Spewer nodes=102 bodies=14
+C2175A24930257EF Automaton assault walker nodes=104 bodies=10
+9B0872D1FD2270CC Nursing Spewer nodes=99 bodies=14
+B791D5AC6452AECC Bile Spewer tier 2 nodes=99 bodies=14
+4601E6E5CC99AA36 Bile Spewer nodes=117 bodies=14
+AFB75108FFCB3FD6 Illuminate tripod tier 2 nodes=151 bodies=10
+07F1BE377B022DF2 Illuminate war machine nodes=124 bodies=6
+4ADDAC515AAE5E96 Illuminate tripod nodes=151 bodies=10
+DDAFCCCCF2172E9E Bile Titan nodes=175 bodies=15
+E336280D128D7ED3 Automaton spawner walker nodes=210 bodies=15
+AAFAA321A4480B96 Terminid dragon nodes=164 bodies=15
+5E60ABF49223206B Acid Charger nodes=138 bodies=15
+8C221C132BB9B70A Burrowing Charger nodes=129 bodies=15
+0378893C654752FD Charger bull (unnamed entity variant) nodes=127 bodies=15
+7A223F33E2DEF230 Automaton jammer spawner walker nodes=210 bodies=15
+883D333823E22160 Nursing Spewer mission variant nodes=99 bodies=14
+97A497D084CB04EF Gloom Bile Titan nodes=175 bodies=15
+990B45D5D75FFF3A Charger bull nodes=127 bodies=15
+B064C698FFCD7F1A Charger nodes=127 bodies=15
+4CACB367ECD15BA0 Charger tier 2 nodes=127 bodies=15

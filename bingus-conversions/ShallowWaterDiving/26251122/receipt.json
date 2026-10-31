@@ -1,0 +1,74 @@
+{
+ "option": "ShallowWaterDiving",
+ "from": "26088801",
+ "to": "26251122",
+ "resources": {
+  "5895ed9013effd40": {
+   "wrapped": false,
+   "lines_changed": 7,
+   "sha256_26088801": "8cf52557a9cb288f09eb484821ff3e943d36eed6eae453b30e974b41c185ff18",
+   "sha256": "2ce184a62485440d1b9082c4e5de685c07fd6b9da43732dadb878aaa9d781063"
+  }
+ },
+ "edits": [
+  {
+   "resource": "5895ed9013effd40",
+   "kind": "string",
+   "old": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "new": "257FD7DE21A04E8668E02E5C820EDF3435176FBDE3569765255CC52A5EA20F9D",
+   "count": 1
+  },
+  {
+   "resource": "5895ed9013effd40",
+   "kind": "string",
+   "old": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "new": "61DCFCD201DACBF3545C97BEB8A5A6186E9850D2670BF60B0E058320B477F6DF",
+   "count": 1
+  },
+  {
+   "resource": "5895ed9013effd40",
+   "kind": "string",
+   "old": "26088801",
+   "new": "26251122",
+   "count": 1
+  },
+  {
+   "resource": "5895ed9013effd40",
+   "kind": "address",
+   "old": "local DIVE_TIMEOUT_RVAS={0x2246948,0x2246938}",
+   "new": "local DIVE_TIMEOUT_RVAS={0x2246968,0x2246958}",
+   "count": 1
+  },
+  {
+   "resource": "5895ed9013effd40",
+   "kind": "address",
+   "old": "reader.read(base+0x22468b8,0x100)",
+   "new": "reader.read(base+0x22468d8,0x100)",
+   "count": 1
+  },
+  {
+   "resource": "5895ed9013effd40",
+   "kind": "address",
+   "old": "string.format('0x%x',0x22468b8+o)",
+   "new": "string.format('0x%x',0x22468d8+o)",
+   "count": 1
+  },
+  {
+   "resource": "5895ed9013effd40",
+   "kind": "address",
+   "old": "local prone=read(base+0x22464ec,4)",
+   "new": "local prone=read(base+0x224650c,4)",
+   "count": 1
+  },
+  {
+   "resource": "5895ed9013effd40",
+   "kind": "address",
+   "old": "local crouch=read(base+0x2246210,4)",
+   "new": "local crouch=read(base+0x2246230,4)",
+   "count": 1
+  }
+ ],
+ "witnesses": [],
+ "source": "original-mods/backups/20261029-170003-ShallowWaterDiving/0-9ba626afa44a3aa3.patch_0",
+ "archive_sha256": "de54b053c4f2bfa6f0af3168433df6880e7fa8a55aaa1d04e90d735ff6cb143a"
+}

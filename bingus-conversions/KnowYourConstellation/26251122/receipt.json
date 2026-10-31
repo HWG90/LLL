@@ -1,0 +1,46 @@
+{
+ "option": "KnowYourConstellation",
+ "from": "26088801",
+ "to": "26251122",
+ "resources": {
+  "1d106bd89d3a79ac": {
+   "wrapped": false,
+   "lines_changed": 4,
+   "sha256_26088801": "772a0c778a924498f232449a2469ec499ababd0a2e7789737114011a98f2b70a",
+   "sha256": "8e675583bd1330b6c44d5bb47b244e55169a6e16be282a3ef8f592448f6e1180"
+  }
+ },
+ "edits": [
+  {
+   "resource": "1d106bd89d3a79ac",
+   "kind": "string",
+   "old": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "new": "257FD7DE21A04E8668E02E5C820EDF3435176FBDE3569765255CC52A5EA20F9D",
+   "count": 1
+  },
+  {
+   "resource": "1d106bd89d3a79ac",
+   "kind": "string",
+   "old": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "new": "61DCFCD201DACBF3545C97BEB8A5A6186E9850D2670BF60B0E058320B477F6DF",
+   "count": 1
+  },
+  {
+   "resource": "1d106bd89d3a79ac",
+   "kind": "string",
+   "old": "26088801",
+   "new": "26251122",
+   "count": 1
+  },
+  {
+   "resource": "1d106bd89d3a79ac",
+   "kind": "address",
+   "old": "read(game + 0x2069D50, 33 * 4, hash_bytes)",
+   "new": "read(game + 0x2069D70, 33 * 4, hash_bytes)",
+   "count": 1
+  }
+ ],
+ "witnesses": [],
+ "source": "original-mods/backups/20261029-170003-KnowYourConstellation/0-9ba626afa44a3aa3.patch_0",
+ "archive_sha256": "7616b9297cd9eee5c72e700f1a3deac3a4614669f3139059d55ffa619f63a8b3"
+}

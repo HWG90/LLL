@@ -1,0 +1,39 @@
+{
+ "option": "ControllableHoverPack",
+ "from": "26088801",
+ "to": "26251122",
+ "resources": {
+  "f58c6742a5198ab4": {
+   "wrapped": false,
+   "lines_changed": 2,
+   "sha256_26088801": "57bd15ff76fd45242ebbf10915a75f78af3e1fcd011e7e5128b64fa30e4eb74c",
+   "sha256": "8e399cbfd12529bdd4cc16d684383d4d0fefe2726100563f089dca1128fca537"
+  }
+ },
+ "edits": [
+  {
+   "resource": "f58c6742a5198ab4",
+   "kind": "string",
+   "old": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "new": "257FD7DE21A04E8668E02E5C820EDF3435176FBDE3569765255CC52A5EA20F9D",
+   "count": 1
+  },
+  {
+   "resource": "f58c6742a5198ab4",
+   "kind": "string",
+   "old": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "new": "61DCFCD201DACBF3545C97BEB8A5A6186E9850D2670BF60B0E058320B477F6DF",
+   "count": 1
+  },
+  {
+   "resource": "f58c6742a5198ab4",
+   "kind": "string",
+   "old": "26088801",
+   "new": "26251122",
+   "count": 1
+  }
+ ],
+ "witnesses": [],
+ "source": "original-mods/backups/20261029-170003-ControllableHoverPack/0-9ba626afa44a3aa3.patch_0",
+ "archive_sha256": "a39fe71baba4c3b61d1c96677c8808ab5bf5f26d8f5cdd4aec1c1253fe02ef2b"
+}

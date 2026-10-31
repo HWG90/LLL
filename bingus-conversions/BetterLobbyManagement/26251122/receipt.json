@@ -1,0 +1,147 @@
+{
+ "option": "BetterLobbyManagement",
+ "from": "26088801",
+ "to": "26251122",
+ "resources": {
+  "b9965a03f28c36ef": {
+   "wrapped": false,
+   "lines_changed": 12,
+   "sha256_26088801": "afca923e4328a969aa661b87d20541eb37cb73bb80fc31b9e97b97a91cc9f7a4",
+   "sha256": "fcb4d1ce0fed7b9d018c4d76cab84e62c7a35f05c846c471117804b87681eb53"
+  }
+ },
+ "edits": [
+  {
+   "resource": "b9965a03f28c36ef",
+   "kind": "string",
+   "old": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "new": "257FD7DE21A04E8668E02E5C820EDF3435176FBDE3569765255CC52A5EA20F9D",
+   "count": 1
+  },
+  {
+   "resource": "b9965a03f28c36ef",
+   "kind": "string",
+   "old": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "new": "61DCFCD201DACBF3545C97BEB8A5A6186E9850D2670BF60B0E058320B477F6DF",
+   "count": 1
+  },
+  {
+   "resource": "b9965a03f28c36ef",
+   "kind": "address",
+   "old": "R.CONTINENT_IDS_RVA = 0x205d3f0",
+   "new": "R.CONTINENT_IDS_RVA = 0x205d100",
+   "count": 1
+  },
+  {
+   "resource": "b9965a03f28c36ef",
+   "kind": "address",
+   "old": "{rva = 0x9562e0, name = 'PlayFab lobby layout'",
+   "new": "{rva = 0x9561b0, name = 'PlayFab lobby layout'",
+   "count": 1
+  },
+  {
+   "resource": "b9965a03f28c36ef",
+   "kind": "address",
+   "old": "{rva = 0x956362, name = 'PlayFab lobby members'",
+   "new": "{rva = 0x956232, name = 'PlayFab lobby members'",
+   "count": 1
+  }
+ ],
+ "witnesses": [
+  {
+   "resource": "b9965a03f28c36ef",
+   "module": "exe",
+   "old_rva": "0x9562e0",
+   "new_rva": "0x9561b0",
+   "size": 68,
+   "old": "488b46188bcf488b0cc8488b59104863831801000083f8030f8551010000498bd6488d0dd0f3de00e843a7caff488b8b20010000488d9424d00000004c89bc24d0000000",
+   "new": "488b46188bcf488b0cc8488b59104863831801000083f8030f8551010000498bd6488d0d58f5de00e803a8caff488b8b20010000488d9424d00000004c89bc24d0000000",
+   "explained": [
+    "0x9562f8 jne branch: 0x95644f -> 0x95631f (-0x130) near branch, same delta as the span (same function)",
+    "0x956301 lea mem: 0x17456d8 -> 0x1745730 (+0x58) .rdata, same 8-byte value",
+    "0x956308 call branch: 0x600a50 -> 0x6009e0 (-0x70) target migrated (high)"
+   ],
+   "accepted": {}
+  },
+  {
+   "resource": "b9965a03f28c36ef",
+   "module": "exe",
+   "old_rva": "0x948f50",
+   "new_rva": "0x948e20",
+   "size": 32,
+   "old": "488b0571cbab01488b88a800000033c04885c9740a4883c1443801480f45c1c3",
+   "new": "488b0599ccab01488b88a800000033c04885c9740a4883c1443801480f45c1c3",
+   "explained": [
+    "0x948f50 mov mem: 0x2405ac8 -> 0x2405ac0 (-0x8) UNEXPLAINED",
+    "0x948f63 je branch: 0x948f6f -> 0x948e3f (-0x130) inside span"
+   ],
+   "accepted": {
+    "0x948f50 mov mem: 0x2405ac8 -> 0x2405ac0 (-0x8)": "exe global 0x2405ac8 -> 0x2405ac0: wide reference vote 46/46, no dissent"
+   }
+  },
+  {
+   "resource": "b9965a03f28c36ef",
+   "module": "exe",
+   "old_rva": "0x2f0bc0",
+   "new_rva": "0x2f0b40",
+   "size": 22,
+   "old": "488b05416c7c01488b88000400000fb68124320000c3",
+   "new": "488b05c16c7c01488b88000400000fb68124320000c3",
+   "explained": [],
+   "accepted": {}
+  },
+  {
+   "resource": "b9965a03f28c36ef",
+   "module": "exe",
+   "old_rva": "0x2f0be0",
+   "new_rva": "0x2f0b60",
+   "size": 26,
+   "old": "488b05216c7c0185c90f95c2488b8800040000889124320000c3",
+   "new": "488b05a16c7c0185c90f95c2488b8800040000889124320000c3",
+   "explained": [],
+   "accepted": {}
+  },
+  {
+   "resource": "b9965a03f28c36ef",
+   "module": "game",
+   "old_rva": "0x1778aa2",
+   "new_rva": "0x1778aa2",
+   "size": 77,
+   "old": "488b9e004e0100488d1558589700488b3d71f76b01488d0d1a5197004c8bc3e86a38e3ff4533c94533c0488bd3b92d3786f7e8f74048ff4533c9488d8fb0590100488bd3458d4101e8614e7aff",
+   "new": "488b9e004e0100488d1578589700488b3d71f76b01488d0d3a5197004c8bc3e86a38e3ff4533c94533c0488bd3b92d3786f7e8f74048ff4533c9488d8fb0590100488bd3458d4101e8614e7aff",
+   "explained": [
+    "0x1778aa9 lea mem: 0x20ee308 -> 0x20ee328 (+0x20) .rdata, same 8-byte value",
+    "0x1778ab7 lea mem: 0x20edbd8 -> 0x20edbf8 (+0x20) .rdata, same 8-byte value"
+   ],
+   "accepted": {}
+  },
+  {
+   "resource": "b9965a03f28c36ef",
+   "module": "game",
+   "old_rva": "0x177b6da",
+   "new_rva": "0x177b6da",
+   "size": 16,
+   "old": "488b1d7fca6b014c8d0550b29d004533",
+   "new": "488b1d7fca6b014c8d0570b29d004533",
+   "explained": [
+    "0x177b6e1 lea mem: 0x2156938 -> 0x2156958 (+0x20) .rdata, same 8-byte value"
+   ],
+   "accepted": {}
+  },
+  {
+   "resource": "b9965a03f28c36ef",
+   "module": "game",
+   "old_rva": "0xf22d80",
+   "new_rva": "0xf22d80",
+   "size": 167,
+   "old": "4c8bdc49895b20574881ecc0000000488b057a2259014833c448898424b00000000f57c08bfa0f11442430488bd9458bc80f114424404c8d0547ef1a01ba800000000f11442450488d4c24300f114424600f11442470410f1143b8410f1143c8410f1143d8e8362d5dff488d4c243048c7c0ffffffff48ffc0803c010075f7894424204c8d442420488d4424308bd74889442428488bcb0f28442420660f7f442420e859feffff",
+   "new": "4c8bdc49895b20574881ecc0000000488b057a2259014833c448898424b00000000f57c08bfa0f11442430488bd9458bc80f114424404c8d0567ef1a01ba800000000f11442450488d4c24300f114424600f11442470410f1143b8410f1143c8410f1143d8e8362d5dff488d4c243048c7c0ffffffff48ffc0803c010075f7894424204c8d442420488d4424308bd74889442428488bcb0f28442420660f7f442420e859feffff",
+   "explained": [
+    "0xf22db6 lea mem: 0x20d1d04 -> 0x20d1d24 (+0x20) .rdata, same 8-byte value"
+   ],
+   "accepted": {}
+  }
+ ],
+ "source": "original-mods/backups/20261029-170002-BetterLobbyManagement/0-9ba626afa44a3aa3.patch_0",
+ "archive_sha256": "5ca9fe92cb69bcd8fd52c22e6b821fdec6d8184eb1311d157adb668a5171050d"
+}
