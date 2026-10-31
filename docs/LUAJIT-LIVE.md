@@ -57,7 +57,7 @@ removal.
 ## Bingus conversions
 
 `bingus-conversions/` holds CowboyBingus's mods (the 25 Vanilla Plus Megapack options, Zero-Clause
-BSD) converted to build 26088801 as the original LuaJIT code with build data remapped and checked in
-game; its README gives each option's status. Mod Options Menu and Match Your Colors still join the
+BSD) converted to builds 26088801 and 26251122 as the original LuaJIT code with build data remapped;
+its README gives each option's in-game status on each build. Mod Options Menu and Match Your Colors still join the
 drop-in package only through `--mom`, `--myc` and `--licenses`. See `docs/LUAJIT-LIVE-NOTICES.txt`
 for contents and licences.
