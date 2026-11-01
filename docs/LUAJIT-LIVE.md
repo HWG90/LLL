@@ -50,6 +50,8 @@ removal.
 
 - LLL's LuaJIT build has no shared input service (the Steam helper provides it), so mods that need
   it (DBF-MCM, DBF freecam) do not enable.
+  On build 26251122 the runtime runs LLL's Steam build with the helper served in-process instead,
+  input service included: see `STEAM-INPROC.md`.
 - `require('cffi')` returns the runtime's alias over LuaJIT's `ffi`, so mods ported to the Lua 5.1
   VM keep loading. Plain `ffi` is the target once LuaJIT is confirmed everywhere.
 - Hellpod Drop Hold's Lua 5.1 port fails to load (`PORT51` missing in its implementation).
