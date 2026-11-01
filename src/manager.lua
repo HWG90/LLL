@@ -57,6 +57,9 @@ return function(host, entries)
     compat.capabilities=loader.capabilities
     compat.discovery=host.discovery_state
     compat.revision="LLL-" .. (host.revision or 'R31-bsl-v20')
+    -- Mods written for Boot Mod Loader and Chef Shared Loader (src/compat.lua).
+    local layers = host.compat
+    if layers then layers.extend(compat) end
     loader.diagnostics=host.diagnostics
     loader.health=host.health and host.health.public
     compat.health=loader.health
@@ -155,7 +158,16 @@ return function(host, entries)
             if host.health and marker then local ok,why=pcall(host.health.after,name,marker);if not ok then pcall(host.report,name,"Health observer failed: "..tostring(why))end end
             callbacks.ending()
         end
+        local update_before = rawget(_G, "update")
+        if layers then layers.loading = name end
         local success, result = pcall(host.require, name)
+        if layers then
+            layers.loading = nil
+            if success then
+                local adopted, value = pcall(layers.adopt, name, result, update_before)
+                if adopted then result = value end
+            end
+        end
         if not success then
             status(name, "load failed: " .. tostring(result))
             finish_health()
@@ -307,6 +319,10 @@ return function(host, entries)
                 end
             end
         end
+        if layers then
+            local ok, why = pcall(layers.tick, dt)
+            if not ok and not layers.tick_failed then layers.tick_failed = true; pcall(host.report, "Compatibility", "tick failed: " .. tostring(why)) end
+        end
     end
     function loader.shutdown()
         callbacks.close()
@@ -317,11 +333,13 @@ return function(host, entries)
                 cleanup(name, record, "disabled")
             end
         end
+        if layers then pcall(layers.shutdown) end
     end
     rawset(_G, "CowboyBingusModLoader", compat)
     rawset(_G, "LiveLuaLoader", loader)
     loader.order = {}
     local seen = {}
+    if layers then pcall(layers.install, entries) end
     for _, name in ipairs(entries) do
         if not seen[name] then
             seen[name] = true
@@ -330,6 +348,7 @@ return function(host, entries)
         end
     end
     callbacks.finish()
+    if layers then pcall(layers.started) end
     function loader.add(name, enabled)
         if not allowed() then return false,'Unsupported game build' end
         if seen[name] then

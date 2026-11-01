@@ -90,6 +90,7 @@ yet had a separate clean-machine gameplay acceptance test. See
 - [Shared input API](docs/STEAM-INPUT-SERVICE.md)
 - [Shared screenshot API candidate and validation limits](docs/STEAM-SCREENSHOTS.md)
 - [Compatibility inventory](docs/STEAM-COMPATIBILITY.md)
+- [Mods for Chef Shared Loader and Boot Mod Loader](docs/CHEF-AND-BOOT-COMPAT.md)
 - [Modular projects](docs/MODULAR-PROJECTS.txt)
 - [Migration guide](docs/MOD-MIGRATION.md)
 - [Typed console commands](docs/CONSOLE-COMMANDS.txt)

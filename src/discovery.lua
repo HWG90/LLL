@@ -5,12 +5,45 @@ if not default_hash and type(jit)=='table' then
     setfenv(chunk,getfenv(1))
     default_hash=chunk()
 end
+-- Names: mods/<author>/<name>[/<more>], letters, digits, _ and - (Chef Shared Loader's rules).
+local function valid_name(name)
+    if type(name) ~= "string" or string.sub(name, 1, 5) ~= "mods/" or string.sub(name, -1) == "/"
+        or string.find(name, "//", 1, true) or string.find(name, "[^%w_%-/]") then return false end
+    return name ~= "mods/codex/loader"
+end
+-- The header block: `-- HD2-<Kind>: <name>` first, then `-- HD2-Requires:` lines among the leading comments.
+local KINDS = { Addon = "addon", Boot = "boot", Options = "options", Lang = "lang" }
+local function parse_head(head)
+    local label, name = string.match(head, "^%-%- HD2%-(%a+): ([^\r\n]+)[\r\n]")
+    local kind = label and KINDS[label]
+    if not kind then return nil end
+    local requires = {}
+    for line in string.gmatch(head, "([^\r\n]*)[\r\n]") do
+        if string.sub(line, 1, 2) ~= "--" then break end
+        local need, rest = string.match(line, "^%-%- HD2%-Requires:%s*(%S+)%s*(.-)%s*$")
+        if need then requires[#requires + 1] = { name = need, version = string.match(rest or "", "^>=%s*(%S+)$") } end
+    end
+    local chef = kind == "boot" or string.find(head, "local%s+chef%s*=%s*%.%.%.") ~= nil
+    for _, need in ipairs(requires) do if need.name == "chef-shared-loader" or need.name == "chef-loader" then chef = true end end
+    return kind, string.match(name, "^(.-)%s*$"), requires, chef
+end
+local function encode_requires(list)
+    local parts = {}
+    for _, need in ipairs(list or {}) do parts[#parts + 1] = need.name .. "@" .. (need.version or "") end
+    return table.concat(parts, ";")
+end
+local function decode_requires(text)
+    local list = {}
+    for need, version in string.gmatch(text or "", "([^@;]+)@([^;]*)") do list[#list + 1] = { name = need, version = version ~= "" and version or nil } end
+    return list
+end
 return function(platform, force)
     local hash = assert(platform.hash or default_hash, 'Archive hash transport unavailable')
     local files = {}
     local winners = {}
     local copies = {}
     local copy_report = {by_name={},notes={}}
+    local details, extras = {}, {}
     local identities = {}
     local warnings = {}
     local counters = { lua = 0, envelopes = 0, markers = 0, mismatches = 0 }
@@ -31,12 +64,12 @@ return function(platform, force)
     end)
     local signature, cache_path
     if stamps and platform.settings then
-        local parts = { "LLL archive cache 3", platform.data }
+        local parts = { "LLL archive cache 4", platform.data }
         for _, file in ipairs(files) do
             parts[#parts + 1] = file.name .. ":" .. assert(stamps[file.name])
         end
         signature = table.concat(parts, "|")
-        cache_path = platform.settings .. "/archive_catalog_v3.txt"
+        cache_path = platform.settings .. "/archive_catalog_v4.txt"
         if not force then
             local cache = platform.read(cache_path, 1048576)
             if cache then
@@ -48,22 +81,25 @@ return function(platform, force)
                     local names,records = {},{}
                     local valid = body and checksum == hash(body)
                     for line in string.gmatch(body or "", "([^\n]+)\n") do
-                        local tag,name,archive,hidden=string.match(line,"^([NH])\t([^\t]+)\t([^\t]+)\t(.*)$")
-                        if not tag or not string.match(name,"^mods/[%w_/]+$") or string.find(name,"//",1,true)
-                            or string.sub(name,-1)=="/" or name=="mods/codex/loader"
+                        local tag,name,archive,hidden,kind,offset,length,chef,requires=string.match(line,"^([NHOL])\t([^\t]+)\t([^\t]+)\t([^\t]*)\t(%a+)\t(%d+)\t(%d+)\t([01])\t(.*)$")
+                        if not tag or not valid_name(name)
                             or not string.match(archive,"^9ba626afa44a3aa3%.patch_%d+$") then valid=false;break end
+                        local detail={kind=kind,archive=archive,offset=tonumber(offset),length=tonumber(length),chef=chef=="1",requires=decode_requires(requires)}
+                        if tag=="O" or tag=="L" then detail.target=name;extras[#extras+1]=detail;records[#records+1]=line
+                        else
                         local duplicates={}
                         for file in string.gmatch(hidden,"[^,]+") do
                             if not string.match(file,"^9ba626afa44a3aa3%.patch_%d+$") then valid=false;break end
                             duplicates[#duplicates+1]=file
                         end
                         local description="Active archive: "..archive.."; hidden copies: "..(#duplicates>0 and table.concat(duplicates,", ") or "none")
-                        if tag=="N" then names[#names+1]=name;copy_report.by_name[name]=description
+                        if tag=="N" then names[#names+1]=name;copy_report.by_name[name]=description;details[name]=detail
                         else copy_report.notes[#copy_report.notes+1]=name..": declared copy hidden by undeclared/compiled resource in "..archive end
                         records[#records+1]=line
+                        end
                     end
                     if valid and body==table.concat(records,"\n").."\n" then
-                        return names, {}, diagnostics .. "; cached catalog; candidates=" .. #files, copy_report
+                        return names, {}, diagnostics .. "; cached catalog; candidates=" .. #files, copy_report, details, extras
                     end
                 end
             end
@@ -117,10 +153,10 @@ return function(platform, force)
                     )
                     local prefix = reader
                             and assert(
-                                reader.read(offset, math.min(length, 264)),
+                                reader.read(offset, math.min(length, 1032)),
                                 "Unreadable resource prefix"
                             )
-                        or string.sub(data, offset + 1, math.min(offset + length, offset + 264))
+                        or string.sub(data, offset + 1, math.min(offset + length, offset + 1032))
                     local function prefix_u32(at)
                         local a,b,c,d = string.byte(prefix, at + 1, at + 4)
                         return a + b * 256 + c * 65536 + d * 16777216
@@ -131,40 +167,26 @@ return function(platform, force)
                     then
                         counters.envelopes = counters.envelopes + 1
                         local head = string.sub(prefix, 9)
-                        local name = string.match(head, "^%-%- HD2%-Addon: ([^\r\n]+)[\r\n]")
+                        local kind, name, requires, chef = parse_head(head)
+                        local envelope = prefix_u32(4)
                         local computed
                         if name then
                             counters.markers = counters.markers + 1
                             computed = hash(name)
-                            if computed ~= key then
+                            if computed ~= key and kind ~= "options" and kind ~= "lang" then
                                 counters.mismatches = counters.mismatches + 1
                                 sample = sample
                                     or (name .. " computed=" .. computed .. " stored=" .. key)
                             end
                         end
-                        local valid = name and string.sub(name, 1, 5) == "mods/" and string.sub(name, -1) ~= "/"
-                        if valid then
-                            local previous
-                            for j = 1, #name do
-                                local b = string.byte(name, j)
-                                if
-                                    not (
-                                        (b >= 48 and b <= 57)
-                                        or (b >= 65 and b <= 90)
-                                        or (b >= 97 and b <= 122)
-                                        or b == 95
-                                        or b == 47
-                                    )
-                                    or (b == 47 and previous == 47)
-                                then
-                                    valid = false
-                                    break
-                                end
-                                previous = b
-                            end
-                        end
-                        if valid and name ~= "mods/codex/loader" and computed == key then
+                        local detail = name and valid_name(name) and { kind = kind, archive = file.name, offset = offset, length = length,
+                            requires = requires, chef = chef and envelope == 2 } or nil
+                        if detail and (kind == "options" or kind == "lang") then
+                            -- Data for another mod (its Arsenal options, a language): not an entry.
+                            if envelope == 2 then detail.target = name; detail.key = key; extras[#extras + 1] = detail end
+                        elseif detail and computed == key then
                             winners[key].name = name
+                            winners[key].detail = detail
                             copies[key].name = name
                         end
                     end
@@ -210,20 +232,25 @@ return function(platform, force)
             local winner=winners[key];local hidden={}
             for _, file in ipairs(history.files)do if file~=winner.archive then hidden[#hidden+1]=file end end
             local tag=winner.name and "N" or "H"
-            records[#records+1]={index=winner.index,order=winner.order,text=tag.."\t"..history.name.."\t"..winner.archive.."\t"..table.concat(hidden,",")}
+            local d=winner.detail or {kind="addon",offset=0,length=0}
+            records[#records+1]={index=winner.index,order=winner.order,text=tag.."\t"..history.name.."\t"..winner.archive.."\t"..table.concat(hidden,",").."\t"..d.kind.."\t"..d.offset.."\t"..d.length.."\t"..(d.chef and "1" or "0").."\t"..encode_requires(d.requires)}
             if winner.name then copy_report.by_name[history.name]="Active archive: "..winner.archive.."; hidden copies: "..(#hidden>0 and table.concat(hidden,", ") or "none")
             else copy_report.notes[#copy_report.notes+1]=history.name..": declared copy hidden by undeclared/compiled resource in "..winner.archive end
         end
+    end
+    for i,extra in ipairs(extras)do
+        records[#records+1]={index=-1,order=i,text=(extra.kind=="options" and "O" or "L").."\t"..extra.target.."\t"..extra.archive.."\t\t"..extra.kind.."\t"..extra.offset.."\t"..extra.length.."\t0\t"}
     end
     table.sort(records,function(a,b)return a.index==b.index and a.order<b.order or a.index<b.index end)
     for i,record in ipairs(records)do records[i]=record.text end
     local names = {}
     for _, entry in ipairs(entries) do
         names[#names + 1] = entry.name
+        details[entry.name] = entry.detail
     end
     if signature and #warnings == 0 and platform.write then
         local body = table.concat(records, "\n") .. "\n"
         pcall(platform.write, cache_path, signature .. "\n" .. hash(body) .. "\n" .. body)
     end
-    return names, warnings, diagnostics, copy_report
+    return names, warnings, diagnostics, copy_report, details, extras
 end
