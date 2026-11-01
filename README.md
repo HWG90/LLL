@@ -5,6 +5,10 @@
 > 577). See [docs/LUAJIT-LIVE.md](docs/LUAJIT-LIVE.md). CowboyBingus's mods converted for the
 > LuaJIT VM (the whole Vanilla Plus Megapack, builds 26088801 and 26251122) are in [bingus-conversions/](bingus-conversions/).
 > tyrypyrking's HD2 Transmog Foundation converted to build 26251122 is in [transmog-conversions/](transmog-conversions/).
+>
+> **Steam build 26251122:** [R38-26251122-luajit.2](https://github.com/HWG90/LLL/releases/tag/R38-26251122-luajit.2),
+> one HD2 Arsenal zip. LLL's Steam build runs in LuaJIT with its Steam helper served inside the game
+> (no helper process, see [docs/STEAM-INPROC.md](docs/STEAM-INPROC.md)); Lua 5.1 fallback with the helper.
 
 Lua loader and in-game mod manager for Helldivers 2.
 
