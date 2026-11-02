@@ -1,0 +1,4605 @@
+{
+ "mod": "Clickable Scrollbars v2.15.1 (pinned component upstream-bingus/VanillaPlusMegapack/components/ClickableScrollbars; upstream-bingus/ClickableScrollbars at tag v2.15.1 is byte-identical)",
+ "source_check": {
+  "lock_revision": "v2.15.1",
+  "pinned_component_matches_lock": true,
+  "mismatches": [],
+  "standalone_checkout": "upstream-bingus/ClickableScrollbars (git tag v2.15.1, commit a69bc06)",
+  "standalone_identical_to_pinned": true,
+  "used": "pinned component"
+ },
+ "old_build": 25480438,
+ "new_build": 26088801,
+ "generated_by": "native-work/megapack-port/ClickableScrollbars/analyze_cs_map.py (static; evidence images only)",
+ "images": {
+  "old": "native-work/evidence/game-pre1020.dll",
+  "new": "native-work/evidence/game-26088801.dll",
+  "new_pdata": "native-work/evidence/game-26088801.pdata"
+ },
+ "summary": {
+  "rows": 87,
+  "by_confidence": {
+   "high": 86,
+   "medium": 1
+  },
+  "source_edits": 26,
+  "feeds_write": 52
+ },
+ "fields": {
+  "old/new": "value in the 25480438 source / value for 26088801 (null: not mapped)",
+  "witnesses": "number of independent agreeing evidence items",
+  "evidence": "old/new code sites (strong: the field lies in an unmasked byte window or in an instruction encoded identically in an aligned function)",
+  "feeds_write": "the value decides where the mod writes or which game routine it calls with what",
+  "replace": "the exact source edit build.py makes on that line"
+ },
+ "rows": [
+  {
+   "id": 1,
+   "file": "src/install.lua",
+   "line": 10,
+   "name": "BUILD.exe_sha256",
+   "category": "build pin",
+   "old": "F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06",
+   "new": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "method": "helldivers2.exe SHA-256 for build 26088801 as given in the port brief; the Mod Options Menu port (MAP.json row 2) and the Mod Bindings Menu port pin the same value",
+   "witnesses": 2,
+   "confidence": "high",
+   "feeds_write": false,
+   "replace": {
+    "old_text": "'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+    "new_text": "'0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'"
+   }
+  },
+  {
+   "id": 2,
+   "file": "src/install.lua",
+   "line": 11,
+   "name": "BUILD.game_sha256",
+   "category": "build pin",
+   "old": "2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E",
+   "new": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "method": "SHA-256 of the disk game.dll recorded with the capture (evidence/game-26088801.manifest.json disk.sha256; .text equals the disk file); MOM MAP.json row 1 pins the same value",
+   "witnesses": 2,
+   "confidence": "high",
+   "feeds_write": false,
+   "replace": {
+    "old_text": "'2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+    "new_text": "'6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'"
+   }
+  },
+  {
+   "id": 3,
+   "file": "src/install.lua",
+   "line": 27,
+   "name": "build gate message",
+   "category": "build number (log text)",
+   "old": "25480438",
+   "new": "26088801",
+   "method": "the build the pins now name",
+   "witnesses": 1,
+   "confidence": "high",
+   "feeds_write": false,
+   "replace": {
+    "old_text": "(needs Steam build 25480438)",
+    "new_text": "(needs Steam build 26088801)"
+   }
+  },
+  {
+   "id": 4,
+   "file": "src/native.lua",
+   "line": 18,
+   "name": "global UI root (logged only)",
+   "category": "global pointer RVA",
+   "old": "0x347cd90",
+   "new": "0x2e380c8",
+   "method": "24 of 24 mapped old RIP-relative uses address it, 0 disagree",
+   "witnesses": 24,
+   "confidence": "high",
+   "feeds_write": false,
+   "replace": {
+    "old_text": "0x347cd90",
+    "new_text": "0x2e380c8"
+   },
+   "evidence": [
+    {
+     "old_site": "0xadedda",
+     "old_ins": "mov rcx, qword ptr [rip + 0x299dfaf]",
+     "new_site": "0xafab8a",
+     "new_ins": "mov rcx, qword ptr [rip + 0x233d537]",
+     "new_value": "0x2e380c8",
+     "window": "strict 155 bytes from -0"
+    },
+    {
+     "old_site": "0xadede6",
+     "old_ins": "mov rcx, qword ptr [rip + 0x299dfa3]",
+     "new_site": "0xafab96",
+     "new_ins": "mov rcx, qword ptr [rip + 0x233d52b]",
+     "new_value": "0x2e380c8",
+     "window": "strict 157 bytes from -0"
+    },
+    {
+     "old_site": "0x12abe21",
+     "old_ins": "mov rax, qword ptr [rip + 0x21d0f68]",
+     "new_site": "0x113dd01",
+     "new_ins": "mov rax, qword ptr [rip + 0x1cfa3c0]",
+     "new_value": "0x2e380c8",
+     "window": "strict 160 bytes from -0"
+    },
+    {
+     "old_site": "0x12ac213",
+     "old_ins": "mov rcx, qword ptr [rip + 0x21d0b76]",
+     "new_site": "0x113e0f3",
+     "new_ins": "mov rcx, qword ptr [rip + 0x1cf9fce]",
+     "new_value": "0x2e380c8",
+     "window": "strict 63 bytes from -0"
+    },
+    {
+     "old_site": "0x138ae09",
+     "old_ins": "mov rbx, qword ptr [rip + 0x20f1f80]",
+     "new_site": "0x1221769",
+     "new_ins": "mov rbx, qword ptr [rip + 0x1c16958]",
+     "new_value": "0x2e380c8",
+     "window": "strict 151 bytes from -0"
+    },
+    {
+     "old_site": "0x138d872",
+     "old_ins": "add rbx, qword ptr [rip + 0x20ef517]",
+     "new_site": "0x12241d2",
+     "new_ins": "add rbx, qword ptr [rip + 0x1c13eef]",
+     "new_value": "0x2e380c8",
+     "window": "strict 62 bytes from -0"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 5,
+   "file": "src/native.lua",
+   "line": 19,
+   "name": "global dispatch table (ui_bridge, logged only)",
+   "category": "global pointer RVA",
+   "old": "0x3326e68",
+   "new": "0x2ce2040",
+   "method": "24 of 24 mapped old RIP-relative uses address it, 0 disagree",
+   "witnesses": 24,
+   "confidence": "high",
+   "feeds_write": false,
+   "replace": {
+    "old_text": "0x3326e68",
+    "new_text": "0x2ce2040"
+   },
+   "evidence": [
+    {
+     "old_site": "0x551bab",
+     "old_ins": "mov rcx, qword ptr [rip + 0x2dd52b6]",
+     "new_site": "0x55a9fd",
+     "new_ins": "mov rcx, qword ptr [rip + 0x278763c]",
+     "new_value": "0x2ce2040",
+     "window": "strict 63 bytes from -0"
+    },
+    {
+     "old_site": "0x551bea",
+     "old_ins": "mov rcx, qword ptr [rip + 0x2dd5277]",
+     "new_site": "0x55aa3c",
+     "new_ins": "mov rcx, qword ptr [rip + 0x27875fd]",
+     "new_value": "0x2ce2040",
+     "window": "relaxed 158 bytes from -0"
+    },
+    {
+     "old_site": "0x551c42",
+     "old_ins": "mov rcx, qword ptr [rip + 0x2dd521f]",
+     "new_site": "0x55aa94",
+     "new_ins": "mov rcx, qword ptr [rip + 0x27875a5]",
+     "new_value": "0x2ce2040",
+     "window": "strict 45 bytes from -0"
+    },
+    {
+     "old_site": "0x551cd0",
+     "old_ins": "mov rcx, qword ptr [rip + 0x2dd5191]",
+     "new_site": "0x55ab22",
+     "new_ins": "mov rcx, qword ptr [rip + 0x2787517]",
+     "new_value": "0x2ce2040",
+     "window": "strict 43 bytes from -32"
+    },
+    {
+     "old_site": "0x551e6a",
+     "old_ins": "mov rcx, qword ptr [rip + 0x2dd4ff7]",
+     "new_site": "0x55acba",
+     "new_ins": "mov rcx, qword ptr [rip + 0x278737f]",
+     "new_value": "0x2ce2040",
+     "window": "strict 48 bytes from -0"
+    },
+    {
+     "old_site": "0x551f0c",
+     "old_ins": "mov r9, qword ptr [rip + 0x2dd4f55]",
+     "new_site": "0x55ad5c",
+     "new_ins": "mov r9, qword ptr [rip + 0x27872dd]",
+     "new_value": "0x2ce2040",
+     "window": "strict 46 bytes from -32"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 6,
+   "file": "src/locate.lua",
+   "line": 15,
+   "name": "global dispatch table (screen controller registry)",
+   "category": "global pointer RVA",
+   "old": "0x3326e68",
+   "new": "0x2ce2040",
+   "method": "24 of 24 mapped old RIP-relative uses address it, 0 disagree",
+   "witnesses": 24,
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "0x3326e68",
+    "new_text": "0x2ce2040"
+   },
+   "evidence": [
+    {
+     "old_site": "0x551bab",
+     "old_ins": "mov rcx, qword ptr [rip + 0x2dd52b6]",
+     "new_site": "0x55a9fd",
+     "new_ins": "mov rcx, qword ptr [rip + 0x278763c]",
+     "new_value": "0x2ce2040",
+     "window": "strict 63 bytes from -0"
+    },
+    {
+     "old_site": "0x551bea",
+     "old_ins": "mov rcx, qword ptr [rip + 0x2dd5277]",
+     "new_site": "0x55aa3c",
+     "new_ins": "mov rcx, qword ptr [rip + 0x27875fd]",
+     "new_value": "0x2ce2040",
+     "window": "relaxed 158 bytes from -0"
+    },
+    {
+     "old_site": "0x551c42",
+     "old_ins": "mov rcx, qword ptr [rip + 0x2dd521f]",
+     "new_site": "0x55aa94",
+     "new_ins": "mov rcx, qword ptr [rip + 0x27875a5]",
+     "new_value": "0x2ce2040",
+     "window": "strict 45 bytes from -0"
+    },
+    {
+     "old_site": "0x551cd0",
+     "old_ins": "mov rcx, qword ptr [rip + 0x2dd5191]",
+     "new_site": "0x55ab22",
+     "new_ins": "mov rcx, qword ptr [rip + 0x2787517]",
+     "new_value": "0x2ce2040",
+     "window": "strict 43 bytes from -32"
+    },
+    {
+     "old_site": "0x551e6a",
+     "old_ins": "mov rcx, qword ptr [rip + 0x2dd4ff7]",
+     "new_site": "0x55acba",
+     "new_ins": "mov rcx, qword ptr [rip + 0x278737f]",
+     "new_value": "0x2ce2040",
+     "window": "strict 48 bytes from -0"
+    },
+    {
+     "old_site": "0x551f0c",
+     "old_ins": "mov r9, qword ptr [rip + 0x2dd4f55]",
+     "new_site": "0x55ad5c",
+     "new_ins": "mov r9, qword ptr [rip + 0x27872dd]",
+     "new_value": "0x2ce2040",
+     "window": "strict 46 bytes from -32"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 7,
+   "file": "src/locate.lua",
+   "line": 38,
+   "name": "global UI state (screen stack owner)",
+   "category": "global pointer RVA",
+   "old": "0x347ce28",
+   "new": "0x2e38160",
+   "method": "24 of 24 mapped old RIP-relative uses address it, 0 disagree; live-verified on 26088801 per the port brief and MOM MAP.json",
+   "witnesses": 24,
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "0x347ce28",
+    "new_text": "0x2e38160"
+   },
+   "evidence": [
+    {
+     "old_site": "0x5c08cb",
+     "old_ins": "mov rdx, qword ptr [rip + 0x2ebc556]",
+     "new_site": "0x5c970b",
+     "new_ins": "mov rdx, qword ptr [rip + 0x286ea4e]",
+     "new_value": "0x2e38160",
+     "window": "strict 123 bytes from -0"
+    },
+    {
+     "old_site": "0x60961e",
+     "old_ins": "mov r9, qword ptr [rip + 0x2e73803]",
+     "new_site": "0x6127ee",
+     "new_ins": "mov r9, qword ptr [rip + 0x282596b]",
+     "new_value": "0x2e38160",
+     "window": "strict 31 bytes from -0"
+    },
+    {
+     "old_site": "0x6617f3",
+     "old_ins": "mov rax, qword ptr [rip + 0x2e1b62e]",
+     "new_site": "0x66b0d3",
+     "new_ins": "mov rax, qword ptr [rip + 0x27cd086]",
+     "new_value": "0x2e38160",
+     "window": "strict 158 bytes from -0"
+    },
+    {
+     "old_site": "0x661c36",
+     "old_ins": "mov r9, qword ptr [rip + 0x2e1b1eb]",
+     "new_site": "0x66b516",
+     "new_ins": "mov r9, qword ptr [rip + 0x27ccc43]",
+     "new_value": "0x2e38160",
+     "window": "strict 160 bytes from -0"
+    },
+    {
+     "old_site": "0x661cfa",
+     "old_ins": "mov r9, qword ptr [rip + 0x2e1b127]",
+     "new_site": "0x66b5da",
+     "new_ins": "mov r9, qword ptr [rip + 0x27ccb7f]",
+     "new_value": "0x2e38160",
+     "window": "strict 159 bytes from -0"
+    },
+    {
+     "old_site": "0x662520",
+     "old_ins": "mov rcx, qword ptr [rip + 0x2e1a901]",
+     "new_site": "0x66be00",
+     "new_ins": "mov rcx, qword ptr [rip + 0x27cc359]",
+     "new_value": "0x2e38160",
+     "window": "strict 62 bytes from -0"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 8,
+   "file": "src/locate.lua",
+   "line": 94,
+   "name": "global UI state (screen stack owner, options route)",
+   "category": "global pointer RVA",
+   "old": "0x347ce28",
+   "new": "0x2e38160",
+   "method": "24 of 24 mapped old RIP-relative uses address it, 0 disagree; live-verified on 26088801 per the port brief and MOM MAP.json",
+   "witnesses": 24,
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "0x347ce28",
+    "new_text": "0x2e38160"
+   },
+   "evidence": [
+    {
+     "old_site": "0x5c08cb",
+     "old_ins": "mov rdx, qword ptr [rip + 0x2ebc556]",
+     "new_site": "0x5c970b",
+     "new_ins": "mov rdx, qword ptr [rip + 0x286ea4e]",
+     "new_value": "0x2e38160",
+     "window": "strict 123 bytes from -0"
+    },
+    {
+     "old_site": "0x60961e",
+     "old_ins": "mov r9, qword ptr [rip + 0x2e73803]",
+     "new_site": "0x6127ee",
+     "new_ins": "mov r9, qword ptr [rip + 0x282596b]",
+     "new_value": "0x2e38160",
+     "window": "strict 31 bytes from -0"
+    },
+    {
+     "old_site": "0x6617f3",
+     "old_ins": "mov rax, qword ptr [rip + 0x2e1b62e]",
+     "new_site": "0x66b0d3",
+     "new_ins": "mov rax, qword ptr [rip + 0x27cd086]",
+     "new_value": "0x2e38160",
+     "window": "strict 158 bytes from -0"
+    },
+    {
+     "old_site": "0x661c36",
+     "old_ins": "mov r9, qword ptr [rip + 0x2e1b1eb]",
+     "new_site": "0x66b516",
+     "new_ins": "mov r9, qword ptr [rip + 0x27ccc43]",
+     "new_value": "0x2e38160",
+     "window": "strict 160 bytes from -0"
+    },
+    {
+     "old_site": "0x661cfa",
+     "old_ins": "mov r9, qword ptr [rip + 0x2e1b127]",
+     "new_site": "0x66b5da",
+     "new_ins": "mov r9, qword ptr [rip + 0x27ccb7f]",
+     "new_value": "0x2e38160",
+     "window": "strict 159 bytes from -0"
+    },
+    {
+     "old_site": "0x662520",
+     "old_ins": "mov rcx, qword ptr [rip + 0x2e1a901]",
+     "new_site": "0x66be00",
+     "new_ins": "mov rcx, qword ptr [rip + 0x27cc359]",
+     "new_value": "0x2e38160",
+     "window": "strict 62 bytes from -0"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 9,
+   "file": "src/locate.lua",
+   "line": 107,
+   "name": "global menu system",
+   "category": "global pointer RVA",
+   "old": "0x347ce38",
+   "new": "0x2e38170",
+   "method": "24 of 24 mapped old RIP-relative uses address it, 0 disagree; live-verified on 26088801 per the port brief and MOM MAP.json",
+   "witnesses": 24,
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "0x347ce38",
+    "new_text": "0x2e38170"
+   },
+   "evidence": [
+    {
+     "old_site": "0x6098d0",
+     "old_ins": "mov rax, qword ptr [rip + 0x2e73561]",
+     "new_site": "0x612aa0",
+     "new_ins": "mov rax, qword ptr [rip + 0x28256c9]",
+     "new_value": "0x2e38170",
+     "window": "strict 96 bytes from -0"
+    },
+    {
+     "old_site": "0x662550",
+     "old_ins": "mov rcx, qword ptr [rip + 0x2e1a8e1]",
+     "new_site": "0x66be30",
+     "new_ins": "mov rcx, qword ptr [rip + 0x27cc339]",
+     "new_value": "0x2e38170",
+     "window": "strict 46 bytes from -32"
+    },
+    {
+     "old_site": "0x873310",
+     "old_ins": "mov rax, qword ptr [rip + 0x2c09b21]",
+     "new_site": "0x880790",
+     "new_ins": "mov rax, qword ptr [rip + 0x25b79d9]",
+     "new_value": "0x2e38170",
+     "window": "relaxed 64 bytes from -0"
+    },
+    {
+     "old_site": "0x8745b9",
+     "old_ins": "mov rax, qword ptr [rip + 0x2c08878]",
+     "new_site": "0x881a29",
+     "new_ins": "mov rax, qword ptr [rip + 0x25b6740]",
+     "new_value": "0x2e38170",
+     "window": "strict 46 bytes from -32"
+    },
+    {
+     "old_site": "0x875b38",
+     "old_ins": "mov rcx, qword ptr [rip + 0x2c072f9]",
+     "new_site": "0x882fa8",
+     "new_ins": "mov rcx, qword ptr [rip + 0x25b51c1]",
+     "new_value": "0x2e38170",
+     "window": "relaxed 128 bytes from -0"
+    },
+    {
+     "old_site": "0x97a145",
+     "old_ins": "mov rax, qword ptr [rip + 0x2b02cec]",
+     "new_site": "0x98bcc5",
+     "new_ins": "mov rax, qword ptr [rip + 0x24ac4a4]",
+     "new_value": "0x2e38170",
+     "window": "relaxed 160 bytes from -0"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 10,
+   "file": "src/native.lua",
+   "line": 73,
+   "name": "global INPUT_STATE (input owner pointer)",
+   "category": "global pointer RVA",
+   "old": "0x347cf18",
+   "new": "0x2e38250",
+   "method": "24 of 24 mapped old RIP-relative uses address it, 0 disagree; live-verified on 26088801 per the port brief and MOM MAP.json",
+   "witnesses": 24,
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "0x347cf18",
+    "new_text": "0x2e38250"
+   },
+   "evidence": [
+    {
+     "old_site": "0x5948b9",
+     "old_ins": "mov rax, qword ptr [rip + 0x2ee8658]",
+     "new_site": "0x59d409",
+     "new_ins": "mov rax, qword ptr [rip + 0x289ae40]",
+     "new_value": "0x2e38250",
+     "window": "strict 158 bytes from -0"
+    },
+    {
+     "old_site": "0x597043",
+     "old_ins": "mov r10, qword ptr [rip + 0x2ee5ece]",
+     "new_site": "0x59fc03",
+     "new_ins": "mov r10, qword ptr [rip + 0x2898646]",
+     "new_value": "0x2e38250",
+     "window": "strict 126 bytes from -0"
+    },
+    {
+     "old_site": "0x5979fc",
+     "old_ins": "mov r10, qword ptr [rip + 0x2ee5515]",
+     "new_site": "0x5a05bc",
+     "new_ins": "mov r10, qword ptr [rip + 0x2897c8d]",
+     "new_value": "0x2e38250",
+     "window": "strict 156 bytes from -0"
+    },
+    {
+     "old_site": "0x6093eb",
+     "old_ins": "mov rax, qword ptr [rip + 0x2e73b26]",
+     "new_site": "0x6125bb",
+     "new_ins": "mov rax, qword ptr [rip + 0x2825c8e]",
+     "new_value": "0x2e38250",
+     "window": "strict 157 bytes from -0"
+    },
+    {
+     "old_site": "0x6095b8",
+     "old_ins": "mov r12, qword ptr [rip + 0x2e73959]",
+     "new_site": "0x612788",
+     "new_ins": "mov r12, qword ptr [rip + 0x2825ac1]",
+     "new_value": "0x2e38250",
+     "window": "strict 126 bytes from -0"
+    },
+    {
+     "old_site": "0x60988a",
+     "old_ins": "mov rax, qword ptr [rip + 0x2e73687]",
+     "new_site": "0x612a5a",
+     "new_ins": "mov rax, qword ptr [rip + 0x28257ef]",
+     "new_value": "0x2e38250",
+     "window": "strict 157 bytes from -0"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 11,
+   "file": "src/native.lua",
+   "line": 72,
+   "name": "native GRID_SOLVER",
+   "category": "function RVA",
+   "old": "0x18d2b60",
+   "new": "0x1753dc0",
+   "method": "agreeing methods: entry window, bindiff.migrate, call sites, copy order",
+   "witnesses": 4,
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "0x18d2b60",
+    "new_text": "0x1753dc0"
+   },
+   "methods": {
+    "entry window": {
+     "new": "0x1753dc0",
+     "detail": "strict 160-byte window at the entry"
+    },
+    "bindiff.migrate": {
+     "new": "0x1753dc0",
+     "detail": "instruction window"
+    },
+    "call sites": {
+     "new": "0x1753dc0",
+     "detail": "6 of 6 mapped old call sites call it"
+    },
+    "copy order": {
+     "new": "0x1753dc0",
+     "detail": "copy 1 of 1 byte-identical (masked) 160-byte windows, same order in both builds"
+    }
+   },
+   "body": {
+    "old_instructions": 671,
+    "new_instructions": 671,
+    "identical_modulo_relocation": false,
+    "similarity": 1.0,
+    "changed_operands": [
+     {
+      "old_site": "0x18d2f12",
+      "new_site": "0x1754172",
+      "kind": "disp",
+      "old": "0x32e25e0",
+      "new": "0x2c9abd0",
+      "old_ins": "mov edx, dword ptr [rdx + rax*4 + 0x32e25e0]",
+      "new_ins": "mov edx, dword ptr [rdx + rax*4 + 0x2c9abd0]"
+     },
+     {
+      "old_site": "0x18d3b85",
+      "new_site": "0x1754de5",
+      "kind": "imm",
+      "old": "0x5f0",
+      "new": "0x5f8",
+      "old_ins": "add rdx, 0x5f0",
+      "new_ins": "add rdx, 0x5f8"
+     }
+    ],
+    "readonly_constants_compared": 6,
+    "readonly_constants_changed": []
+   }
+  },
+  {
+   "id": 12,
+   "file": "src/native.lua",
+   "line": 75,
+   "name": "native GRID_SOLVER prologue signature",
+   "category": "prologue signature",
+   "old": "488bc45355565741544155415641574881ecf800000083b9",
+   "new": "488bc45355565741544155415641574881ecf800000083b9",
+   "method": "the first 24 bytes at the new RVA in the new image (unchanged)",
+   "witnesses": 1,
+   "confidence": "high",
+   "feeds_write": true
+  },
+  {
+   "id": 13,
+   "file": "src/native.lua",
+   "line": 72,
+   "name": "native SCROLL_SET",
+   "category": "function RVA",
+   "old": "0x1794530",
+   "new": "0x16157c0",
+   "method": "agreeing methods: copy order, neighbour distance",
+   "witnesses": 2,
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "0x1794530",
+    "new_text": "0x16157c0"
+   },
+   "methods": {
+    "copy order": {
+     "new": "0x16157c0",
+     "detail": "copy 1 of 2 byte-identical (masked) 48-byte windows, same order in both builds"
+    },
+    "neighbour distance": {
+     "new": "0x16157c0",
+     "detail": "scroll_reset (MOM row 21) 0x1615800 - 0x40; the old body jumps to scroll_reset at +0x40 and so does the new one"
+    }
+   },
+   "body": {
+    "old_instructions": 33,
+    "new_instructions": 33,
+    "identical_modulo_relocation": true,
+    "similarity": 1.0,
+    "changed_operands": [],
+    "readonly_constants_compared": 2,
+    "readonly_constants_changed": []
+   }
+  },
+  {
+   "id": 14,
+   "file": "src/native.lua",
+   "line": 76,
+   "name": "native SCROLL_SET prologue signature",
+   "category": "prologue signature",
+   "old": "0f57d20f2fd1770cf30f10153028c300f30f5dd1f30f1081",
+   "new": "0f57d20f2fd1770cf30f1015c40dc300f30f5dd1f30f1081",
+   "method": "the first 24 bytes at the new RVA in the new image (they differ only in a RIP displacement / call target, see body)",
+   "witnesses": 1,
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "'0f57d20f2fd1770cf30f10153028c300f30f5dd1f30f1081'",
+    "new_text": "'0f57d20f2fd1770cf30f1015c40dc300f30f5dd1f30f1081'"
+   }
+  },
+  {
+   "id": 15,
+   "file": "src/native.lua",
+   "line": 72,
+   "name": "native POSITION_SET",
+   "category": "function RVA",
+   "old": "0x14476a0",
+   "new": "0x12df3b0",
+   "method": "agreeing methods: entry window, bindiff.migrate, call sites, copy order, Mod Options Menu port",
+   "witnesses": 5,
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "0x14476a0",
+    "new_text": "0x12df3b0"
+   },
+   "methods": {
+    "entry window": {
+     "new": "0x12df3b0",
+     "detail": "strict 160-byte window at the entry"
+    },
+    "bindiff.migrate": {
+     "new": "0x12df3b0",
+     "detail": "instruction window"
+    },
+    "call sites": {
+     "new": "0x12df3b0",
+     "detail": "12 of 12 mapped old call sites call it"
+    },
+    "copy order": {
+     "new": "0x12df3b0",
+     "detail": "copy 1 of 1 byte-identical (masked) 160-byte windows, same order in both builds"
+    },
+    "Mod Options Menu port": {
+     "new": "0x12df3b0",
+     "detail": "MOM MAP.json row 24 (NATIVE.set_position)"
+    }
+   },
+   "body": {
+    "old_instructions": 105,
+    "new_instructions": 105,
+    "identical_modulo_relocation": true,
+    "similarity": 1.0,
+    "changed_operands": [],
+    "readonly_constants_compared": 0,
+    "readonly_constants_changed": []
+   }
+  },
+  {
+   "id": 16,
+   "file": "src/native.lua",
+   "line": 77,
+   "name": "native POSITION_SET prologue signature",
+   "category": "prologue signature",
+   "old": "48895c241848896c24204889542410565741574883ec20f3",
+   "new": "48895c241848896c24204889542410565741574883ec20f3",
+   "method": "the first 24 bytes at the new RVA in the new image (unchanged)",
+   "witnesses": 1,
+   "confidence": "high",
+   "feeds_write": true
+  },
+  {
+   "id": 17,
+   "file": "src/native.lua",
+   "line": 72,
+   "name": "native ANIMATION_STOP",
+   "category": "function RVA",
+   "old": "0x1439d40",
+   "new": "0x12d1a50",
+   "method": "agreeing methods: entry window, bindiff.migrate, call sites, copy order",
+   "witnesses": 4,
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "0x1439d40",
+    "new_text": "0x12d1a50"
+   },
+   "methods": {
+    "entry window": {
+     "new": "0x12d1a50",
+     "detail": "strict 43-byte window at the entry"
+    },
+    "bindiff.migrate": {
+     "new": "0x12d1a50",
+     "detail": "instruction window"
+    },
+    "call sites": {
+     "new": "0x12d1a50",
+     "detail": "12 of 12 mapped old call sites call it"
+    },
+    "copy order": {
+     "new": "0x12d1a50",
+     "detail": "copy 1 of 1 byte-identical (masked) 43-byte windows, same order in both builds"
+    }
+   },
+   "body": {
+    "old_instructions": 20,
+    "new_instructions": 20,
+    "identical_modulo_relocation": true,
+    "similarity": 1.0,
+    "changed_operands": [],
+    "readonly_constants_compared": 0,
+    "readonly_constants_changed": []
+   }
+  },
+  {
+   "id": 18,
+   "file": "src/native.lua",
+   "line": 78,
+   "name": "native ANIMATION_STOP prologue signature",
+   "category": "prologue signature",
+   "old": "40534883ec40488b05c32220014833c448894424300fb601",
+   "new": "40534883ec40488b05b3351e014833c448894424300fb601",
+   "method": "the first 24 bytes at the new RVA in the new image (they differ only in a RIP displacement / call target, see body)",
+   "witnesses": 1,
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "'40534883ec40488b05c32220014833c448894424300fb601'",
+    "new_text": "'40534883ec40488b05b3351e014833c448894424300fb601'"
+   }
+  },
+  {
+   "id": 19,
+   "file": "src/native.lua",
+   "line": 73,
+   "name": "native INPUT_CONSUME",
+   "category": "function RVA",
+   "old": "0x12fde90",
+   "new": "0x1190e30",
+   "method": "agreeing methods: entry window, bindiff.migrate, call sites, copy order, Mod Bindings Menu port",
+   "witnesses": 5,
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "0x12fde90",
+    "new_text": "0x1190e30"
+   },
+   "methods": {
+    "entry window": {
+     "new": "0x1190e30",
+     "detail": "strict 126-byte window at the entry"
+    },
+    "bindiff.migrate": {
+     "new": "0x1190e30",
+     "detail": "instruction window"
+    },
+    "call sites": {
+     "new": "0x1190e30",
+     "detail": "12 of 12 mapped old call sites call it"
+    },
+    "copy order": {
+     "new": "0x1190e30",
+     "detail": "copy 1 of 1 byte-identical (masked) 155-byte windows, same order in both builds"
+    },
+    "Mod Bindings Menu port": {
+     "new": "0x1190e30",
+     "detail": "port-tools/build_mbm_archive.py mapping"
+    }
+   },
+   "body": {
+    "old_instructions": 37,
+    "new_instructions": 37,
+    "identical_modulo_relocation": true,
+    "similarity": 1.0,
+    "changed_operands": [],
+    "readonly_constants_compared": 0,
+    "readonly_constants_changed": []
+   }
+  },
+  {
+   "id": 20,
+   "file": "src/native.lua",
+   "line": 79,
+   "name": "native INPUT_CONSUME prologue signature",
+   "category": "prologue signature",
+   "old": "40534883ec204c8bd14c8bca488bcae8dc7c28ff",
+   "new": "40534883ec204c8bd14c8bca488bcae81cda3fff",
+   "method": "the first 20 bytes at the new RVA in the new image (they differ only in a RIP displacement / call target, see body)",
+   "witnesses": 1,
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "'40534883ec204c8bd14c8bca488bcae8dc7c28ff'",
+    "new_text": "'40534883ec204c8bd14c8bca488bcae81cda3fff'"
+   }
+  },
+  {
+   "id": 21,
+   "file": "src/native.lua",
+   "line": 73,
+   "name": "UI_SELECT (input group 0 action 10, Menu.Select)",
+   "category": "input action word",
+   "old": "0xa00000000",
+   "new": "0xa00000000",
+   "method": "25 mapped old calls of INPUT_CONSUME pass 0xa00000000 in rdx; their new counterparts pass 0xa00000000 (0 disagree); MOM MAP.json verifies (group 0, action 10) as Menu.Select on the dialog confirm key",
+   "witnesses": 25,
+   "confidence": "high",
+   "feeds_write": true,
+   "evidence": [
+    {
+     "old_site": "0x1481f44",
+     "old_ins": "movabs rdx, 0xa00000000",
+     "new_site": "0x1319e04",
+     "new_ins": "movabs rdx, 0xa00000000",
+     "window": "strict"
+    },
+    {
+     "old_site": "0x148f42b",
+     "old_ins": "movabs rdx, 0xa00000000",
+     "new_site": "0x13273fb",
+     "new_ins": "movabs rdx, 0xa00000000",
+     "window": "strict"
+    },
+    {
+     "old_site": "0x1490a7c",
+     "old_ins": "movabs rdx, 0xa00000000",
+     "new_site": "0x1328ccc",
+     "new_ins": "movabs rdx, 0xa00000000",
+     "window": "strict"
+    },
+    {
+     "old_site": "0x149252d",
+     "old_ins": "movabs rdx, 0xa00000000",
+     "new_site": "0x132a5fd",
+     "new_ins": "movabs rdx, 0xa00000000",
+     "window": "strict"
+    },
+    {
+     "old_site": "0x1498236",
+     "old_ins": "movabs rdx, 0xa00000000",
+     "new_site": "0x13303c3",
+     "new_ins": "movabs rdx, 0xa00000000",
+     "window": "strict"
+    },
+    {
+     "old_site": "0x17f7dc6",
+     "old_ins": "movabs rdx, 0xa00000000",
+     "new_site": "0x1679066",
+     "new_ins": "movabs rdx, 0xa00000000",
+     "window": "strict"
+    }
+   ]
+  },
+  {
+   "id": 22,
+   "file": "src/locate.lua",
+   "line": 17,
+   "name": "dispatch registry count",
+   "category": "struct offset",
+   "old": "0x166c",
+   "new": "0x166c",
+   "method": "every paired registration reads/increments [registry + 0x166c] in both builds (6 sites)",
+   "witnesses": 6,
+   "confidence": "high",
+   "feeds_write": true,
+   "evidence": [
+    {
+     "old_site": "0xb2a61e",
+     "old_ins": "mov eax, dword ptr [rcx + 0x166c]",
+     "new_site": "0xb467de",
+     "new_ins": "mov eax, dword ptr [rcx + 0x166c]",
+     "old_value": "0x166c",
+     "new_value": "0x166c",
+     "window": "paired by shape from 0xb2a5f8 / 0xb467b8",
+     "status": "same",
+     "strong": false,
+     "context": "Armory controller registration stub (kind 224 -> 226)"
+    },
+    {
+     "old_site": "0xb2a63d",
+     "old_ins": "inc dword ptr [rcx + 0x166c]",
+     "new_site": "0xb467fd",
+     "new_ins": "inc dword ptr [rcx + 0x166c]",
+     "old_value": "0x166c",
+     "new_value": "0x166c",
+     "window": "paired by shape from 0xb2a5f8 / 0xb467b8",
+     "status": "same",
+     "strong": false,
+     "context": "Armory controller registration stub (kind 224 -> 226)"
+    },
+    {
+     "old_site": "0x1455c94",
+     "old_ins": "mov eax, dword ptr [rdx + 0x166c]",
+     "new_site": "0x12ed9a4",
+     "new_ins": "mov eax, dword ptr [rdx + 0x166c]",
+     "old_value": "0x166c",
+     "new_value": "0x166c",
+     "window": "paired by shape from 0x1455c65 / 0x12ed975",
+     "status": "same",
+     "strong": false,
+     "context": "Armory controller constructor 0x1455c40 -> 0x12ed950"
+    },
+    {
+     "old_site": "0x1455cb3",
+     "old_ins": "inc dword ptr [rdx + 0x166c]",
+     "new_site": "0x12ed9c3",
+     "new_ins": "inc dword ptr [rdx + 0x166c]",
+     "old_value": "0x166c",
+     "new_value": "0x166c",
+     "window": "paired by shape from 0x1455c65 / 0x12ed975",
+     "status": "same",
+     "strong": false,
+     "context": "Armory controller constructor 0x1455c40 -> 0x12ed950"
+    },
+    {
+     "old_site": "0xb2a88b",
+     "old_ins": "mov eax, dword ptr [rcx + 0x166c]",
+     "new_site": "0xb46a5b",
+     "new_ins": "mov eax, dword ptr [rcx + 0x166c]",
+     "old_value": "0x166c",
+     "new_value": "0x166c",
+     "window": "paired by shape from 0xb2a878 / 0xb46a48",
+     "status": "same",
+     "strong": false,
+     "context": "loadout controller registration stub (kind 229 -> 231)"
+    },
+    {
+     "old_site": "0xb2a8a4",
+     "old_ins": "inc dword ptr [rcx + 0x166c]",
+     "new_site": "0xb46a74",
+     "new_ins": "inc dword ptr [rcx + 0x166c]",
+     "old_value": "0x166c",
+     "new_value": "0x166c",
+     "window": "paired by shape from 0xb2a878 / 0xb46a48",
+     "status": "same",
+     "strong": false,
+     "context": "loadout controller registration stub (kind 229 -> 231)"
+    }
+   ]
+  },
+  {
+   "id": 23,
+   "file": "src/locate.lua",
+   "line": 20,
+   "name": "dispatch registry rows (+0x167*16 = 0x1670), 16-byte rows",
+   "category": "struct offset",
+   "old": "0x1670",
+   "new": "0x1670",
+   "method": "the registration stores the 16-byte row at registry + (0x167 + count) * 16 in both builds (add rax, 0x167; add rax, rax; movups [rcx + rax*8]) (3 sites)",
+   "witnesses": 3,
+   "confidence": "high",
+   "feeds_write": true,
+   "evidence": [
+    {
+     "old_site": "0xb2a62a",
+     "old_ins": "add rax, 0x167",
+     "new_site": "0xb467ea",
+     "new_ins": "add rax, 0x167",
+     "old_value": "0x167",
+     "new_value": "0x167",
+     "window": "paired by shape from 0xb2a5f8 / 0xb467b8",
+     "status": "same",
+     "strong": false,
+     "context": "Armory controller registration stub (kind 224 -> 226)"
+    },
+    {
+     "old_site": "0x1455ca0",
+     "old_ins": "add rax, 0x167",
+     "new_site": "0x12ed9b0",
+     "new_ins": "add rax, 0x167",
+     "old_value": "0x167",
+     "new_value": "0x167",
+     "window": "paired by shape from 0x1455c65 / 0x12ed975",
+     "status": "same",
+     "strong": false,
+     "context": "Armory controller constructor 0x1455c40 -> 0x12ed950"
+    },
+    {
+     "old_site": "0xb2a891",
+     "old_ins": "add rax, 0x167",
+     "new_site": "0xb46a61",
+     "new_ins": "add rax, 0x167",
+     "old_value": "0x167",
+     "new_value": "0x167",
+     "window": "paired by shape from 0xb2a878 / 0xb46a48",
+     "status": "same",
+     "strong": false,
+     "context": "loadout controller registration stub (kind 229 -> 231)"
+    }
+   ]
+  },
+  {
+   "id": 24,
+   "file": "src/locate.lua",
+   "line": 25,
+   "name": "dispatch row layout: controller at +0, kind (u32) at +8",
+   "category": "layout",
+   "old": "0x8",
+   "new": "0x8",
+   "method": "the stubs build the row in a 16-byte stack slot: controller at [rsp+0x40] / [rsp], kind at [rsp+0x48] / [rsp+8], then one movups; same in both builds",
+   "witnesses": 3,
+   "confidence": "high",
+   "feeds_write": true
+  },
+  {
+   "id": 25,
+   "file": "src/locate.lua",
+   "line": 29,
+   "name": "controller kind 224 (Ship Armory)",
+   "category": "enum (screen controller kind)",
+   "old": "0xe0",
+   "new": "0xe2",
+   "method": "the controller kinds registered in the 0x166c registry all moved by +2 (old [205, 220, 224, 229, 231, 233, 288, 289, 290], new [207, 222, 226, 231, 233, 235, 290, 291, 292], in the same order); the paired registrations write 0xe0 -> 0xe2, 0xe0 -> 0xe2; the Armory constructor (identical apart from this kind, its third registry 0x2df0 -> 0x2e48 and a +8 member move: similarity 0.9982) registers 226",
+   "witnesses": 3,
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "        if kind == 224 then has_armory = true",
+    "new_text": "        if kind == 226 then has_armory = true"
+   },
+   "evidence": [
+    {
+     "old_site": "0xb2a5ff",
+     "old_ins": "mov dword ptr [rsp + 8], 0xe0",
+     "new_site": "0xb467bf",
+     "new_ins": "mov dword ptr [rsp + 8], 0xe2",
+     "old_value": "0xe0",
+     "new_value": "0xe2",
+     "window": "paired by shape from 0xb2a5f8 / 0xb467b8",
+     "status": "changed",
+     "strong": false,
+     "context": "Armory controller registration stub (kind 224 -> 226)"
+    },
+    {
+     "old_site": "0x1455c74",
+     "old_ins": "mov dword ptr [rsp + 0x48], 0xe0",
+     "new_site": "0x12ed984",
+     "new_ins": "mov dword ptr [rsp + 0x48], 0xe2",
+     "old_value": "0xe0",
+     "new_value": "0xe2",
+     "window": "paired by shape from 0x1455c65 / 0x12ed975",
+     "status": "changed",
+     "strong": false,
+     "context": "Armory controller constructor 0x1455c40 -> 0x12ed950"
+    }
+   ]
+  },
+  {
+   "id": 26,
+   "file": "src/locate.lua",
+   "line": 64,
+   "name": "controller kind 224 (Ship Armory)",
+   "category": "enum (screen controller kind)",
+   "old": "0xe0",
+   "new": "0xe2",
+   "method": "the controller kinds registered in the 0x166c registry all moved by +2 (old [205, 220, 224, 229, 231, 233, 288, 289, 290], new [207, 222, 226, 231, 233, 235, 290, 291, 292], in the same order); the paired registrations write 0xe0 -> 0xe2, 0xe0 -> 0xe2; the Armory constructor (identical apart from this kind, its third registry 0x2df0 -> 0x2e48 and a +8 member move: similarity 0.9982) registers 226",
+   "witnesses": 3,
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "        if (kind == 224 or kind == 229) and (not active_kind or kind == active_kind) then",
+    "new_text": "        if (kind == 226 or kind == 231) and (not active_kind or kind == active_kind) then"
+   },
+   "evidence": [
+    {
+     "old_site": "0xb2a5ff",
+     "old_ins": "mov dword ptr [rsp + 8], 0xe0",
+     "new_site": "0xb467bf",
+     "new_ins": "mov dword ptr [rsp + 8], 0xe2",
+     "old_value": "0xe0",
+     "new_value": "0xe2",
+     "window": "paired by shape from 0xb2a5f8 / 0xb467b8",
+     "status": "changed",
+     "strong": false,
+     "context": "Armory controller registration stub (kind 224 -> 226)"
+    },
+    {
+     "old_site": "0x1455c74",
+     "old_ins": "mov dword ptr [rsp + 0x48], 0xe0",
+     "new_site": "0x12ed984",
+     "new_ins": "mov dword ptr [rsp + 0x48], 0xe2",
+     "old_value": "0xe0",
+     "new_value": "0xe2",
+     "window": "paired by shape from 0x1455c65 / 0x12ed975",
+     "status": "changed",
+     "strong": false,
+     "context": "Armory controller constructor 0x1455c40 -> 0x12ed950"
+    }
+   ]
+  },
+  {
+   "id": 27,
+   "file": "src/locate.lua",
+   "line": 67,
+   "name": "controller kind 224 (Ship Armory)",
+   "category": "enum (screen controller kind)",
+   "old": "0xe0",
+   "new": "0xe2",
+   "method": "the controller kinds registered in the 0x166c registry all moved by +2 (old [205, 220, 224, 229, 231, 233, 288, 289, 290], new [207, 222, 226, 231, 233, 235, 290, 291, 292], in the same order); the paired registrations write 0xe0 -> 0xe2, 0xe0 -> 0xe2; the Armory constructor (identical apart from this kind, its third registry 0x2df0 -> 0x2e48 and a +8 member move: similarity 0.9982) registers 226",
+   "witnesses": 3,
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "            local grid_offset = kind == 224 and GRID.offset or LOADOUT_GRID_OFFSET",
+    "new_text": "            local grid_offset = kind == 226 and GRID.offset or LOADOUT_GRID_OFFSET"
+   },
+   "evidence": [
+    {
+     "old_site": "0xb2a5ff",
+     "old_ins": "mov dword ptr [rsp + 8], 0xe0",
+     "new_site": "0xb467bf",
+     "new_ins": "mov dword ptr [rsp + 8], 0xe2",
+     "old_value": "0xe0",
+     "new_value": "0xe2",
+     "window": "paired by shape from 0xb2a5f8 / 0xb467b8",
+     "status": "changed",
+     "strong": false,
+     "context": "Armory controller registration stub (kind 224 -> 226)"
+    },
+    {
+     "old_site": "0x1455c74",
+     "old_ins": "mov dword ptr [rsp + 0x48], 0xe0",
+     "new_site": "0x12ed984",
+     "new_ins": "mov dword ptr [rsp + 0x48], 0xe2",
+     "old_value": "0xe0",
+     "new_value": "0xe2",
+     "window": "paired by shape from 0x1455c65 / 0x12ed975",
+     "status": "changed",
+     "strong": false,
+     "context": "Armory controller constructor 0x1455c40 -> 0x12ed950"
+    }
+   ]
+  },
+  {
+   "id": 28,
+   "file": "src/locate.lua",
+   "line": 70,
+   "name": "controller kind 224 (Ship Armory)",
+   "category": "enum (screen controller kind)",
+   "old": "0xe0",
+   "new": "0xe2",
+   "method": "the controller kinds registered in the 0x166c registry all moved by +2 (old [205, 220, 224, 229, 231, 233, 288, 289, 290], new [207, 222, 226, 231, 233, 235, 290, 291, 292], in the same order); the paired registrations write 0xe0 -> 0xe2, 0xe0 -> 0xe2; the Armory constructor (identical apart from this kind, its third registry 0x2df0 -> 0x2e48 and a +8 member move: similarity 0.9982) registers 226",
+   "witnesses": 3,
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "                            panel = kind == 224 and controller + CAREER.offset or nil}",
+    "new_text": "                            panel = kind == 226 and controller + CAREER.offset or nil}"
+   },
+   "evidence": [
+    {
+     "old_site": "0xb2a5ff",
+     "old_ins": "mov dword ptr [rsp + 8], 0xe0",
+     "new_site": "0xb467bf",
+     "new_ins": "mov dword ptr [rsp + 8], 0xe2",
+     "old_value": "0xe0",
+     "new_value": "0xe2",
+     "window": "paired by shape from 0xb2a5f8 / 0xb467b8",
+     "status": "changed",
+     "strong": false,
+     "context": "Armory controller registration stub (kind 224 -> 226)"
+    },
+    {
+     "old_site": "0x1455c74",
+     "old_ins": "mov dword ptr [rsp + 0x48], 0xe0",
+     "new_site": "0x12ed984",
+     "new_ins": "mov dword ptr [rsp + 0x48], 0xe2",
+     "old_value": "0xe0",
+     "new_value": "0xe2",
+     "window": "paired by shape from 0x1455c65 / 0x12ed975",
+     "status": "changed",
+     "strong": false,
+     "context": "Armory controller constructor 0x1455c40 -> 0x12ed950"
+    }
+   ]
+  },
+  {
+   "id": 29,
+   "file": "src/locate.lua",
+   "line": 50,
+   "name": "controller kind 224 (Ship Armory)",
+   "category": "enum (screen controller kind)",
+   "old": "0xe0",
+   "new": "0xe2",
+   "method": "the controller kinds registered in the 0x166c registry all moved by +2 (old [205, 220, 224, 229, 231, 233, 288, 289, 290], new [207, 222, 226, 231, 233, 235, 290, 291, 292], in the same order); the paired registrations write 0xe0 -> 0xe2, 0xe0 -> 0xe2; the Armory constructor (identical apart from this kind, its third registry 0x2df0 -> 0x2e48 and a +8 member move: similarity 0.9982) registers 226",
+   "witnesses": 3,
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "            if top == 5 then return 224 end",
+    "new_text": "            if top == 5 then return 226 end"
+   },
+   "evidence": [
+    {
+     "old_site": "0xb2a5ff",
+     "old_ins": "mov dword ptr [rsp + 8], 0xe0",
+     "new_site": "0xb467bf",
+     "new_ins": "mov dword ptr [rsp + 8], 0xe2",
+     "old_value": "0xe0",
+     "new_value": "0xe2",
+     "window": "paired by shape from 0xb2a5f8 / 0xb467b8",
+     "status": "changed",
+     "strong": false,
+     "context": "Armory controller registration stub (kind 224 -> 226)"
+    },
+    {
+     "old_site": "0x1455c74",
+     "old_ins": "mov dword ptr [rsp + 0x48], 0xe0",
+     "new_site": "0x12ed984",
+     "new_ins": "mov dword ptr [rsp + 0x48], 0xe2",
+     "old_value": "0xe0",
+     "new_value": "0xe2",
+     "window": "paired by shape from 0x1455c65 / 0x12ed975",
+     "status": "changed",
+     "strong": false,
+     "context": "Armory controller constructor 0x1455c40 -> 0x12ed950"
+    }
+   ]
+  },
+  {
+   "id": 30,
+   "file": "src/locate.lua",
+   "line": 30,
+   "name": "controller kind 229 (mission loadout picker)",
+   "category": "enum (screen controller kind)",
+   "old": "0xe5",
+   "new": "0xe7",
+   "method": "the controller kinds registered in the 0x166c registry all moved by +2 (old [205, 220, 224, 229, 231, 233, 288, 289, 290], new [207, 222, 226, 231, 233, 235, 290, 291, 292], in the same order); the paired registrations write 0xe5 -> 0xe7; the Armory constructor (identical apart from this kind, its third registry 0x2df0 -> 0x2e48 and a +8 member move: similarity 0.9982) registers 231",
+   "witnesses": 2,
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "        elseif kind == 229 then has_loadout = true end",
+    "new_text": "        elseif kind == 231 then has_loadout = true end"
+   },
+   "evidence": [
+    {
+     "old_site": "0xb2a87f",
+     "old_ins": "mov dword ptr [rsp + 8], 0xe5",
+     "new_site": "0xb46a4f",
+     "new_ins": "mov dword ptr [rsp + 8], 0xe7",
+     "old_value": "0xe5",
+     "new_value": "0xe7",
+     "window": "paired by shape from 0xb2a878 / 0xb46a48",
+     "status": "changed",
+     "strong": false,
+     "context": "loadout controller registration stub (kind 229 -> 231)"
+    }
+   ]
+  },
+  {
+   "id": 31,
+   "file": "src/locate.lua",
+   "line": 51,
+   "name": "controller kind 229 (mission loadout picker)",
+   "category": "enum (screen controller kind)",
+   "old": "0xe5",
+   "new": "0xe7",
+   "method": "the controller kinds registered in the 0x166c registry all moved by +2 (old [205, 220, 224, 229, 231, 233, 288, 289, 290], new [207, 222, 226, 231, 233, 235, 290, 291, 292], in the same order); the paired registrations write 0xe5 -> 0xe7; the Armory constructor (identical apart from this kind, its third registry 0x2df0 -> 0x2e48 and a +8 member move: similarity 0.9982) registers 231",
+   "witnesses": 2,
+   "confidence": "high",
+   "feeds_write": true,
+   "replace": {
+    "old_text": "            if top == 14 then return 229 end",
+    "new_text": "            if top == 14 then return 231 end"
+   },
+   "evidence": [
+    {
+     "old_site": "0xb2a87f",
+     "old_ins": "mov dword ptr [rsp + 8], 0xe5",
+     "new_site": "0xb46a4f",
+     "new_ins": "mov dword ptr [rsp + 8], 0xe7",
+     "old_value": "0xe5",
+     "new_value": "0xe7",
+     "window": "paired by shape from 0xb2a878 / 0xb46a48",
+     "status": "changed",
+     "strong": false,
+     "context": "loadout controller registration stub (kind 229 -> 231)"
+    }
+   ]
+  },
+  {
+   "id": 32,
+   "file": "src/locate.lua",
+   "line": 40,
+   "name": "UI stack (+0x429c, 5 entries, depth word at +20 = 0x42b0)",
+   "category": "struct offset",
+   "old": "0x429c",
+   "new": "0x429c",
+   "method": "MOM MAP.json rows 45/46 (UI_STACK 0x429c, depth 0x42b0), live-checked layout in HDH NOTES",
+   "witnesses": 2,
+   "confidence": "high",
+   "feeds_write": true
+  },
+  {
+   "id": 33,
+   "file": "src/locate.lua",
+   "line": 96,
+   "name": "UI stack (options route)",
+   "category": "struct offset",
+   "old": "0x429c",
+   "new": "0x429c",
+   "method": "as above",
+   "witnesses": 2,
+   "confidence": "high",
+   "feeds_write": true
+  },
+  {
+   "id": 34,
+   "file": "src/locate.lua",
+   "line": 50,
+   "name": "screen id 5 (Ship Armory screen)",
+   "category": "enum (UI screen id)",
+   "old": "0x5",
+   "new": "0x5",
+   "method": "3 agreeing comparisons of a UI menu/stack field with this id, 0 disagreeing; semantic link: the Armory controller update (old 0x1456bb0) runs only while [ui + 0x4294] == 5 and then drives the Career panel at controller + 0x4dc08; no stack/menu id comparison in the mapped code changed value",
+   "witnesses": 3,
+   "confidence": "high",
+   "feeds_write": true,
+   "evidence": [
+    {
+     "old_site": "0x1456bc8",
+     "old_ins": "cmp dword ptr [rax + 0x4294], 5",
+     "new_site": "0x12ee8d8",
+     "new_ins": "cmp dword ptr [rax + 0x4294], 5",
+     "new_value": "0x5",
+     "window": "strict",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x1886d37",
+     "old_ins": "cmp dword ptr [rax + 0x4294], 5",
+     "new_site": "0x1707f47",
+     "new_ins": "cmp dword ptr [rax + 0x4294], 5",
+     "new_value": "0x5",
+     "window": "strict",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x12f3250",
+     "old_ins": "cmp dword ptr [rcx], 5",
+     "new_site": "0x11861b0",
+     "new_ins": "cmp dword ptr [rcx], 5",
+     "old_value": "0x5",
+     "new_value": "0x5",
+     "window": "strict window (stack scan loop over ui + 0x429c)",
+     "status": "same",
+     "strong": true
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 35,
+   "file": "src/locate.lua",
+   "line": 51,
+   "name": "screen id 14 (mission loadout screen)",
+   "category": "enum (UI screen id)",
+   "old": "0xe",
+   "new": "0xe",
+   "method": "6 agreeing comparisons of a UI menu/stack field with this id, 0 disagreeing; semantic link: with [ui + 0x4294] == 14 the game calls a grid routine on menu[+0xb0] + LOADOUT_GRID_OFFSET (old 0x8745b0, new 0x881a20); no stack/menu id comparison in the mapped code changed value",
+   "witnesses": 6,
+   "confidence": "high",
+   "feeds_write": true,
+   "evidence": [
+    {
+     "old_site": "0x8745b0",
+     "old_ins": "cmp dword ptr [rax + 0x4294], 0xe",
+     "new_site": "0x881a20",
+     "new_ins": "cmp dword ptr [rax + 0x4294], 0xe",
+     "new_value": "0xe",
+     "window": "strict",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x875b05",
+     "old_ins": "cmp dword ptr [rcx + 0x4294], 0xe",
+     "new_site": "0x882f75",
+     "new_ins": "cmp dword ptr [rcx + 0x4294], 0xe",
+     "new_value": "0xe",
+     "window": "strict",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0xb9e5b7",
+     "old_ins": "cmp dword ptr [rax + 0x4294], 0xe",
+     "new_site": "0xbbcb87",
+     "new_ins": "cmp dword ptr [rax + 0x4294], 0xe",
+     "new_value": "0xe",
+     "window": "strict",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x1381538",
+     "old_ins": "cmp dword ptr [rax + 0x4294], 0xe",
+     "new_site": "0x1217f88",
+     "new_ins": "cmp dword ptr [rax + 0x4294], 0xe",
+     "new_value": "0xe",
+     "window": "strict",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x1381962",
+     "old_ins": "cmp dword ptr [rax + 0x4294], 0xe",
+     "new_site": "0x12183b2",
+     "new_ins": "cmp dword ptr [rax + 0x4294], 0xe",
+     "new_value": "0xe",
+     "window": "strict",
+     "status": "same",
+     "strong": true
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 36,
+   "file": "src/native.lua",
+   "line": 68,
+   "name": "screen id 1 (escape menu (Options) screen)",
+   "category": "enum (UI screen id)",
+   "old": "0x1",
+   "new": "0x1",
+   "method": "2 agreeing comparisons of a UI menu/stack field with this id, 0 disagreeing; MOM MAP.json row 48 (ESCAPE_MENU_TYPE 1); no stack/menu id comparison in the mapped code changed value",
+   "witnesses": 2,
+   "confidence": "high",
+   "feeds_write": true,
+   "evidence": [
+    {
+     "old_site": "0x19985c5",
+     "old_ins": "cmp dword ptr [rax + 0x4294], 1",
+     "new_site": "0x1819845",
+     "new_ins": "cmp dword ptr [rax + 0x4294], 1",
+     "new_value": "0x1",
+     "window": "strict",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x12f3210",
+     "old_ins": "cmp dword ptr [rcx], 1",
+     "new_site": "0x1186170",
+     "new_ins": "cmp dword ptr [rcx], 1",
+     "old_value": "0x1",
+     "new_value": "0x1",
+     "window": "strict window (stack scan loop over ui + 0x429c)",
+     "status": "same",
+     "strong": true
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 37,
+   "file": "src/native.lua",
+   "line": 69,
+   "name": "screen id 26 (key bindings screen)",
+   "category": "enum (UI screen id)",
+   "old": "0x1a",
+   "new": "0x1a",
+   "method": "1 agreeing comparisons of a UI menu/stack field with this id, 0 disagreeing; the old stack scan for 26 (0x12f3330) maps by a strict window to a scan for 26 (0x1186290); no stack/menu id comparison in the mapped code changed value",
+   "witnesses": 1,
+   "confidence": "high",
+   "feeds_write": true,
+   "evidence": [
+    {
+     "old_site": "0x12f3330",
+     "old_ins": "cmp dword ptr [rax], 0x1a",
+     "new_site": "0x1186290",
+     "new_ins": "cmp dword ptr [rax], 0x1a",
+     "old_value": "0x1a",
+     "new_value": "0x1a",
+     "window": "strict window (stack scan loop over ui + 0x429c)",
+     "status": "same",
+     "strong": true
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 38,
+   "file": "src/native.lua",
+   "line": 68,
+   "name": "OPTIONS_PAGES[1].menu (escape menu screen at menu + 0xc8)",
+   "category": "struct offset",
+   "old": "0xc8",
+   "new": "0xc8",
+   "method": "MOM MAP.json row 47 (ESCAPE_MENU_SCREEN 0xc8, high, 16 mapped uses)",
+   "witnesses": 2,
+   "confidence": "high",
+   "feeds_write": true
+  },
+  {
+   "id": 39,
+   "file": "src/native.lua",
+   "line": 69,
+   "name": "OPTIONS_PAGES[26].menu (bindings screen at menu + 0xd0)",
+   "category": "struct offset",
+   "old": "0xd0",
+   "new": "0xd0",
+   "method": "the menu system's per-screen input switch (old case 15 at 0x14ace9d, strict 158-byte window to new 0x1345135): mov rsi, [menu + 0xd0]; cmp byte [rsi + 0xc], 0; checks [rsi + 0x498f8] / [rsi + 0x52588]; the tab bar at rsi + 0x4e0 (Mod Bindings Menu's TAB_BAR_OFFSET); case 14 is the escape menu at + 0xc8",
+   "witnesses": 2,
+   "confidence": "high",
+   "feeds_write": true,
+   "evidence": [
+    {
+     "old_site": "0x14ace9d",
+     "old_ins": "mov rsi, qword ptr [rcx + 0xd0]",
+     "new_site": "0x1345135",
+     "new_ins": "mov rsi, qword ptr [rcx + 0xd0]",
+     "old_value": "0xd0",
+     "new_value": "0xd0",
+     "window": "paired by shape from 0x14ace9d / 0x1345135",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x14acea4",
+     "old_ins": "cmp byte ptr [rsi + 0xc], 0",
+     "new_site": "0x134513c",
+     "new_ins": "cmp byte ptr [rsi + 0xc], 0",
+     "old_value": "0xc",
+     "new_value": "0xc",
+     "window": "paired by shape from 0x14ace9d / 0x1345135",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x14acea4",
+     "old_ins": "cmp byte ptr [rsi + 0xc], 0",
+     "new_site": "0x134513c",
+     "new_ins": "cmp byte ptr [rsi + 0xc], 0",
+     "old_value": "0x0",
+     "new_value": "0x0",
+     "window": "paired by shape from 0x14ace9d / 0x1345135",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x14aceaa",
+     "old_ins": "cmp dword ptr [rsi + 0x498f8], 2",
+     "new_site": "0x1345142",
+     "new_ins": "cmp dword ptr [rsi + 0x498f8], 2",
+     "old_value": "0x498f8",
+     "new_value": "0x498f8",
+     "window": "paired by shape from 0x14ace9d / 0x1345135",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x14aceaa",
+     "old_ins": "cmp dword ptr [rsi + 0x498f8], 2",
+     "new_site": "0x1345142",
+     "new_ins": "cmp dword ptr [rsi + 0x498f8], 2",
+     "old_value": "0x2",
+     "new_value": "0x2",
+     "window": "paired by shape from 0x14ace9d / 0x1345135",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x14aceb3",
+     "old_ins": "cmp dword ptr [rsi + 0x52588], 2",
+     "new_site": "0x134514b",
+     "new_ins": "cmp dword ptr [rsi + 0x52588], 2",
+     "old_value": "0x52588",
+     "new_value": "0x52588",
+     "window": "paired by shape from 0x14ace9d / 0x1345135",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x14aceb3",
+     "old_ins": "cmp dword ptr [rsi + 0x52588], 2",
+     "new_site": "0x134514b",
+     "new_ins": "cmp dword ptr [rsi + 0x52588], 2",
+     "old_value": "0x2",
+     "new_value": "0x2",
+     "window": "paired by shape from 0x14ace9d / 0x1345135",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x14acebc",
+     "old_ins": "lea rcx, [rsi + 0x4e0]",
+     "new_site": "0x1345154",
+     "new_ins": "lea rcx, [rsi + 0x4e0]",
+     "old_value": "0x4e0",
+     "new_value": "0x4e0",
+     "window": "paired by shape from 0x14ace9d / 0x1345135",
+     "status": "same",
+     "strong": true
+    }
+   ]
+  },
+  {
+   "id": 40,
+   "file": "src/locate.lua",
+   "line": 109,
+   "name": "screen active byte (+12)",
+   "category": "struct offset",
+   "old": "0xc",
+   "new": "0xc",
+   "method": "same switch: the game gates the bindings screen input on byte [screen + 0xc] in both builds",
+   "witnesses": 1,
+   "confidence": "high",
+   "feeds_write": true,
+   "evidence": [
+    {
+     "old_site": "0x14acea4",
+     "old_ins": "cmp byte ptr [rsi + 0xc], 0",
+     "new_site": "0x134513c",
+     "new_ins": "cmp byte ptr [rsi + 0xc], 0",
+     "old_value": "0xc",
+     "new_value": "0xc",
+     "window": "paired by shape from 0x14ace9d / 0x1345135",
+     "status": "same",
+     "strong": true
+    }
+   ]
+  },
+  {
+   "id": 41,
+   "file": "src/native.lua",
+   "line": 35,
+   "name": "GRID.offset (controller -> grid)",
+   "category": "struct offset",
+   "old": "0x7fde8",
+   "new": "0x7fde8",
+   "method": "4 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 4,
+   "confidence": "high",
+   "feeds_write": true,
+   "evidence": [
+    {
+     "old_site": "0x1456fdc",
+     "old_ins": "lea rcx, [rdi + 0x7fde8]",
+     "new_site": "0x12eecec",
+     "window": "strict 156 bytes from -0",
+     "new_ins": "lea rcx, [rdi + 0x7fde8]",
+     "new_value": "0x7fde8",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x14572eb",
+     "old_ins": "lea rcx, [rdi + 0x7fde8]",
+     "new_site": "0x12eeffb",
+     "window": "strict 61 bytes from -0",
+     "new_ins": "lea rcx, [rdi + 0x7fde8]",
+     "new_value": "0x7fde8",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x14573f2",
+     "old_ins": "lea rcx, [rdi + 0x7fde8]",
+     "new_site": "0x12ef102",
+     "window": "strict 156 bytes from -0",
+     "new_ins": "lea rcx, [rdi + 0x7fde8]",
+     "new_value": "0x7fde8",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x14581a5",
+     "old_ins": "lea rcx, [rdi + 0x7fde8]",
+     "new_site": "0x12efeb5",
+     "window": "strict 157 bytes from -0",
+     "new_ins": "lea rcx, [rdi + 0x7fde8]",
+     "new_value": "0x7fde8",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x145952a",
+     "old_ins": "lea rcx, [rdi + 0x7fde8]",
+     "status": "unmapped"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 42,
+   "file": "src/native.lua",
+   "line": 36,
+   "name": "GRID.rows",
+   "category": "struct offset",
+   "old": "0x91f0c",
+   "new": "0x91f0c",
+   "method": "11 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 11,
+   "confidence": "high",
+   "feeds_write": false,
+   "evidence": [
+    {
+     "old_site": "0x18d06d6",
+     "old_ins": "cmp dword ptr [r14 + 0x91f0c], ebp",
+     "new_site": "0x1751936",
+     "new_ins": "cmp dword ptr [r14 + 0x91f0c], ebp",
+     "new_value": "0x91f0c",
+     "function": "0x18d0690",
+     "strong": true,
+     "window": "aligned in function 0x18d0690->0x17518f0 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d07b9",
+     "old_ins": "cmp ebp, dword ptr [r14 + 0x91f0c]",
+     "new_site": "0x1751a19",
+     "new_ins": "cmp ebp, dword ptr [r14 + 0x91f0c]",
+     "new_value": "0x91f0c",
+     "function": "0x18d0690",
+     "strong": true,
+     "window": "aligned in function 0x18d0690->0x17518f0 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d091a",
+     "old_ins": "cmp dword ptr [rcx + 0x91f0c], esi",
+     "new_site": "0x1751b7a",
+     "new_ins": "cmp dword ptr [rcx + 0x91f0c], esi",
+     "new_value": "0x91f0c",
+     "function": "0x18d0900",
+     "strong": true,
+     "window": "aligned in function 0x18d0900->0x1751b60 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d09a5",
+     "old_ins": "cmp esi, dword ptr [rbp + 0x91f0c]",
+     "new_site": "0x1751c05",
+     "new_ins": "cmp esi, dword ptr [rbp + 0x91f0c]",
+     "new_value": "0x91f0c",
+     "function": "0x18d0900",
+     "strong": true,
+     "window": "aligned in function 0x18d0900->0x1751b60 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d10fb",
+     "old_ins": "cmp dword ptr [rcx + 0x91f0c], esi",
+     "new_site": "0x175235b",
+     "new_ins": "cmp dword ptr [rcx + 0x91f0c], esi",
+     "new_value": "0x91f0c",
+     "function": "0x18d10d0",
+     "strong": true,
+     "window": "aligned in function 0x18d10d0->0x1752330 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d11e9",
+     "old_ins": "cmp r12d, dword ptr [r14 + 0x91f0c]",
+     "new_site": "0x1752449",
+     "new_ins": "cmp r12d, dword ptr [r14 + 0x91f0c]",
+     "new_value": "0x91f0c",
+     "function": "0x18d10d0",
+     "strong": true,
+     "window": "aligned in function 0x18d10d0->0x1752330 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d1302",
+     "old_ins": "mov ecx, dword ptr [rdi + 0x91f0c]",
+     "new_site": "0x1752562",
+     "new_ins": "mov ecx, dword ptr [rdi + 0x91f0c]",
+     "new_value": "0x91f0c",
+     "function": "0x18d1280",
+     "strong": true,
+     "window": "aligned in function 0x18d1280->0x17524e0 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d1320",
+     "old_ins": "mov ecx, dword ptr [rdi + 0x91f0c]",
+     "new_site": "0x1752580",
+     "new_ins": "mov ecx, dword ptr [rdi + 0x91f0c]",
+     "new_value": "0x91f0c",
+     "function": "0x18d1280",
+     "strong": true,
+     "window": "aligned in function 0x18d1280->0x17524e0 (identical)",
+     "status": "same"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 43,
+   "file": "src/native.lua",
+   "line": 37,
+   "name": "GRID.row_heights",
+   "category": "struct offset",
+   "old": "0x91f18",
+   "new": "0x91f18",
+   "method": "9 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 9,
+   "confidence": "high",
+   "feeds_write": false,
+   "evidence": [
+    {
+     "old_site": "0x18d1c3a",
+     "old_ins": "lea rax, [rcx + 0x91f18]",
+     "new_site": "0x1752e9a",
+     "window": "strict 159 bytes from -0",
+     "new_ins": "lea rax, [rcx + 0x91f18]",
+     "new_value": "0x91f18",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d1dab",
+     "old_ins": "lea rcx, [rbx + 0x91f18]",
+     "new_site": "0x175300b",
+     "window": "strict 160 bytes from -0",
+     "new_ins": "lea rcx, [rbx + 0x91f18]",
+     "new_value": "0x91f18",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d208c",
+     "old_ins": "lea rcx, [r9 + 0x91f18]",
+     "new_site": "0x17532ec",
+     "window": "strict 127 bytes from -0",
+     "new_ins": "lea rcx, [r9 + 0x91f18]",
+     "new_value": "0x91f18",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d20c9",
+     "old_ins": "addss xmm5, dword ptr [r9 + r8*4 + 0x91f18]",
+     "new_site": "0x1753329",
+     "window": "strict 62 bytes from -0",
+     "new_ins": "addss xmm5, dword ptr [r9 + r8*4 + 0x91f18]",
+     "new_value": "0x91f18",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d2180",
+     "old_ins": "add rcx, 0x91f18",
+     "new_site": "0x17533e0",
+     "window": "strict 61 bytes from -0",
+     "new_ins": "add rcx, 0x91f18",
+     "new_value": "0x91f18",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d28c8",
+     "old_ins": "lea rcx, [rdi + 0x91f18]",
+     "new_site": "0x1753b28",
+     "window": "strict 157 bytes from -0",
+     "new_ins": "lea rcx, [rdi + 0x91f18]",
+     "new_value": "0x91f18",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d2c00",
+     "old_ins": "movss xmm0, dword ptr [rsi + r15*4 + 0x91f18]",
+     "new_site": "0x1753e60",
+     "window": "strict 153 bytes from -0",
+     "new_ins": "movss xmm0, dword ptr [rsi + r15*4 + 0x91f18]",
+     "new_value": "0x91f18",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d3979",
+     "old_ins": "movss xmm0, dword ptr [rsi + r15*4 + 0x91f18]",
+     "new_site": "0x1754bd9",
+     "window": "strict 160 bytes from -0",
+     "new_ins": "movss xmm0, dword ptr [rsi + r15*4 + 0x91f18]",
+     "new_value": "0x91f18",
+     "status": "same",
+     "strong": true
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 44,
+   "file": "src/native.lua",
+   "line": 38,
+   "name": "GRID.row_items",
+   "category": "struct offset",
+   "old": "0x92318",
+   "new": "0x92318",
+   "method": "15 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 15,
+   "confidence": "high",
+   "feeds_write": false,
+   "evidence": [
+    {
+     "old_site": "0x18cff5d",
+     "old_ins": "cmp dword ptr [rdi + rax*4 + 0x92318], 1",
+     "new_site": "0x17511bd",
+     "window": "strict 158 bytes from -0",
+     "new_ins": "cmp dword ptr [rdi + rax*4 + 0x92318], 1",
+     "new_value": "0x92318",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d12b4",
+     "old_ins": "mov ecx, dword ptr [rdi + rax*4 + 0x92318]",
+     "new_site": "0x1752514",
+     "window": "strict 156 bytes from -0",
+     "new_ins": "mov ecx, dword ptr [rdi + rax*4 + 0x92318]",
+     "new_value": "0x92318",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d1400",
+     "old_ins": "mov eax, dword ptr [rdi + rax*4 + 0x92318]",
+     "new_site": "0x1752660",
+     "window": "strict 48 bytes from -0",
+     "new_ins": "mov eax, dword ptr [rdi + rax*4 + 0x92318]",
+     "new_value": "0x92318",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d146a",
+     "old_ins": "lea rbx, [rcx + 0x92318]",
+     "new_site": "0x17526ca",
+     "window": "strict 160 bytes from -0",
+     "new_ins": "lea rbx, [rcx + 0x92318]",
+     "new_value": "0x92318",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d1576",
+     "old_ins": "lea r14, [rcx + 0x92318]",
+     "new_site": "0x17527d6",
+     "window": "strict 96 bytes from -0",
+     "new_ins": "lea r14, [rcx + 0x92318]",
+     "new_value": "0x92318",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d1730",
+     "old_ins": "mov eax, dword ptr [rbx + rax*4 + 0x92318]",
+     "new_site": "0x1752990",
+     "window": "strict 64 bytes from -0",
+     "new_ins": "mov eax, dword ptr [rbx + rax*4 + 0x92318]",
+     "new_value": "0x92318",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d17a9",
+     "old_ins": "cmp edx, dword ptr [rcx + rax*4 + 0x92318]",
+     "new_site": "0x1752a09",
+     "window": "strict 46 bytes from -32",
+     "new_ins": "cmp edx, dword ptr [rcx + rax*4 + 0x92318]",
+     "new_value": "0x92318",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d17e7",
+     "old_ins": "cmp edx, dword ptr [rcx + rax*4 + 0x92318]",
+     "new_site": "0x1752a47",
+     "window": "strict 45 bytes from -32",
+     "new_ins": "cmp edx, dword ptr [rcx + rax*4 + 0x92318]",
+     "new_value": "0x92318",
+     "status": "same",
+     "strong": true
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 45,
+   "file": "src/native.lua",
+   "line": 39,
+   "name": "GRID.selected",
+   "category": "struct offset",
+   "old": "0x928f4",
+   "new": "0x928f4",
+   "method": "3 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 3,
+   "confidence": "high",
+   "feeds_write": false,
+   "evidence": [
+    {
+     "old_site": "0x18d2935",
+     "old_ins": "mov dword ptr [rdi + 0x928f4], 0xffffffff",
+     "new_site": "0x1753b95",
+     "window": "strict 125 bytes from -0",
+     "new_ins": "mov dword ptr [rdi + 0x928f4], 0xffffffff",
+     "new_value": "0x928f4",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d2c51",
+     "old_ins": "mov eax, dword ptr [rsi + 0x928f4]",
+     "new_site": "0x1753eb1",
+     "window": "strict 158 bytes from -0",
+     "new_ins": "mov eax, dword ptr [rsi + 0x928f4]",
+     "new_value": "0x928f4",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d38e3",
+     "old_ins": "mov dword ptr [rsi + 0x928f4], r13d",
+     "new_site": "0x1754b43",
+     "window": "strict 160 bytes from -0",
+     "new_ins": "mov dword ptr [rsi + 0x928f4], r13d",
+     "new_value": "0x928f4",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d4bc1",
+     "old_ins": "cmp ebx, dword ptr [r14 + 0x928f4]",
+     "status": "unmapped"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 46,
+   "file": "src/native.lua",
+   "line": 40,
+   "name": "GRID.content",
+   "category": "struct offset",
+   "old": "0x92968",
+   "new": "0x92968",
+   "method": "10 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 10,
+   "confidence": "high",
+   "feeds_write": false,
+   "evidence": [
+    {
+     "old_site": "0x18d1cb3",
+     "old_ins": "movss xmm2, dword ptr [rbx + 0x92968]",
+     "new_site": "0x1752f13",
+     "new_ins": "movss xmm2, dword ptr [rbx + 0x92968]",
+     "new_value": "0x92968",
+     "function": "0x18d1c00",
+     "strong": true,
+     "window": "aligned in function 0x18d1c00->0x1752e60",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d1e59",
+     "old_ins": "movss xmm3, dword ptr [rbx + 0x92968]",
+     "new_site": "0x17530b9",
+     "new_ins": "movss xmm3, dword ptr [rbx + 0x92968]",
+     "new_value": "0x92968",
+     "function": "0x18d1c00",
+     "strong": true,
+     "window": "aligned in function 0x18d1c00->0x1752e60",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d2db0",
+     "old_ins": "movss xmm0, dword ptr [rsi + 0x92968]",
+     "new_site": "0x1754010",
+     "new_ins": "movss xmm0, dword ptr [rsi + 0x92968]",
+     "new_value": "0x92968",
+     "function": "0x18d1c00",
+     "strong": true,
+     "window": "aligned in function 0x18d1c00->0x1752e60",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d294d",
+     "old_ins": "mov dword ptr [rdi + 0x92968], ebp",
+     "new_site": "0x1753bad",
+     "new_ins": "mov dword ptr [rdi + 0x92968], ebp",
+     "new_value": "0x92968",
+     "function": "0x18d27b0",
+     "strong": true,
+     "window": "aligned in function 0x18d27b0->0x1753a10 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d2db0",
+     "old_ins": "movss xmm0, dword ptr [rsi + 0x92968]",
+     "new_site": "0x1754010",
+     "new_ins": "movss xmm0, dword ptr [rsi + 0x92968]",
+     "new_value": "0x92968",
+     "function": "0x18d2b60",
+     "strong": true,
+     "window": "aligned in function 0x18d2b60->0x1753dc0",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d4086",
+     "old_ins": "movss xmm1, dword ptr [r14 + 0x92968]",
+     "new_site": "0x17552e6",
+     "new_ins": "movss xmm1, dword ptr [r14 + 0x92968]",
+     "new_value": "0x92968",
+     "function": "0x18d3f30",
+     "strong": true,
+     "window": "aligned in function 0x18d3f30->0x1755190 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d455f",
+     "old_ins": "addss xmm0, dword ptr [rbx + 0x92968]",
+     "new_site": "0x17557bf",
+     "new_ins": "addss xmm0, dword ptr [rbx + 0x92968]",
+     "new_value": "0x92968",
+     "function": "0x18d44b0",
+     "strong": true,
+     "window": "aligned in function 0x18d44b0->0x1755710 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d456a",
+     "old_ins": "movss dword ptr [rbx + 0x92968], xmm0",
+     "new_site": "0x17557ca",
+     "new_ins": "movss dword ptr [rbx + 0x92968], xmm0",
+     "new_value": "0x92968",
+     "function": "0x18d44b0",
+     "strong": true,
+     "window": "aligned in function 0x18d44b0->0x1755710 (identical)",
+     "status": "same"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 47,
+   "file": "src/native.lua",
+   "line": 41,
+   "name": "GRID.scroll",
+   "category": "struct offset",
+   "old": "0x92960",
+   "new": "0x92960",
+   "method": "12 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 12,
+   "confidence": "high",
+   "feeds_write": true,
+   "evidence": [
+    {
+     "old_site": "0x18d1af9",
+     "old_ins": "movss dword ptr [rcx + 0x92960], xmm3",
+     "new_site": "0x1752d59",
+     "new_ins": "movss dword ptr [rcx + 0x92960], xmm3",
+     "new_value": "0x92960",
+     "function": "0x18d1ae0",
+     "strong": true,
+     "window": "aligned in function 0x18d1ae0->0x1752d40 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d1b16",
+     "old_ins": "movss xmm2, dword ptr [rcx + 0x92960]",
+     "new_site": "0x1752d76",
+     "new_ins": "movss xmm2, dword ptr [rcx + 0x92960]",
+     "new_value": "0x92960",
+     "function": "0x18d1ae0",
+     "strong": true,
+     "window": "aligned in function 0x18d1ae0->0x1752d40 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d1b5a",
+     "old_ins": "movss xmm2, dword ptr [rbx + 0x92960]",
+     "new_site": "0x1752dba",
+     "new_ins": "movss xmm2, dword ptr [rbx + 0x92960]",
+     "new_value": "0x92960",
+     "function": "0x18d1ae0",
+     "strong": true,
+     "window": "aligned in function 0x18d1ae0->0x1752d40 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d1b7e",
+     "old_ins": "lea r9, [rbx + 0x92960]",
+     "new_site": "0x1752dde",
+     "new_ins": "lea r9, [rbx + 0x92960]",
+     "new_value": "0x92960",
+     "function": "0x18d1ae0",
+     "strong": true,
+     "window": "aligned in function 0x18d1ae0->0x1752d40 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d1d09",
+     "old_ins": "movss dword ptr [rbx + 0x92960], xmm2",
+     "new_site": "0x1752f69",
+     "new_ins": "movss dword ptr [rbx + 0x92960], xmm2",
+     "new_value": "0x92960",
+     "function": "0x18d1c00",
+     "strong": true,
+     "window": "aligned in function 0x18d1c00->0x1752e60",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d1dd4",
+     "old_ins": "movss xmm2, dword ptr [rbx + 0x92960]",
+     "new_site": "0x1753034",
+     "new_ins": "movss xmm2, dword ptr [rbx + 0x92960]",
+     "new_value": "0x92960",
+     "function": "0x18d1c00",
+     "strong": true,
+     "window": "aligned in function 0x18d1c00->0x1752e60",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d1ec1",
+     "old_ins": "movss dword ptr [rbx + 0x92960], xmm3",
+     "new_site": "0x1753121",
+     "new_ins": "movss dword ptr [rbx + 0x92960], xmm3",
+     "new_value": "0x92960",
+     "function": "0x18d1c00",
+     "strong": true,
+     "window": "aligned in function 0x18d1c00->0x1752e60",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d1ee2",
+     "old_ins": "movss xmm2, dword ptr [rbx + 0x92960]",
+     "new_site": "0x1753142",
+     "new_ins": "movss xmm2, dword ptr [rbx + 0x92960]",
+     "new_value": "0x92960",
+     "function": "0x18d1c00",
+     "strong": true,
+     "window": "aligned in function 0x18d1c00->0x1752e60",
+     "status": "same"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 48,
+   "file": "src/native.lua",
+   "line": 42,
+   "name": "GRID.span (bar + 0x7b0)",
+   "category": "struct offset",
+   "old": "0x8c0",
+   "new": "0x8c0",
+   "method": "2 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 2,
+   "confidence": "high",
+   "feeds_write": false,
+   "evidence": [
+    {
+     "old_site": "0x18d4635",
+     "old_ins": "mulss xmm0, dword ptr [rbx + 0x8c0]",
+     "new_site": "0x1755895",
+     "new_ins": "mulss xmm0, dword ptr [rbx + 0x8c0]",
+     "new_value": "0x8c0",
+     "function": "0x18d44b0",
+     "strong": true,
+     "window": "aligned in function 0x18d44b0->0x1755710 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d57d7",
+     "old_ins": "movss xmm1, dword ptr [rbx + 0x8c0]",
+     "new_site": "0x17569c7",
+     "new_ins": "movss xmm1, dword ptr [rbx + 0x8c0]",
+     "new_value": "0x8c0",
+     "function": "0x18d5770",
+     "strong": true,
+     "window": "aligned in function 0x18d5770->0x1756960",
+     "status": "same"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 49,
+   "file": "src/native.lua",
+   "line": 43,
+   "name": "GRID.value (bar + 0x7b8)",
+   "category": "struct offset",
+   "old": "0x8c8",
+   "new": "0x8c8",
+   "method": "1 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 1,
+   "confidence": "high",
+   "feeds_write": true,
+   "evidence": [
+    {
+     "old_site": "0x18d462d",
+     "old_ins": "movss xmm0, dword ptr [rbx + 0x8c8]",
+     "new_site": "0x175588d",
+     "new_ins": "movss xmm0, dword ptr [rbx + 0x8c8]",
+     "new_value": "0x8c8",
+     "function": "0x18d44b0",
+     "strong": true,
+     "window": "aligned in function 0x18d44b0->0x1755710 (identical)",
+     "status": "same"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 50,
+   "file": "src/native.lua",
+   "line": 44,
+   "name": "GRID.first",
+   "category": "struct offset",
+   "old": "0x98040",
+   "new": "0x98040",
+   "method": "3 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 3,
+   "confidence": "high",
+   "feeds_write": false,
+   "evidence": [
+    {
+     "old_site": "0x18d2b18",
+     "old_ins": "mov edx, dword ptr [rsi + 0x98040]",
+     "new_site": "0x1753d78",
+     "window": "strict 42 bytes from -0",
+     "new_ins": "mov edx, dword ptr [rsi + 0x98040]",
+     "new_value": "0x98040",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d3a08",
+     "old_ins": "mov dword ptr [rsi + 0x98040], edx",
+     "new_site": "0x1754c68",
+     "window": "strict 158 bytes from -0",
+     "new_ins": "mov dword ptr [rsi + 0x98040], edx",
+     "new_value": "0x98040",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d3fac",
+     "old_ins": "mov edx, dword ptr [r14 + 0x98040]",
+     "new_site": "0x175520c",
+     "window": "strict 157 bytes from -0",
+     "new_ins": "mov edx, dword ptr [r14 + 0x98040]",
+     "new_value": "0x98040",
+     "status": "same",
+     "strong": true
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 51,
+   "file": "src/native.lua",
+   "line": 45,
+   "name": "GRID.last",
+   "category": "struct offset",
+   "old": "0x98044",
+   "new": "0x98044",
+   "method": "3 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 3,
+   "confidence": "high",
+   "feeds_write": false,
+   "evidence": [
+    {
+     "old_site": "0x18d2b0e",
+     "old_ins": "mov r8d, dword ptr [rsi + 0x98044]",
+     "new_site": "0x1753d6e",
+     "window": "strict 64 bytes from -0",
+     "new_ins": "mov r8d, dword ptr [rsi + 0x98044]",
+     "new_value": "0x98044",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d39fe",
+     "old_ins": "mov dword ptr [rsi + 0x98044], r8d",
+     "new_site": "0x1754c5e",
+     "window": "strict 158 bytes from -0",
+     "new_ins": "mov dword ptr [rsi + 0x98044], r8d",
+     "new_value": "0x98044",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d3fa5",
+     "old_ins": "mov r8d, dword ptr [r14 + 0x98044]",
+     "new_site": "0x1755205",
+     "window": "strict 160 bytes from -0",
+     "new_ins": "mov r8d, dword ptr [r14 + 0x98044]",
+     "new_value": "0x98044",
+     "status": "same",
+     "strong": true
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 52,
+   "file": "src/native.lua",
+   "line": 46,
+   "name": "GRID.anchor",
+   "category": "struct offset",
+   "old": "0x92ff0",
+   "new": "0x92ff0",
+   "method": "4 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 4,
+   "confidence": "high",
+   "feeds_write": false,
+   "evidence": [
+    {
+     "old_site": "0x149b1c7",
+     "old_ins": "mov dword ptr [rbx + 0x92ff0], 0xffffffff",
+     "new_site": "0x13333d7",
+     "window": "strict 124 bytes from -0",
+     "new_ins": "mov dword ptr [rbx + 0x92ff0], 0xffffffff",
+     "new_value": "0x92ff0",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d2988",
+     "old_ins": "mov dword ptr [rdi + 0x92ff0], 0xffffffff",
+     "new_site": "0x1753be8",
+     "window": "strict 56 bytes from -0",
+     "new_ins": "mov dword ptr [rdi + 0x92ff0], 0xffffffff",
+     "new_value": "0x92ff0",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d2b1e",
+     "old_ins": "mov dword ptr [rsi + 0x92ff0], 0xffffffff",
+     "new_site": "0x1753d7e",
+     "window": "strict 48 bytes from -0",
+     "new_ins": "mov dword ptr [rsi + 0x92ff0], 0xffffffff",
+     "new_value": "0x92ff0",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d3c44",
+     "old_ins": "mov eax, dword ptr [rbx + 0x92ff0]",
+     "new_site": "0x1754ea4",
+     "window": "strict 160 bytes from -0",
+     "new_ins": "mov eax, dword ptr [rbx + 0x92ff0]",
+     "new_value": "0x92ff0",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d48e9",
+     "old_ins": "mov eax, dword ptr [rcx + 0x92ff0]",
+     "status": "unmapped"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 53,
+   "file": "src/native.lua",
+   "line": 47,
+   "name": "GRID.items",
+   "category": "struct offset",
+   "old": "0x92984",
+   "new": "0x92984",
+   "method": "9 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 9,
+   "confidence": "high",
+   "feeds_write": false,
+   "evidence": [
+    {
+     "old_site": "0x18cfbdf",
+     "old_ins": "cmp dword ptr [rdi + 0x92984], 1",
+     "new_site": "0x1750e3f",
+     "window": "strict 160 bytes from -0",
+     "new_ins": "cmp dword ptr [rdi + 0x92984], 1",
+     "new_value": "0x92984",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d0660",
+     "old_ins": "cmp dword ptr [rcx + 0x92984], 1",
+     "new_site": "0x17518c0",
+     "window": "strict 28 bytes from -0",
+     "new_ins": "cmp dword ptr [rcx + 0x92984], 1",
+     "new_value": "0x92984",
+     "status": "same",
+     "strong": false
+    },
+    {
+     "old_site": "0x18d194f",
+     "old_ins": "cmp dword ptr [r12 + 0x92984], ecx",
+     "new_site": "0x1752baf",
+     "window": "strict 155 bytes from -0",
+     "new_ins": "cmp dword ptr [r12 + 0x92984], ecx",
+     "new_value": "0x92984",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d196d",
+     "old_ins": "cmp ecx, dword ptr [r12 + 0x92984]",
+     "new_site": "0x1752bcd",
+     "window": "strict 158 bytes from -0",
+     "new_ins": "cmp ecx, dword ptr [r12 + 0x92984]",
+     "new_value": "0x92984",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d296f",
+     "old_ins": "mov qword ptr [rdi + 0x92984], rbp",
+     "new_site": "0x1753bcf",
+     "window": "strict 96 bytes from -0",
+     "new_ins": "mov qword ptr [rdi + 0x92984], rbp",
+     "new_value": "0x92984",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d2b04",
+     "old_ins": "mov r9d, dword ptr [rsi + 0x92984]",
+     "new_site": "0x1753d64",
+     "window": "strict 62 bytes from -0",
+     "new_ins": "mov r9d, dword ptr [rsi + 0x92984]",
+     "new_value": "0x92984",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d39f3",
+     "old_ins": "mov r9d, dword ptr [rsi + 0x92984]",
+     "new_site": "0x1754c53",
+     "window": "strict 159 bytes from -0",
+     "new_ins": "mov r9d, dword ptr [rsi + 0x92984]",
+     "new_value": "0x92984",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x18d3f90",
+     "old_ins": "mov r9d, dword ptr [r14 + 0x92984]",
+     "new_site": "0x17551f0",
+     "window": "strict 160 bytes from -0",
+     "new_ins": "mov r9d, dword ptr [r14 + 0x92984]",
+     "new_value": "0x92984",
+     "status": "same",
+     "strong": true
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 54,
+   "file": "src/native.lua",
+   "line": 48,
+   "name": "GRID.columns",
+   "category": "struct offset",
+   "old": "0xb9b4",
+   "new": "0xb9b4",
+   "method": "12 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 12,
+   "confidence": "high",
+   "feeds_write": false,
+   "evidence": [
+    {
+     "old_site": "0x18d071b",
+     "old_ins": "cmp dword ptr [rsi + 0xb9b4], edi",
+     "new_site": "0x175197b",
+     "new_ins": "cmp dword ptr [rsi + 0xb9b4], edi",
+     "new_value": "0xb9b4",
+     "function": "0x18d0690",
+     "strong": true,
+     "window": "aligned in function 0x18d0690->0x17518f0 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d0789",
+     "old_ins": "cmp edi, dword ptr [rsi + 0xb9b4]",
+     "new_site": "0x17519e9",
+     "new_ins": "cmp edi, dword ptr [rsi + 0xb9b4]",
+     "new_value": "0xb9b4",
+     "function": "0x18d0690",
+     "strong": true,
+     "window": "aligned in function 0x18d0690->0x17518f0 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d1132",
+     "old_ins": "cmp dword ptr [rbp + 0xb9b4], 0",
+     "new_site": "0x1752392",
+     "new_ins": "cmp dword ptr [rbp + 0xb9b4], 0",
+     "new_value": "0xb9b4",
+     "function": "0x18d10d0",
+     "strong": true,
+     "window": "aligned in function 0x18d10d0->0x1752330 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d11c7",
+     "old_ins": "cmp edi, dword ptr [rbp + 0xb9b4]",
+     "new_site": "0x1752427",
+     "new_ins": "cmp edi, dword ptr [rbp + 0xb9b4]",
+     "new_value": "0xb9b4",
+     "function": "0x18d10d0",
+     "strong": true,
+     "window": "aligned in function 0x18d10d0->0x1752330 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d14df",
+     "old_ins": "cmp eax, dword ptr [r8 + r10 + 0xb9b4]",
+     "new_site": "0x175273f",
+     "new_ins": "cmp eax, dword ptr [r8 + r10 + 0xb9b4]",
+     "new_value": "0xb9b4",
+     "function": "0x18d1440",
+     "strong": true,
+     "window": "aligned in function 0x18d1440->0x17526a0 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d18dd",
+     "old_ins": "mov ebp, dword ptr [rsi + r12 + 0xb9b4]",
+     "new_site": "0x1752b3d",
+     "new_ins": "mov ebp, dword ptr [rsi + r12 + 0xb9b4]",
+     "new_value": "0xb9b4",
+     "function": "0x18d1890",
+     "strong": true,
+     "window": "aligned in function 0x18d1890->0x1752af0 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d18f4",
+     "old_ins": "cmp ebx, dword ptr [rsi + r12 + 0xb9b4]",
+     "new_site": "0x1752b54",
+     "new_ins": "cmp ebx, dword ptr [rsi + r12 + 0xb9b4]",
+     "new_value": "0xb9b4",
+     "function": "0x18d1890",
+     "strong": true,
+     "window": "aligned in function 0x18d1890->0x1752af0 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d30cd",
+     "old_ins": "mov eax, dword ptr [rdx + 0xb9b4]",
+     "new_site": "0x175432d",
+     "new_ins": "mov eax, dword ptr [rdx + 0xb9b4]",
+     "new_value": "0xb9b4",
+     "function": "0x18d1c00",
+     "strong": true,
+     "window": "aligned in function 0x18d1c00->0x1752e60",
+     "status": "same"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 55,
+   "file": "src/native.lua",
+   "line": 49,
+   "name": "GRID.kind",
+   "category": "struct offset",
+   "old": "0x92fc4",
+   "new": "0x92fc4",
+   "method": "10 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 10,
+   "confidence": "high",
+   "feeds_write": false,
+   "evidence": [
+    {
+     "old_site": "0x18d0248",
+     "old_ins": "mov ecx, dword ptr [rcx + 0x92fc4]",
+     "new_site": "0x17514a8",
+     "new_ins": "mov ecx, dword ptr [rcx + 0x92fc4]",
+     "new_value": "0x92fc4",
+     "function": "0x18d0210",
+     "strong": true,
+     "window": "aligned in function 0x18d0210->0x1751470 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d0841",
+     "old_ins": "mov eax, dword ptr [r14 + 0x92fc4]",
+     "new_site": "0x1751aa1",
+     "new_ins": "mov eax, dword ptr [r14 + 0x92fc4]",
+     "new_value": "0x92fc4",
+     "function": "0x18d0690",
+     "strong": true,
+     "window": "aligned in function 0x18d0690->0x17518f0 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d0888",
+     "old_ins": "mov ecx, dword ptr [r14 + 0x92fc4]",
+     "new_site": "0x1751ae8",
+     "new_ins": "mov ecx, dword ptr [r14 + 0x92fc4]",
+     "new_value": "0x92fc4",
+     "function": "0x18d0690",
+     "strong": true,
+     "window": "aligned in function 0x18d0690->0x17518f0 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d0a19",
+     "old_ins": "mov dword ptr [rcx + 0x92fc4], ebx",
+     "new_site": "0x1751c79",
+     "new_ins": "mov dword ptr [rcx + 0x92fc4], ebx",
+     "new_value": "0x92fc4",
+     "function": "0x18d09d0",
+     "strong": true,
+     "window": "aligned in function 0x18d09d0->0x1751c30",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d2ffd",
+     "old_ins": "cmp dword ptr [rsi + 0x92fc4], 9",
+     "new_site": "0x175425d",
+     "new_ins": "cmp dword ptr [rsi + 0x92fc4], 9",
+     "new_value": "0x92fc4",
+     "function": "0x18d1c00",
+     "strong": true,
+     "window": "aligned in function 0x18d1c00->0x1752e60",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d3170",
+     "old_ins": "mov eax, dword ptr [rsi + 0x92fc4]",
+     "new_site": "0x17543d0",
+     "new_ins": "mov eax, dword ptr [rsi + 0x92fc4]",
+     "new_value": "0x92fc4",
+     "function": "0x18d1c00",
+     "strong": true,
+     "window": "aligned in function 0x18d1c00->0x1752e60",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d32a3",
+     "old_ins": "cmp dword ptr [rsi + 0x92fc4], 9",
+     "new_site": "0x1754503",
+     "new_ins": "cmp dword ptr [rsi + 0x92fc4], 9",
+     "new_value": "0x92fc4",
+     "function": "0x18d1c00",
+     "strong": true,
+     "window": "aligned in function 0x18d1c00->0x1752e60",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d396d",
+     "old_ins": "mov ecx, dword ptr [rsi + 0x92fc4]",
+     "new_site": "0x1754bcd",
+     "new_ins": "mov ecx, dword ptr [rsi + 0x92fc4]",
+     "new_value": "0x92fc4",
+     "function": "0x18d1c00",
+     "strong": true,
+     "window": "aligned in function 0x18d1c00->0x1752e60",
+     "status": "same"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 56,
+   "file": "src/native.lua",
+   "line": 50,
+   "name": "GRID.row_base",
+   "category": "struct offset",
+   "old": "0xb00",
+   "new": "0xb00",
+   "method": "10 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 10,
+   "confidence": "high",
+   "feeds_write": false,
+   "evidence": [
+    {
+     "old_site": "0x18d048c",
+     "old_ins": "add rcx, 0xb00",
+     "new_site": "0x17516ec",
+     "new_ins": "add rcx, 0xb00",
+     "new_value": "0xb00",
+     "function": "0x18d0410",
+     "strong": true,
+     "window": "aligned in function 0x18d0410->0x1751670 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d0539",
+     "old_ins": "add rcx, 0xb00",
+     "new_site": "0x1751799",
+     "new_ins": "add rcx, 0xb00",
+     "new_value": "0xb00",
+     "function": "0x18d04d0",
+     "strong": true,
+     "window": "aligned in function 0x18d04d0->0x1751730 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d0583",
+     "old_ins": "add rcx, 0xb00",
+     "new_site": "0x17517e3",
+     "new_ins": "add rcx, 0xb00",
+     "new_value": "0xb00",
+     "function": "0x18d04d0",
+     "strong": true,
+     "window": "aligned in function 0x18d04d0->0x1751730 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d05cb",
+     "old_ins": "add rcx, 0xb00",
+     "new_site": "0x175182b",
+     "new_ins": "add rcx, 0xb00",
+     "new_value": "0xb00",
+     "function": "0x18d05b0",
+     "strong": true,
+     "window": "aligned in function 0x18d05b0->0x1751810 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d062c",
+     "old_ins": "lea rcx, [rbx + 0xb00]",
+     "new_site": "0x175188c",
+     "new_ins": "lea rcx, [rbx + 0xb00]",
+     "new_value": "0xb00",
+     "function": "0x18d0600",
+     "strong": true,
+     "window": "aligned in function 0x18d0600->0x1751860 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d0942",
+     "old_ins": "lea rdi, [rbp + 0xb00]",
+     "new_site": "0x1751ba2",
+     "new_ins": "lea rdi, [rbp + 0xb00]",
+     "new_value": "0xb00",
+     "function": "0x18d0900",
+     "strong": true,
+     "window": "aligned in function 0x18d0900->0x1751b60 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d1357",
+     "old_ins": "add rcx, 0xb00",
+     "new_site": "0x17525b7",
+     "new_ins": "add rcx, 0xb00",
+     "new_value": "0xb00",
+     "function": "0x18d1280",
+     "strong": true,
+     "window": "aligned in function 0x18d1280->0x17524e0 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d138f",
+     "old_ins": "add rcx, 0xb00",
+     "new_site": "0x17525ef",
+     "new_ins": "add rcx, 0xb00",
+     "new_value": "0xb00",
+     "function": "0x18d1280",
+     "strong": true,
+     "window": "aligned in function 0x18d1280->0x17524e0 (identical)",
+     "status": "same"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 57,
+   "file": "src/native.lua",
+   "line": 51,
+   "name": "GRID.row_stride",
+   "category": "struct offset",
+   "old": "0xaed0",
+   "new": "0xaed0",
+   "method": "12 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 12,
+   "confidence": "high",
+   "feeds_write": false,
+   "evidence": [
+    {
+     "old_site": "0x18d0485",
+     "old_ins": "imul rcx, rax, 0xaed0",
+     "new_site": "0x17516e5",
+     "new_ins": "imul rcx, rax, 0xaed0",
+     "new_value": "0xaed0",
+     "function": "0x18d0410",
+     "strong": true,
+     "window": "aligned in function 0x18d0410->0x1751670 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d052b",
+     "old_ins": "imul rcx, r8, 0xaed0",
+     "new_site": "0x175178b",
+     "new_ins": "imul rcx, r8, 0xaed0",
+     "new_value": "0xaed0",
+     "function": "0x18d04d0",
+     "strong": true,
+     "window": "aligned in function 0x18d04d0->0x1751730 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d057c",
+     "old_ins": "imul rcx, rcx, 0xaed0",
+     "new_site": "0x17517dc",
+     "new_ins": "imul rcx, rcx, 0xaed0",
+     "new_value": "0xaed0",
+     "function": "0x18d04d0",
+     "strong": true,
+     "window": "aligned in function 0x18d04d0->0x1751730 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d05c4",
+     "old_ins": "imul rdx, rax, 0xaed0",
+     "new_site": "0x1751824",
+     "new_ins": "imul rdx, rax, 0xaed0",
+     "new_value": "0xaed0",
+     "function": "0x18d05b0",
+     "strong": true,
+     "window": "aligned in function 0x18d05b0->0x1751810 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d0625",
+     "old_ins": "imul rdx, rax, 0xaed0",
+     "new_site": "0x1751885",
+     "new_ins": "imul rdx, rax, 0xaed0",
+     "new_value": "0xaed0",
+     "function": "0x18d0600",
+     "strong": true,
+     "window": "aligned in function 0x18d0600->0x1751860 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d0704",
+     "old_ins": "imul rsi, rax, 0xaed0",
+     "new_site": "0x1751964",
+     "new_ins": "imul rsi, rax, 0xaed0",
+     "new_value": "0xaed0",
+     "function": "0x18d0690",
+     "strong": true,
+     "window": "aligned in function 0x18d0690->0x17518f0 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d0857",
+     "old_ins": "imul rdx, rax, 0xaed0",
+     "new_site": "0x1751ab7",
+     "new_ins": "imul rdx, rax, 0xaed0",
+     "new_value": "0xaed0",
+     "function": "0x18d0690",
+     "strong": true,
+     "window": "aligned in function 0x18d0690->0x17518f0 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d08a5",
+     "old_ins": "imul rdx, rax, 0xaed0",
+     "new_site": "0x1751b05",
+     "new_ins": "imul rdx, rax, 0xaed0",
+     "new_value": "0xaed0",
+     "function": "0x18d0690",
+     "strong": true,
+     "window": "aligned in function 0x18d0690->0x17518f0 (identical)",
+     "status": "same"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 58,
+   "file": "src/native.lua",
+   "line": 207,
+   "name": "grid animation flag (byte)",
+   "category": "struct offset",
+   "old": "0x92902",
+   "new": "0x92902",
+   "method": "4 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 4,
+   "confidence": "high",
+   "feeds_write": true,
+   "evidence": [
+    {
+     "old_site": "0x18d1ab6",
+     "old_ins": "cmp byte ptr [rcx + 0x92902], 0",
+     "new_site": "0x1752d16",
+     "new_ins": "cmp byte ptr [rcx + 0x92902], 0",
+     "new_value": "0x92902",
+     "function": "0x18d1ab0",
+     "strong": true,
+     "window": "aligned in function 0x18d1ab0->0x1752d10 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d1b3a",
+     "old_ins": "cmp byte ptr [rcx + 0x92902], 0",
+     "new_site": "0x1752d9a",
+     "new_ins": "cmp byte ptr [rcx + 0x92902], 0",
+     "new_value": "0x92902",
+     "function": "0x18d1ae0",
+     "strong": true,
+     "window": "aligned in function 0x18d1ae0->0x1752d40 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d1f09",
+     "old_ins": "cmp byte ptr [rbx + 0x92902], 0",
+     "new_site": "0x1753169",
+     "new_ins": "cmp byte ptr [rbx + 0x92902], 0",
+     "new_value": "0x92902",
+     "function": "0x18d1c00",
+     "strong": true,
+     "window": "aligned in function 0x18d1c00->0x1752e60",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d5824",
+     "old_ins": "movzx ecx, byte ptr [rbx + 0x92902]",
+     "new_site": "0x1756a14",
+     "new_ins": "movzx ecx, byte ptr [rbx + 0x92902]",
+     "new_value": "0x92902",
+     "function": "0x18d5770",
+     "strong": true,
+     "window": "aligned in function 0x18d5770->0x1756960",
+     "status": "same"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 59,
+   "file": "src/native.lua",
+   "line": 207,
+   "name": "grid animation stop target (ANIMATION_STOP argument)",
+   "category": "struct offset",
+   "old": "0x92900",
+   "new": "0x92900",
+   "method": "4 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 4,
+   "confidence": "high",
+   "feeds_write": true,
+   "evidence": [
+    {
+     "old_site": "0x18d1ac2",
+     "old_ins": "add rcx, 0x92900",
+     "new_site": "0x1752d22",
+     "new_ins": "add rcx, 0x92900",
+     "new_value": "0x92900",
+     "function": "0x18d1ab0",
+     "strong": true,
+     "window": "aligned in function 0x18d1ab0->0x1752d10 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d1b49",
+     "old_ins": "lea rsi, [rcx + 0x92900]",
+     "new_site": "0x1752da9",
+     "new_ins": "lea rsi, [rcx + 0x92900]",
+     "new_value": "0x92900",
+     "function": "0x18d1ae0",
+     "strong": true,
+     "window": "aligned in function 0x18d1ae0->0x1752d40 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d1f18",
+     "old_ins": "lea rdi, [rbx + 0x92900]",
+     "new_site": "0x1753178",
+     "new_ins": "lea rdi, [rbx + 0x92900]",
+     "new_value": "0x92900",
+     "function": "0x18d1c00",
+     "strong": true,
+     "window": "aligned in function 0x18d1c00->0x1752e60",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d580e",
+     "old_ins": "lea rcx, [rbx + 0x92900]",
+     "new_site": "0x17569fe",
+     "new_ins": "lea rcx, [rbx + 0x92900]",
+     "new_value": "0x92900",
+     "function": "0x18d5770",
+     "strong": true,
+     "window": "aligned in function 0x18d5770->0x1756960",
+     "status": "same"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 60,
+   "file": "src/native.lua",
+   "line": 253,
+   "name": "grid scrollbar widget (+272)",
+   "category": "struct offset",
+   "old": "0x110",
+   "new": "0x110",
+   "method": "10 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 10,
+   "confidence": "high",
+   "feeds_write": true,
+   "evidence": [
+    {
+     "old_site": "0x18d0979",
+     "old_ins": "add rcx, 0x110",
+     "new_site": "0x1751bd9",
+     "new_ins": "add rcx, 0x110",
+     "new_value": "0x110",
+     "function": "0x18d0900",
+     "strong": true,
+     "window": "aligned in function 0x18d0900->0x1751b60 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d1062",
+     "old_ins": "lea rbx, [r15 + 0x110]",
+     "new_site": "0x17522c2",
+     "new_ins": "lea rbx, [r15 + 0x110]",
+     "new_value": "0x110",
+     "function": "0x18d0dd0",
+     "strong": true,
+     "window": "aligned in function 0x18d0dd0->0x1752030 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d1cc7",
+     "old_ins": "lea rcx, [rbx + 0x110]",
+     "new_site": "0x1752f27",
+     "new_ins": "lea rcx, [rbx + 0x110]",
+     "new_value": "0x110",
+     "function": "0x18d1c00",
+     "strong": true,
+     "window": "aligned in function 0x18d1c00->0x1752e60",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d1e71",
+     "old_ins": "lea rcx, [rbx + 0x110]",
+     "new_site": "0x17530d1",
+     "new_ins": "lea rcx, [rbx + 0x110]",
+     "new_value": "0x110",
+     "function": "0x18d1c00",
+     "strong": true,
+     "window": "aligned in function 0x18d1c00->0x1752e60",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d2ee9",
+     "old_ins": "lea rcx, [rbx + 0x110]",
+     "new_site": "0x1754149",
+     "new_ins": "lea rcx, [rbx + 0x110]",
+     "new_value": "0x110",
+     "function": "0x18d1c00",
+     "strong": true,
+     "window": "aligned in function 0x18d1c00->0x1752e60",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d3341",
+     "old_ins": "add rcx, 0x110",
+     "new_site": "0x17545a1",
+     "new_ins": "add rcx, 0x110",
+     "new_value": "0x110",
+     "function": "0x18d1c00",
+     "strong": true,
+     "window": "aligned in function 0x18d1c00->0x1752e60",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d2ee9",
+     "old_ins": "lea rcx, [rbx + 0x110]",
+     "new_site": "0x1754149",
+     "new_ins": "lea rcx, [rbx + 0x110]",
+     "new_value": "0x110",
+     "function": "0x18d2b60",
+     "strong": true,
+     "window": "aligned in function 0x18d2b60->0x1753dc0",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d3341",
+     "old_ins": "add rcx, 0x110",
+     "new_site": "0x17545a1",
+     "new_ins": "add rcx, 0x110",
+     "new_value": "0x110",
+     "function": "0x18d2b60",
+     "strong": true,
+     "window": "aligned in function 0x18d2b60->0x1753dc0",
+     "status": "same"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 61,
+   "file": "src/locate.lua",
+   "line": 76,
+   "name": "grid scrollbar widget (+272, visibility read)",
+   "category": "struct offset",
+   "old": "0x110",
+   "new": "0x110",
+   "method": "10 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 10,
+   "confidence": "high",
+   "feeds_write": true,
+   "evidence": [
+    {
+     "old_site": "0x18d0979",
+     "old_ins": "add rcx, 0x110",
+     "new_site": "0x1751bd9",
+     "new_ins": "add rcx, 0x110",
+     "new_value": "0x110",
+     "function": "0x18d0900",
+     "strong": true,
+     "window": "aligned in function 0x18d0900->0x1751b60 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d1062",
+     "old_ins": "lea rbx, [r15 + 0x110]",
+     "new_site": "0x17522c2",
+     "new_ins": "lea rbx, [r15 + 0x110]",
+     "new_value": "0x110",
+     "function": "0x18d0dd0",
+     "strong": true,
+     "window": "aligned in function 0x18d0dd0->0x1752030 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d1cc7",
+     "old_ins": "lea rcx, [rbx + 0x110]",
+     "new_site": "0x1752f27",
+     "new_ins": "lea rcx, [rbx + 0x110]",
+     "new_value": "0x110",
+     "function": "0x18d1c00",
+     "strong": true,
+     "window": "aligned in function 0x18d1c00->0x1752e60",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d1e71",
+     "old_ins": "lea rcx, [rbx + 0x110]",
+     "new_site": "0x17530d1",
+     "new_ins": "lea rcx, [rbx + 0x110]",
+     "new_value": "0x110",
+     "function": "0x18d1c00",
+     "strong": true,
+     "window": "aligned in function 0x18d1c00->0x1752e60",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d2ee9",
+     "old_ins": "lea rcx, [rbx + 0x110]",
+     "new_site": "0x1754149",
+     "new_ins": "lea rcx, [rbx + 0x110]",
+     "new_value": "0x110",
+     "function": "0x18d1c00",
+     "strong": true,
+     "window": "aligned in function 0x18d1c00->0x1752e60",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d3341",
+     "old_ins": "add rcx, 0x110",
+     "new_site": "0x17545a1",
+     "new_ins": "add rcx, 0x110",
+     "new_value": "0x110",
+     "function": "0x18d1c00",
+     "strong": true,
+     "window": "aligned in function 0x18d1c00->0x1752e60",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d2ee9",
+     "old_ins": "lea rcx, [rbx + 0x110]",
+     "new_site": "0x1754149",
+     "new_ins": "lea rcx, [rbx + 0x110]",
+     "new_value": "0x110",
+     "function": "0x18d2b60",
+     "strong": true,
+     "window": "aligned in function 0x18d2b60->0x1753dc0",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18d3341",
+     "old_ins": "add rcx, 0x110",
+     "new_site": "0x17545a1",
+     "new_ins": "add rcx, 0x110",
+     "new_value": "0x110",
+     "function": "0x18d2b60",
+     "strong": true,
+     "window": "aligned in function 0x18d2b60->0x1753dc0",
+     "status": "same"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 62,
+   "file": "src/locate.lua",
+   "line": 78,
+   "name": "grid scrollbar thumb (+888 = bar + 0x268)",
+   "category": "struct offset (derived)",
+   "old": "0x378",
+   "new": "0x378",
+   "method": "bar (0x110, 12 in-function witnesses) + the scrollbar's thumb widget at +0x268, used identically by SCROLL_SET/scroll_reset/scroll_thumb in both builds",
+   "witnesses": 2,
+   "confidence": "high",
+   "feeds_write": false,
+   "derived_from": [
+    {
+     "what": "grid bar",
+     "value": "0x110"
+    },
+    {
+     "what": "scrollbar thumb widget (scroll_thumb/scroll_reset identical bodies: lea/add rcx, [bar + 0x268])",
+     "value": "0x268"
+    }
+   ]
+  },
+  {
+   "id": 63,
+   "file": "src/native.lua",
+   "line": 62,
+   "name": "LOADOUT_GRID_OFFSET",
+   "category": "struct offset",
+   "old": "0xd2f20",
+   "new": "0xd2f60",
+   "method": "5 agreeing code witnesses, 0 disagreeing, all changed 0xd2f20 -> 0xd2f60 (the loadout controller grew by 0x40 ahead of its grid: the same code also moved [ctl + 0x2808 / 0x2818] -> [+0x2848 / 0x2858]); key witness old 0x8745b0 / new 0x881a20: with [ui + 0x4294] == 14 the game takes menu[+0xb0] + this offset and calls the grid routine (old 0x18d4660, new 0x17558c0, both beside GRID_SOLVER)",
+   "witnesses": 6,
+   "confidence": "high",
+   "feeds_write": true,
+   "conflicts": 0,
+   "evidence": [
+    {
+     "old_site": "0x8745d9",
+     "old_ins": "add rcx, 0xd2f20",
+     "new_site": "0x881a49",
+     "window": "relaxed 157 bytes from -0",
+     "new_ins": "add rcx, 0xd2f60",
+     "new_value": "0xd2f60",
+     "status": "changed",
+     "strong": false
+    },
+    {
+     "old_site": "0x14686d5",
+     "old_ins": "lea rdi, [rsi + 0xd2f20]",
+     "new_site": "0x1300305",
+     "window": "relaxed 63 bytes from -0",
+     "new_ins": "lea rdi, [rsi + 0xd2f60]",
+     "new_value": "0xd2f60",
+     "status": "changed",
+     "strong": false
+    },
+    {
+     "old_site": "0x146e67d",
+     "old_ins": "lea rcx, [rdi + 0xd2f20]",
+     "new_site": "0x13062cd",
+     "new_ins": "lea rcx, [rdi + 0xd2f60]",
+     "new_value": "0xd2f60",
+     "window": "aligned in function 0x146e0a0->0x1305cf0 (strict window at entry)",
+     "status": "changed",
+     "strong": false
+    },
+    {
+     "old_site": "0x146ee2a",
+     "old_ins": "lea rsi, [rdi + 0xd2f20]",
+     "new_site": "0x1306a7a",
+     "window": "relaxed 157 bytes from -0",
+     "new_ins": "lea rsi, [rdi + 0xd2f60]",
+     "new_value": "0xd2f60",
+     "status": "changed",
+     "strong": false
+    },
+    {
+     "old_site": "0x146f429",
+     "old_ins": "lea rcx, [rsi + 0xd2f20]",
+     "new_site": "0x1307079",
+     "window": "relaxed 160 bytes from -0",
+     "new_ins": "lea rcx, [rsi + 0xd2f60]",
+     "new_value": "0xd2f60",
+     "status": "changed",
+     "strong": false
+    },
+    {
+     "old_site": "0x873300",
+     "old_ins": "add rcx, 0xd2f20",
+     "status": "unmapped"
+    },
+    {
+     "old_site": "0xb90643",
+     "old_ins": "lea rcx, [rdx + 0xd2f20]",
+     "status": "unmapped"
+    },
+    {
+     "old_site": "0x1471e32",
+     "old_ins": "add rcx, 0xd2f20",
+     "status": "unmapped"
+    }
+   ],
+   "replace": {
+    "old_text": "LOADOUT_GRID_OFFSET = 864032",
+    "new_text": "LOADOUT_GRID_OFFSET = 864096"
+   }
+  },
+  {
+   "id": 64,
+   "file": "src/native.lua",
+   "line": 59,
+   "name": "BLOCK_BYTES (largest model block)",
+   "category": "derived size",
+   "old": "0x1100",
+   "new": "0x1100",
+   "method": "the largest block native_state reads is grid rows..anchor+4 = 4328 bytes with the (unchanged) mapped offsets; 4352 still covers it",
+   "witnesses": 1,
+   "confidence": "high",
+   "feeds_write": false
+  },
+  {
+   "id": 65,
+   "file": "src/native.lua",
+   "line": 52,
+   "name": "GRID.max_rows",
+   "category": "plausibility bound (the mod's own)",
+   "old": "0x10",
+   "new": "0x10",
+   "method": "a sanity limit the mod applies to values it reads, not game data; the grid layout it bounds (row_base, row_stride, columns) is unchanged",
+   "witnesses": 1,
+   "confidence": "high",
+   "feeds_write": false
+  },
+  {
+   "id": 66,
+   "file": "src/native.lua",
+   "line": 53,
+   "name": "GRID.max_columns",
+   "category": "plausibility bound (the mod's own)",
+   "old": "0x8",
+   "new": "0x8",
+   "method": "a sanity limit the mod applies to values it reads, not game data; the grid layout it bounds (row_base, row_stride, columns) is unchanged",
+   "witnesses": 1,
+   "confidence": "high",
+   "feeds_write": false
+  },
+  {
+   "id": 67,
+   "file": "src/native.lua",
+   "line": 54,
+   "name": "GRID.max_items",
+   "category": "plausibility bound (the mod's own)",
+   "old": "0x186a0",
+   "new": "0x186a0",
+   "method": "a sanity limit the mod applies to values it reads, not game data; the grid layout it bounds (row_base, row_stride, columns) is unchanged",
+   "witnesses": 1,
+   "confidence": "high",
+   "feeds_write": false
+  },
+  {
+   "id": 68,
+   "file": "src/native.lua",
+   "line": 55,
+   "name": "GRID.max_pixels",
+   "category": "plausibility bound (the mod's own)",
+   "old": "0xf4240",
+   "new": "0xf4240",
+   "method": "a sanity limit the mod applies to values it reads, not game data; the grid layout it bounds (row_base, row_stride, columns) is unchanged",
+   "witnesses": 1,
+   "confidence": "high",
+   "feeds_write": false
+  },
+  {
+   "id": 69,
+   "file": "src/native.lua",
+   "line": 60,
+   "name": "CAREER.offset (controller -> Career panel)",
+   "category": "struct offset",
+   "old": "0x4dc08",
+   "new": "0x4dc08",
+   "method": "2 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 2,
+   "confidence": "high",
+   "feeds_write": true,
+   "evidence": [
+    {
+     "old_site": "0x1456c2b",
+     "old_ins": "lea rcx, [rbx + 0x4dc08]",
+     "new_site": "0x12ee93b",
+     "window": "strict 154 bytes from -0",
+     "new_ins": "lea rcx, [rbx + 0x4dc08]",
+     "new_value": "0x4dc08",
+     "status": "same",
+     "strong": true
+    },
+    {
+     "old_site": "0x1457ca6",
+     "old_ins": "lea rcx, [rdi + 0x4dc08]",
+     "new_site": "0x12ef9b6",
+     "window": "strict 160 bytes from -0",
+     "new_ins": "lea rcx, [rdi + 0x4dc08]",
+     "new_value": "0x4dc08",
+     "status": "same",
+     "strong": true
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 70,
+   "file": "src/native.lua",
+   "line": 60,
+   "name": "CAREER.list (container widget)",
+   "category": "struct offset",
+   "old": "0x9b8",
+   "new": "0x9b8",
+   "method": "12 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 12,
+   "confidence": "high",
+   "feeds_write": true,
+   "evidence": [
+    {
+     "old_site": "0x18e57a9",
+     "old_ins": "lea r12, [r13 + 0x9b8]",
+     "new_site": "0x17668f9",
+     "new_ins": "lea r12, [r13 + 0x9b8]",
+     "new_value": "0x9b8",
+     "function": "0x18e52b0",
+     "strong": true,
+     "window": "aligned in function 0x18e52b0->0x1766400 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18e5b78",
+     "old_ins": "lea rcx, [rsi + 0x9b8]",
+     "new_site": "0x1766cc8",
+     "new_ins": "lea rcx, [rsi + 0x9b8]",
+     "new_value": "0x9b8",
+     "function": "0x18e5b10",
+     "strong": true,
+     "window": "aligned in function 0x18e5b10->0x1766c60 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18e5bcb",
+     "old_ins": "lea rsi, [r14 + 0x9b8]",
+     "new_site": "0x1766d1b",
+     "new_ins": "lea rsi, [r14 + 0x9b8]",
+     "new_value": "0x9b8",
+     "function": "0x18e5ba0",
+     "strong": true,
+     "window": "aligned in function 0x18e5ba0->0x1766cf0",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18e5de0",
+     "old_ins": "lea rsi, [rcx + 0x9b8]",
+     "new_site": "0x1766f30",
+     "new_ins": "lea rsi, [rcx + 0x9b8]",
+     "new_value": "0x9b8",
+     "function": "0x18e5dc0",
+     "strong": true,
+     "window": "aligned in function 0x18e5dc0->0x1766f10 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18e6086",
+     "old_ins": "lea rbp, [rcx + 0x9b8]",
+     "new_site": "0x17671d6",
+     "new_ins": "lea rbp, [rcx + 0x9b8]",
+     "new_value": "0x9b8",
+     "function": "0x18e6010",
+     "strong": true,
+     "window": "aligned in function 0x18e6010->0x1767160 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18e63dd",
+     "old_ins": "lea rcx, [rdi + 0x9b8]",
+     "new_site": "0x176752d",
+     "new_ins": "lea rcx, [rdi + 0x9b8]",
+     "new_value": "0x9b8",
+     "function": "0x18e62b0",
+     "strong": true,
+     "window": "aligned in function 0x18e62b0->0x1767400",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18e63fd",
+     "old_ins": "lea rcx, [rdi + 0x9b8]",
+     "new_site": "0x176754d",
+     "new_ins": "lea rcx, [rdi + 0x9b8]",
+     "new_value": "0x9b8",
+     "function": "0x18e62b0",
+     "strong": true,
+     "window": "aligned in function 0x18e62b0->0x1767400",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18e6415",
+     "old_ins": "lea rcx, [rdi + 0x9b8]",
+     "new_site": "0x1767565",
+     "new_ins": "lea rcx, [rdi + 0x9b8]",
+     "new_value": "0x9b8",
+     "function": "0x18e62b0",
+     "strong": true,
+     "window": "aligned in function 0x18e62b0->0x1767400",
+     "status": "same"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 71,
+   "file": "src/native.lua",
+   "line": 60,
+   "name": "CAREER.track (scrollbar)",
+   "category": "struct offset",
+   "old": "0x2fab8",
+   "new": "0x2fab8",
+   "method": "2 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 2,
+   "confidence": "high",
+   "feeds_write": false,
+   "evidence": [
+    {
+     "old_site": "0x18e5911",
+     "old_ins": "lea rdi, [r13 + 0x2fab8]",
+     "new_site": "0x1766a61",
+     "new_ins": "lea rdi, [r13 + 0x2fab8]",
+     "new_value": "0x2fab8",
+     "function": "0x18e52b0",
+     "strong": true,
+     "window": "aligned in function 0x18e52b0->0x1766400 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18e745d",
+     "old_ins": "add rcx, 0x2fab8",
+     "new_site": "0x176856d",
+     "new_ins": "add rcx, 0x2fab8",
+     "new_value": "0x2fab8",
+     "function": "0x18e7440",
+     "strong": true,
+     "window": "aligned in function 0x18e7440->0x1768550 (identical)",
+     "status": "same"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 72,
+   "file": "src/native.lua",
+   "line": 60,
+   "name": "CAREER.thumb",
+   "category": "struct offset",
+   "old": "0x2fce0",
+   "new": "0x2fce0",
+   "method": "3 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 3,
+   "confidence": "high",
+   "feeds_write": false,
+   "evidence": [
+    {
+     "old_site": "0x18e5a0e",
+     "old_ins": "lea rbx, [r13 + 0x2fce0]",
+     "new_site": "0x1766b5e",
+     "new_ins": "lea rbx, [r13 + 0x2fce0]",
+     "new_value": "0x2fce0",
+     "function": "0x18e52b0",
+     "strong": true,
+     "window": "aligned in function 0x18e52b0->0x1766400 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18e5d44",
+     "old_ins": "lea rcx, [r14 + 0x2fce0]",
+     "new_site": "0x1766e94",
+     "new_ins": "lea rcx, [r14 + 0x2fce0]",
+     "new_value": "0x2fce0",
+     "function": "0x18e5ba0",
+     "strong": true,
+     "window": "aligned in function 0x18e5ba0->0x1766cf0",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18e74c8",
+     "old_ins": "lea rcx, [rbx + 0x2fce0]",
+     "new_site": "0x17685d8",
+     "new_ins": "lea rcx, [rbx + 0x2fce0]",
+     "new_value": "0x2fce0",
+     "function": "0x18e7440",
+     "strong": true,
+     "window": "aligned in function 0x18e7440->0x1768550 (identical)",
+     "status": "same"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 73,
+   "file": "src/native.lua",
+   "line": 61,
+   "name": "CAREER.thumb_height",
+   "category": "struct offset",
+   "old": "0x2fe34",
+   "new": "0x2fe34",
+   "method": "2 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 2,
+   "confidence": "high",
+   "feeds_write": false,
+   "evidence": [
+    {
+     "old_site": "0x18e5d82",
+     "old_ins": "subss xmm1, dword ptr [r14 + 0x2fe34]",
+     "new_site": "0x1766ed2",
+     "new_ins": "subss xmm1, dword ptr [r14 + 0x2fe34]",
+     "new_value": "0x2fe34",
+     "function": "0x18e5ba0",
+     "strong": true,
+     "window": "aligned in function 0x18e5ba0->0x1766cf0",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18e74e7",
+     "old_ins": "movss dword ptr [rbx + 0x2fe34], xmm2",
+     "new_site": "0x17685f7",
+     "new_ins": "movss dword ptr [rbx + 0x2fe34], xmm2",
+     "new_value": "0x2fe34",
+     "function": "0x18e7440",
+     "strong": true,
+     "window": "aligned in function 0x18e7440->0x1768550 (identical)",
+     "status": "same"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 74,
+   "file": "src/native.lua",
+   "line": 61,
+   "name": "CAREER.enabled (byte)",
+   "category": "struct offset",
+   "old": "0x2fdf9",
+   "new": "0x2fdf9",
+   "method": "6 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 6,
+   "confidence": "high",
+   "feeds_write": false,
+   "evidence": [
+    {
+     "old_site": "0x18e5d27",
+     "old_ins": "cmp byte ptr [r14 + 0x2fdf9], 0",
+     "new_site": "0x1766e77",
+     "new_ins": "cmp byte ptr [r14 + 0x2fdf9], 0",
+     "new_value": "0x2fdf9",
+     "function": "0x18e5ba0",
+     "strong": true,
+     "window": "aligned in function 0x18e5ba0->0x1766cf0",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18e5e4b",
+     "old_ins": "cmp byte ptr [rdi + 0x2fdf9], 0",
+     "new_site": "0x1766f9b",
+     "new_ins": "cmp byte ptr [rdi + 0x2fdf9], 0",
+     "new_value": "0x2fdf9",
+     "function": "0x18e5dc0",
+     "strong": true,
+     "window": "aligned in function 0x18e5dc0->0x1766f10 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18e5f04",
+     "old_ins": "cmp byte ptr [rdi + 0x2fdf9], 0",
+     "new_site": "0x1767054",
+     "new_ins": "cmp byte ptr [rdi + 0x2fdf9], 0",
+     "new_value": "0x2fdf9",
+     "function": "0x18e5dc0",
+     "strong": true,
+     "window": "aligned in function 0x18e5dc0->0x1766f10 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18e6016",
+     "old_ins": "cmp byte ptr [rcx + 0x2fdf9], 0",
+     "new_site": "0x1767166",
+     "new_ins": "cmp byte ptr [rcx + 0x2fdf9], 0",
+     "new_value": "0x2fdf9",
+     "function": "0x18e6010",
+     "strong": true,
+     "window": "aligned in function 0x18e6010->0x1767160 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18e7474",
+     "old_ins": "mov byte ptr [rbx + 0x2fdf9], 0",
+     "new_site": "0x1768584",
+     "new_ins": "mov byte ptr [rbx + 0x2fdf9], 0",
+     "new_value": "0x2fdf9",
+     "function": "0x18e7440",
+     "strong": true,
+     "window": "aligned in function 0x18e7440->0x1768550 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18e74a0",
+     "old_ins": "mov byte ptr [rbx + 0x2fdf9], 1",
+     "new_site": "0x17685b0",
+     "new_ins": "mov byte ptr [rbx + 0x2fdf9], 1",
+     "new_value": "0x2fdf9",
+     "function": "0x18e7440",
+     "strong": true,
+     "window": "aligned in function 0x18e7440->0x1768550 (identical)",
+     "status": "same"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 75,
+   "file": "src/model.lua",
+   "line": 45,
+   "name": "Career list widget fields +4 x, +8 y, +16 height, +32 scale y",
+   "category": "struct offset",
+   "old": "4/8/16/32",
+   "new": "4/8/16/32",
+   "method": "the Career code reads [list + 4] (qword x,y), [list + 0x10] and [list + 0x20] identically in both builds (9 witnesses); set_position (old 0x14476a0, identical) reads [w + 4] / [w + 8]; set_size (MOM row 25, identical) writes [w + 0xc] / [w + 0x10]",
+   "witnesses": 9,
+   "confidence": "high",
+   "feeds_write": true,
+   "evidence": [
+    {
+     "old_site": "0x18e5d4b",
+     "old_ins": "mov rax, qword ptr [r14 + 0x9bc]",
+     "new_site": "0x1766e9b",
+     "new_ins": "mov rax, qword ptr [r14 + 0x9bc]",
+     "new_value": "0x9bc",
+     "function": "0x18e5ba0",
+     "strong": true,
+     "window": "aligned in function 0x18e5ba0->0x1766cf0",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18e5f78",
+     "old_ins": "mov rax, qword ptr [rdi + 0x9bc]",
+     "new_site": "0x17670c8",
+     "new_ins": "mov rax, qword ptr [rdi + 0x9bc]",
+     "new_value": "0x9bc",
+     "function": "0x18e5dc0",
+     "strong": true,
+     "window": "aligned in function 0x18e5dc0->0x1766f10 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18e612d",
+     "old_ins": "mov rdx, qword ptr [rdi + 0x9bc]",
+     "new_site": "0x176727d",
+     "new_ins": "mov rdx, qword ptr [rdi + 0x9bc]",
+     "new_value": "0x9bc",
+     "function": "0x18e6010",
+     "strong": true,
+     "window": "aligned in function 0x18e6010->0x1767160 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18e5d52",
+     "old_ins": "mulss xmm0, dword ptr [r14 + 0x9c8]",
+     "new_site": "0x1766ea2",
+     "new_ins": "mulss xmm0, dword ptr [r14 + 0x9c8]",
+     "new_value": "0x9c8",
+     "function": "0x18e5ba0",
+     "strong": true,
+     "window": "aligned in function 0x18e5ba0->0x1766cf0",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18e5fa5",
+     "old_ins": "mulss xmm0, dword ptr [rdi + 0x9c8]",
+     "new_site": "0x17670f5",
+     "new_ins": "mulss xmm0, dword ptr [rdi + 0x9c8]",
+     "new_value": "0x9c8",
+     "function": "0x18e5dc0",
+     "strong": true,
+     "window": "aligned in function 0x18e5dc0->0x1766f10 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18e7455",
+     "old_ins": "mulss xmm2, dword ptr [rcx + 0x9c8]",
+     "new_site": "0x1768565",
+     "new_ins": "mulss xmm2, dword ptr [rcx + 0x9c8]",
+     "new_value": "0x9c8",
+     "function": "0x18e7440",
+     "strong": true,
+     "window": "aligned in function 0x18e7440->0x1768550 (identical)",
+     "status": "same"
+    }
+   ]
+  },
+  {
+   "id": 76,
+   "file": "src/native.lua",
+   "line": 61,
+   "name": "CAREER.padding (4 px)",
+   "category": "layout constant",
+   "old": "0x4",
+   "new": "0x4",
+   "method": "4 read-only 4.0 constants loaded by the mapped Career functions, all still 4.0",
+   "witnesses": 4,
+   "confidence": "high",
+   "feeds_write": true,
+   "evidence": [
+    {
+     "old_site": "0x18e5d6e",
+     "old_ins": "addss xmm2, dword ptr [rip + 0xae169a]",
+     "new_site": "0x1766ebe",
+     "new_ins": "addss xmm2, dword ptr [rip + 0xadfd92]",
+     "old_constant": 4.0,
+     "new_constant": 4.0
+    },
+    {
+     "old_site": "0x18e5fb5",
+     "old_ins": "addss xmm0, dword ptr [rip + 0xae1453]",
+     "new_site": "0x1767105",
+     "new_ins": "addss xmm0, dword ptr [rip + 0xadfb4b]",
+     "old_constant": 4.0,
+     "new_constant": 4.0
+    },
+    {
+     "old_site": "0x18e6115",
+     "old_ins": "addss xmm3, dword ptr [rip + 0xae12f3]",
+     "new_site": "0x1767265",
+     "new_ins": "addss xmm3, dword ptr [rip + 0xadf9eb]",
+     "old_constant": 4.0,
+     "new_constant": 4.0
+    },
+    {
+     "old_site": "0x18e6147",
+     "old_ins": "addss xmm0, dword ptr [rip + 0xae12c1]",
+     "new_site": "0x1767297",
+     "new_ins": "addss xmm0, dword ptr [rip + 0xadf9b9]",
+     "old_constant": 4.0,
+     "new_constant": 4.0
+    }
+   ]
+  },
+  {
+   "id": 77,
+   "file": "src/native.lua",
+   "line": 65,
+   "name": "OPTIONS_LIST.bar",
+   "category": "struct offset",
+   "old": "0x330",
+   "new": "0x330",
+   "method": "9 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 9,
+   "confidence": "high",
+   "feeds_write": true,
+   "evidence": [
+    {
+     "old_site": "0x1812089",
+     "old_ins": "add rcx, 0x330",
+     "new_site": "0x16932d9",
+     "new_ins": "add rcx, 0x330",
+     "new_value": "0x330",
+     "function": "0x1812060",
+     "strong": true,
+     "window": "aligned in function 0x1812060->0x16932b0",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18126ad",
+     "old_ins": "lea rcx, [rsi + 0x330]",
+     "new_site": "0x16938fd",
+     "new_ins": "lea rcx, [rsi + 0x330]",
+     "new_value": "0x330",
+     "function": "0x18123f0",
+     "strong": true,
+     "window": "aligned in function 0x18123f0->0x1693640 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x1812722",
+     "old_ins": "lea rdx, [rsi + 0x330]",
+     "new_site": "0x1693972",
+     "new_ins": "lea rdx, [rsi + 0x330]",
+     "new_value": "0x330",
+     "function": "0x18123f0",
+     "strong": true,
+     "window": "aligned in function 0x18123f0->0x1693640 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18127da",
+     "old_ins": "lea rcx, [rdi + 0x330]",
+     "new_site": "0x1693a2a",
+     "new_ins": "lea rcx, [rdi + 0x330]",
+     "new_value": "0x330",
+     "function": "0x18127a0",
+     "strong": true,
+     "window": "aligned in function 0x18127a0->0x16939f0 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x181290b",
+     "old_ins": "lea rcx, [r14 + 0x330]",
+     "new_site": "0x1693b5b",
+     "new_ins": "lea rcx, [r14 + 0x330]",
+     "new_value": "0x330",
+     "function": "0x1812800",
+     "strong": true,
+     "window": "aligned in function 0x1812800->0x1693a50 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x1812d01",
+     "old_ins": "lea rdi, [rcx + 0x330]",
+     "new_site": "0x1693f51",
+     "new_ins": "lea rdi, [rcx + 0x330]",
+     "new_value": "0x330",
+     "function": "0x1812940",
+     "strong": true,
+     "window": "aligned in function 0x1812940->0x1693b90",
+     "status": "same"
+    },
+    {
+     "old_site": "0x1812d01",
+     "old_ins": "lea rdi, [rcx + 0x330]",
+     "new_site": "0x1693f51",
+     "new_ins": "lea rdi, [rcx + 0x330]",
+     "new_value": "0x330",
+     "function": "0x1812cf0",
+     "strong": true,
+     "window": "aligned in function 0x1812cf0->0x1693f40",
+     "status": "same"
+    },
+    {
+     "old_site": "0x1813e92",
+     "old_ins": "lea rcx, [rbx + 0x330]",
+     "new_site": "0x16950e2",
+     "new_ins": "lea rcx, [rbx + 0x330]",
+     "new_value": "0x330",
+     "function": "0x1813dd0",
+     "strong": true,
+     "window": "aligned in function 0x1813dd0->0x1695020 (identical)",
+     "status": "same"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 78,
+   "file": "src/native.lua",
+   "line": 66,
+   "name": "OPTIONS_LIST.span (bar + 0x7b0)",
+   "category": "struct offset",
+   "old": "0xae0",
+   "new": "0xae0",
+   "method": "1 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 1,
+   "confidence": "high",
+   "feeds_write": false,
+   "evidence": [
+    {
+     "old_site": "0x18120a8",
+     "old_ins": "mulss xmm1, dword ptr [rdi + 0xae0]",
+     "new_site": "0x16932f8",
+     "new_ins": "mulss xmm1, dword ptr [rdi + 0xae0]",
+     "new_value": "0xae0",
+     "function": "0x1812060",
+     "strong": true,
+     "window": "aligned in function 0x1812060->0x16932b0",
+     "status": "same"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 79,
+   "file": "src/native.lua",
+   "line": 66,
+   "name": "OPTIONS_LIST.value (bar + 0x7b8)",
+   "category": "struct offset",
+   "old": "0xae8",
+   "new": "0xae8",
+   "method": "2 agreeing code witness(es) (strong), 0 disagreeing",
+   "witnesses": 2,
+   "confidence": "high",
+   "feeds_write": false,
+   "evidence": [
+    {
+     "old_site": "0x1812099",
+     "old_ins": "movss xmm1, dword ptr [rdi + 0xae8]",
+     "new_site": "0x16932e9",
+     "new_ins": "movss xmm1, dword ptr [rdi + 0xae8]",
+     "new_value": "0xae8",
+     "function": "0x1812060",
+     "strong": true,
+     "window": "aligned in function 0x1812060->0x16932b0",
+     "status": "same"
+    },
+    {
+     "old_site": "0x1813e8a",
+     "old_ins": "movss xmm1, dword ptr [rbx + 0xae8]",
+     "new_site": "0x16950da",
+     "new_ins": "movss xmm1, dword ptr [rbx + 0xae8]",
+     "new_value": "0xae8",
+     "function": "0x1813dd0",
+     "strong": true,
+     "window": "aligned in function 0x1813dd0->0x1695020 (identical)",
+     "status": "same"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 80,
+   "file": "src/native.lua",
+   "line": 65,
+   "name": "OPTIONS_LIST.thumb (bar + 0x268)",
+   "category": "struct offset",
+   "old": "0x598",
+   "new": "0x598",
+   "method": "1 agreeing code witness(es) (strong), 0 disagreeing; equals bar 0x330 + the scrollbar thumb widget +0x268 (SCROLL_SET identical)",
+   "witnesses": 2,
+   "confidence": "high",
+   "feeds_write": false,
+   "evidence": [
+    {
+     "old_site": "0x1812861",
+     "old_ins": "mov rdx, qword ptr [rbx + 0x598]",
+     "new_site": "0x1693ab1",
+     "new_ins": "mov rdx, qword ptr [rbx + 0x598]",
+     "new_value": "0x598",
+     "function": "0x1812800",
+     "strong": true,
+     "window": "aligned in function 0x1812800->0x1693a50 (identical)",
+     "status": "same"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 81,
+   "file": "src/native.lua",
+   "line": 251,
+   "name": "list content container (+544)",
+   "category": "struct offset",
+   "old": "0x220",
+   "new": "0x220",
+   "method": "6 agreeing code witness(es) (strong), 0 disagreeing; MOM MAP.json row 138 PANEL_CONTAINER 0x220",
+   "witnesses": 7,
+   "confidence": "high",
+   "feeds_write": true,
+   "evidence": [
+    {
+     "old_site": "0x18120a1",
+     "old_ins": "lea rcx, [rdi + 0x220]",
+     "new_site": "0x16932f1",
+     "new_ins": "lea rcx, [rdi + 0x220]",
+     "new_value": "0x220",
+     "function": "0x1812060",
+     "strong": true,
+     "window": "aligned in function 0x1812060->0x16932b0",
+     "status": "same"
+    },
+    {
+     "old_site": "0x18125e1",
+     "old_ins": "lea rbx, [rsi + 0x220]",
+     "new_site": "0x1693831",
+     "new_ins": "lea rbx, [rsi + 0x220]",
+     "new_value": "0x220",
+     "function": "0x18123f0",
+     "strong": true,
+     "window": "aligned in function 0x18123f0->0x1693640 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x1812bd0",
+     "old_ins": "lea rcx, [rbx + 0x220]",
+     "new_site": "0x1693e20",
+     "new_ins": "lea rcx, [rbx + 0x220]",
+     "new_value": "0x220",
+     "function": "0x1812940",
+     "strong": true,
+     "window": "aligned in function 0x1812940->0x1693b90",
+     "status": "same"
+    },
+    {
+     "old_site": "0x1812c1e",
+     "old_ins": "mov ecx, dword ptr [rbx + 0x220]",
+     "new_site": "0x1693e6e",
+     "new_ins": "mov ecx, dword ptr [rbx + 0x220]",
+     "new_value": "0x220",
+     "function": "0x1812940",
+     "strong": true,
+     "window": "aligned in function 0x1812940->0x1693b90",
+     "status": "same"
+    },
+    {
+     "old_site": "0x1812c33",
+     "old_ins": "mov dword ptr [rbx + 0x220], ecx",
+     "new_site": "0x1693e83",
+     "new_ins": "mov dword ptr [rbx + 0x220], ecx",
+     "new_value": "0x220",
+     "function": "0x1812940",
+     "strong": true,
+     "window": "aligned in function 0x1812940->0x1693b90",
+     "status": "same"
+    },
+    {
+     "old_site": "0x1813e6c",
+     "old_ins": "lea rcx, [rbx + 0x220]",
+     "new_site": "0x16950bc",
+     "new_ins": "lea rcx, [rbx + 0x220]",
+     "new_value": "0x220",
+     "function": "0x1813dd0",
+     "strong": true,
+     "window": "aligned in function 0x1813dd0->0x1695020 (identical)",
+     "status": "same"
+    }
+   ],
+   "conflicts": 0
+  },
+  {
+   "id": 82,
+   "file": "src/native.lua",
+   "line": 66,
+   "name": "OPTIONS_LIST.scroll (container + 8 = its y position)",
+   "category": "struct offset (derived)",
+   "old": "0x228",
+   "new": "0x228",
+   "method": "container (0x220, 6 witnesses) + widget y at +8",
+   "witnesses": 2,
+   "confidence": "high",
+   "feeds_write": false,
+   "derived_from": [
+    {
+     "what": "content container",
+     "value": "0x220"
+    },
+    {
+     "what": "widget y (set_position compares [w + 8], identical body)",
+     "value": "0x8"
+    }
+   ]
+  },
+  {
+   "id": 83,
+   "file": "src/native.lua",
+   "line": 68,
+   "name": "OPTIONS_PAGES[1].list (escape screen -> OPTIONS content -> settings panel)",
+   "category": "struct offset (derived)",
+   "old": "0x3fef20",
+   "new": "0x3fef20",
+   "method": "escape screen + OPTIONS_CONTENT 0x2def98 + panel 0x11ff88, both high in the MOM map (the panel's scrollbar at +0x330 and container at +0x220 match MOM PANEL_SCROLL / PANEL_CONTAINER)",
+   "witnesses": 2,
+   "confidence": "high",
+   "feeds_write": false,
+   "derived_from": [
+    {
+     "what": "MOM OPTIONS_CONTENT (row 50)",
+     "value": "0x2def98"
+    },
+    {
+     "what": "MOM PANELS[1].offset (row 106)",
+     "value": "0x11ff88"
+    }
+   ]
+  },
+  {
+   "id": 84,
+   "file": "src/native.lua",
+   "line": 69,
+   "name": "OPTIONS_PAGES[26].list (bindings screen -> its binding list)",
+   "category": "struct offset",
+   "old": "0x529a8",
+   "new": "0x529a8",
+   "method": "not directly witnessed: every old use of 0x529a8 (bindings screen destroy/update at old 0x1475440-0x1475850) maps into new RVA 0x130d000-0x130dfff, a page the 26088801 capture holds encrypted (game.dll decrypts it on first use). Bracketing evidence, all unchanged: fields before the list read by readable code ([screen + 0x498f8], [screen + 0x52588], tab bar + 0x4e0, the init's +0x44608 / +0x44610), the list object's own code (old 0x1812800 -> new 0x1693a50 identical; its +0x220/+0x330/+0xae8 fields), and the Mod Bindings Menu port keeps ROW_LIST_OFFSET 338344. The mod only drives the list after its bar reads visible (alpha > 0.95) and its span/value/scroll pass the model bounds; live check C5 in NOTES.md",
+   "witnesses": 3,
+   "confidence": "medium",
+   "feeds_write": true,
+   "evidence": [
+    {
+     "old_site": "0x14aceaa",
+     "old_ins": "cmp dword ptr [rsi + 0x498f8], 2",
+     "new_site": "0x1345142",
+     "new_ins": "cmp dword ptr [rsi + 0x498f8], 2",
+     "old_value": "0x498f8",
+     "new_value": "0x498f8",
+     "window": "paired by shape from 0x14ace9d / 0x1345135",
+     "status": "same",
+     "strong": false
+    },
+    {
+     "old_site": "0x14aceb3",
+     "old_ins": "cmp dword ptr [rsi + 0x52588], 2",
+     "new_site": "0x134514b",
+     "new_ins": "cmp dword ptr [rsi + 0x52588], 2",
+     "old_value": "0x52588",
+     "new_value": "0x52588",
+     "window": "paired by shape from 0x14ace9d / 0x1345135",
+     "status": "same",
+     "strong": false
+    },
+    {
+     "old_site": "0x14acebc",
+     "old_ins": "lea rcx, [rsi + 0x4e0]",
+     "new_site": "0x1345154",
+     "new_ins": "lea rcx, [rsi + 0x4e0]",
+     "old_value": "0x4e0",
+     "new_value": "0x4e0",
+     "window": "paired by shape from 0x14ace9d / 0x1345135",
+     "status": "same",
+     "strong": false
+    },
+    {
+     "old_site": "0x14752b9",
+     "old_ins": "cmp dword ptr [r13 + 0x44608], 0",
+     "new_site": "0x130cf69",
+     "new_ins": "cmp dword ptr [r13 + 0x44608], 0",
+     "old_value": "0x44608",
+     "new_value": "0x44608",
+     "window": "paired by shape from 0x14752b9 / 0x130cf69",
+     "status": "same",
+     "strong": false
+    }
+   ],
+   "encrypted_page": {
+    "new_page": "0x130d000",
+    "byte_entropy_bits": 7.953,
+    "note": "readable code pages in this image measure ~5.5-6.5 bits; >7.75 is ciphertext",
+    "old_uses_of_0x529a8": [
+     "0x1475477",
+     "0x1475678",
+     "0x1475773",
+     "0x14757de",
+     "0x1475846"
+    ],
+    "new_occurrences_of_0x529a8": []
+   }
+  },
+  {
+   "id": 85,
+   "file": "src/model.lua",
+   "line": 28,
+   "name": "scrollbar widget fields +12 width, +16 height, +84 resolved alpha, +100 / +140 scale, +148 left, +156 bottom",
+   "category": "struct offset",
+   "old": "12/16/84/100/140/148/156",
+   "new": "12/16/84/100/140/148/156",
+   "method": "the widget transform passes that write these fields (old 0x1434d40, 0x14402d0, 0x1442580, 0x144a3e0, 0x144a130) are identical apart from relocations in the new build (0x1434d40->0x12cc8c0 identical, 0x14402d0->0x12d7fe0 identical, 0x1442580->0x12da290 identical, 0x144a3e0->0x12e20f0 identical, 0x144a130->0x12e1e40 identical); set_size (identical) writes +0xc / +0x10; MOM MAP.json WIDGET_HEIGHT 0x10",
+   "witnesses": 5,
+   "confidence": "high",
+   "feeds_write": false,
+   "evidence": [
+    {
+     "old_site": "0x1434ed3",
+     "old_ins": "mov ebx, dword ptr [rdi + r14*4 + 0x54]",
+     "new_site": "0x12cca53",
+     "new_ins": "mov ebx, dword ptr [rdi + r14*4 + 0x54]",
+     "new_value": "0x54",
+     "function": "0x1434d40",
+     "strong": true,
+     "window": "aligned in function 0x1434d40->0x12cc8c0 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x14357f7",
+     "old_ins": "mov ebx, dword ptr [rdi + rax*4 + 0x54]",
+     "new_site": "0x12cd377",
+     "new_ins": "mov ebx, dword ptr [rdi + rax*4 + 0x54]",
+     "new_value": "0x54",
+     "function": "0x1434d40",
+     "strong": true,
+     "window": "aligned in function 0x1434d40->0x12cc8c0 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x14403cd",
+     "old_ins": "movss xmm0, dword ptr [rcx + 0x54]",
+     "new_site": "0x12d80dd",
+     "new_ins": "movss xmm0, dword ptr [rcx + 0x54]",
+     "new_value": "0x54",
+     "function": "0x14402d0",
+     "strong": true,
+     "window": "aligned in function 0x14402d0->0x12d7fe0 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x1440895",
+     "old_ins": "movss xmm13, dword ptr [rdi + 0x64]",
+     "new_site": "0x12d85a5",
+     "new_ins": "movss xmm13, dword ptr [rdi + 0x64]",
+     "new_value": "0x64",
+     "function": "0x14402d0",
+     "strong": true,
+     "window": "aligned in function 0x14402d0->0x12d7fe0 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x1442b95",
+     "old_ins": "movss xmm13, dword ptr [rdi + 0x64]",
+     "new_site": "0x12da8a5",
+     "new_ins": "movss xmm13, dword ptr [rdi + 0x64]",
+     "new_value": "0x64",
+     "function": "0x1442580",
+     "strong": true,
+     "window": "aligned in function 0x1442580->0x12da290 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x144a618",
+     "old_ins": "movss xmm6, dword ptr [rax + 0x64]",
+     "new_site": "0x12e2328",
+     "new_ins": "movss xmm6, dword ptr [rax + 0x64]",
+     "new_value": "0x64",
+     "function": "0x144a3e0",
+     "strong": true,
+     "window": "aligned in function 0x144a3e0->0x12e20f0 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x1434f62",
+     "old_ins": "movss xmm9, dword ptr [r14 + rdi + 0x8c]",
+     "new_site": "0x12ccae2",
+     "new_ins": "movss xmm9, dword ptr [r14 + rdi + 0x8c]",
+     "new_value": "0x8c",
+     "function": "0x1434d40",
+     "strong": true,
+     "window": "aligned in function 0x1434d40->0x12cc8c0 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x144093a",
+     "old_ins": "movss xmm1, dword ptr [rdi + 0x8c]",
+     "new_site": "0x12d864a",
+     "new_ins": "movss xmm1, dword ptr [rdi + 0x8c]",
+     "new_value": "0x8c",
+     "function": "0x14402d0",
+     "strong": true,
+     "window": "aligned in function 0x14402d0->0x12d7fe0 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x1440a3b",
+     "old_ins": "movss xmm1, dword ptr [rdi + 0x8c]",
+     "new_site": "0x12d874b",
+     "new_ins": "movss xmm1, dword ptr [rdi + 0x8c]",
+     "new_value": "0x8c",
+     "function": "0x14402d0",
+     "strong": true,
+     "window": "aligned in function 0x14402d0->0x12d7fe0 (identical)",
+     "status": "same"
+    },
+    {
+     "old_site": "0x1434f80",
+     "old_ins": "movss xmm15, dword ptr [r14 + rdi + 0x94]",
+     "new_site": "0x12ccb00",
+     "new_ins": "movss xmm15, dword ptr [r14 + rdi + 0x94]",
+     "new_value": "0x94",
+     "function": "0x1434d40",
+     "strong": true,
+     "window": "aligned in function 0x1434d40->0x12cc8c0 (identical)",
+     "status": "same"
+    }
+   ]
+  },
+  {
+   "id": 86,
+   "file": "src/locate.lua",
+   "line": 73,
+   "name": "resolved alpha (+84) visibility gate",
+   "category": "struct offset",
+   "old": "0x54",
+   "new": "0x54",
+   "method": "as the widget row above",
+   "witnesses": 5,
+   "confidence": "high",
+   "feeds_write": true
+  },
+  {
+   "id": 87,
+   "file": "src/native.lua",
+   "line": 42,
+   "name": "ScrollBar layout: +0x268 thumb widget, +0x7b0 extent, +0x7b8 value",
+   "category": "struct layout",
+   "old": "0x268/0x7b0/0x7b8",
+   "new": "0x268/0x7b0/0x7b8",
+   "method": "scroll_thumb, SCROLL_SET, scroll_reset and scroll_extent use these and are identical apart from relocations (0x1793f60->0x16151f0, 0x1794530->0x16157c0, 0x1794570->0x1615800, 0x1794600->0x1615890)",
+   "witnesses": 4,
+   "confidence": "high",
+   "feeds_write": true,
+   "functions": [
+    {
+     "old": "0x1793f60",
+     "new": "0x16151f0",
+     "identical_modulo_relocation": true,
+     "similarity": 1.0
+    },
+    {
+     "old": "0x1794530",
+     "new": "0x16157c0",
+     "identical_modulo_relocation": true,
+     "similarity": 1.0
+    },
+    {
+     "old": "0x1794570",
+     "new": "0x1615800",
+     "identical_modulo_relocation": true,
+     "similarity": 1.0
+    },
+    {
+     "old": "0x1794600",
+     "new": "0x1615890",
+     "identical_modulo_relocation": true,
+     "similarity": 1.0
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,10 @@
+--- upstream wrapper
++++ port wrapper
+@@ -660,2 +660,2 @@
+-    manager_rva = 0x346d578, owner_rva = 0x347cf18,
+-    owner_offset = 0x7c8c90, size = 69688,
++    manager_rva = 0x2e287d8, owner_rva = 0x2e38250,
++    owner_offset = 0x7c8810, size = 69688,
+@@ -1009 +1009 @@
+-install_loader(create_runtime_api, patch, {revision = 'data-v7.5.1', exe_sha256 = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06', game_sha256 = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'}, runtime)
++install_loader(create_runtime_api, patch, {revision = 'data-v7.5.1-26088801', exe_sha256 = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE', game_sha256 = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'}, runtime)

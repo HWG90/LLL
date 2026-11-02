@@ -1,0 +1,220 @@
+{
+ "port": {
+  "linux GC64 luajit: test_cooldown.lua": {
+   "command": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit tests/test_cooldown.lua <workspace>/native-work/megapack-port/LaserSentryCooldown/work/port",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: test_cooldown.lua (13 checks, LuaJIT 2.1.ROLLING)"
+   ],
+   "tail": [
+    "PASS: test_cooldown.lua (13 checks, LuaJIT 2.1.ROLLING)"
+   ]
+  },
+  "linux GC64 luajit: test_hooks.lua": {
+   "command": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit tests/test_hooks.lua <workspace>/native-work/megapack-port/LaserSentryCooldown/work/port",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: test_hooks.lua (LuaJIT 2.1.ROLLING)"
+   ],
+   "tail": [
+    "PASS: test_hooks.lua (LuaJIT 2.1.ROLLING)"
+   ]
+  },
+  "linux GC64 luajit: test_turret.lua": {
+   "command": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit tests/test_turret.lua <workspace>/native-work/megapack-port/LaserSentryCooldown/work/port",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: test_turret.lua (8 checks, LuaJIT 2.1.ROLLING)"
+   ],
+   "tail": [
+    "PASS: test_turret.lua (8 checks, LuaJIT 2.1.ROLLING)"
+   ]
+  },
+  "linux GC64 luajit: test_equivalence.lua": {
+   "command": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit tests/test_equivalence.lua <workspace>/native-work/megapack-port/LaserSentryCooldown/work/port",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: test_equivalence.lua (3200 frames, 27 with calls, LuaJIT 2.1.ROLLING)"
+   ],
+   "tail": [
+    "PASS: test_equivalence.lua (3200 frames, 27 with calls, LuaJIT 2.1.ROLLING)"
+   ]
+  },
+  "linux GC64 luajit: compile_entry.lua entry-check": {
+   "command": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit tests/compile_entry.lua <workspace>/native-work/megapack-port/LaserSentryCooldown/work/port/build/entry-check.lua",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: assembled entry compiles"
+   ],
+   "tail": [
+    "PASS: assembled entry compiles"
+   ]
+  },
+  "linux GC64 luajit: compile_entry.lua entry-check-test": {
+   "command": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit tests/compile_entry.lua <workspace>/native-work/megapack-port/LaserSentryCooldown/work/port/build/entry-check-test.lua",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: assembled entry compiles"
+   ],
+   "tail": [
+    "PASS: assembled entry compiles"
+   ]
+  },
+  "wine luajit.exe: test_adapter.lua plain": {
+   "command": "wine <workspace>/native-work/megapack-port/LaserSentryCooldown/work/luajit.exe tests/test_adapter.lua . plain",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: test_adapter.lua plain (LuaJIT 2.1.ROLLING)"
+   ],
+   "tail": [
+    "PASS: test_adapter.lua plain (LuaJIT 2.1.ROLLING)"
+   ],
+   "attempts": 1,
+   "earlier_tails": []
+  },
+  "wine luajit.exe: test_adapter.lua hostile": {
+   "command": "wine <workspace>/native-work/megapack-port/LaserSentryCooldown/work/luajit.exe tests/test_adapter.lua . hostile",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: test_adapter.lua hostile (LuaJIT 2.1.ROLLING)"
+   ],
+   "tail": [
+    "PASS: test_adapter.lua hostile (LuaJIT 2.1.ROLLING)"
+   ],
+   "attempts": 1,
+   "earlier_tails": []
+  },
+  "wine luajit.exe: test_adapter.lua sdk": {
+   "command": "wine <workspace>/native-work/megapack-port/LaserSentryCooldown/work/luajit.exe tests/test_adapter.lua . sdk",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: test_adapter.lua sdk (LuaJIT 2.1.ROLLING)"
+   ],
+   "tail": [
+    "PASS: test_adapter.lua sdk (LuaJIT 2.1.ROLLING)"
+   ],
+   "attempts": 1,
+   "earlier_tails": []
+  }
+ },
+ "upstream": {
+  "linux GC64 luajit: test_cooldown.lua": {
+   "command": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit tests/test_cooldown.lua <workspace>/native-work/megapack-port/LaserSentryCooldown/work/upstream",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: test_cooldown.lua (13 checks, LuaJIT 2.1.ROLLING)"
+   ],
+   "tail": [
+    "PASS: test_cooldown.lua (13 checks, LuaJIT 2.1.ROLLING)"
+   ]
+  },
+  "linux GC64 luajit: test_hooks.lua": {
+   "command": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit tests/test_hooks.lua <workspace>/native-work/megapack-port/LaserSentryCooldown/work/upstream",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: test_hooks.lua (LuaJIT 2.1.ROLLING)"
+   ],
+   "tail": [
+    "PASS: test_hooks.lua (LuaJIT 2.1.ROLLING)"
+   ]
+  },
+  "linux GC64 luajit: test_turret.lua": {
+   "command": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit tests/test_turret.lua <workspace>/native-work/megapack-port/LaserSentryCooldown/work/upstream",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: test_turret.lua (8 checks, LuaJIT 2.1.ROLLING)"
+   ],
+   "tail": [
+    "PASS: test_turret.lua (8 checks, LuaJIT 2.1.ROLLING)"
+   ]
+  },
+  "linux GC64 luajit: test_equivalence.lua": {
+   "command": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit tests/test_equivalence.lua <workspace>/native-work/megapack-port/LaserSentryCooldown/work/upstream",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: test_equivalence.lua (3200 frames, 27 with calls, LuaJIT 2.1.ROLLING)"
+   ],
+   "tail": [
+    "PASS: test_equivalence.lua (3200 frames, 27 with calls, LuaJIT 2.1.ROLLING)"
+   ]
+  },
+  "linux GC64 luajit: compile_entry.lua entry-check": {
+   "command": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit tests/compile_entry.lua <workspace>/native-work/megapack-port/LaserSentryCooldown/work/upstream/build/entry-check.lua",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: assembled entry compiles"
+   ],
+   "tail": [
+    "PASS: assembled entry compiles"
+   ]
+  },
+  "linux GC64 luajit: compile_entry.lua entry-check-test": {
+   "command": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit tests/compile_entry.lua <workspace>/native-work/megapack-port/LaserSentryCooldown/work/upstream/build/entry-check-test.lua",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: assembled entry compiles"
+   ],
+   "tail": [
+    "PASS: assembled entry compiles"
+   ]
+  },
+  "wine luajit.exe: test_adapter.lua plain": {
+   "command": "wine <workspace>/native-work/megapack-port/LaserSentryCooldown/work/luajit.exe tests/test_adapter.lua . plain",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: test_adapter.lua plain (LuaJIT 2.1.ROLLING)"
+   ],
+   "tail": [
+    "PASS: test_adapter.lua plain (LuaJIT 2.1.ROLLING)"
+   ],
+   "attempts": 1,
+   "earlier_tails": []
+  },
+  "wine luajit.exe: test_adapter.lua hostile": {
+   "command": "wine <workspace>/native-work/megapack-port/LaserSentryCooldown/work/luajit.exe tests/test_adapter.lua . hostile",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: test_adapter.lua hostile (LuaJIT 2.1.ROLLING)"
+   ],
+   "tail": [
+    "PASS: test_adapter.lua hostile (LuaJIT 2.1.ROLLING)"
+   ],
+   "attempts": 1,
+   "earlier_tails": []
+  },
+  "wine luajit.exe: test_adapter.lua sdk": {
+   "command": "wine <workspace>/native-work/megapack-port/LaserSentryCooldown/work/luajit.exe tests/test_adapter.lua . sdk",
+   "exit": 0,
+   "passed": true,
+   "pass_lines": [
+    "PASS: test_adapter.lua sdk (LuaJIT 2.1.ROLLING)"
+   ],
+   "tail": [
+    "PASS: test_adapter.lua sdk (LuaJIT 2.1.ROLLING)"
+   ],
+   "attempts": 1,
+   "earlier_tails": []
+  }
+ },
+ "not_run": {
+  "tests/game_lua.py": "runs the suites inside the game's old bin/lua51.dll through Windows ctypes (the game VM is LuaJIT GC64 now); Windows-only"
+ },
+ "port_test_inputs": "tests/heat_fixture.lua re-laid out to the 26088801 lookup (build.py port_fixture); tests/reference/laser_sentry_cooldown.lua got the same code constants as the source; test_hooks MANAGER_RVA, the ability literal and the refusal text follow the port"
+}

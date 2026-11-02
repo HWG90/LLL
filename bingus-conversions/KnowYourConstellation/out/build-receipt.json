@@ -1,0 +1,1302 @@
+{
+ "option": "KnowYourConstellation",
+ "revision": "v4.1.1",
+ "module": "mods/cowboybingus/enemy_intelligence",
+ "build": 26088801,
+ "source": "upstream-bingus/KnowYourConstellation (git tag v4.1.1; lock source_sha256 53/53 equal)",
+ "pack_recipe": "WRAPPERS: scripts/module.py wrapper(root, game_sha, exe_sha) -> compile_resource (-bsdW); the port ships the plaintext wrapper instead (GC64 game VM)",
+ "pins": {
+  "game_dll_sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+  "exe_sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE"
+ },
+ "reproduction": {
+  "lock_resource_sha256": "505E2E8E3162226F68EE1E4ECB46EFB364021831E244E648083D32BCE0DC0DC5",
+  "bytecode_envelope_sha256": "505E2E8E3162226F68EE1E4ECB46EFB364021831E244E648083D32BCE0DC0DC5",
+  "equals_lock": true,
+  "shipped_v26_resource_sha256": "ED8123AD55E3C47619B1B88D7966CBFC2EC6FCBE356D6AA617C6C373485A89B6",
+  "shipped_v26_equals_discoverable_form": true
+ },
+ "map_summary": {
+  "rows": 55,
+  "by_confidence": {
+   "high": 49,
+   "medium": 5,
+   "low": 1
+  },
+  "changed": 38,
+  "feeds_write": 0,
+  "unmapped": []
+ },
+ "edits": [
+  {
+   "row": "mission.ui_state",
+   "file": "src/mission.lua",
+   "line": 151,
+   "old": "read(game + 0x347ce28, 8)",
+   "new": "read(game + 0x2E38160, 8)",
+   "confidence": "high"
+  },
+  {
+   "row": "mission.session_fallback_global",
+   "file": "src/mission.lua",
+   "line": 207,
+   "old": "ptr(game + 0x3326aa0)",
+   "new": "ptr(game + 0x2CE1C68)",
+   "confidence": "high"
+  },
+  {
+   "row": "mission.matchmaking",
+   "file": "src/mission.lua",
+   "line": 236,
+   "old": "ptr(game + 0x347ce80)",
+   "new": "ptr(game + 0x2E381B8)",
+   "confidence": "high"
+  },
+  {
+   "row": "mission.briefing_manager",
+   "file": "src/mission.lua",
+   "line": 261,
+   "old": "local manager = ptr(game + 0x3326e68)",
+   "new": "local manager = ptr(game + 0x2CE2040)",
+   "confidence": "high"
+  },
+  {
+   "row": "mission.root",
+   "file": "src/mission.lua",
+   "line": 280,
+   "old": "ptr(game + 0x3326340)",
+   "new": "ptr(game + 0x2CE1508)",
+   "confidence": "high"
+  },
+  {
+   "row": "mission.board",
+   "file": "src/mission.lua",
+   "line": 282,
+   "old": "ptr(game + 0x347cee8)",
+   "new": "ptr(game + 0x2E38220)",
+   "confidence": "high"
+  },
+  {
+   "row": "mission.difficulty_settings",
+   "file": "src/mission.lua",
+   "line": 305,
+   "old": "game + 0x328d2a0 + ",
+   "new": "game + 0x2C44280 + ",
+   "confidence": "high"
+  },
+  {
+   "row": "mission.definitions",
+   "file": "src/mission.lua",
+   "line": 323,
+   "old": "ptr(game + 0x347cd98)",
+   "new": "ptr(game + 0x2E380D0)",
+   "confidence": "high"
+  },
+  {
+   "row": "mission.categories",
+   "file": "src/mission.lua",
+   "line": 408,
+   "old": "game + 0x32e98e0 + 168",
+   "new": "game + 0x2CA1F40 + 168",
+   "confidence": "high"
+  },
+  {
+   "row": "mission.war_effects",
+   "file": "src/mission.lua",
+   "line": 444,
+   "old": "ptr(game + 0x346d518)",
+   "new": "ptr(game + 0x2E38278)",
+   "confidence": "high"
+  },
+  {
+   "row": "mission.session",
+   "file": "src/mission.lua",
+   "line": 476,
+   "old": "ptr(game + 0x347cef0)",
+   "new": "ptr(game + 0x2E38228)",
+   "confidence": "high"
+  },
+  {
+   "row": "mission.override_config",
+   "file": "src/mission.lua",
+   "line": 533,
+   "old": "ptr(game + 0x347cdf8)",
+   "new": "ptr(game + 0x2E38128)",
+   "confidence": "high"
+  },
+  {
+   "row": "mission.mission_configs",
+   "file": "src/mission.lua",
+   "line": 626,
+   "old": "game + 0x3773420 + 896",
+   "new": "game + 0x312EB50 + 896",
+   "confidence": "high"
+  },
+  {
+   "row": "presentation.manager",
+   "file": "src/presentation.lua",
+   "line": 112,
+   "old": "pointer(game+0x3326e68)",
+   "new": "pointer(game+0x2CE2040)",
+   "confidence": "high"
+  },
+  {
+   "row": "presentation.font",
+   "file": "src/presentation.lua",
+   "line": 126,
+   "old": "font_hash(game+0x3772268)",
+   "new": "font_hash(game+0x312D998)",
+   "confidence": "high"
+  },
+  {
+   "row": "presentation.material",
+   "file": "src/presentation.lua",
+   "line": 127,
+   "old": "pointer(game+0x37c5478)",
+   "new": "pointer(game+0x3180C08)",
+   "confidence": "high"
+  },
+  {
+   "row": "presentation.atlas",
+   "file": "src/presentation.lua",
+   "line": 128,
+   "old": "atlas_hash(game+0x3772ee8)",
+   "new": "atlas_hash(game+0x312E618)",
+   "confidence": "high"
+  },
+  {
+   "row": "mission.session_fallback",
+   "file": "src/mission.lua",
+   "line": 208,
+   "old": "read(session + 5633600, 12)",
+   "new": "read(session + 5630328, 12)",
+   "confidence": "high"
+  },
+  {
+   "row": "mission.root_packet",
+   "file": "src/mission.lua",
+   "line": 244,
+   "old": "read(root + 713400, 512, packet_bytes)",
+   "new": "read(root + 713528, 512, packet_bytes)",
+   "confidence": "high"
+  },
+  {
+   "row": "mission.controller",
+   "file": "src/mission.lua",
+   "line": 281,
+   "old": "ptr(root + 0xae288)",
+   "new": "ptr(root + 0xae308)",
+   "confidence": "high"
+  },
+  {
+   "row": "mission.session_gate",
+   "file": "src/mission.lua",
+   "line": 480,
+   "old": "read(session + 92134, 1)",
+   "new": "read(session + 92142, 1)",
+   "confidence": "high"
+  },
+  {
+   "row": "mission.root_gate_4205",
+   "file": "src/mission.lua",
+   "line": 480,
+   "old": "read(root + 4205, 1)",
+   "new": "read(root + 4333, 1)",
+   "confidence": "high"
+  },
+  {
+   "row": "mission.root_gate_4217",
+   "file": "src/mission.lua",
+   "line": 481,
+   "old": "read(root + 4217, 1)",
+   "new": "read(root + 4345, 1)",
+   "confidence": "high"
+  },
+  {
+   "row": "mission.level",
+   "file": "src/mission.lua",
+   "line": 505,
+   "old": "ptr(controller + 648)",
+   "new": "ptr(controller + 664)",
+   "confidence": "medium"
+  },
+  {
+   "row": "mission.briefing_count",
+   "file": "src/mission.lua",
+   "line": 262,
+   "old": "count(manager + 26184, 1024)",
+   "new": "count(manager + 26424, 1024)",
+   "confidence": "high"
+  },
+  {
+   "row": "mission.briefing_rows",
+   "file": "src/mission.lua",
+   "line": 264,
+   "old": "read(manager + 26192, n * 16, bulk)",
+   "new": "read(manager + 26432, n * 16, bulk)",
+   "confidence": "high"
+  },
+  {
+   "row": "mission.briefing_kind",
+   "file": "src/mission.lua",
+   "line": 267,
+   "old": "u32(rows, 16 * i + 8) == 235",
+   "new": "u32(rows, 16 * i + 8) == 237",
+   "confidence": "high"
+  },
+  {
+   "row": "presentation.registry_map",
+   "file": "src/presentation.lua",
+   "line": 113,
+   "old": "screen == 'map' and 25224 or 25272",
+   "new": "screen == 'map' and 25464 or 25512",
+   "confidence": "high"
+  },
+  {
+   "row": "presentation.kinds",
+   "file": "src/presentation.lua",
+   "line": 114,
+   "old": "screen == 'map' and 226 or 229",
+   "new": "screen == 'map' and 228 or 231",
+   "confidence": "high"
+  },
+  {
+   "row": "mission.tag_table",
+   "file": "src/mission.lua",
+   "line": 542,
+   "old": "read(game + 0x21e1920, 32 * 4, hash_bytes)",
+   "new": "read(game + 0x2069D50, 33 * 4, hash_bytes)",
+   "confidence": "high"
+  },
+  {
+   "row": "mission.tag_loop",
+   "file": "src/mission.lua",
+   "line": 543,
+   "old": "        clear(hashes)\n        for i = 0, 31 do",
+   "new": "        clear(hashes)\n        for i = 0, 32 do",
+   "confidence": "high"
+  },
+  {
+   "row": "mission.hash_buffer",
+   "file": "src/mission.lua",
+   "line": 107,
+   "old": "buffer(816), buffer(896), buffer(128)",
+   "new": "buffer(816), buffer(896), buffer(132)",
+   "confidence": "high"
+  },
+  {
+   "row": "resolve.from_native",
+   "file": "src/resolve.lua",
+   "line": 141,
+   "old": "function M.from_native(tag)\n    assert(tag >= 0 and tag <= 31, 'Unknown native enemy tag')\n    if tag == 1 then return 31 end\n    return tag > 1 and tag - 1 or 0\nend",
+   "new": "function M.from_native(tag)\n    assert(tag >= 0 and tag <= 32, 'Unknown native enemy tag')\n    if tag == 1 then return 31 end\n    if tag == 12 then return 32 end\n    return tag > 12 and tag - 2 or tag > 1 and tag - 1 or 0\nend",
+   "confidence": "high"
+  },
+  {
+   "row": "resolve.add_bound",
+   "file": "src/resolve.lua",
+   "line": 24,
+   "old": "assert(tag >= 1 and tag <= 31, 'Unknown enemy tag')",
+   "new": "assert(tag >= 1 and tag <= 32, 'Unknown enemy tag')",
+   "confidence": "high"
+  },
+  {
+   "row": "bingus_text.GAME",
+   "file": "src/bingus_text.lua",
+   "line": 357,
+   "old": "M.GAME = {settings = 0x3326340, index = 705500 + 212, table = 0x37C5650, count = 15}",
+   "new": "M.GAME = {settings = 0x2CE1508, index = 705628 + 212, table = 0x3180DE0, count = 15}",
+   "confidence": "high"
+  }
+ ],
+ "roster_data": {
+  "file": "src/roster_data.lua",
+  "sha256": "EB22F3BEE392796632477E1332E79ED31CD65E75CEC6A504849465BCD0548AF6",
+  "upstream_sha256": "4301CB28E09B05922F33C64015DCE9756D47BBCEAD37F7DF35690BDB55367CC4",
+  "reproduces_upstream_from_old_capture": true,
+  "report": {
+   "descriptors": {
+    "2": "0x1fec7b0",
+    "3": "0x1fec700",
+    "4": "0x1fef380"
+   },
+   "factions": {
+    "2": {
+     "spans": [
+      [
+       "0x2c6e530",
+       47
+      ],
+      [
+       "0x2cb1650",
+       26
+      ],
+      [
+       "0x2c79250",
+       42
+      ],
+      [
+       "0x312d630",
+       1
+      ],
+      [
+       "0x2c6c780",
+       27
+      ],
+      [
+       "0x2c85e70",
+       52
+      ],
+      [
+       "0x2c98910",
+       6
+      ],
+      [
+       "0x2c9b5a0",
+       8
+      ],
+      [
+       "0x312e2b0",
+       1
+      ],
+      [
+       "0x312e900",
+       1
+      ],
+      [
+       "0x1fe9658",
+       14
+      ]
+     ],
+     "raw_units": 47,
+     "units": [
+      45,
+      47
+     ],
+     "swaps": [
+      21,
+      26
+     ],
+     "groups": [
+      122,
+      127
+     ],
+     "families": [
+      33,
+      35
+     ],
+     "new_families": [
+      "0xaf38488d",
+      "0x24dc6d4b"
+     ],
+     "resources": [
+      40,
+      42
+     ],
+     "new_resources_not_displayed": [
+      "0x8ab62629db3d6ac8",
+      "0x662a7907531b45e5"
+     ],
+     "resources_gone": [],
+     "summoned_family": "0x8f7704f8"
+    },
+    "3": {
+     "spans": [
+      [
+       "0x2c71330",
+       61
+      ],
+      [
+       "0x2cb0f00",
+       39
+      ],
+      [
+       "0x2c76230",
+       44
+      ],
+      [
+       "0x312d510",
+       1
+      ],
+      [
+       "0x2c731b0",
+       32
+      ],
+      [
+       "0x2c827c0",
+       50
+      ],
+      [
+       "0x2c984b0",
+       4
+      ],
+      [
+       "0x2c9ace0",
+       8
+      ],
+      [
+       "0x2ca3680",
+       5
+      ],
+      [
+       "0x312e7e0",
+       1
+      ],
+      [
+       "0x1fe9548",
+       13
+      ]
+     ],
+     "raw_units": 61,
+     "units": [
+      60,
+      60
+     ],
+     "swaps": [
+      39,
+      39
+     ],
+     "groups": [
+      130,
+      130
+     ],
+     "families": [
+      29,
+      29
+     ],
+     "new_families": [],
+     "resources": [
+      53,
+      53
+     ],
+     "new_resources_not_displayed": [],
+     "resources_gone": []
+    },
+    "4": {
+     "spans": [
+      [
+       "0x2c6fcb0",
+       45
+      ],
+      [
+       "0x2cb1b30",
+       3
+      ],
+      [
+       "0x2c7c040",
+       81
+      ],
+      [
+       "0x312d750",
+       1
+      ],
+      [
+       "0x2c69b50",
+       18
+      ],
+      [
+       "0x2c89750",
+       53
+      ],
+      [
+       "0x2c98fa0",
+       1
+      ],
+      [
+       "0x2c9be60",
+       21
+      ],
+      [
+       "0x312e3d0",
+       1
+      ],
+      [
+       "0x2cae080",
+       3
+      ],
+      [
+       "0x1fe9ff8",
+       9
+      ]
+     ],
+     "raw_units": 45,
+     "units": [
+      44,
+      45
+     ],
+     "swaps": [
+      3,
+      3
+     ],
+     "groups": [
+      151,
+      156
+     ],
+     "families": [
+      20,
+      21
+     ],
+     "new_families": [
+      "0xa3decc72"
+     ],
+     "resources": [
+      16,
+      16
+     ],
+     "new_resources_not_displayed": [],
+     "resources_gone": []
+    }
+   }
+  }
+ },
+ "wrapper_changed_lines": [
+  "M.GAME = {settings = 0x2CE1508, index = 705628 + 212, table = 0x3180DE0, count = 15}",
+  "    assert(tag >= 1 and tag <= 32, 'Unknown enemy tag')",
+  "    assert(tag >= 0 and tag <= 32, 'Unknown native enemy tag')",
+  "    if tag == 12 then return 32 end",
+  "    return tag > 12 and tag - 2 or tag > 1 and tag - 1 or 0",
+  "    local settings_bytes, config_bytes, hash_bytes = buffer(816), buffer(896), buffer(132)",
+  "        local manager = pointer_at(read(game + 0x2E38160, 8), 0)",
+  "            local session = ptr(game + 0x2CE1C68)",
+  "            local fallback = read(session + 5630328, 12)",
+  "        local manager = ptr(game + 0x2E381B8)",
+  "        local loaded = read(root + 713528, 512, packet_bytes)",
+  "        local manager = ptr(game + 0x2CE2040)",
+  "        local n = count(manager + 26424, 1024)",
+  "        local rows = read(manager + 26432, n * 16, bulk)",
+  "            if u32(rows, 16 * i + 8) == 237 then",
+  "        local root = ptr(game + 0x2CE1508)",
+  "        local controller = ptr(root + 0xae308)",
+  "        local board = ptr(game + 0x2E38220)",
+  "        local b = read(game + 0x2C44280 + (snapshot.difficulty - 1) * 816, 816, settings_bytes)",
+  "        local defs = ptr(game + 0x2E380D0)",
+  "        if selected[52] == 0 or category >= 14 or read(game + 0x2CA1F40 + 168 * category + 9, 1)[0] == 0 then",
+  "        local globals = read(ptr(game + 0x2E38278), 32 * 356, bulk)",
+  "        local session = ptr(game + 0x2E38228)",
+  "        local gated = read(session + 92142, 1)[0] ~= 0 or read(root + 4333, 1)[0] ~= 0",
+  "            or read(root + 4345, 1)[0] ~= 0",
+  "        local level = ptr(controller + 664)",
+  "        local manager = ptr(game + 0x2E38128)",
+  "        local b = read(game + 0x2069D50, 33 * 4, hash_bytes)",
+  "        for i = 0, 32 do",
+  "        local config = read(game + 0x312EB50 + 896 * snapshot.mission, 896, config_bytes)",
+  "        local manager = pointer(game+0x2CE2040)",
+  "        local registry = screen == 'map' and 25464 or 25512",
+  "        local kind = screen == 'map' and 228 or 231",
+  "        box.font = font_hash(game+0x312D998)",
+  "        box.material = material_hash(pointer(game+0x3180C08)+24)",
+  "        box.atlas = atlas_hash(game+0x312E618)",
+  "install line (game/exe SHA-256 pins)"
+ ],
+ "wrapper_roster_lines_changed": 10,
+ "upstream_wrapper_sha256": "CEB348463B4D96182ED7E776AFB9BC82B3EC1C2295403C2159068207299BCD47",
+ "port_wrapper_sha256": "772A0C778A924498F232449A2469EC499ABABD0A2E7789737114011A98F2B70A",
+ "resource": {
+  "name": "mods/cowboybingus/enemy_intelligence",
+  "key": "1d106bd89d3a79ac",
+  "envelope_sha256": "164E2474CDE18285B7CCC2215DBDB03528C04D0A5BBF40EEDF45DE7B6BEE101E",
+  "bytes": 207753
+ },
+ "archive": {
+  "file": "9ba626afa44a3aa3.patch_0",
+  "sha256": "3BC184B6356CEA4BB60FEDF5B0E7B7A655E3600422B133E061D77ACCEDAF02E6",
+  "resources": 1
+ },
+ "luajit": {
+  "binary": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit",
+  "result": "compile: ok\tLuaJIT 2.1.ROLLING\t8\t207745"
+ },
+ "compat_adapter": false,
+ "writes": 0,
+ "tests": {
+  "upstream": {
+   "bingus_text": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: UTF-8 decoding accepts every well-formed length and rejects overlong, surrogate, truncated and out-of-range bytes",
+     "PASS: display text is any valid UTF-8 without control characters; line feeds only where a text allows them",
+     "PASS: byte caps (the game's fixed text buffers) cut only between characters and keep every whole character",
+     "PASS: character boundaries keep combining marks and ZWJ sequences whole",
+     "PASS: CJK wraps between characters, never before closing or after opening punctuation, nothing lost",
+     "PASS: 400 random mixed-script texts wrap into valid, fitting lines without losing characters",
+     "PASS: placeholders fill by name; pseudo text is longer, accented and keeps placeholders",
+     "PASS: game language picks bundled texts; later packs win; bad entries are refused singly and logged once",
+     "PASS: regional tags fall back to their base language; a forced pack wins, including English and pseudo",
+     "PASS: a broken registry is repaired, malformed packs are skipped, and only force = true forces",
+     "PASS: upper case covers Latin-1, Polish/Czech letters, Greek and Cyrillic; CJK and invalid bytes stay",
+     "PASS: the game's Text Language is read in five reads, mapped, and unreadable memory never guesses",
+     "PASS: two copies share one registry; a pack registered inline reaches every mod",
+     "PASS: refresh() and lookups with nothing changed allocate nothing",
+     "PASS: the Steam language query fails soft outside the game and tolerates several copies"
+    ],
+    "tail": []
+   },
+   "locales": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: en.lua names every title and roster enemy exactly, with no unused text"
+    ],
+    "tail": []
+   },
+   "resolve": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: recorded seed predictions, fallback, exclusions, subfaction headlines and display text",
+     "PASS: allocation-free draw identical to the uint64 replica: 48096 draws over 8 recorded and memory-fixture missions, 60000 over generated settings (1905 raising the same error), 5886 on float32 boundaries; 128000 generator states word for word; filters identical, reused lists too"
+    ],
+    "tail": []
+   },
+   "roster": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: data integrity, wiki cross-checks for all three factions, War Strider rules, zone multipliers, sorting and one computation per mission"
+    ],
+    "tail": []
+   },
+   "panel": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: forecast box below the native panel at six resolutions, every enemy named, high draw layer, meter ticks, no redraw when static, pending, briefing and side placement, font fallback and world changes",
+     "PASS: installer, roster and renderer through pending, pod entry, briefing, loadout and client unhover",
+     "PASS: the panel's 9 waits (engine resources, window size) each held for 10000 frames: hidden with their reason, never counted, back once cleared",
+     "PASS: long headlines scroll on one line with masks and no idle GUI calls; one GUI in the first non-main world",
+     "PASS: Chinese forecasts: whole characters in every line and scroll window, CJK wrapping, every enemy named or counted"
+    ],
+    "tail": []
+   },
+   "install": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: complete report publication, rapid selection races, pending retry bounds, footer consistency, hidden states and callback preservation"
+    ],
+    "tail": []
+   },
+   "update_chain": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: update chain on the runtime guard: previous update uncaught, pause and resume after a failed update below, bursts of 8 errors stop, one log line per burst, first failure kept through shutdown, expected transient states never counted, the build checked once through the shared runtime"
+    ],
+    "tail": []
+   },
+   "mission": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: host and joinable forecasts, cross-planet identity and scoped modifiers, pending previews, expiry, bounds and controller readiness",
+     "PASS: inserted native tag preserves catalogue IDs; all eight mission exclusions supported",
+     "PASS: category-72 spawn weights on the hovered planet, deduplicated IDs, scoped type-15 war effects; samples refilled in place",
+     "PASS: no forecast screen before the UI state exists"
+    ],
+    "tail": []
+   },
+   "presentation": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: left planet anchoring, independent card movement and fade, hover dismissal, host border, pod fade, loadout and native font mapping"
+    ],
+    "tail": []
+   },
+   "budget": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: per-frame API budget on the ship, in a mission, on the war table (host, client, spawn weights), briefing and loadout; no protection queries",
+     "PASS: garbage per frame, interpreted and compiled: none, refreshes included (with and without spawn weights); refreshes start no trace in the resolver, the roster or the refresh helpers of the installer"
+    ],
+    "tail": []
+   },
+   "panel_budget": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: real panel per frame: 3 engine calls while up (world list, main world, window size), 5 more on a moving headline, none while hidden; no garbage, interpreted or compiled, on the ship, in missions, on the war table (host and client), waiting, scrolling, briefing and loadout"
+    ],
+    "tail": []
+   },
+   "pending": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: 14 expected transient states each held for 10000 frames: hidden with their reason, never counted, no garbage interpreted or compiled, back once cleared; a failing layout check still stops at 8"
+    ],
+    "tail": []
+   },
+   "idle": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: 3953 frames side by side with v4.1 (host and client; idle, war table, briefing, loadout, screen changes, pending states, errors, a failing update below, a stop): every output equal, reads 38482 -> 36397; gate: 1 read per quiet frame, 2 every 30th; a replaced UI manager is seen within 30 frames (here 21); idle aborted trace starts 24 -> 0"
+    ],
+    "tail": []
+   },
+   "ffi_names sdk-first": {
+    "runner": "wine luajit.exe",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: Windows calls under private names, SDK-style declarations made first: module handles, memory reads into strings and buffers and module hashing (shared runtime) work, and the SDK prototypes stay live"
+    ],
+    "tail": []
+   },
+   "ffi_names mod-first": {
+    "runner": "wine luajit.exe",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: Windows calls under private names, SDK-style declarations made after the reader was built, with the real names and type names free until then: module handles, memory reads into strings and buffers and module hashing (shared runtime) work, and the SDK prototypes stay live"
+    ],
+    "tail": []
+   },
+   "ffi_names hostile": {
+    "runner": "wine luajit.exe",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: Windows calls under private names, every name declared first with a wrong prototype: module handles, memory reads into strings and buffers and module hashing (shared runtime) work"
+    ],
+    "tail": []
+   }
+  },
+  "port": {
+   "bingus_text": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: UTF-8 decoding accepts every well-formed length and rejects overlong, surrogate, truncated and out-of-range bytes",
+     "PASS: display text is any valid UTF-8 without control characters; line feeds only where a text allows them",
+     "PASS: byte caps (the game's fixed text buffers) cut only between characters and keep every whole character",
+     "PASS: character boundaries keep combining marks and ZWJ sequences whole",
+     "PASS: CJK wraps between characters, never before closing or after opening punctuation, nothing lost",
+     "PASS: 400 random mixed-script texts wrap into valid, fitting lines without losing characters",
+     "PASS: placeholders fill by name; pseudo text is longer, accented and keeps placeholders",
+     "PASS: game language picks bundled texts; later packs win; bad entries are refused singly and logged once",
+     "PASS: regional tags fall back to their base language; a forced pack wins, including English and pseudo",
+     "PASS: a broken registry is repaired, malformed packs are skipped, and only force = true forces",
+     "PASS: upper case covers Latin-1, Polish/Czech letters, Greek and Cyrillic; CJK and invalid bytes stay",
+     "PASS: the game's Text Language is read in five reads, mapped, and unreadable memory never guesses",
+     "PASS: two copies share one registry; a pack registered inline reaches every mod",
+     "PASS: refresh() and lookups with nothing changed allocate nothing",
+     "PASS: the Steam language query fails soft outside the game and tolerates several copies"
+    ],
+    "tail": []
+   },
+   "locales": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: en.lua names every title and roster enemy exactly, with no unused text"
+    ],
+    "tail": []
+   },
+   "resolve": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: recorded seed predictions, fallback, exclusions, subfaction headlines and display text",
+     "PASS: allocation-free draw identical to the uint64 replica: 48096 draws over 8 recorded and memory-fixture missions, 60000 over generated settings (1905 raising the same error), 5886 on float32 boundaries; 128000 generator states word for word; filters identical, reused lists too"
+    ],
+    "tail": []
+   },
+   "roster": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: data integrity, wiki cross-checks for all three factions, War Strider rules, zone multipliers, sorting and one computation per mission"
+    ],
+    "tail": []
+   },
+   "panel": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: forecast box below the native panel at six resolutions, every enemy named, high draw layer, meter ticks, no redraw when static, pending, briefing and side placement, font fallback and world changes",
+     "PASS: installer, roster and renderer through pending, pod entry, briefing, loadout and client unhover",
+     "PASS: the panel's 9 waits (engine resources, window size) each held for 10000 frames: hidden with their reason, never counted, back once cleared",
+     "PASS: long headlines scroll on one line with masks and no idle GUI calls; one GUI in the first non-main world",
+     "PASS: Chinese forecasts: whole characters in every line and scroll window, CJK wrapping, every enemy named or counted"
+    ],
+    "tail": []
+   },
+   "install": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: complete report publication, rapid selection races, pending retry bounds, footer consistency, hidden states and callback preservation"
+    ],
+    "tail": []
+   },
+   "update_chain": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: update chain on the runtime guard: previous update uncaught, pause and resume after a failed update below, bursts of 8 errors stop, one log line per burst, first failure kept through shutdown, expected transient states never counted, the build checked once through the shared runtime"
+    ],
+    "tail": []
+   },
+   "mission": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: host and joinable forecasts, cross-planet identity and scoped modifiers, pending previews, expiry, bounds and controller readiness",
+     "PASS: inserted native tag preserves catalogue IDs; all eight mission exclusions supported",
+     "PASS: category-72 spawn weights on the hovered planet, deduplicated IDs, scoped type-15 war effects; samples refilled in place",
+     "PASS: no forecast screen before the UI state exists"
+    ],
+    "tail": []
+   },
+   "presentation": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: left planet anchoring, independent card movement and fade, hover dismissal, host border, pod fade, loadout and native font mapping"
+    ],
+    "tail": []
+   },
+   "budget": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: per-frame API budget on the ship, in a mission, on the war table (host, client, spawn weights), briefing and loadout; no protection queries",
+     "PASS: garbage per frame, interpreted and compiled: none, refreshes included (with and without spawn weights); refreshes start no trace in the resolver, the roster or the refresh helpers of the installer"
+    ],
+    "tail": []
+   },
+   "panel_budget": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: real panel per frame: 3 engine calls while up (world list, main world, window size), 5 more on a moving headline, none while hidden; no garbage, interpreted or compiled, on the ship, in missions, on the war table (host and client), waiting, scrolling, briefing and loadout"
+    ],
+    "tail": []
+   },
+   "pending": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: 14 expected transient states each held for 10000 frames: hidden with their reason, never counted, no garbage interpreted or compiled, back once cleared; a failing layout check still stops at 8"
+    ],
+    "tail": []
+   },
+   "idle": {
+    "runner": "linux luajit",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: 3953 frames side by side with v4.1 (host and client; idle, war table, briefing, loadout, screen changes, pending states, errors, a failing update below, a stop): every output equal, reads 38482 -> 36397; gate: 1 read per quiet frame, 2 every 30th; a replaced UI manager is seen within 30 frames (here 21); idle aborted trace starts 28 -> 0"
+    ],
+    "tail": []
+   },
+   "ffi_names sdk-first": {
+    "runner": "wine luajit.exe",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: Windows calls under private names, SDK-style declarations made first: module handles, memory reads into strings and buffers and module hashing (shared runtime) work, and the SDK prototypes stay live"
+    ],
+    "tail": []
+   },
+   "ffi_names mod-first": {
+    "runner": "wine luajit.exe",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: Windows calls under private names, SDK-style declarations made after the reader was built, with the real names and type names free until then: module handles, memory reads into strings and buffers and module hashing (shared runtime) work, and the SDK prototypes stay live"
+    ],
+    "tail": []
+   },
+   "ffi_names hostile": {
+    "runner": "wine luajit.exe",
+    "exit": 0,
+    "passed": true,
+    "pass_lines": [
+     "PASS: Windows calls under private names, every name declared first with a wrong prototype: module handles, memory reads into strings and buffers and module hashing (shared runtime) work"
+    ],
+    "tail": []
+   }
+  },
+  "remap": [
+   {
+    "file": "tests/fixtures/memory.lua",
+    "what": "game.dll globals (hex literals)"
+   },
+   {
+    "file": "tests/reference/mission.lua",
+    "what": "game.dll globals (hex literals)"
+   },
+   {
+    "file": "tests/session.lua",
+    "what": "game.dll globals (hex literals)"
+   },
+   {
+    "file": "tests/test_budget.lua",
+    "what": "game.dll globals (hex literals)"
+   },
+   {
+    "file": "tests/test_idle.lua",
+    "what": "game.dll globals (hex literals)"
+   },
+   {
+    "file": "tests/test_mission.lua",
+    "what": "game.dll globals (hex literals)"
+   },
+   {
+    "file": "tests/test_pending.lua",
+    "what": "game.dll globals (hex literals)"
+   },
+   {
+    "file": "tests/test_presentation.lua",
+    "what": "game.dll globals (hex literals)"
+   },
+   {
+    "file": "tests/test_resolve.lua",
+    "what": "game.dll globals (hex literals)"
+   },
+   {
+    "file": "tests/fixtures/memory.lua",
+    "old": "put(session+92134,",
+    "new": "put(session+92142,",
+    "count": 1
+   },
+   {
+    "file": "tests/fixtures/memory.lua",
+    "old": "put(root+4205,",
+    "new": "put(root+4333,",
+    "count": 1
+   },
+   {
+    "file": "tests/fixtures/memory.lua",
+    "old": "put(root+4217,",
+    "new": "put(root+4345,",
+    "count": 1
+   },
+   {
+    "file": "tests/fixtures/memory.lua",
+    "old": "put(root+0xae288,",
+    "new": "put(root+0xae308,",
+    "count": 1
+   },
+   {
+    "file": "tests/fixtures/memory.lua",
+    "old": "put(controller+648,",
+    "new": "put(controller+664,",
+    "count": 1
+   },
+   {
+    "file": "tests/fixtures/memory.lua",
+    "old": "put(fallback+5633600,",
+    "new": "put(fallback+5630328,",
+    "count": 1
+   },
+   {
+    "file": "tests/fixtures/memory.lua",
+    "old": "put(root+713400,",
+    "new": "put(root+713528,",
+    "count": 1
+   },
+   {
+    "file": "tests/fixtures/memory.lua",
+    "old": "put(manager+25224,word(1)..word(0)..qword(owner)..word(226)",
+    "new": "put(manager+25464,word(1)..word(0)..qword(owner)..word(228)",
+    "count": 1
+   },
+   {
+    "file": "tests/fixtures/memory.lua",
+    "old": "put(manager+25272,word(1)..word(0)..qword(owner)..word(229)",
+    "new": "put(manager+25512,word(1)..word(0)..qword(owner)..word(231)",
+    "count": 1
+   },
+   {
+    "file": "tests/fixtures/memory.lua",
+    "old": "for i=0,31 do hashes[#hashes+1]=word(i==12 and 0x9fd5943a or 1000+i) end",
+    "new": "for i=0,32 do hashes[#hashes+1]=word(i==13 and 0x9fd5943a or 1000+i) end",
+    "count": 1
+   },
+   {
+    "file": "tests/session.lua",
+    "old": "space.pointer(manager + 25224 + 8)",
+    "new": "space.pointer(manager + 25464 + 8)",
+    "count": 1
+   },
+   {
+    "file": "tests/session.lua",
+    "old": "space.put(manager + 26184, word(1))",
+    "new": "space.put(manager + 26424, word(1))",
+    "count": 1
+   },
+   {
+    "file": "tests/session.lua",
+    "old": "space.put(manager + 26192, qword(0x5a000000) .. word(235)",
+    "new": "space.put(manager + 26432, qword(0x5a000000) .. word(237)",
+    "count": 1
+   },
+   {
+    "file": "tests/session.lua",
+    "old": "space.pointer(controller + 648)",
+    "new": "space.pointer(controller + 664)",
+    "count": 1
+   },
+   {
+    "file": "tests/session.lua",
+    "old": "+ 0xae288",
+    "new": "+ 0xae308",
+    "count": 1
+   },
+   {
+    "file": "tests/test_pending.lua",
+    "old": "s.manager + 26184",
+    "new": "s.manager + 26424",
+    "count": 2
+   },
+   {
+    "file": "tests/test_pending.lua",
+    "old": "s.manager + 26192 + 8, word(236)",
+    "new": "s.manager + 26432 + 8, word(238)",
+    "count": 1
+   },
+   {
+    "file": "tests/test_pending.lua",
+    "old": "s.manager + 26192 + 8, word(235)",
+    "new": "s.manager + 26432 + 8, word(237)",
+    "count": 1
+   },
+   {
+    "file": "tests/test_pending.lua",
+    "old": "s.manager + 26192,",
+    "new": "s.manager + 26432,",
+    "count": 2
+   },
+   {
+    "file": "tests/test_presentation.lua",
+    "old": "put(manager+25272,",
+    "new": "put(manager+25512,",
+    "count": 2
+   },
+   {
+    "file": "tests/test_presentation.lua",
+    "old": "put(manager+25288,word(226))",
+    "new": "put(manager+25528,word(228))",
+    "count": 1
+   },
+   {
+    "file": "tests/test_presentation.lua",
+    "old": "put(manager+25224,word(1)..word(0)..qword(owner)..word(226)",
+    "new": "put(manager+25464,word(1)..word(0)..qword(owner)..word(228)",
+    "count": 1
+   },
+   {
+    "file": "tests/test_presentation.lua",
+    "old": "put(join_manager+25224,",
+    "new": "put(join_manager+25464,",
+    "count": 1
+   },
+   {
+    "file": "tests/test_mission.lua",
+    "old": "put(joined.root+713400,",
+    "new": "put(joined.root+713528,",
+    "count": 1
+   },
+   {
+    "file": "tests/test_mission.lua",
+    "old": "+5633600",
+    "new": "+5630328",
+    "count": 3
+   },
+   {
+    "file": "tests/test_mission.lua",
+    "old": "assert(resolve.from_native(1)==31 and resolve.from_native(2)==1 and resolve.from_native(31)==30)",
+    "new": "assert(resolve.from_native(1)==31 and resolve.from_native(2)==1 and resolve.from_native(12)==32 and resolve.from_native(13)==11 and resolve.from_native(32)==30)",
+    "count": 1
+   },
+   {
+    "file": "tests/test_resolve.lua",
+    "old": "for id=2,31 do assert(resolve.from_native(id)==id-1) end\nassert(not pcall(resolve.from_native,32))",
+    "new": "for id=2,11 do assert(resolve.from_native(id)==id-1) end\nassert(resolve.from_native(12)==32)\nfor id=13,32 do assert(resolve.from_native(id)==id-2) end\nassert(not pcall(resolve.from_native,33))",
+    "count": 1
+   },
+   {
+    "file": "tests/reference/mission.lua",
+    "old": "read(session + 5633600, 12)",
+    "new": "read(session + 5630328, 12)",
+    "count": 1
+   },
+   {
+    "file": "tests/reference/mission.lua",
+    "old": "read(root + 713400, 512, packet_bytes)",
+    "new": "read(root + 713528, 512, packet_bytes)",
+    "count": 1
+   },
+   {
+    "file": "tests/reference/mission.lua",
+    "old": "count(manager + 26184, 1024)",
+    "new": "count(manager + 26424, 1024)",
+    "count": 1
+   },
+   {
+    "file": "tests/reference/mission.lua",
+    "old": "read(manager + 26192, n * 16, bulk)",
+    "new": "read(manager + 26432, n * 16, bulk)",
+    "count": 1
+   },
+   {
+    "file": "tests/reference/mission.lua",
+    "old": "u32(rows, 16 * i + 8) == 235",
+    "new": "u32(rows, 16 * i + 8) == 237",
+    "count": 1
+   },
+   {
+    "file": "tests/reference/mission.lua",
+    "old": "ptr(root + 0xae288)",
+    "new": "ptr(root + 0xae308)",
+    "count": 1
+   },
+   {
+    "file": "tests/reference/mission.lua",
+    "old": "read(session + 92134, 1)",
+    "new": "read(session + 92142, 1)",
+    "count": 1
+   },
+   {
+    "file": "tests/reference/mission.lua",
+    "old": "read(root + 4205, 1)",
+    "new": "read(root + 4333, 1)",
+    "count": 1
+   },
+   {
+    "file": "tests/reference/mission.lua",
+    "old": "read(root + 4217, 1)",
+    "new": "read(root + 4345, 1)",
+    "count": 1
+   },
+   {
+    "file": "tests/reference/mission.lua",
+    "old": "ptr(controller + 648)",
+    "new": "ptr(controller + 664)",
+    "count": 1
+   },
+   {
+    "file": "tests/reference/mission.lua",
+    "old": "read(game + 0x21e1920, 32 * 4, hash_bytes)",
+    "new": "read(game + 0x2069D50, 33 * 4, hash_bytes)",
+    "count": 1
+   },
+   {
+    "file": "tests/reference/mission.lua",
+    "old": "buffer(816), buffer(896), buffer(128)",
+    "new": "buffer(816), buffer(896), buffer(132)",
+    "count": 1
+   },
+   {
+    "file": "tests/reference/mission.lua",
+    "old": "        clear(hashes)\n        for i = 0, 31 do",
+    "new": "        clear(hashes)\n        for i = 0, 32 do",
+    "count": 1
+   },
+   {
+    "file": "tests/fixtures/memory.lua",
+    "old": "put(game+0x21e1920,",
+    "new": "put(game+0x2069D50,",
+    "count": 1
+   },
+   {
+    "file": "tests/fixtures/memory.lua",
+    "old": "[candidate]=word(tag+1)",
+    "new": "[candidate]=word(tag>=11 and tag+2 or tag+1)",
+    "count": 1
+   },
+   {
+    "file": "tests/test_mission.lua",
+    "old": "string.char(17)..string.rep('\\0',3)..word(tag+1)",
+    "new": "string.char(17)..string.rep('\\0',3)..word(tag>=11 and tag+2 or tag+1)",
+    "count": 1
+   },
+   {
+    "file": "tests/test_mission.lua",
+    "old": "string.rep('\\0',20)..word(8)..word(12)..",
+    "new": "string.rep('\\0',20)..word(8)..word(13)..",
+    "count": 1
+   },
+   {
+    "file": "tests/session.lua",
+    "old": "word(12) .. word(13) .. word(24) ..",
+    "new": "word(13) .. word(14) .. word(25) ..",
+    "count": 1
+   },
+   {
+    "file": "tests/test_presentation.lua",
+    "old": "api.read(manager+25280,8)",
+    "new": "api.read(manager+25520,8)",
+    "count": 1
+   },
+   {
+    "file": "tests/test_presentation.lua",
+    "old": "_manager+25232,8)",
+    "new": "_manager+25472,8)",
+    "count": 2
+   },
+   {
+    "file": "tests/test_roster.lua",
+    "old": "tag<=31",
+    "new": "tag<=32",
+    "count": 2
+   },
+   {
+    "file": "tests/test_roster.lua",
+    "old": "rule[1]<=31",
+    "new": "rule[1]<=32",
+    "count": 1
+   }
+  ],
+  "summary": {
+   "bingus_text": "pass",
+   "locales": "pass",
+   "resolve": "pass",
+   "roster": "pass",
+   "panel": "pass",
+   "install": "pass",
+   "update_chain": "pass",
+   "mission": "pass",
+   "presentation": "pass",
+   "budget": "pass",
+   "panel_budget": "pass",
+   "pending": "pass",
+   "idle": "pass",
+   "ffi_names sdk-first": "pass",
+   "ffi_names mod-first": "pass",
+   "ffi_names hostile": "pass"
+  }
+ },
+ "live_tested": false
+}

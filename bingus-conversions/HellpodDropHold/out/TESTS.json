@@ -1,0 +1,79 @@
+{
+ "port": {
+  "command": "wine <workspace>/native-work/hdh-port/work/luajit.exe -e dofile([[../test_prelude.lua]]) tests/test_hold.lua src F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7",
+  "exit": 0,
+  "passed": true,
+  "pass_count": 18,
+  "pass_lines": [
+   "PASS: adapter: plain-number reads, module pages refused, module hash",
+   "PASS: idle: 4 reads every 0.25 s, nothing between polls, no page check, no write",
+   "PASS: in a mission with no loading screen, drops and reinforcements are never held",
+   "PASS: join in progress: held at spawn while loading (1 write), released 1.5 s after the screen (1 write)",
+   "PASS: preparing a mission or the ship counts as loading; the event log follows the state and the HUD",
+   "PASS: a join cutscene that outlasts preparing keeps the pod held; a cutscene alone never holds one",
+   "PASS: a join still finishing (is_hotjoining) keeps the pod held in the mission; unreadable or ship flags never do",
+   "PASS: loading screens 2 and 4 at any depth hold; screen 3 does not; reinforce-type pods use their own speeds",
+   "PASS: only own falling or braking drop pods that the id map confirms are held; the saved factor comes back",
+   "PASS: a held pod that the manager moves is found again and released at its new index",
+   "PASS: a held pod that disappears is forgotten without a write",
+   "PASS: a factor changed by someone else is never overwritten, at hold or at release",
+   "PASS: the longest hold ends at 120 s, and that pod is not held again",
+   "PASS: a release that cannot read the manager is kept and retried 4 times a second",
+   "PASS: a manager or setting that makes no sense stops the mod before any write; a missing manager waits",
+   "PASS: test builds hold every own drop pod for the set time, once each",
+   "PASS: no Lua garbage per frame: idle, loading screen, holding",
+   "PASS: loader: refuses other builds, holds through the guard, releases on pause, writes nothing at shutdown, no aborting trace starts in the mod"
+  ],
+  "tail": [
+   "[HellpodDropHold] loading screen up",
+   "[HellpodDropHold] game state 4, hud none, menu loading mission, popup 0, menu stack [loading mission], cutscene none (next none), client state 0, hotjoining 0, hotjoined 0",
+   "[HellpodDropHold] own initial spawn pod 101 seen at 1500 m, phase 0",
+   "[HellpodDropHold] holding initial spawn pod 101 at 1500 m (speed factor 1.000 -> -0.332)",
+   "PASS: loader: refuses other builds, holds through the guard, releases on pause, writes nothing at shutdown, no aborting trace starts in the mod",
+   "18 offline checks passed"
+  ]
+ },
+ "upstream": {
+  "command": "wine <workspace>/native-work/hdh-port/work/luajit.exe -e dofile([[../test_prelude.lua]]) tests/test_hold.lua src F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7",
+  "exit": 0,
+  "passed": true,
+  "pass_count": 18,
+  "pass_lines": [
+   "PASS: adapter: plain-number reads, module pages refused, module hash",
+   "PASS: idle: 4 reads every 0.25 s, nothing between polls, no page check, no write",
+   "PASS: in a mission with no loading screen, drops and reinforcements are never held",
+   "PASS: join in progress: held at spawn while loading (1 write), released 1.5 s after the screen (1 write)",
+   "PASS: preparing a mission or the ship counts as loading; the event log follows the state and the HUD",
+   "PASS: a join cutscene that outlasts preparing keeps the pod held; a cutscene alone never holds one",
+   "PASS: a join still finishing (is_hotjoining) keeps the pod held in the mission; unreadable or ship flags never do",
+   "PASS: loading screens 2 and 4 at any depth hold; screen 3 does not; reinforce-type pods use their own speeds",
+   "PASS: only own falling or braking drop pods that the id map confirms are held; the saved factor comes back",
+   "PASS: a held pod that the manager moves is found again and released at its new index",
+   "PASS: a held pod that disappears is forgotten without a write",
+   "PASS: a factor changed by someone else is never overwritten, at hold or at release",
+   "PASS: the longest hold ends at 120 s, and that pod is not held again",
+   "PASS: a release that cannot read the manager is kept and retried 4 times a second",
+   "PASS: a manager or setting that makes no sense stops the mod before any write; a missing manager waits",
+   "PASS: test builds hold every own drop pod for the set time, once each",
+   "PASS: no Lua garbage per frame: idle, loading screen, holding",
+   "PASS: loader: refuses other builds, holds through the guard, releases on pause, writes nothing at shutdown, no aborting trace starts in the mod"
+  ],
+  "tail": [
+   "[HellpodDropHold] loading screen up",
+   "[HellpodDropHold] game state 4, hud none, menu loading mission, popup 0, menu stack [loading mission], cutscene none (next none), client state 0, hotjoining 0, hotjoined 0",
+   "[HellpodDropHold] own initial spawn pod 101 seen at 1500 m, phase 0",
+   "[HellpodDropHold] holding initial spawn pod 101 at 1500 m (speed factor 1.000 -> -0.332)",
+   "PASS: loader: refuses other builds, holds through the guard, releases on pause, writes nothing at shutdown, no aborting trace starts in the mod",
+   "18 offline checks passed"
+  ]
+ },
+ "luajit_exe_sha256": "F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7",
+ "environment_shim": {
+  "prelude": "local ffi = require('ffi')\nffi.cdef[[uint32_t GetModuleFileNameW(void *module, uint16_t *path, uint32_t capacity);]]\nlocal path = ffi.new('uint16_t[32768]')\nlocal length = ffi.load('kernel32').GetModuleFileNameW(nil, path, 32768)\nassert(length > 0 and length < 32768)\nBingusRuntime = {hashes = {['sha256:' .. ffi.string(path, length * 2)] = arg[2]}}",
+  "why": "Wine bcrypt faults in BCryptDestroyHash (execute access violation) for the unmodified upstream too; the one module_hash call is served from the runtime cache seeded with the SHA-256 computed by Python"
+ },
+ "not_run": {
+  "tests/game_lua.py": "runs test_hold.lua inside the game's own lua51.dll via Windows ctypes (the old PUC/LuaJIT DLL, not the GC64 VM the game now uses); Windows-only",
+  "tests/test_package.py": "checks the release zip from scripts/package.py; no release package is built here"
+ }
+}

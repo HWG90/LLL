@@ -1,0 +1,331 @@
+{
+ "option": "GalacticMenuHotkey",
+ "mod": "Ship Station Hotkeys v1.9.1",
+ "build": 26088801,
+ "source": "upstream-bingus/ShipStationHotkeys (tag v1.9.1, matches every lock source_sha256)",
+ "resource": "mods/cowboybingus/galactic_menu_hotkey",
+ "resource_hash": "9ee275c2bd559175",
+ "archive": "9ba626afa44a3aa3.patch_0",
+ "archive_resources": [
+  "9ee275c2bd559175"
+ ],
+ "archive_sha256": "05E352769FA5CBFD34DCB5E7C1FD353C67ED35A607C88B6602CF6FA78F80074B",
+ "payload_sha256": "C11707444DF47BC3F709D8421310C7B3C0720313D0DFC261069A24F46709FB28",
+ "entry_sha256": "4FFF29B304AE2A2246B5E6A186A38281B087A3A2D77848A14EE13FC2A272DA6B",
+ "entry_bytes": 111935,
+ "reproduction": {
+  "upstream_payload_sha256": "8FA1F904497F0733DAE19DD1282BCED380A2220A2768444E6349C392EBEA65A2",
+  "lock_resource_sha256": "8FA1F904497F0733DAE19DD1282BCED380A2220A2768444E6349C392EBEA65A2",
+  "matches_lock": true,
+  "pinned_component_assembles_same": true,
+  "shipped_v26_archive": "<hellforge>/mods/Vanilla Plus Megapack - v26/options/GalacticMenuHotkey/9ba626afa44a3aa3.patch_0",
+  "shipped_v26_resource_sha256": "8FA1F904497F0733DAE19DD1282BCED380A2220A2768444E6349C392EBEA65A2",
+  "matches_shipped_v26": true
+ },
+ "map_summary": {
+  "rows": 64,
+  "by_confidence": {
+   "high": 58,
+   "medium": 6
+  },
+  "unmapped": 0,
+  "source_edits": 29,
+  "rows_feeding_write": 4
+ },
+ "edits": [
+  {
+   "row": 1,
+   "name": "GAME_SHA256",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 107,
+   "old_text": "'2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+   "new_text": "'6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'",
+   "confidence": "high"
+  },
+  {
+   "row": 2,
+   "name": "EXE_SHA256",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 108,
+   "old_text": "'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+   "new_text": "'0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'",
+   "confidence": "high"
+  },
+  {
+   "row": 3,
+   "name": "ENTER_PRESENTER_RVA (PresenterManager open)",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 113,
+   "old_text": "local ENTER_PRESENTER_RVA = 0x14c0350",
+   "new_text": "local ENTER_PRESENTER_RVA = 0x135b4f0",
+   "confidence": "high"
+  },
+  {
+   "row": 4,
+   "name": "START_ARCADE_RVA (arcade interaction start)",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 114,
+   "old_text": "local START_ARCADE_RVA = 0x997800",
+   "new_text": "local START_ARCADE_RVA = 0x9a9450",
+   "confidence": "high"
+  },
+  {
+   "row": 5,
+   "name": "INSTANT_SEAT_RVA (seater instant entry)",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 128,
+   "old_text": "local INSTANT_SEAT_RVA = 0x639830",
+   "new_text": "local INSTANT_SEAT_RVA = 0x642f30",
+   "confidence": "high"
+  },
+  {
+   "row": 6,
+   "name": "OPEN_BRIEFING_RVA (Hellpod briefing entry)",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 132,
+   "old_text": "local OPEN_BRIEFING_RVA = 0x661cf0",
+   "new_text": "local OPEN_BRIEFING_RVA = 0x66b5d0",
+   "confidence": "high"
+  },
+  {
+   "row": 12,
+   "name": "MODE_PTR_RVA (mission record pointer)",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 79,
+   "old_text": "local MODE_PTR_RVA, MODE_RECORD_SIZE = 0x33266a0",
+   "new_text": "local MODE_PTR_RVA, MODE_RECORD_SIZE = 0x2ce1850",
+   "confidence": "high"
+  },
+  {
+   "row": 13,
+   "name": "INPUT_OWNER_PTR_RVA",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 89,
+   "old_text": "local INPUT_OWNER_PTR_RVA, ACTION_STATE_OFFSET, ACTION_STATE_STRIDE = 0x347cf18",
+   "new_text": "local INPUT_OWNER_PTR_RVA, ACTION_STATE_OFFSET, ACTION_STATE_STRIDE = 0x2e38250",
+   "confidence": "high"
+  },
+  {
+   "row": 14,
+   "name": "UI_STATE_PTR_RVA",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 115,
+   "old_text": "local UI_STATE_PTR_RVA = 0x347ce28",
+   "new_text": "local UI_STATE_PTR_RVA = 0x2e38160",
+   "confidence": "high"
+  },
+  {
+   "row": 15,
+   "name": "ARCADE_COMPONENT_PTR_RVA",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 116,
+   "old_text": "local ARCADE_COMPONENT_PTR_RVA = 0x3326700",
+   "new_text": "local ARCADE_COMPONENT_PTR_RVA = 0x2ce18b0",
+   "confidence": "high"
+  },
+  {
+   "row": 16,
+   "name": "ARCADE_SYSTEM_PTR_RVA (system registry)",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 117,
+   "old_text": "local ARCADE_SYSTEM_PTR_RVA = 0x3326e68",
+   "new_text": "local ARCADE_SYSTEM_PTR_RVA = 0x2ce2040",
+   "confidence": "high"
+  },
+  {
+   "row": 17,
+   "name": "PLAYER_MANAGER_PTR_RVA",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 118,
+   "old_text": "local PLAYER_MANAGER_PTR_RVA = 0x3326468",
+   "new_text": "local PLAYER_MANAGER_PTR_RVA = 0x2ce1618",
+   "confidence": "high"
+  },
+  {
+   "row": 18,
+   "name": "ENTITY_MANAGER_PTR_RVA",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 119,
+   "old_text": "local ENTITY_MANAGER_PTR_RVA = 0x346bf98",
+   "new_text": "local ENTITY_MANAGER_PTR_RVA = 0x2ce41b8",
+   "confidence": "high"
+  },
+  {
+   "row": 19,
+   "name": "UNIT_INTERFACE_PTR_RVA (script C API)",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 120,
+   "old_text": "local UNIT_INTERFACE_PTR_RVA = 0x3326308",
+   "new_text": "local UNIT_INTERFACE_PTR_RVA = 0x2ce14c8",
+   "confidence": "high"
+  },
+  {
+   "row": 20,
+   "name": "HELLPOD_SYSTEM_PTR_RVA (deployment system)",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 121,
+   "old_text": "local HELLPOD_SYSTEM_PTR_RVA = 0x33265f0",
+   "new_text": "local HELLPOD_SYSTEM_PTR_RVA = 0x2ce17a0",
+   "confidence": "high"
+  },
+  {
+   "row": 21,
+   "name": "HELLPOD_MANAGER_PTR_RVA",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 122,
+   "old_text": "local HELLPOD_MANAGER_PTR_RVA = 0x3326428",
+   "new_text": "local HELLPOD_MANAGER_PTR_RVA = 0x2ce15d8",
+   "confidence": "high"
+  },
+  {
+   "row": 22,
+   "name": "SEATER_COMPONENT_PTR_RVA",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 123,
+   "old_text": "local SEATER_COMPONENT_PTR_RVA = 0x3326d78",
+   "new_text": "local SEATER_COMPONENT_PTR_RVA = 0x2ce1f38",
+   "confidence": "high"
+  },
+  {
+   "row": 23,
+   "name": "SCREEN_STACK_PTR_RVA (menu system)",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 138,
+   "old_text": "local SCREEN_STACK_PTR_RVA = 0x347ce38",
+   "new_text": "local SCREEN_STACK_PTR_RVA = 0x2e38170",
+   "confidence": "high"
+  },
+  {
+   "row": 37,
+   "name": "INTRO_TIMER_OFFSET / INTRO_PHASE_OFFSET (loadout screen intro timer float, phase u32)",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 140,
+   "old_text": "local INTRO_TIMER_OFFSET, INTRO_PHASE_OFFSET = 2570632, 2570636",
+   "new_text": "local INTRO_TIMER_OFFSET, INTRO_PHASE_OFFSET = 2570696, 2570700",
+   "confidence": "high"
+  },
+  {
+   "row": 39,
+   "name": "entity id map at entities + 0xf22ec8 (buckets, capacity +8, empty +12, multiplier +16)",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 473,
+   "old_text": "map_layout(read(entities + 0xf22ec8, 20))",
+   "new_text": "map_layout(read(entities + 0xf24990, 20))",
+   "confidence": "high"
+  },
+  {
+   "row": 40,
+   "name": "entity records at entities + 0xf32f18, 24 bytes (hash +0, id +8, unit +12, flags +20)",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 477,
+   "old_text": "return read(entities + 0xf32f18 + 24 * index, 24)",
+   "new_text": "return read(entities + 0xf349e0 + 24 * index, 24)",
+   "confidence": "high"
+  },
+  {
+   "row": 47,
+   "name": "system registry list: count +19512, rows +19520 (16 bytes: system, type)",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 534,
+   "old_text": "u32(read(systems + 19512, 4))",
+   "new_text": "u32(read(systems + 19704, 4))",
+   "confidence": "high"
+  },
+  {
+   "row": 47,
+   "name": "system registry list: count +19512, rows +19520 (16 bytes: system, type)",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 534,
+   "old_text": "read(systems + 19520, system_count * 16)",
+   "new_text": "read(systems + 19712, system_count * 16)",
+   "confidence": "high"
+  },
+  {
+   "row": 53,
+   "name": "instant seat placement buffer: seat collection [406], entrance hash [407], entrance index [408] (u32 slots), request byte 0 enable, request +72 pointer",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 682,
+   "old_text": "local placement = ffi.new('GMH_u32[409]')",
+   "new_text": "local placement = ffi.new('GMH_u32[411]')",
+   "confidence": "high"
+  },
+  {
+   "row": 53,
+   "name": "instant seat placement buffer: seat collection [406], entrance hash [407], entrance index [408] (u32 slots), request byte 0 enable, request +72 pointer",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 682,
+   "old_text": "placement[406] = pod",
+   "new_text": "placement[408] = pod",
+   "confidence": "high"
+  },
+  {
+   "row": 53,
+   "name": "instant seat placement buffer: seat collection [406], entrance hash [407], entrance index [408] (u32 slots), request byte 0 enable, request +72 pointer",
+   "file": "src/galactic_menu_hotkey.lua",
+   "line": 682,
+   "old_text": "-- at +72 holds the seat collection at [406], an entrance hash at [407]\n    -- (0 selects by index) and the entrance index at [408].",
+   "new_text": "-- at +72 holds the seat collection at [408], an entrance hash at [409]\n    -- (0 selects by index) and the entrance index at [410] (build 26088801).",
+   "confidence": "high"
+  },
+  {
+   "row": 61,
+   "name": "bingus_text M.GAME.settings",
+   "file": "src/bingus_text.lua",
+   "line": 357,
+   "old_text": "settings = 0x3326340",
+   "new_text": "settings = 0x2ce1508",
+   "confidence": "high"
+  },
+  {
+   "row": 62,
+   "name": "bingus_text M.GAME.index",
+   "file": "src/bingus_text.lua",
+   "line": 357,
+   "old_text": "index = 705500 + 212",
+   "new_text": "index = 705628 + 212",
+   "confidence": "high"
+  },
+  {
+   "row": 63,
+   "name": "bingus_text M.GAME.table",
+   "file": "src/bingus_text.lua",
+   "line": 357,
+   "old_text": "table = 0x37C5650",
+   "new_text": "table = 0x3180DE0",
+   "confidence": "high"
+  },
+  {
+   "name": "comment (build number)",
+   "file": "src/galactic_menu_hotkey.lua",
+   "old_text": "-- Steam build 25480438: PresenterManager::open presenter, and the game's",
+   "new_text": "-- Steam build 26088801: PresenterManager::open presenter, and the game's"
+  },
+  {
+   "name": "prologue checks through ReadProcessMemory, deferred to first call for non-resident code pages",
+   "file": "src/galactic_menu_hotkey.lua",
+   "old_text": "        check(read(base + ENTER_PRESENTER_RVA, #PRESENTER_PREFIX) ==\n              PRESENTER_PREFIX, 'native presenter changed in memory')\n        check(read(base + START_ARCADE_RVA, #ARCADE_PREFIX) ==\n              ARCADE_PREFIX, 'native arcade start changed in memory')\n        check(read(base + INSTANT_SEAT_RVA, #INSTANT_SEAT_PREFIX) ==\n              INSTANT_SEAT_PREFIX, 'native instant seat entry changed in memory')\n        check(read(base + OPEN_BRIEFING_RVA, #BRIEFING_PREFIX) ==\n              BRIEFING_PREFIX, 'native Hellpod briefing entry changed in memory')\n        check(pointer(read(base + UI_STATE_PTR_RVA, 8)), 'UI state unavailable')\n        state.game_base = base\n        state.open_presenter = ffi.cast('void (__fastcall *)(void *, int, void *)',\n            base + ENTER_PRESENTER_RVA)\n        state.start_arcade = ffi.cast(\n            'void (__fastcall *)(void *, void *, GMH_u32, GMH_u32)',\n            base + START_ARCADE_RVA)\n        state.enter_seat = ffi.cast(\n            'void (__fastcall *)(void *, void *, void *)', base + INSTANT_SEAT_RVA)\n        state.open_briefing = ffi.cast(\n            'void (__fastcall *)(void *, GMH_u32)', base + OPEN_BRIEFING_RVA)\n        local unit_interface = pointer(read(base + UNIT_INTERFACE_PTR_RVA, 8))\n        local unit_vtable = unit_interface and pointer(read(unit_interface + 24, 8))\n        local position_address = unit_vtable and pointer(read(unit_vtable + 136, 8))\n        if position_address and read(position_address, #UNIT_POSITION_PREFIX) ==\n                UNIT_POSITION_PREFIX then\n            state.unit_position = ffi.cast(\n                'GMH_u64 (__fastcall *)(GMH_u32, int)', position_address)\n        else\n",
+   "new_text": "        -- Some code pages stay unreadable until the game first runs them (read answers\n        -- nil): such a function is checked right before its first call, never called\n        -- unchecked; until its page is readable its shortcut is skipped.\n        local deferred = {}\n        local function native(address, prefix, ctype, what, changed)\n            local bytes = read(address, #prefix)\n            check(bytes == nil or bytes == prefix, changed)\n            if bytes then return ffi.cast(ctype, address) end\n            deferred[#deferred + 1] = what\n            local fn, off = nil, false\n            return function(...)\n                if off then return nil end\n                if not fn then\n                    local now = read(address, #prefix)\n                    if now == nil then\n                        note(what .. ' not resident yet; shortcut skipped.')\n                        return nil\n                    end\n                    if now ~= prefix then\n                        off = true\n                        if changed then guard.stop(changed)\n                        else note('Arcade proximity check unavailable: world-position function changed.') end\n                        return nil\n                    end\n                    fn = ffi.cast(ctype, address)\n                end\n                return fn(...)\n            end\n        end\n        local open_presenter = native(base + ENTER_PRESENTER_RVA, PRESENTER_PREFIX,\n            'void (__fastcall *)(void *, int, void *)', 'native presenter',\n            'native presenter changed in memory')\n        local start_arcade = native(base + START_ARCADE_RVA, ARCADE_PREFIX,\n            'void (__fastcall *)(void *, void *, GMH_u32, GMH_u32)', 'native arcade start',\n            'native arcade start changed in memory')\n        local enter_seat = native(base + INSTANT_SEAT_RVA, INSTANT_SEAT_PREFIX,\n            'void (__fastcall *)(void *, void *, void *)', 'native instant seat entry',\n            'native instant seat entry changed in memory')\n        local open_briefing = native(base + OPEN_BRIEFING_RVA, BRIEFING_PREFIX,\n            'void (__fastcall *)(void *, GMH_u32)', 'native Hellpod briefing entry',\n            'native Hellpod briefing entry changed in memory')\n        check(pointer(read(base + UI_STATE_PTR_RVA, 8)), 'UI state unavailable')\n        state.game_base = base\n        state.open_presenter, state.start_arcade = open_presenter, start_arcade\n        state.enter_seat, state.open_briefing = enter_seat, open_briefing\n        local unit_interface = pointer(read(base + UNIT_INTERFACE_PTR_RVA, 8))\n        local unit_vtable = unit_interface and pointer(read(unit_interface + 24, 8))\n        local position_address = unit_vtable and pointer(read(unit_vtable + 136, 8))\n        local position_bytes = position_address and read(position_address, #UNIT_POSITION_PREFIX)\n        if position_address and (position_bytes == nil or position_bytes == UNIT_POSITION_PREFIX) then\n            state.unit_position = native(position_address, UNIT_POSITION_PREFIX,\n                'GMH_u64 (__fastcall *)(GMH_u32, int)', 'world-position function', false)\n        else\n"
+  },
+  {
+   "name": "prologue checks through ReadProcessMemory, deferred to first call for non-resident code pages",
+   "file": "src/galactic_menu_hotkey.lua",
+   "old_text": "    if ok then\n        note('Native ship menu presenters ready for current game build.')\n",
+   "new_text": "    if ok then\n        note('Native ship menu presenters ready for current game build.')\n        if #result > 0 then note('Checked at first use (code not resident yet): ' .. table.concat(result, ', ')) end\n"
+  },
+  {
+   "name": "prologue checks through ReadProcessMemory, deferred to first call for non-resident code pages",
+   "file": "src/galactic_menu_hotkey.lua",
+   "old_text": "            note('Arcade proximity check unavailable: world-position function changed.')\n        end\n    end)\n",
+   "new_text": "            note('Arcade proximity check unavailable: world-position function changed.')\n        end\n        return deferred\n    end)\n"
+  }
+ ],
+ "entry_changed_lines": 129,
+ "luajit": {
+  "binary": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit",
+  "port": "loadstring OK: 111935 bytes, LuaJIT 2.1.ROLLING, GC64",
+  "unmodified": "loadstring OK: 110315 bytes, LuaJIT 2.1.ROLLING, GC64"
+ },
+ "compat_adapter": false,
+ "bytecode": false,
+ "live_tested": false
+}

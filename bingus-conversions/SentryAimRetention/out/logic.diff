@@ -1,0 +1,143 @@
+--- build-data-only wrapper
++++ port wrapper
+@@ -661,4 +661,10 @@
+         ]]
+     end
++    -- The routine the turret speed setters end with (network id, field hash,
++    -- field address), declared on its own: a block above declared by another
++    -- copy of this file would not have it.
++    if not pcall(ffi.typeof, 'sentry_aim_replicate_fn') then
++        ffi.cdef [[ typedef void (*sentry_aim_replicate_fn)(uint32_t, uint32_t, void *); ]]
++    end
+     -- time: seconds as a Lua number from the performance counter, read without
+     -- allocating (the 64-bit tick count this adapter read before was boxed,
+@@ -826,6 +832,5 @@
+         -- Signatures and entity/record identity are checked before each call.
+         local flag = ffi.cast('sentry_aim_retention_fn',game+0x6c9a50)
+-        local horizontal = ffi.cast('sentry_aim_speed_fn',game+0x105cff0)
+-        local vertical = ffi.cast('sentry_aim_speed_fn',game+0x105cf00)
++        local replicate = ffi.cast('sentry_aim_replicate_fn',game+0xe69780)
+         local mode = ffi.cast('sentry_aim_fire_mode_fn',game+0x761700)
+         local world_id = ffi.cast('sentry_aim_world_id_fn',exe+0x826d10)
+@@ -855,8 +860,52 @@
+                 object=object,nodes=uint(object+0x70)}
+         end
++        -- The turret speed setters' work (game.dll 0x105cff0 horizontal,
++        -- 0x105cf00 vertical), which the game never runs in play, so their
++        -- code cannot be checked: the entity's id (+8), nothing for the
++        -- invalid id; its slot in the turret registry's id map; nothing unless
++        -- this machine owns the registry's entity (+0x14 bit 0); the speed into
++        -- its control record (+8 horizontal, +12 vertical); then the field is
++        -- queued for replication under its hash with the entity's network id
++        -- (+0x10). The write checks its range first; only a write that landed
++        -- is replicated. The registry's entity must be the one given.
++        local speed_bits=ffi.new('float[1]')
++        local function set_speed(entity,speed,offset,hash)
++            local id=word_at(api.read(entity+8,4),0)
++            assert(id,'Turret entity unavailable')
++            if id==word_at(api.read(game+0x2e3f0d0,4),0) then return end
++            local manager=read_pointer(game+0x2ce1f30)
++            local h=manager and api.read(manager+0x28,20)
++            local count=manager and word_at(api.read(manager+0x14,4),0)
++            assert(h and count,'Turret registry unavailable')
++            local slots,capacity,empty,multiplier=api.pointer(h),word_at(h,8),word_at(h,12),word_at(h,16)
++            if capacity==0 then return end
++            assert(slots and capacity<=8192 and bit.band(capacity,capacity-1)==0,'Unsupported turret registry')
++            local start=tonumber(ffi.cast('uint32_t',ffi.new('uint64_t',id)*multiplier))
++            local index
++            for probe=0,math.min(capacity,128)-1 do
++                local slot=api.read(slots+8*bit.band(start+probe,capacity-1),8)
++                assert(slot,'Turret registry unavailable')
++                if word_at(slot,0)==id then index=word_at(slot,4);break end
++                if word_at(slot,0)==empty then return end
++            end
++            assert(index,'Entity map probe bound exceeded')
++            if index==0xffffffff then return end
++            assert(index<count,'Component index out of range')
++            local records,controls=read_pointer(manager+0x40),read_pointer(manager+0x58)
++            local record=records and read_pointer(records+8*index)
++            assert(record and controls,'Turret registry unavailable')
++            assert(api.address(record)==api.address(entity),'Component identity mismatch')
++            local flags,network=api.read(record+0x14,1),word_at(api.read(record+0x10,4),0)
++            assert(flags and network,'Turret entity unavailable')
++            if bit.band(flags:byte(1),1)==0 then return end
++            local field=controls+16*index+offset
++            speed_bits[0]=speed;local bytes=ffi.string(speed_bits,4)
++            if not api.write(field,bytes) or api.read(field,4)~=bytes then return end
++            replicate(network,hash,field)
++        end
+         return {
+             retention=function(id,enabled) flag(nil,id,2,enabled and 1 or 0) end,
+-            horizontal=function(entity,speed) horizontal(entity,speed) end,
+-            vertical=function(entity,speed) vertical(entity,speed) end,
++            horizontal=function(entity,speed) set_speed(entity,speed,8,0xcc0b45e5) end,
++            vertical=function(entity,speed) set_speed(entity,speed,12,0x9d5d6cc7) end,
+             fire_mode=function(manager,id,value) mode(manager,id,value) end,
+             terrain_path=function(unit,origin,target,target_unit)
+@@ -943,6 +992,10 @@
+ local signatures={
+     {0x6c9a50,'405741574883ec283b1572567702450fb6f94c8b15878461'},
+-    {0x105cf00,'4883ec288b41083b05c321de010f84d00000004c8b151650'},
+-    {0x105cff0,'4883ec288b41083b05d320de010f84d00000004c8b15264fc80133d24889742438458b4a30458b5a38440fafd8418d71ff4585c90f84a400000048895c2430498b5a2848897c2420418b7a340f1f40008bce468d041a4c23c1428b0cc33bcf741f3bc8741fffc2413bd172e4488b5c2430488b7c2420488b7424384883c428c33bc87550428b44c30483f8ff74464c8d0cc5000000008bd0498b4240498b0c01f6411401742e498b425848c1e204f30f114c0208498b42404d8b42584983c0084c03c2bae5450bcc498b0c018b4910e8bcc6e0ff488b5c2430488b7c2420488b7424384883c428c3'},
++    -- Build 26088801 never runs its two turret speed setters (0x105cf00,
++    -- 0x105cff0) in play: their code pages stay unreadable, so their bytes can
++    -- never be checked. api.bind does their work itself and calls only the
++    -- routine they end with, which queues the field for replication; it is
++    -- checked here in full (221 bytes, through its ret).
++    {0xe69780,'48896c241856415641574883ec30488b0523aae7014d8bf0448bfa8be9488b700880be1d300000000f85a000000048897c2458488b7e1081f9ff7f00000f84860000004c8b0dfe7ce70148895c2450498b4140488b9868010000498b4138ff5008488bc88bd5ffd385c07e588b074803c0896c242044897c24244c897424280f104424200f1144c7088b07ffc0890780be1c3000000074073d000800007525488b1e488b05777de701488bcbff5070488bd7e8294c0000488b05627de701488bcbff5078488b5c2450488b7c2458488b6c24604883c430415f415e5ec3'},
+     {0x761700,'48894c24085355565741574883ec20'},
+ }
+@@ -1979,19 +2032,30 @@
+ 
+ -- Verifies the native setters, the pose getter and the terrain query once per
+--- session, then binds them.
++-- session, then binds them. Build 26088801 maps some code pages only once the
++-- game has run them: until then their bytes cannot be read. Code that cannot
++-- be read yet gives nil (M.apply checks again later); code that reads
++-- differently is refused.
++local function native_code(api,address,expected,why)
++    local found=api.read(address,#expected)
++    if found==nil then return false end
++    assert(found==expected,why)
++    return true
++end
+ local function bind_natives(api,game,exe)
++    local ready=true
+     for _,s in ipairs(signatures) do
+-        local expected=fromhex(s[2])
+-        assert(api.read(game+s[1],#expected)==expected,'Unsupported native sentry setter')
+-    end
++        ready=native_code(api,game+s[1],fromhex(s[2]),'Unsupported native sentry setter') and ready
++    end
++    if not ready then return nil end
+     local pose_signature=fromhex('40534883ec204863dae8e2d5eaff488bc84c8b0041ff90e8')
+-    assert(exe and api.read(exe+0x1f30c0,#pose_signature)==pose_signature,'Unsupported engine pose getter')
++    assert(exe,'Unsupported engine pose getter')
++    ready=native_code(api,exe+0x1f30c0,pose_signature,'Unsupported engine pose getter')
+     for _,s in ipairs({
+         {0x826d10,'33c04c8d05f7b203020f1f800000000049390cc0740cffc083f80475f3'},
+         {0x87bc70,'488bc4f30f11582089480855535657415441554156415748'},
+     }) do
+-        local expected=fromhex(s[2])
+-        assert(api.read(exe+s[1],#expected)==expected,'Unsupported terrain query')
+-    end
++        ready=native_code(api,exe+s[1],fromhex(s[2]),'Unsupported terrain query') and ready
++    end
++    if not ready then return nil end
+     return api.bind(game,exe)
+ end
+@@ -2044,5 +2108,13 @@
+     if not ok then state.layout=nil;return false,tostring(rows),false end
+     if #rows==0 and not state.native then return true,reason,false end
+-    if not state.native then state.native=bind_natives(api,game,exe) end
++    if not state.native then
++        -- Until every native's code can be read and matches: no hold, fire
++        -- pause or search request (the sentries keep the game's own behavior),
++        -- and the natives are checked again after 1 s.
++        local now=api.time()
++        if state.native_retry and now<state.native_retry then return true,'waiting_for_natives',false end
++        state.native=bind_natives(api,game,exe)
++        if not state.native then state.native_retry=now+1;return true,'waiting_for_natives',false end
++    end
+     for _,s in ipairs(rows) do
+         if s.fire then prepare_fire(api,state.native,s) end

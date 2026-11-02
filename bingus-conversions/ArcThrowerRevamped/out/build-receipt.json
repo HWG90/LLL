@@ -1,0 +1,429 @@
+{
+ "mod": "Arc Thrower Revamped v1.7.1",
+ "module": "mods/cowboybingus/arc_thrower_auto",
+ "resource_hash": "eafc48b0c362fb8a",
+ "source": "<workspace>/upstream-bingus/VanillaPlusMegapack/components/ArcThrowerRevamped",
+ "source_note": "pinned Megapack component copy; every file equals the lock source_sha256 and upstream-bingus/ArcThrowerRevamped at tag v1.7.1 (<workspace>/upstream-bingus/ArcThrowerRevamped)",
+ "lock_revision": "v1.7.1",
+ "pack_recipe": "ASSEMBLED: scripts/entry.py entry_text(root); resource = <II len,2> + plaintext entry (no bytecode)",
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "game_sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+ "exe_sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+ "map": {
+  "sha256": "b0bc5348715941d0fecbd5af643a7d069f323996c3cb527f11f5fa3c847ba98f",
+  "counts": {
+   "high": 28,
+   "medium": 1
+  }
+ },
+ "replacements": [
+  {
+   "file": "src/arc_thrower_auto.lua",
+   "line": 13,
+   "old": "local module = {revision = 'v1.7.1'}",
+   "new": "local module = {revision = 'v1.7.1-26088801'}",
+   "map_rows": [
+    "text.revision"
+   ]
+  },
+  {
+   "file": "src/arc_thrower_auto.lua",
+   "line": 23,
+   "old": "-- Build 25480438 anchors. The charge manager",
+   "new": "-- Build 26088801 anchors (megapack-port/ArcThrowerRevamped/MAP.json). The charge manager",
+   "map_rows": [
+    "text.build_number"
+   ]
+  },
+  {
+   "file": "src/arc_thrower_auto.lua",
+   "line": 26,
+   "old": "local CHARGE_MANAGER = 0x3326c20",
+   "new": "local CHARGE_MANAGER = 0x2ce1de8",
+   "map_rows": [
+    "atr.CHARGE_MANAGER"
+   ]
+  },
+  {
+   "file": "src/arc_thrower_auto.lua",
+   "line": 27,
+   "old": "local TRIGGER_MANAGER = 0x3326660",
+   "new": "local TRIGGER_MANAGER = 0x2ce1810",
+   "map_rows": [
+    "atr.TRIGGER_MANAGER"
+   ]
+  },
+  {
+   "file": "src/arc_thrower_auto.lua",
+   "line": 28,
+   "old": "local FIRE_MODE_SETTER = 0x755f90",
+   "new": "local FIRE_MODE_SETTER = 0x761700",
+   "map_rows": [
+    "atr.FIRE_MODE_SETTER"
+   ]
+  },
+  {
+   "file": "src/arc_thrower_auto.lua",
+   "line": 49,
+   "old": "local MISSION_RECORD = 0x33266a0",
+   "new": "local MISSION_RECORD = 0x2ce1850",
+   "map_rows": [
+    "atr.MISSION_RECORD"
+   ]
+  },
+  {
+   "file": "src/arc_thrower_auto.lua",
+   "line": 153,
+   "old": "-- SHA-256 of helldivers2.exe and game.dll must be build 25480438's.",
+   "new": "-- SHA-256 of helldivers2.exe and game.dll must be build 26088801's.",
+   "map_rows": [
+    "text.build_number"
+   ]
+  },
+  {
+   "file": "src/arc_thrower_auto.lua",
+   "line": 159,
+   "old": "local EXE_SHA256 = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+   "new": "local EXE_SHA256 = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'",
+   "map_rows": [
+    "gate.EXE_SHA256"
+   ]
+  },
+  {
+   "file": "src/arc_thrower_auto.lua",
+   "line": 160,
+   "old": "local GAME_SHA256 = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+   "new": "local GAME_SHA256 = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'",
+   "map_rows": [
+    "gate.GAME_SHA256"
+   ]
+  },
+  {
+   "file": "src/arc_thrower_auto.lua",
+   "line": 170,
+   "old": "'unsupported game build (needs Steam build 25480438)'",
+   "new": "'unsupported game build (needs Steam build 26088801)'",
+   "map_rows": [
+    "text.build_number"
+   ]
+  },
+  {
+   "file": "src/arc_thrower_auto.lua",
+   "line": 352,
+   "old": "local pm,owner,am=pointer(state.game+0x3326468),pointer(state.game+0x346bf98),pointer(state.game+0x3326d20)",
+   "new": "local pm,owner,am=pointer(state.game+0x2ce1618),pointer(state.game+0x2ce41b8),pointer(state.game+0x2ce1ee0)",
+   "map_rows": [
+    "atr.avatar_manager",
+    "atr.entities",
+    "atr.player_manager"
+   ]
+  },
+  {
+   "file": "src/arc_thrower_auto.lua",
+   "line": 361,
+   "old": "local ei=lookup(owner+0xf22ec8,PLAYER_UNIT[0],1048576)",
+   "new": "local ei=lookup(owner+0xf24990,PLAYER_UNIT[0],1048576)",
+   "map_rows": [
+    "atr.entity_unit_lookup"
+   ]
+  },
+  {
+   "file": "src/arc_thrower_auto.lua",
+   "line": 363,
+   "old": "if not read_into(owner+0xf32f18+ei*24,24,AVATAR)",
+   "new": "if not read_into(owner+0xf349e0+ei*24,24,AVATAR)",
+   "map_rows": [
+    "atr.entity_records"
+   ]
+  },
+  {
+   "file": "src/arc_thrower_auto.lua",
+   "line": 407,
+   "old": "if pointer(state.game+0x3326d20)~=kept.am then return nil end",
+   "new": "if pointer(state.game+0x2ce1ee0)~=kept.am then return nil end",
+   "map_rows": [
+    "atr.avatar_manager"
+   ]
+  },
+  {
+   "file": "src/arc_thrower_auto.lua",
+   "line": 461,
+   "old": "local manager=pointer(state.game+0x3326dc0)",
+   "new": "local manager=pointer(state.game+0x2ce1f88)",
+   "map_rows": [
+    "atr.weapon_holder_manager"
+   ]
+  },
+  {
+   "file": "src/arc_thrower_auto.lua",
+   "line": 1195,
+   "old": "' initialised on game build 25480438 (loader API '",
+   "new": "' initialised on game build 26088801 (loader API '",
+   "map_rows": [
+    "text.build_number"
+   ]
+  },
+  {
+   "file": "src/arc_thrower_auto.lua",
+   "line": 503,
+   "old": "    if state.checked then return state.supported end\n    state.checked = true\n    local game = kernel.atr1_GetModuleHandleA('game.dll')\n    if game == nil then return false end\n    local base = tonumber(ffi.cast('uint64_t', game))\n    state.supported = read(base + FIRE_MODE_SETTER, #FIRE_MODE_SIGNATURE)\n        == FIRE_MODE_SIGNATURE\n    return state.supported",
+   "new": "    if state.checked then return state.supported end\n    local game = kernel.atr1_GetModuleHandleA('game.dll')\n    if game == nil then state.checked = true; return false end\n    local code = read(tonumber(ffi.cast('uint64_t', game)) + FIRE_MODE_SETTER, #FIRE_MODE_SIGNATURE)\n    if code == nil then state.signature_pending = true; return false end -- port: no-access code page, retry\n    state.checked, state.signature_pending = true, nil\n    state.supported = code == FIRE_MODE_SIGNATURE\n    return state.supported",
+   "map_rows": [],
+   "kind": "code patch"
+  },
+  {
+   "file": "src/arc_thrower_auto.lua",
+   "line": 853,
+   "old": "    if not supported_build() then\n        if not failure_logged then",
+   "new": "    if not supported_build() then\n        if not failure_logged and not state.signature_pending then -- port: unreadable is not a refusal",
+   "map_rows": [],
+   "kind": "code patch"
+  }
+ ],
+ "entry_changes_vs_upstream": [
+  {
+   "entry_line": 555,
+   "old": "local module = {revision = 'v1.7.1'}",
+   "new": "local module = {revision = 'v1.7.1-26088801'}"
+  },
+  {
+   "entry_line": 565,
+   "old": "-- Build 25480438 anchors. The charge manager holds one 40-byte entry per",
+   "new": "-- Build 26088801 anchors (megapack-port/ArcThrowerRevamped/MAP.json). The charge manager holds one 40-byte entry per"
+  },
+  {
+   "entry_line": 568,
+   "old": "local CHARGE_MANAGER = 0x3326c20",
+   "new": "local CHARGE_MANAGER = 0x2ce1de8"
+  },
+  {
+   "entry_line": 569,
+   "old": "local TRIGGER_MANAGER = 0x3326660",
+   "new": "local TRIGGER_MANAGER = 0x2ce1810"
+  },
+  {
+   "entry_line": 570,
+   "old": "local FIRE_MODE_SETTER = 0x755f90",
+   "new": "local FIRE_MODE_SETTER = 0x761700"
+  },
+  {
+   "entry_line": 591,
+   "old": "local MISSION_RECORD = 0x33266a0",
+   "new": "local MISSION_RECORD = 0x2ce1850"
+  },
+  {
+   "entry_line": 695,
+   "old": "-- SHA-256 of helldivers2.exe and game.dll must be build 25480438's. Each file",
+   "new": "-- SHA-256 of helldivers2.exe and game.dll must be build 26088801's. Each file"
+  },
+  {
+   "entry_line": 701,
+   "old": "local EXE_SHA256 = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+   "new": "local EXE_SHA256 = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'"
+  },
+  {
+   "entry_line": 702,
+   "old": "local GAME_SHA256 = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+   "new": "local GAME_SHA256 = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'"
+  },
+  {
+   "entry_line": 712,
+   "old": "if why == 'unsupported game build' then return false, 'unsupported game build (needs Steam build 25480438)' end",
+   "new": "if why == 'unsupported game build' then return false, 'unsupported game build (needs Steam build 26088801)' end"
+  },
+  {
+   "entry_line": 894,
+   "old": "local pm,owner,am=pointer(state.game+0x3326468),pointer(state.game+0x346bf98),pointer(state.game+0x3326d20)",
+   "new": "local pm,owner,am=pointer(state.game+0x2ce1618),pointer(state.game+0x2ce41b8),pointer(state.game+0x2ce1ee0)"
+  },
+  {
+   "entry_line": 903,
+   "old": "local ei=lookup(owner+0xf22ec8,PLAYER_UNIT[0],1048576)",
+   "new": "local ei=lookup(owner+0xf24990,PLAYER_UNIT[0],1048576)"
+  },
+  {
+   "entry_line": 905,
+   "old": "if not read_into(owner+0xf32f18+ei*24,24,AVATAR) or AVATAR[0]~=AVATAR_TYPE_LOW or AVATAR[1]~=AVATAR_TYPE_HIGH",
+   "new": "if not read_into(owner+0xf349e0+ei*24,24,AVATAR) or AVATAR[0]~=AVATAR_TYPE_LOW or AVATAR[1]~=AVATAR_TYPE_HIGH"
+  },
+  {
+   "entry_line": 949,
+   "old": "if pointer(state.game+0x3326d20)~=kept.am then return nil end",
+   "new": "if pointer(state.game+0x2ce1ee0)~=kept.am then return nil end"
+  },
+  {
+   "entry_line": 1003,
+   "old": "local manager=pointer(state.game+0x3326dc0)",
+   "new": "local manager=pointer(state.game+0x2ce1f88)"
+  },
+  {
+   "entry_line": 1046,
+   "old": "state.checked = true",
+   "new": "local game = kernel.atr1_GetModuleHandleA('game.dll')"
+  },
+  {
+   "entry_line": 1047,
+   "old": "local game = kernel.atr1_GetModuleHandleA('game.dll')",
+   "new": "if game == nil then state.checked = true; return false end"
+  },
+  {
+   "entry_line": 1048,
+   "old": "if game == nil then return false end",
+   "new": "local code = read(tonumber(ffi.cast('uint64_t', game)) + FIRE_MODE_SETTER, #FIRE_MODE_SIGNATURE)"
+  },
+  {
+   "entry_line": 1049,
+   "old": "local base = tonumber(ffi.cast('uint64_t', game))",
+   "new": "if code == nil then state.signature_pending = true; return false end -- port: no-access code page, retry"
+  },
+  {
+   "entry_line": 1050,
+   "old": "state.supported = read(base + FIRE_MODE_SETTER, #FIRE_MODE_SIGNATURE)",
+   "new": "state.checked, state.signature_pending = true, nil"
+  },
+  {
+   "entry_line": 1051,
+   "old": "== FIRE_MODE_SIGNATURE",
+   "new": "state.supported = code == FIRE_MODE_SIGNATURE"
+  },
+  {
+   "entry_line": 1396,
+   "old": "if not failure_logged then",
+   "new": "if not failure_logged and not state.signature_pending then -- port: unreadable is not a refusal"
+  },
+  {
+   "entry_line": 1737,
+   "old": "note('Arc Thrower Revamped ' .. module.revision .. ' initialised on game build 25480438 (loader API ' ..",
+   "new": "note('Arc Thrower Revamped ' .. module.revision .. ' initialised on game build 26088801 (loader API ' .."
+  }
+ ],
+ "unmodified_assembly": {
+  "sha256": "C100E4938768ED95C3B76983236A4F8BDE5C3E7A9322DD1C51946C6FFD526753",
+  "equals_lock_resource_sha256": true,
+  "equals_shipped_v26_resource": true,
+  "shipped_archive": "<hellforge>/mods/Vanilla Plus Megapack - v26/options/ArcThrowerRevamped/9ba626afa44a3aa3.patch_0"
+ },
+ "archive": {
+  "resources": {
+   "mods/cowboybingus/arc_thrower_auto": {
+    "hash": "eafc48b0c362fb8a",
+    "bytes": 81026
+   }
+  },
+  "shared_stub_included": false
+ },
+ "outputs": {
+  "9ba626afa44a3aa3.patch_0": "e0bd09019d9a0c5581c974035e726a620cb79eab122efedd155c52cb428f1a3f",
+  "9ba626afa44a3aa3.patch_0.gpu_resources": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "9ba626afa44a3aa3.patch_0.stream": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "arc_thrower_auto.lua": "787c207e1d3ea946aa2792e6e7b09923e696b0a5d57bcd86cf73777a12e53a14",
+  "arc_thrower_auto.lua.main": "4d7a94a119336a1846500fae8377daeb6187f154d3209b9457d20cb9c9a4a1ff",
+  "entry.diff": "2c1f71e0cc8a68dc4aabc379c73a14350693d3b9d947cd028672aacd2e04c3db"
+ },
+ "luajit_check": {
+  "luajit": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit",
+  "string_dump_flags": 8,
+  "gc64_fr2": true,
+  "output": [
+   "compile: ok\tLuaJIT 2.1.ROLLING\t8",
+   "entry run: true",
+   "log: Disabled: mods/cowboybingus/arc_thrower_auto:358: libkernel32.so: cannot open shared object file: No such file or directory; the addon does nothing this session.",
+   "installed flag: true"
+  ]
+ },
+ "test_fixture_remap": {
+  "pairs": [
+   [
+    "0x3326c20",
+    "0x2ce1de8"
+   ],
+   [
+    "0x3326660",
+    "0x2ce1810"
+   ],
+   [
+    "0x755f90",
+    "0x761700"
+   ],
+   [
+    "0x33266a0",
+    "0x2ce1850"
+   ],
+   [
+    "0x3326468",
+    "0x2ce1618"
+   ],
+   [
+    "0x346bf98",
+    "0x2ce41b8"
+   ],
+   [
+    "0x3326d20",
+    "0x2ce1ee0"
+   ],
+   [
+    "0x3326dc0",
+    "0x2ce1f88"
+   ],
+   [
+    "0xf22ec8",
+    "0xf24990"
+   ],
+   [
+    "0xf32f18",
+    "0xf349e0"
+   ],
+   [
+    "0x21f32f30",
+    "0x21f349f8"
+   ],
+   [
+    "F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06",
+    "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE"
+   ],
+   [
+    "2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E",
+    "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F"
+   ],
+   [
+    "25480438",
+    "26088801"
+   ],
+   [
+    "revision = 'v1.7.1'",
+    "revision = 'v1.7.1-26088801'"
+   ]
+  ],
+  "files_changed_lines": {
+   "tests/reference/arc_thrower_auto.lua": 15,
+   "tests/test_bindings.lua": 7,
+   "tests/test_equivalence.lua": 13,
+   "tests/test_work_budget.lua": 16
+  }
+ },
+ "forbidden_text_absent": [
+  "PORT51",
+  "compat51",
+  "require('cffi')",
+  "require(\"cffi\")"
+ ],
+ "tests": {
+  "source": "out/TESTS.json (an earlier --tests run)",
+  "port": {
+   "passed": 63,
+   "total": 63
+  },
+  "upstream": {
+   "passed": 61,
+   "total": 63
+  },
+  "code_patch_check": {
+   "port_passes": true,
+   "upstream_fails": true,
+   "expected": "port passes, upstream fails"
+  },
+  "port_only_failures": [],
+  "failing_on_both (environment)": []
+ }
+}

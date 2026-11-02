@@ -1,0 +1,172 @@
+--- upstream wrapper
++++ port wrapper
+@@ -656,3 +656,3 @@
+-            {0x3326338,0x27cd910,{{0x18,0x7972f0},{0x38,0x7993d0},{0xa8,0x799540}}},
+-            {0x3326388,0x27cdc30,{{0,0x7ce220},{0x28,0x7cf050},{0x68,0x7cfe10}}},
+-            {0x3326328,0x27cdb40,{{0,0x79f860},{0x68,0x77dec0},{0x80,0x7f9070}}},
++            {0x2ce1500,0x2874ed0,{{0x18,0x81e620},{0x38,0x820700},{0xa8,0x820870}}},
++            {0x2ce1548,0x2875170,{{0,0x855900},{0x28,0x856730},{0x68,0x8574f0}}},
++            {0x2ce14e8,0x2875080,{{0,0x826d10},{0x68,0x805160},{0x80,0x880750}}},
+@@ -667 +667 @@
+-        assert(api.read(game+0xa9d560,12)=='\072\139\196\072\137\088\008\072\137\104\032\086',
++        assert(api.read(game+0xab9040,12)=='\072\139\196\072\137\088\008\072\137\104\032\086',
+@@ -669 +669 @@
+-        assert(api.read(game+0xa9a0c0,16)=='\064\085\083\086\087\065\084\065\086\065\087\072\141\108\036\208',
++        assert(api.read(game+0xab5ba0,16)=='\064\085\083\086\087\065\084\065\086\065\087\072\141\108\036\208',
+@@ -672,8 +672,8 @@
+-        local valid=ffi.cast('uint64_t (*)(uint32_t)',exe+0x7972f0)
+-        local flags=ffi.cast('uint32_t (*)(uint32_t)',exe+0x7993d0)
+-        local motion=ffi.cast('void (*)(uint32_t,float *,float *)',exe+0x799540)
+-        local mover=ffi.cast('uint32_t (*)(uint32_t,uint32_t)',exe+0x7ce220)
+-        local dimensions=ffi.cast('void *(*)(uint32_t)',exe+0x7cfe10)
+-        local position=ffi.cast('void (*)(uint32_t,float *)',exe+0x7cf050)
+-        local basis=ffi.cast('void *(*)(void *,const float *,const float *)',game+0x173f150)
+-        local rotation=ffi.cast('void (*)(float *,const void *)',game+0x173a750)
++        local valid=ffi.cast('uint64_t (*)(uint32_t)',exe+0x81e620)
++        local flags=ffi.cast('uint32_t (*)(uint32_t)',exe+0x820700)
++        local motion=ffi.cast('void (*)(uint32_t,float *,float *)',exe+0x820870)
++        local mover=ffi.cast('uint32_t (*)(uint32_t,uint32_t)',exe+0x855900)
++        local dimensions=ffi.cast('void *(*)(uint32_t)',exe+0x8574f0)
++        local position=ffi.cast('void (*)(uint32_t,float *)',exe+0x856730)
++        local basis=ffi.cast('void *(*)(void *,const float *,const float *)',game+0x15b3180)
++        local rotation=ffi.cast('void (*)(float *,const void *)',game+0x15ae780)
+@@ -681,6 +681,6 @@
+-        local classify=ffi.cast('int32_t (*)(void *,const void *,const float *,const float *)',game+0xa9d560)
+-        local world_id=ffi.cast('uint32_t (*)(const void *)',exe+0x79f860)
+-        local query=ffi.cast('uint32_t (*)(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,const void *,void *,uint32_t)',exe+0x7f9070)
+-        local drive=ffi.cast('void (*)(void *,float)',game+0xa9a0c0)
+-        local detect=ffi.cast('uint32_t (*)(void *,float)',game+0xa9c3e0)
+-        assert(api.read(game+0xa9dd90,16)=='\072\139\196\072\137\088\008\085\086\087\065\084\065\085\065\086',
++        local classify=ffi.cast('int32_t (*)(void *,const void *,const float *,const float *)',game+0xab9040)
++        local world_id=ffi.cast('uint32_t (*)(const void *)',exe+0x826d10)
++        local query=ffi.cast('uint32_t (*)(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,const void *,void *,uint32_t)',exe+0x880750)
++        local drive=ffi.cast('void (*)(void *,float)',game+0xab5ba0)
++        local detect=ffi.cast('uint32_t (*)(void *,float)',game+0xab7ec0)
++        assert(api.read(game+0xab9870,16)=='\072\139\196\072\137\088\008\085\086\087\065\084\065\085\065\086',
+@@ -689,2 +689,2 @@
+-        local approach=ffi.cast('uint8_t (*)(void *,const void *,float *,float *,float *,float *)',game+0xa9dd90)
+-        local override=ffi.cast('void (*)(void *,const void *,const void *)',game+0x83c420)
++        local approach=ffi.cast('uint8_t (*)(void *,const void *,float *,float *,float *,float *)',game+0xab9870)
++        local override=ffi.cast('void (*)(void *,const void *,const void *)',game+0x8492a0)
+@@ -698 +698 @@
+-            assert(api.read(game+0x83c420,16)=='\072\137\092\036\008\072\137\108\036\016\072\137\116\036\024\087',
++            assert(api.read(game+0x8492a0,16)=='\072\137\092\036\008\072\137\108\036\016\072\137\116\036\024\087',
+@@ -827 +827 @@
+-            tail[12]=ffi.cast('uint32_t *',copy+112)[0]
++            tail[12]=ffi.cast('uint32_t *',copy+116)[0]
+@@ -985 +985 @@
+-    if game~=gate_game then gate_game,gate_global=game,game+0x33266a0 end
++    if game~=gate_game then gate_game,gate_global=game,game+0x2ce1850 end
+@@ -1004 +1004 @@
+-    local pm=global(api,s,game,0x3326468,true)
++    local pm=global(api,s,game,0x2ce1618,true)
+@@ -1017 +1017 @@
+-    local ei=lookup(api,s,read(api,s,owner+0xf22ec8,20),unit_ref,1048576)
++    local ei=lookup(api,s,read(api,s,owner+0xf24990,20),unit_ref,1048576)
+@@ -1020 +1020 @@
+-    local entity_address=owner+0xf32f18+ei*24
++    local entity_address=owner+0xf349e0+ei*24
+@@ -1069 +1069 @@
+-    s.flags_address=manager+ai*0x1238+0x53e880
++    s.flags_address=manager+ai*0x1240+0x53e888
+@@ -1095 +1095 @@
+-    s.world=global(api,s,game,0x346bfa0,true)
++    s.world=global(api,s,game,0x2e271f8,true)
+@@ -1149,3 +1149,3 @@
+-    ffi.cast('uint32_t *',template+0x70)[0]=u32(entity,12)
+-    ffi.cast('uint16_t *',template+0x74)[0]=1
+-    template[0x7a],template[0x7b],template[0x7c]=2,1,5
++    ffi.cast('uint32_t *',template+0x74)[0]=u32(entity,12)
++    ffi.cast('uint16_t *',template+0x78)[0]=1
++    template[0x7c],template[0x7d],template[0x7e]=2,1,5
+@@ -1159,3 +1159,3 @@
+-    assert(u32(record,0x68)==0x05a5271a and u32(record,0x70)==u32(entity,12), 'Query identity mismatch')
+-    assert(record:byte(0x7b)==2 and record:byte(0x7c)==1 and record:byte(0x7d)==5,'Unsupported query type')
+-    assert(u16(record,0x74)==1 and u16(record,0x76)<=1,'Unsupported query capacity')
++    assert(u32(record,0x68)==0x05a5271a and u32(record,0x74)==u32(entity,12), 'Query identity mismatch')
++    assert(record:byte(0x7d)==2 and record:byte(0x7e)==1 and record:byte(0x7f)==5,'Unsupported query type')
++    assert(u16(record,0x78)==1 and u16(record,0x7a)<=1,'Unsupported query capacity')
+@@ -1166 +1166 @@
+-    return record,u16(record,0x76)
++    return record,u16(record,0x7a)
+@@ -1186 +1186 @@
+-    local override=lookup(api,s,read(api,s,manager+0x547c70,20),id,64)
++    local override=lookup(api,s,read(api,s,manager+0x547cb0,20),id,64)
+@@ -1189,3 +1189,3 @@
+-        return read(api,s,manager+0x547d24+override*0x354,852)
+-    end
+-    local component=pointer(api,read(api,s,owner+0xf12bb8,8))
++        return read(api,s,manager+0x547d64+override*0x354,852)
++    end
++    local component=pointer(api,read(api,s,owner+0xf14680,8))
+@@ -1211 +1211 @@
+-    local movement=global(api,s,game,0x3326558)
++    local movement=global(api,s,game,0x2ce1708)
+@@ -1234 +1234 @@
+-    local camera=vector(read(api,s,global(api,s,game,0x346d560)+0x1c,12),0)
++    local camera=vector(read(api,s,global(api,s,game,0x2e287d0)+0x1c,12),0)
+@@ -1239 +1239 @@
+-        assert(u32(read(api,s,manager+ai*0x1238+0x53e15c,4),0)==id,'Direction state identity mismatch')
++        assert(u32(read(api,s,manager+ai*0x1240+0x53e15c,4),0)==id,'Direction state identity mismatch')
+@@ -1252 +1252 @@
+-    local owner=global(api,s,game,0x346bf98,true)
++    local owner=global(api,s,game,0x2ce41b8,true)
+@@ -1255 +1255 @@
+-    local manager=global(api,s,game,0x3326d20,true)
++    local manager=global(api,s,game,0x2ce1ee0,true)
+@@ -1279 +1279 @@
+-    s.controller=manager+0x53e1b8+ai*0x1238
++    s.controller=manager+0x53e1b8+ai*0x1240
+@@ -2233 +2233 @@
+-    local mode=light_read(api,light_global(api,base,0x33266a0,CHAIN),0x44,CHAIN)
++    local mode=light_read(api,light_global(api,base,0x2ce1850,CHAIN),0x44,CHAIN)
+@@ -2240 +2240 @@
+-    local pm=light_global(api,base,0x3326468,OWNED)
++    local pm=light_global(api,base,0x2ce1618,OWNED)
+@@ -2259 +2259 @@
+-    local ei=light_lookup(api,owner+0xf22ec8,ref,1048576)
++    local ei=light_lookup(api,owner+0xf24990,ref,1048576)
+@@ -2262 +2262 @@
+-    local address=owner+0xf32f18+ei*24
++    local address=owner+0xf349e0+ei*24
+@@ -2297 +2297 @@
+-    local owner,manager=light_global(api,base,0x346bf98,OWNED),light_global(api,base,0x3326d20,OWNED)
++    local owner,manager=light_global(api,base,0x2ce41b8,OWNED),light_global(api,base,0x2ce1ee0,OWNED)
+@@ -2386 +2386 @@
+-    local mm=global(api,s,game,0x3326558)
++    local mm=global(api,s,game,0x2ce1708)
+@@ -2400 +2400 @@
+-    local pool=ptr(api,read(api,s,exe+0x27c3298+bit.rshift(handle,30)*0x810,8,true))
++    local pool=ptr(api,read(api,s,exe+0x286a768+bit.rshift(handle,30)*0x810,8,true))
+@@ -2412 +2412 @@
+-    assert(api.distance(ptr(api,read(api,s,object,8,true)),exe+0x16a16d8)==0,'Unsupported character controller')
++    assert(api.distance(ptr(api,read(api,s,object,8,true)),exe+0x17430a0)==0,'Unsupported character controller')
+@@ -2430 +2430 @@
+-    local oi=lookup(api,s,manager+0x547c70,s.key.id,64)
++    local oi=lookup(api,s,manager+0x547cb0,s.key.id,64)
+@@ -2433 +2433 @@
+-        local base=manager+0x547d24+oi*852
++        local base=manager+0x547d64+oi*852
+@@ -2438 +2438 @@
+-    local component=ptr(api,read(api,s,s.key.owner+0xf12bb8,8,true))
++    local component=ptr(api,read(api,s,s.key.owner+0xf14680,8,true))
+@@ -2450 +2450 @@
+-    s.override_count=u(read(api,s,s.key.manager+0x547d20,4,true))
++    s.override_count=u(read(api,s,s.key.manager+0x547d60,4,true))
+@@ -2468 +2468 @@
+-    local flags=read(api,s,manager+0x53e880+ai*0x1238,24,true)
++    local flags=read(api,s,manager+0x53e888+ai*0x1240,24,true)
+@@ -2492 +2492 @@
+-    IDLE.vault_phase=api_address(found_manager+0x53e1b8+found_ai*0x1238+4)
++    IDLE.vault_phase=api_address(found_manager+0x53e1b8+found_ai*0x1240+4)
+@@ -2510 +2510 @@
+-    local vault_phase=api_address(found_manager+0x53e1b8+found_ai*0x1238+4)
++    local vault_phase=api_address(found_manager+0x53e1b8+found_ai*0x1240+4)
+@@ -2521,2 +2521,2 @@
+-    assert(u(read(api,s,manager+0x53e1b8+ai*0x1238+0x2ac,4,true))==id,'Vault identity mismatch')
+-    local direction=manager+0x53e134+ai*0x1238
++    assert(u(read(api,s,manager+0x53e1b8+ai*0x1240+0x2ac,4,true))==id,'Vault identity mismatch')
++    local direction=manager+0x53e134+ai*0x1240
+@@ -3080 +3080 @@
+-install_loader(function() return create_api(runtime, runtime_write.extend(runtime_memory.new(runtime))) end, patch, {revision = 'data-v8.9.1', exe_sha256 = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06', game_sha256 = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'}, runtime)
++install_loader(function() return create_api(runtime, runtime_write.extend(runtime_memory.new(runtime))) end, patch, {revision = 'data-v8.9.1-26088801', exe_sha256 = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE', game_sha256 = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'}, runtime)

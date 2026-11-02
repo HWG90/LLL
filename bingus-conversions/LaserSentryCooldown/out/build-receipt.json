@@ -1,0 +1,614 @@
+{
+ "mod": "Laser Sentry Cooldown v1.1.1 (Vanilla Plus Megapack option LaserSentryCooldown)",
+ "upstream": "<workspace>/upstream-bingus/LaserSentryCooldown",
+ "upstream_tag": "v1.1.1",
+ "pack_recipe": "BUILD_ASSEMBLED: scripts/build.py assemble(False); envelope <II len, 2>",
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "game_sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+ "exe_sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+ "map": {
+  "sha256": "7a04e48a100f12aaeb3fca7b7719da8c3a33e5fa114e5a4760b58029f8e8e475",
+  "counts": {
+   "high": 19,
+   "medium": 4,
+   "low": 0,
+   "unmapped": 0,
+   "feeds_write": 16
+  }
+ },
+ "replacements": [
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 34,
+   "old": "Cooldown.REVISION = 'v' .. Cooldown.VERSION",
+   "new": "Cooldown.REVISION = 'v' .. Cooldown.VERSION .. '-26088801'",
+   "map_rows": [
+    "build.revision"
+   ]
+  },
+  {
+   "file": "tests/reference/laser_sentry_cooldown.lua",
+   "line": 34,
+   "old": "Cooldown.REVISION = 'v' .. Cooldown.VERSION",
+   "new": "Cooldown.REVISION = 'v' .. Cooldown.VERSION .. '-26088801'",
+   "map_rows": [
+    "build.revision"
+   ]
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 43,
+   "old": "Cooldown.ROOT_RVA = 0x346BF98",
+   "new": "Cooldown.ROOT_RVA = 0x2CE41B8",
+   "map_rows": [
+    "heat.root_rva"
+   ]
+  },
+  {
+   "file": "tests/reference/laser_sentry_cooldown.lua",
+   "line": 43,
+   "old": "Cooldown.ROOT_RVA = 0x346BF98",
+   "new": "Cooldown.ROOT_RVA = 0x2CE41B8",
+   "map_rows": [
+    "heat.root_rva"
+   ]
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 44,
+   "old": "Cooldown.TABLE_OFFSET = 0xF12CC8",
+   "new": "Cooldown.TABLE_OFFSET = 0xF14790",
+   "map_rows": [
+    "heat.table_offset"
+   ]
+  },
+  {
+   "file": "tests/reference/laser_sentry_cooldown.lua",
+   "line": 44,
+   "old": "Cooldown.TABLE_OFFSET = 0xF12CC8",
+   "new": "Cooldown.TABLE_OFFSET = 0xF14790",
+   "map_rows": [
+    "heat.table_offset"
+   ]
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 45,
+   "old": "Cooldown.SLOTS, Cooldown.SLOT_SIZE = 58, 16",
+   "new": "Cooldown.SLOTS, Cooldown.SLOT_SIZE = 60, 16",
+   "map_rows": [
+    "heat.slots"
+   ]
+  },
+  {
+   "file": "tests/reference/laser_sentry_cooldown.lua",
+   "line": 45,
+   "old": "Cooldown.SLOTS, Cooldown.SLOT_SIZE = 58, 16",
+   "new": "Cooldown.SLOTS, Cooldown.SLOT_SIZE = 60, 16",
+   "map_rows": [
+    "heat.slots"
+   ]
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 46,
+   "old": "Cooldown.RECORDS_OFFSET, Cooldown.RECORD_SIZE = 928, 592",
+   "new": "Cooldown.RECORDS_OFFSET, Cooldown.RECORD_SIZE = 960, 592",
+   "map_rows": [
+    "heat.records_offset+size"
+   ]
+  },
+  {
+   "file": "tests/reference/laser_sentry_cooldown.lua",
+   "line": 46,
+   "old": "Cooldown.RECORDS_OFFSET, Cooldown.RECORD_SIZE = 928, 592",
+   "new": "Cooldown.RECORDS_OFFSET, Cooldown.RECORD_SIZE = 960, 592",
+   "map_rows": [
+    "heat.records_offset+size"
+   ]
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 72,
+   "old": "Cooldown.ABILITY_VANILLA = '\\50\\11\\0\\0'    -- 2866 (0xB32) little-endian",
+   "new": "Cooldown.ABILITY_VANILLA = '\\68\\11\\0\\0'    -- 2884 (0xB44) little-endian",
+   "map_rows": [
+    "heat.ability_vanilla"
+   ]
+  },
+  {
+   "file": "tests/reference/laser_sentry_cooldown.lua",
+   "line": 72,
+   "old": "Cooldown.ABILITY_VANILLA = '\\50\\11\\0\\0'    -- 2866 (0xB32) little-endian",
+   "new": "Cooldown.ABILITY_VANILLA = '\\68\\11\\0\\0'    -- 2884 (0xB44) little-endian",
+   "map_rows": [
+    "heat.ability_vanilla"
+   ]
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 282,
+   "old": "Cooldown.HEAT_MANAGER_RVA = 0x3326D48     -- WeaponHeat manager:",
+   "new": "Cooldown.HEAT_MANAGER_RVA = 0x2CE1F08     -- WeaponHeat manager:",
+   "map_rows": [
+    "heat.manager_rva"
+   ]
+  },
+  {
+   "file": "tests/reference/laser_sentry_cooldown.lua",
+   "line": 282,
+   "old": "Cooldown.HEAT_MANAGER_RVA = 0x3326D48     -- WeaponHeat manager:",
+   "new": "Cooldown.HEAT_MANAGER_RVA = 0x2CE1F08     -- WeaponHeat manager:",
+   "map_rows": [
+    "heat.manager_rva"
+   ]
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 283,
+   "old": "Cooldown.BEHAVIOR_MANAGER_RVA = 0x3326740 -- behavior manager (world + 0xEEBA08, set by 0x568230), layout below",
+   "new": "Cooldown.BEHAVIOR_MANAGER_RVA = 0x2CE18F0 -- behavior manager (world + 0xEED2B8, set by 0x5711CB), layout below",
+   "map_rows": [
+    "behavior.manager_rva"
+   ]
+  },
+  {
+   "file": "tests/reference/laser_sentry_cooldown.lua",
+   "line": 283,
+   "old": "Cooldown.BEHAVIOR_MANAGER_RVA = 0x3326740 -- behavior manager (world + 0xEEBA08, set by 0x568230), layout below",
+   "new": "Cooldown.BEHAVIOR_MANAGER_RVA = 0x2CE18F0 -- behavior manager (world + 0xEED2B8, set by 0x5711CB), layout below",
+   "map_rows": [
+    "behavior.manager_rva"
+   ]
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 284,
+   "old": "Cooldown.BEHAVIOR_ID, Cooldown.BEHAVIOR_SIZE = 308, 504",
+   "new": "Cooldown.BEHAVIOR_ID, Cooldown.BEHAVIOR_SIZE = 309, 504",
+   "map_rows": [
+    "behavior.id"
+   ]
+  },
+  {
+   "file": "tests/reference/laser_sentry_cooldown.lua",
+   "line": 284,
+   "old": "Cooldown.BEHAVIOR_ID, Cooldown.BEHAVIOR_SIZE = 308, 504",
+   "new": "Cooldown.BEHAVIOR_ID, Cooldown.BEHAVIOR_SIZE = 309, 504",
+   "map_rows": [
+    "behavior.id"
+   ]
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 666,
+   "old": "Cooldown.GAME_SHA256 = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+   "new": "Cooldown.GAME_SHA256 = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'",
+   "map_rows": []
+  },
+  {
+   "file": "tests/reference/laser_sentry_cooldown.lua",
+   "line": 666,
+   "old": "Cooldown.GAME_SHA256 = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+   "new": "Cooldown.GAME_SHA256 = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'",
+   "map_rows": []
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 667,
+   "old": "Cooldown.EXE_SHA256 = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+   "new": "Cooldown.EXE_SHA256 = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'",
+   "map_rows": []
+  },
+  {
+   "file": "tests/reference/laser_sentry_cooldown.lua",
+   "line": 667,
+   "old": "Cooldown.EXE_SHA256 = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+   "new": "Cooldown.EXE_SHA256 = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'",
+   "map_rows": []
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 726,
+   "old": "'unsupported game build (needs Steam build 25480438)'",
+   "new": "'unsupported game build (needs Steam build 26088801)'",
+   "map_rows": []
+  },
+  {
+   "file": "tests/reference/laser_sentry_cooldown.lua",
+   "line": 723,
+   "old": "'unsupported game build (needs Steam build 25480438)'",
+   "new": "'unsupported game build (needs Steam build 26088801)'",
+   "map_rows": []
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 2,
+   "old": "-- Laser Sentry Cooldown v1.1.1 for Helldivers 2 Steam build 25480438.",
+   "new": "-- Laser Sentry Cooldown v1.1.1 for Helldivers 2 Steam build 26088801 (port of the 25480438 release).",
+   "map_rows": [
+    "comments"
+   ]
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 7,
+   "old": "(WeaponHeat update 0x762F60)",
+   "new": "(WeaponHeat update 0x76E3F0)",
+   "map_rows": [
+    "comments"
+   ]
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 8,
+   "old": "--   - overheat_ability = 2866: when the sentry overheats, the WeaponHeat presentation (0x763780) plays that",
+   "new": "--   - overheat_ability = 2884: when the sentry overheats, the WeaponHeat presentation (0x76EC10) plays that",
+   "map_rows": [
+    "comments"
+   ]
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 9,
+   "old": "The ability's script (0x1150660, case 2866 of 0x11509E0)",
+   "new": "The ability's script (0xFE3550, case 2884 of 0xFE38D0)",
+   "map_rows": [
+    "comments"
+   ]
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 11,
+   "old": "(0x11AD240 -> 0x13C0A80)",
+   "new": "(0x103DC80 -> 25480438: 0x13C0A80)",
+   "map_rows": [
+    "comments"
+   ]
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 14,
+   "old": "An overheat_ability of 0 plays no ability: 0x763780 skips it.",
+   "new": "An overheat_ability of 0 plays no ability: 0x76EC10 skips it.",
+   "map_rows": [
+    "comments"
+   ]
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 39,
+   "old": "-- Build 25480438 anchors (EXE 1.8.46015.0). The heat settings lookup 0x50DD30 reads",
+   "new": "-- Build 26088801 anchors (native-work/megapack-port/LaserSentryCooldown/MAP.json). The heat settings lookup 0x516310 reads",
+   "map_rows": [
+    "comments"
+   ]
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 40,
+   "old": "-- [[game + ROOT_RVA] + TABLE_OFFSET]: 58 slots of",
+   "new": "-- [[game + ROOT_RVA] + TABLE_OFFSET]: 60 slots of",
+   "map_rows": [
+    "comments"
+   ]
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 41,
+   "old": "-- resource % 58, then 592-byte WeaponHeatComponent records at table + 928 + 592 * index.",
+   "new": "-- resource % 60, then 592-byte WeaponHeatComponent records at table + 960 + 592 * index.",
+   "map_rows": [
+    "comments"
+   ]
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 118,
+   "old": "-- The record's index in the slot table (928 bytes as a string), probed as 0x50DD30 does: linearly from\n-- resource % 58,",
+   "new": "-- The record's index in the slot table (960 bytes as a string), probed as 0x516310 does: linearly from\n-- resource % 60,",
+   "map_rows": [
+    "comments"
+   ]
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 67,
+   "old": "2. overheat_ability (u32 at 0x248). Vanilla: 2866,",
+   "new": "2. overheat_ability (u32 at 0x248). Vanilla: 2884,",
+   "map_rows": [
+    "comments"
+   ]
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 270,
+   "old": "(behavior 308 in this build, per-frame\n-- update 0x472F60) leaves its firing state (13, 0x32A3D0)",
+   "new": "(behavior 309 in this build, per-frame\n-- update 0x479CA0) leaves its firing state (13, 0x3310D0)",
+   "map_rows": [
+    "comments"
+   ]
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 274,
+   "old": "(the machine that owns it, 0x843930)",
+   "new": "(the machine that owns it, 0x850830)",
+   "map_rows": [
+    "comments"
+   ]
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 279,
+   "old": "(0x843040 -> 0x4962C0, which refuses only state\n-- 12 for this behavior -> 0x48EE50 -> 0x32B6B0)",
+   "new": "(0x84FF40 -> 0x49CFC0, which refuses only state\n-- 12 for this behavior -> 0x495C20 -> 0x3323B0)",
+   "map_rows": [
+    "comments"
+   ]
+  },
+  {
+   "file": "src/laser_sentry_cooldown.lua",
+   "line": 664,
+   "old": "-- Build 25480438 module hashes,",
+   "new": "-- Build 26088801 module hashes,",
+   "map_rows": [
+    "comments"
+   ]
+  },
+  {
+   "file": "src/test_hooks.lua",
+   "line": 3,
+   "old": "([game+0x3326D48]:",
+   "new": "([game+0x2CE1F08]:",
+   "map_rows": [
+    "comments"
+   ]
+  },
+  {
+   "file": "scripts/build.py",
+   "line": 78,
+   "old": "'-- Laser Sentry Cooldown v%s%s for Steam build 25480438. Generated by",
+   "new": "'-- Laser Sentry Cooldown v%s%s for Steam build 26088801. Generated by",
+   "map_rows": [
+    "comments"
+   ]
+  }
+ ],
+ "entry_changes_vs_upstream": [
+  {
+   "entry_line": 2,
+   "old": "-- Laser Sentry Cooldown v1.1.1 for Steam build 25480438. Generated by scripts/build.py from src/bingus_runtime.lua, src/bingus_memory.lua, src/laser_sentry_cooldown.lua; edit those.",
+   "new": "-- Laser Sentry Cooldown v1.1.1 for Steam build 26088801. Generated by scripts/build.py from src/bingus_runtime.lua, src/bingus_memory.lua, src/laser_sentry_cooldown.lua; edit those."
+  },
+  {
+   "entry_line": 544,
+   "old": "-- Laser Sentry Cooldown v1.1.1 for Helldivers 2 Steam build 25480438.",
+   "new": "-- Laser Sentry Cooldown v1.1.1 for Helldivers 2 Steam build 26088801 (port of the 25480438 release)."
+  },
+  {
+   "entry_line": 549,
+   "old": "--     lets it recover (WeaponHeat update 0x762F60), so its weapon reads as empty for good;",
+   "new": "--     lets it recover (WeaponHeat update 0x76E3F0), so its weapon reads as empty for good;"
+  },
+  {
+   "entry_line": 550,
+   "old": "--   - overheat_ability = 2866: when the sentry overheats, the WeaponHeat presentation (0x763780) plays that",
+   "new": "--   - overheat_ability = 2884: when the sentry overheats, the WeaponHeat presentation (0x76EC10) plays that"
+  },
+  {
+   "entry_line": 551,
+   "old": "--     ability on it, on every machine in the match. The ability's script (0x1150660, case 2866 of 0x11509E0)",
+   "new": "--     ability on it, on every machine in the match. The ability's script (0xFE3550, case 2884 of 0xFE38D0)"
+  },
+  {
+   "entry_line": 553,
+   "old": "--     sentry as its source (0x11AD240 -> 0x13C0A80). That explosion is what destroys the sentry.",
+   "new": "--     sentry as its source (0x103DC80 -> 25480438: 0x13C0A80). That explosion is what destroys the sentry."
+  },
+  {
+   "entry_line": 556,
+   "old": "-- overheat_temperature_recover (0). An overheat_ability of 0 plays no ability: 0x763780 skips it.",
+   "new": "-- overheat_temperature_recover (0). An overheat_ability of 0 plays no ability: 0x76EC10 skips it."
+  },
+  {
+   "entry_line": 576,
+   "old": "Cooldown.REVISION = 'v' .. Cooldown.VERSION",
+   "new": "Cooldown.REVISION = 'v' .. Cooldown.VERSION .. '-26088801'"
+  },
+  {
+   "entry_line": 581,
+   "old": "-- Build 25480438 anchors (EXE 1.8.46015.0). The heat settings lookup 0x50DD30 reads",
+   "new": "-- Build 26088801 anchors (native-work/megapack-port/LaserSentryCooldown/MAP.json). The heat settings lookup 0x516310 reads"
+  },
+  {
+   "entry_line": 582,
+   "old": "-- [[game + ROOT_RVA] + TABLE_OFFSET]: 58 slots of {u64 resource, u32 index, u32 pad} probed linearly from",
+   "new": "-- [[game + ROOT_RVA] + TABLE_OFFSET]: 60 slots of {u64 resource, u32 index, u32 pad} probed linearly from"
+  },
+  {
+   "entry_line": 583,
+   "old": "-- resource % 58, then 592-byte WeaponHeatComponent records at table + 928 + 592 * index. The block starts",
+   "new": "-- resource % 60, then 592-byte WeaponHeatComponent records at table + 960 + 592 * index. The block starts"
+  },
+  {
+   "entry_line": 585,
+   "old": "Cooldown.ROOT_RVA = 0x346BF98",
+   "new": "Cooldown.ROOT_RVA = 0x2CE41B8"
+  },
+  {
+   "entry_line": 586,
+   "old": "Cooldown.TABLE_OFFSET = 0xF12CC8",
+   "new": "Cooldown.TABLE_OFFSET = 0xF14790"
+  },
+  {
+   "entry_line": 587,
+   "old": "Cooldown.SLOTS, Cooldown.SLOT_SIZE = 58, 16",
+   "new": "Cooldown.SLOTS, Cooldown.SLOT_SIZE = 60, 16"
+  },
+  {
+   "entry_line": 588,
+   "old": "Cooldown.RECORDS_OFFSET, Cooldown.RECORD_SIZE = 928, 592",
+   "new": "Cooldown.RECORDS_OFFSET, Cooldown.RECORD_SIZE = 960, 592"
+  },
+  {
+   "entry_line": 609,
+   "old": "--   2. overheat_ability (u32 at 0x248). Vanilla: 2866, the ability that blows the sentry up. The mod's value: 0.",
+   "new": "--   2. overheat_ability (u32 at 0x248). Vanilla: 2884, the ability that blows the sentry up. The mod's value: 0."
+  },
+  {
+   "entry_line": 614,
+   "old": "Cooldown.ABILITY_VANILLA = '\\50\\11\\0\\0'    -- 2866 (0xB32) little-endian",
+   "new": "Cooldown.ABILITY_VANILLA = '\\68\\11\\0\\0'    -- 2884 (0xB44) little-endian"
+  },
+  {
+   "entry_line": 660,
+   "old": "-- The record's index in the slot table (928 bytes as a string), probed as 0x50DD30 does: linearly from",
+   "new": "-- The record's index in the slot table (960 bytes as a string), probed as 0x516310 does: linearly from"
+  },
+  {
+   "entry_line": 661,
+   "old": "-- resource % 58, stopping at an empty slot. nil when the resource is not there.",
+   "new": "-- resource % 60, stopping at an empty slot. nil when the resource is not there."
+  },
+  {
+   "entry_line": 812,
+   "old": "-- After an overheat, the turret itself. The Laser Sentry's AI behavior (behavior 308 in this build, per-frame",
+   "new": "-- After an overheat, the turret itself. The Laser Sentry's AI behavior (behavior 309 in this build, per-frame"
+  },
+  {
+   "entry_line": 813,
+   "old": "-- update 0x472F60) leaves its firing state (13, 0x32A3D0) for state 6 the moment its weapon reports overheated,",
+   "new": "-- update 0x479CA0) leaves its firing state (13, 0x3310D0) for state 6 the moment its weapon reports overheated,"
+  },
+  {
+   "entry_line": 816,
+   "old": "-- So once an overheated Laser Sentry whose behavior runs on this machine (the machine that owns it, 0x843930)",
+   "new": "-- So once an overheated Laser Sentry whose behavior runs on this machine (the machine that owns it, 0x850830)"
+  },
+  {
+   "entry_line": 821,
+   "old": "-- pending request through set_state when the behavior allows it (0x843040 -> 0x4962C0, which refuses only state",
+   "new": "-- pending request through set_state when the behavior allows it (0x84FF40 -> 0x49CFC0, which refuses only state"
+  },
+  {
+   "entry_line": 822,
+   "old": "-- 12 for this behavior -> 0x48EE50 -> 0x32B6B0), so the game itself makes the change, enter action and",
+   "new": "-- 12 for this behavior -> 0x495C20 -> 0x3323B0), so the game itself makes the change, enter action and"
+  },
+  {
+   "entry_line": 824,
+   "old": "Cooldown.HEAT_MANAGER_RVA = 0x3326D48     -- WeaponHeat manager: +20 instances, +64 records, +88 states (12 bytes, +8 overheated)",
+   "new": "Cooldown.HEAT_MANAGER_RVA = 0x2CE1F08     -- WeaponHeat manager: +20 instances, +64 records, +88 states (12 bytes, +8 overheated)"
+  },
+  {
+   "entry_line": 825,
+   "old": "Cooldown.BEHAVIOR_MANAGER_RVA = 0x3326740 -- behavior manager (world + 0xEEBA08, set by 0x568230), layout below",
+   "new": "Cooldown.BEHAVIOR_MANAGER_RVA = 0x2CE18F0 -- behavior manager (world + 0xEED2B8, set by 0x5711CB), layout below"
+  },
+  {
+   "entry_line": 826,
+   "old": "Cooldown.BEHAVIOR_ID, Cooldown.BEHAVIOR_SIZE = 308, 504",
+   "new": "Cooldown.BEHAVIOR_ID, Cooldown.BEHAVIOR_SIZE = 309, 504"
+  },
+  {
+   "entry_line": 1206,
+   "old": "-- Build 25480438 module hashes, verified through bingus_memory.lua (each file hashed once per session for",
+   "new": "-- Build 26088801 module hashes, verified through bingus_memory.lua (each file hashed once per session for"
+  },
+  {
+   "entry_line": 1208,
+   "old": "Cooldown.GAME_SHA256 = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+   "new": "Cooldown.GAME_SHA256 = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'"
+  },
+  {
+   "entry_line": 1209,
+   "old": "Cooldown.EXE_SHA256 = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+   "new": "Cooldown.EXE_SHA256 = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'"
+  },
+  {
+   "entry_line": 1268,
+   "old": "        require_that(ok, why == 'unsupported game build' and 'unsupported game build (needs Steam build 25480438)'",
+   "new": "        require_that(ok, why == 'unsupported game build' and 'unsupported game build (needs Steam build 26088801)'"
+  }
+ ],
+ "port_test_fixture": {
+  "entries": 29,
+  "header_size": [
+   18688,
+   18720
+  ],
+  "index": 11,
+  "ability": [
+   2866,
+   2884
+  ]
+ },
+ "unmodified_assembly": {
+  "sha256": "e3cfc11c1486501ec5100bdb23270b20959f49d73e83737ceb97a6d1388fbb74",
+  "equals_lock_resource_sha256": true,
+  "equals_shipped_v26_resource": "<hellforge>/mods/Vanilla Plus Megapack - v26/options/LaserSentryCooldown/9ba626afa44a3aa3.patch_0 :: eca1c2278f17bc65"
+ },
+ "resource": {
+  "name": "mods/cowboybingus/laser_sentry_cooldown",
+  "hash": "eca1c2278f17bc65",
+  "bytes": 66954,
+  "format": "plaintext entry (type 2 envelope)"
+ },
+ "archive_holds_only": [
+  "eca1c2278f17bc65"
+ ],
+ "outputs": {
+  "entry.lua": "da61ce1a5fcedbfc7a89fe8f67c2787a36df98db008026fa4b856ed671e2aa23",
+  "laser_sentry_cooldown.lua.main": "51ca420da96bc3f68b6602cfedcec5e5eeaa805b98665b36804a456e09da073a",
+  "9ba626afa44a3aa3.patch_0": "618478580a14d1cc5157e8bd43ea30e7ff4a577567727ae7bb3cc5f5d642d46c",
+  "9ba626afa44a3aa3.patch_0.stream": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "9ba626afa44a3aa3.patch_0.gpu_resources": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+ },
+ "luajit_check": {
+  "luajit": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit",
+  "string_dump_flags": 8,
+  "gc64_fr2": true,
+  "output": [
+   "compile: ok\tLuaJIT 2.1.ROLLING\t8",
+   "entry run: false: mods/cowboybingus/laser_sentry_cooldown:359: libkernel32.so: cannot open shared object file: No such file or directory",
+   "installed: nil"
+  ],
+  "unmodified_upstream_output": [
+   "compile: ok\tLuaJIT 2.1.ROLLING\t8",
+   "entry run: false: mods/cowboybingus/laser_sentry_cooldown:359: libbcrypt.so: cannot open shared object file: No such file or directory",
+   "installed: nil"
+  ]
+ },
+ "adapter_text_absent": [
+  "PORT51",
+  "compat51",
+  "require('cffi')",
+  "require(\"cffi\")"
+ ],
+ "tests": {
+  "port": {
+   "linux GC64 luajit: test_cooldown.lua": true,
+   "linux GC64 luajit: test_hooks.lua": true,
+   "linux GC64 luajit: test_turret.lua": true,
+   "linux GC64 luajit: test_equivalence.lua": true,
+   "linux GC64 luajit: compile_entry.lua entry-check": true,
+   "linux GC64 luajit: compile_entry.lua entry-check-test": true,
+   "wine luajit.exe: test_adapter.lua plain": true,
+   "wine luajit.exe: test_adapter.lua hostile": true,
+   "wine luajit.exe: test_adapter.lua sdk": true
+  },
+  "upstream": {
+   "linux GC64 luajit: test_cooldown.lua": true,
+   "linux GC64 luajit: test_hooks.lua": true,
+   "linux GC64 luajit: test_turret.lua": true,
+   "linux GC64 luajit: test_equivalence.lua": true,
+   "linux GC64 luajit: compile_entry.lua entry-check": true,
+   "linux GC64 luajit: compile_entry.lua entry-check-test": true,
+   "wine luajit.exe: test_adapter.lua plain": true,
+   "wine luajit.exe: test_adapter.lua hostile": true,
+   "wine luajit.exe: test_adapter.lua sdk": true
+  }
+ }
+}

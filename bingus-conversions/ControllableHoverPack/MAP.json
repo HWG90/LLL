@@ -1,0 +1,2419 @@
+{
+ "mod": "Controllable Hover Pack v1.8.1 (Vanilla Plus Megapack option ControllableHoverPack)",
+ "source": {
+  "used": "<workspace>/upstream-bingus/VanillaPlusMegapack/components/ControllableHoverPack",
+  "standalone": "<workspace>/upstream-bingus/ControllableHoverPack (git tag v1.8.1)",
+  "lock_revision": "v1.8.1",
+  "every_lock_source_sha256_matches": {
+   "scripts/archive.py": {
+    "pinned_copy": true,
+    "standalone_v1.8.1": true
+   },
+   "scripts/build.py": {
+    "pinned_copy": true,
+    "standalone_v1.8.1": true
+   },
+   "scripts/package.py": {
+    "pinned_copy": true,
+    "standalone_v1.8.1": true
+   },
+   "scripts/privacy_audit.py": {
+    "pinned_copy": true,
+    "standalone_v1.8.1": true
+   },
+   "src/archive_loader.lua": {
+    "pinned_copy": true,
+    "standalone_v1.8.1": true
+   },
+   "src/bingus_memory.lua": {
+    "pinned_copy": true,
+    "standalone_v1.8.1": true
+   },
+   "src/bingus_runtime.lua": {
+    "pinned_copy": true,
+    "standalone_v1.8.1": true
+   },
+   "src/bingus_write.lua": {
+    "pinned_copy": true,
+    "standalone_v1.8.1": true
+   },
+   "src/cancel.lua": {
+    "pinned_copy": true,
+    "standalone_v1.8.1": true
+   },
+   "src/hover_data.lua": {
+    "pinned_copy": true,
+    "standalone_v1.8.1": true
+   },
+   "src/settings.lua": {
+    "pinned_copy": true,
+    "standalone_v1.8.1": true
+   },
+   "src/windows_api.lua": {
+    "pinned_copy": true,
+    "standalone_v1.8.1": true
+   },
+   "tests/flight_replay.lua": {
+    "pinned_copy": true,
+    "standalone_v1.8.1": true
+   },
+   "tests/frame_budget.lua": {
+    "pinned_copy": true,
+    "standalone_v1.8.1": true
+   },
+   "tests/reference/archive_loader.lua": {
+    "pinned_copy": true,
+    "standalone_v1.8.1": true
+   },
+   "tests/reference/hover_data.lua": {
+    "pinned_copy": true,
+    "standalone_v1.8.1": true
+   },
+   "tests/test_cancel.lua": {
+    "pinned_copy": true,
+    "standalone_v1.8.1": true
+   },
+   "tests/test_idle_gate.lua": {
+    "pinned_copy": true,
+    "standalone_v1.8.1": true
+   },
+   "tests/test_loader.lua": {
+    "pinned_copy": true,
+    "standalone_v1.8.1": true
+   },
+   "tests/test_module.lua": {
+    "pinned_copy": true,
+    "standalone_v1.8.1": true
+   },
+   "tests/test_package.py": {
+    "pinned_copy": true,
+    "standalone_v1.8.1": true
+   },
+   "tests/test_replay.lua": {
+    "pinned_copy": true,
+    "standalone_v1.8.1": true
+   },
+   "tests/test_settings.lua": {
+    "pinned_copy": true,
+    "standalone_v1.8.1": true
+   },
+   "tests/test_snapshot.lua": {
+    "pinned_copy": true,
+    "standalone_v1.8.1": true
+   },
+   "tests/test_windows_api.lua": {
+    "pinned_copy": true,
+    "standalone_v1.8.1": true
+   }
+  },
+  "note": "the pinned copy and the standalone checkout at tag v1.8.1 both match every lock hash; the pinned copy is used"
+ },
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "old_image": "<workspace>/native-work/evidence/game-pre1020.dll",
+ "new_image": "<workspace>/native-work/evidence/game-26088801.dll",
+ "native_calls": [],
+ "native_calls_note": "the mod calls no game function (upstream build report: native_calls [])",
+ "counts": {
+  "high": 25,
+  "medium": 5
+ },
+ "rows_total": 30,
+ "rows_feeding_write": 11,
+ "blocked": [
+  "settings.duration"
+ ],
+ "live_acceptance_file": null,
+ "changed": [
+  "archive.EXE_SHA",
+  "archive.GAME_DLL_SHA",
+  "lock.revision",
+  "hover.mission_rva",
+  "hover.player_manager_rva",
+  "hover.entities_rva",
+  "hover.avatar_manager_rva",
+  "hover.equipment_rva",
+  "hover.jump_pack_rva",
+  "hover.attachment_rva",
+  "hover.player_fields",
+  "hover.entity_map",
+  "hover.entity_records",
+  "hover.avatar_manager_fields",
+  "hover.movement_flags",
+  "hover.jump_input",
+  "hover.equipment_fields",
+  "hover.jump_pack_registry",
+  "hover.attachment_fields",
+  "hover.state_bytes",
+  "settings.override_layout",
+  "settings.resource_table",
+  "settings.duration"
+ ],
+ "witness_check_failures": [],
+ "rows": [
+  {
+   "id": "archive.EXE_SHA",
+   "file": "(pack) scripts/archive.py",
+   "line": 9,
+   "symbol": "EXE_SHA",
+   "kind": "SHA-256 pin; hover_source() passes it into install(... game_sha256/exe_sha256), checked by src/archive_loader.lua line 44 before anything runs",
+   "old": "F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06",
+   "new": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "role": "gate",
+   "feeds_write": true,
+   "method": "SHA-256 of the installed file (read-only)",
+   "witnesses": [
+    {
+     "file": "<game>/bin/helldivers2.exe",
+     "sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+     "equal": true
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L0",
+   "changed": true
+  },
+  {
+   "id": "archive.GAME_DLL_SHA",
+   "file": "(pack) scripts/archive.py",
+   "line": 10,
+   "symbol": "GAME_DLL_SHA",
+   "kind": "SHA-256 pin; hover_source() passes it into install(... game_sha256/exe_sha256), checked by src/archive_loader.lua line 44 before anything runs",
+   "old": "2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E",
+   "new": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "role": "gate",
+   "feeds_write": true,
+   "method": "SHA-256 of the installed file (read-only)",
+   "witnesses": [
+    {
+     "file": "<game>/data/game/game.dll",
+     "sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+     "equal": true
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L0",
+   "changed": true
+  },
+  {
+   "id": "lock.revision",
+   "file": "(pack) components.lock.json",
+   "line": null,
+   "symbol": "revision",
+   "kind": "revision string shown in the log/status line (hover_source passes component[\"revision\"])",
+   "old": "v1.8.1",
+   "new": "v1.8.1-26088801",
+   "role": "label",
+   "feeds_write": false,
+   "method": "port label only (as Hellpod Drop Hold data-v1.2.1-26088801)",
+   "witnesses": [],
+   "confidence": "high",
+   "live_check": "L0",
+   "changed": true
+  },
+  {
+   "id": "hover.mission_rva",
+   "file": "src/hover_data.lua",
+   "line": [
+    102
+   ],
+   "symbol": "mission state",
+   "kind": "game.dll global (pointer)",
+   "old": "0x33266a0",
+   "new": "0x2ce1850",
+   "role": "address",
+   "feeds_write": false,
+   "method": "RIP-relative reference windows migrated (exact first, field-masked second); every witness re-read",
+   "witnesses": [
+    {
+     "kind": "RIP-relative reference windows (tools/map_globals.py, evidence/globals.json)",
+     "old_sites": 240,
+     "sampled": 64,
+     "votes": {
+      "0x2ce1850": 51
+     },
+     "exact_window_votes": {
+      "0x2ce1850": 46
+     },
+     "distinct_old_functions": 50,
+     "examples": [
+      {
+       "old": "0x38013b",
+       "new": "0x386e3b",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1850",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2fa655e]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x295aa0e]",
+       "old_function": "0x380130"
+      },
+      {
+       "old": "0x461c76",
+       "new": "0x468a96",
+       "window_bytes": 128,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1850",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2ec4a23]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2878db3]",
+       "old_function": "0x461c70"
+      },
+      {
+       "old": "0x4b012a",
+       "new": "0x4b69ea",
+       "window_bytes": 128,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1850",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2e7656f]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x282ae5f]",
+       "old_function": "0x4b0110"
+      }
+     ]
+    }
+   ],
+   "agreeing": 51,
+   "disagreeing": 0,
+   "confidence": "high",
+   "live_check": "L1",
+   "notes": null,
+   "changed": true
+  },
+  {
+   "id": "hover.player_manager_rva",
+   "file": "src/hover_data.lua",
+   "line": [
+    111
+   ],
+   "symbol": "player manager",
+   "kind": "game.dll global (pointer)",
+   "old": "0x3326468",
+   "new": "0x2ce1618",
+   "role": "address",
+   "feeds_write": false,
+   "method": "RIP-relative reference windows migrated (exact first, field-masked second); every witness re-read",
+   "witnesses": [
+    {
+     "kind": "RIP-relative reference windows (tools/map_globals.py, evidence/globals.json)",
+     "old_sites": 1199,
+     "sampled": 64,
+     "votes": {
+      "0x2ce1618": 47
+     },
+     "exact_window_votes": {
+      "0x2ce1618": 45
+     },
+     "distinct_old_functions": 47,
+     "examples": [
+      {
+       "old": "0x3a4bde",
+       "new": "0x3ab8de",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1618",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2f81883]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2935d33]",
+       "old_function": "0x3a4a20"
+      },
+      {
+       "old": "0x545204",
+       "new": "0x54e054",
+       "window_bytes": 128,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1618",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2de125d]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x27935bd]",
+       "old_function": "0x5451e6"
+      },
+      {
+       "old": "0x606c9a",
+       "new": "0x60fe6a",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1618",
+       "instruction_old": "mov r10, qword ptr [rip + 0x2d1f7c7]",
+       "instruction_new": "mov r10, qword ptr [rip + 0x26d17a7]",
+       "old_function": "0x606c90"
+      }
+     ]
+    }
+   ],
+   "agreeing": 47,
+   "disagreeing": 0,
+   "confidence": "high",
+   "live_check": "L1",
+   "notes": null,
+   "changed": true
+  },
+  {
+   "id": "hover.entities_rva",
+   "file": "src/hover_data.lua",
+   "line": [
+    123,
+    {
+     "file": "src/settings.lua",
+     "line": 57
+    }
+   ],
+   "symbol": "entities object (entity owner)",
+   "kind": "game.dll global (pointer)",
+   "old": "0x346bf98",
+   "new": "0x2ce41b8",
+   "role": "address",
+   "feeds_write": true,
+   "method": "RIP-relative reference windows migrated (exact first, field-masked second); every witness re-read",
+   "witnesses": [
+    {
+     "kind": "RIP-relative reference windows (tools/map_globals.py, evidence/globals.json)",
+     "old_sites": 1449,
+     "sampled": 64,
+     "votes": {
+      "0x2ce41b8": 42
+     },
+     "exact_window_votes": {
+      "0x2ce41b8": 27
+     },
+     "distinct_old_functions": 42,
+     "examples": [
+      {
+       "old": "0x4536dc",
+       "new": "0x45a4fc",
+       "window_bytes": 48,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce41b8",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x30188b5]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x2889cb5]",
+       "old_function": "0x453680"
+      },
+      {
+       "old": "0x49c4a1",
+       "new": "0x4a3157",
+       "window_bytes": 32,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce41b8",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2fcfaf0]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x284105a]",
+       "old_function": "0x496700"
+      },
+      {
+       "old": "0x4f57fa",
+       "new": "0x4fdb5a",
+       "window_bytes": 32,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce41b8",
+       "instruction_old": "mov rbp, qword ptr [rip + 0x2f76797]",
+       "instruction_new": "mov rbp, qword ptr [rip + 0x27e6657]",
+       "old_function": "0x4f57f2"
+      }
+     ]
+    },
+    {
+     "kind": "coordinator live verification",
+     "note": "brief: live-verified 0x346BF98->0x2CE41B8"
+    }
+   ],
+   "agreeing": 42,
+   "disagreeing": 0,
+   "confidence": "high",
+   "live_check": "L1",
+   "notes": null,
+   "changed": true
+  },
+  {
+   "id": "hover.avatar_manager_rva",
+   "file": "src/hover_data.lua",
+   "line": [
+    136
+   ],
+   "symbol": "avatar manager",
+   "kind": "game.dll global (pointer)",
+   "old": "0x3326d20",
+   "new": "0x2ce1ee0",
+   "role": "address",
+   "feeds_write": false,
+   "method": "RIP-relative reference windows migrated (exact first, field-masked second); every witness re-read",
+   "witnesses": [
+    {
+     "kind": "RIP-relative reference windows (tools/map_globals.py, evidence/globals.json)",
+     "old_sites": 1644,
+     "sampled": 64,
+     "votes": {
+      "0x2ce1ee0": 47
+     },
+     "exact_window_votes": {
+      "0x2ce1ee0": 43
+     },
+     "distinct_old_functions": 47,
+     "examples": [
+      {
+       "old": "0x4c38ee",
+       "new": "0x4ca52e",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1ee0",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2e6342a]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x28179aa]",
+       "old_function": "0x4c38e0"
+      },
+      {
+       "old": "0x5e74eb",
+       "new": "0x5efe3b",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1ee0",
+       "instruction_old": "mov rbx, qword ptr [rip + 0x2d3f82e]",
+       "instruction_new": "mov rbx, qword ptr [rip + 0x26f209e]",
+       "old_function": "0x5e74b1"
+      },
+      {
+       "old": "0x60c05e",
+       "new": "0x61525e",
+       "window_bytes": 128,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1ee0",
+       "instruction_old": "mov r11, qword ptr [rip + 0x2d1acbb]",
+       "instruction_new": "mov r11, qword ptr [rip + 0x26ccc7b]",
+       "old_function": "0x60c01b"
+      }
+     ]
+    },
+    {
+     "kind": "coordinator live verification",
+     "note": "brief: live-verified avatars 0x3326D20->0x2CE1EE0"
+    }
+   ],
+   "agreeing": 47,
+   "disagreeing": 0,
+   "confidence": "high",
+   "live_check": "L1",
+   "notes": null,
+   "changed": true
+  },
+  {
+   "id": "hover.equipment_rva",
+   "file": "src/hover_data.lua",
+   "line": [
+    149
+   ],
+   "symbol": "equipment registry (inventory)",
+   "kind": "game.dll global (pointer)",
+   "old": "0x3326738",
+   "new": "0x2ce18e8",
+   "role": "address",
+   "feeds_write": false,
+   "method": "RIP-relative reference windows migrated (exact first, field-masked second); every witness re-read",
+   "witnesses": [
+    {
+     "kind": "RIP-relative reference windows (tools/map_globals.py, evidence/globals.json)",
+     "old_sites": 372,
+     "sampled": 64,
+     "votes": {
+      "0x2ce18e8": 47
+     },
+     "exact_window_votes": {
+      "0x2ce18e8": 44
+     },
+     "distinct_old_functions": 44,
+     "examples": [
+      {
+       "old": "0x3a9e00",
+       "new": "0x3b0b00",
+       "window_bytes": 128,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce18e8",
+       "instruction_old": "mov r8, qword ptr [rip + 0x2f7c931]",
+       "instruction_new": "mov r8, qword ptr [rip + 0x2930de1]",
+       "old_function": "0x3a9d90"
+      },
+      {
+       "old": "0x4b24b4",
+       "new": "0x4b8d74",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce18e8",
+       "instruction_old": "mov r11, qword ptr [rip + 0x2e7427d]",
+       "instruction_new": "mov r11, qword ptr [rip + 0x2828b6d]",
+       "old_function": "0x4b22e0"
+      },
+      {
+       "old": "0x4ba83e",
+       "new": "0x4c0f2e",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce18e8",
+       "instruction_old": "mov r15, qword ptr [rip + 0x2e6bef3]",
+       "instruction_new": "mov r15, qword ptr [rip + 0x28209b3]",
+       "old_function": "0x4ba820"
+      }
+     ]
+    },
+    {
+     "kind": "coordinator live verification",
+     "note": "brief: live-verified inventory 0x3326738->0x2CE18E8"
+    }
+   ],
+   "agreeing": 47,
+   "disagreeing": 0,
+   "confidence": "high",
+   "live_check": "L1",
+   "notes": null,
+   "changed": true
+  },
+  {
+   "id": "hover.jump_pack_rva",
+   "file": "src/hover_data.lua",
+   "line": [
+    164,
+    {
+     "file": "src/settings.lua",
+     "line": 18
+    }
+   ],
+   "symbol": "jump-pack manager",
+   "kind": "game.dll global (pointer)",
+   "old": "0x3326bb8",
+   "new": "0x2ce1d78",
+   "role": "address",
+   "feeds_write": true,
+   "method": "RIP-relative reference windows migrated (exact first, field-masked second); every witness re-read",
+   "witnesses": [
+    {
+     "kind": "RIP-relative reference windows (tools/map_globals.py, evidence/globals.json)",
+     "old_sites": 30,
+     "sampled": 30,
+     "votes": {
+      "0x2ce1d78": 17,
+      "0x2ce1618": 1,
+      "0x2ce1de8": 1
+     },
+     "exact_window_votes": {
+      "0x2ce1d78": 16,
+      "0x2ce1de8": 1
+     },
+     "distinct_old_functions": 15,
+     "examples": [
+      {
+       "old": "0x545aea",
+       "new": "0x54e94a",
+       "window_bytes": 128,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1d78",
+       "instruction_old": "mov rbx, qword ptr [rip + 0x2de10c7]",
+       "instruction_new": "mov rbx, qword ptr [rip + 0x2793427]",
+       "old_function": "0x545ae0"
+      },
+      {
+       "old": "0x545b8f",
+       "new": "0x54e9ef",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1d78",
+       "instruction_old": "mov rbx, qword ptr [rip + 0x2de1022]",
+       "instruction_new": "mov rbx, qword ptr [rip + 0x2793382]",
+       "old_function": "0x545b80"
+      },
+      {
+       "old": "0x56902d",
+       "new": "0x571e99",
+       "window_bytes": 96,
+       "field_displacements_masked": true,
+       "new_global": "0x2ce1618",
+       "instruction_old": "mov qword ptr [rip + 0x2dbdb84], rax",
+       "instruction_new": "mov qword ptr [rip + 0x276f778], rax",
+       "old_function": "0x568230"
+      }
+     ]
+    },
+    {
+     "kind": "construction site: the manager is embedded in one allocation, size 0xa8 in both builds",
+     "old": [
+      {
+       "image": "old",
+       "rva": "0x569026",
+       "instruction": "lea rax, [rbx + 0xeb63f8]",
+       "expect": "lea rax, [rbx + 0xeb63f8]",
+       "page": "code"
+      },
+      {
+       "image": "old",
+       "rva": "0x56902d",
+       "instruction": "mov qword ptr [rip + 0x2dbdb84], rax",
+       "expect": "mov qword ptr [rip",
+       "page": "code",
+       "rip_target": "0x3326bb8"
+      },
+      {
+       "image": "old",
+       "rva": "0x569034",
+       "instruction": "lea rax, [rbx + 0xeb64a0]",
+       "expect": "lea rax, [rbx + 0xeb64a0]",
+       "page": "code"
+      }
+     ],
+     "new": [
+      {
+       "image": "new",
+       "rva": "0x571ff0",
+       "instruction": "lea rax, [rbx + 0xeb7ca8]",
+       "expect": "lea rax, [rbx + 0xeb7ca8]",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x571ff7",
+       "instruction": "mov qword ptr [rip + 0x276fd7a], rax",
+       "expect": "mov qword ptr [rip",
+       "page": "code",
+       "rip_target": "0x2ce1d78"
+      },
+      {
+       "image": "new",
+       "rva": "0x571ffe",
+       "instruction": "lea rax, [rbx + 0xeb7d50]",
+       "expect": "lea rax, [rbx + 0xeb7d50]",
+       "page": "code"
+      }
+     ]
+    },
+    {
+     "kind": "effective component getter (identical body, 54/54 instructions aligned)",
+     "old": {
+      "image": "old",
+      "rva": "0x50d852",
+      "instruction": "mov r11, qword ptr [rip + 0x2e1935f]",
+      "expect": "mov r11, qword ptr [rip",
+      "page": "code",
+      "rip_target": "0x3326bb8"
+     },
+     "new": {
+      "image": "new",
+      "rva": "0x515e32",
+      "instruction": "mov r11, qword ptr [rip + 0x27cbf3f]",
+      "expect": "mov r11, qword ptr [rip",
+      "page": "code",
+      "rip_target": "0x2ce1d78"
+     }
+    }
+   ],
+   "agreeing": 17,
+   "disagreeing": 2,
+   "confidence": "high",
+   "live_check": "L1",
+   "notes": "2 dissenting witnesses explained: 0x56902d is one store in a run of identical global stores (window landed on the neighbour), 0x9b878a is a template duplicate (old 0x9b8780 and 0x545ae0 are the same code; the new build keeps one copy, 0x54e93b)",
+   "changed": true
+  },
+  {
+   "id": "hover.attachment_rva",
+   "file": "src/hover_data.lua",
+   "line": [
+    183
+   ],
+   "symbol": "attachment registry",
+   "kind": "game.dll global (pointer)",
+   "old": "0x3326dc0",
+   "new": "0x2ce1f88",
+   "role": "address",
+   "feeds_write": false,
+   "method": "RIP-relative reference windows migrated (exact first, field-masked second); every witness re-read",
+   "witnesses": [
+    {
+     "kind": "RIP-relative reference windows (tools/map_globals.py, evidence/globals.json)",
+     "old_sites": 197,
+     "sampled": 64,
+     "votes": {
+      "0x2ce17c0": 1,
+      "0x2ce1f88": 45,
+      "0x2ce1848": 1
+     },
+     "exact_window_votes": {
+      "0x2ce1f88": 45
+     },
+     "distinct_old_functions": 40,
+     "examples": [
+      {
+       "old": "0xc30b8",
+       "new": "0x1033b4d",
+       "window_bytes": 48,
+       "field_displacements_masked": true,
+       "new_global": "0x2ce17c0",
+       "instruction_old": "mov rdi, qword ptr [rip + 0x3263d01]",
+       "instruction_new": "mov rdi, qword ptr [rip + 0x1cadc6c]",
+       "old_function": "0xc30b0"
+      },
+      {
+       "old": "0x4b6085",
+       "new": "0x4bc975",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1f88",
+       "instruction_old": "mov rbx, qword ptr [rip + 0x2e70d34]",
+       "instruction_new": "mov rbx, qword ptr [rip + 0x282560c]",
+       "old_function": "0x4b607d"
+      },
+      {
+       "old": "0x53f77a",
+       "new": "0x5485aa",
+       "window_bytes": 64,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1f88",
+       "instruction_old": "mov rbx, qword ptr [rip + 0x2de763f]",
+       "instruction_new": "mov rbx, qword ptr [rip + 0x27999d7]",
+       "old_function": "0x53f770"
+      }
+     ]
+    }
+   ],
+   "agreeing": 45,
+   "disagreeing": 2,
+   "confidence": "high",
+   "live_check": "L1",
+   "notes": "2 dissenting votes come from field-masked windows only; all 45 exact windows agree",
+   "changed": true
+  },
+  {
+   "id": "hover.mission_fields",
+   "file": "src/hover_data.lua",
+   "line": 105,
+   "symbol": "mode+8 active, mode+0x40 mission type, accepted 1..7",
+   "kind": "field offsets and accepted range",
+   "old": "+0x8, +0x40, 1..7",
+   "new": "+0x8, +0x40, 1..7",
+   "role": "gate",
+   "feeds_write": false,
+   "method": "field pairs + the game's own gate, identical in both builds",
+   "witnesses": [
+    {
+     "kind": "aligned-function field pairs (tools/map_fields.py, evidence/field-pairs.json)",
+     "path": "MODE",
+     "pairs": {
+      "0x8": [
+       [
+        "MODE",
+        "0x8",
+        111
+       ]
+      ],
+      "0x40": [
+       [
+        "MODE",
+        "0x40",
+        88
+       ]
+      ]
+     }
+    },
+    {
+     "kind": "native mission gate (dec eax; cmp eax, 6; ja)",
+     "old": [
+      {
+       "image": "old",
+       "rva": "0x38013b",
+       "instruction": "mov rax, qword ptr [rip + 0x2fa655e]",
+       "expect": "mov rax, qword ptr [rip",
+       "page": "code",
+       "rip_target": "0x33266a0"
+      }
+     ],
+     "new": [
+      {
+       "image": "new",
+       "rva": "0x386e3b",
+       "instruction": "mov rax, qword ptr [rip + 0x295aa0e]",
+       "expect": "mov rax, qword ptr [rip",
+       "page": "code",
+       "rip_target": "0x2ce1850"
+      },
+      {
+       "image": "new",
+       "rva": "0x386e45",
+       "instruction": "cmp dword ptr [rax + 8], 0",
+       "expect": "cmp dword ptr [rax + 8], 0",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x386e4f",
+       "instruction": "mov eax, dword ptr [rax + 0x40]",
+       "expect": "mov eax, dword ptr [rax + 0x40]",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x386e52",
+       "instruction": "dec eax",
+       "expect": "dec eax",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x386e54",
+       "instruction": "cmp eax, 6",
+       "expect": "cmp eax, 6",
+       "page": "code"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L1",
+   "changed": false
+  },
+  {
+   "id": "hover.player_fields",
+   "file": "src/hover_data.lua",
+   "line": [
+    111,
+    116
+   ],
+   "symbol": "pm+0x84/+0x88 counts (<=4), pm+0xe8 local player (record +20 bit 0 owned), pm+0x3a8 local unit (0x7fff none)",
+   "kind": "field offsets",
+   "old": "+0x84 +0x88 +0xe8 [+0x14 bit0] +0x3a8",
+   "new": "unchanged",
+   "role": "identity",
+   "feeds_write": false,
+   "method": "aligned-function field pairs",
+   "witnesses": [
+    {
+     "kind": "aligned-function field pairs (tools/map_fields.py, evidence/field-pairs.json)",
+     "path": "PM",
+     "pairs": {
+      "0x84": [
+       [
+        "PM",
+        "0x84",
+        102
+       ]
+      ],
+      "0x88": [
+       [
+        "PM",
+        "0x88",
+        100
+       ]
+      ],
+      "0xe8": [
+       [
+        "PM",
+        "0xe8",
+        49
+       ]
+      ],
+      "0x3a8": [
+       [
+        "PM",
+        "0x3a8",
+        53
+       ]
+      ]
+     }
+    },
+    {
+     "kind": "aligned-function field pairs (tools/map_fields.py, evidence/field-pairs.json)",
+     "path": "PM->0xe8",
+     "pairs": {
+      "0x14": [
+       [
+        "PM->0xe8",
+        "0x14",
+        4
+       ]
+      ]
+     }
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L1",
+   "changed": true
+  },
+  {
+   "id": "hover.entity_map",
+   "file": "src/hover_data.lua",
+   "line": 124,
+   "symbol": "entities + network-id map header",
+   "kind": "field offset",
+   "old": "0xf22ec8",
+   "new": "0xf24990",
+   "role": "identity",
+   "feeds_write": false,
+   "method": "aligned sites using the old displacement (tools/value_map.py)",
+   "witnesses": [
+    {
+     "kind": "value votes",
+     "votes": {
+      "0xf24990": 15
+     },
+     "examples": [
+      {
+       "old": "0x60658d",
+       "new": "0x60f75d",
+       "old_insn": "mov rdi, qword ptr [rbp + 0xf22ec8]",
+       "new_insn": "mov rdi, qword ptr [rbp + 0xf24990]",
+       "old_function": "0x606520",
+       "new_function": "0x60f6ec",
+       "ratio": 0.986
+      },
+      {
+       "old": "0x7c827c",
+       "new": "0x7d426c",
+       "old_insn": "mov rdi, qword ptr [rcx + 0xf22ec8]",
+       "new_insn": "mov rdi, qword ptr [rcx + 0xf24990]",
+       "old_function": "0x7c8253",
+       "new_function": "0x7d4243",
+       "ratio": 1.0
+      },
+      {
+       "old": "0xfd9687",
+       "new": "0xe69627",
+       "old_insn": "mov rdi, qword ptr [r11 + 0xf22ec8]",
+       "new_insn": "mov rdi, qword ptr [r11 + 0xf24990]",
+       "old_function": "0xfd9660",
+       "new_function": "0xe69600",
+       "ratio": 1.0
+      }
+     ]
+    },
+    {
+     "kind": "coordinator live verification",
+     "note": "brief: entities fields 0xF22EC8->0xF24990"
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L1",
+   "changed": true
+  },
+  {
+   "id": "hover.entity_records",
+   "file": "src/hover_data.lua",
+   "line": 127,
+   "symbol": "entities + 24-byte entity records {hash u64, id +8, flags +20 bit 0 owned}",
+   "kind": "field offset",
+   "old": "0xf32f18",
+   "new": "0xf349e0",
+   "role": "identity",
+   "feeds_write": false,
+   "method": "coordinator live verification; consistent with aligned field pair 0xf32f24[] -> 0xf349ec[]",
+   "witnesses": [
+    {
+     "kind": "coordinator live verification",
+     "note": "brief: entities fields 0xF32F18->0xF349E0"
+    },
+    {
+     "kind": "aligned-function field pairs (tools/map_fields.py, evidence/field-pairs.json)",
+     "path": "ENT",
+     "pairs": {
+      "0xf32f24": [
+       [
+        "ENT",
+        "0xf349ec",
+        4
+       ]
+      ]
+     },
+     "note": "record +0xc, old 0xf32f24 -> new 0xf349ec"
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L1",
+   "changed": true
+  },
+  {
+   "id": "hover.entity_bounds",
+   "file": "src/hover_data.lua",
+   "line": [
+    124,
+    126
+   ],
+   "symbol": "entity map capacity limit 1048576, record index limit 262144",
+   "kind": "sanity bounds (reads only)",
+   "old": "1048576, 262144",
+   "new": "1048576, 262144",
+   "role": "bound",
+   "feeds_write": false,
+   "method": "the map-to-records distance is unchanged (old 0xf32f18-0xf22ec8 = new 0xf349e0-0xf24990 = 0x10050); the bounds only refuse; not separately witnessed",
+   "witnesses": [],
+   "confidence": "medium",
+   "live_check": "L1",
+   "changed": false
+  },
+  {
+   "id": "hover.avatar_hash",
+   "file": "src/hover_data.lua",
+   "line": 18,
+   "symbol": "avatar_helldiver resource id",
+   "kind": "resource hash",
+   "old": "0x4d1c334d294dfa97",
+   "new": "0x4d1c334d294dfa97",
+   "role": "identity",
+   "feeds_write": false,
+   "method": "the same 64-bit immediate occurs in game code of both builds",
+   "witnesses": [
+    {
+     "old": [
+      {
+       "image": "old",
+       "rva": "0x62c56c",
+       "instruction": "movabs rax, 0x4d1c334d294dfa97",
+       "expect": "movabs rax, 0x4d1c334d294dfa97",
+       "page": "code"
+      },
+      {
+       "image": "old",
+       "rva": "0x75babb",
+       "instruction": "movabs r11, 0x4d1c334d294dfa97",
+       "expect": "movabs r11, 0x4d1c334d294dfa97",
+       "page": "code"
+      }
+     ],
+     "new": [
+      {
+       "image": "new",
+       "rva": "0x635bec",
+       "instruction": "movabs rax, 0x4d1c334d294dfa97",
+       "expect": "movabs rax, 0x4d1c334d294dfa97",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0xae5e21",
+       "instruction": "movabs rbx, 0x4d1c334d294dfa97",
+       "expect": "movabs rbx, 0x4d1c334d294dfa97",
+       "page": "code"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L1",
+   "changed": false
+  },
+  {
+   "id": "hover.avatar_manager_fields",
+   "file": "src/hover_data.lua",
+   "line": [
+    137,
+    253
+   ],
+   "symbol": "am+0xf8 map, am+0x6c count (<=8), am+0x110 slots (block read +0x6c.. holds slot at +0xa4)",
+   "kind": "field offsets",
+   "old": "+0xf8 +0x6c +0x110",
+   "new": "unchanged",
+   "role": "identity",
+   "feeds_write": false,
+   "method": "aligned-function field pairs",
+   "witnesses": [
+    {
+     "kind": "aligned-function field pairs (tools/map_fields.py, evidence/field-pairs.json)",
+     "path": "AM",
+     "pairs": {
+      "0xf8": [
+       [
+        "AM",
+        "0xf8",
+        226
+       ]
+      ],
+      "0x6c": [
+       [
+        "AM",
+        "0x6c",
+        28
+       ]
+      ]
+     }
+    },
+    {
+     "kind": "aligned-function field pairs (tools/map_fields.py, evidence/field-pairs.json)",
+     "path": "AM",
+     "pairs": {
+      "0x110": [
+       [
+        "AM",
+        "0x110",
+        68
+       ]
+      ]
+     }
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L1",
+   "changed": true
+  },
+  {
+   "id": "hover.movement_flags",
+   "file": "src/hover_data.lua",
+   "line": 195,
+   "symbol": "avatar movement block: am + 0x53d900 + index*stride; flags qword at +0xf88 (old) read as +8/+12 of a 24-byte read at +0xf80",
+   "kind": "field offset and stride",
+   "old": "0x53d900 + ai*0x1238 + 0xf80",
+   "new": "0x53d900 + ai*0x1240 + 0xf88",
+   "role": "gate",
+   "feeds_write": false,
+   "method": "every old function that loads the avatar-manager global and uses the block constants, aligned with its new counterpart (tools/avatar_block.py); flag bit masks compared over the same functions",
+   "witnesses": [
+    {
+     "kind": "aligned constant votes over 93 avatar-manager functions",
+     "votes": {
+      "0x53d900": {
+       "0x53d900": 56
+      },
+      "0x1238": {
+       "0x1240": 86
+      },
+      "0xf80": {
+       "0xf88": 117
+      },
+      "0xf88": {
+       "0xf90": 115
+      },
+      "0xf90": {
+       "0xf98": 117
+      }
+     },
+     "examples": {
+      "0x1238": [
+       {
+        "old": "0x53f697",
+        "new": "0x5484c7",
+        "old_insn": "imul rbx, rcx, 0x1238",
+        "new_insn": "imul rbx, rcx, 0x1240"
+       },
+       {
+        "old": "0x68bb2c",
+        "new": "0x695a2c",
+        "old_insn": "imul rsi, rcx, 0x1238",
+        "new_insn": "imul rsi, rcx, 0x1240"
+       },
+       {
+        "old": "0x78231e",
+        "new": "0x78d98e",
+        "old_insn": "imul rax, rcx, 0x1238",
+        "new_insn": "imul rax, rcx, 0x1240"
+       }
+      ],
+      "0xf80": [
+       {
+        "old": "0xa4179c",
+        "new": "0xa5bfac",
+        "old_insn": "and rax, qword ptr [rbp + 0xf80]",
+        "new_insn": "and rax, qword ptr [rbp + 0xf88]"
+       },
+       {
+        "old": "0xa418c8",
+        "new": "0xa5c0d8",
+        "old_insn": "and rax, qword ptr [rbp + 0xf80]",
+        "new_insn": "and rax, qword ptr [rbp + 0xf88]"
+       },
+       {
+        "old": "0xa4829e",
+        "new": "0xa62aae",
+        "old_insn": "mov rsi, qword ptr [rbx + 0xf80]",
+        "new_insn": "mov rsi, qword ptr [rbx + 0xf88]"
+       }
+      ],
+      "0xf88": [
+       {
+        "old": "0xa417a6",
+        "new": "0xa5bfb6",
+        "old_insn": "mov rcx, qword ptr [rbp + 0xf88]",
+        "new_insn": "mov rcx, qword ptr [rbp + 0xf90]"
+       },
+       {
+        "old": "0xa418d2",
+        "new": "0xa5c0e2",
+        "old_insn": "mov rcx, qword ptr [rbp + 0xf88]",
+        "new_insn": "mov rcx, qword ptr [rbp + 0xf90]"
+       },
+       {
+        "old": "0xa48294",
+        "new": "0xa62aa4",
+        "old_insn": "mov r10, qword ptr [rbx + 0xf88]",
+        "new_insn": "mov r10, qword ptr [rbx + 0xf90]"
+       }
+      ]
+     }
+    },
+    {
+     "kind": "flag bit masks",
+     "note": "959 aligned bit-mask/bit-index immediates (mov/and/or/test/bt*) in the same functions, 0 changed, including 0x4, 0x10, 0x20, 0x30 and 0x8000000000000000; the flags qword moved with its block (+8) and keeps its bits",
+     "direct_flag_accesses": [
+      {
+       "mnemonic": "and",
+       "size": "qword ptr ",
+       "old_imm": "[]",
+       "new_imm": "[]",
+       "new_disp": "['0xf90']",
+       "count": 31
+      },
+      {
+       "mnemonic": "or",
+       "size": "qword ptr ",
+       "old_imm": "[]",
+       "new_imm": "[]",
+       "new_disp": "['0xf90']",
+       "count": 14
+      },
+      {
+       "mnemonic": "test",
+       "size": "qword ptr ",
+       "old_imm": "[]",
+       "new_imm": "[]",
+       "new_disp": "['0xf90']",
+       "count": 5
+      },
+      {
+       "mnemonic": "and",
+       "size": "rax",
+       "old_imm": "[]",
+       "new_imm": "[]",
+       "new_disp": "['0xf90']",
+       "count": 4
+      },
+      {
+       "mnemonic": "and",
+       "size": "rdx",
+       "old_imm": "[]",
+       "new_imm": "[]",
+       "new_disp": "['0xf90']",
+       "count": 4
+      }
+     ]
+    }
+   ],
+   "notes": "The mod reads 24 bytes at the block +0xf80 and tests words +8 (bit 31) and +12 (bits 2, 4, 5) = the flags qword (old +0xf88). New read base +0xf88 keeps the same relative words (new qword +0xf90).",
+   "confidence": "high",
+   "live_check": "L1",
+   "changed": true
+  },
+  {
+   "id": "hover.jump_input",
+   "file": "src/hover_data.lua",
+   "line": 199,
+   "symbol": "avatar input block am + 0x150 + index*0xa7aec, processed slot records at +0x1b68 (32 bytes, held time +8), jump = slot 15",
+   "kind": "field offsets, stride, slot index",
+   "old": "0x150 + ai*0xa7aec + 0x1b68 + 15*32 (+8)",
+   "new": "unchanged",
+   "role": "gate",
+   "feeds_write": false,
+   "method": "aligned constant votes over avatar-manager functions; the jump-pack routine reads pair (2,15) through the input helper, whose 13-way table returns the high word (slot 15) in both builds",
+   "witnesses": [
+    {
+     "kind": "aligned constant votes",
+     "votes": {
+      "0x150": {
+       "0x150": 43
+      },
+      "0xa7aec": {
+       "0xa7aec": 79
+      },
+      "0x1b68": {
+       "0x1b68": 17
+      }
+     }
+    },
+    {
+     "kind": "jump-pack routine (old 0xa63790 / new 0xa7f170, decrypted, 364/368 aligned)",
+     "old": [
+      {
+       "image": "old",
+       "rva": "0xa63d45",
+       "instruction": "movabs rcx, 0xf00000002",
+       "expect": "movabs rcx, 0xf00000002",
+       "page": "code"
+      },
+      {
+       "image": "old",
+       "rva": "0xa63d68",
+       "instruction": "movss xmm1, dword ptr [r10 + rax + 0x1b70]",
+       "expect": "movss xmm1, dword ptr [r10 + rax + 0x1b70]",
+       "page": "code"
+      }
+     ],
+     "new": [
+      {
+       "image": "new",
+       "rva": "0xa7f725",
+       "instruction": "movabs rcx, 0xf00000002",
+       "expect": "movabs rcx, 0xf00000002",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0xa7f72f",
+       "instruction": "call 0x58e860",
+       "expect": "call 0x58e860",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0xa7f744",
+       "instruction": "shl r10, 5",
+       "expect": "shl r10, 5",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0xa7f748",
+       "instruction": "movss xmm1, dword ptr [r10 + rax + 0x1b70]",
+       "expect": "movss xmm1, dword ptr [r10 + rax + 0x1b70]",
+       "page": "code"
+      }
+     ]
+    },
+    {
+     "kind": "input helper (old 0x585b80 / new 0x58e860): cmp ecx, 0xc; jump table; shr rcx, 0x20",
+     "new": [
+      {
+       "image": "new",
+       "rva": "0x58e860",
+       "instruction": "cmp ecx, 0xc",
+       "expect": "cmp ecx, 0xc",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x58e87b",
+       "instruction": "shr rcx, 0x20",
+       "expect": "shr rcx, 0x20",
+       "page": "code"
+      }
+     ],
+     "table_all_to_shr": {
+      "old": true,
+      "new": true
+     }
+    },
+    {
+     "kind": "old physics reads the same slot",
+     "old": [
+      {
+       "image": "old",
+       "rva": "0x9b4d0d",
+       "instruction": "movabs rcx, 0xf00000002",
+       "expect": "movabs rcx, 0xf00000002",
+       "page": "code"
+      },
+      {
+       "image": "old",
+       "rva": "0x9b4d26",
+       "instruction": "movss xmm0, dword ptr [r9 + r10 + 0x1cc0]",
+       "expect": "movss xmm0, dword ptr [r9 + r10 + 0x1cc0]",
+       "page": "code"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L1",
+   "changed": true
+  },
+  {
+   "id": "hover.equipment_fields",
+   "file": "src/hover_data.lua",
+   "line": [
+    150,
+    156
+   ],
+   "symbol": "equipment +40 map, +64 identity pointers, +80 48-byte rows, backpack id at row +12",
+   "kind": "field offsets and stride",
+   "old": "+40 +64 +80, 48, +12",
+   "new": "unchanged",
+   "role": "identity",
+   "feeds_write": true,
+   "method": "field pairs; identical-body function for the stride; the jump-pack routine reads row +0xc as the pack it hands to the jump-pack component getter",
+   "witnesses": [
+    {
+     "kind": "aligned-function field pairs (tools/map_fields.py, evidence/field-pairs.json)",
+     "path": "EQ",
+     "pairs": {
+      "0x28": [
+       [
+        "EQ",
+        "0x28",
+        75
+       ],
+       [
+        "AM",
+        "0xf8",
+        1
+       ]
+      ],
+      "0x40": [
+       [
+        "EQ",
+        "0x40",
+        4
+       ]
+      ],
+      "0x50": [
+       [
+        "EQ",
+        "0x50",
+        40
+       ]
+      ]
+     }
+    },
+    {
+     "kind": "aligned-function field pairs (tools/map_fields.py, evidence/field-pairs.json)",
+     "path": "EQ->0x50",
+     "pairs": {
+      "0xc": [
+       [
+        "EQ->0x50",
+        "0xc",
+        3
+       ]
+      ]
+     }
+    },
+    {
+     "kind": "stride 48 (identical body old 0x774a7b / new 0x78018b)",
+     "new": [
+      {
+       "image": "new",
+       "rva": "0x780192",
+       "instruction": "mov rbp, qword ptr [rip + 0x256174f]",
+       "expect": "mov rbp, qword ptr [rip",
+       "page": "code",
+       "rip_target": "0x2ce18e8"
+      },
+      {
+       "image": "new",
+       "rva": "0x7801f1",
+       "instruction": "lea rsi, [rax + rax*2]",
+       "expect": "lea rsi, [rax + rax*2]",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x7801f5",
+       "instruction": "add rsi, rsi",
+       "expect": "add rsi, rsi",
+       "page": "code"
+      }
+     ]
+    },
+    {
+     "kind": "semantics: backpack -> jump-pack component (new 0xa7f170)",
+     "new": [
+      {
+       "image": "new",
+       "rva": "0xa7f6ae",
+       "instruction": "mov r11, qword ptr [rip + 0x2262233]",
+       "expect": "mov r11, qword ptr [rip",
+       "page": "code",
+       "rip_target": "0x2ce18e8"
+      },
+      {
+       "image": "new",
+       "rva": "0xa7f7e6",
+       "instruction": "lea rcx, [rax + rax*2]",
+       "expect": "lea rcx, [rax + rax*2]",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0xa7f7ea",
+       "instruction": "mov rax, qword ptr [r11 + 0x50]",
+       "expect": "mov rax, qword ptr [r11 + 0x50]",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0xa7f7f1",
+       "instruction": "mov ebx, dword ptr [rax + rcx*8 + 0xc]",
+       "expect": "mov ebx, dword ptr [rax + rcx*8 + 0xc]",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0xa7f817",
+       "instruction": "call 0x515e10",
+       "expect": "call 0x515e10",
+       "page": "code"
+      }
+     ]
+    }
+   ],
+   "notes": "feeds the write as the identity of the pack whose override is created (fail-closed: a wrong row finds no hover pack)",
+   "confidence": "high",
+   "live_check": "L1",
+   "changed": true
+  },
+  {
+   "id": "hover.jump_pack_registry",
+   "file": "src/hover_data.lua",
+   "line": [
+    166,
+    168,
+    171,
+    233
+   ],
+   "symbol": "jm +12 total, +16 active, +20 local, +32 entity->index map, +56 entity pointers, +80 five-byte state array; pack entity record {hash, id +8, flags +20 bit 0}",
+   "kind": "field offsets and strides",
+   "old": "+12 +16 +20 +32 +56 +80, stride 5",
+   "new": "unchanged",
+   "role": "identity",
+   "feeds_write": true,
+   "method": "field pairs over migrated jump-pack functions; decrypted new function 0xb6f1b8 (identical body to old 0xb52a28)",
+   "witnesses": [
+    {
+     "kind": "aligned-function field pairs (tools/map_fields.py, evidence/field-pairs.json)",
+     "path": "JM",
+     "pairs": {
+      "0xc": [
+       [
+        "JM",
+        "0xc",
+        7
+       ]
+      ],
+      "0x10": [
+       [
+        "JM",
+        "0x10",
+        3
+       ]
+      ],
+      "0x14": [
+       [
+        "JM",
+        "0x14",
+        3
+       ]
+      ],
+      "0x20": [
+       [
+        "JM",
+        "0x20",
+        12
+       ]
+      ],
+      "0x28": [
+       [
+        "JM",
+        "0x28",
+        13
+       ]
+      ],
+      "0x2c": [
+       [
+        "JM",
+        "0x2c",
+        10
+       ]
+      ],
+      "0x30": [
+       [
+        "JM",
+        "0x30",
+        11
+       ]
+      ],
+      "0x38": [
+       [
+        "JM",
+        "0x38",
+        4
+       ]
+      ],
+      "0x50": [
+       [
+        "JM",
+        "0x50",
+        6
+       ]
+      ]
+     }
+    },
+    {
+     "kind": "state stride 5 and owned flag (new 0xb6f1b8)",
+     "new": [
+      {
+       "image": "new",
+       "rva": "0xb6f2a9",
+       "instruction": "mov r10, qword ptr [rip + 0x2172ac8]",
+       "expect": "mov r10, qword ptr [rip",
+       "page": "code",
+       "rip_target": "0x2ce1d78"
+      },
+      {
+       "image": "new",
+       "rva": "0xb6f2f2",
+       "instruction": "mov rcx, qword ptr [r10 + 0x50]",
+       "expect": "mov rcx, qword ptr [r10 + 0x50]",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0xb6f2f9",
+       "instruction": "lea rdx, [r9 + r9*4]",
+       "expect": "lea rdx, [r9 + r9*4]",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0xb6f309",
+       "instruction": "mov rax, qword ptr [r10 + 0x38]",
+       "expect": "mov rax, qword ptr [r10 + 0x38]",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0xb6f261",
+       "instruction": "test byte ptr [rcx + 0x14], 1",
+       "expect": "test byte ptr [rcx + 0x14], 1",
+       "page": "code"
+      }
+     ]
+    },
+    {
+     "kind": "JM init (new 0x9c989b, decrypted, 364/368 aligned with old 0x9b7c10): states stride 5",
+     "new": [
+      {
+       "image": "new",
+       "rva": "0x9c9af6",
+       "instruction": "lea rdx, [rax + rax*4]",
+       "expect": "lea rdx, [rax + rax*4]",
+       "page": "code"
+      }
+     ]
+    }
+   ],
+   "notes": "identity of the pack the override is created for (fail-closed)",
+   "confidence": "high",
+   "live_check": "L1",
+   "changed": true
+  },
+  {
+   "id": "hover.hover_hash",
+   "file": "src/hover_data.lua",
+   "line": 19,
+   "symbol": "hover pack resource id",
+   "kind": "resource hash (game data)",
+   "old": "0x5ec80f4f1cdb66cf",
+   "new": "0x5ec80f4f1cdb66cf",
+   "role": "identity",
+   "feeds_write": false,
+   "method": "data-derived name hash, not present in code of either build; unchanged unless the resource was renamed",
+   "witnesses": [],
+   "notes": "fail-closed: a different id only means no pack is recognised (status not_hover_pack)",
+   "confidence": "medium",
+   "live_check": "L3",
+   "changed": false
+  },
+  {
+   "id": "hover.attachment_fields",
+   "file": "src/hover_data.lua",
+   "line": [
+    184,
+    [
+     188,
+     189
+    ]
+   ],
+   "symbol": "attachment +32 map, +64 48-byte rows, holder at +4",
+   "kind": "field offsets and stride",
+   "old": "+32 +64, 48, +4",
+   "new": "unchanged",
+   "role": "identity",
+   "feeds_write": false,
+   "method": "field pairs; identical-body function (old 0x87fa08 / new 0x88d038)",
+   "witnesses": [
+    {
+     "kind": "aligned-function field pairs (tools/map_fields.py, evidence/field-pairs.json)",
+     "path": "ATT",
+     "pairs": {
+      "0x20": [
+       [
+        "ATT",
+        "0x20",
+        67
+       ],
+       [
+        "AM",
+        "0xf8",
+        1
+       ]
+      ],
+      "0x40": [
+       [
+        "ATT",
+        "0x40",
+        34
+       ]
+      ]
+     }
+    },
+    {
+     "kind": "aligned-function field pairs (tools/map_fields.py, evidence/field-pairs.json)",
+     "path": "ATT->0x40",
+     "pairs": {
+      "0x4": [
+       [
+        "ATT->0x40",
+        "0x4",
+        18
+       ]
+      ]
+     }
+    },
+    {
+     "new": [
+      {
+       "image": "new",
+       "rva": "0x88d0ca",
+       "instruction": "mov r11, qword ptr [rip + 0x2454eb7]",
+       "expect": "mov r11, qword ptr [rip",
+       "page": "code",
+       "rip_target": "0x2ce1f88"
+      },
+      {
+       "image": "new",
+       "rva": "0x88d17c",
+       "instruction": "mov rax, qword ptr [r11 + 0x40]",
+       "expect": "mov rax, qword ptr [r11 + 0x40]",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x88d180",
+       "instruction": "lea rdx, [rcx + rcx*2]",
+       "expect": "lea rdx, [rcx + rcx*2]",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x88d184",
+       "instruction": "add rdx, rdx",
+       "expect": "add rdx, rdx",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x88d187",
+       "instruction": "mov ebx, dword ptr [rax + rdx*8 + 4]",
+       "expect": "mov ebx, dword ptr [rax + rdx*8 + 4]",
+       "page": "code"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L1",
+   "changed": true
+  },
+  {
+   "id": "hover.state_bytes",
+   "file": "src/hover_data.lua",
+   "line": 202,
+   "symbol": "pack state bytes: +0 active, +1 landing assistance, +4 lift",
+   "kind": "field semantics",
+   "old": "+0 +1 +4",
+   "new": "+0 +1 +4 (layout unchanged; meaning not re-witnessed)",
+   "role": "gate",
+   "feeds_write": false,
+   "method": "stride 5 and +3 are witnessed in decrypted new code (hover.jump_pack_registry); the physics routine that reads +1 (old 0x9b4cdf) is on pages still encrypted in every capture (0x9c5000-0x9c8fff)",
+   "witnesses": [
+    {
+     "old": [
+      {
+       "image": "old",
+       "rva": "0x9b4cdf",
+       "instruction": "cmp byte ptr [rax + rcx + 1], r14b",
+       "expect": "cmp byte ptr [rax + rcx + 1], r14b",
+       "page": "code"
+      }
+     ]
+    },
+    {
+     "image": "new",
+     "page": "0x9c5000",
+     "opaque": true
+    },
+    {
+     "image": "new",
+     "page": "0x9c6000",
+     "opaque": true
+    },
+    {
+     "image": "new",
+     "page": "0x9c7000",
+     "opaque": true
+    },
+    {
+     "image": "new",
+     "page": "0x9c8000",
+     "opaque": true
+    }
+   ],
+   "notes": "decides when a cancellation is offered; see the blocked duration write",
+   "confidence": "medium",
+   "live_check": "L4",
+   "changed": true
+  },
+  {
+   "id": "settings.override_layout",
+   "file": "src/settings.lua",
+   "line": [
+    40,
+    42,
+    46,
+    43,
+    54
+   ],
+   "symbol": "jm +4 override capacity (32), +96 entity->override map, +128 override->entity map, +152 override count, +160 override records",
+   "kind": "field offsets (write destinations)",
+   "old": "+4 +96 +128 +152 +160",
+   "new": "unchanged",
+   "role": "address",
+   "feeds_write": true,
+   "method": "decrypted new manager initialiser aligned with the old one (364/368, every field displacement equal); the effective-component getter identical; the old removal (0x9b8930) gives +0x98 its meaning; the manager is 0xa8 bytes in both builds",
+   "witnesses": [
+    {
+     "kind": "manager initialiser old 0x9b7c10 / new 0x9c989b",
+     "old": [
+      {
+       "image": "old",
+       "rva": "0x9b7f6f",
+       "instruction": "mov dword ptr [rbx + 4], 0x20",
+       "expect": "mov dword ptr [rbx + 4], 0x20",
+       "page": "code"
+      },
+      {
+       "image": "old",
+       "rva": "0x9b7f82",
+       "instruction": "imul r8, rcx, 0x118",
+       "expect": "imul r8, rcx, 0x118",
+       "page": "code"
+      },
+      {
+       "image": "old",
+       "rva": "0x9b7f8c",
+       "instruction": "mov qword ptr [rbx + 0xa0], rax",
+       "expect": "mov qword ptr [rbx + 0xa0], rax",
+       "page": "code"
+      },
+      {
+       "image": "old",
+       "rva": "0x9b800d",
+       "instruction": "mov qword ptr [rbx + 0x60], rax",
+       "expect": "mov qword ptr [rbx + 0x60], rax",
+       "page": "code"
+      },
+      {
+       "image": "old",
+       "rva": "0x9b804f",
+       "instruction": "mov qword ptr [rbx + 0x80], rax",
+       "expect": "mov qword ptr [rbx + 0x80], rax",
+       "page": "code"
+      }
+     ],
+     "new": [
+      {
+       "image": "new",
+       "rva": "0x9c9bff",
+       "instruction": "mov dword ptr [rbx + 4], 0x20",
+       "expect": "mov dword ptr [rbx + 4], 0x20",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x9c9c0d",
+       "instruction": "mov ecx, dword ptr [rbx + 4]",
+       "expect": "mov ecx, dword ptr [rbx + 4]",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x9c9c12",
+       "instruction": "imul r8, rcx, 0x118",
+       "expect": "imul r8, rcx, 0x118",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x9c9c1c",
+       "instruction": "mov qword ptr [rbx + 0xa0], rax",
+       "expect": "mov qword ptr [rbx + 0xa0], rax",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x9c9c9d",
+       "instruction": "mov qword ptr [rbx + 0x60], rax",
+       "expect": "mov qword ptr [rbx + 0x60], rax",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x9c9ca1",
+       "instruction": "mov dword ptr [rbx + 0x68], 0x40",
+       "expect": "mov dword ptr [rbx + 0x68], 0x40",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x9c9cab",
+       "instruction": "mov dword ptr [rbx + 0x70], 2",
+       "expect": "mov dword ptr [rbx + 0x70], 2",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x9c9cdf",
+       "instruction": "mov qword ptr [rbx + 0x80], rax",
+       "expect": "mov qword ptr [rbx + 0x80], rax",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x9c9ce6",
+       "instruction": "mov dword ptr [rbx + 0x88], 0x40",
+       "expect": "mov dword ptr [rbx + 0x88], 0x40",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x9c9cf0",
+       "instruction": "mov dword ptr [rbx + 0x8c], 0xffffffff",
+       "expect": "mov dword ptr [rbx + 0x8c], 0xffffffff",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x9c9cfa",
+       "instruction": "mov dword ptr [rbx + 0x90], 2",
+       "expect": "mov dword ptr [rbx + 0x90], 2",
+       "page": "code"
+      }
+     ]
+    },
+    {
+     "kind": "effective component getter old 0x50d830 / new 0x515e10 (54/54 aligned)",
+     "new": [
+      {
+       "image": "new",
+       "rva": "0x515e4b",
+       "instruction": "mov r9d, dword ptr [r11 + 0x68]",
+       "expect": "mov r9d, dword ptr [r11 + 0x68]",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x515e4f",
+       "instruction": "mov ebx, dword ptr [r11 + 0x70]",
+       "expect": "mov ebx, dword ptr [r11 + 0x70]",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x515e64",
+       "instruction": "mov rdi, qword ptr [r11 + 0x60]",
+       "expect": "mov rdi, qword ptr [r11 + 0x60]",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x515e68",
+       "instruction": "mov esi, dword ptr [r11 + 0x6c]",
+       "expect": "mov esi, dword ptr [r11 + 0x6c]",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x515eb2",
+       "instruction": "imul rax, rax, 0x118",
+       "expect": "imul rax, rax, 0x118",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x515eb9",
+       "instruction": "add rax, qword ptr [r11 + 0xa0]",
+       "expect": "add rax, qword ptr [r11 + 0xa0]",
+       "page": "code"
+      }
+     ]
+    },
+    {
+     "kind": "old override removal 0x9b8930 (meaning of +0x98 and both maps); its new copy is on an opaque page",
+     "old": [
+      {
+       "image": "old",
+       "rva": "0x9b8a37",
+       "instruction": "mov esi, dword ptr [rbx + 0x98]",
+       "expect": "mov esi, dword ptr [rbx + 0x98]",
+       "page": "code"
+      },
+      {
+       "image": "old",
+       "rva": "0x9b8a42",
+       "instruction": "dec esi",
+       "expect": "dec esi",
+       "page": "code"
+      },
+      {
+       "image": "old",
+       "rva": "0x9b8a44",
+       "instruction": "lea r12, [rbx + 0x60]",
+       "expect": "lea r12, [rbx + 0x60]",
+       "page": "code"
+      },
+      {
+       "image": "old",
+       "rva": "0x9b8a48",
+       "instruction": "mov dword ptr [rbx + 0x98], esi",
+       "expect": "mov dword ptr [rbx + 0x98], esi",
+       "page": "code"
+      },
+      {
+       "image": "old",
+       "rva": "0x9b8a5b",
+       "instruction": "lea r14, [rbx + 0x80]",
+       "expect": "lea r14, [rbx + 0x80]",
+       "page": "code"
+      }
+     ],
+     "new_page": {
+      "image": "new",
+      "page": "0x9ca000",
+      "opaque": true
+     }
+    },
+    {
+     "kind": "struct bound",
+     "note": "the reverse map {ptr, cap, empty, mult} occupies +0x80..+0x93 and the record pointer +0xa0 in the new initialiser; the manager is 0xa8 bytes in both builds (construction site), so the dword count can only sit at +0x98 as before"
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L5",
+   "changed": true
+  },
+  {
+   "id": "settings.record_size",
+   "file": "src/settings.lua",
+   "line": [
+    48,
+    {
+     "file": "src/windows_api.lua",
+     "line": 77
+    }
+   ],
+   "symbol": "280-byte jump-pack component record (override array, shared resource table, adapter write limit)",
+   "kind": "record size",
+   "old": "280",
+   "new": "280",
+   "role": "address",
+   "feeds_write": true,
+   "method": "imul 0x118 in the decrypted new getter, initialiser, resource fallback and the modifier stub",
+   "witnesses": [
+    {
+     "new": [
+      {
+       "image": "new",
+       "rva": "0x515eb2",
+       "instruction": "imul rax, rax, 0x118",
+       "expect": "imul rax, rax, 0x118",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x9c9c12",
+       "instruction": "imul r8, rcx, 0x118",
+       "expect": "imul r8, rcx, 0x118",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x51596c",
+       "instruction": "imul rax, rcx, 0x118",
+       "expect": "imul rax, rcx, 0x118",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x9cb34a",
+       "instruction": "mov edx, 0x118",
+       "expect": "mov edx, 0x118",
+       "page": "code"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L5",
+   "changed": false
+  },
+  {
+   "id": "settings.resource_table",
+   "file": "src/settings.lua",
+   "line": 58,
+   "symbol": "entities + shared jump-pack resource table: six 16-byte {hash u64, index u32} headers, 280-byte records at +0x60 (index < 3; the default record sits at +0x3a8)",
+   "kind": "field offset (source of the copied record)",
+   "old": "0xf12cb8",
+   "new": "0xf14780",
+   "role": "value",
+   "feeds_write": true,
+   "method": "the resource fallback and the modifier stub, decrypted and identical in both builds",
+   "witnesses": [
+    {
+     "kind": "resource fallback old 0x50d310 / new 0x5158f0",
+     "old": [
+      {
+       "image": "old",
+       "rva": "0x50d315",
+       "instruction": "mov rax, qword ptr [rip + 0x2f5ec7c]",
+       "expect": "mov rax, qword ptr [rip",
+       "page": "code",
+       "rip_target": "0x346bf98"
+      },
+      {
+       "image": "old",
+       "rva": "0x50d31f",
+       "instruction": "mov r10, qword ptr [rax + 0xf12cb8]",
+       "expect": "mov r10, qword ptr [rax + 0xf12cb8]",
+       "page": "code"
+      }
+     ],
+     "new": [
+      {
+       "image": "new",
+       "rva": "0x5158f5",
+       "instruction": "mov rax, qword ptr [rip + 0x27ce8bc]",
+       "expect": "mov rax, qword ptr [rip",
+       "page": "code",
+       "rip_target": "0x2ce41b8"
+      },
+      {
+       "image": "new",
+       "rva": "0x5158ff",
+       "instruction": "mov r10, qword ptr [rax + 0xf14780]",
+       "expect": "mov r10, qword ptr [rax + 0xf14780]",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x515933",
+       "instruction": "shl rax, 4",
+       "expect": "shl rax, 4",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x51595b",
+       "instruction": "cmp r9d, 6",
+       "expect": "cmp r9d, 6",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x515969",
+       "instruction": "mov ecx, dword ptr [rax + 8]",
+       "expect": "mov ecx, dword ptr [rax + 8]",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x51596c",
+       "instruction": "imul rax, rcx, 0x118",
+       "expect": "imul rax, rcx, 0x118",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x515973",
+       "instruction": "add rax, 0x60",
+       "expect": "add rax, 0x60",
+       "page": "code"
+      }
+     ]
+    },
+    {
+     "kind": "modifier stub old 0x9b95b0 / new 0x9cb2c0 (83/83 aligned)",
+     "new": [
+      {
+       "image": "new",
+       "rva": "0x9cb36a",
+       "instruction": "mov rax, qword ptr [rip + 0x2318e47]",
+       "expect": "mov rax, qword ptr [rip",
+       "page": "code",
+       "rip_target": "0x2ce41b8"
+      },
+      {
+       "image": "new",
+       "rva": "0x9cb371",
+       "instruction": "mov rax, qword ptr [rax + 0xf14780]",
+       "expect": "mov rax, qword ptr [rax + 0xf14780]",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0x9cb378",
+       "instruction": "add rax, 0x3a8",
+       "expect": "add rax, 0x3a8",
+       "page": "code"
+      }
+     ]
+    },
+    {
+     "kind": "value votes",
+     "votes": {
+      "0xf14780": 2
+     }
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L5",
+   "changed": true
+  },
+  {
+   "id": "settings.registry_count",
+   "file": "src/settings.lua",
+   "line": 36,
+   "symbol": "jm +12 registered pack count (bound for the entity index)",
+   "kind": "field offset",
+   "old": "+12",
+   "new": "+12",
+   "role": "bound",
+   "feeds_write": true,
+   "method": "field pairs (create/remove functions inc/dec +0xc)",
+   "witnesses": [
+    {
+     "kind": "aligned-function field pairs (tools/map_fields.py, evidence/field-pairs.json)",
+     "path": "JM",
+     "pairs": {
+      "0xc": [
+       [
+        "JM",
+        "0xc",
+        7
+       ]
+      ]
+     }
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L5",
+   "changed": false
+  },
+  {
+   "id": "settings.mode_byte",
+   "file": "src/settings.lua",
+   "line": 104,
+   "symbol": "component +0x99 (byte 154): duration mode, must be 1 before a write",
+   "kind": "field offset (guard)",
+   "old": "+0x99",
+   "new": "+0x99",
+   "role": "guard",
+   "feeds_write": false,
+   "method": "decrypted new jump-pack routine reads +0x99 (and +0x98) of the getter's record exactly as the old one",
+   "witnesses": [
+    {
+     "old": [
+      {
+       "image": "old",
+       "rva": "0xa63bd3",
+       "instruction": "movzx esi, byte ptr [rax + 0x99]",
+       "expect": "movzx esi, byte ptr [rax + 0x99]",
+       "page": "code"
+      },
+      {
+       "image": "old",
+       "rva": "0x9b4b0d",
+       "instruction": "cmp byte ptr [r12 + 0x99], r14b",
+       "expect": "cmp byte ptr [r12 + 0x99], r14b",
+       "page": "code"
+      }
+     ],
+     "new": [
+      {
+       "image": "new",
+       "rva": "0xa7f5ae",
+       "instruction": "call 0x515e10",
+       "expect": "call 0x515e10",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0xa7f5b3",
+       "instruction": "movzx esi, byte ptr [rax + 0x99]",
+       "expect": "movzx esi, byte ptr [rax + 0x99]",
+       "page": "code"
+      },
+      {
+       "image": "new",
+       "rva": "0xa7f82a",
+       "instruction": "cmp byte ptr [rdi + 0x98], r14b",
+       "expect": "cmp byte ptr [rdi + 0x98], r14b",
+       "page": "code"
+      }
+     ]
+    }
+   ],
+   "notes": "offset witnessed; its meaning (1 = timed hover) is the old physics routine's, whose new copy is opaque",
+   "confidence": "medium",
+   "live_check": "L5",
+   "changed": false
+  },
+  {
+   "id": "settings.duration",
+   "file": "src/settings.lua",
+   "line": [
+    103,
+    110,
+    132
+   ],
+   "symbol": "component +0x9c (bytes 157..160): hover duration in seconds; the cancellation writes 1/1024 there and restores the original",
+   "kind": "field offset and meaning (THE WRITE)",
+   "old": "+0x9c",
+   "new": null,
+   "role": "address+value",
+   "feeds_write": true,
+   "method": "old physics routine 0x9b4790 compares +0x9c with the airborne time; in the new build that routine and every other reader of +0x9c found (callers of the getter 0x515e10 / fallback 0x5158f0, JM-global users) are on pages 0x9c5000-0x9c8fff that are still encrypted in all three captures. Record size, +0x98 and +0x99 are unchanged, which makes +0x9c likely, but no new-build code witnesses it.",
+   "witnesses": [
+    {
+     "old": [
+      {
+       "image": "old",
+       "rva": "0x9b4cb2",
+       "instruction": "movss xmm0, dword ptr [r12 + 0x9c]",
+       "expect": "movss xmm0, dword ptr [r12 + 0x9c]",
+       "page": "code"
+      },
+      {
+       "image": "old",
+       "rva": "0x9b4cce",
+       "instruction": "comiss xmm0, dword ptr [r13 + 0x64]",
+       "expect": "comiss xmm0, dword ptr [r13 + 0x64]",
+       "page": "code"
+      }
+     ]
+    },
+    {
+     "image": "new",
+     "page": "0x9c5000",
+     "opaque": true
+    },
+    {
+     "image": "new",
+     "page": "0x9c6000",
+     "opaque": true
+    },
+    {
+     "image": "new",
+     "page": "0x9c7000",
+     "opaque": true
+    },
+    {
+     "image": "new",
+     "page": "0x9c8000",
+     "opaque": true
+    }
+   ],
+   "notes": "BLOCKED: feeds the only gameplay write; medium. build.py refuses to produce the installable archive until live check L5 confirms +0x9c (live/accepted.json), or a decrypted dump of the new physics routine shows it.",
+   "confidence": "medium",
+   "live_check": "L5",
+   "changed": true
+  }
+ ]
+}

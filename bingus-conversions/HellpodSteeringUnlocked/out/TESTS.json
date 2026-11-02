@@ -1,0 +1,200 @@
+{
+ "port": {
+  "runs": [
+   {
+    "command": "luajit tests/test_idle_gate.lua src tests/reference (x20)",
+    "exit": 0,
+    "outcomes": [
+     "pass",
+     "jit_trace_count_variance",
+     "pass",
+     "jit_trace_count_variance",
+     "pass",
+     "pass",
+     "pass",
+     "pass",
+     "pass",
+     "pass",
+     "pass",
+     "pass",
+     "pass",
+     "pass",
+     "pass",
+     "pass",
+     "jit_trace_count_variance",
+     "pass",
+     "pass",
+     "jit_trace_count_variance"
+    ],
+    "pass_lines": [
+     "PASS: the idle gate makes the same writes and status lines as v7.5; only hidden changes wait for a full check",
+     "PASS: a mission reset is cleared on the same frame as v7.5 at every point of the window",
+     "PASS: the guarded step and poll start no trace that aborts"
+    ],
+    "tail": [
+     "PASS: a mission reset is cleared on the same frame as v7.5 at every point of the window",
+     "trace aborts over 3000 frames: v7.5 14, now 0",
+     "PASS: the guarded step and poll start no trace that aborts",
+     "3 idle gate checks passed; no game process was accessed."
+    ]
+   },
+   {
+    "command": "wine luajit.exe tests/test_data.lua src build F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7 ../bounce-src/src",
+    "exit": 0,
+    "pass_lines": [
+     "PASS: runtime-backed adapter hashes each module once per session and refuses module pages",
+     "PASS: ship initialization waits; exactly one data byte changes; mission reset reapplies",
+     "PASS: a flag value from another writer is left alone and never stops the mod; the game value is cleared again",
+     "PASS: layout, pointer, page, read, write and reset-race failures leave data unchanged",
+     "PASS: restore puts the game value back only over its own write, rechecked right before the store",
+     "PASS: loader handles failures, duplicate initialization and existing update callbacks",
+     "PASS: standalone update forwards return values unchanged; no runtime, no wrapper",
+     "PASS: per-frame call budget: no protection query after settings are applied; frames between polls make no calls",
+     "PASS: through the loader: another writer is reported once and never fought; polling continues",
+     "PASS: no allocation on frames between polls or on polled frames, interpreted and compiled",
+     "PASS: an error below pauses the mod with the game value restored; 60 clean updates resume it afresh",
+     "PASS: 8 failed updates below stop the mod; the first failure survives shutdown",
+     "PASS: own errors and errors below are counted per burst: rare ones never stop the mod, 8 in a burst do",
+     "PASS: a refusal stops at once; a refused restore stops the mod; shutdown writes nothing",
+     "PASS: compiled module rejects the non-game test host"
+    ],
+    "tail": [
+     "PASS: an error below pauses the mod with the game value restored; 60 clean updates resume it afresh",
+     "PASS: 8 failed updates below stop the mod; the first failure survives shutdown",
+     "PASS: own errors and errors below are counted per burst: rare ones never stop the mod, 8 in a burst do",
+     "PASS: a refusal stops at once; a refused restore stops the mod; shutdown writes nothing",
+     "PASS: compiled module rejects the non-game test host",
+     "15 data-only hellpod checks passed; no game process was accessed."
+    ]
+   },
+   {
+    "command": "wine luajit.exe tests/test_api_coexistence.lua src ../bounce-src/src hellpod-first",
+    "exit": 0,
+    "pass_lines": [
+     "PASS: real Windows data APIs coexist in a fresh VM, hellpod-first; image writes still refused"
+    ],
+    "tail": [
+     "PASS: real Windows data APIs coexist in a fresh VM, hellpod-first; image writes still refused"
+    ]
+   },
+   {
+    "command": "wine luajit.exe tests/test_api_coexistence.lua src ../bounce-src/src bounce-first",
+    "exit": 0,
+    "pass_lines": [
+     "PASS: real Windows data APIs coexist in a fresh VM, bounce-first; image writes still refused"
+    ],
+    "tail": [
+     "PASS: real Windows data APIs coexist in a fresh VM, bounce-first; image writes still refused"
+    ]
+   }
+  ],
+  "fixture_value_changes": {
+   "tests/reference/steering_patch.lua:0x346d578->0x2e287d8": 1,
+   "tests/reference/steering_patch.lua:0x347cf18->0x2e38250": 1,
+   "tests/reference/steering_patch.lua:0x7c8c90->0x7c8810": 1
+  },
+  "passed": true
+ },
+ "upstream": {
+  "runs": [
+   {
+    "command": "luajit tests/test_idle_gate.lua src tests/reference (x20)",
+    "exit": 0,
+    "outcomes": [
+     "pass",
+     "jit_trace_count_variance",
+     "pass",
+     "pass",
+     "pass",
+     "jit_trace_count_variance",
+     "pass",
+     "pass",
+     "jit_trace_count_variance",
+     "jit_trace_count_variance",
+     "pass",
+     "pass",
+     "pass",
+     "jit_trace_count_variance",
+     "pass",
+     "jit_trace_count_variance",
+     "pass",
+     "pass",
+     "jit_trace_count_variance",
+     "pass"
+    ],
+    "pass_lines": [
+     "PASS: the idle gate makes the same writes and status lines as v7.5; only hidden changes wait for a full check",
+     "PASS: a mission reset is cleared on the same frame as v7.5 at every point of the window",
+     "PASS: the guarded step and poll start no trace that aborts"
+    ],
+    "tail": [
+     "PASS: a mission reset is cleared on the same frame as v7.5 at every point of the window",
+     "trace aborts over 3000 frames: v7.5 14, now 0",
+     "PASS: the guarded step and poll start no trace that aborts",
+     "3 idle gate checks passed; no game process was accessed."
+    ]
+   },
+   {
+    "command": "wine luajit.exe tests/test_data.lua src build F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7 ../bounce-src/src",
+    "exit": 0,
+    "pass_lines": [
+     "PASS: runtime-backed adapter hashes each module once per session and refuses module pages",
+     "PASS: ship initialization waits; exactly one data byte changes; mission reset reapplies",
+     "PASS: a flag value from another writer is left alone and never stops the mod; the game value is cleared again",
+     "PASS: layout, pointer, page, read, write and reset-race failures leave data unchanged",
+     "PASS: restore puts the game value back only over its own write, rechecked right before the store",
+     "PASS: loader handles failures, duplicate initialization and existing update callbacks",
+     "PASS: standalone update forwards return values unchanged; no runtime, no wrapper",
+     "PASS: per-frame call budget: no protection query after settings are applied; frames between polls make no calls",
+     "PASS: through the loader: another writer is reported once and never fought; polling continues",
+     "PASS: no allocation on frames between polls or on polled frames, interpreted and compiled",
+     "PASS: an error below pauses the mod with the game value restored; 60 clean updates resume it afresh",
+     "PASS: 8 failed updates below stop the mod; the first failure survives shutdown",
+     "PASS: own errors and errors below are counted per burst: rare ones never stop the mod, 8 in a burst do",
+     "PASS: a refusal stops at once; a refused restore stops the mod; shutdown writes nothing",
+     "PASS: compiled module rejects the non-game test host"
+    ],
+    "tail": [
+     "PASS: an error below pauses the mod with the game value restored; 60 clean updates resume it afresh",
+     "PASS: 8 failed updates below stop the mod; the first failure survives shutdown",
+     "PASS: own errors and errors below are counted per burst: rare ones never stop the mod, 8 in a burst do",
+     "PASS: a refusal stops at once; a refused restore stops the mod; shutdown writes nothing",
+     "PASS: compiled module rejects the non-game test host",
+     "15 data-only hellpod checks passed; no game process was accessed."
+    ]
+   },
+   {
+    "command": "wine luajit.exe tests/test_api_coexistence.lua src ../bounce-src/src hellpod-first",
+    "exit": 0,
+    "pass_lines": [
+     "PASS: real Windows data APIs coexist in a fresh VM, hellpod-first; image writes still refused"
+    ],
+    "tail": [
+     "PASS: real Windows data APIs coexist in a fresh VM, hellpod-first; image writes still refused"
+    ]
+   },
+   {
+    "command": "wine luajit.exe tests/test_api_coexistence.lua src ../bounce-src/src bounce-first",
+    "exit": 0,
+    "pass_lines": [
+     "PASS: real Windows data APIs coexist in a fresh VM, bounce-first; image writes still refused"
+    ],
+    "tail": [
+     "PASS: real Windows data APIs coexist in a fresh VM, bounce-first; image writes still refused"
+    ]
+   }
+  ],
+  "fixture_value_changes": {},
+  "passed": true
+ },
+ "luajit_exe_sha256": "F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7",
+ "environment_shim": {
+  "prelude": "local ffi = require('ffi')\nffi.cdef[[uint32_t GetModuleFileNameW(void *module, uint16_t *path, uint32_t capacity);]]\nlocal path = ffi.new('uint16_t[32768]')\nlocal length = ffi.load('kernel32').GetModuleFileNameW(nil, path, 32768)\nassert(length > 0 and length < 32768)\nBingusRuntime = {hashes = {['sha256:' .. ffi.string(path, length * 2)] = os.getenv('HSU_EXE_SHA')}}",
+  "why": "Wine bcrypt faults in BCryptDestroyHash; the one module_hash of luajit.exe is served from the runtime cache seeded with the SHA-256 computed by Python (identical for port and upstream)"
+ },
+ "peer": "test_data.lua / test_api_coexistence.lua peer: a copy of upstream-bingus/BetterStratagemBounce/src (v15.4.1)",
+ "not_run": {
+  "tests/test_package.py": "checks the standalone release zip from scripts/package.py; no release package is built here",
+  "tests/frame_budget.lua": "helper loaded by test_data.lua (runs inside it)"
+ }
+}

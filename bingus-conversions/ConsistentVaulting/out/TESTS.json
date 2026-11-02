@@ -1,0 +1,420 @@
+{
+ "fixture_remap": {
+  "what": "test fixtures only: the old build values in tests/*.lua replaced by the same map",
+  "pairs": [
+   [
+    "0x33266a0",
+    "0x2ce1850"
+   ],
+   [
+    "0x3326468",
+    "0x2ce1618"
+   ],
+   [
+    "0x346bf98",
+    "0x2ce41b8"
+   ],
+   [
+    "0x3326d20",
+    "0x2ce1ee0"
+   ],
+   [
+    "0x3326558",
+    "0x2ce1708"
+   ],
+   [
+    "0x346d560",
+    "0x2e287d0"
+   ],
+   [
+    "0x346bfa0",
+    "0x2e271f8"
+   ],
+   [
+    "0xf22ec8",
+    "0xf24990"
+   ],
+   [
+    "0xf32f18",
+    "0xf349e0"
+   ],
+   [
+    "0xf12bb8",
+    "0xf14680"
+   ],
+   [
+    "0x547c70",
+    "0x547cb0"
+   ],
+   [
+    "0x547d20",
+    "0x547d60"
+   ],
+   [
+    "0x547d24",
+    "0x547d64"
+   ],
+   [
+    "0x53e880",
+    "0x53e888"
+   ],
+   [
+    "0x1238",
+    "0x1240"
+   ],
+   [
+    "0x27c3298",
+    "0x286a768"
+   ],
+   [
+    "0x16a16d8",
+    "0x17430a0"
+   ],
+   [
+    "u(q,0x70,444)",
+    "u(q,0x74,444)"
+   ],
+   [
+    "put(q,0x74,'uint16_t',1);q[0x7a]=2;q[0x7b]=1;q[0x7c]=5",
+    "put(q,0x78,'uint16_t',1);q[0x7c]=2;q[0x7d]=1;q[0x7e]=5"
+   ],
+   [
+    "put(q,0x76,'uint16_t',1)",
+    "put(q,0x7a,'uint16_t',1)"
+   ],
+   [
+    "put(queries,0x74,'uint16_t',64);put(queries,0x76,'uint16_t',64)",
+    "put(queries,0x78,'uint16_t',64);put(queries,0x7a,'uint16_t',64)"
+   ],
+   [
+    "ffi.cast('uint32_t *',b+0x70)[0])==444",
+    "ffi.cast('uint32_t *',b+0x74)[0])==444"
+   ],
+   [
+    "ffi.cast('uint16_t *',b+0x74)[0])==1",
+    "ffi.cast('uint16_t *',b+0x78)[0])==1"
+   ],
+   [
+    "b[0x7a]==2 and b[0x7b]==1 and b[0x7c]==5",
+    "b[0x7c]==2 and b[0x7d]==1 and b[0x7e]==5"
+   ]
+  ],
+  "files": [
+   {
+    "file": "frame_budget.lua",
+    "replacements": 0
+   },
+   {
+    "file": "test_geometry.lua",
+    "replacements": 0
+   },
+   {
+    "file": "test_loader.lua",
+    "replacements": 0
+   },
+   {
+    "file": "test_raised_approach.lua",
+    "replacements": 0
+   },
+   {
+    "file": "test_slope.lua",
+    "replacements": 43
+   },
+   {
+    "file": "test_vault.lua",
+    "replacements": 34
+   }
+  ]
+ },
+ "linux-fr1": {
+  "luajit": "<workspace>/runtime-modules/vm-poc/work/runtime/linux/LuaJIT/src/luajit",
+  "upstream": {
+   "test_vault": {
+    "exit": 1,
+    "pass_lines": [
+     "PASS: per-check call budget: no protection queries while idle or waiting for a manual vault"
+    ],
+    "tail": [
+     "\tsrc/bingus_memory.lua:116: in function 'bind'",
+     "\tsrc/bingus_memory.lua:183: in function 'new'",
+     "\ttests/test_vault.lua:815: in main chunk",
+     "\t[C]: at 0x55c548248480"
+    ]
+   },
+   "test_geometry": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: 40 captured native descriptors; geometry max error 0, basis max error 1.1920929e-07; ownership/options preserved"
+    ],
+    "tail": []
+   },
+   "test_raised_approach": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: native raised-approach parameter layout, current mover refresh, private outputs, no-ledge and invalid geometry"
+    ],
+    "tail": []
+   },
+   "test_slope": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: idle checks allocate nothing: outside a mission, idle in a mission, retained query with the input released; number and pointer addresses, interpreted and compiled",
+     "PASS: per-check call budget: 7 reads and no protection queries idle; released-input checks skip the mover/settings reads; leases write only on arm, cap and release",
+     "PASS: per-frame call budget with the idle gate: 1 read on 9 of 10 idle mission frames (7 on the 10th), none on 59 of 60 frames outside a mission (2 on the 60th); a press arms on the frame it is seen; a changed avatar index is found within 10 frames (a tap before then is missed)",
+     "PASS: 55 slope ownership, native-override model, limits, lease lifecycle, cleanup and integration scenarios"
+    ],
+    "tail": []
+   },
+   "test_loader": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: loader version/build gates, duplicate load, update/shutdown tuples, failure isolation and throttled heartbeat",
+     "PASS: one check per frame while idle, a second after the game update only while busy, the skipped one replayed when work starts",
+     "PASS: silent default, opt-in diagnostics, shutdown report and callback returns",
+     "PASS: update errors pass through unchanged, the next update restores and pauses, the mod resumes after 60 clean frames, 8 errors below stop it",
+     "PASS: own errors restore and start fresh, 8 in a burst stop the mod, bursts end after 3600 clean frames with one log line each",
+     "PASS: the first failure survives shutdown, refusals stop the mod, cleanup errors stay contained"
+    ],
+    "tail": []
+   }
+  },
+  "port": {
+   "test_vault": {
+    "exit": 1,
+    "pass_lines": [
+     "PASS: per-check call budget: no protection queries while idle or waiting for a manual vault"
+    ],
+    "tail": [
+     "\tsrc/bingus_memory.lua:116: in function 'bind'",
+     "\tsrc/bingus_memory.lua:183: in function 'new'",
+     "\ttests/test_vault.lua:815: in main chunk",
+     "\t[C]: at 0x555b90d61480"
+    ]
+   },
+   "test_geometry": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: 40 captured native descriptors; geometry max error 0, basis max error 1.1920929e-07; ownership/options preserved"
+    ],
+    "tail": []
+   },
+   "test_raised_approach": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: native raised-approach parameter layout, current mover refresh, private outputs, no-ledge and invalid geometry"
+    ],
+    "tail": []
+   },
+   "test_slope": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: idle checks allocate nothing: outside a mission, idle in a mission, retained query with the input released; number and pointer addresses, interpreted and compiled",
+     "PASS: per-check call budget: 7 reads and no protection queries idle; released-input checks skip the mover/settings reads; leases write only on arm, cap and release",
+     "PASS: per-frame call budget with the idle gate: 1 read on 9 of 10 idle mission frames (7 on the 10th), none on 59 of 60 frames outside a mission (2 on the 60th); a press arms on the frame it is seen; a changed avatar index is found within 10 frames (a tap before then is missed)",
+     "PASS: 55 slope ownership, native-override model, limits, lease lifecycle, cleanup and integration scenarios"
+    ],
+    "tail": []
+   },
+   "test_loader": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: loader version/build gates, duplicate load, update/shutdown tuples, failure isolation and throttled heartbeat",
+     "PASS: one check per frame while idle, a second after the game update only while busy, the skipped one replayed when work starts",
+     "PASS: silent default, opt-in diagnostics, shutdown report and callback returns",
+     "PASS: update errors pass through unchanged, the next update restores and pauses, the mod resumes after 60 clean frames, 8 errors below stop it",
+     "PASS: own errors restore and start fresh, 8 in a burst stop the mod, bursts end after 3600 clean frames with one log line each",
+     "PASS: the first failure survives shutdown, refusals stop the mod, cleanup errors stay contained"
+    ],
+    "tail": []
+   }
+  }
+ },
+ "linux-gc64": {
+  "luajit": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit",
+  "upstream": {
+   "test_vault": {
+    "exit": 1,
+    "pass_lines": [
+     "PASS: per-check call budget: no protection queries while idle or waiting for a manual vault"
+    ],
+    "tail": [
+     "\tsrc/bingus_memory.lua:116: in function 'bind'",
+     "\tsrc/bingus_memory.lua:183: in function 'new'",
+     "\ttests/test_vault.lua:815: in main chunk",
+     "\t[C]: at 0x55b6b7729480"
+    ]
+   },
+   "test_geometry": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: 40 captured native descriptors; geometry max error 0, basis max error 1.1920929e-07; ownership/options preserved"
+    ],
+    "tail": []
+   },
+   "test_raised_approach": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: native raised-approach parameter layout, current mover refresh, private outputs, no-ledge and invalid geometry"
+    ],
+    "tail": []
+   },
+   "test_slope": {
+    "exit": -11,
+    "pass_lines": [],
+    "tail": []
+   },
+   "test_loader": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: loader version/build gates, duplicate load, update/shutdown tuples, failure isolation and throttled heartbeat",
+     "PASS: one check per frame while idle, a second after the game update only while busy, the skipped one replayed when work starts",
+     "PASS: silent default, opt-in diagnostics, shutdown report and callback returns",
+     "PASS: update errors pass through unchanged, the next update restores and pauses, the mod resumes after 60 clean frames, 8 errors below stop it",
+     "PASS: own errors restore and start fresh, 8 in a burst stop the mod, bursts end after 3600 clean frames with one log line each",
+     "PASS: the first failure survives shutdown, refusals stop the mod, cleanup errors stay contained"
+    ],
+    "tail": []
+   }
+  },
+  "port": {
+   "test_vault": {
+    "exit": 1,
+    "pass_lines": [
+     "PASS: per-check call budget: no protection queries while idle or waiting for a manual vault"
+    ],
+    "tail": [
+     "\tsrc/bingus_memory.lua:116: in function 'bind'",
+     "\tsrc/bingus_memory.lua:183: in function 'new'",
+     "\ttests/test_vault.lua:815: in main chunk",
+     "\t[C]: at 0x5592d6e06480"
+    ]
+   },
+   "test_geometry": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: 40 captured native descriptors; geometry max error 0, basis max error 1.1920929e-07; ownership/options preserved"
+    ],
+    "tail": []
+   },
+   "test_raised_approach": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: native raised-approach parameter layout, current mover refresh, private outputs, no-ledge and invalid geometry"
+    ],
+    "tail": []
+   },
+   "test_slope": {
+    "exit": -11,
+    "pass_lines": [],
+    "tail": []
+   },
+   "test_loader": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: loader version/build gates, duplicate load, update/shutdown tuples, failure isolation and throttled heartbeat",
+     "PASS: one check per frame while idle, a second after the game update only while busy, the skipped one replayed when work starts",
+     "PASS: silent default, opt-in diagnostics, shutdown report and callback returns",
+     "PASS: update errors pass through unchanged, the next update restores and pauses, the mod resumes after 60 clean frames, 8 errors below stop it",
+     "PASS: own errors restore and start fresh, 8 in a burst stop the mod, bursts end after 3600 clean frames with one log line each",
+     "PASS: the first failure survives shutdown, refusals stop the mod, cleanup errors stay contained"
+    ],
+    "tail": []
+   }
+  }
+ },
+ "wine-windows": {
+  "luajit": "<workspace>/runtime-modules/build/windows/LuaJIT/src/luajit.exe",
+  "upstream": {
+   "test_vault": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: per-check call budget: no protection queries while idle or waiting for a manual vault",
+     "PASS: 147 local query, native-check model, identity, worker, transition, rollback and Windows permission scenarios"
+    ],
+    "tail": []
+   },
+   "test_geometry": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: 40 captured native descriptors; geometry max error 0, basis max error 1.1920929e-07; ownership/options preserved"
+    ],
+    "tail": []
+   },
+   "test_raised_approach": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: native raised-approach parameter layout, current mover refresh, private outputs, no-ledge and invalid geometry"
+    ],
+    "tail": []
+   },
+   "test_slope": {
+    "exit": 5,
+    "pass_lines": [
+     "PASS: idle checks allocate nothing: outside a mission, idle in a mission, retained query with the input released; number and pointer addresses, interpreted and compiled"
+    ],
+    "tail": [
+     "PASS: idle checks allocate nothing: outside a mission, idle in a mission, retained query with the input released; number and pointer addresses, interpreted and compiled",
+     "wine: Unhandled page fault on write access to 0000000002000811 at address 000000014001E35B (thread 0024), starting debugger..."
+    ]
+   },
+   "test_loader": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: loader version/build gates, duplicate load, update/shutdown tuples, failure isolation and throttled heartbeat",
+     "PASS: one check per frame while idle, a second after the game update only while busy, the skipped one replayed when work starts",
+     "PASS: silent default, opt-in diagnostics, shutdown report and callback returns",
+     "PASS: update errors pass through unchanged, the next update restores and pauses, the mod resumes after 60 clean frames, 8 errors below stop it",
+     "PASS: own errors restore and start fresh, 8 in a burst stop the mod, bursts end after 3600 clean frames with one log line each",
+     "PASS: the first failure survives shutdown, refusals stop the mod, cleanup errors stay contained"
+    ],
+    "tail": []
+   }
+  },
+  "port": {
+   "test_vault": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: per-check call budget: no protection queries while idle or waiting for a manual vault",
+     "PASS: 147 local query, native-check model, identity, worker, transition, rollback and Windows permission scenarios"
+    ],
+    "tail": []
+   },
+   "test_geometry": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: 40 captured native descriptors; geometry max error 0, basis max error 1.1920929e-07; ownership/options preserved"
+    ],
+    "tail": []
+   },
+   "test_raised_approach": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: native raised-approach parameter layout, current mover refresh, private outputs, no-ledge and invalid geometry"
+    ],
+    "tail": []
+   },
+   "test_slope": {
+    "exit": 5,
+    "pass_lines": [
+     "PASS: idle checks allocate nothing: outside a mission, idle in a mission, retained query with the input released; number and pointer addresses, interpreted and compiled"
+    ],
+    "tail": [
+     "PASS: idle checks allocate nothing: outside a mission, idle in a mission, retained query with the input released; number and pointer addresses, interpreted and compiled",
+     "wine: Unhandled page fault on write access to 0000000002000811 at address 000000014001E35B (thread 0024), starting debugger..."
+    ]
+   },
+   "test_loader": {
+    "exit": 0,
+    "pass_lines": [
+     "PASS: loader version/build gates, duplicate load, update/shutdown tuples, failure isolation and throttled heartbeat",
+     "PASS: one check per frame while idle, a second after the game update only while busy, the skipped one replayed when work starts",
+     "PASS: silent default, opt-in diagnostics, shutdown report and callback returns",
+     "PASS: update errors pass through unchanged, the next update restores and pauses, the mod resumes after 60 clean frames, 8 errors below stop it",
+     "PASS: own errors restore and start fresh, 8 in a burst stop the mod, bursts end after 3600 clean frames with one log line each",
+     "PASS: the first failure survives shutdown, refusals stop the mod, cleanup errors stay contained"
+    ],
+    "tail": []
+   }
+  }
+ }
+}

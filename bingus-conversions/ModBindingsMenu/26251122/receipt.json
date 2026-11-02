@@ -1,0 +1,32 @@
+{
+ "option": "ModBindingsMenu",
+ "from": "26088801",
+ "to": "26251122",
+ "resources": {
+  "ace3bd664062daa9": {
+   "wrapped": false,
+   "lines_changed": 2,
+   "sha256_26088801": "98592434657cd205afa44ecf3ea1857cb22c2c4ab91b29d7765b976769100d47",
+   "sha256": "3d6561950ec65e199dfd85a201cfdde688bd342379a39931313bb498bdf08fba"
+  }
+ },
+ "edits": [
+  {
+   "resource": "ace3bd664062daa9",
+   "kind": "string",
+   "old": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "new": "257FD7DE21A04E8668E02E5C820EDF3435176FBDE3569765255CC52A5EA20F9D",
+   "count": 1
+  },
+  {
+   "resource": "ace3bd664062daa9",
+   "kind": "string",
+   "old": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "new": "61DCFCD201DACBF3545C97BEB8A5A6186E9850D2670BF60B0E058320B477F6DF",
+   "count": 1
+  }
+ ],
+ "witnesses": [],
+ "source": "original-mods/backups/20261029-170003-ModBindingsMenu/0-9ba626afa44a3aa3.patch_0",
+ "archive_sha256": "903ac35075b0163207a21305ce88b8fc1733102c1d271ca3125cbe75bf3b1c62"
+}

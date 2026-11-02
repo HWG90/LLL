@@ -1,0 +1,46 @@
+{
+ "option": "ReinforcementBeaconsFixed",
+ "from": "26088801",
+ "to": "26251122",
+ "resources": {
+  "4f1ba22daa1eab5c": {
+   "wrapped": true,
+   "lines_changed": 3,
+   "sha256_26088801": "28f56ff5ef8d58ef249dc587597d023f8243d8bcb622fd90f94912d1bfa1f21c",
+   "sha256": "791a8ea23353d9b4466ae89da0a6144d1250fe7b8a68ca597803ca7ba46b2514"
+  }
+ },
+ "edits": [
+  {
+   "resource": "4f1ba22daa1eab5c",
+   "kind": "string",
+   "old": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "new": "257FD7DE21A04E8668E02E5C820EDF3435176FBDE3569765255CC52A5EA20F9D",
+   "count": 1
+  },
+  {
+   "resource": "4f1ba22daa1eab5c",
+   "kind": "string",
+   "old": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "new": "61DCFCD201DACBF3545C97BEB8A5A6186E9850D2670BF60B0E058320B477F6DF",
+   "count": 1
+  },
+  {
+   "resource": "4f1ba22daa1eab5c",
+   "kind": "string",
+   "old": "26088801",
+   "new": "26251122",
+   "count": 1
+  },
+  {
+   "resource": "4f1ba22daa1eab5c",
+   "kind": "address",
+   "old": "reader.exe)==0x28d3a0,",
+   "new": "reader.exe)==0x28d310,",
+   "count": 1
+  }
+ ],
+ "witnesses": [],
+ "source": "original-mods/backups/20261029-170003-ReinforcementBeaconsFixed/0-9ba626afa44a3aa3.patch_0",
+ "archive_sha256": "9d1564e670d9f12e50d85344fe886661cc4a03866868628570feff414f1cd790"
+}

@@ -1,0 +1,805 @@
+{
+ "mod": "Sound Systems Rebalanced v1.0 (upstream-bingus/SoundSystemsRebalanced, git tag v1.0)",
+ "source": {
+  "used": "<workspace>/upstream-bingus/SoundSystemsRebalanced",
+  "why": "its checkout is at tag v1.0 and every file pinned in VanillaPlusMegapack/components.lock.json source_sha256 matches it byte for byte",
+  "lock_revision": "v1.0",
+  "module": "mods/cowboybingus/sound_systems_rebalanced"
+ },
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "old_image": "<workspace>/native-work/evidence/game-pre1020.dll",
+ "new_image": "<workspace>/native-work/evidence/game-26088801.dll",
+ "counts": {
+  "high": 16,
+  "medium": 1
+ },
+ "rows_total": 17,
+ "rows_feeding_write": 0,
+ "writes": "none to game memory: it reads one u32 every 0.25 s and, at a mission start, makes one checked call of the Wwise plugin export AK::SoundEngine::SetState (rows engine.Wwise.set_state, native.*)",
+ "non_data_edits": [
+  "port/native_set_state.lua inserted before log_writer; Mod.install falls back to it; enter_mission returns when set_state returns false"
+ ],
+ "blocked": [],
+ "not_applied": [],
+ "changed": [
+  "mod.EXE_SHA256",
+  "mod.GAME_SHA256",
+  "layout.game_rva",
+  "layout.state_offset",
+  "engine.Wwise.set_state",
+  "native.module",
+  "native.export_rva",
+  "biome_patch.VANILLA.music_init",
+  "biome_patch.VANILLA.music_mission_bot",
+  "biome_patch.VANILLA.music_mission_bug",
+  "biome_patch.VANILLA.music_mission_bug_hiveworld",
+  "biome_patch.VANILLA.music_mission_illuminate"
+ ],
+ "bank_dry_run": {
+  "ok": true,
+  "report": {
+   "tracks_edited": 24,
+   "switches_edited": 1,
+   "tracks_added": 24,
+   "switches_added": 3,
+   "size_before": 487182,
+   "size_after": 520638,
+   "objects": 2303
+  }
+ },
+ "witness_check_failures": [],
+ "rows": [
+  {
+   "id": "mod.EXE_SHA256",
+   "line": 18,
+   "symbol": "Mod.EXE_SHA256",
+   "kind": "SHA-256 pin (api.verify_build gate)",
+   "old": "F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06",
+   "new": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "feeds_write": false,
+   "method": "SHA-256 of the installed file (read-only); the old pin re-derived from an installed build-25480438 copy",
+   "witnesses": [
+    {
+     "what": "sha256 <game>/bin/helldivers2.exe",
+     "observed": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+     "expected": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+     "checked": true
+    },
+    {
+     "what": "sha256 <hellforge>/game/bin/helldivers2.exe",
+     "observed": "F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06",
+     "expected": "F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06",
+     "checked": true
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L0",
+   "file": "src/sound_systems_rebalanced.lua",
+   "changed": true
+  },
+  {
+   "id": "mod.GAME_SHA256",
+   "line": 19,
+   "symbol": "Mod.GAME_SHA256",
+   "kind": "SHA-256 pin (api.verify_build gate)",
+   "old": "2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E",
+   "new": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "feeds_write": false,
+   "method": "SHA-256 of the installed file (read-only); the old pin re-derived from an installed build-25480438 copy",
+   "witnesses": [
+    {
+     "what": "sha256 <game>/data/game/game.dll",
+     "observed": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+     "expected": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+     "checked": true
+    },
+    {
+     "what": "sha256 <hellforge>/game/data/game/game.dll",
+     "observed": "2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E",
+     "expected": "2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E",
+     "checked": true
+    }
+   ],
+   "confidence": "high",
+   "live_check": "L0",
+   "file": "src/sound_systems_rebalanced.lua",
+   "changed": true
+  },
+  {
+   "id": "layout.game_rva",
+   "line": 23,
+   "symbol": "Mod.LAYOUT.game_rva",
+   "kind": "game.dll global: game object pointer",
+   "old": "0x3326340",
+   "new": "0x2CE1508",
+   "feeds_write": false,
+   "method": "live-verified coordinator value (BRIEF); same row as hdh-port/MAP.json hold.game_rva (34 of 34 migrated references agree); re-checked here on one paired reference",
+   "witnesses": [
+    {
+     "what": "new game.dll 0x93c9d3",
+     "observed": "mov rcx, qword ptr [rip + 0x23a4b2e] ->0x2ce1508",
+     "expected": "mov rcx, qword ptr [rip + 0x23a4b2e] ->0x2ce1508",
+     "checked": true
+    },
+    {
+     "what": "old game.dll 0x92baed",
+     "observed": "mov rcx, qword ptr [rip + 0x29fa84c] ->0x3326340",
+     "expected": "mov rcx, qword ptr [rip + 0x29fa84c] ->0x3326340",
+     "checked": true
+    },
+    {
+     "what": "hdh-port/MAP.json hold.game_rva",
+     "agreeing": 34,
+     "disagreeing": 0,
+     "live": "HDH_L1 batch, state 3 on ship"
+    }
+   ],
+   "confidence": "high",
+   "live_check": "S1",
+   "file": "src/sound_systems_rebalanced.lua",
+   "changed": true
+  },
+  {
+   "id": "layout.state_offset",
+   "line": 23,
+   "symbol": "Mod.LAYOUT.state_offset",
+   "kind": "game object field: game state (u32)",
+   "old": "0xAC21C",
+   "new": "0xAC29C",
+   "feeds_write": false,
+   "method": "live-verified coordinator value; the state setter stores here; 75 taint-paired operands agree (hdh-port)",
+   "witnesses": [
+    {
+     "what": "new state setter 0xacedcc",
+     "observed": "mov dword ptr [rdi + 0xac29c], ebx",
+     "expected": "mov dword ptr [rdi + 0xac29c], ebx",
+     "checked": true
+    },
+    {
+     "what": "old state setter 0xab309c",
+     "observed": "mov dword ptr [rdi + 0xac21c], ebx",
+     "expected": "mov dword ptr [rdi + 0xac21c], ebx",
+     "checked": true
+    },
+    {
+     "what": "new 0x57a3e2",
+     "observed": "cmp dword ptr [rax + 0xac29c], 3",
+     "expected": "cmp dword ptr [rax + 0xac29c], 3",
+     "checked": true
+    },
+    {
+     "what": "new 0x5ee5ef",
+     "observed": "cmp dword ptr [r13 + 0xac29c], 4",
+     "expected": "cmp dword ptr [r13 + 0xac29c], 4",
+     "checked": true
+    },
+    {
+     "what": "hdh-port/MAP.json hold.state_offset",
+     "agreeing": 75,
+     "live": "hdh_readonly.live.log: state +0xAC29C 3 on the ship, old +0xAC21C reads 0"
+    }
+   ],
+   "confidence": "high",
+   "live_check": "S1",
+   "file": "src/sound_systems_rebalanced.lua",
+   "changed": true
+  },
+  {
+   "id": "mod.MISSION_STATES",
+   "line": 24,
+   "symbol": "Mod.MISSION_STATES",
+   "kind": "game state values (6 preparing a mission, 4 mission)",
+   "old": "{6, 4}",
+   "new": "{6, 4}",
+   "feeds_write": false,
+   "method": "hdh-port/MAP.json drop_hold.PREPARING+SCENE_STATES (state-name table decoded in both builds; every compared immediate kept its value)",
+   "witnesses": [
+    {
+     "what": "hdh row",
+     "confidence": "high"
+    }
+   ],
+   "confidence": "high",
+   "live_check": "S1/S2",
+   "file": "src/sound_systems_rebalanced.lua",
+   "changed": false
+  },
+  {
+   "id": "mod.GROUP+ROOM",
+   "line": 29,
+   "symbol": "Mod.GROUP, Mod.ROOM",
+   "kind": "Wwise state group / value names (FNV-1 ids 0xEC643124 / 0x08EEC31C)",
+   "old": "'environment_shiphub_room', 'shiphub_view'",
+   "new": "'environment_shiphub_room', 'shiphub_view'",
+   "feeds_write": false,
+   "method": "both ids counted in the current and the build-25480438 Init and env_ship banks (extracted read-only with tools/find_banks.lua)",
+   "witnesses": [
+    {
+     "what": "fnv1(environment_shiphub_room)",
+     "observed": "0xec643124",
+     "expected": "0xec643124",
+     "checked": true
+    },
+    {
+     "what": "fnv1(shiphub_view)",
+     "observed": "0x8eec31c",
+     "expected": "0x8eec31c",
+     "checked": true
+    },
+    {
+     "what": "old Init bank: group+value ids present",
+     "observed": "True",
+     "expected": "True",
+     "checked": true
+    },
+    {
+     "what": "new Init bank: group+value ids present",
+     "observed": "True",
+     "expected": "True",
+     "checked": true
+    },
+    {
+     "what": "Init bank id counts unchanged (old vs new)",
+     "observed": "{\"group\": 6, \"value\": 3, \"event_set_state_shiphub_view\": 0, \"bus_music\": 5}",
+     "expected": "{\"group\": 6, \"value\": 3, \"event_set_state_shiphub_view\": 0, \"bus_music\": 5}",
+     "checked": true
+    },
+    {
+     "what": "counts",
+     "counts": {
+      "new": {
+       "Init": {
+        "group": 6,
+        "value": 3,
+        "event_set_state_shiphub_view": 0,
+        "bus_music": 5
+       },
+       "env_ship": {
+        "group": 90,
+        "value": 41,
+        "event_set_state_shiphub_view": 1,
+        "bus_music": 0
+       }
+      },
+      "old": {
+       "Init": {
+        "group": 6,
+        "value": 3,
+        "event_set_state_shiphub_view": 0,
+        "bus_music": 5
+       },
+       "env_ship": {
+        "group": 88,
+        "value": 41,
+        "event_set_state_shiphub_view": 1,
+        "bus_music": 0
+       }
+      }
+     }
+    }
+   ],
+   "confidence": "high",
+   "live_check": "none (bank data)",
+   "file": "src/sound_systems_rebalanced.lua",
+   "changed": false
+  },
+  {
+   "id": "engine.Wwise.set_state",
+   "line": 113,
+   "symbol": "stingray.Wwise.set_state",
+   "kind": "engine Lua binding (Wwise plugin, add_module_function)",
+   "old": "present: wwise_pluginw64_release.dll registers Wwise.set_state -> plugin RVA 0xbdd0, which calls AK::SoundEngine::SetState(const char*, const char*) (export RVA 0xdd690)",
+   "new": null,
+   "feeds_write": false,
+   "method": "old plugin: the stock add_module_function site (lea r8 fn; lea rdx \"set_state\"; lea rcx \"Wwise\"; call [rbx]) decoded and the bound function disassembled; new: the live enumeration of stingray.* in the PUC engine state (2026-10-22, before any LuaJIT boot handoff existed) has no Wwise namespace and no plugin-owned native at all, and the boot bridge mirrors the whole stingray table, so the absence is the engine's, not the handoff's. (The new plugin file is encrypted on disk, so its missing strings are only consistent with this, not proof; live S4 reads its decrypted .rdata.)",
+   "witnesses": [
+    {
+     "what": "old plugin sha256 (from the build-25480438 install)",
+     "observed": "C78A9FA4EB3E93A07FD65AEC26EAA86C909470210012327AE747B5D5615410B3",
+     "expected": "C78A9FA4EB3E93A07FD65AEC26EAA86C909470210012327AE747B5D5615410B3",
+     "checked": true
+    },
+    {
+     "what": "old plugin: Lua registration of Wwise.set_state found",
+     "observed": "True",
+     "expected": "True",
+     "checked": true
+    },
+    {
+     "what": "old Wwise.set_state body calls the exported AK::SoundEngine::SetState(const char*, const char*)",
+     "observed": "call 0xdd690",
+     "expected": "call 0xdd690",
+     "checked": true
+    },
+    {
+     "what": "new plugin on disk: exact \"set_state\" string (NOT conclusive: see protection below)",
+     "observed": "0",
+     "expected": "0",
+     "checked": true
+    },
+    {
+     "what": "old plugin: exact \"set_state\" registration string",
+     "observed": "True",
+     "expected": "True",
+     "checked": true
+    },
+    {
+     "what": "new plugin still exports AK::SoundEngine::SetState(const char*, const char*)",
+     "observed": "0xda120",
+     "expected": "0xda120",
+     "checked": true
+    },
+    {
+     "what": "new plugin still exports AK::SoundEngine::SetState(AkStateGroupID, AkStateID)",
+     "observed": "0xda030",
+     "expected": "0xda030",
+     "checked": true
+    },
+    {
+     "what": "live build-26088801 PUC enumeration of every C function under stingray.*: Wwise namespace",
+     "observed": "False",
+     "expected": "False",
+     "checked": true
+    },
+    {
+     "what": "live enumeration: function owners (no plugin-owned natives at all)",
+     "observed": "error,helldivers2.exe",
+     "expected": "error,helldivers2.exe",
+     "checked": true
+    },
+    {
+     "what": "binding probe walks every stingray table",
+     "observed": "True",
+     "expected": "True",
+     "checked": true
+    },
+    {
+     "what": "binding probe log: 1874 functions captured",
+     "observed": "True",
+     "expected": "True",
+     "checked": true
+    },
+    {
+     "what": "LuaJIT boot bridge mirrors every key of the PUC stingray table and every missing global",
+     "observed": "True",
+     "expected": "True",
+     "checked": true
+    },
+    {
+     "what": "namespaces in the live enumeration",
+     "count": 117
+    },
+    {
+     "what": "on-disk protection (entropy > 7.5 bits/byte per 4 KB page): the new plugin is encrypted on disk, so its missing strings alone prove nothing; live S4 reads the decrypted .rdata",
+     "pages": {
+      "new .text high-entropy pages": "1085/1085",
+      "new .rdata high-entropy pages": "166/296",
+      "old .text high-entropy pages": "0/1081",
+      "old .rdata high-entropy pages": "1/291"
+     }
+    },
+    {
+     "what": "old/new plugin exact-string counts",
+     "old": {
+      "Wwise": 1,
+      "set_state": 1,
+      "trigger_event": 1,
+      "set_switch": 1,
+      "WwiseWorld": 1
+     },
+     "new": {
+      "Wwise": 0,
+      "set_state": 0,
+      "trigger_event": 0,
+      "set_switch": 0,
+      "WwiseWorld": 1
+     }
+    },
+    {
+     "what": "old Wwise.set_state body",
+     "rva": "0xbdd0",
+     "insns": [
+      "mov qword ptr [rsp + 8], rbx",
+      "push rdi",
+      "sub rsp, 0x20",
+      "mov rax, qword ptr [rip + 0x641bdf]",
+      "xor r8d, r8d",
+      "mov rbx, rcx",
+      "mov r9, qword ptr [rax + 8]",
+      "lea edx, [r8 + 1]",
+      "call qword ptr [r9 + 0x128]",
+      "mov rdx, qword ptr [rip + 0x641bc3]",
+      "xor r8d, r8d",
+      "mov rcx, rbx",
+      "mov rdi, rax",
+      "mov r9, qword ptr [rdx + 8]",
+      "lea edx, [r8 + 2]",
+      "call qword ptr [r9 + 0x128]",
+      "test rdi, rdi",
+      "je 0xbe2a",
+      "test rax, rax",
+      "je 0xbe2a",
+      "mov rdx, rax",
+      "mov rcx, rdi",
+      "call 0xdd690",
+      "mov rbx, qword ptr [rsp + 0x30]"
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "S3/S4",
+   "status": "replaced (the one non-data edit): Mod.native_set_state, rows native.*",
+   "native_equivalent": {
+    "function": "AK::SoundEngine::SetState(const char* group, const char* state) -> AKRESULT",
+    "module": "bin/plugins/wwise_pluginw64_release.dll",
+    "export": "?SetState@SoundEngine@AK@@YA?AW4AKRESULT@@PEBD0@Z",
+    "export_rva": "0xda120",
+    "alternative": "?SetState@SoundEngine@AK@@YA?AW4AKRESULT@@II@Z at 0xda030 with (0xEC643124, 0x08EEC31C)",
+    "basis": "exactly what the build-25480438 binding called (disassembled above); the export is still present",
+    "caveats": [
+     "the new plugin's code is protected on disk (high-entropy .text); its bytes are read in-game with ReadProcessMemory before every call and the function is never called unchecked",
+     "a code change (a direct native call), not build data; user-approved follow-up",
+     "thread: Wwise SetState is documented thread-safe (queued to the audio thread)"
+    ],
+    "applied": true
+   },
+   "file": "src/sound_systems_rebalanced.lua",
+   "changed": true
+  },
+  {
+   "id": "native.module",
+   "file": "port/native_set_state.lua",
+   "line": 8,
+   "symbol": "Mod.WWISE.module",
+   "kind": "already-loaded plugin module (GetModuleHandleA through api.module; never loaded)",
+   "old": null,
+   "new": "wwise_pluginw64_release.dll",
+   "feeds_write": false,
+   "method": "the file the old binding lived in; present in the current install",
+   "witnesses": [
+    {
+     "what": "current plugin file present",
+     "observed": "True",
+     "expected": "True",
+     "checked": true
+    }
+   ],
+   "confidence": "high",
+   "live_check": "S5",
+   "changed": true
+  },
+  {
+   "id": "native.export",
+   "file": "port/native_set_state.lua",
+   "line": 9,
+   "symbol": "Mod.WWISE.export",
+   "kind": "export name (GetProcAddress)",
+   "old": "?SetState@SoundEngine@AK@@YA?AW4AKRESULT@@PEBD0@Z",
+   "new": "?SetState@SoundEngine@AK@@YA?AW4AKRESULT@@PEBD0@Z",
+   "feeds_write": false,
+   "method": "current file export table",
+   "witnesses": [
+    {
+     "what": "export present in the current file",
+     "observed": "True",
+     "expected": "True",
+     "checked": true
+    }
+   ],
+   "confidence": "high",
+   "live_check": "S5",
+   "changed": false
+  },
+  {
+   "id": "native.export_rva",
+   "file": "port/native_set_state.lua",
+   "line": 10,
+   "symbol": "Mod.WWISE.rva",
+   "kind": "expected export RVA (resolved address - module base must equal it)",
+   "old": "0xdd690",
+   "new": "0xDA120",
+   "feeds_write": false,
+   "method": "current file export table (headers and export directory are plain)",
+   "witnesses": [
+    {
+     "what": "current export RVA",
+     "observed": "0xda120",
+     "expected": "0xda120",
+     "checked": true
+    }
+   ],
+   "confidence": "high",
+   "live_check": "S5",
+   "changed": true
+  },
+  {
+   "id": "native.prologue",
+   "file": "port/native_set_state.lua",
+   "line": 13,
+   "symbol": "Mod.WWISE.prologue",
+   "kind": "expected first 31 code bytes of the export (identity gate before every call)",
+   "old": "40534533c94c8bda488bd94885c97505458bd1eb4a440fb60141bac59d1c81",
+   "new": "40534533c94c8bda488bd94885c97505458bd1eb4a440fb60141bac59d1c81",
+   "feeds_write": false,
+   "method": "the build-25480438 plugin's export bytes (plain on disk), whole position-independent instructions; both plugins link the same Wwise SDK library build. The current file is encrypted on disk, so no offline witness of the CURRENT bytes exists: a live read must match (S5) or the mod never calls",
+   "witnesses": [
+    {
+     "what": "old export bytes [0:31] (build-25480438 plugin, plain code)",
+     "observed": "40534533c94c8bda488bd94885c97505458bd1eb4a440fb60141bac59d1c81",
+     "expected": "40534533c94c8bda488bd94885c97505458bd1eb4a440fb60141bac59d1c81",
+     "checked": true
+    },
+    {
+     "what": "31 bytes end on an instruction boundary",
+     "observed": "31",
+     "expected": "31",
+     "checked": true
+    },
+    {
+     "what": "no RIP-relative operand or call inside them (position independent)",
+     "observed": "False",
+     "expected": "False",
+     "checked": true
+    },
+    {
+     "what": "port/native_set_state.lua prologue equals those bytes",
+     "observed": "40534533c94c8bda488bd94885c97505458bd1eb4a440fb60141bac59d1c81",
+     "expected": "40534533c94c8bda488bd94885c97505458bd1eb4a440fb60141bac59d1c81",
+     "checked": true
+    },
+    {
+     "what": "Wwise SDK library build, old plugin",
+     "observed": "wwise-2024.1.9.8920-v1",
+     "expected": "wwise-2024.1.9.8920-v1",
+     "checked": true
+    },
+    {
+     "what": "Wwise SDK library build, new plugin",
+     "observed": "wwise-2024.1.9.8920-v1",
+     "expected": "wwise-2024.1.9.8920-v1",
+     "checked": true
+    },
+    {
+     "what": "old instructions",
+     "insns": [
+      "0xdd690 4053 push rbx",
+      "0xdd692 4533c9 xor r9d, r9d",
+      "0xdd695 4c8bda mov r11, rdx",
+      "0xdd698 488bd9 mov rbx, rcx",
+      "0xdd69b 4885c9 test rcx, rcx",
+      "0xdd69e 7505 jne 0xdd6a5",
+      "0xdd6a0 458bd1 mov r10d, r9d",
+      "0xdd6a3 eb4a jmp 0xdd6ef",
+      "0xdd6a5 440fb601 movzx r8d, byte ptr [rcx]",
+      "0xdd6a9 41bac59d1c81 mov r10d, 0x811c9dc5"
+     ]
+    }
+   ],
+   "confidence": "medium",
+   "live_check": "S5 (must print match=true)",
+   "notes": "Medium means: if the live bytes differ, the mod refuses (logs, no call); it can never call on a guess.",
+   "changed": false
+  },
+  {
+   "id": "native.AK_Success",
+   "file": "port/native_set_state.lua",
+   "line": 15,
+   "symbol": "Mod.WWISE.success",
+   "kind": "AKRESULT success value",
+   "old": "1",
+   "new": "1",
+   "feeds_write": false,
+   "method": "Wwise SDK AKRESULT enum (AK_Success = 1); the old binding ignored the result",
+   "witnesses": [],
+   "confidence": "high",
+   "live_check": "log line on mission start",
+   "changed": false
+  },
+  {
+   "id": "biome_patch.VANILLA.music_init",
+   "file": "scripts/biome_patch.py",
+   "line": 48,
+   "symbol": "VANILLA['content/audio/music_init']",
+   "kind": "input game data pin (wwise_bank main part) for the music_init patch archive",
+   "old": "A207AC1196A47EE6923DE1E051954AF5CD1A7C7AFC208E801A9715D2018ECA09",
+   "new": "57CC6AD025466BAE8C5DDF477C7B7412BD4FBEFB42C07D51297CB710C2C45DA3",
+   "feeds_write": false,
+   "method": "bank main parts read from the slim data (bundles.nxa) with Match Your Colors' upstream slim.lua; the same extractor on the installed build-25480438 copy reproduces the pinned hash",
+   "witnesses": [
+    {
+     "what": "content/audio/music_init current copies agree",
+     "observed": "1",
+     "expected": "1",
+     "checked": true
+    },
+    {
+     "what": "content/audio/music_init old-build extraction equals the pin",
+     "observed": "True",
+     "expected": "True",
+     "checked": true
+    },
+    {
+     "what": "current copies",
+     "rows": [
+      {
+       "archive": "2e24ba9dd702da5c",
+       "main_size": 487198,
+       "sha256": "57CC6AD025466BAE8C5DDF477C7B7412BD4FBEFB42C07D51297CB710C2C45DA3"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "none",
+   "status": "applied: patch_1 rebuilt from the current banks with only these pins changed (build.py)",
+   "changed": true
+  },
+  {
+   "id": "biome_patch.VANILLA.music_mission_bot",
+   "file": "scripts/biome_patch.py",
+   "line": 49,
+   "symbol": "VANILLA['content/audio/music_mission_bot']",
+   "kind": "input game data pin (wwise_bank main part) for the music_init patch archive",
+   "old": "C2F50B796590F0839A86EAF214094BE2C1D571A9EAB9B2EE18AD5BC5A19A14EB",
+   "new": "E9BAD21AE928F6BBBE6B903C1F490C744623B9CAAC6290DAE75B62651DE6DA8D",
+   "feeds_write": false,
+   "method": "bank main parts read from the slim data (bundles.nxa) with Match Your Colors' upstream slim.lua; the same extractor on the installed build-25480438 copy reproduces the pinned hash",
+   "witnesses": [
+    {
+     "what": "content/audio/music_mission_bot current copies agree",
+     "observed": "1",
+     "expected": "1",
+     "checked": true
+    },
+    {
+     "what": "content/audio/music_mission_bot old-build extraction equals the pin",
+     "observed": "True",
+     "expected": "True",
+     "checked": true
+    },
+    {
+     "what": "current copies",
+     "rows": [
+      {
+       "archive": "fdf011daecf24312",
+       "main_size": 25306329,
+       "sha256": "E9BAD21AE928F6BBBE6B903C1F490C744623B9CAAC6290DAE75B62651DE6DA8D"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "none",
+   "status": "applied: patch_1 rebuilt from the current banks with only these pins changed (build.py)",
+   "changed": true
+  },
+  {
+   "id": "biome_patch.VANILLA.music_mission_bug",
+   "file": "scripts/biome_patch.py",
+   "line": 50,
+   "symbol": "VANILLA['content/audio/music_mission_bug']",
+   "kind": "input game data pin (wwise_bank main part) for the music_init patch archive",
+   "old": "AF9CF1643D28C5D3E7DA1AA7BAE75766DBCEC410D5A81C9A2147F70BB016B48C",
+   "new": "D7BE764CAAE82B6004638CF8A18D29CBC19FF134FDF1D69CD69B3CAEF8BD1712",
+   "feeds_write": false,
+   "method": "bank main parts read from the slim data (bundles.nxa) with Match Your Colors' upstream slim.lua; the same extractor on the installed build-25480438 copy reproduces the pinned hash",
+   "witnesses": [
+    {
+     "what": "content/audio/music_mission_bug current copies agree",
+     "observed": "1",
+     "expected": "1",
+     "checked": true
+    },
+    {
+     "what": "content/audio/music_mission_bug old-build extraction equals the pin",
+     "observed": "True",
+     "expected": "True",
+     "checked": true
+    },
+    {
+     "what": "current copies",
+     "rows": [
+      {
+       "archive": "3b2c86dd5b316eb2",
+       "main_size": 24026971,
+       "sha256": "D7BE764CAAE82B6004638CF8A18D29CBC19FF134FDF1D69CD69B3CAEF8BD1712"
+      },
+      {
+       "archive": "89de9c3d26d2adc1",
+       "main_size": 24026971,
+       "sha256": "D7BE764CAAE82B6004638CF8A18D29CBC19FF134FDF1D69CD69B3CAEF8BD1712"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "none",
+   "status": "applied: patch_1 rebuilt from the current banks with only these pins changed (build.py)",
+   "changed": true
+  },
+  {
+   "id": "biome_patch.VANILLA.music_mission_bug_hiveworld",
+   "file": "scripts/biome_patch.py",
+   "line": 51,
+   "symbol": "VANILLA['content/audio/music_mission_bug_hiveworld']",
+   "kind": "input game data pin (wwise_bank main part) for the music_init patch archive",
+   "old": "CF565E9661BEBEBE13E5A165E369842DEA1CEC2B4671E96A2D1028AB00AA403F",
+   "new": "4A6B74B04EAF3B99E1515E0389EC24E0577E94595F3A65595B26D36C50B9FD96",
+   "feeds_write": false,
+   "method": "bank main parts read from the slim data (bundles.nxa) with Match Your Colors' upstream slim.lua; the same extractor on the installed build-25480438 copy reproduces the pinned hash",
+   "witnesses": [
+    {
+     "what": "content/audio/music_mission_bug_hiveworld current copies agree",
+     "observed": "1",
+     "expected": "1",
+     "checked": true
+    },
+    {
+     "what": "content/audio/music_mission_bug_hiveworld old-build extraction equals the pin",
+     "observed": "True",
+     "expected": "True",
+     "checked": true
+    },
+    {
+     "what": "current copies",
+     "rows": [
+      {
+       "archive": "35cbcf1adb1c54b5",
+       "main_size": 24095211,
+       "sha256": "4A6B74B04EAF3B99E1515E0389EC24E0577E94595F3A65595B26D36C50B9FD96"
+      },
+      {
+       "archive": "7a4c3b2f38a8b5b1",
+       "main_size": 24095211,
+       "sha256": "4A6B74B04EAF3B99E1515E0389EC24E0577E94595F3A65595B26D36C50B9FD96"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "none",
+   "status": "applied: patch_1 rebuilt from the current banks with only these pins changed (build.py)",
+   "changed": true
+  },
+  {
+   "id": "biome_patch.VANILLA.music_mission_illuminate",
+   "file": "scripts/biome_patch.py",
+   "line": 52,
+   "symbol": "VANILLA['content/audio/music_mission_illuminate']",
+   "kind": "input game data pin (wwise_bank main part) for the music_init patch archive",
+   "old": "043CE4B5CFB54B7E2D84BD72DE8DFC14DA1754A8AC5CACF5CDF48EA1114A032E",
+   "new": "5E36E635B50AC1D7BDDF81344016874667C0A6EF74A0B9E70295E2FC2569E723",
+   "feeds_write": false,
+   "method": "bank main parts read from the slim data (bundles.nxa) with Match Your Colors' upstream slim.lua; the same extractor on the installed build-25480438 copy reproduces the pinned hash",
+   "witnesses": [
+    {
+     "what": "content/audio/music_mission_illuminate current copies agree",
+     "observed": "1",
+     "expected": "1",
+     "checked": true
+    },
+    {
+     "what": "content/audio/music_mission_illuminate old-build extraction equals the pin",
+     "observed": "True",
+     "expected": "True",
+     "checked": true
+    },
+    {
+     "what": "current copies",
+     "rows": [
+      {
+       "archive": "046d4441a6dae0a9",
+       "main_size": 25405538,
+       "sha256": "5E36E635B50AC1D7BDDF81344016874667C0A6EF74A0B9E70295E2FC2569E723"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "live_check": "none",
+   "status": "applied: patch_1 rebuilt from the current banks with only these pins changed (build.py)",
+   "changed": true
+  }
+ ]
+}

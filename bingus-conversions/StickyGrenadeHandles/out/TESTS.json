@@ -1,0 +1,86 @@
+{
+ "port:tests/test_mod.lua": {
+  "command": "wine <workspace>/native-work/megapack-port/StickyGrenadeHandles/work/luajit.exe -e dofile([[../test_prelude.lua]]) tests/test_mod.lua .",
+  "exit": 0,
+  "passed": true,
+  "pass_lines": [
+   "PASS: 14 Sticky Grenade Handles tests (LuaJIT 2.1.ROLLING)"
+  ],
+  "tail": [
+   "[StickyGrenadeHandles] applied (material 3 tagged throwable: the handles of the G-123 Thermite and the sticky stun grenade stick), after 0.8 s.",
+   "[StickyGrenadeHandles] Waiting for the game: the material library does not exist yet.",
+   "[StickyGrenadeHandles] applied (material 3 tagged throwable: the handles of the G-123 Thermite and the sticky stun grenade stick), after 1.6 s.",
+   "[StickyGrenadeHandles] Waiting for the game: the material library does not exist yet.",
+   "[StickyGrenadeHandles] applied (material 3 tagged throwable: the handles of the G-123 Thermite and the sticky stun grenade stick), after 1.6 s.",
+   "PASS: 14 Sticky Grenade Handles tests (LuaJIT 2.1.ROLLING)"
+  ]
+ },
+ "port:tests/compile_entry.lua": {
+  "command": "wine <workspace>/native-work/megapack-port/StickyGrenadeHandles/work/luajit.exe -e dofile([[../test_prelude.lua]]) tests/compile_entry.lua entry-check.lua",
+  "exit": 0,
+  "passed": true,
+  "pass_lines": [
+   "PASS: assembled entry compiles"
+  ],
+  "tail": [
+   "PASS: assembled entry compiles"
+  ]
+ },
+ "port:tests/test_entry.lua": {
+  "command": "wine <workspace>/native-work/megapack-port/StickyGrenadeHandles/work/luajit.exe -e dofile([[../test_prelude.lua]]) tests/test_entry.lua entry-check.lua",
+  "exit": 0,
+  "passed": true,
+  "pass_lines": [
+   "PASS: assembled entry refuses outside the game and runs once (disabled: game modules unavailable)"
+  ],
+  "tail": [
+   "PASS: assembled entry refuses outside the game and runs once (disabled: game modules unavailable)"
+  ]
+ },
+ "upstream:tests/test_mod.lua": {
+  "command": "wine <workspace>/native-work/megapack-port/StickyGrenadeHandles/work/luajit.exe -e dofile([[../test_prelude.lua]]) tests/test_mod.lua .",
+  "exit": 0,
+  "passed": true,
+  "pass_lines": [
+   "PASS: 14 Sticky Grenade Handles tests (LuaJIT 2.1.ROLLING)"
+  ],
+  "tail": [
+   "[StickyGrenadeHandles] applied (material 3 tagged throwable: the handles of the G-123 Thermite and the sticky stun grenade stick), after 0.8 s.",
+   "[StickyGrenadeHandles] Waiting for the game: the material library does not exist yet.",
+   "[StickyGrenadeHandles] applied (material 3 tagged throwable: the handles of the G-123 Thermite and the sticky stun grenade stick), after 1.6 s.",
+   "[StickyGrenadeHandles] Waiting for the game: the material library does not exist yet.",
+   "[StickyGrenadeHandles] applied (material 3 tagged throwable: the handles of the G-123 Thermite and the sticky stun grenade stick), after 1.6 s.",
+   "PASS: 14 Sticky Grenade Handles tests (LuaJIT 2.1.ROLLING)"
+  ]
+ },
+ "upstream:tests/compile_entry.lua": {
+  "command": "wine <workspace>/native-work/megapack-port/StickyGrenadeHandles/work/luajit.exe -e dofile([[../test_prelude.lua]]) tests/compile_entry.lua entry-check.lua",
+  "exit": 0,
+  "passed": true,
+  "pass_lines": [
+   "PASS: assembled entry compiles"
+  ],
+  "tail": [
+   "PASS: assembled entry compiles"
+  ]
+ },
+ "upstream:tests/test_entry.lua": {
+  "command": "wine <workspace>/native-work/megapack-port/StickyGrenadeHandles/work/luajit.exe -e dofile([[../test_prelude.lua]]) tests/test_entry.lua entry-check.lua",
+  "exit": 0,
+  "passed": true,
+  "pass_lines": [
+   "PASS: assembled entry refuses outside the game and runs once (disabled: game modules unavailable)"
+  ],
+  "tail": [
+   "PASS: assembled entry refuses outside the game and runs once (disabled: game modules unavailable)"
+  ]
+ },
+ "luajit_exe_sha256": "F2AB6507B0CB36F01559341C632DCD95E6F8F5D21DA220BBD9C80EBF649BDEB7",
+ "environment_shim": {
+  "prelude": "local ffi = require('ffi')\nffi.cdef[[uint32_t GetModuleFileNameW(void *module, uint16_t *path, uint32_t capacity);]]\nlocal path = ffi.new('uint16_t[32768]')\nlocal length = ffi.load('kernel32').GetModuleFileNameW(nil, path, 32768)\nassert(length > 0 and length < 32768)\nBingusRuntime = {hashes = {['sha256:' .. ffi.string(path, length * 2)] = os.getenv('SGH_EXE_SHA')}}",
+  "why": "Wine bcrypt faults in BCryptDestroyHash; the runtime module_hash is served from its documented cache, both copies alike"
+ },
+ "not_run": {
+  "tests/game_lua.py": "runs the tests inside the game's own lua51.dll via Windows ctypes; Windows-only, and the game VM is now LuaJIT GC64 at boot"
+ }
+}

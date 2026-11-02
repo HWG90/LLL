@@ -1,0 +1,293 @@
+{
+ "mod": "Flame Damage Fixed v1.2 (Vanilla Plus Megapack option FlameDamageFixed)",
+ "upstream": "<workspace>/upstream-bingus/FlameDamageFixed",
+ "upstream_tag": "v1.2",
+ "pack_recipe": "BUILD_ASSEMBLED: scripts/build.py assemble(); envelope <II len, 2>",
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "game_sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+ "exe_sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+ "map": {
+  "sha256": "683e79226eba5ae46631481e24ebb082a93d56e59030d16c1c806eb4b0f6ba1e",
+  "counts": {
+   "high": 29,
+   "medium": 2,
+   "low": 0,
+   "unmapped": 0,
+   "feeds_write": 22
+  }
+ },
+ "replacements": [
+  {
+   "file": "src/flame_damage_fixed.lua",
+   "line": 20,
+   "old": "local SPRAY_MANAGER_RVA = 0x3326bb0 --",
+   "new": "local SPRAY_MANAGER_RVA = 0x2ce1d70 --",
+   "map_rows": [
+    "spray.manager_rva"
+   ]
+  },
+  {
+   "file": "src/flame_damage_fixed.lua",
+   "line": 21,
+   "old": "local RESOURCE_ROOT_RVA = 0x23621a8 --",
+   "new": "local RESOURCE_ROOT_RVA = 0x24099e8 --",
+   "map_rows": [
+    "effect.resource_root_rva"
+   ]
+  },
+  {
+   "file": "src/flame_damage_fixed.lua",
+   "line": 72,
+   "old": "FILTER_PTR = 0x27C5E40, FILTER_VTABLE = 0x148B938, MATRIX = 40,",
+   "new": "FILTER_PTR = 0x286D330, FILTER_VTABLE = 0x1521958, MATRIX = 40,",
+   "map_rows": [
+    "phys.filter_ptr",
+    "phys.filter_semantics",
+    "phys.filter_vtable"
+   ]
+  },
+  {
+   "file": "src/flame_damage_fixed.lua",
+   "line": 73,
+   "old": "WORLDS = 0x27BA890, WORLD_STRIDE = 176, WORLD_VTABLE = 0x14B3148,",
+   "new": "WORLDS = 0x2861D70, WORLD_STRIDE = 176, WORLD_VTABLE = 0x1549168,",
+   "map_rows": [
+    "phys.world_vtable",
+    "phys.worlds"
+   ]
+  },
+  {
+   "file": "src/flame_damage_fixed.lua",
+   "line": 75,
+   "old": "WORLD_PTR = 0x346BFA0, PARTICLE_MANAGER = 0x230888, INSTANCE = 136, INSTANCE_ID = 0x10,",
+   "new": "WORLD_PTR = 0x2E271F8, PARTICLE_MANAGER = 0x230768, INSTANCE = 136, INSTANCE_ID = 0x10,",
+   "map_rows": [
+    "flame.instance_records",
+    "flame.particle_manager",
+    "flame.world_ptr"
+   ]
+  },
+  {
+   "file": "src/flame_damage_fixed.lua",
+   "line": 77,
+   "old": "UNITS = 0x1A100F0, UNIT_OBJECTS = 0x88,",
+   "new": "UNITS = 0x1AB76F8, UNIT_OBJECTS = 0x88,",
+   "map_rows": [
+    "phys.units"
+   ]
+  },
+  {
+   "file": "src/flame_damage_fixed.lua",
+   "line": 79,
+   "old": "GROUPS = 0x27C5B88, GROUP_TOP = 2047, GROUP_LOW = 2040,",
+   "new": "GROUPS = 0x286D078, GROUP_TOP = 2047, GROUP_LOW = 2040,",
+   "map_rows": [
+    "phys.groups"
+   ]
+  },
+  {
+   "file": "src/flame_damage_fixed.lua",
+   "line": 1003,
+   "old": "local GAME_SHA256 = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+   "new": "local GAME_SHA256 = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'",
+   "map_rows": []
+  },
+  {
+   "file": "src/flame_damage_fixed.lua",
+   "line": 1004,
+   "old": "local EXE_SHA256 = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+   "new": "local EXE_SHA256 = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'",
+   "map_rows": []
+  },
+  {
+   "file": "src/flame_damage_fixed.lua",
+   "line": 1131,
+   "old": "'Unsupported game build (needs 25480438)'",
+   "new": "'Unsupported game build (needs 26088801)'",
+   "map_rows": []
+  },
+  {
+   "file": "tests/test_fix.lua",
+   "line": 126,
+   "old": "m.put(EXE + 0x23621a8, le64(ROOT_OBJ))",
+   "new": "m.put(EXE + 0x24099e8, le64(ROOT_OBJ))",
+   "map_rows": []
+  },
+  {
+   "file": "tests/test_fix.lua",
+   "line": 152,
+   "old": "m.put(GAME + 0x3326bb0, le64(SPRAY_MGR))",
+   "new": "m.put(GAME + 0x2ce1d70, le64(SPRAY_MGR))",
+   "map_rows": []
+  },
+  {
+   "file": "tests/test_fix.lua",
+   "line": 219,
+   "old": "m.put(GAME + 0x346BFA0, le64(PM_OWNER))",
+   "new": "m.put(GAME + 0x2E271F8, le64(PM_OWNER))",
+   "map_rows": []
+  },
+  {
+   "file": "tests/test_fix.lua",
+   "line": 220,
+   "old": "m.put(PM_OWNER + 0x230888, le64(PM))",
+   "new": "m.put(PM_OWNER + 0x230768, le64(PM))",
+   "map_rows": []
+  },
+  {
+   "file": "tests/test_fix.lua",
+   "line": 243,
+   "old": "le64(options.world_vtable or EXE + 0x14B3148)",
+   "new": "le64(options.world_vtable or EXE + 0x1549168)",
+   "map_rows": []
+  },
+  {
+   "file": "tests/test_fix.lua",
+   "line": 247,
+   "old": "m.put(EXE + 0x27BA890 + 176 * 2, le64(WORLD))",
+   "new": "m.put(EXE + 0x2861D70 + 176 * 2, le64(WORLD))",
+   "map_rows": []
+  },
+  {
+   "file": "tests/test_fix.lua",
+   "line": 282,
+   "old": "le64(options.vtable or EXE + 0x148B938)",
+   "new": "le64(options.vtable or EXE + 0x1521958)",
+   "map_rows": []
+  },
+  {
+   "file": "tests/test_fix.lua",
+   "line": 283,
+   "old": "m.put(EXE + 0x27C5E40, le64(FILTER_OBJ))",
+   "new": "m.put(EXE + 0x286D330, le64(FILTER_OBJ))",
+   "map_rows": []
+  },
+  {
+   "file": "tests/test_fix.lua",
+   "line": 285,
+   "old": "m.put(EXE + 0x1A100F0, le64(UNIT_REG))",
+   "new": "m.put(EXE + 0x1AB76F8, le64(UNIT_REG))",
+   "map_rows": []
+  },
+  {
+   "file": "tests/test_fix.lua",
+   "line": 310,
+   "old": "m.put(EXE + 0x27C5B88, le64(ALLOC))",
+   "new": "m.put(EXE + 0x286D078, le64(ALLOC))",
+   "map_rows": []
+  }
+ ],
+ "entry_changes_vs_upstream": [
+  {
+   "entry_line": 562,
+   "old": "local SPRAY_MANAGER_RVA = 0x3326bb0 -- game.dll: SprayWeaponComponent manager pointer",
+   "new": "local SPRAY_MANAGER_RVA = 0x2ce1d70 -- game.dll: SprayWeaponComponent manager pointer"
+  },
+  {
+   "entry_line": 563,
+   "old": "local RESOURCE_ROOT_RVA = 0x23621a8 -- helldivers2.exe: object whose +0x3f8 is the resource manager",
+   "new": "local RESOURCE_ROOT_RVA = 0x24099e8 -- helldivers2.exe: object whose +0x3f8 is the resource manager"
+  },
+  {
+   "entry_line": 614,
+   "old": "FILTER_PTR = 0x27C5E40, FILTER_VTABLE = 0x148B938, MATRIX = 40,",
+   "new": "FILTER_PTR = 0x286D330, FILTER_VTABLE = 0x1521958, MATRIX = 40,"
+  },
+  {
+   "entry_line": 615,
+   "old": "WORLDS = 0x27BA890, WORLD_STRIDE = 176, WORLD_VTABLE = 0x14B3148,",
+   "new": "WORLDS = 0x2861D70, WORLD_STRIDE = 176, WORLD_VTABLE = 0x1549168,"
+  },
+  {
+   "entry_line": 617,
+   "old": "WORLD_PTR = 0x346BFA0, PARTICLE_MANAGER = 0x230888, INSTANCE = 136, INSTANCE_ID = 0x10,",
+   "new": "WORLD_PTR = 0x2E271F8, PARTICLE_MANAGER = 0x230768, INSTANCE = 136, INSTANCE_ID = 0x10,"
+  },
+  {
+   "entry_line": 619,
+   "old": "UNITS = 0x1A100F0, UNIT_OBJECTS = 0x88, UNIT_HANDLE = 0x8, UNIT_PARENT = 0x1D0, UNIT_CHILD = 0x1D8,",
+   "new": "UNITS = 0x1AB76F8, UNIT_OBJECTS = 0x88, UNIT_HANDLE = 0x8, UNIT_PARENT = 0x1D0, UNIT_CHILD = 0x1D8,"
+  },
+  {
+   "entry_line": 621,
+   "old": "GROUPS = 0x27C5B88, GROUP_TOP = 2047, GROUP_LOW = 2040,",
+   "new": "GROUPS = 0x286D078, GROUP_TOP = 2047, GROUP_LOW = 2040,"
+  },
+  {
+   "entry_line": 1545,
+   "old": "local GAME_SHA256 = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+   "new": "local GAME_SHA256 = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'"
+  },
+  {
+   "entry_line": 1546,
+   "old": "local EXE_SHA256 = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+   "new": "local EXE_SHA256 = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'"
+  },
+  {
+   "entry_line": 1673,
+   "old": "assert(ok, why == 'unsupported game build' and 'Unsupported game build (needs 25480438)' or why)",
+   "new": "assert(ok, why == 'unsupported game build' and 'Unsupported game build (needs 26088801)' or why)"
+  }
+ ],
+ "unmodified_assembly": {
+  "sha256": "8c168d6af5974369b54c53b25238f17744864f28cf380f622dc4f7c3fd9a235b",
+  "equals_lock_resource_sha256": true,
+  "equals_shipped_v26_resource": "<hellforge>/mods/Vanilla Plus Megapack - v26/options/FlameDamageFixed/9ba626afa44a3aa3.patch_0 :: af1003f292e2726b"
+ },
+ "resource": {
+  "name": "mods/cowboybingus/flame_damage_fixed",
+  "hash": "af1003f292e2726b",
+  "bytes": 88320,
+  "format": "plaintext entry (type 2 envelope)"
+ },
+ "archive_holds_only": [
+  "af1003f292e2726b"
+ ],
+ "outputs": {
+  "entry.lua": "643572d551e061bdec44789f3687ed82f8023e2fe1b6d59fcb37519c282ada20",
+  "flame_damage_fixed.lua.main": "d685633a088e0f14ae3b6f1d4cce50c3a2f1ded788f47a7116f1c7644d4f1436",
+  "9ba626afa44a3aa3.patch_0": "c8828f51a90d160d0e13d6d0aae8fc327dc350d15b22b90ddb82232d1fbc08d6",
+  "9ba626afa44a3aa3.patch_0.stream": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "9ba626afa44a3aa3.patch_0.gpu_resources": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+ },
+ "luajit_check": {
+  "luajit": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit",
+  "string_dump_flags": 8,
+  "gc64_fr2": true,
+  "output": [
+   "compile: ok\tLuaJIT 2.1.ROLLING\t8",
+   "entry run: false: mods/cowboybingus/flame_damage_fixed:359: libbcrypt.so: cannot open shared object file: No such file or directory",
+   "installed: nil"
+  ],
+  "note": "on Linux the vendored bingus_memory.new() loads bcrypt before the mod pcall; the unmodified upstream entry stops at the same call (checked)"
+ },
+ "adapter_text_absent": [
+  "PORT51",
+  "compat51",
+  "require('cffi')",
+  "require(\"cffi\")"
+ ],
+ "tests": {
+  "port": {
+   "test_constants.py (installed 26088801 effects)": true,
+   "linux GC64 luajit: test_fix.lua": true,
+   "linux GC64 luajit: test_guard_diff.lua": true,
+   "linux GC64 luajit: compile_entry.lua": true,
+   "wine luajit.exe: test_fix_adapter.lua": true,
+   "wine luajit.exe: test_ffi_names.lua sdk": true,
+   "wine luajit.exe: test_ffi_names.lua hostile": true,
+   "wine luajit.exe: test_ffi_names.lua reverse": true
+  },
+  "upstream": {
+   "test_constants.py (installed 26088801 effects)": true,
+   "linux GC64 luajit: test_fix.lua": true,
+   "linux GC64 luajit: test_guard_diff.lua": true,
+   "linux GC64 luajit: compile_entry.lua": true,
+   "wine luajit.exe: test_fix_adapter.lua": true,
+   "wine luajit.exe: test_ffi_names.lua sdk": true,
+   "wine luajit.exe: test_ffi_names.lua hostile": true,
+   "wine luajit.exe: test_ffi_names.lua reverse": true
+  }
+ }
+}

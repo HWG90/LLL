@@ -1,0 +1,32 @@
+{
+ "option": "ModOptionsMenu",
+ "from": "26088801",
+ "to": "26251122",
+ "resources": {
+  "fd50351f21814b0e": {
+   "wrapped": false,
+   "lines_changed": 2,
+   "sha256_26088801": "830533ce114efe16ba66adaa9df1f1f8962455422ba426e13f13484486f2f717",
+   "sha256": "d080b0e478e3370ba39e4c317a16c45dbd3670328592ba8a2536a4e4e88a3997"
+  }
+ },
+ "edits": [
+  {
+   "resource": "fd50351f21814b0e",
+   "kind": "string",
+   "old": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "new": "257FD7DE21A04E8668E02E5C820EDF3435176FBDE3569765255CC52A5EA20F9D",
+   "count": 1
+  },
+  {
+   "resource": "fd50351f21814b0e",
+   "kind": "string",
+   "old": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "new": "61DCFCD201DACBF3545C97BEB8A5A6186E9850D2670BF60B0E058320B477F6DF",
+   "count": 1
+  }
+ ],
+ "witnesses": [],
+ "source": "original-mods/backups/20261029-170003-ModOptionsMenu/0-9ba626afa44a3aa3.patch_0",
+ "archive_sha256": "5fff91b500a04b59359793194e78e41db86d1b88761a75121ae25eaa57e344a1"
+}

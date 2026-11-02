@@ -1,0 +1,471 @@
+{
+ "option": "Shallow Water Diving (Vanilla Plus Megapack option ShallowWaterDiving)",
+ "source": "<workspace>/upstream-bingus/VanillaPlusMegapack/components/ShallowWaterDiving",
+ "lock_revision": "data-v3.10.1",
+ "port_revision": "data-v3.10.1-26088801",
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "game_sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+ "exe_sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+ "map": {
+  "path": "<workspace>/native-work/megapack-port/ShallowWaterDiving/MAP.json",
+  "sha256": "66246b3cd460ac3d08376efdc1e14fcbae48e216c41bf2a06d58c67cc0623d18",
+  "counts": {
+   "high": 33,
+   "medium": 7
+  },
+  "rows": 40
+ },
+ "replacements": [
+  {
+   "file": "scripts/archive.py",
+   "line": 9,
+   "old": "EXE_SHA = 'F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06'",
+   "new": "EXE_SHA = '0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE'",
+   "map_rows": [
+    "archive.EXE_SHA"
+   ]
+  },
+  {
+   "file": "scripts/archive.py",
+   "line": 10,
+   "old": "GAME_DLL_SHA = '2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E'",
+   "new": "GAME_DLL_SHA = '6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F'",
+   "map_rows": [
+    "archive.GAME_DLL_SHA"
+   ]
+  },
+  {
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 51,
+   "old": "local DIVE_TIMEOUT_RVAS={0x23c7110,0x23c7100}",
+   "new": "local DIVE_TIMEOUT_RVAS={0x2246948,0x2246938}",
+   "map_rows": [
+    "dive.rdata.timeout",
+    "dive.rdata.timeout_fallback"
+   ]
+  },
+  {
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 80,
+   "old": "for rva,name in pairs({[0x33266a0]='mission',[0x3326468]='local_player',[0x346bf98]='local_avatar',",
+   "new": "for rva,name in pairs({[0x2ce1850]='mission',[0x2ce1618]='local_player',[0x2ce41b8]='local_avatar',",
+   "map_rows": [
+    "dive.global.entities",
+    "dive.global.local_player",
+    "dive.global.mission"
+   ]
+  },
+  {
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 81,
+   "old": "    [0x3326d20]='local_avatar',[0x3326a80]='water',[0x3326598]='stance',[0x3326558]='movement'}) do",
+   "new": "    [0x2ce1ee0]='local_avatar',[0x2ce1c40]='water',[0x2ce1748]='stance',[0x2ce1708]='movement'}) do",
+   "map_rows": [
+    "dive.global.avatars",
+    "dive.global.movement",
+    "dive.global.stance",
+    "dive.global.water"
+   ]
+  },
+  {
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 150,
+   "old": "local CONTROLLER,CONTROLLER_SIZE,FLAGS=0xb84,0x414,0xf80-0xb84",
+   "new": "local CONTROLLER,CONTROLLER_SIZE,FLAGS=0xb84,0x41c,0xf88-0xb84",
+   "map_rows": [
+    "dive.controller.flags",
+    "dive.controller.record"
+   ]
+  },
+  {
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 166,
+   "old": "local mode=global(0x33266a0);",
+   "new": "local mode=global(0x2ce1850);",
+   "map_rows": [
+    "dive.global.mission"
+   ]
+  },
+  {
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 170,
+   "old": "local pm=global(0x3326468);",
+   "new": "local pm=global(0x2ce1618);",
+   "map_rows": [
+    "dive.global.local_player"
+   ]
+  },
+  {
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 184,
+   "old": "local owner=global(0x346bf98,true);",
+   "new": "local owner=global(0x2ce41b8,true);",
+   "map_rows": [
+    "dive.global.entities"
+   ]
+  },
+  {
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 185,
+   "old": "local header=read(owner+0xf22ec8,20);",
+   "new": "local header=read(owner+0xf24990,20);",
+   "map_rows": [
+    "dive.entity.network_map"
+   ]
+  },
+  {
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 189,
+   "old": "local entity_address=owner+0xf32f18+ei*24",
+   "new": "local entity_address=owner+0xf349e0+ei*24",
+   "map_rows": [
+    "dive.entity.records"
+   ]
+  },
+  {
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 194,
+   "old": "local am=global(0x3326d20,true);",
+   "new": "local am=global(0x2ce1ee0,true);",
+   "map_rows": [
+    "dive.global.avatars"
+   ]
+  },
+  {
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 208,
+   "old": "local controller=am+0x53d900+ai*0x1238",
+   "new": "local controller=am+0x53d900+ai*0x1240",
+   "map_rows": [
+    "dive.avatar.controller_base",
+    "dive.avatar.stride"
+   ]
+  },
+  {
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 210,
+   "old": "guard(controller+0xf80,c+FLAGS,24)",
+   "new": "guard(controller+0xf88,c+FLAGS,24)",
+   "map_rows": [
+    "dive.controller.flags"
+   ]
+  },
+  {
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 226,
+   "old": "local dm=global(0x3326a80,true);",
+   "new": "local dm=global(0x2ce1c40,true);",
+   "map_rows": [
+    "dive.global.water"
+   ]
+  },
+  {
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 256,
+   "old": "local sm=global(0x3326598,true);",
+   "new": "local sm=global(0x2ce1748,true);",
+   "map_rows": [
+    "dive.global.stance"
+   ]
+  },
+  {
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 271,
+   "old": "local mm=global(0x3326558);",
+   "new": "local mm=global(0x2ce1708);",
+   "map_rows": [
+    "dive.global.movement"
+   ]
+  },
+  {
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 284,
+   "old": "local components=read(owner+0xf12e20,8);",
+   "new": "local components=read(owner+0xf148e8,8);",
+   "map_rows": [
+    "dive.settings.table_offset"
+   ]
+  },
+  {
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 313,
+   "old": "local window,two=reader.read(base+0x23c7080,0x100)",
+   "new": "local window,two=reader.read(base+0x22468b8,0x100)",
+   "map_rows": [
+    "dive.rdata.window"
+   ]
+  },
+  {
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 315,
+   "old": "found[#found+1]=string.format('0x%x',0x23c7080+o)",
+   "new": "found[#found+1]=string.format('0x%x',0x22468b8+o)",
+   "map_rows": [
+    "dive.rdata.window"
+   ]
+  },
+  {
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 319,
+   "old": "local prone=read(base+0x23c6ccc,4);",
+   "new": "local prone=read(base+0x22464ec,4);",
+   "map_rows": [
+    "dive.rdata.prone"
+   ]
+  },
+  {
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 321,
+   "old": "local crouch=read(base+0x23c69f8,4);",
+   "new": "local crouch=read(base+0x2246210,4);",
+   "map_rows": [
+    "dive.rdata.crouch"
+   ]
+  },
+  {
+   "file": "components/ShallowWaterDiving/src/bingus_text.lua",
+   "line": 357,
+   "old": "M.GAME = {settings = 0x3326340, index = 705500 + 212, table = 0x37C5650, count = 15}",
+   "new": "M.GAME = {settings = 0x2CE1508, index = 705628 + 212, table = 0x3180DE0, count = 15}",
+   "map_rows": [
+    "bingus_text.GAME.count",
+    "bingus_text.GAME.index",
+    "bingus_text.GAME.settings",
+    "bingus_text.GAME.table"
+   ]
+  }
+ ],
+ "wrapper_changes_vs_upstream": [
+  {
+   "line": 358,
+   "what": "replacement",
+   "old": "M.GAME = {settings = 0x3326340, index = 705500 + 212, table = 0x37C5650, count = 15}",
+   "new": "M.GAME = {settings = 0x2CE1508, index = 705628 + 212, table = 0x3180DE0, count = 15}"
+  },
+  {
+   "line": 1388,
+   "what": "replacement",
+   "old": "local DIVE_TIMEOUT_RVAS={0x23c7110,0x23c7100}",
+   "new": "local DIVE_TIMEOUT_RVAS={0x2246948,0x2246938}"
+  },
+  {
+   "line": 1417,
+   "what": "replacement",
+   "old": "for rva,name in pairs({[0x33266a0]='mission',[0x3326468]='local_player',[0x346bf98]='local_avatar',",
+   "new": "for rva,name in pairs({[0x2ce1850]='mission',[0x2ce1618]='local_player',[0x2ce41b8]='local_avatar',"
+  },
+  {
+   "line": 1418,
+   "what": "replacement",
+   "old": "[0x3326d20]='local_avatar',[0x3326a80]='water',[0x3326598]='stance',[0x3326558]='movement'}) do",
+   "new": "[0x2ce1ee0]='local_avatar',[0x2ce1c40]='water',[0x2ce1748]='stance',[0x2ce1708]='movement'}) do"
+  },
+  {
+   "line": 1487,
+   "what": "replacement",
+   "old": "local CONTROLLER,CONTROLLER_SIZE,FLAGS=0xb84,0x414,0xf80-0xb84",
+   "new": "local CONTROLLER,CONTROLLER_SIZE,FLAGS=0xb84,0x41c,0xf88-0xb84"
+  },
+  {
+   "line": 1503,
+   "what": "replacement",
+   "old": "local mode=global(0x33266a0);if not mode then return nil,wait end",
+   "new": "local mode=global(0x2ce1850);if not mode then return nil,wait end"
+  },
+  {
+   "line": 1507,
+   "what": "replacement",
+   "old": "local pm=global(0x3326468);if not pm then return nil,wait end",
+   "new": "local pm=global(0x2ce1618);if not pm then return nil,wait end"
+  },
+  {
+   "line": 1521,
+   "what": "replacement",
+   "old": "local owner=global(0x346bf98,true);if not owner then return nil,wait end",
+   "new": "local owner=global(0x2ce41b8,true);if not owner then return nil,wait end"
+  },
+  {
+   "line": 1522,
+   "what": "replacement",
+   "old": "local header=read(owner+0xf22ec8,20);if not header then return nil,wait end",
+   "new": "local header=read(owner+0xf24990,20);if not header then return nil,wait end"
+  },
+  {
+   "line": 1526,
+   "what": "replacement",
+   "old": "local entity_address=owner+0xf32f18+ei*24",
+   "new": "local entity_address=owner+0xf349e0+ei*24"
+  },
+  {
+   "line": 1531,
+   "what": "replacement",
+   "old": "local am=global(0x3326d20,true);if not am then return nil,wait end",
+   "new": "local am=global(0x2ce1ee0,true);if not am then return nil,wait end"
+  },
+  {
+   "line": 1545,
+   "what": "replacement",
+   "old": "local controller=am+0x53d900+ai*0x1238",
+   "new": "local controller=am+0x53d900+ai*0x1240"
+  },
+  {
+   "line": 1547,
+   "what": "replacement",
+   "old": "guard(controller+CONTROLLER,c,20);guard(controller+0xf80,c+FLAGS,24)",
+   "new": "guard(controller+CONTROLLER,c,20);guard(controller+0xf88,c+FLAGS,24)"
+  },
+  {
+   "line": 1563,
+   "what": "replacement",
+   "old": "local dm=global(0x3326a80,true);if not dm then return nil,wait end",
+   "new": "local dm=global(0x2ce1c40,true);if not dm then return nil,wait end"
+  },
+  {
+   "line": 1593,
+   "what": "replacement",
+   "old": "local sm=global(0x3326598,true);if not sm then return nil,wait end",
+   "new": "local sm=global(0x2ce1748,true);if not sm then return nil,wait end"
+  },
+  {
+   "line": 1608,
+   "what": "replacement",
+   "old": "local mm=global(0x3326558);if not mm then return nil,wait end",
+   "new": "local mm=global(0x2ce1708);if not mm then return nil,wait end"
+  },
+  {
+   "line": 1621,
+   "what": "replacement",
+   "old": "local components=read(owner+0xf12e20,8);if not components then return nil,wait end",
+   "new": "local components=read(owner+0xf148e8,8);if not components then return nil,wait end"
+  },
+  {
+   "line": 1650,
+   "what": "replacement",
+   "old": "local window,two=reader.read(base+0x23c7080,0x100) or '',packed(2)",
+   "new": "local window,two=reader.read(base+0x22468b8,0x100) or '',packed(2)"
+  },
+  {
+   "line": 1652,
+   "what": "replacement",
+   "old": "for o=0,#window-4,4 do if window:sub(o+1,o+4)==two then found[#found+1]=string.format('0x%x',0x23c7080+o) end end",
+   "new": "for o=0,#window-4,4 do if window:sub(o+1,o+4)==two then found[#found+1]=string.format('0x%x',0x22468b8+o) end end"
+  },
+  {
+   "line": 1656,
+   "what": "replacement",
+   "old": "local prone=read(base+0x23c6ccc,4);if not prone then return nil,wait end",
+   "new": "local prone=read(base+0x22464ec,4);if not prone then return nil,wait end"
+  },
+  {
+   "line": 1658,
+   "what": "replacement",
+   "old": "local crouch=read(base+0x23c69f8,4);if not crouch then return nil,wait end",
+   "new": "local crouch=read(base+0x2246210,4);if not crouch then return nil,wait end"
+  },
+  {
+   "line": 2174,
+   "what": "install_loader call (revision, exe/game SHA-256 pins)"
+  }
+ ],
+ "upstream_reproduction": {
+  "compiler": "<workspace>/runtime-modules/vm-poc/work/runtime/linux/LuaJIT/src/luajit -bsdW (non-GC64, as the pack)",
+  "resource_sha256": "94E5B6DC46EA8218664E59DF44201FA4E14854592904470F021355D637B46AEA",
+  "equals_lock": true,
+  "discoverable_entry_sha256": "ec33eaad74e8f99e67b207aebe907939a9ea3913232cd3e382cbf5ca0288af22",
+  "shipped_archive": "<hellforge>/mods/Vanilla Plus Megapack - v26/options/ShallowWaterDiving/9ba626afa44a3aa3.patch_0",
+  "shipped_resource": "5895ed9013effd40",
+  "equals_shipped_v26_resource": true
+ },
+ "compile_step_captured_not_run": [
+  "<workspace>/native-work/megapack-port/ShallowWaterDiving/work/port/tools/src/LuaJIT/src/luajit.exe",
+  "-bsdW",
+  "<wrapper>",
+  "<output>"
+ ],
+ "resource_format": "plaintext: BingusSharedLoader build_addon.entry_source(module, wrapper) ('-- HD2-Addon: <module>' line + the wrapper build_module assembled), type-2 envelope",
+ "resources": {
+  "mods/cowboybingus/shallow_water_dive": {
+   "hash": "5895ed9013effd40",
+   "bytes": 109305
+  }
+ },
+ "outputs": {
+  "entry.lua": "8cf52557a9cb288f09eb484821ff3e943d36eed6eae453b30e974b41c185ff18",
+  "9ba626afa44a3aa3.patch_0": "40671e000468095b6f5f28872ee13e3f806c5ef4b379d2ec6df95da15ceb9e03",
+  "9ba626afa44a3aa3.patch_0.stream": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "9ba626afa44a3aa3.patch_0.gpu_resources": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+ },
+ "luajit_check": {
+  "luajit": "<workspace>/runtime-modules/build/linux/LuaJIT/src/luajit",
+  "string_dump_flags": 8,
+  "gc64_fr2": true,
+  "output": [
+   "compile: ok\tLuaJIT 2.1.ROLLING\t8",
+   "[ShallowWaterDiving] data-v3.10.1-26088801: mods/cowboybingus/shallow_water_dive:2032: Bingus Shared Loader v14 or newer (API 1 with open_log) is required",
+   "run without loader: true",
+   "status: mods/cowboybingus/shallow_water_dive:2032: Bingus Shared Loader v14 or newer (API 1 with open_log) is required",
+   "revision: data-v3.10.1-26088801",
+   "[ShallowWaterDiving] data-v3.10.1-26088801: mods/cowboybingus/shallow_water_dive:959: libbcrypt.so: cannot open shared object file: No such file or directory",
+   "run with fake loader: true",
+   "status: mods/cowboybingus/shallow_water_dive:959: libbcrypt.so: cannot open shared object file: No such file or directory"
+  ]
+ },
+ "test_fixture_token_edits": {
+  "tests/test_dive.lua": 74,
+  "tests/test_idle_equivalence.lua": 21,
+  "tests/reference/dive_data.lua": 28
+ },
+ "adapter_text_absent": [
+  "PORT51",
+  "compat51",
+  "require('cffi')",
+  "require(\"cffi\")"
+ ],
+ "tests": {
+  "upstream": {
+   "tests/test_bingus_text.lua": {
+    "exit": 0,
+    "passed": true,
+    "pass_count": 15
+   },
+   "tests/test_dive.lua": {
+    "exit": 0,
+    "passed": true,
+    "pass_count": 13
+   },
+   "tests/test_loader.lua": {
+    "exit": 0,
+    "passed": true,
+    "pass_count": 8
+   },
+   "tests/test_idle_equivalence.lua": {
+    "exit": 0,
+    "passed": true,
+    "pass_count": 2
+   }
+  },
+  "port": {
+   "tests/test_bingus_text.lua": {
+    "exit": 0,
+    "passed": true,
+    "pass_count": 15
+   },
+   "tests/test_dive.lua": {
+    "exit": 0,
+    "passed": true,
+    "pass_count": 13
+   },
+   "tests/test_loader.lua": {
+    "exit": 0,
+    "passed": true,
+    "pass_count": 8
+   },
+   "tests/test_idle_equivalence.lua": {
+    "exit": 0,
+    "passed": true,
+    "pass_count": 2
+   }
+  }
+ }
+}

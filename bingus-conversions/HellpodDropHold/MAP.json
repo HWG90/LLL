@@ -1,0 +1,2774 @@
+{
+ "mod": "Hellpod Drop Hold v1.2.1 (upstream-bingus/HellpodDropHold, git v1.2.1)",
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "old_image": "<workspace>/native-work/evidence/game-pre1020.dll",
+ "new_image": "<workspace>/native-work/evidence/game-26088801.dll",
+ "counts": {
+  "high": 32,
+  "medium": 1
+ },
+ "rows_total": 33,
+ "rows_feeding_write": 29,
+ "changed": [
+  "archive.EXE_SHA",
+  "archive.GAME_DLL_SHA",
+  "hold.game_rva",
+  "hold.state_offset",
+  "hold.ui_state_rva",
+  "hold.cutscene_rva",
+  "hold.session_rva",
+  "hold.hotjoin_offset",
+  "hold.manager_rva",
+  "hold.settings_rva",
+  "hold.settings_table_offset"
+ ],
+ "witness_check_failures": [],
+ "rows": [
+  {
+   "id": "archive.EXE_SHA",
+   "file": "scripts/archive.py",
+   "line": 10,
+   "symbol": "EXE_SHA",
+   "kind": "SHA-256 pin (verify_build gate; passed into install_loader by scripts/module.py)",
+   "old": "F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06",
+   "new": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "role": "gate",
+   "feeds_write": true,
+   "method": "SHA-256 of the installed bin/helldivers2.exe (read-only), equal to the hash the coordinator supplied",
+   "witnesses": [
+    {
+     "file": "<game>/bin/helldivers2.exe",
+     "sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+     "equal": true
+    }
+   ],
+   "agreeing": 1,
+   "disagreeing": 0,
+   "confidence": "high",
+   "live_check": "L0",
+   "changed": true
+  },
+  {
+   "id": "archive.GAME_DLL_SHA",
+   "file": "scripts/archive.py",
+   "line": 11,
+   "symbol": "GAME_DLL_SHA",
+   "kind": "SHA-256 pin (verify_build gate; passed into install_loader by scripts/module.py)",
+   "old": "2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E",
+   "new": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "role": "gate",
+   "feeds_write": true,
+   "method": "SHA-256 of the installed data/game/game.dll (read-only), equal to the hash the coordinator supplied",
+   "witnesses": [
+    {
+     "file": "<game>/data/game/game.dll",
+     "sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+     "equal": true
+    }
+   ],
+   "agreeing": 1,
+   "disagreeing": 0,
+   "confidence": "high",
+   "live_check": "L0",
+   "changed": true
+  },
+  {
+   "id": "hold.game_rva",
+   "line": 32,
+   "symbol": "game_rva",
+   "kind": "game.dll global: game object pointer",
+   "old": "0x3326340",
+   "new": "0x2CE1508",
+   "role": "timing",
+   "feeds_write": true,
+   "method": "RIP-relative references of the old global migrated by unique instruction windows (exact first, field displacements masked second); every witness points at the same new global",
+   "witnesses": [
+    {
+     "agreeing": 34,
+     "disagreeing": 0,
+     "old_sites": 2624,
+     "sampled": 64,
+     "votes": {
+      "0x2ce1508": 34
+     },
+     "exact_window_votes": {
+      "0x2ce1508": 4
+     },
+     "distinct_old_functions": 34,
+     "examples": [
+      {
+       "old": "0x5989c3",
+       "new": "0x5a1583",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2d8d976]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x273ff7e]",
+       "window_bytes": 48,
+       "field_displacements_masked": true,
+       "new_global": "0x2ce1508"
+      },
+      {
+       "old": "0x5fe740",
+       "new": "0x607820",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2d27bf9]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x26d9ce1]",
+       "window_bytes": 96,
+       "field_displacements_masked": true,
+       "new_global": "0x2ce1508"
+      },
+      {
+       "old": "0x616936",
+       "new": "0x61fbe6",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2d0fa03]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x26c191b]",
+       "window_bytes": 128,
+       "field_displacements_masked": true,
+       "new_global": "0x2ce1508"
+      },
+      {
+       "old": "0x693af2",
+       "new": "0x69db82",
+       "instruction_old": "mov rbx, qword ptr [rip + 0x2c92847]",
+       "instruction_new": "mov rbx, qword ptr [rip + 0x264397f]",
+       "window_bytes": 32,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1508"
+      }
+     ]
+    },
+    {
+     "old": "0x92baed",
+     "new": "0x93c9d3",
+     "old_insn": "mov rcx, qword ptr [rip + 0x29fa84c] ->0x3326340",
+     "new_insn": "mov rcx, qword ptr [rip + 0x23a4b2e] ->0x2ce1508",
+     "proves": "the hellpod update reads the same global",
+     "checked": true
+    }
+   ],
+   "agreeing": 34,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L1",
+   "notes": "Same value already used by the live-verified MOM/MYC/megapack ports.",
+   "file": "src/drop_hold.lua",
+   "changed": true
+  },
+  {
+   "id": "hold.state_offset",
+   "line": 32,
+   "symbol": "state_offset",
+   "kind": "game object field: game state (u32)",
+   "old": "0xAC21C",
+   "new": "0xAC29C",
+   "role": "timing",
+   "feeds_write": true,
+   "method": "taint-paired operands of [game object + disp] in aligned old/new functions; plus every old instruction with displacement 0xAC21C migrated (masked window) lands on 0xAC29C",
+   "witnesses": [
+    {
+     "path": "[GS] + 0xac21c",
+     "agreeing": 75,
+     "other": {},
+     "examples": [
+      {
+       "old": "0x571435",
+       "new": "0x57a3e2",
+       "old_insn": "cmp dword ptr [rax + 0xac21c], 3",
+       "new_insn": "cmp dword ptr [rax + 0xac29c], 3"
+      },
+      {
+       "old": "0x5e4f1f",
+       "new": "0x5ee5ef",
+       "old_insn": "cmp dword ptr [r13 + 0xac21c], 4",
+       "new_insn": "cmp dword ptr [r13 + 0xac29c], 4"
+      },
+      {
+       "old": "0x609365",
+       "new": "0x612535",
+       "old_insn": "mov r14d, dword ptr [rax + 0xac21c]",
+       "new_insn": "mov r14d, dword ptr [rax + 0xac29c]"
+      }
+     ]
+    },
+    {
+     "image_wide": "211 of 211 mapped sites (of 329) carry 0xAC29C"
+    },
+    {
+     "old": "0xab309c",
+     "new": "0xacedcc",
+     "old_insn": "mov dword ptr [rdi + 0xac21c], ebx",
+     "new_insn": "mov dword ptr [rdi + 0xac29c], ebx",
+     "proves": "the state setter stores the new state here",
+     "checked": true
+    }
+   ],
+   "agreeing": 75,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L1",
+   "notes": "The whole object grew 0x80 before this field (+0xAC220 -> +0xAC2A0 too).",
+   "file": "src/drop_hold.lua",
+   "changed": true
+  },
+  {
+   "id": "drop_hold.PREPARING+SCENE_STATES",
+   "line": 52,
+   "symbol": "PREPARING {5,6}, SCENE_STATES {4,6}",
+   "kind": "game-state enum values",
+   "old": "4 Mission, 5 PrepareShip, 6 PrepareMission",
+   "new": "4 Mission, 5 PrepareShip, 6 PrepareMission",
+   "role": "timing",
+   "feeds_write": true,
+   "method": "the state setter logs old/new state names from a pointer table indexed by the state; both tables decoded; and every compared state immediate at [object + state] kept its value",
+   "witnesses": [
+    {
+     "old": "0xab2fda",
+     "new": "0xaced0a",
+     "old_insn": "lea r14, [rbx*8 + 0x2147f30]",
+     "new_insn": "lea r14, [rbx*8 + 0x1fd0740]",
+     "proves": "state setter indexes the state name table",
+     "checked": true
+    },
+    {
+     "old_table": "0x2147F30",
+     "old_names_0_6": [
+      "None",
+      "Splash",
+      "TitleScreen",
+      "Ship",
+      "Mission",
+      "PrepareShip",
+      "PrepareMission"
+     ],
+     "new_table": "0x1FD0740",
+     "new_names_0_6": [
+      "None",
+      "Splash",
+      "TitleScreen",
+      "Ship",
+      "Mission",
+      "PrepareShip",
+      "PrepareMission"
+     ],
+     "equal": true
+    },
+    {
+     "compared_immediates": "170 of 170 equal (values {'3': 105, '4': 63, '2': 2}), 0 different"
+    }
+   ],
+   "agreeing": 171,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L1",
+   "file": "src/drop_hold.lua",
+   "changed": false
+  },
+  {
+   "id": "hold.ui_state_rva",
+   "line": 33,
+   "symbol": "ui_state_rva",
+   "kind": "game.dll global: UI state pointer",
+   "old": "0x347CE28",
+   "new": "0x2E38160",
+   "role": "timing",
+   "feeds_write": true,
+   "method": "RIP-relative reference windows (see globals.json)",
+   "witnesses": [
+    {
+     "agreeing": 18,
+     "disagreeing": 0,
+     "old_sites": 569,
+     "sampled": 64,
+     "votes": {
+      "0x2e38160": 18
+     },
+     "exact_window_votes": {
+      "0x2e38160": 16
+     },
+     "distinct_old_functions": 18,
+     "examples": [
+      {
+       "old": "0x5c08cb",
+       "new": "0x5c970b",
+       "instruction_old": "mov rdx, qword ptr [rip + 0x2ebc556]",
+       "instruction_new": "mov rdx, qword ptr [rip + 0x286ea4e]",
+       "window_bytes": 96,
+       "field_displacements_masked": false,
+       "new_global": "0x2e38160"
+      },
+      {
+       "old": "0xba58a1",
+       "new": "0xbc3c91",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x28d7580]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x22744c8]",
+       "window_bytes": 128,
+       "field_displacements_masked": false,
+       "new_global": "0x2e38160"
+      },
+      {
+       "old": "0x1083d50",
+       "new": "0xf14590",
+       "instruction_old": "mov rdx, qword ptr [rip + 0x23f90d1]",
+       "instruction_new": "mov rdx, qword ptr [rip + 0x1f23bc9]",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2e38160"
+      },
+      {
+       "old": "0x1169bbd",
+       "new": "0xffa66d",
+       "instruction_old": "mov rdx, qword ptr [rip + 0x2313264]",
+       "instruction_new": "mov rdx, qword ptr [rip + 0x1e3daec]",
+       "window_bytes": 96,
+       "field_displacements_masked": false,
+       "new_global": "0x2e38160"
+      }
+     ]
+    }
+   ],
+   "agreeing": 18,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L2",
+   "notes": "Live-verified by the coordinator (MOM port uses the same value).",
+   "file": "src/drop_hold.lua",
+   "changed": true
+  },
+  {
+   "id": "hold.presenters_offset",
+   "line": 33,
+   "symbol": "presenters_offset (36-byte block: HUD +0, menu +4, popup +8, stack ids +12..+28, depth +32)",
+   "kind": "UI state field block (PresenterManager at UI+0x4288, +8..+0x28)",
+   "old": "0x4290",
+   "new": "0x4290",
+   "role": "timing",
+   "feeds_write": true,
+   "method": "taint-paired [UI + disp] operands in aligned functions; the PresenterManager push aligned old/new with its manager-relative offsets unchanged",
+   "witnesses": [
+    {
+     "path": "[UI] + 0x4288",
+     "agreeing": 6,
+     "other": {},
+     "examples": [
+      {
+       "old": "0x609629",
+       "new": "0x6127f9",
+       "old_insn": "lea r15, [r9 + 0x4288]",
+       "new_insn": "lea r15, [r9 + 0x4288]"
+      },
+      {
+       "old": "0x609663",
+       "new": "0x612833",
+       "old_insn": "lea r15, [r9 + 0x4288]",
+       "new_insn": "lea r15, [r9 + 0x4288]"
+      },
+      {
+       "old": "0x661c40",
+       "new": "0x66b520",
+       "old_insn": "lea r8, [r9 + 0x4288]",
+       "new_insn": "lea r8, [r9 + 0x4288]"
+      }
+     ]
+    },
+    {
+     "path": "[UI] + 0x4290",
+     "agreeing": 1,
+     "other": {},
+     "examples": [
+      {
+       "old": "0x97c3f3",
+       "new": "0x98df73",
+       "old_insn": "mov r8d, dword ptr [rax + 0x4290]",
+       "new_insn": "mov r8d, dword ptr [rax + 0x4290]"
+      }
+     ]
+    },
+    {
+     "path": "[UI] + 0x4294",
+     "agreeing": 40,
+     "other": {},
+     "examples": [
+      {
+       "old": "0x6617fa",
+       "new": "0x66b0da",
+       "old_insn": "cmp dword ptr [rax + 0x4294], 0",
+       "new_insn": "cmp dword ptr [rax + 0x4294], 0"
+      },
+      {
+       "old": "0xadaf68",
+       "new": "0xaf6cd8",
+       "old_insn": "cmp dword ptr [rax + 0x4294], r13d",
+       "new_insn": "cmp dword ptr [rax + 0x4294], r13d"
+      },
+      {
+       "old": "0xadb1da",
+       "new": "0xaf6f35",
+       "old_insn": "cmp dword ptr [rax + 0x4294], r13d",
+       "new_insn": "cmp dword ptr [rax + 0x4294], r13d"
+      }
+     ]
+    },
+    {
+     "path": "[UI] + 0x4298",
+     "agreeing": 29,
+     "other": {},
+     "examples": [
+      {
+       "old": "0x1486064",
+       "new": "0x131df24",
+       "old_insn": "cmp dword ptr [rax + 0x4298], 4",
+       "new_insn": "cmp dword ptr [rax + 0x4298], 4"
+      },
+      {
+       "old": "0x661807",
+       "new": "0x66b0e7",
+       "old_insn": "cmp dword ptr [rax + 0x4298], 0",
+       "new_insn": "cmp dword ptr [rax + 0x4298], 0"
+      },
+      {
+       "old": "0xadaf75",
+       "new": "0xaf6ce5",
+       "old_insn": "cmp dword ptr [rax + 0x4298], r13d",
+       "new_insn": "cmp dword ptr [rax + 0x4298], r13d"
+      }
+     ]
+    },
+    {
+     "path": "[UI] + 0x429c",
+     "agreeing": 39,
+     "other": {},
+     "examples": [
+      {
+       "old": "0x5c08e0",
+       "new": "0x5c9720",
+       "old_insn": "lea rax, [rdx + 0x429c]",
+       "new_insn": "lea rax, [rdx + 0x429c]"
+      },
+      {
+       "old": "0xadb18a",
+       "new": "0xaf6ee3",
+       "old_insn": "lea rax, [r8 + 0x429c]",
+       "new_insn": "lea rax, [r8 + 0x429c]"
+      },
+      {
+       "old": "0x1083d65",
+       "new": "0xf145a5",
+       "old_insn": "lea rax, [rdx + 0x429c]",
+       "new_insn": "lea rax, [rdx + 0x429c]"
+      }
+     ]
+    },
+    {
+     "path": "[UI] + 0x42b0",
+     "agreeing": 35,
+     "other": {},
+     "examples": [
+      {
+       "old": "0x5c08d2",
+       "new": "0x5c9712",
+       "old_insn": "mov eax, dword ptr [rdx + 0x42b0]",
+       "new_insn": "mov eax, dword ptr [rdx + 0x42b0]"
+      },
+      {
+       "old": "0xadb17b",
+       "new": "0xaf6ed4",
+       "old_insn": "mov eax, dword ptr [r8 + 0x42b0]",
+       "new_insn": "mov eax, dword ptr [r8 + 0x42b0]"
+      },
+      {
+       "old": "0x1083d57",
+       "new": "0xf14597",
+       "old_insn": "mov eax, dword ptr [rdx + 0x42b0]",
+       "new_insn": "mov eax, dword ptr [rdx + 0x42b0]"
+      }
+     ]
+    },
+    {
+     "old": "0x14c055d",
+     "new": "0x135b83d",
+     "old_insn": "mov eax, dword ptr [rcx + 0x28]",
+     "new_insn": "mov eax, dword ptr [rcx + 0x28]",
+     "proves": "PresenterManager push: menu stack depth at manager+0x28 (UI+0x42B0)",
+     "checked": true
+    },
+    {
+     "old": "0x14c056e",
+     "new": "0x135b84e",
+     "old_insn": "lea rax, [rcx + 0x14]",
+     "new_insn": "lea rax, [rcx + 0x14]",
+     "proves": "menu stack ids at manager+0x14 (UI+0x429C)",
+     "checked": true
+    },
+    {
+     "old": "0x14c0671",
+     "new": "0x135b9a4",
+     "old_insn": "mov dword ptr [rsi + rax*4 + 0x14], edi",
+     "new_insn": "mov dword ptr [rsi + rax*4 + 0x14], ebp",
+     "proves": "push stores the id at stack[depth]",
+     "checked": true
+    },
+    {
+     "old": "0x14c0675",
+     "new": "0x135b9a8",
+     "old_insn": "inc dword ptr [rsi + 0x28]",
+     "new_insn": "inc dword ptr [rsi + 0x28]",
+     "proves": "then depth + 1",
+     "checked": true
+    },
+    {
+     "old": "0x14c0584",
+     "new": "0x135b877",
+     "old_insn": "movsxd rax, dword ptr [rcx + 0xc]",
+     "new_insn": "movsxd rbx, dword ptr [rcx + 0xc]",
+     "proves": "current menu presenter at manager+0xC (UI+0x4294)",
+     "checked": true
+    },
+    {
+     "old": "0x14c0604",
+     "new": "0x135b937",
+     "old_insn": "movsxd rbx, dword ptr [rcx + 8]",
+     "new_insn": "movsxd rbx, dword ptr [rcx + 8]",
+     "proves": "HUD presenter at manager+8 (UI+0x4290)",
+     "checked": true
+    },
+    {
+     "old": "0x66319b",
+     "new": "0x66cb0b",
+     "old_insn": "mov rcx, qword ptr [rip + 0x2e19c86] ->0x347ce28",
+     "new_insn": "mov rcx, qword ptr [rip + 0x27cb64e] ->0x2e38160",
+     "proves": "UI global -> manager (exact 128-byte window)",
+     "checked": true
+    },
+    {
+     "old": "0x6631a2",
+     "new": "0x66cb12",
+     "old_insn": "add rcx, 0x4288",
+     "new_insn": "add rcx, 0x4288",
+     "proves": "PresenterManager = UI + 0x4288",
+     "checked": true
+    }
+   ],
+   "agreeing": 158,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L2",
+   "notes": "HUD (+0) and popup (+8) only feed the event log; the menu (+4), stack (+12..) and depth (+32) gate the loading period. Coordinator live check: depth at +0x42B0, stack at +0x429C.",
+   "file": "src/drop_hold.lua",
+   "changed": false
+  },
+  {
+   "id": "hold.stack_offset",
+   "line": 33,
+   "symbol": "stack_offset",
+   "kind": "UI state field: menu stack ids",
+   "old": "0x429C",
+   "new": "0x429C",
+   "role": "tests",
+   "feeds_write": false,
+   "method": "as presenters_offset (only the offline tests use this name; the mod reads the block)",
+   "witnesses": [
+    {
+     "path": "[UI] + 0x429c",
+     "agreeing": 39,
+     "other": {},
+     "examples": [
+      {
+       "old": "0x5c08e0",
+       "new": "0x5c9720",
+       "old_insn": "lea rax, [rdx + 0x429c]",
+       "new_insn": "lea rax, [rdx + 0x429c]"
+      },
+      {
+       "old": "0xadb18a",
+       "new": "0xaf6ee3",
+       "old_insn": "lea rax, [r8 + 0x429c]",
+       "new_insn": "lea rax, [r8 + 0x429c]"
+      },
+      {
+       "old": "0x1083d65",
+       "new": "0xf145a5",
+       "old_insn": "lea rax, [rdx + 0x429c]",
+       "new_insn": "lea rax, [rdx + 0x429c]"
+      }
+     ]
+    }
+   ],
+   "agreeing": 39,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L2",
+   "file": "src/drop_hold.lua",
+   "changed": false
+  },
+  {
+   "id": "hold.max_depth",
+   "line": 33,
+   "symbol": "max_depth",
+   "kind": "menu stack capacity",
+   "old": "5",
+   "new": "5",
+   "role": "timing",
+   "feeds_write": true,
+   "method": "layout: five u32 ids at manager+0x14..+0x27, depth at manager+0x28, both unchanged; the push writes stack[depth] then depth+1 in both builds (no wider array was introduced: depth stays at +0x28)",
+   "witnesses": [
+    {
+     "old": "0x14c055d",
+     "new": "0x135b83d",
+     "old_insn": "mov eax, dword ptr [rcx + 0x28]",
+     "new_insn": "mov eax, dword ptr [rcx + 0x28]",
+     "proves": "PresenterManager push: menu stack depth at manager+0x28 (UI+0x42B0)",
+     "checked": true
+    },
+    {
+     "old": "0x14c056e",
+     "new": "0x135b84e",
+     "old_insn": "lea rax, [rcx + 0x14]",
+     "new_insn": "lea rax, [rcx + 0x14]",
+     "proves": "menu stack ids at manager+0x14 (UI+0x429C)",
+     "checked": true
+    },
+    {
+     "old": "0x14c0671",
+     "new": "0x135b9a4",
+     "old_insn": "mov dword ptr [rsi + rax*4 + 0x14], edi",
+     "new_insn": "mov dword ptr [rsi + rax*4 + 0x14], ebp",
+     "proves": "push stores the id at stack[depth]",
+     "checked": true
+    },
+    {
+     "old": "0x14c0675",
+     "new": "0x135b9a8",
+     "old_insn": "inc dword ptr [rsi + 0x28]",
+     "new_insn": "inc dword ptr [rsi + 0x28]",
+     "proves": "then depth + 1",
+     "checked": true
+    }
+   ],
+   "agreeing": 4,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L2",
+   "file": "src/drop_hold.lua",
+   "changed": false
+  },
+  {
+   "id": "drop_hold.LOADING",
+   "line": 54,
+   "symbol": "LOADING {2 LoadingMission, 4 LoadingTutorial}; MENU_NAMES",
+   "kind": "menu presenter enum",
+   "old": "2 LoadingMission, 4 LoadingTutorial",
+   "new": "2 LoadingMission, 4 LoadingTutorial",
+   "role": "timing",
+   "feeds_write": true,
+   "method": "menu presenter name table (indexed by presenter id) found by content in the new image and used by the aligned PresenterManager push; ids 0..25 have identical names",
+   "witnesses": [
+    {
+     "old_table": "0x21dc810",
+     "new_table": "0x2065380",
+     "names_equal_0_25": true,
+     "names": [
+      "None",
+      "Main",
+      "LoadingMission",
+      "LoadingShip",
+      "LoadingTutorial",
+      "Armory",
+      "InformationTerminal",
+      "Credits",
+      "ShipManagement",
+      "Acquisitions",
+      "AcquisitionsWarbond",
+      "AcquisitionsSuperCredits",
+      "AcquisitionsSuperstore",
+      "MissionEnd",
+      "Loadout",
+      "Hologram",
+      "DemocracySpaceStation",
+      "TutorialOutro",
+      "InitialSettings",
+      "Title",
+      "ShipNaming",
+      "ShipNamingFirstTime",
+      "WeaponCustomization",
+      "MissionSummary",
+      "Load",
+      "Join"
+     ]
+    },
+    {
+     "old": "0x14c058f",
+     "new": "0x135b87b",
+     "old_insn": "mov r9, qword ptr [r14 + rdi*8 + 0x21dc810]",
+     "new_insn": "mov r9, qword ptr [r14 + rbp*8 + 0x2065380]",
+     "proves": "push logs the pushed id through this table",
+     "checked": true
+    }
+   ],
+   "agreeing": 2,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L2",
+   "file": "src/drop_hold.lua",
+   "changed": false
+  },
+  {
+   "id": "drop_hold.HUD_NAMES",
+   "line": 56,
+   "symbol": "HUD_NAMES",
+   "kind": "HUD presenter enum (log only)",
+   "old": "1 NewUiIntroduction, 2 Ship, 3 Mission, 4 Tutorial",
+   "new": "1 NewUiIntroduction, 2 Ship, 3 Mission, 4 Tutorial",
+   "role": "log",
+   "feeds_write": false,
+   "method": "HUD presenter name table, old RIP references migrated to the new table",
+   "witnesses": [
+    {
+     "old_table": "0x21dd450",
+     "new_table": "0x2065978",
+     "equal": true,
+     "names": [
+      "None",
+      "NewUiIntroduction",
+      "Ship",
+      "Mission",
+      "Tutorial",
+      "Count"
+     ],
+     "code_witnesses": [
+      {
+       "old": "0x132634d",
+       "new": "0x11b9ddd",
+       "new_target": "0x2065978"
+      },
+      {
+       "old": "0x14b466d",
+       "new": "0x134e3fd",
+       "new_target": "0x2065978"
+      },
+      {
+       "old": "0x14b5edd",
+       "new": "0x134f75d",
+       "new_target": "0x2065978"
+      },
+      {
+       "old": "0x14bd321",
+       "new": "0x1358011",
+       "new_target": "0x2065978"
+      },
+      {
+       "old": "0x14c22ed",
+       "new": "0x135d45d",
+       "new_target": "0x2065978"
+      }
+     ]
+    },
+    {
+     "old": "0x14c0616",
+     "new": "0x135b949",
+     "old_insn": "mov r8, qword ptr [r14 + rbx*8 + 0x21dd450]",
+     "new_insn": "mov r8, qword ptr [r14 + rbx*8 + 0x2065978]",
+     "proves": "HUD presenter name lookup",
+     "checked": true
+    }
+   ],
+   "agreeing": 6,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L2",
+   "file": "src/drop_hold.lua",
+   "changed": false
+  },
+  {
+   "id": "hold.cutscene_rva",
+   "line": 36,
+   "symbol": "cutscene_rva",
+   "kind": "game.dll global: cutscene manager pointer",
+   "old": "0x346D530",
+   "new": "0x2E28780",
+   "role": "timing",
+   "feeds_write": true,
+   "method": "RIP-relative reference windows (see globals.json); also read by synchronized-tasks-done",
+   "witnesses": [
+    {
+     "agreeing": 40,
+     "disagreeing": 0,
+     "old_sites": 598,
+     "sampled": 64,
+     "votes": {
+      "0x2e28780": 40
+     },
+     "exact_window_votes": {
+      "0x2e28780": 35
+     },
+     "distinct_old_functions": 40,
+     "examples": [
+      {
+       "old": "0x3a4bfa",
+       "new": "0x3ab8fa",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x30c892f]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x2a7ce7f]",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2e28780"
+      },
+      {
+       "old": "0x663017",
+       "new": "0x66c987",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2e0a512]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x27bbdf2]",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2e28780"
+      },
+      {
+       "old": "0x8f0521",
+       "new": "0x900d5e",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2b7d006]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2527a19]",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2e28780"
+      },
+      {
+       "old": "0xab768f",
+       "new": "0xad3b7f",
+       "instruction_old": "mov r9, qword ptr [rip + 0x29b5e9a]",
+       "instruction_new": "mov r9, qword ptr [rip + 0x2354bfa]",
+       "window_bytes": 160,
+       "field_displacements_masked": true,
+       "new_global": "0x2e28780"
+      }
+     ]
+    },
+    {
+     "old": "0xad4634",
+     "new": "0xaf0754",
+     "old_insn": "mov rcx, qword ptr [rip + 0x2998ef5] ->0x346d530",
+     "new_insn": "mov rcx, qword ptr [rip + 0x2338025] ->0x2e28780",
+     "proves": "synchronized-tasks-done (old 0xAD4520 -> new 0xAF0640) checks the current scene",
+     "checked": true
+    }
+   ],
+   "agreeing": 41,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L3",
+   "notes": "The 0x346D5xx family is not a uniform shift (0x346D578 -> 0x2E287D8 is +0x58 from here, was +0x48).",
+   "file": "src/drop_hold.lua",
+   "changed": true
+  },
+  {
+   "id": "hold.scene_offset",
+   "line": 36,
+   "symbol": "scene_offset (current scene u32, queued scene u32 at +4)",
+   "kind": "cutscene manager field",
+   "old": "6412",
+   "new": "6412",
+   "role": "timing",
+   "feeds_write": true,
+   "method": "taint-paired [cutscene manager + disp] operands in aligned functions",
+   "witnesses": [
+    {
+     "path": "[CUT] + 0x190c",
+     "agreeing": 50,
+     "other": {},
+     "examples": [
+      {
+       "old": "0x572f96",
+       "new": "0x57c026",
+       "old_insn": "cmp dword ptr [rax + 0x190c], 0",
+       "new_insn": "cmp dword ptr [rax + 0x190c], 0"
+      },
+      {
+       "old": "0x609709",
+       "new": "0x6128d9",
+       "old_insn": "mov r14d, dword ptr [rax + 0x190c]",
+       "new_insn": "mov r14d, dword ptr [rax + 0x190c]"
+      },
+      {
+       "old": "0x8f052a",
+       "new": "0x900d67",
+       "old_insn": "mov ecx, dword ptr [rax + 0x190c]",
+       "new_insn": "mov ecx, dword ptr [rax + 0x190c]"
+      }
+     ]
+    },
+    {
+     "path": "[CUT] + 0x1910",
+     "agreeing": 39,
+     "other": {},
+     "examples": [
+      {
+       "old": "0x116ed24",
+       "new": "0x100e139",
+       "old_insn": "mov edx, dword ptr [rbx + 0x1910]",
+       "new_insn": "mov edx, dword ptr [rbx + 0x1910]"
+      },
+      {
+       "old": "0x11718bf",
+       "new": "0x100236f",
+       "old_insn": "mov edx, dword ptr [rsi + 0x1910]",
+       "new_insn": "mov edx, dword ptr [rsi + 0x1910]"
+      },
+      {
+       "old": "0x117587a",
+       "new": "0x100632a",
+       "old_insn": "mov edx, dword ptr [rbx + 0x1910]",
+       "new_insn": "mov edx, dword ptr [rbx + 0x1910]"
+      }
+     ]
+    },
+    {
+     "old": "0xad463b",
+     "new": "0xaf075b",
+     "old_insn": "cmp dword ptr [rcx + 0x190c], r14d",
+     "new_insn": "cmp dword ptr [rcx + 0x190c], r14d",
+     "proves": "synchronized-tasks-done reads the current scene",
+     "checked": true
+    }
+   ],
+   "agreeing": 90,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L3",
+   "file": "src/drop_hold.lua",
+   "changed": false
+  },
+  {
+   "id": "drop_hold.SCENE_NAMES",
+   "line": 60,
+   "symbol": "SCENE_NAMES (log); scene ~= 0 test",
+   "kind": "cutscene enum",
+   "old": "1..20 (15 ship_teleporter_network_join)",
+   "new": "1..20 (15 ship_teleporter_network_join)",
+   "role": "log",
+   "feeds_write": false,
+   "method": "scene-name switch decoded in both images (jump table of string stubs)",
+   "witnesses": [
+    {
+     "old_function": "0x117e950",
+     "new_function": "0x100f400",
+     "equal": true,
+     "names": [
+      "mission_extraction",
+      "ship_bridge_hellpod_launch",
+      "ship_bridge_intro",
+      "ship_clan_station_reveal",
+      "ship_cryogenic_intro",
+      "ship_hellpod_launch",
+      "ship_intro",
+      "ship_mission_return_failure",
+      "ship_mission_return_success",
+      "ship_name_resource_loading",
+      "ship_planet_arrival",
+      "ship_planet_departure",
+      "ship_teleporter_arrival",
+      "ship_teleporter_deeplink_join",
+      "ship_teleporter_network_join",
+      "tutorial_avatar_respawn",
+      "tutorial_cape_ceremony",
+      "tutorial_intro",
+      "tutorial_outro",
+      "tutorial_outro_to_ship"
+     ]
+    }
+   ],
+   "agreeing": 1,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L3",
+   "notes": "The mod only tests scene ~= 0; the names are for its log.",
+   "file": "src/drop_hold.lua",
+   "changed": false
+  },
+  {
+   "id": "hold.session_rva",
+   "line": 37,
+   "symbol": "session_rva",
+   "kind": "game.dll global: session / network context",
+   "old": "0x347CEF0",
+   "new": "0x2E38228",
+   "role": "timing",
+   "feeds_write": true,
+   "method": "RIP-relative reference windows (see globals.json)",
+   "witnesses": [
+    {
+     "agreeing": 41,
+     "disagreeing": 0,
+     "old_sites": 1136,
+     "sampled": 64,
+     "votes": {
+      "0x2e38228": 41
+     },
+     "exact_window_votes": {
+      "0x2e38228": 33
+     },
+     "distinct_old_functions": 41,
+     "examples": [
+      {
+       "old": "0x4c375b",
+       "new": "0x4ca39b",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2fb978e]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x296de86]",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2e38228"
+      },
+      {
+       "old": "0x5bcf03",
+       "new": "0x5c5d43",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2ebffe6]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x28724de]",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2e38228"
+      },
+      {
+       "old": "0x67a9aa",
+       "new": "0x6845ea",
+       "instruction_old": "mov rbx, qword ptr [rip + 0x2e0253f]",
+       "instruction_new": "mov rbx, qword ptr [rip + 0x27b3c37]",
+       "window_bytes": 48,
+       "field_displacements_masked": false,
+       "new_global": "0x2e38228"
+      },
+      {
+       "old": "0x6ecaee",
+       "new": "0x6f781e",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2d903fb]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2740a03]",
+       "window_bytes": 48,
+       "field_displacements_masked": false,
+       "new_global": "0x2e38228"
+      }
+     ]
+    },
+    {
+     "old": "0xad4579",
+     "new": "0xaf0699",
+     "old_insn": "mov rax, qword ptr [rip + 0x29a8970] ->0x347cef0",
+     "new_insn": "mov rax, qword ptr [rip + 0x2347b88] ->0x2e38228",
+     "proves": "synchronized-tasks-done",
+     "checked": true
+    }
+   ],
+   "agreeing": 42,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L4",
+   "notes": "Live-verified by the coordinator; MYC uses the same value.",
+   "file": "src/drop_hold.lua",
+   "changed": true
+  },
+  {
+   "id": "hold.client_state_offset",
+   "line": 37,
+   "symbol": "client_state_offset",
+   "kind": "session field: client state (log only)",
+   "old": "91288",
+   "new": "91288",
+   "role": "log",
+   "feeds_write": false,
+   "method": "taint-paired [session + disp] operands; image-wide masked-window scan (6 of 8 sites unchanged, 2 unmapped); the +8 insertion in this object lies between +0x166D8 (unchanged) and +0x167E6 (+8)",
+   "witnesses": [
+    {
+     "path": "[NET] + 0x16498",
+     "agreeing": 4,
+     "other": {},
+     "examples": [
+      {
+       "old": "0x13676ca",
+       "new": "0x11fd02a",
+       "old_insn": "cmp dword ptr [rax + 0x16498], 5",
+       "new_insn": "cmp dword ptr [rax + 0x16498], 5"
+      },
+      {
+       "old": "0xac56f0",
+       "new": "0xae191f",
+       "old_insn": "cmp dword ptr [rcx + 0x16498], 6",
+       "new_insn": "cmp dword ptr [rcx + 0x16498], 6"
+      },
+      {
+       "old": "0x13ea532",
+       "new": "0x1281792",
+       "old_insn": "mov eax, dword ptr [rdi + 0x16498]",
+       "new_insn": "mov eax, dword ptr [rdi + 0x16498]"
+      }
+     ]
+    }
+   ],
+   "agreeing": 4,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L4",
+   "file": "src/drop_hold.lua",
+   "changed": false
+  },
+  {
+   "id": "hold.hotjoin_offset",
+   "line": 37,
+   "symbol": "hotjoin_offset (is_hotjoining u8, has_hotjoined u8 at +1)",
+   "kind": "session field",
+   "old": "92135",
+   "new": "92143",
+   "role": "timing",
+   "feeds_write": true,
+   "method": "taint-paired [session + disp] operands (every pair moved +8); synchronized-tasks-done clears the flag at the new offset; the neighbouring flags +0x167E6..+0x167EC all moved +8",
+   "witnesses": [
+    {
+     "path": "[NET] + 0x167e7",
+     "agreeing": 4,
+     "other": {},
+     "examples": [
+      {
+       "old": "0xac5730",
+       "new": "0xae1960",
+       "old_insn": "cmp byte ptr [rcx + 0x167e7], 0",
+       "new_insn": "cmp byte ptr [rcx + 0x167ef], 0"
+      },
+      {
+       "old": "0xac5742",
+       "new": "0xae1972",
+       "old_insn": "mov byte ptr [rcx + 0x167e7], 0",
+       "new_insn": "mov byte ptr [rcx + 0x167ef], 0"
+      },
+      {
+       "old": "0xad4585",
+       "new": "0xaf06a5",
+       "old_insn": "cmp byte ptr [rax + 0x167e7], 0",
+       "new_insn": "cmp byte ptr [rax + 0x167ef], 0"
+      }
+     ]
+    },
+    {
+     "path": "[NET] + 0x167e8",
+     "agreeing": 9,
+     "other": {},
+     "examples": [
+      {
+       "old": "0xac5762",
+       "new": "0xae1992",
+       "old_insn": "cmp byte ptr [rcx + 0x167e8], 0",
+       "new_insn": "cmp byte ptr [rcx + 0x167f0], 0"
+      },
+      {
+       "old": "0xac5774",
+       "new": "0xae19a4",
+       "old_insn": "mov byte ptr [rcx + 0x167e8], 0",
+       "new_insn": "mov byte ptr [rcx + 0x167f0], 0"
+      },
+      {
+       "old": "0x116ae1d",
+       "new": "0xffb8cd",
+       "old_insn": "cmp byte ptr [rax + 0x167e8], 0",
+       "new_insn": "cmp byte ptr [rax + 0x167f0], 0"
+      }
+     ]
+    },
+    {
+     "old": "0xad4585",
+     "new": "0xaf06a5",
+     "old_insn": "cmp byte ptr [rax + 0x167e7], 0",
+     "new_insn": "cmp byte ptr [rax + 0x167ef], 0",
+     "proves": "synchronized-tasks-done tests is_hotjoining",
+     "checked": true
+    },
+    {
+     "old": "0xad458e",
+     "new": "0xaf06ae",
+     "old_insn": "mov byte ptr [rax + 0x167e7], 0",
+     "new_insn": "mov byte ptr [rax + 0x167ef], 0",
+     "proves": "and clears it",
+     "checked": true
+    }
+   ],
+   "agreeing": 15,
+   "disagreeing": 0,
+   "conflicts": [
+    "field_scan of the raw value 0x167E8 also finds 2 unchanged sites (e.g. old 0x149e3fe `mov qword ptr [rbx + 0x167e8], rsi`): a different object (not loaded from the session global), excluded"
+   ],
+   "confidence": "high",
+   "live_check": "L4",
+   "notes": "Keeping the old 92135 would read the byte 8 before is_hotjoining.",
+   "file": "src/drop_hold.lua",
+   "changed": true
+  },
+  {
+   "id": "hold.manager_rva",
+   "line": 38,
+   "symbol": "manager_rva",
+   "kind": "game.dll global: HellpodComponent manager pointer",
+   "old": "0x3326D58",
+   "new": "0x2CE1F18",
+   "role": "write-address",
+   "feeds_write": true,
+   "method": "RIP-relative reference windows (54 exact unmasked windows, 1 masked); the world initializer stores &world[+0x75ECD0] in it and the world update passes that same address to the HellpodComponent update (old 0x92B770 -> new 0x93C640)",
+   "witnesses": [
+    {
+     "agreeing": 55,
+     "disagreeing": 1,
+     "old_sites": 66,
+     "sampled": 64,
+     "votes": {
+      "0x2ce1f18": 55,
+      "0x2ce1eb8": 1
+     },
+     "exact_window_votes": {
+      "0x2ce1f18": 54
+     },
+     "distinct_old_functions": 50,
+     "examples": [
+      {
+       "old": "0x539224",
+       "new": "0x542044",
+       "instruction_old": "mov rdi, qword ptr [rip + 0x2dedb2d]",
+       "instruction_new": "mov rdi, qword ptr [rip + 0x279fecd]",
+       "window_bytes": 128,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1f18"
+      },
+      {
+       "old": "0x5392c4",
+       "new": "0x5420e4",
+       "instruction_old": "mov rdi, qword ptr [rip + 0x2deda8d]",
+       "instruction_new": "mov rdi, qword ptr [rip + 0x279fe2d]",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1f18"
+      },
+      {
+       "old": "0x53946d",
+       "new": "0x54228d",
+       "instruction_old": "mov r10, qword ptr [rip + 0x2ded8e4]",
+       "instruction_new": "mov r10, qword ptr [rip + 0x279fc84]",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1f18"
+      },
+      {
+       "old": "0x58c29a",
+       "new": "0x4adcca",
+       "instruction_old": "mov r10, qword ptr [rip + 0x2d9aab7]",
+       "instruction_new": "mov r10, qword ptr [rip + 0x28341e7]",
+       "window_bytes": 160,
+       "field_displacements_masked": true,
+       "new_global": "0x2ce1eb8"
+      }
+     ]
+    },
+    {
+     "old": "0x568cec",
+     "new": "0x571cb6",
+     "old_insn": "lea rax, [rbx + 0x75f270]",
+     "new_insn": "lea rax, [rbx + 0x75ecd0]",
+     "proves": "world init: &world.hellpods",
+     "checked": true
+    },
+    {
+     "old": "0x568cf3",
+     "new": "0x571cbd",
+     "old_insn": "mov qword ptr [rip + 0x2dbe05e], rax ->0x3326d58",
+     "new_insn": "mov qword ptr [rip + 0x2770254], rax ->0x2ce1f18",
+     "proves": "... stored in the global",
+     "checked": true
+    },
+    {
+     "old": "0x572ef7",
+     "new": "0x57bf7e",
+     "old_insn": "lea rcx, [rdi + 0x75f270]",
+     "new_insn": "lea rcx, [rdi + 0x75ecd0]",
+     "proves": "world update passes the same manager ...",
+     "checked": true
+    },
+    {
+     "old": "0x572f01",
+     "new": "0x57bf88",
+     "old_insn": "call 0x92b770",
+     "new_insn": "call 0x93c640",
+     "proves": "... to the HellpodComponent update",
+     "checked": true
+    }
+   ],
+   "agreeing": 59,
+   "disagreeing": 1,
+   "conflicts": [
+    "one masked-window witness (old 0x58c29a, the manager getter \"local state by id\") matched a different component's identically shaped getter at new 0x4adcca -> 0x2ce1eb8 (its header uses +0x50/+0x28, not +0x68/+0x48): a template twin, rejected; every exact window agrees"
+   ],
+   "confidence": "high",
+   "live_check": "L5",
+   "notes": "0x3326D20 -> 0x2CE1EE0 (avatars) keeps the same 0x38 distance.",
+   "file": "src/drop_hold.lua",
+   "changed": true
+  },
+  {
+   "id": "hold.header_offset+header_size",
+   "line": 38,
+   "symbol": "header_offset 36, header_size 84; read_manager words[]",
+   "kind": "HellpodComponent manager header layout",
+   "old": "capacity +36, total +44, active +48, id map +64 (slots), +72 capacity, +76 empty key, +80 multiplier, records +88, locals +104, nets +112",
+   "new": "capacity +36, total +44, active +48, id map +64 (slots), +72 capacity, +76 empty key, +80 multiplier, records +88, locals +104, nets +112",
+   "role": "write-address",
+   "feeds_write": true,
+   "method": "taint-paired [manager + disp] operands in every aligned function that loads the manager global; the HellpodComponent update and the id-map lookup re-disassembled",
+   "witnesses": [
+    {
+     "path": "[HPM] + 0x24",
+     "agreeing": 3,
+     "other": {},
+     "examples": [
+      {
+       "old": "0x539241",
+       "new": "0x542061",
+       "old_insn": "cmp esi, dword ptr [rdi + 0x24]",
+       "new_insn": "cmp esi, dword ptr [rdi + 0x24]"
+      },
+      {
+       "old": "0x931684",
+       "new": "0x942874",
+       "old_insn": "cmp eax, dword ptr [rdi + 0x24]",
+       "new_insn": "cmp eax, dword ptr [rdi + 0x24]"
+      },
+      {
+       "old": "0x931751",
+       "new": "0x942941",
+       "old_insn": "cmp esi, dword ptr [rdi + 0x24]",
+       "new_insn": "cmp esi, dword ptr [rdi + 0x24]"
+      }
+     ]
+    },
+    {
+     "path": "[HPM] + 0x2c",
+     "agreeing": 14,
+     "other": {},
+     "examples": [
+      {
+       "old": "0x53922e",
+       "new": "0x54204e",
+       "old_insn": "mov esi, dword ptr [rdi + 0x2c]",
+       "new_insn": "mov esi, dword ptr [rdi + 0x2c]"
+      },
+      {
+       "old": "0x53923e",
+       "new": "0x54205e",
+       "old_insn": "mov esi, dword ptr [rdi + 0x2c]",
+       "new_insn": "mov esi, dword ptr [rdi + 0x2c]"
+      },
+      {
+       "old": "0x53924e",
+       "new": "0x54206e",
+       "old_insn": "mov esi, dword ptr [rdi + 0x2c]",
+       "new_insn": "mov esi, dword ptr [rdi + 0x2c]"
+      }
+     ]
+    },
+    {
+     "path": "[HPM] + 0x30",
+     "agreeing": 9,
+     "other": {},
+     "examples": [
+      {
+       "old": "0x6a038f",
+       "new": "0x6aa5af",
+       "old_insn": "cmp dword ptr [rdx + 0x30], esi",
+       "new_insn": "cmp dword ptr [rdx + 0x30], esi"
+      },
+      {
+       "old": "0x6a63a7",
+       "new": "0x6b0757",
+       "old_insn": "cmp dword ptr [r10 + 0x30], r12d",
+       "new_insn": "cmp dword ptr [r10 + 0x30], r12d"
+      },
+      {
+       "old": "0x6a65e1",
+       "new": "0x6b0991",
+       "old_insn": "cmp r12d, dword ptr [r10 + 0x30]",
+       "new_insn": "cmp r12d, dword ptr [r10 + 0x30]"
+      }
+     ]
+    },
+    {
+     "path": "[HPM] + 0x40",
+     "agreeing": 28,
+     "other": {},
+     "examples": [
+      {
+       "old": "0x539280",
+       "new": "0x5420a0",
+       "old_insn": "lea rcx, [rdi + 0x40]",
+       "new_insn": "lea rcx, [rdi + 0x40]"
+      },
+      {
+       "old": "0x6a2564",
+       "new": "0x6ac794",
+       "old_insn": "mov rbx, qword ptr [r9 + 0x40]",
+       "new_insn": "mov rbx, qword ptr [r9 + 0x40]"
+      },
+      {
+       "old": "0x6e4a9e",
+       "new": "0x6ef74e",
+       "old_insn": "mov rdi, qword ptr [rdx + 0x40]",
+       "new_insn": "mov rdi, qword ptr [rdx + 0x40]"
+      }
+     ]
+    },
+    {
+     "path": "[HPM] + 0x48",
+     "agreeing": 34,
+     "other": {},
+     "examples": [
+      {
+       "old": "0x539231",
+       "new": "0x542051",
+       "old_insn": "cmp esi, dword ptr [rdi + 0x48]",
+       "new_insn": "cmp esi, dword ptr [rdi + 0x48]"
+      },
+      {
+       "old": "0x53947a",
+       "new": "0x54229a",
+       "old_insn": "mov r9d, dword ptr [r10 + 0x48]",
+       "new_insn": "mov r9d, dword ptr [r10 + 0x48]"
+      },
+      {
+       "old": "0x6a254f",
+       "new": "0x6ac77f",
+       "old_insn": "mov r10d, dword ptr [r9 + 0x48]",
+       "new_insn": "mov r10d, dword ptr [r9 + 0x48]"
+      }
+     ]
+    },
+    {
+     "path": "[HPM] + 0x4c",
+     "agreeing": 24,
+     "other": {},
+     "examples": [
+      {
+       "old": "0x6a2568",
+       "new": "0x6ac798",
+       "old_insn": "mov esi, dword ptr [r9 + 0x4c]",
+       "new_insn": "mov esi, dword ptr [r9 + 0x4c]"
+      },
+      {
+       "old": "0x6e4aa2",
+       "new": "0x6ef752",
+       "old_insn": "mov ebp, dword ptr [rdx + 0x4c]",
+       "new_insn": "mov ebp, dword ptr [rdx + 0x4c]"
+      },
+      {
+       "old": "0x7601f9",
+       "new": "0x76b639",
+       "old_insn": "mov r14d, dword ptr [rax + 0x4c]",
+       "new_insn": "mov r14d, dword ptr [rax + 0x4c]"
+      }
+     ]
+    },
+    {
+     "path": "[HPM] + 0x50",
+     "agreeing": 27,
+     "other": {},
+     "examples": [
+      {
+       "old": "0x6a2553",
+       "new": "0x6ac783",
+       "old_insn": "mov r11d, dword ptr [r9 + 0x50]",
+       "new_insn": "mov r11d, dword ptr [r9 + 0x50]"
+      },
+      {
+       "old": "0x6e4a8f",
+       "new": "0x6ef73f",
+       "old_insn": "mov ebx, dword ptr [rdx + 0x50]",
+       "new_insn": "mov ebx, dword ptr [rdx + 0x50]"
+      },
+      {
+       "old": "0x7601e4",
+       "new": "0x76b624",
+       "old_insn": "mov r10d, dword ptr [rax + 0x50]",
+       "new_insn": "mov r10d, dword ptr [rax + 0x50]"
+      }
+     ]
+    },
+    {
+     "path": "[HPM] + 0x58",
+     "agreeing": 10,
+     "other": {},
+     "examples": [
+      {
+       "old": "0x53927c",
+       "new": "0x54209c",
+       "old_insn": "mov rax, qword ptr [rdi + 0x58]",
+       "new_insn": "mov rax, qword ptr [rdi + 0x58]"
+      },
+      {
+       "old": "0x6a63f4",
+       "new": "0x6b07a4",
+       "old_insn": "mov rax, qword ptr [r10 + 0x58]",
+       "new_insn": "mov rax, qword ptr [r10 + 0x58]"
+      },
+      {
+       "old": "0x92aeb4",
+       "new": "0x93bd84",
+       "old_insn": "mov rax, qword ptr [rbp + 0x58]",
+       "new_insn": "mov rax, qword ptr [rbp + 0x58]"
+      }
+     ]
+    },
+    {
+     "path": "[HPM] + 0x68",
+     "agreeing": 8,
+     "other": {},
+     "examples": [
+      {
+       "old": "0x539273",
+       "new": "0x542093",
+       "old_insn": "add rcx, qword ptr [rdi + 0x68]",
+       "new_insn": "add rcx, qword ptr [rdi + 0x68]"
+      },
+      {
+       "old": "0x6a63b1",
+       "new": "0x6b0761",
+       "old_insn": "mov r9, qword ptr [r10 + 0x68]",
+       "new_insn": "mov r9, qword ptr [r10 + 0x68]"
+      },
+      {
+       "old": "0x6a65da",
+       "new": "0x6b098a",
+       "old_insn": "mov r9, qword ptr [r10 + 0x68]",
+       "new_insn": "mov r9, qword ptr [r10 + 0x68]"
+      }
+     ]
+    },
+    {
+     "path": "[HPM] + 0x70",
+     "agreeing": 8,
+     "other": {},
+     "examples": [
+      {
+       "old": "0x92ab42",
+       "new": "0x93ba12",
+       "old_insn": "mov r13, qword ptr [rbp + 0x70]",
+       "new_insn": "mov r13, qword ptr [rbp + 0x70]"
+      },
+      {
+       "old": "0x930a2e",
+       "new": "0x941bbe",
+       "old_insn": "mov rcx, qword ptr [rdi + 0x70]",
+       "new_insn": "mov rcx, qword ptr [rdi + 0x70]"
+      },
+      {
+       "old": "0x930a39",
+       "new": "0x941bc9",
+       "old_insn": "mov rcx, qword ptr [rdi + 0x70]",
+       "new_insn": "mov rcx, qword ptr [rdi + 0x70]"
+      }
+     ]
+    },
+    {
+     "old": "0x92b7fc",
+     "new": "0x93c6cc",
+     "old_insn": "cmp dword ptr [rcx + 0x30], esi",
+     "new_insn": "cmp dword ptr [rcx + 0x30], ebx",
+     "proves": "update loops over active (+48)",
+     "checked": true
+    },
+    {
+     "old": "0x92b8a6",
+     "new": "0x93c776",
+     "old_insn": "mov rax, qword ptr [r15 + 0x58]",
+     "new_insn": "mov rax, qword ptr [r15 + 0x58]",
+     "proves": "record pointer array (+88)",
+     "checked": true
+    },
+    {
+     "old": "0x92b8c2",
+     "new": "0x93c792",
+     "old_insn": "add r13, qword ptr [r15 + 0x68]",
+     "new_insn": "add r12, qword ptr [r15 + 0x68]",
+     "proves": "local state array (+104)",
+     "checked": true
+    },
+    {
+     "old": "0x92b8a0",
+     "new": "0x93c770",
+     "old_insn": "mov r12, qword ptr [r15 + 0x70]",
+     "new_insn": "mov rsi, qword ptr [r15 + 0x70]",
+     "proves": "networked state array (+112)",
+     "checked": true
+    },
+    {
+     "old": "0x9304f5",
+     "new": "0x941685",
+     "old_insn": "mov r10, qword ptr [rip + 0x29f685c] ->0x3326d58",
+     "new_insn": "mov r10, qword ptr [rip + 0x23a088c] ->0x2ce1f18",
+     "proves": "id lookup loads the manager",
+     "checked": true
+    },
+    {
+     "old": "0x9304fe",
+     "new": "0x94168e",
+     "old_insn": "mov r9d, dword ptr [r10 + 0x48]",
+     "new_insn": "mov r9d, dword ptr [r10 + 0x48]",
+     "proves": "map capacity +72",
+     "checked": true
+    },
+    {
+     "old": "0x930504",
+     "new": "0x941694",
+     "old_insn": "mov r11d, dword ptr [r10 + 0x50]",
+     "new_insn": "mov r11d, dword ptr [r10 + 0x50]",
+     "proves": "multiplier +80",
+     "checked": true
+    },
+    {
+     "old": "0x930508",
+     "new": "0x941698",
+     "old_insn": "imul r11d, edx",
+     "new_insn": "imul r11d, edx",
+     "proves": "start = id * multiplier (32-bit)",
+     "checked": true
+    },
+    {
+     "old": "0x93050c",
+     "new": "0x94169c",
+     "old_insn": "lea esi, [r9 - 1]",
+     "new_insn": "lea esi, [r9 - 1]",
+     "proves": "mask = capacity - 1",
+     "checked": true
+    },
+    {
+     "old": "0x930515",
+     "new": "0x9416a5",
+     "old_insn": "mov rbx, qword ptr [r10 + 0x40]",
+     "new_insn": "mov rbx, qword ptr [r10 + 0x40]",
+     "proves": "slots +64",
+     "checked": true
+    },
+    {
+     "old": "0x930519",
+     "new": "0x9416a9",
+     "old_insn": "mov edi, dword ptr [r10 + 0x4c]",
+     "new_insn": "mov edi, dword ptr [r10 + 0x4c]",
+     "proves": "empty key +76",
+     "checked": true
+    },
+    {
+     "old": "0x930522",
+     "new": "0x9416b2",
+     "old_insn": "lea r8d, [rcx + r11]",
+     "new_insn": "lea r8d, [rcx + r11]",
+     "proves": "probe + start",
+     "checked": true
+    },
+    {
+     "old": "0x930526",
+     "new": "0x9416b6",
+     "old_insn": "and r8, rax",
+     "new_insn": "and r8, rax",
+     "proves": "& mask",
+     "checked": true
+    },
+    {
+     "old": "0x930529",
+     "new": "0x9416b9",
+     "old_insn": "mov eax, dword ptr [rbx + r8*8]",
+     "new_insn": "mov eax, dword ptr [rbx + r8*8]",
+     "proves": "8-byte slots: key",
+     "checked": true
+    },
+    {
+     "old": "0xa89b38",
+     "new": "0xaa5598",
+     "old_insn": "mov rax, qword ptr [r10 + 0x58]",
+     "new_insn": "mov rax, qword ptr [r10 + 0x58]",
+     "proves": "map hit -> records +88",
+     "checked": true
+    },
+    {
+     "old": "0xa89b40",
+     "new": "0xaa55a0",
+     "old_insn": "test byte ptr [rcx + 0x14], 1",
+     "new_insn": "test byte ptr [rcx + 0x14], 1",
+     "proves": "records[index] +20 bit 0: owned",
+     "checked": true
+    }
+   ],
+   "agreeing": 181,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L5",
+   "file": "src/drop_hold.lua",
+   "changed": false
+  },
+  {
+   "id": "hold.max_capacity",
+   "line": 38,
+   "symbol": "max_capacity",
+   "kind": "mod sanity bound (not build data)",
+   "old": "4096",
+   "new": "4096",
+   "role": "write-address",
+   "feeds_write": true,
+   "method": "the mod's own plausibility bound on the header; the manager is still a growable array (capacity at +36 compared with total at +44 before growing, unchanged)",
+   "witnesses": [
+    {
+     "old": "0x53922e",
+     "new": "0x54204e",
+     "old_insn": "mov esi, dword ptr [rdi + 0x2c]",
+     "new_insn": "mov esi, dword ptr [rdi + 0x2c]",
+     "proves": "add: total",
+     "checked": true
+    },
+    {
+     "old": "0x539241",
+     "new": "0x542061",
+     "old_insn": "cmp esi, dword ptr [rdi + 0x24]",
+     "new_insn": "cmp esi, dword ptr [rdi + 0x24]",
+     "proves": "add: compared with capacity",
+     "checked": true
+    }
+   ],
+   "agreeing": 2,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L5",
+   "file": "src/drop_hold.lua",
+   "changed": false
+  },
+  {
+   "id": "hold.record_size",
+   "line": 41,
+   "symbol": "record_size 24; record[0..1] hash, record[2] id, record[5] bit 0 owned",
+   "kind": "HellpodComponent entity record layout",
+   "old": "hash +0, id +8, unit +12, network id +16, flags +20",
+   "new": "hash +0, id +8, unit +12, network id +16, flags +20",
+   "role": "write-address",
+   "feeds_write": true,
+   "method": "HellpodComponent update and id-map lookup aligned old/new, record operands identical",
+   "witnesses": [
+    {
+     "old": "0x92b8b6",
+     "new": "0x93c786",
+     "old_insn": "mov rdi, qword ptr [rax + rcx*8]",
+     "new_insn": "mov r13, qword ptr [rax + rcx*8]",
+     "proves": "record = records[index]",
+     "checked": true
+    },
+    {
+     "old": "0x92b8dd",
+     "new": "0x93c7ad",
+     "old_insn": "mov rcx, qword ptr [rdi]",
+     "new_insn": "mov rcx, qword ptr [r13]",
+     "proves": "record +0: 64-bit entity type hash (passed to the settings lookup)",
+     "checked": true
+    },
+    {
+     "old": "0x92b900",
+     "new": "0x93c7d1",
+     "old_insn": "mov edx, dword ptr [rdi + 8]",
+     "new_insn": "mov edx, dword ptr [r13 + 8]",
+     "proves": "record +8: entity id",
+     "checked": true
+    },
+    {
+     "old": "0x92c32e",
+     "new": "0x93d647",
+     "old_insn": "test byte ptr [rcx + 0x14], 1",
+     "new_insn": "test byte ptr [rcx + 0x14], 1",
+     "proves": "record +20 bit 0: owned by this machine",
+     "checked": true
+    },
+    {
+     "old": "0x92cca7",
+     "new": "0x93dfc7",
+     "old_insn": "test byte ptr [rcx + 0x14], 1",
+     "new_insn": "test byte ptr [rcx + 0x14], 1",
+     "proves": "same, second site",
+     "checked": true
+    },
+    {
+     "old": "0xa89b38",
+     "new": "0xaa5598",
+     "old_insn": "mov rax, qword ptr [r10 + 0x58]",
+     "new_insn": "mov rax, qword ptr [r10 + 0x58]",
+     "proves": "map hit -> records +88",
+     "checked": true
+    },
+    {
+     "old": "0xa89b40",
+     "new": "0xaa55a0",
+     "old_insn": "test byte ptr [rcx + 0x14], 1",
+     "new_insn": "test byte ptr [rcx + 0x14], 1",
+     "proves": "records[index] +20 bit 0: owned",
+     "checked": true
+    }
+   ],
+   "agreeing": 7,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L6",
+   "notes": "unit (+12) and network id (+16) are read but not used.",
+   "file": "src/drop_hold.lua",
+   "changed": false
+  },
+  {
+   "id": "hold.local_size",
+   "line": 41,
+   "symbol": "local_size",
+   "kind": "HellpodComponent local state stride",
+   "old": "160",
+   "new": "160",
+   "role": "write-address",
+   "feeds_write": true,
+   "method": "index*5<<5 + [manager+0x68] in the update and in pod init, both builds; the manager add path clears 0xA0 bytes per new pod (aligned, unchanged)",
+   "witnesses": [
+    {
+     "old": "0x92b8b2",
+     "new": "0x93c782",
+     "old_insn": "lea r13, [rcx + rcx*4]",
+     "new_insn": "lea r12, [rcx + rcx*4]",
+     "proves": "index * 5",
+     "checked": true
+    },
+    {
+     "old": "0x92b8be",
+     "new": "0x93c78e",
+     "old_insn": "shl r13, 5",
+     "new_insn": "shl r12, 5",
+     "proves": "* 32 = index * 160",
+     "checked": true
+    },
+    {
+     "old": "0x92b8c2",
+     "new": "0x93c792",
+     "old_insn": "add r13, qword ptr [r15 + 0x68]",
+     "new_insn": "add r12, qword ptr [r15 + 0x68]",
+     "proves": "+ locals",
+     "checked": true
+    },
+    {
+     "old": "0x92ab5a",
+     "new": "0x93ba2a",
+     "old_insn": "lea rdi, [rcx + rcx*4]",
+     "new_insn": "lea rdi, [rcx + rcx*4]",
+     "proves": "pod init: index * 5",
+     "checked": true
+    },
+    {
+     "old": "0x92ab68",
+     "new": "0x93ba38",
+     "old_insn": "shl rdi, 5",
+     "new_insn": "shl rdi, 5",
+     "proves": "pod init: * 32",
+     "checked": true
+    },
+    {
+     "old": "0x92ab6c",
+     "new": "0x93ba3c",
+     "old_insn": "add rdi, qword ptr [rbp + 0x68]",
+     "new_insn": "add rdi, qword ptr [rbp + 0x68]",
+     "proves": "pod init: + locals",
+     "checked": true
+    },
+    {
+     "path": "[HPM] + 0x68",
+     "agreeing": 8,
+     "other": {},
+     "examples": [
+      {
+       "old": "0x539273",
+       "new": "0x542093",
+       "old_insn": "add rcx, qword ptr [rdi + 0x68]",
+       "new_insn": "add rcx, qword ptr [rdi + 0x68]"
+      },
+      {
+       "old": "0x6a63b1",
+       "new": "0x6b0761",
+       "old_insn": "mov r9, qword ptr [r10 + 0x68]",
+       "new_insn": "mov r9, qword ptr [r10 + 0x68]"
+      },
+      {
+       "old": "0x6a65da",
+       "new": "0x6b098a",
+       "old_insn": "mov r9, qword ptr [r10 + 0x68]",
+       "new_insn": "mov r9, qword ptr [r10 + 0x68]"
+      }
+     ]
+    }
+   ],
+   "agreeing": 14,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L6",
+   "file": "src/drop_hold.lua",
+   "changed": false
+  },
+  {
+   "id": "hold.factor_offset",
+   "line": 41,
+   "symbol": "factor_offset (t, float)",
+   "kind": "HellpodComponent local state field",
+   "old": "32",
+   "new": "32",
+   "role": "write-address",
+   "feeds_write": true,
+   "method": "HellpodComponent update (old 0x92B770 -> new 0x93C640, 2463 of 2770 instructions aligned) and pod init (old 0x92AA70 -> new 0x93B940): every access of local+32 re-disassembled; exactly three accesses in the update in both builds (decay read, decay store, step read); the step is still ((1 - t) * braking + t * initial) * dt; the inserted new code (an inlined event queue) never touches the local state",
+   "witnesses": [
+    {
+     "old": "0x92bb1c",
+     "new": "0x93ca00",
+     "old_insn": "cmp ecx, 1",
+     "new_insn": "cmp ecx, 1",
+     "proves": "decay only while braking (phase 1) ...",
+     "checked": true
+    },
+    {
+     "old": "0x92bb21",
+     "new": "0x93ca05",
+     "old_insn": "movss xmm3, dword ptr [r13 + 0x20]",
+     "new_insn": "movss xmm3, dword ptr [r12 + 0x20]",
+     "proves": "t = local+32",
+     "checked": true
+    },
+    {
+     "old": "0x92bb27",
+     "new": "0x93ca0c",
+     "old_insn": "comiss xmm3, xmm14",
+     "new_insn": "comiss xmm3, xmm14",
+     "proves": "... and only while t > 0 (xmm14 = 0)",
+     "checked": true
+    },
+    {
+     "old": "0x92bb3c",
+     "new": "0x93ca21",
+     "old_insn": "divss xmm0, dword ptr [rax + 0x20]",
+     "new_insn": "divss xmm0, dword ptr [rax + 0x20]",
+     "proves": "dt / settings braking time (+32)",
+     "checked": true
+    },
+    {
+     "old": "0x92bb45",
+     "new": "0x93ca2a",
+     "old_insn": "maxss xmm2, xmm1",
+     "new_insn": "maxss xmm2, xmm1",
+     "proves": "t = max(0, t - dt / time)",
+     "checked": true
+    },
+    {
+     "old": "0x92bb4d",
+     "new": "0x93ca32",
+     "old_insn": "movss dword ptr [r13 + 0x20], xmm2",
+     "new_insn": "movss dword ptr [r12 + 0x20], xmm2",
+     "proves": "stored back",
+     "checked": true
+    },
+    {
+     "old": "0x92c5fc",
+     "new": "0x93d91a",
+     "old_insn": "movss xmm1, dword ptr [r13 + 0x20]",
+     "new_insn": "movss xmm1, dword ptr [r12 + 0x20]",
+     "proves": "step: t",
+     "checked": true
+    },
+    {
+     "old": "0x92c60a",
+     "new": "0x93d92d",
+     "old_insn": "subss xmm0, xmm1",
+     "new_insn": "subss xmm0, xmm1",
+     "proves": "step: 1 - t (xmm12 = 1.0)",
+     "checked": true
+    },
+    {
+     "old": "0x92c619",
+     "new": "0x93d931",
+     "old_insn": "mulss xmm1, dword ptr [rsi + 0x14]",
+     "new_insn": "mulss xmm1, dword ptr [rax + 0x14]",
+     "proves": "step: t * initial velocity (+20)",
+     "checked": true
+    },
+    {
+     "old": "0x92c61e",
+     "new": "0x93d936",
+     "old_insn": "mulss xmm0, dword ptr [rsi + 0x1c]",
+     "new_insn": "mulss xmm0, dword ptr [rax + 0x1c]",
+     "proves": "step: (1 - t) * braking velocity (+28)",
+     "checked": true
+    },
+    {
+     "old": "0x92c623",
+     "new": "0x93d93b",
+     "old_insn": "addss xmm0, xmm1",
+     "new_insn": "addss xmm0, xmm1",
+     "proves": "sum",
+     "checked": true
+    },
+    {
+     "old": "0x92c627",
+     "new": "0x93d93f",
+     "old_insn": "mulss xmm0, xmm13",
+     "new_insn": "mulss xmm0, xmm13",
+     "proves": "* dt",
+     "checked": true
+    },
+    {
+     "old": "0x92b871",
+     "new": "0x93c741",
+     "old_insn": "movss xmm12, dword ptr [rip + 0x1a9b4f6] ->0x23c6d70",
+     "new_insn": "movss xmm12, dword ptr [rip + 0x1909e4a] ->0x2246594",
+     "proves": "xmm12 = 1.0",
+     "checked": true
+    },
+    {
+     "old": "0x92ad1d",
+     "new": "0x93bbed",
+     "old_insn": "movss xmm0, dword ptr [rbx + 0x20]",
+     "new_insn": "movss xmm0, dword ptr [rbx + 0x20]",
+     "proves": "pod init: t = 1 when the braking time > 0 ...",
+     "checked": true
+    },
+    {
+     "old": "0x92ad30",
+     "new": "0x93bc00",
+     "old_insn": "movss dword ptr [rdi + 0x20], xmm0",
+     "new_insn": "movss dword ptr [rdi + 0x20], xmm0",
+     "proves": "... stored at local+32",
+     "checked": true
+    },
+    {
+     "float_constants": {
+      "old 0x23C6D70": 1.0,
+      "new 0x2246594": 1.0
+     }
+    }
+   ],
+   "agreeing": 15,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L6",
+   "notes": "THE WRITE: the mod writes t_hold = (0.5 - braking) / (initial - braking) (< 0) here and later the saved t. With t < 0 the decay is skipped (t > 0 test) and the step becomes 0.5 m/s * dt.",
+   "file": "src/drop_hold.lua",
+   "changed": false
+  },
+  {
+   "id": "hold.net_size",
+   "line": 41,
+   "symbol": "net_size 20; phase +0 (0 falling, 1 braking, 2 landed); z +12",
+   "kind": "HellpodComponent networked state layout",
+   "old": "20",
+   "new": "20",
+   "role": "write-address",
+   "feeds_write": true,
+   "method": "update and the nets getter aligned; stride, phase values and z offset identical",
+   "witnesses": [
+    {
+     "old": "0x92b8ba",
+     "new": "0x93c78a",
+     "old_insn": "lea r14, [rcx + rcx*4]",
+     "new_insn": "lea r14, [rcx + rcx*4]",
+     "proves": "index * 5 (* 4 below = 20)",
+     "checked": true
+    },
+    {
+     "old": "0x92b8e9",
+     "new": "0x93c7ba",
+     "old_insn": "mov ecx, dword ptr [r12 + r14*4]",
+     "new_insn": "mov ecx, dword ptr [rsi + r14*4]",
+     "proves": "phase at +0",
+     "checked": true
+    },
+    {
+     "old": "0x92b8f7",
+     "new": "0x93c7c8",
+     "old_insn": "cmp ecx, 1",
+     "new_insn": "cmp ecx, 1",
+     "proves": "phase 1 = braking",
+     "checked": true
+    },
+    {
+     "old": "0x92bbcc",
+     "new": "0x93cab8",
+     "old_insn": "cmp eax, 2",
+     "new_insn": "cmp eax, 2",
+     "proves": "phase 2 = landed",
+     "checked": true
+    },
+    {
+     "old": "0x92c67c",
+     "new": "0x93d99a",
+     "old_insn": "movss xmm0, dword ptr [r12 + r14*4 + 0xc]",
+     "new_insn": "movss xmm0, dword ptr [rsi + r14*4 + 0xc]",
+     "proves": "position z at +12",
+     "checked": true
+    },
+    {
+     "old": "0xa4091a",
+     "new": "0xa5b07a",
+     "old_insn": "mov r10, qword ptr [rip + 0x28e6437] ->0x3326d58",
+     "new_insn": "mov r10, qword ptr [rip + 0x2286e97] ->0x2ce1f18",
+     "proves": "nets getter loads the manager",
+     "checked": true
+    },
+    {
+     "old": "0xa4092a",
+     "new": "0xa5b08a",
+     "old_insn": "mov rax, qword ptr [r10 + 0x70]",
+     "new_insn": "mov rax, qword ptr [r10 + 0x70]",
+     "proves": "nets + ...",
+     "checked": true
+    },
+    {
+     "old": "0xa40932",
+     "new": "0xa5b092",
+     "old_insn": "lea rax, [rax + rdx*4]",
+     "new_insn": "lea rax, [rax + rdx*4]",
+     "proves": "... index*5*4",
+     "checked": true
+    }
+   ],
+   "agreeing": 8,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L6",
+   "notes": "Phase picks which pod is held (falling or braking only); z only feeds the log.",
+   "file": "src/drop_hold.lua",
+   "changed": false
+  },
+  {
+   "id": "drop_hold.map_index",
+   "line": 225,
+   "symbol": "map_index: slot = (probe + id * multiplier) & (capacity - 1), 8-byte slots {key, index}",
+   "kind": "HellpodComponent id map probing",
+   "old": "slot = (probe + id * [m+80]) & ([m+72] - 1); slots at [m+64], 8 bytes {u32 key, u32 index}; empty key [m+76]",
+   "new": "slot = (probe + id * [m+80]) & ([m+72] - 1); slots at [m+64], 8 bytes {u32 key, u32 index}; empty key [m+76]",
+   "role": "write-address",
+   "feeds_write": true,
+   "method": "the manager's own id lookup (new) and its old twin, re-disassembled",
+   "witnesses": [
+    {
+     "old": "0x9304f5",
+     "new": "0x941685",
+     "old_insn": "mov r10, qword ptr [rip + 0x29f685c] ->0x3326d58",
+     "new_insn": "mov r10, qword ptr [rip + 0x23a088c] ->0x2ce1f18",
+     "proves": "id lookup loads the manager",
+     "checked": true
+    },
+    {
+     "old": "0x9304fe",
+     "new": "0x94168e",
+     "old_insn": "mov r9d, dword ptr [r10 + 0x48]",
+     "new_insn": "mov r9d, dword ptr [r10 + 0x48]",
+     "proves": "map capacity +72",
+     "checked": true
+    },
+    {
+     "old": "0x930504",
+     "new": "0x941694",
+     "old_insn": "mov r11d, dword ptr [r10 + 0x50]",
+     "new_insn": "mov r11d, dword ptr [r10 + 0x50]",
+     "proves": "multiplier +80",
+     "checked": true
+    },
+    {
+     "old": "0x930508",
+     "new": "0x941698",
+     "old_insn": "imul r11d, edx",
+     "new_insn": "imul r11d, edx",
+     "proves": "start = id * multiplier (32-bit)",
+     "checked": true
+    },
+    {
+     "old": "0x93050c",
+     "new": "0x94169c",
+     "old_insn": "lea esi, [r9 - 1]",
+     "new_insn": "lea esi, [r9 - 1]",
+     "proves": "mask = capacity - 1",
+     "checked": true
+    },
+    {
+     "old": "0x930515",
+     "new": "0x9416a5",
+     "old_insn": "mov rbx, qword ptr [r10 + 0x40]",
+     "new_insn": "mov rbx, qword ptr [r10 + 0x40]",
+     "proves": "slots +64",
+     "checked": true
+    },
+    {
+     "old": "0x930519",
+     "new": "0x9416a9",
+     "old_insn": "mov edi, dword ptr [r10 + 0x4c]",
+     "new_insn": "mov edi, dword ptr [r10 + 0x4c]",
+     "proves": "empty key +76",
+     "checked": true
+    },
+    {
+     "old": "0x930522",
+     "new": "0x9416b2",
+     "old_insn": "lea r8d, [rcx + r11]",
+     "new_insn": "lea r8d, [rcx + r11]",
+     "proves": "probe + start",
+     "checked": true
+    },
+    {
+     "old": "0x930526",
+     "new": "0x9416b6",
+     "old_insn": "and r8, rax",
+     "new_insn": "and r8, rax",
+     "proves": "& mask",
+     "checked": true
+    },
+    {
+     "old": "0x930529",
+     "new": "0x9416b9",
+     "old_insn": "mov eax, dword ptr [rbx + r8*8]",
+     "new_insn": "mov eax, dword ptr [rbx + r8*8]",
+     "proves": "8-byte slots: key",
+     "checked": true
+    },
+    {
+     "old": "0xa89b38",
+     "new": "0xaa5598",
+     "old_insn": "mov rax, qword ptr [r10 + 0x58]",
+     "new_insn": "mov rax, qword ptr [r10 + 0x58]",
+     "proves": "map hit -> records +88",
+     "checked": true
+    },
+    {
+     "old": "0xa89b40",
+     "new": "0xaa55a0",
+     "old_insn": "test byte ptr [rcx + 0x14], 1",
+     "new_insn": "test byte ptr [rcx + 0x14], 1",
+     "proves": "records[index] +20 bit 0: owned",
+     "checked": true
+    }
+   ],
+   "agreeing": 12,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L5",
+   "file": "src/drop_hold.lua",
+   "changed": false
+  },
+  {
+   "id": "hold.settings_rva",
+   "line": 39,
+   "symbol": "settings_rva",
+   "kind": "game.dll global: entities object",
+   "old": "0x346BF98",
+   "new": "0x2CE41B8",
+   "role": "write-value",
+   "feeds_write": true,
+   "method": "RIP-relative reference windows (see globals.json); the HellpodComponent settings lookup reads it",
+   "witnesses": [
+    {
+     "agreeing": 42,
+     "disagreeing": 0,
+     "old_sites": 1449,
+     "sampled": 64,
+     "votes": {
+      "0x2ce41b8": 42
+     },
+     "exact_window_votes": {
+      "0x2ce41b8": 27
+     },
+     "distinct_old_functions": 42,
+     "examples": [
+      {
+       "old": "0x4536dc",
+       "new": "0x45a4fc",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x30188b5]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x2889cb5]",
+       "window_bytes": 48,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce41b8"
+      },
+      {
+       "old": "0x49c4a1",
+       "new": "0x4a3157",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2fcfaf0]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x284105a]",
+       "window_bytes": 32,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce41b8"
+      },
+      {
+       "old": "0x4f57fa",
+       "new": "0x4fdb5a",
+       "instruction_old": "mov rbp, qword ptr [rip + 0x2f76797]",
+       "instruction_new": "mov rbp, qword ptr [rip + 0x27e6657]",
+       "window_bytes": 32,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce41b8"
+      },
+      {
+       "old": "0x4fb0d2",
+       "new": "0x503452",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2f70ebf]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x27e0d5f]",
+       "window_bytes": 128,
+       "field_displacements_masked": true,
+       "new_global": "0x2ce41b8"
+      }
+     ]
+    },
+    {
+     "old": "0x505395",
+     "new": "0x50d985",
+     "old_insn": "mov rax, qword ptr [rip + 0x2f66bfc] ->0x346bf98",
+     "new_insn": "mov rax, qword ptr [rip + 0x27d682c] ->0x2ce41b8",
+     "proves": "HellpodComponent settings lookup",
+     "checked": true
+    }
+   ],
+   "agreeing": 43,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L7",
+   "notes": "Live-verified by the coordinator; MYC uses it.",
+   "file": "src/drop_hold.lua",
+   "changed": true
+  },
+  {
+   "id": "hold.settings_table_offset",
+   "line": 39,
+   "symbol": "settings_table_offset",
+   "kind": "entities object field: HellpodComponent settings table pointer",
+   "old": "15805152 (0xF12AE0)",
+   "new": "15812008 (0xF145A8)",
+   "role": "write-value",
+   "feeds_write": true,
+   "method": "every instruction carrying the displacement, pdata or not, in both images: 2 old sites (0xF12AE0), 2 new sites (0xF145A8), paired 1:1 by identical code; the lookup is the one the HellpodComponent update and pod init call (24 call sites old, 24 new, same order); the neighbouring settings-table fields 0xF12A28..0xF12C48 all moved +0x1AC8",
+   "witnesses": [
+    {
+     "old": "0x5053a6",
+     "new": "0x50d996",
+     "old_insn": "mov r10, qword ptr [rax + 0xf12ae0]",
+     "new_insn": "mov r10, qword ptr [rax + 0xf145a8]",
+     "proves": "settings lookup (leaf, no pdata): table = [entities + X]",
+     "checked": true
+    },
+    {
+     "old": "0x870c98",
+     "new": "0x87e048",
+     "old_insn": "mov r10, qword ptr [rcx + 0xf12ae0]",
+     "new_insn": "mov r10, qword ptr [rcx + 0xf145a8]",
+     "proves": "the only other user, same 16-slot probe inlined (old 0x870C00 -> new 0x87DFB0, identical)",
+     "checked": true
+    },
+    {
+     "old": "0x92b8e0",
+     "new": "0x93c7b1",
+     "old_insn": "call 0x505390",
+     "new_insn": "call 0x50d980",
+     "proves": "the HellpodComponent update calls this lookup with record +0 (the pod type hash)",
+     "checked": true
+    },
+    {
+     "old": "0x92ab3d",
+     "new": "0x93ba0d",
+     "old_insn": "call 0x505390",
+     "new_insn": "call 0x50d980",
+     "proves": "pod init calls it too",
+     "checked": true
+    },
+    {
+     "old_sites": [
+      {
+       "at": "0x5053a6",
+       "insn": "mov r10, qword ptr [rax + 0xf12ae0]"
+      },
+      {
+       "at": "0x870c98",
+       "insn": "mov r10, qword ptr [rcx + 0xf12ae0]"
+      }
+     ],
+     "new_sites": [
+      {
+       "at": "0x50d996",
+       "insn": "mov r10, qword ptr [rax + 0xf145a8]"
+      },
+      {
+       "at": "0x87e048",
+       "insn": "mov r10, qword ptr [rcx + 0xf145a8]"
+      }
+     ],
+     "new_image_uses_old_value_for": [
+      {
+       "at": "0x5659bf",
+       "insn": "mov qword ptr [rcx + 0xf12ae0], rax"
+      }
+     ],
+     "lookup_callers": {
+      "old": 24,
+      "new": 24
+     }
+    },
+    {
+     "neighbours": [
+      {
+       "old": "0xf12a28",
+       "new": {
+        "0xf144f0": 1
+       },
+       "delta": "0x1ac8"
+      },
+      {
+       "old": "0xf12a40",
+       "new": {
+        "0xf14508": 1
+       },
+       "delta": "0x1ac8"
+      },
+      {
+       "old": "0xf12aa0",
+       "new": {
+        "0xf14568": 1
+       },
+       "delta": "0x1ac8"
+      },
+      {
+       "old": "0xf12ab0",
+       "new": {
+        "0xf14578": 1
+       },
+       "delta": "0x1ac8"
+      },
+      {
+       "old": "0xf12ac0",
+       "new": {
+        "0xf14588": 1
+       },
+       "delta": "0x1ac8"
+      },
+      {
+       "old": "0xf12ad8",
+       "new": {
+        "0xf145a0": 1
+       },
+       "delta": "0x1ac8"
+      },
+      {
+       "old": "0xf12b08",
+       "new": {
+        "0xf145d0": 1
+       },
+       "delta": "0x1ac8"
+      },
+      {
+       "old": "0xf12b10",
+       "new": {
+        "0xf145d8": 1
+       },
+       "delta": "0x1ac8"
+      },
+      {
+       "old": "0xf12b18",
+       "new": {
+        "0xf145e0": 1
+       },
+       "delta": "0x1ac8"
+      },
+      {
+       "old": "0xf12b20",
+       "new": {
+        "0xf145e8": 1
+       },
+       "delta": "0x1ac8"
+      }
+     ]
+    }
+   ],
+   "agreeing": 14,
+   "disagreeing": 0,
+   "conflicts": [
+    "the fields of this object are not a uniform shift (0xF12558 -> 0xF14008 is +0x1AB0, 0xF12C70 -> +0x1AC0); this field is proved by its own two code sites, not by the neighbours",
+    "in the new image +0xF12AE0 is written by unrelated code (0x5659bf): keeping the old offset would read a different pointer"
+   ],
+   "confidence": "high",
+   "live_check": "L7",
+   "file": "src/drop_hold.lua",
+   "changed": true
+  },
+  {
+   "id": "hold.settings_layout",
+   "line": 39,
+   "symbol": "settings_slots 16, settings_records 256, settings_size 104 (slot: hash +0, index +8)",
+   "kind": "HellpodComponent settings table layout",
+   "old": "16 / 256 / 104",
+   "new": "16 / 256 / 104",
+   "role": "write-value",
+   "feeds_write": true,
+   "method": "the settings lookup re-disassembled in both images",
+   "witnesses": [
+    {
+     "old": "0x50539f",
+     "new": "0x50d98f",
+     "old_insn": "and r8d, 0xf",
+     "new_insn": "and r8d, 0xf",
+     "proves": "start slot = hash low bits & 15",
+     "checked": true
+    },
+    {
+     "old": "0x5053b3",
+     "new": "0x50d9a3",
+     "old_insn": "shl rax, 4",
+     "new_insn": "shl rax, 4",
+     "proves": "16-byte slots",
+     "checked": true
+    },
+    {
+     "old": "0x5053ba",
+     "new": "0x50d9aa",
+     "old_insn": "mov rdx, qword ptr [rax]",
+     "new_insn": "mov rdx, qword ptr [rax]",
+     "proves": "slot +0: 64-bit hash",
+     "checked": true
+    },
+    {
+     "old": "0x5053db",
+     "new": "0x50d9cb",
+     "old_insn": "cmp r9d, 0x10",
+     "new_insn": "cmp r9d, 0x10",
+     "proves": "16 probes",
+     "checked": true
+    },
+    {
+     "old": "0x5053e9",
+     "new": "0x50d9d9",
+     "old_insn": "mov eax, dword ptr [rax + 8]",
+     "new_insn": "mov eax, dword ptr [rax + 8]",
+     "proves": "slot +8: record index",
+     "checked": true
+    },
+    {
+     "old": "0x5053ec",
+     "new": "0x50d9dc",
+     "old_insn": "imul rcx, rax, 0x68",
+     "new_insn": "imul rcx, rax, 0x68",
+     "proves": "104-byte records",
+     "checked": true
+    },
+    {
+     "old": "0x5053f0",
+     "new": "0x50d9e0",
+     "old_insn": "lea rax, [r10 + 0x100]",
+     "new_insn": "lea rax, [r10 + 0x100]",
+     "proves": "records at +256",
+     "checked": true
+    }
+   ],
+   "agreeing": 7,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L7",
+   "file": "src/drop_hold.lua",
+   "changed": false
+  },
+  {
+   "id": "hold.settings_count",
+   "line": 40,
+   "symbol": "settings_count",
+   "kind": "mod sanity bound on the record index",
+   "old": "64",
+   "new": "64",
+   "role": "write-value",
+   "feeds_write": true,
+   "method": "not game data: the table has 16 slots, so a valid index is far below 64; the game itself does not bound the index",
+   "witnesses": [],
+   "agreeing": 0,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L7",
+   "file": "src/drop_hold.lua",
+   "changed": false
+  },
+  {
+   "id": "hold.settings_record_fields",
+   "line": 326,
+   "symbol": "settings record: variant +0, initial velocity +20, braking height +24, braking velocity +28, braking time +32",
+   "kind": "HellpodComponent settings record",
+   "old": "+0 / +20 / +24 / +28 / +32",
+   "new": "+0 / +20 / +24 / +28 / +32",
+   "role": "write-value",
+   "feeds_write": true,
+   "method": "the update reads exactly these fields from the record the lookup returns",
+   "witnesses": [
+    {
+     "old": "0x92ba1e",
+     "new": "0x93c8fe",
+     "old_insn": "movss xmm3, dword ptr [rsi + 0x18]",
+     "new_insn": "movss xmm3, dword ptr [rsi + 0x18]",
+     "proves": "record +24: braking height (landing ray)",
+     "checked": true
+    },
+    {
+     "old": "0x92c619",
+     "new": "0x93d931",
+     "old_insn": "mulss xmm1, dword ptr [rsi + 0x14]",
+     "new_insn": "mulss xmm1, dword ptr [rax + 0x14]",
+     "proves": "step: t * initial velocity (+20)",
+     "checked": true
+    },
+    {
+     "old": "0x92c61e",
+     "new": "0x93d936",
+     "old_insn": "mulss xmm0, dword ptr [rsi + 0x1c]",
+     "new_insn": "mulss xmm0, dword ptr [rax + 0x1c]",
+     "proves": "step: (1 - t) * braking velocity (+28)",
+     "checked": true
+    },
+    {
+     "old": "0x92bb3c",
+     "new": "0x93ca21",
+     "old_insn": "divss xmm0, dword ptr [rax + 0x20]",
+     "new_insn": "divss xmm0, dword ptr [rax + 0x20]",
+     "proves": "dt / settings braking time (+32)",
+     "checked": true
+    },
+    {
+     "old": "0x92dffe",
+     "new": "0x93f199",
+     "old_insn": "cmp dword ptr [rax], 0",
+     "new_insn": "cmp dword ptr [rax], 0",
+     "proves": "record +0: variant",
+     "checked": true
+    },
+    {
+     "old": "0x93057e",
+     "new": "0x94170e",
+     "old_insn": "cmp dword ptr [rax], 0",
+     "new_insn": "cmp dword ptr [rax], 0",
+     "proves": "record +0: variant (2nd site)",
+     "checked": true
+    }
+   ],
+   "agreeing": 6,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L7",
+   "file": "src/drop_hold.lua",
+   "changed": false
+  },
+  {
+   "id": "drop_hold.TYPES.hash",
+   "line": 69,
+   "symbol": "TYPES low/high (InitialSpawn 0xE58163E71928D3E2, Reinforce 0xEF9EB729A9D6D849)",
+   "kind": "entity type hashes of the player drop pods",
+   "old": "0xE58163E71928D3E2, 0xEF9EB729A9D6D849",
+   "new": "0xE58163E71928D3E2, 0xEF9EB729A9D6D849",
+   "role": "write-address",
+   "feeds_write": true,
+   "method": "the hashes are immediates in the avatar spawn sequence; the only occurrences in either image, at aligned positions",
+   "witnesses": [
+    {
+     "old": "0xa88049",
+     "new": "0xaa3aa9",
+     "old_insn": "movabs rdi, 0xe58163e71928d3e2",
+     "new_insn": "movabs rdi, 0xe58163e71928d3e2",
+     "proves": "avatar spawn sequence (old 0xA866F0 -> new 0xAA2150, 1850/1861 aligned): InitialSpawn pod type",
+     "checked": true
+    },
+    {
+     "old": "0xa8818e",
+     "new": "0xaa3bf5",
+     "old_insn": "movabs rdi, 0xef9eb729a9d6d849",
+     "new_insn": "movabs rdi, 0xef9eb729a9d6d849",
+     "proves": "same sequence: Reinforce pod type",
+     "checked": true
+    },
+    {
+     "old": "0xa88f62",
+     "new": "0xaa49c2",
+     "old_insn": "movabs rcx, 0xe58163e71928d3e2",
+     "new_insn": "movabs rcx, 0xe58163e71928d3e2",
+     "proves": "second InitialSpawn use",
+     "checked": true
+    }
+   ],
+   "agreeing": 3,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L6",
+   "file": "src/drop_hold.lua",
+   "changed": false
+  },
+  {
+   "id": "drop_hold.TYPES.variant",
+   "line": 69,
+   "symbol": "TYPES variant (2 initial spawn, 1 reinforce)",
+   "kind": "HellpodComponent settings variant per pod type (game data)",
+   "old": "2 / 1",
+   "new": "2 / 1",
+   "role": "write-value",
+   "feeds_write": true,
+   "method": "game data (generated_entities.dl_bin is encrypted; not readable offline). Code still special-cases variant 2 at the same two sites. The mod checks the variant and the velocities before any write and stops (drop_pod_settings_unrecognized) when they differ, so a change here fails closed",
+   "witnesses": [
+    {
+     "old": "0x10e2329",
+     "new": "0xf73419",
+     "old_insn": "cmp dword ptr [rbx], 2",
+     "new_insn": "cmp dword ptr [rbx], 2",
+     "proves": "a HellpodComponent handler special-cases settings variant 2",
+     "checked": true
+    },
+    {
+     "old": "0x11b3e2c",
+     "new": "0x104494c",
+     "old_insn": "cmp dword ptr [rbx], 2",
+     "new_insn": "cmp dword ptr [rbx], 2",
+     "proves": "a HellpodComponent handler special-cases settings variant 2",
+     "checked": true
+    }
+   ],
+   "agreeing": 2,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "medium",
+   "live_check": "L7",
+   "file": "src/drop_hold.lua",
+   "changed": false
+  },
+  {
+   "id": "semantics.hold_and_release",
+   "file": "docs/TECHNICAL.md",
+   "line": 0,
+   "symbol": "one float write of t per hold, one per release",
+   "kind": "game behaviour the write relies on",
+   "old": "owner moves pod by ((1-t)*braking + t*initial)*dt; t decays only while braking and t > 0",
+   "new": "owner moves pod by ((1-t)*braking + t*initial)*dt; t decays only while braking and t > 0",
+   "role": "write-value",
+   "feeds_write": true,
+   "method": "see hold.factor_offset; the owner gate (record +20 bit 0) is unchanged",
+   "witnesses": [
+    "0x92bb1c -> 0x93ca00",
+    "see hold.factor_offset"
+   ],
+   "agreeing": 15,
+   "disagreeing": 0,
+   "conflicts": [],
+   "confidence": "high",
+   "live_check": "L6",
+   "changed": false
+  }
+ ]
+}

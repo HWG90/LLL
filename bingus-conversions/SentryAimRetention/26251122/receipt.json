@@ -1,0 +1,122 @@
+{
+ "option": "SentryAimRetention",
+ "from": "26088801",
+ "to": "26251122",
+ "resources": {
+  "5b268e629ad0619d": {
+   "wrapped": false,
+   "lines_changed": 9,
+   "sha256_26088801": "a2572037ab66aecfe5795b14a658cd752463fc0dc96fe6423847d16ebc3f0712",
+   "sha256": "26a2ba32c6ed546146d4a996aa0fa81b9c435e92cde0b032386ccc31b1d5fedd"
+  }
+ },
+ "edits": [
+  {
+   "resource": "5b268e629ad0619d",
+   "kind": "string",
+   "old": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "new": "257FD7DE21A04E8668E02E5C820EDF3435176FBDE3569765255CC52A5EA20F9D",
+   "count": 1
+  },
+  {
+   "resource": "5b268e629ad0619d",
+   "kind": "string",
+   "old": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "new": "61DCFCD201DACBF3545C97BEB8A5A6186E9850D2670BF60B0E058320B477F6DF",
+   "count": 1
+  },
+  {
+   "resource": "5b268e629ad0619d",
+   "kind": "string",
+   "old": "26088801",
+   "new": "26251122",
+   "count": 1
+  },
+  {
+   "resource": "5b268e629ad0619d",
+   "kind": "address",
+   "old": "'sentry_aim_raycast_fn',exe+0x87bc70)",
+   "new": "'sentry_aim_raycast_fn',exe+0x87bb20)",
+   "count": 1
+  },
+  {
+   "resource": "5b268e629ad0619d",
+   "kind": "address",
+   "old": "'sentry_aim_world_id_fn',exe+0x826d10)",
+   "new": "'sentry_aim_world_id_fn',exe+0x826bc0)",
+   "count": 1
+  },
+  {
+   "resource": "5b268e629ad0619d",
+   "kind": "address",
+   "old": "native_code(api,exe+0x1f30c0,pose_signature",
+   "new": "native_code(api,exe+0x1f3020,pose_signature",
+   "count": 1
+  },
+  {
+   "resource": "5b268e629ad0619d",
+   "kind": "address",
+   "old": "{0x826d10,'",
+   "new": "{0x826bc0,'",
+   "count": 1
+  },
+  {
+   "resource": "5b268e629ad0619d",
+   "kind": "address",
+   "old": "{0x87bc70,'",
+   "new": "{0x87bb20,'",
+   "count": 1
+  }
+ ],
+ "witnesses": [
+  {
+   "resource": "5b268e629ad0619d",
+   "module": "exe",
+   "old_rva": "0x1f30c0",
+   "new_rva": "0x1f3020",
+   "size": 24,
+   "old": "40534883ec204863dae8e2d5eaff488bc84c8b0041ff90e8",
+   "new": "40534883ec204863dae872d6eaff488bc84c8b0041ff90e8",
+   "explained": [
+    "0x1f30c9 call branch: 0xa06b0 -> 0xa06a0 (-0x10) target migrated (high)"
+   ],
+   "accepted": {}
+  },
+  {
+   "resource": "5b268e629ad0619d",
+   "module": "exe",
+   "old_rva": "0x826d10",
+   "new_rva": "0x826bc0",
+   "size": 29,
+   "old": "33c04c8d05f7b203020f1f800000000049390cc0740cffc083f80475f3",
+   "new": "33c04c8d0547b403020f1f800000000049390cc0740cffc083f80475f3",
+   "explained": [
+    "0x826d24 je branch: 0x826d32 -> 0x826be2 (-0x150) near branch, same delta as the span (same function)",
+    "0x826d2b jne branch: 0x826d20 -> 0x826bd0 (-0x150) inside span"
+   ],
+   "accepted": {}
+  }
+ ],
+ "source": "original-mods/backups/20261029-170003-SentryAimRetention/0-9ba626afa44a3aa3.patch_0",
+ "fixes": [
+  {
+   "resource": "5b268e629ad0619d",
+   "old": "                return api.cast_terrain(raycast,tonumber(world_id(world)),unit,origin,target,target_unit,\n",
+   "new": "                -- The raycast reads this world's physics scene from its slot\n                -- (exe+0x2861d70, 0xb0 apart) without a check; the slot can be\n                -- empty while the world is listed (crash 2026-10-30 23:11).\n                local id=tonumber(world_id(world))\n                if id<4 and not api.pointer(api.read(exe+0x2861d70+0xb0*id,8)) then return nil end\n                return api.cast_terrain(raycast,id,unit,origin,target,target_unit,\n",
+   "count": 1
+  },
+  {
+   "resource": "5b268e629ad0619d",
+   "old": "        {0x87bb20,'488bc4f30f11582089480855535657415441554156415748'},\n",
+   "new": "        {0x87bb20,'488bc4f30f11582089480855535657415441554156415748'},\n        {0x87bb80,'488d15c961fe014181e40080000033f644896424680fae5c24508b4c24500fbae90f894c24500fae54245083ff047205448bfeeb0c4869cfb00000004c8b7c1120'},\n",
+   "count": 1
+  },
+  {
+   "resource": "5b268e629ad0619d",
+   "old": "revision = 'data-v8.6-26251122'",
+   "new": "revision = 'data-v8.7-26251122'",
+   "count": 1
+  }
+ ],
+ "archive_sha256": "9c88bf3becfe85a8fd57424a62790bc239b6092888579063d80daccabe9009db"
+}

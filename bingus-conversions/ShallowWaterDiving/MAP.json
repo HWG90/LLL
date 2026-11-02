@@ -1,0 +1,3684 @@
+{
+ "mod": "Shallow Water Diving v3.10.1 (Vanilla Plus Megapack component, lock revision data-v3.10.1)",
+ "source": {
+  "used": "upstream-bingus/VanillaPlusMegapack/components/ShallowWaterDiving",
+  "note": "it and upstream-bingus/ShallowWaterDiving (git tag v3.10.1, HEAD 31c3d4e) both match every source_sha256 in components.lock.json"
+ },
+ "old_build": "25480438",
+ "new_build": "26088801",
+ "old_image": "native-work/evidence/game-pre1020.dll",
+ "new_image": "native-work/evidence/game-26088801.dll",
+ "counts": {
+  "high": 33,
+  "medium": 7
+ },
+ "rows_total": 40,
+ "rows_feeding_write": 20,
+ "changed": [
+  "archive.EXE_SHA",
+  "archive.GAME_DLL_SHA",
+  "dive.global.mission",
+  "dive.global.local_player",
+  "dive.global.entities",
+  "dive.global.avatars",
+  "dive.global.water",
+  "dive.global.stance",
+  "dive.global.movement",
+  "dive.entity.network_map",
+  "dive.entity.records",
+  "dive.avatar.stride",
+  "dive.controller.flags",
+  "dive.settings.table_offset",
+  "dive.rdata.timeout",
+  "dive.rdata.timeout_fallback",
+  "dive.rdata.window",
+  "dive.rdata.prone",
+  "dive.rdata.crouch",
+  "bingus_text.GAME.settings",
+  "bingus_text.GAME.table",
+  "bingus_text.GAME.index"
+ ],
+ "witness_check_failures": [],
+ "instruction_witnesses": {
+  "flags.stride": {
+   "old": "0x82dd9e",
+   "old_insn": "imul r13, r8, 0x1238",
+   "new": "0x83ac1e",
+   "new_insn": "imul r13, r8, 0x1240",
+   "old_function": "0x82dd20",
+   "new_function": "0x83aba0",
+   "ok": true
+  },
+  "flags.base": {
+   "old": "0x82de4d",
+   "old_insn": "lea rsi, [r13 + 0x53d900]",
+   "new": "0x83accd",
+   "new_insn": "lea rsi, [r13 + 0x53d900]",
+   "old_function": "0x82de16",
+   "new_function": "0x83ac96",
+   "ok": true
+  },
+  "flags.block": {
+   "old": "0x82de56",
+   "old_insn": "lea r14, [rsi + 0xf80]",
+   "new": "0x83acd6",
+   "new_insn": "lea r14, [rsi + 0xf88]",
+   "old_function": "0x82de16",
+   "new_function": "0x83ac96",
+   "ok": true
+  },
+  "flags.q0": {
+   "old": "0x82dfde",
+   "old_insn": "mov r11, qword ptr [rsi + 0xf80]",
+   "new": "0x83ae5e",
+   "new_insn": "mov r11, qword ptr [rsi + 0xf88]",
+   "old_function": "0x82de16",
+   "new_function": "0x83ac96",
+   "ok": true
+  },
+  "flags.q1": {
+   "old": "0x82dfe5",
+   "old_insn": "mov rdx, qword ptr [rsi + 0xf88]",
+   "new": "0x83ae65",
+   "new_insn": "mov rdx, qword ptr [rsi + 0xf90]",
+   "old_function": "0x82de16",
+   "new_function": "0x83ac96",
+   "ok": true
+  },
+  "flags.q2": {
+   "old": "0x82dfd7",
+   "old_insn": "test qword ptr [rsi + 0xf90], r10",
+   "new": "0x83ae57",
+   "new_insn": "test qword ptr [rsi + 0xf98], r10",
+   "old_function": "0x82de16",
+   "new_function": "0x83ac96",
+   "ok": true
+  },
+  "flags.am_global": {
+   "old": "0x82dcaf",
+   "old_insn": "mov r11, qword ptr [rip + 0x2af906a]->0x3326d20",
+   "new": "0x83ab2f",
+   "new_insn": "mov r11, qword ptr [rip + 0x24a73aa]->0x2ce1ee0",
+   "old_function": "0x82dc80",
+   "new_function": "0x83ab00",
+   "ok": true
+  },
+  "flags.am_map": {
+   "old": "0x82dcda",
+   "old_insn": "mov r14, qword ptr [r11 + 0xf8]",
+   "new": "0x83ab5a",
+   "new_insn": "mov r14, qword ptr [r11 + 0xf8]",
+   "old_function": "0x82dc80",
+   "new_function": "0x83ab00",
+   "ok": true
+  },
+  "record.caller_base": {
+   "old": "0x68bb72",
+   "old_insn": "lea rcx, [rsi + 0x53d900]",
+   "new": null,
+   "new_insn": null,
+   "old_function": "0x68b730",
+   "new_function": null,
+   "ok": true
+  },
+  "record.flag_block": {
+   "old": "0xa3f23a",
+   "old_insn": "lea r14, [rcx + 0xf80]",
+   "new": "0xa5996a",
+   "new_insn": "lea r14, [rcx + 0xf88]",
+   "old_function": "0xa3f220",
+   "new_function": "0xa59950",
+   "ok": true
+  },
+  "stance.settings_call": {
+   "old": "0x83408c",
+   "old_insn": "call 0x512f90",
+   "new": "0x840edc",
+   "new_insn": "call 0x51b580",
+   "old_function": "0x834019",
+   "new_function": "0x840e69",
+   "ok": true
+  },
+  "stance.base_load": {
+   "old": "0x834093",
+   "old_insn": "movss xmm0, dword ptr [rax + 4]",
+   "new": "0x840ee3",
+   "new_insn": "movss xmm0, dword ptr [rax + 4]",
+   "old_function": "0x834019",
+   "new_function": "0x840e69",
+   "ok": true
+  },
+  "stance.is_prone": {
+   "old": "0x83409f",
+   "old_insn": "cmp eax, 2",
+   "new": "0x840eef",
+   "new_insn": "cmp eax, 2",
+   "old_function": "0x834019",
+   "new_function": "0x840e69",
+   "ok": true
+  },
+  "stance.is_crouch": {
+   "old": "0x8340c0",
+   "old_insn": "cmp ebp, 1",
+   "new": "0x840f10",
+   "new_insn": "cmp ebp, 1",
+   "old_function": "0x834019",
+   "new_function": "0x840e69",
+   "ok": true
+  },
+  "stance.crouch_const": {
+   "old": "0x8340c5",
+   "old_insn": "addss xmm0, dword ptr [rip + 0x1b9292b]->0x23c69f8",
+   "new": "0x840f15",
+   "new_insn": "addss xmm0, dword ptr [rip + 0x1a052f3]->0x2246210",
+   "old_function": "0x834019",
+   "new_function": "0x840e69",
+   "ok": true
+  },
+  "stance.prone_const": {
+   "old": "0x8340da",
+   "old_insn": "addss xmm0, dword ptr [rip + 0x1b92bea]->0x23c6ccc",
+   "new": "0x840f2a",
+   "new_insn": "addss xmm0, dword ptr [rip + 0x1a055ba]->0x22464ec",
+   "old_function": "0x834019",
+   "new_function": "0x840e69",
+   "ok": true
+  },
+  "stance.dm_global": {
+   "old": "0x8340e8",
+   "old_insn": "mov r8, qword ptr [rip + 0x2af2991]->0x3326a80",
+   "new": "0x840f38",
+   "new_insn": "mov r8, qword ptr [rip + 0x24a0d01]->0x2ce1c40",
+   "old_function": "0x834019",
+   "new_function": "0x840e69",
+   "ok": true
+  },
+  "stance.dm_capacity": {
+   "old": "0x8340fb",
+   "old_insn": "mov edx, dword ptr [r8 + 0x28]",
+   "new": "0x840f4b",
+   "new_insn": "mov edx, dword ptr [r8 + 0x28]",
+   "old_function": "0x8340fb",
+   "new_function": "0x840f4b",
+   "ok": true
+  },
+  "stance.dm_mult": {
+   "old": "0x8340ff",
+   "old_insn": "mov r9d, dword ptr [r8 + 0x30]",
+   "new": "0x840f4f",
+   "new_insn": "mov r9d, dword ptr [r8 + 0x30]",
+   "old_function": "0x8340fb",
+   "new_function": "0x840f4b",
+   "ok": true
+  },
+  "stance.dm_rows": {
+   "old": "0x83410e",
+   "old_insn": "mov r10, qword ptr [r8 + 0x20]",
+   "new": "0x840f5e",
+   "new_insn": "mov r10, qword ptr [r8 + 0x20]",
+   "old_function": "0x8340fb",
+   "new_function": "0x840f4b",
+   "ok": true
+  },
+  "stance.dm_empty": {
+   "old": "0x834112",
+   "old_insn": "mov r11d, dword ptr [r8 + 0x2c]",
+   "new": "0x840f62",
+   "new_insn": "mov r11d, dword ptr [r8 + 0x2c]",
+   "old_function": "0x8340fb",
+   "new_function": "0x840f4b",
+   "ok": true
+  },
+  "stance.dm_stride": {
+   "old": "0x834150",
+   "old_insn": "imul rcx, rax, 0x1c",
+   "new": "0x840fa0",
+   "new_insn": "imul rcx, rax, 0x1c",
+   "old_function": "0x8340fb",
+   "new_function": "0x840f4b",
+   "ok": true
+  },
+  "stance.dm_data": {
+   "old": "0x834154",
+   "old_insn": "mov rax, qword ptr [r8 + 0x40]",
+   "new": "0x840fa4",
+   "new_insn": "mov rax, qword ptr [r8 + 0x40]",
+   "old_function": "0x8340fb",
+   "new_function": "0x840f4b",
+   "ok": true
+  },
+  "stance.offset_write": {
+   "old": "0x834158",
+   "old_insn": "movss dword ptr [rcx + rax + 8], xmm0",
+   "new": "0x840fa8",
+   "new_insn": "movss dword ptr [rcx + rax + 8], xmm0",
+   "old_function": "0x8340fb",
+   "new_function": "0x840f4b",
+   "ok": true
+  },
+  "stance.am_map": {
+   "old": "0x83404d",
+   "old_insn": "mov r10, qword ptr [r15 + 0xf8]",
+   "new": "0x840e9d",
+   "new_insn": "mov r10, qword ptr [r15 + 0xf8]",
+   "old_function": "0x834019",
+   "new_function": "0x840e69",
+   "ok": true
+  },
+  "stance.am_stride": {
+   "old": "0x8340a6",
+   "old_insn": "imul rdx, rcx, 0x1238",
+   "new": "0x840ef6",
+   "new_insn": "imul rdx, rcx, 0x1240",
+   "old_function": "0x834019",
+   "new_function": "0x840e69",
+   "ok": true
+  },
+  "settings.entities": {
+   "old": "0x512fa7",
+   "old_insn": "mov rax, qword ptr [rip + 0x2f58fea]->0x346bf98",
+   "new": "0x51b597",
+   "new_insn": "mov rax, qword ptr [rip + 0x27c8c1a]->0x2ce41b8",
+   "old_function": null,
+   "new_function": null,
+   "ok": true
+  },
+  "settings.table": {
+   "old": "0x512fb1",
+   "old_insn": "mov r11, qword ptr [rax + 0xf12e20]",
+   "new": "0x51b5a1",
+   "new_insn": "mov r11, qword ptr [rax + 0xf148e8]",
+   "old_function": null,
+   "new_function": null,
+   "ok": true
+  },
+  "settings.slots": {
+   "old": "0x512fd5",
+   "old_insn": "imul eax, eax, 0x7a",
+   "new": "0x51b5c5",
+   "new_insn": "imul eax, eax, 0x7a",
+   "old_function": null,
+   "new_function": null,
+   "ok": true
+  },
+  "settings.slot_size": {
+   "old": "0x512ff3",
+   "old_insn": "shl rax, 4",
+   "new": "0x51b5e3",
+   "new_insn": "shl rax, 4",
+   "old_function": null,
+   "new_function": null,
+   "ok": true
+  },
+  "settings.wrap": {
+   "old": "0x513014",
+   "old_insn": "cmp eax, 0x79",
+   "new": "0x51b604",
+   "new_insn": "cmp eax, 0x79",
+   "old_function": null,
+   "new_function": null,
+   "ok": true
+  },
+  "settings.probes": {
+   "old": "0x51301b",
+   "old_insn": "cmp r10d, 0x7a",
+   "new": "0x51b60b",
+   "new_insn": "cmp r10d, 0x7a",
+   "old_function": null,
+   "new_function": null,
+   "ok": true
+  },
+  "settings.index": {
+   "old": "0x51302a",
+   "old_insn": "mov ecx, dword ptr [rax + 8]",
+   "new": "0x51b61a",
+   "new_insn": "mov ecx, dword ptr [rax + 8]",
+   "old_function": null,
+   "new_function": null,
+   "ok": true
+  },
+  "settings.records": {
+   "old": "0x51302d",
+   "old_insn": "lea r9, [r11 + 0x7a0]",
+   "new": "0x51b61d",
+   "new_insn": "lea r9, [r11 + 0x7a0]",
+   "old_function": null,
+   "new_function": null,
+   "ok": true
+  },
+  "settings.record_size": {
+   "old": "0x513034",
+   "old_insn": "shl rcx, 6",
+   "new": "0x51b624",
+   "new_insn": "shl rcx, 6",
+   "old_function": null,
+   "new_function": null,
+   "ok": true
+  },
+  "settings.neighbour_changed": {
+   "old": "0x51304f",
+   "old_insn": "mov r10, qword ptr [rax + 0xf12e28]",
+   "new": "0x51b63f",
+   "new_insn": "mov r10, qword ptr [rax + 0xf148f0]",
+   "old_function": null,
+   "new_function": null,
+   "ok": true
+  },
+  "water.global": {
+   "old": "0x89d3ae",
+   "old_insn": "mov r14, qword ptr [rip + 0x2a896cb]->0x3326a80",
+   "new": "0x8aab8e",
+   "new_insn": "mov r14, qword ptr [rip + 0x24370ab]->0x2ce1c40",
+   "old_function": "0x89d370",
+   "new_function": "0x8aab50",
+   "ok": true
+  },
+  "water.owners": {
+   "old": "0x89d42b",
+   "old_insn": "mov r13, qword ptr [r14 + 0x38]",
+   "new": "0x8aac0b",
+   "new_insn": "mov r13, qword ptr [r14 + 0x38]",
+   "old_function": "0x89d370",
+   "new_function": "0x8aab50",
+   "ok": true
+  },
+  "water.owner_id": {
+   "old": "0x89d439",
+   "old_insn": "mov eax, dword ptr [r13 + 8]",
+   "new": "0x8aac19",
+   "new_insn": "mov eax, dword ptr [r13 + 8]",
+   "old_function": "0x89d370",
+   "new_function": "0x8aab50",
+   "ok": true
+  },
+  "water.data": {
+   "old": "0x89d557",
+   "old_insn": "mov rax, qword ptr [r14 + 0x40]",
+   "new": "0x8aad37",
+   "new_insn": "mov rax, qword ptr [r14 + 0x40]",
+   "old_function": "0x89d370",
+   "new_function": "0x8aab50",
+   "ok": true
+  },
+  "water.stride": {
+   "old": "0x89d55b",
+   "old_insn": "imul r9, r8, 0x1c",
+   "new": "0x8aad3b",
+   "new_insn": "imul r9, r8, 0x1c",
+   "old_function": "0x89d370",
+   "new_function": "0x8aab50",
+   "ok": true
+  },
+  "water.surface": {
+   "old": "0x89d55f",
+   "old_insn": "movss xmm0, dword ptr [r9 + rax + 0x18]",
+   "new": "0x8aad3f",
+   "new_insn": "movss xmm0, dword ptr [r9 + rax + 0x18]",
+   "old_function": "0x89d370",
+   "new_function": "0x8aab50",
+   "ok": true
+  }
+ },
+ "rows": [
+  {
+   "id": "archive.EXE_SHA",
+   "file": "scripts/archive.py (pack)",
+   "line": 9,
+   "symbol": "EXE_SHA",
+   "kind": "SHA-256 pin (archive_loader asserts api.module_hash(exe) == build.exe_sha256)",
+   "old": "F5FEE03DCFDB2E553A4752C283590950AC13316B376D8196AA556FF0400D5F06",
+   "new": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+   "changed": true,
+   "method": "SHA-256 of the installed bin/helldivers2.exe (read-only), equal to the brief's hash",
+   "witnesses": [
+    {
+     "file": "<game>/bin/helldivers2.exe",
+     "sha256": "0ACC07DEBE04714AE04281E1A66BD2EB9D3D85232953E32A93C8A3DD0874EABE",
+     "equal": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "gate",
+   "live_check": "L0",
+   "notes": ""
+  },
+  {
+   "id": "archive.GAME_DLL_SHA",
+   "file": "scripts/archive.py (pack)",
+   "line": 10,
+   "symbol": "GAME_DLL_SHA",
+   "kind": "SHA-256 pin (archive_loader asserts api.module_hash(game.dll) == build.game_sha256)",
+   "old": "2E2C3B7C2500646DADD5F2B4C6E0504DBB7E7896139F64CDDC0D1813C718F51E",
+   "new": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+   "changed": true,
+   "method": "SHA-256 of the installed data/game/game.dll (read-only), equal to the brief's hash",
+   "witnesses": [
+    {
+     "file": "<game>/data/game/game.dll",
+     "sha256": "6D1D4D3BC6FC84801D9F8F1B310E13A603D07409F3D9495D74B42E1D0BB1C08F",
+     "equal": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "gate",
+   "live_check": "L0",
+   "notes": ""
+  },
+  {
+   "id": "dive.global.mission",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": [
+    80,
+    166
+   ],
+   "symbol": "global(0x33266a0) and GLOBAL_WAIT key",
+   "kind": "game.dll global: mission / game mode object",
+   "old": "0x33266a0",
+   "new": "0x2ce1850",
+   "changed": true,
+   "method": "RIP-relative references of the old global migrated by unique instruction windows (exact first, field displacements masked second); the new instruction's RIP target votes",
+   "witnesses": [
+    {
+     "kind": "global windows",
+     "old_sites": 240,
+     "sampled": 64,
+     "votes": {
+      "0x2ce1850": 51
+     },
+     "exact_window_votes": {
+      "0x2ce1850": 46
+     },
+     "agreeing": 51,
+     "disagreeing": 0,
+     "distinct_old_functions": 50,
+     "examples": [
+      {
+       "old": "0x38013b",
+       "new": "0x386e3b",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1850",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2fa655e]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x295aa0e]",
+       "old_function": "0x380130"
+      },
+      {
+       "old": "0x461c76",
+       "new": "0x468a96",
+       "window_bytes": 128,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1850",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2ec4a23]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2878db3]",
+       "old_function": "0x461c70"
+      },
+      {
+       "old": "0x4b012a",
+       "new": "0x4b69ea",
+       "window_bytes": 128,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1850",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2e7656f]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x282ae5f]",
+       "old_function": "0x4b0110"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "gate",
+   "live_check": "L1",
+   "notes": ""
+  },
+  {
+   "id": "dive.global.local_player",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": [
+    80,
+    170
+   ],
+   "symbol": "global(0x3326468) and GLOBAL_WAIT key",
+   "kind": "game.dll global: player manager",
+   "old": "0x3326468",
+   "new": "0x2ce1618",
+   "changed": true,
+   "method": "RIP-relative references of the old global migrated by unique instruction windows (exact first, field displacements masked second); the new instruction's RIP target votes",
+   "witnesses": [
+    {
+     "kind": "global windows",
+     "old_sites": 1199,
+     "sampled": 64,
+     "votes": {
+      "0x2ce1618": 47
+     },
+     "exact_window_votes": {
+      "0x2ce1618": 45
+     },
+     "agreeing": 47,
+     "disagreeing": 0,
+     "distinct_old_functions": 47,
+     "examples": [
+      {
+       "old": "0x3a4bde",
+       "new": "0x3ab8de",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1618",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2f81883]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x2935d33]",
+       "old_function": "0x3a4a20"
+      },
+      {
+       "old": "0x545204",
+       "new": "0x54e054",
+       "window_bytes": 128,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1618",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2de125d]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x27935bd]",
+       "old_function": "0x5451e6"
+      },
+      {
+       "old": "0x606c9a",
+       "new": "0x60fe6a",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1618",
+       "instruction_old": "mov r10, qword ptr [rip + 0x2d1f7c7]",
+       "instruction_new": "mov r10, qword ptr [rip + 0x26d17a7]",
+       "old_function": "0x606c90"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "identity",
+   "live_check": "L1",
+   "notes": "brief: live-verified 0x3326468->0x2CE1618"
+  },
+  {
+   "id": "dive.global.entities",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": [
+    80,
+    184
+   ],
+   "symbol": "global(0x346bf98) and GLOBAL_WAIT key",
+   "kind": "game.dll global: entities object",
+   "old": "0x346bf98",
+   "new": "0x2ce41b8",
+   "changed": true,
+   "method": "RIP-relative references of the old global migrated by unique instruction windows (exact first, field displacements masked second); the new instruction's RIP target votes",
+   "witnesses": [
+    {
+     "kind": "global windows",
+     "old_sites": 1449,
+     "sampled": 64,
+     "votes": {
+      "0x2ce41b8": 42
+     },
+     "exact_window_votes": {
+      "0x2ce41b8": 27
+     },
+     "agreeing": 42,
+     "disagreeing": 0,
+     "distinct_old_functions": 42,
+     "examples": [
+      {
+       "old": "0x4536dc",
+       "new": "0x45a4fc",
+       "window_bytes": 48,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce41b8",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x30188b5]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x2889cb5]",
+       "old_function": "0x453680"
+      },
+      {
+       "old": "0x49c4a1",
+       "new": "0x4a3157",
+       "window_bytes": 32,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce41b8",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2fcfaf0]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x284105a]",
+       "old_function": "0x496700"
+      },
+      {
+       "old": "0x4f57fa",
+       "new": "0x4fdb5a",
+       "window_bytes": 32,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce41b8",
+       "instruction_old": "mov rbp, qword ptr [rip + 0x2f76797]",
+       "instruction_new": "mov rbp, qword ptr [rip + 0x27e6657]",
+       "old_function": "0x4f57f2"
+      }
+     ]
+    },
+    {
+     "old": "0x512fa7",
+     "old_insn": "mov rax, qword ptr [rip + 0x2f58fea]->0x346bf98",
+     "new": "0x51b597",
+     "new_insn": "mov rax, qword ptr [rip + 0x27c8c1a]->0x2ce41b8",
+     "old_function": null,
+     "new_function": null,
+     "ok": true,
+     "witness": "settings.entities"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "identity",
+   "live_check": "L1",
+   "notes": "brief: live-verified 0x346BF98->0x2CE41B8"
+  },
+  {
+   "id": "dive.global.avatars",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": [
+    81,
+    194
+   ],
+   "symbol": "global(0x3326d20) and GLOBAL_WAIT key",
+   "kind": "game.dll global: avatar manager",
+   "old": "0x3326d20",
+   "new": "0x2ce1ee0",
+   "changed": true,
+   "method": "RIP-relative references of the old global migrated by unique instruction windows (exact first, field displacements masked second); the new instruction's RIP target votes",
+   "witnesses": [
+    {
+     "kind": "global windows",
+     "old_sites": 1644,
+     "sampled": 64,
+     "votes": {
+      "0x2ce1ee0": 47
+     },
+     "exact_window_votes": {
+      "0x2ce1ee0": 43
+     },
+     "agreeing": 47,
+     "disagreeing": 0,
+     "distinct_old_functions": 47,
+     "examples": [
+      {
+       "old": "0x4c38ee",
+       "new": "0x4ca52e",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1ee0",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2e6342a]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x28179aa]",
+       "old_function": "0x4c38e0"
+      },
+      {
+       "old": "0x5e74eb",
+       "new": "0x5efe3b",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1ee0",
+       "instruction_old": "mov rbx, qword ptr [rip + 0x2d3f82e]",
+       "instruction_new": "mov rbx, qword ptr [rip + 0x26f209e]",
+       "old_function": "0x5e74b1"
+      },
+      {
+       "old": "0x60c05e",
+       "new": "0x61525e",
+       "window_bytes": 128,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1ee0",
+       "instruction_old": "mov r11, qword ptr [rip + 0x2d1acbb]",
+       "instruction_new": "mov r11, qword ptr [rip + 0x26ccc7b]",
+       "old_function": "0x60c01b"
+      }
+     ]
+    },
+    {
+     "old": "0x82dcaf",
+     "old_insn": "mov r11, qword ptr [rip + 0x2af906a]->0x3326d20",
+     "new": "0x83ab2f",
+     "new_insn": "mov r11, qword ptr [rip + 0x24a73aa]->0x2ce1ee0",
+     "old_function": "0x82dc80",
+     "new_function": "0x83ab00",
+     "ok": true,
+     "witness": "flags.am_global"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "identity",
+   "live_check": "L1",
+   "notes": "brief: live-verified 0x3326D20->0x2CE1EE0"
+  },
+  {
+   "id": "dive.global.water",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": [
+    81,
+    226
+   ],
+   "symbol": "global(0x3326a80) and GLOBAL_WAIT key",
+   "kind": "game.dll global: Drownable component manager",
+   "old": "0x3326a80",
+   "new": "0x2ce1c40",
+   "changed": true,
+   "method": "RIP-relative references of the old global migrated by unique instruction windows (exact first, field displacements masked second); the new instruction's RIP target votes",
+   "witnesses": [
+    {
+     "kind": "global windows",
+     "old_sites": 43,
+     "sampled": 43,
+     "votes": {
+      "0x2ce1c40": 34,
+      "0x2ce1778": 1
+     },
+     "exact_window_votes": {
+      "0x2ce1c40": 32
+     },
+     "agreeing": 34,
+     "disagreeing": 1,
+     "distinct_old_functions": 31,
+     "examples": [
+      {
+       "old": "0x54e8aa",
+       "new": "0x5576fa",
+       "window_bytes": 96,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1c40",
+       "instruction_old": "mov rbx, qword ptr [rip + 0x2dd81cf]",
+       "instruction_new": "mov rbx, qword ptr [rip + 0x278a53f]",
+       "old_function": "0x54e8a0"
+      },
+      {
+       "old": "0x54e92a",
+       "new": "0x55777a",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1c40",
+       "instruction_old": "mov rbx, qword ptr [rip + 0x2dd814f]",
+       "instruction_new": "mov rbx, qword ptr [rip + 0x278a4bf]",
+       "old_function": "0x54e920"
+      },
+      {
+       "old": "0x54ea1d",
+       "new": "0x55786d",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1c40",
+       "instruction_old": "mov rdi, qword ptr [rip + 0x2dd805c]",
+       "instruction_new": "mov rdi, qword ptr [rip + 0x278a3cc]",
+       "old_function": "0x54ea00"
+      }
+     ]
+    },
+    {
+     "old": "0x8340e8",
+     "old_insn": "mov r8, qword ptr [rip + 0x2af2991]->0x3326a80",
+     "new": "0x840f38",
+     "new_insn": "mov r8, qword ptr [rip + 0x24a0d01]->0x2ce1c40",
+     "old_function": "0x834019",
+     "new_function": "0x840e69",
+     "ok": true,
+     "witness": "stance.dm_global"
+    },
+    {
+     "old": "0x89d3ae",
+     "old_insn": "mov r14, qword ptr [rip + 0x2a896cb]->0x3326a80",
+     "new": "0x8aab8e",
+     "new_insn": "mov r14, qword ptr [rip + 0x24370ab]->0x2ce1c40",
+     "old_function": "0x89d370",
+     "new_function": "0x8aab50",
+     "ok": true,
+     "witness": "water.global"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "live_check": "L1",
+   "notes": "; 1 masked-window vote(s) elsewhere (outvoted)"
+  },
+  {
+   "id": "dive.global.stance",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": [
+    81,
+    256
+   ],
+   "symbol": "global(0x3326598) and GLOBAL_WAIT key",
+   "kind": "game.dll global: stance component manager",
+   "old": "0x3326598",
+   "new": "0x2ce1748",
+   "changed": true,
+   "method": "RIP-relative references of the old global migrated by unique instruction windows (exact first, field displacements masked second); the new instruction's RIP target votes",
+   "witnesses": [
+    {
+     "kind": "global windows",
+     "old_sites": 91,
+     "sampled": 64,
+     "votes": {
+      "0x2ce1748": 53,
+      "0x2ce1af0": 1
+     },
+     "exact_window_votes": {
+      "0x2ce1748": 52
+     },
+     "agreeing": 53,
+     "disagreeing": 1,
+     "distinct_old_functions": 44,
+     "examples": [
+      {
+       "old": "0x4a91ca",
+       "new": "0x4afa8a",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1748",
+       "instruction_old": "mov r10, qword ptr [rip + 0x2e7d3c7]",
+       "instruction_new": "mov r10, qword ptr [rip + 0x2831cb7]",
+       "old_function": "0x4a91c0"
+      },
+      {
+       "old": "0x4b28b7",
+       "new": "0x4b9177",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1748",
+       "instruction_old": "mov rbx, qword ptr [rip + 0x2e73cd9]",
+       "instruction_new": "mov rbx, qword ptr [rip + 0x28285c9]",
+       "old_function": "0x4b2890"
+      },
+      {
+       "old": "0x4b5bbe",
+       "new": "0x4bc4ae",
+       "window_bytes": 160,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1748",
+       "instruction_old": "mov rbx, qword ptr [rip + 0x2e709d3]",
+       "instruction_new": "mov rbx, qword ptr [rip + 0x2825293]",
+       "old_function": "0x4b5b90"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "value",
+   "live_check": "L1",
+   "notes": "; 1 masked-window vote(s) elsewhere (outvoted)"
+  },
+  {
+   "id": "dive.global.movement",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": [
+    81,
+    271
+   ],
+   "symbol": "global(0x3326558) and GLOBAL_WAIT key",
+   "kind": "game.dll global: movement / position component manager",
+   "old": "0x3326558",
+   "new": "0x2ce1708",
+   "changed": true,
+   "method": "RIP-relative references of the old global migrated by unique instruction windows (exact first, field displacements masked second); the new instruction's RIP target votes",
+   "witnesses": [
+    {
+     "kind": "global windows",
+     "old_sites": 426,
+     "sampled": 64,
+     "votes": {
+      "0x2ce1708": 46,
+      "0x2ce1ef0": 1
+     },
+     "exact_window_votes": {
+      "0x2ce1708": 46
+     },
+     "agreeing": 46,
+     "disagreeing": 1,
+     "distinct_old_functions": 46,
+     "examples": [
+      {
+       "old": "0xbad7c",
+       "new": "0x42bf3c",
+       "window_bytes": 96,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1708",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x326b7d5]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x28b57c5]",
+       "old_function": "0xbad70"
+      },
+      {
+       "old": "0xdb710",
+       "new": "0xddeb0",
+       "window_bytes": 32,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1708",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x324ae41]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x2c03851]",
+       "old_function": "0xdb640"
+      },
+      {
+       "old": "0x140322",
+       "new": "0x13ffd2",
+       "window_bytes": 32,
+       "field_displacements_masked": false,
+       "new_global": "0x2ce1708",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x31e622f]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x2ba172f]",
+       "old_function": "0x1401b0"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "gate",
+   "live_check": "L1",
+   "notes": "; 1 masked-window vote(s) elsewhere (outvoted)"
+  },
+  {
+   "id": "dive.mission.fields",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 167,
+   "symbol": "read(mode,0x44); u(mode+8), u(mode+0x40) in 1..7",
+   "kind": "struct offsets",
+   "old": "+8, +0x40 (1..7)",
+   "new": "+8, +0x40 (1..7)",
+   "changed": false,
+   "method": "aligned field pairs of functions loading the global",
+   "witnesses": [
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "MODE+0x8",
+     "new": [
+      [
+       "MODE",
+       "0x8",
+       115
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x572d50",
+       "new": "0x57bde2",
+       "old_function": "0x571250",
+       "new_function": "0x57a1f0",
+       "old_insn": "cmp dword ptr [rax + 8], 0",
+       "new_insn": "cmp dword ptr [rax + 8], 0"
+      },
+      {
+       "old": "0x573427",
+       "new": "0x57c4a7",
+       "old_function": "0x571250",
+       "new_function": "0x57a1f0",
+       "old_insn": "cmp dword ptr [rcx + 8], 0",
+       "new_insn": "cmp dword ptr [rcx + 8], 0"
+      }
+     ]
+    },
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "MODE+0x40",
+     "new": [
+      [
+       "MODE",
+       "0x40",
+       92
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x572d56",
+       "new": "0x57bde8",
+       "old_function": "0x571250",
+       "new_function": "0x57a1f0",
+       "old_insn": "cmp dword ptr [rax + 0x40], 4",
+       "new_insn": "cmp dword ptr [rax + 0x40], 4"
+      },
+      {
+       "old": "0xa890f8",
+       "new": "0xaa4b58",
+       "old_function": "0xa89093",
+       "new_function": "0xaa4af3",
+       "old_insn": "cmp dword ptr [rax + 0x40], 4",
+       "new_insn": "cmp dword ptr [rax + 0x40], 4"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "gate",
+   "live_check": "L1",
+   "notes": "Offsets unchanged (115 / 92 aligned pairs). The 1..7 range is the mod's plausibility test of the mode value; it is not tied to a code witness here; checked live (L1)."
+  },
+  {
+   "id": "dive.player.fields",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": [
+    172,
+    176,
+    180
+   ],
+   "symbol": "pm+0x84 counts, +0xe8 player, +0x3a8 unit; player+20 bit 0",
+   "kind": "struct offsets",
+   "old": "+0x84, +0x88, +0xe8, +0x3a8",
+   "new": "+0x84, +0x88, +0xe8, +0x3a8",
+   "changed": false,
+   "method": "aligned field pairs of functions loading the global",
+   "witnesses": [
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "PM+0x84",
+     "new": [
+      [
+       "PM",
+       "0x84",
+       105
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x609382",
+       "new": "0x612552",
+       "old_function": "0x609288",
+       "new_function": "0x612458",
+       "old_insn": "mov r9d, dword ptr [r8 + 0x84]",
+       "new_insn": "mov r9d, dword ptr [r8 + 0x84]"
+      },
+      {
+       "old": "0x609a83",
+       "new": "0x612c86",
+       "old_function": "0x609288",
+       "new_function": "0x612458",
+       "old_insn": "cmp dword ptr [rax + 0x84], 1",
+       "new_insn": "cmp dword ptr [rax + 0x84], 1"
+      }
+     ]
+    },
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "PM+0x88",
+     "new": [
+      [
+       "PM",
+       "0x88",
+       100
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x60972f",
+       "new": "0x6128ff",
+       "old_function": "0x609288",
+       "new_function": "0x612458",
+       "old_insn": "cmp dword ptr [rax + 0x88], 0",
+       "new_insn": "cmp dword ptr [rax + 0x88], 0"
+      },
+      {
+       "old": "0x820a4b",
+       "new": "0x82da5b",
+       "old_function": "0x820a34",
+       "new_function": "0x82da44",
+       "old_insn": "cmp dword ptr [rax + 0x88], r12d",
+       "new_insn": "cmp dword ptr [rax + 0x88], r12d"
+      }
+     ]
+    },
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "PM+0xe8",
+     "new": [
+      [
+       "PM",
+       "0xe8",
+       47
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x116d20f",
+       "new": "0xffdcbf",
+       "old_function": "0x116d0a0",
+       "new_function": "0xffdb4a",
+       "old_insn": "mov rax, qword ptr [rax + 0xe8]",
+       "new_insn": "mov rax, qword ptr [rax + 0xe8]"
+      },
+      {
+       "old": "0x116d5d5",
+       "new": "0xffe085",
+       "old_function": "0x116d0a0",
+       "new_function": "0xffdb4a",
+       "old_insn": "mov r14, qword ptr [rax + 0xe8]",
+       "new_insn": "mov r14, qword ptr [rax + 0xe8]"
+      }
+     ]
+    },
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "PM+0x3a8",
+     "new": [
+      [
+       "PM",
+       "0x3a8",
+       51
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x609738",
+       "new": "0x612908",
+       "old_function": "0x609288",
+       "new_function": "0x612458",
+       "old_insn": "mov edx, dword ptr [rax + 0x3a8]",
+       "new_insn": "mov edx, dword ptr [rax + 0x3a8]"
+      },
+      {
+       "old": "0x820a54",
+       "new": "0x82da64",
+       "old_function": "0x820a34",
+       "new_function": "0x82da44",
+       "old_insn": "mov edx, dword ptr [rax + 0x3a8]",
+       "new_insn": "mov edx, dword ptr [rax + 0x3a8]"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "identity",
+   "live_check": "L2",
+   "notes": "Same values the HDH/HYS ports use (live-verified there)."
+  },
+  {
+   "id": "dive.entity.network_map",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 185,
+   "symbol": "owner+0xf22ec8",
+   "kind": "entities field: network-id map",
+   "old": "0xf22ec8",
+   "new": "0xf24990",
+   "changed": true,
+   "method": "whole-image displacement scan (field_scan.py): 17 of 17 mapped sites agree",
+   "witnesses": [
+    {
+     "kind": "displacement scan",
+     "old_sites": 26,
+     "mapped": 17,
+     "votes": {
+      "0xf24990": 17
+     }
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "identity",
+   "live_check": "L2",
+   "notes": "brief: live-verified 0xF22EC8->0xF24990"
+  },
+  {
+   "id": "dive.entity.records",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 189,
+   "symbol": "owner+0xf32f18+ei*24",
+   "kind": "entities field: 24-byte entity records",
+   "old": "0xf32f18",
+   "new": "0xf349e0",
+   "changed": true,
+   "method": "brief's live-verified value; field pairs show +0xf32f24 (indexed, record +0xc) -> +0xf349ec (5)",
+   "witnesses": [
+    {
+     "kind": "brief live verification",
+     "value": "0xF32F18->0xF349E0"
+    },
+    {
+     "kind": "field pair",
+     "old": "ENT+0xf32f24 [idx*8]",
+     "new": "ENT+0xf349ec",
+     "count": 5
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "identity",
+   "live_check": "L2",
+   "notes": ""
+  },
+  {
+   "id": "dive.entity.limits",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": [
+    186,
+    188
+   ],
+   "symbol": "lookup limit 1048576, ei<262144",
+   "kind": "sanity bounds",
+   "old": "1048576, 262144",
+   "new": "1048576, 262144",
+   "changed": false,
+   "method": "unchanged: plausibility bounds only (a smaller real map passes; a larger one would make the mod wait, never write elsewhere)",
+   "witnesses": [],
+   "confidence": "medium",
+   "feeds_write": false,
+   "role": "gate",
+   "live_check": "L2",
+   "notes": ""
+  },
+  {
+   "id": "dive.entity.avatar_resource",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 52,
+   "symbol": "RESOURCE",
+   "kind": "resource name hash",
+   "old": "0x4D1C334D294DFA97",
+   "new": "0x4D1C334D294DFA97",
+   "changed": false,
+   "method": "murmur64 of \"content/fac_helldivers/cha_avatar/avatar_helldiver\" (archive.py resource_hash) equals the constant: name-derived, not build data; present in both images (7 / 6 times)",
+   "witnesses": [
+    {
+     "kind": "name hash",
+     "name": "content/fac_helldivers/cha_avatar/avatar_helldiver",
+     "equal": true
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "identity",
+   "live_check": "L2",
+   "notes": ""
+  },
+  {
+   "id": "dive.avatar.fields",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": [
+    196,
+    197,
+    204
+   ],
+   "symbol": "am+0x6c count, +0xf8 map, +0x110 registry",
+   "kind": "struct offsets",
+   "old": "+0x6c, +0xf8, +0x110",
+   "new": "+0x6c, +0xf8, +0x110",
+   "changed": false,
+   "method": "aligned field pairs",
+   "witnesses": [
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "AM+0x6c",
+     "new": [
+      [
+       "AM",
+       "0x6c",
+       32
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x3a54e3",
+       "new": "0x3ac1e3",
+       "old_function": "0x3a5294",
+       "new_function": "0x3abf94",
+       "old_insn": "cmp dword ptr [rax + 0x6c], ebx",
+       "new_insn": "cmp dword ptr [rax + 0x6c], ebx"
+      },
+      {
+       "old": "0x9ff0d8",
+       "new": "0xa11a88",
+       "old_function": "0x9fee76",
+       "new_function": "0xa11826",
+       "old_insn": "cmp dword ptr [r8 + 0x6c], edi",
+       "new_insn": "cmp dword ptr [r8 + 0x6c], edi"
+      }
+     ]
+    },
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "AM+0xf8",
+     "new": [
+      [
+       "AM",
+       "0xf8",
+       228
+      ],
+      [
+       "MM",
+       "0x48a0",
+       1
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x609812",
+       "new": "0x6129e2",
+       "old_function": "0x609288",
+       "new_function": "0x612458",
+       "old_insn": "mov r11, qword ptr [r14 + 0xf8]",
+       "new_insn": "mov r11, qword ptr [r14 + 0xf8]"
+      },
+      {
+       "old": "0x694526",
+       "new": "0x69e5b6",
+       "old_function": "0x6941fa",
+       "new_function": "0x69e28a",
+       "old_insn": "mov r11, qword ptr [rax + 0xf8]",
+       "new_insn": "mov r11, qword ptr [rax + 0xf8]"
+      }
+     ]
+    },
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "AM+0x100",
+     "new": [
+      [
+       "AM",
+       "0x100",
+       216
+      ],
+      [
+       "MM",
+       "0x48a8",
+       1
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x6097f3",
+       "new": "0x6129c3",
+       "old_function": "0x609288",
+       "new_function": "0x612458",
+       "old_insn": "mov r9d, dword ptr [r14 + 0x100]",
+       "new_insn": "mov r9d, dword ptr [r14 + 0x100]"
+      },
+      {
+       "old": "0x694512",
+       "new": "0x69e5a2",
+       "old_function": "0x6941fa",
+       "new_function": "0x69e28a",
+       "old_insn": "mov r9d, dword ptr [rax + 0x100]",
+       "new_insn": "mov r9d, dword ptr [rax + 0x100]"
+      }
+     ]
+    },
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "AM+0x104",
+     "new": [
+      [
+       "AM",
+       "0x104",
+       207
+      ],
+      [
+       "MM",
+       "0x48ac",
+       1
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x609819",
+       "new": "0x6129e9",
+       "old_function": "0x609288",
+       "new_function": "0x612458",
+       "old_insn": "mov edi, dword ptr [r14 + 0x104]",
+       "new_insn": "mov edi, dword ptr [r14 + 0x104]"
+      },
+      {
+       "old": "0x69452d",
+       "new": "0x69e5bd",
+       "old_function": "0x6941fa",
+       "new_function": "0x69e28a",
+       "old_insn": "mov edi, dword ptr [rax + 0x104]",
+       "new_insn": "mov edi, dword ptr [rax + 0x104]"
+      }
+     ]
+    },
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "AM+0x108",
+     "new": [
+      [
+       "AM",
+       "0x108",
+       219
+      ],
+      [
+       "MM",
+       "0x48b0",
+       1
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x6097fc",
+       "new": "0x6129cc",
+       "old_function": "0x609288",
+       "new_function": "0x612458",
+       "old_insn": "mov r10d, dword ptr [r14 + 0x108]",
+       "new_insn": "mov r10d, dword ptr [r14 + 0x108]"
+      },
+      {
+       "old": "0x69450b",
+       "new": "0x69e59b",
+       "old_function": "0x6941fa",
+       "new_function": "0x69e28a",
+       "old_insn": "mov r10d, dword ptr [rax + 0x108]",
+       "new_insn": "mov r10d, dword ptr [rax + 0x108]"
+      }
+     ]
+    },
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "AM+0x110",
+     "new": [
+      [
+       "AM",
+       "0x110",
+       6
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x3a54e8",
+       "new": "0x3ac1e8",
+       "old_function": "0x3a5294",
+       "new_function": "0x3abf94",
+       "old_insn": "mov rax, qword ptr [rax + 0x110]",
+       "new_insn": "mov rax, qword ptr [rax + 0x110]"
+      },
+      {
+       "old": "0x9ff1b5",
+       "new": "0xa11b65",
+       "old_function": "0x9fee76",
+       "new_function": "0xa11826",
+       "old_insn": "mov rdx, qword ptr [rax + 0x110]",
+       "new_insn": "mov rdx, qword ptr [rax + 0x110]"
+      }
+     ]
+    },
+    {
+     "old": "0x82dcda",
+     "old_insn": "mov r14, qword ptr [r11 + 0xf8]",
+     "new": "0x83ab5a",
+     "new_insn": "mov r14, qword ptr [r11 + 0xf8]",
+     "old_function": "0x82dc80",
+     "new_function": "0x83ab00",
+     "ok": true,
+     "witness": "flags.am_map"
+    },
+    {
+     "old": "0x83404d",
+     "old_insn": "mov r10, qword ptr [r15 + 0xf8]",
+     "new": "0x840e9d",
+     "new_insn": "mov r10, qword ptr [r15 + 0xf8]",
+     "old_function": "0x834019",
+     "new_function": "0x840e69",
+     "ok": true,
+     "witness": "stance.am_map"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "identity",
+   "live_check": "L3",
+   "notes": ""
+  },
+  {
+   "id": "dive.avatar.controller_base",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 208,
+   "symbol": "am+0x53d900",
+   "kind": "avatar manager: per-avatar records",
+   "old": "0x53d900",
+   "new": "0x53d900",
+   "changed": false,
+   "method": "aligned instruction pairs; displacement scan 46 + 10 immediates agree",
+   "witnesses": [
+    {
+     "old": "0x82de4d",
+     "old_insn": "lea rsi, [r13 + 0x53d900]",
+     "new": "0x83accd",
+     "new_insn": "lea rsi, [r13 + 0x53d900]",
+     "old_function": "0x82de16",
+     "new_function": "0x83ac96",
+     "ok": true,
+     "witness": "flags.base"
+    },
+    {
+     "kind": "displacement scan",
+     "votes": {
+      "0x53d900 (disp)": 46,
+      "0x53d900 (imm)": 10
+     }
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "identity",
+   "live_check": "L3",
+   "notes": ""
+  },
+  {
+   "id": "dive.avatar.stride",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 208,
+   "symbol": "ai*0x1238",
+   "kind": "per-avatar record stride",
+   "old": "0x1238",
+   "new": "0x1240",
+   "changed": true,
+   "method": "every aligned imul of the old stride in functions loading the avatar manager carries the new one (imm_scan: 237 imul + 9 mov 0x1238->0x1240; one unrelated pair); also native-work/dbf-experiments-port actor_layout (0x1238->0x1240)",
+   "witnesses": [
+    {
+     "old": "0x82dd9e",
+     "old_insn": "imul r13, r8, 0x1238",
+     "new": "0x83ac1e",
+     "new_insn": "imul r13, r8, 0x1240",
+     "old_function": "0x82dd20",
+     "new_function": "0x83aba0",
+     "ok": true,
+     "witness": "flags.stride"
+    },
+    {
+     "old": "0x8340a6",
+     "old_insn": "imul rdx, rcx, 0x1238",
+     "new": "0x840ef6",
+     "new_insn": "imul rdx, rcx, 0x1240",
+     "old_function": "0x834019",
+     "new_function": "0x840e69",
+     "ok": true,
+     "witness": "stance.am_stride"
+    },
+    {
+     "kind": "immediate pairs",
+     "imul 0x1238->0x1240": 237,
+     "mov 0x1238->0x1240": 9,
+     "other": "imul 0x1238->0x1c x1 (0x9b494e: a different function aligned onto it)"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "identity",
+   "live_check": "L3",
+   "notes": ""
+  },
+  {
+   "id": "dive.controller.record",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": [
+    150,
+    211,
+    215
+   ],
+   "symbol": "CONTROLLER=0xb84: id +0, elapsed +8, landing +12",
+   "kind": "per-avatar record: dive record",
+   "old": "0xb84 (+0xb8c, +0xb90)",
+   "new": "0xb84 (+0xb8c, +0xb90)",
+   "changed": false,
+   "method": "record functions aligned with ratio >= 0.94 (old 0xa3e620/0xa3edf0/0xa3f220 -> new 0xa58d40/0xa59520/0xa59950) keep every field 0xb64..0xf40 at the same offset (0xb80, 0xb84, 0xb98, 0xbac, 0xbb0, 0xd54 ...); the inserted 8 bytes sit between +0xf40 (unchanged) and +0xf48 (->+0xf50). 0xa3f220 takes am+0x53d900 (+index*stride) as its record (caller 0x68bb6f). Whole-image scans: 0xb84 x30, 0xb8c x32, 0xb90 x44 unchanged",
+   "witnesses": [
+    {
+     "old": "0x68bb72",
+     "old_insn": "lea rcx, [rsi + 0x53d900]",
+     "new": null,
+     "new_insn": null,
+     "old_function": "0x68b730",
+     "new_function": null,
+     "ok": true,
+     "witness": "record.caller_base"
+    },
+    {
+     "old": "0xa3f23a",
+     "old_insn": "lea r14, [rcx + 0xf80]",
+     "new": "0xa5996a",
+     "new_insn": "lea r14, [rcx + 0xf88]",
+     "old_function": "0xa3f220",
+     "new_function": "0xa59950",
+     "ok": true,
+     "witness": "record.flag_block"
+    },
+    {
+     "kind": "aligned record functions",
+     "unchanged": "0xb68 0xb80 0xb84 0xb98 0xbb0 0xd58 0xd68 ... 0xf3c 0xf40",
+     "changed": "0xf48->0xf50, 0xf50->0xf58, 0xf54->0xf5c, 0xf80->0xf88"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "gate",
+   "live_check": "L3",
+   "notes": ""
+  },
+  {
+   "id": "dive.controller.flags",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": [
+    150,
+    210
+   ],
+   "symbol": "FLAGS=0xf80-0xb84, CONTROLLER_SIZE=0x414, guard +0xf80",
+   "kind": "per-avatar record: 3-qword state flag set",
+   "old": "0xf80 (size 0x414)",
+   "new": "0xf88 (size 0x41c)",
+   "changed": true,
+   "method": "aligned instruction pairs in the flag update (old 0x82dc80 / new 0x83ab00, ratio 1.0) and the record commit function; the three flag qwords move +8 together; the read size follows (0xf88+24-0xb84 = 0x41c)",
+   "witnesses": [
+    {
+     "old": "0x82de56",
+     "old_insn": "lea r14, [rsi + 0xf80]",
+     "new": "0x83acd6",
+     "new_insn": "lea r14, [rsi + 0xf88]",
+     "old_function": "0x82de16",
+     "new_function": "0x83ac96",
+     "ok": true,
+     "witness": "flags.block"
+    },
+    {
+     "old": "0x82dfde",
+     "old_insn": "mov r11, qword ptr [rsi + 0xf80]",
+     "new": "0x83ae5e",
+     "new_insn": "mov r11, qword ptr [rsi + 0xf88]",
+     "old_function": "0x82de16",
+     "new_function": "0x83ac96",
+     "ok": true,
+     "witness": "flags.q0"
+    },
+    {
+     "old": "0x82dfe5",
+     "old_insn": "mov rdx, qword ptr [rsi + 0xf88]",
+     "new": "0x83ae65",
+     "new_insn": "mov rdx, qword ptr [rsi + 0xf90]",
+     "old_function": "0x82de16",
+     "new_function": "0x83ac96",
+     "ok": true,
+     "witness": "flags.q1"
+    },
+    {
+     "old": "0x82dfd7",
+     "old_insn": "test qword ptr [rsi + 0xf90], r10",
+     "new": "0x83ae57",
+     "new_insn": "test qword ptr [rsi + 0xf98], r10",
+     "old_function": "0x82de16",
+     "new_function": "0x83ac96",
+     "ok": true,
+     "witness": "flags.q2"
+    },
+    {
+     "old": "0xa3f23a",
+     "old_insn": "lea r14, [rcx + 0xf80]",
+     "new": "0xa5996a",
+     "new_insn": "lea r14, [rcx + 0xf88]",
+     "old_function": "0xa3f220",
+     "new_function": "0xa59950",
+     "ok": true,
+     "witness": "record.flag_block"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "gate",
+   "live_check": "L3",
+   "notes": ""
+  },
+  {
+   "id": "dive.controller.flag_bits",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": [
+    212,
+    213,
+    214,
+    448
+   ],
+   "symbol": "dive 0x20 @+12, swim 0x80000000 @+8, ragdoll 0x10 @+12",
+   "kind": "state flag numbering",
+   "old": "qword1 bits 37, 31, 36",
+   "new": "qword1 bits 37, 31, 36",
+   "changed": false,
+   "method": "each bts/btr of a flag bit in the 123 aligned callers of the record commit function was followed to the qword it is combined with (flag_qwords.py): all 48 distinct qword-1 bits keep their number, bits 31, 36 and 37 among them; the one change seen is in qword 2 (bit 9 -> 10, a state inserted there), which this mod does not read",
+   "witnesses": [
+    {
+     "kind": "flag bits by qword",
+     "qword1_bits_seen": 48,
+     "qword1_changed": [],
+     "other_qword_changes": [
+      {
+       "old_qword": 2,
+       "old_bit": 9,
+       "new_qword": 2,
+       "new_bit": 10,
+       "state_index_old": 137,
+       "count": 1,
+       "examples": [
+        [
+         "0xa6ff49",
+         "0xa8b939",
+         "or qword ptr [rbx + 0xf90], rdi",
+         "or qword ptr [rbx + 0xf98], rdi"
+        ]
+       ]
+      }
+     ],
+     "bits_31_36_37": {
+      "31": [
+       {
+        "old_qword": 1,
+        "old_bit": 31,
+        "new_qword": 1,
+        "new_bit": 31,
+        "state_index_old": 95,
+        "count": 1,
+        "examples": [
+         [
+          "0xa91ed8",
+          "0xaad938",
+          "or qword ptr [r15 + 0xf88], rbx",
+          "or qword ptr [r15 + 0xf90], rbx"
+         ]
+        ]
+       }
+      ],
+      "36": [
+       {
+        "old_qword": 1,
+        "old_bit": 36,
+        "new_qword": 1,
+        "new_bit": 36,
+        "state_index_old": 100,
+        "count": 1,
+        "examples": [
+         [
+          "0xa760e5",
+          "0xa91b45",
+          "or qword ptr [rdi + 0xf88], r10",
+          "or qword ptr [rdi + 0xf90], r10"
+         ]
+        ]
+       }
+      ],
+      "37": [
+       {
+        "old_qword": 1,
+        "old_bit": 37,
+        "new_qword": 1,
+        "new_bit": 37,
+        "state_index_old": 101,
+        "count": 2,
+        "examples": [
+         [
+          "0xa50989",
+          "0xa6b199",
+          "or qword ptr [rbx + 0xf88], r11",
+          "or qword ptr [rbx + 0xf90], r11"
+         ],
+         [
+          "0xa50989",
+          "0xa6b199",
+          "or qword ptr [rbx + 0xf88], r11",
+          "or qword ptr [rbx + 0xf90], r11"
+         ]
+        ]
+       }
+      ]
+     }
+    },
+    {
+     "kind": "flag-setter immediates (all qwords)",
+     "callers": 171,
+     "aligned": 123,
+     "changed": [
+      {
+       "mnemonic": "bts",
+       "old": "0x9",
+       "new": "0xa",
+       "bit_old": 9,
+       "bit_new": 10,
+       "count": 2,
+       "example": [
+        "0xa6ff49",
+        "0xa8b939"
+       ]
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "gate",
+   "live_check": "L3",
+   "notes": ""
+  },
+  {
+   "id": "dive.water.manager_fields",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": [
+    229,
+    230,
+    232,
+    236,
+    242,
+    246
+   ],
+   "symbol": "dm+8 capacity, +32 map, +56 owners, +64 data, +72 enabled",
+   "kind": "Drownable manager fields",
+   "old": "+8, +0x20, +0x38, +0x40, +0x48",
+   "new": "+8, +0x20, +0x38, +0x40, +0x48",
+   "changed": false,
+   "method": "aligned field pairs, and the game's own lookup/write functions (old 0x89d370 / 0x834000) unchanged",
+   "witnesses": [
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "DM+0x8",
+     "new": [
+      [
+       "DM",
+       "0x8",
+       4
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x54e8ca",
+       "new": "0x55771a",
+       "old_function": "0x54e8a0",
+       "new_function": "0x5576e4",
+       "old_insn": "cmp r8d, dword ptr [rbx + 8]",
+       "new_insn": "cmp r8d, dword ptr [rbx + 8]"
+      },
+      {
+       "old": "0x54e947",
+       "new": "0x557797",
+       "old_function": "0x54e920",
+       "new_function": "0x55776e",
+       "old_insn": "cmp eax, dword ptr [rbx + 8]",
+       "new_insn": "cmp eax, dword ptr [rbx + 8]"
+      }
+     ]
+    },
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "DM+0x20",
+     "new": [
+      [
+       "DM",
+       "0x20",
+       27
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x694310",
+       "new": "0x69e3a0",
+       "old_function": "0x6941fa",
+       "new_function": "0x69e28a",
+       "old_insn": "mov r11, qword ptr [rax + 0x20]",
+       "new_insn": "mov r11, qword ptr [rax + 0x20]"
+      },
+      {
+       "old": "0x700cdf",
+       "new": "0x70be2f",
+       "old_function": "0x6ff055",
+       "new_function": "0x70a1a5",
+       "old_insn": "mov r11, qword ptr [rcx + 0x20]",
+       "new_insn": "mov r11, qword ptr [rcx + 0x20]"
+      }
+     ]
+    },
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "DM+0x28",
+     "new": [
+      [
+       "DM",
+       "0x28",
+       35
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x694303",
+       "new": "0x69e393",
+       "old_function": "0x6941fa",
+       "new_function": "0x69e28a",
+       "old_insn": "mov r9d, dword ptr [rax + 0x28]",
+       "new_insn": "mov r9d, dword ptr [rax + 0x28]"
+      },
+      {
+       "old": "0x700cca",
+       "new": "0x70be1a",
+       "old_function": "0x6ff055",
+       "new_function": "0x70a1a5",
+       "old_insn": "mov r9d, dword ptr [rcx + 0x28]",
+       "new_insn": "mov r9d, dword ptr [rcx + 0x28]"
+      }
+     ]
+    },
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "DM+0x2c",
+     "new": [
+      [
+       "DM",
+       "0x2c",
+       23
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x694314",
+       "new": "0x69e3a4",
+       "old_function": "0x6941fa",
+       "new_function": "0x69e28a",
+       "old_insn": "mov eax, dword ptr [rax + 0x2c]",
+       "new_insn": "mov eax, dword ptr [rax + 0x2c]"
+      },
+      {
+       "old": "0x700ce3",
+       "new": "0x70be33",
+       "old_function": "0x6ff055",
+       "new_function": "0x70a1a5",
+       "old_insn": "mov ebx, dword ptr [rcx + 0x2c]",
+       "new_insn": "mov ebx, dword ptr [rcx + 0x2c]"
+      }
+     ]
+    },
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "DM+0x30",
+     "new": [
+      [
+       "DM",
+       "0x30",
+       30
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x6942ff",
+       "new": "0x69e38f",
+       "old_function": "0x6941fa",
+       "new_function": "0x69e28a",
+       "old_insn": "mov r10d, dword ptr [rax + 0x30]",
+       "new_insn": "mov r10d, dword ptr [rax + 0x30]"
+      },
+      {
+       "old": "0x700cce",
+       "new": "0x70be1e",
+       "old_function": "0x6ff055",
+       "new_function": "0x70a1a5",
+       "old_insn": "mov r10d, dword ptr [rcx + 0x30]",
+       "new_insn": "mov r10d, dword ptr [rcx + 0x30]"
+      }
+     ]
+    },
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "DM+0x38",
+     "new": [
+      [
+       "DM",
+       "0x38",
+       13
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x69316b",
+       "new": "0x69d1fb",
+       "old_function": "0x692702",
+       "new_function": "0x69c792",
+       "old_insn": "mov rax, qword ptr [rsi + 0x38]",
+       "new_insn": "mov rax, qword ptr [rsi + 0x38]"
+      },
+      {
+       "old": "0x693190",
+       "new": "0x69d220",
+       "old_function": "0x692702",
+       "new_function": "0x69c792",
+       "old_insn": "mov rax, qword ptr [rsi + 0x38]",
+       "new_insn": "mov rax, qword ptr [rsi + 0x38]"
+      }
+     ]
+    },
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "DM+0x40",
+     "new": [
+      [
+       "DM",
+       "0x40",
+       15
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x6943a5",
+       "new": "0x69e435",
+       "old_function": "0x6941fa",
+       "new_function": "0x69e28a",
+       "old_insn": "mov rax, qword ptr [rax + 0x40]",
+       "new_insn": "mov rax, qword ptr [rax + 0x40]"
+      },
+      {
+       "old": "0x54e8e8",
+       "new": "0x557738",
+       "old_function": "0x54e8a0",
+       "new_function": "0x5576e4",
+       "old_insn": "add rax, qword ptr [rbx + 0x40]",
+       "new_insn": "add rax, qword ptr [rbx + 0x40]"
+      }
+     ]
+    },
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "DM+0x48",
+     "new": [
+      [
+       "DM",
+       "0x48",
+       5
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x69317d",
+       "new": "0x69d20d",
+       "old_function": "0x692702",
+       "new_function": "0x69c792",
+       "old_insn": "mov rax, qword ptr [rsi + 0x48]",
+       "new_insn": "mov rax, qword ptr [rsi + 0x48]"
+      },
+      {
+       "old": "0x693194",
+       "new": "0x69d224",
+       "old_function": "0x692702",
+       "new_function": "0x69c792",
+       "old_insn": "mov r8, qword ptr [rsi + 0x48]",
+       "new_insn": "mov r8, qword ptr [rsi + 0x48]"
+      }
+     ]
+    },
+    {
+     "old": "0x89d42b",
+     "old_insn": "mov r13, qword ptr [r14 + 0x38]",
+     "new": "0x8aac0b",
+     "new_insn": "mov r13, qword ptr [r14 + 0x38]",
+     "old_function": "0x89d370",
+     "new_function": "0x8aab50",
+     "ok": true,
+     "witness": "water.owners"
+    },
+    {
+     "old": "0x89d439",
+     "old_insn": "mov eax, dword ptr [r13 + 8]",
+     "new": "0x8aac19",
+     "new_insn": "mov eax, dword ptr [r13 + 8]",
+     "old_function": "0x89d370",
+     "new_function": "0x8aab50",
+     "ok": true,
+     "witness": "water.owner_id"
+    },
+    {
+     "old": "0x89d557",
+     "old_insn": "mov rax, qword ptr [r14 + 0x40]",
+     "new": "0x8aad37",
+     "new_insn": "mov rax, qword ptr [r14 + 0x40]",
+     "old_function": "0x89d370",
+     "new_function": "0x8aab50",
+     "ok": true,
+     "witness": "water.data"
+    },
+    {
+     "old": "0x83410e",
+     "old_insn": "mov r10, qword ptr [r8 + 0x20]",
+     "new": "0x840f5e",
+     "new_insn": "mov r10, qword ptr [r8 + 0x20]",
+     "old_function": "0x8340fb",
+     "new_function": "0x840f4b",
+     "ok": true,
+     "witness": "stance.dm_rows"
+    },
+    {
+     "old": "0x8340fb",
+     "old_insn": "mov edx, dword ptr [r8 + 0x28]",
+     "new": "0x840f4b",
+     "new_insn": "mov edx, dword ptr [r8 + 0x28]",
+     "old_function": "0x8340fb",
+     "new_function": "0x840f4b",
+     "ok": true,
+     "witness": "stance.dm_capacity"
+    },
+    {
+     "old": "0x834112",
+     "old_insn": "mov r11d, dword ptr [r8 + 0x2c]",
+     "new": "0x840f62",
+     "new_insn": "mov r11d, dword ptr [r8 + 0x2c]",
+     "old_function": "0x8340fb",
+     "new_function": "0x840f4b",
+     "ok": true,
+     "witness": "stance.dm_empty"
+    },
+    {
+     "old": "0x8340ff",
+     "old_insn": "mov r9d, dword ptr [r8 + 0x30]",
+     "new": "0x840f4f",
+     "new_insn": "mov r9d, dword ptr [r8 + 0x30]",
+     "old_function": "0x8340fb",
+     "new_function": "0x840f4b",
+     "ok": true,
+     "witness": "stance.dm_mult"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "live_check": "L4",
+   "notes": ""
+  },
+  {
+   "id": "dive.water.record",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": [
+    244,
+    250,
+    251,
+    252,
+    254,
+    509,
+    523
+   ],
+   "symbol": "data+28*di: +1 deep, +4 node, +8 offset, +16 drown elapsed, +20 remaining, +24 surface",
+   "kind": "Drownable record layout (the two written floats are +8 and +16)",
+   "old": "stride 28; +1 +4 +8 +16 +20 +24",
+   "new": "stride 28; +1 +4 +8 +16 +20 +24",
+   "changed": false,
+   "method": "the game writes record +8 itself with settings base +0.4/+0.9 (old 0x834158 / new 0x840fa8); every aligned access through an imul-0x1c index in the 39 Drownable functions keeps its displacement (33 stride pairs equal)",
+   "witnesses": [
+    {
+     "old": "0x834150",
+     "old_insn": "imul rcx, rax, 0x1c",
+     "new": "0x840fa0",
+     "new_insn": "imul rcx, rax, 0x1c",
+     "old_function": "0x8340fb",
+     "new_function": "0x840f4b",
+     "ok": true,
+     "witness": "stance.dm_stride"
+    },
+    {
+     "old": "0x834154",
+     "old_insn": "mov rax, qword ptr [r8 + 0x40]",
+     "new": "0x840fa4",
+     "new_insn": "mov rax, qword ptr [r8 + 0x40]",
+     "old_function": "0x8340fb",
+     "new_function": "0x840f4b",
+     "ok": true,
+     "witness": "stance.dm_data"
+    },
+    {
+     "old": "0x834158",
+     "old_insn": "movss dword ptr [rcx + rax + 8], xmm0",
+     "new": "0x840fa8",
+     "new_insn": "movss dword ptr [rcx + rax + 8], xmm0",
+     "old_function": "0x8340fb",
+     "new_function": "0x840f4b",
+     "ok": true,
+     "witness": "stance.offset_write"
+    },
+    {
+     "old": "0x89d55b",
+     "old_insn": "imul r9, r8, 0x1c",
+     "new": "0x8aad3b",
+     "new_insn": "imul r9, r8, 0x1c",
+     "old_function": "0x89d370",
+     "new_function": "0x8aab50",
+     "ok": true,
+     "witness": "water.stride"
+    },
+    {
+     "old": "0x89d55f",
+     "old_insn": "movss xmm0, dword ptr [r9 + rax + 0x18]",
+     "new": "0x8aad3f",
+     "new_insn": "movss xmm0, dword ptr [r9 + rax + 0x18]",
+     "old_function": "0x89d370",
+     "new_function": "0x8aab50",
+     "ok": true,
+     "witness": "water.surface"
+    },
+    {
+     "kind": "stride fields (index register from imul stride, aligned functions)",
+     "global": "0x3326a80",
+     "stride": 28,
+     "stride_pairs": {
+      "28->28": 33
+     },
+     "functions": 39,
+     "fields": [
+      {
+       "old": "0x1",
+       "new": "0x1",
+       "role": "write",
+       "size": 1,
+       "count": 1,
+       "example": [
+        "0x89d1bc",
+        "0x8aa99c",
+        "cmp byte ptr [rcx + rax + 1], 0",
+        "cmp byte ptr [rcx + rax + 1], 0"
+       ]
+      },
+      {
+       "old": "0x4",
+       "new": "0x4",
+       "role": "read",
+       "size": 4,
+       "count": 4,
+       "example": [
+        "0x59d1c5",
+        "0x5a5de5",
+        "mov eax, dword ptr [r10 + rdx*8 + 4]",
+        "mov eax, dword ptr [r10 + rdx*8 + 4]"
+       ]
+      },
+      {
+       "old": "0x4",
+       "new": "0x4",
+       "role": "write",
+       "size": 4,
+       "count": 2,
+       "example": [
+        "0x54ec07",
+        "0x557a57",
+        "mov dword ptr [rsi + 4], eax",
+        "mov dword ptr [rsi + 4], eax"
+       ]
+      },
+      {
+       "old": "0x8",
+       "new": "0x8",
+       "role": "read",
+       "size": 4,
+       "count": 2,
+       "example": [
+        "0x59d881",
+        "0x5a64a1",
+        "subss xmm0, dword ptr [rbx + 8]",
+        "subss xmm0, dword ptr [rbx + 8]"
+       ]
+      },
+      {
+       "old": "0x8",
+       "new": "0x8",
+       "role": "write",
+       "size": 1,
+       "count": 1,
+       "example": [
+        "0x82fd27",
+        "0x83cc67",
+        "cmp byte ptr [rdx + rax + 8], 0",
+        "cmp byte ptr [rdx + rax + 8], 0"
+       ]
+      },
+      {
+       "old": "0x8",
+       "new": "0x8",
+       "role": "write",
+       "size": 4,
+       "count": 4,
+       "example": [
+        "0x54ec10",
+        "0x557a60",
+        "mov dword ptr [rsi + 8], eax",
+        "mov dword ptr [rsi + 8], eax"
+       ]
+      },
+      {
+       "old": "0x10",
+       "new": "0x10",
+       "role": "read",
+       "size": 4,
+       "count": 5,
+       "example": [
+        "0x59d1aa",
+        "0x5a5dca",
+        "movss xmm0, dword ptr [rdx + rax + 0x10]",
+        "movss xmm0, dword ptr [rdx + rax + 0x10]"
+       ]
+      },
+      {
+       "old": "0x10",
+       "new": "0x10",
+       "role": "write",
+       "size": 4,
+       "count": 2,
+       "example": [
+        "0x54ec48",
+        "0x557a98",
+        "mov dword ptr [rsi + 0x10], 0",
+        "mov dword ptr [rsi + 0x10], 0"
+       ]
+      },
+      {
+       "old": "0x10",
+       "new": "0x10",
+       "role": "write",
+       "size": 8,
+       "count": 6,
+       "example": [
+        "0x54e8ef",
+        "0x55773f",
+        "mov qword ptr [rax + 0x10], rdx",
+        "mov qword ptr [rax + 0x10], rdx"
+       ]
+      },
+      {
+       "old": "0x14",
+       "new": "0x14",
+       "role": "read",
+       "size": 4,
+       "count": 5,
+       "example": [
+        "0x5a00de",
+        "0x5a8c1e",
+        "addss xmm14, dword ptr [rsi + rax + 0x14]",
+        "addss xmm14, dword ptr [rsi + rax + 0x14]"
+       ]
+      },
+      {
+       "old": "0x14",
+       "new": "0x14",
+       "role": "write",
+       "size": 4,
+       "count": 2,
+       "example": [
+        "0x54ec43",
+        "0x557a93",
+        "movss dword ptr [rsi + 0x14], xmm0",
+        "movss dword ptr [rsi + 0x14], xmm0"
+       ]
+      },
+      {
+       "old": "0x18",
+       "new": "0x18",
+       "role": "read",
+       "size": 4,
+       "count": 10,
+       "example": [
+        "0x59d886",
+        "0x5a64a6",
+        "movss xmm1, dword ptr [rbx + 0x18]",
+        "movss xmm1, dword ptr [rbx + 0x18]"
+       ]
+      },
+      {
+       "old": "0x18",
+       "new": "0x18",
+       "role": "write",
+       "size": 1,
+       "count": 1,
+       "example": [
+        "0x82f872",
+        "0x83c6e0",
+        "mov byte ptr [rdx + rax + 0x18], 1",
+        "mov byte ptr [rdx + rax + 0x18], 1"
+       ]
+      },
+      {
+       "old": "0x18",
+       "new": "0x18",
+       "role": "write",
+       "size": 4,
+       "count": 6,
+       "example": [
+        "0x54e8f3",
+        "0x557743",
+        "mov dword ptr [rax + 0x18], edx",
+        "mov dword ptr [rax + 0x18], edx"
+       ]
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "address",
+   "live_check": "L4",
+   "notes": ""
+  },
+  {
+   "id": "dive.water.limits",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": [
+    231,
+    235
+   ],
+   "symbol": "lookup limit 32768, capacity<=16384",
+   "kind": "sanity bounds",
+   "old": "32768, 16384",
+   "new": "32768, 16384",
+   "changed": false,
+   "method": "unchanged plausibility bounds (refusal only)",
+   "witnesses": [],
+   "confidence": "medium",
+   "feeds_write": false,
+   "role": "gate",
+   "live_check": "L4",
+   "notes": ""
+  },
+  {
+   "id": "dive.stance.fields",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": [
+    258,
+    259,
+    263,
+    265,
+    268,
+    269,
+    378
+   ],
+   "symbol": "sm+24 map, +56 data; record 56 bytes, stance at +28 (0 stand, 1 crouch, 2 prone, 3 transition)",
+   "kind": "stance manager layout",
+   "old": "+0x18, +0x38; stride 56; +0x1c",
+   "new": "+0x18, +0x38; stride 56; +0x1c",
+   "changed": false,
+   "method": "aligned field pairs; 45 aligned imul-56 pairs equal, +0x1c read 15 / compared 15 times unchanged; the game's stance offset writer still tests 2 (prone, +0.9) and 1 (crouch, +0.4)",
+   "witnesses": [
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "SM+0x18",
+     "new": [
+      [
+       "SM",
+       "0x18",
+       43
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x6943fc",
+       "new": "0x69e48c",
+       "old_function": "0x6941fa",
+       "new_function": "0x69e28a",
+       "old_insn": "mov rcx, qword ptr [r11 + 0x18]",
+       "new_insn": "mov rcx, qword ptr [r11 + 0x18]"
+      },
+      {
+       "old": "0x69441b",
+       "new": "0x69e4ab",
+       "old_function": "0x6941fa",
+       "new_function": "0x69e28a",
+       "old_insn": "mov rax, qword ptr [r11 + 0x18]",
+       "new_insn": "mov rax, qword ptr [r11 + 0x18]"
+      }
+     ]
+    },
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "SM+0x20",
+     "new": [
+      [
+       "SM",
+       "0x20",
+       50
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x6943e4",
+       "new": "0x69e474",
+       "old_function": "0x6941fa",
+       "new_function": "0x69e28a",
+       "old_insn": "mov r9d, dword ptr [r11 + 0x20]",
+       "new_insn": "mov r9d, dword ptr [r11 + 0x20]"
+      },
+      {
+       "old": "0x6945d2",
+       "new": "0x69e662",
+       "old_function": "0x6941fa",
+       "new_function": "0x69e28a",
+       "old_insn": "mov r9d, dword ptr [rdi + 0x20]",
+       "new_insn": "mov r9d, dword ptr [rdi + 0x20]"
+      }
+     ]
+    },
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "SM+0x24",
+     "new": [
+      [
+       "SM",
+       "0x24",
+       40
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x694404",
+       "new": "0x69e494",
+       "old_function": "0x6941fa",
+       "new_function": "0x69e28a",
+       "old_insn": "cmp ecx, dword ptr [r11 + 0x24]",
+       "new_insn": "cmp ecx, dword ptr [r11 + 0x24]"
+      },
+      {
+       "old": "0x6945ff",
+       "new": "0x69e68f",
+       "old_function": "0x6941fa",
+       "new_function": "0x69e28a",
+       "old_insn": "cmp ecx, dword ptr [rdi + 0x24]",
+       "new_insn": "cmp ecx, dword ptr [rdi + 0x24]"
+      }
+     ]
+    },
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "SM+0x28",
+     "new": [
+      [
+       "SM",
+       "0x28",
+       44
+      ],
+      [
+       "MM",
+       "0x48a8",
+       1
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x6943e0",
+       "new": "0x69e470",
+       "old_function": "0x6941fa",
+       "new_function": "0x69e28a",
+       "old_insn": "mov r10d, dword ptr [r11 + 0x28]",
+       "new_insn": "mov r10d, dword ptr [r11 + 0x28]"
+      },
+      {
+       "old": "0x6945ce",
+       "new": "0x69e65e",
+       "old_function": "0x6941fa",
+       "new_function": "0x69e28a",
+       "old_insn": "mov r10d, dword ptr [rdi + 0x28]",
+       "new_insn": "mov r10d, dword ptr [rdi + 0x28]"
+      }
+     ]
+    },
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "SM+0x38",
+     "new": [
+      [
+       "SM",
+       "0x38",
+       27
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x4a91de",
+       "new": "0x4afa9e",
+       "old_function": "0x4a91c0",
+       "new_function": "0x4afa80",
+       "old_insn": "add rax, qword ptr [r10 + 0x38]",
+       "new_insn": "add rax, qword ptr [r10 + 0x38]"
+      },
+      {
+       "old": "0x52981b",
+       "new": "0x5321eb",
+       "old_function": "0x5297e0",
+       "new_function": "0x5321ad",
+       "old_insn": "mov rax, qword ptr [rbx + 0x38]",
+       "new_insn": "mov rax, qword ptr [rbx + 0x38]"
+      }
+     ]
+    },
+    {
+     "kind": "stride fields (index register from imul stride, aligned functions)",
+     "global": "0x3326598",
+     "stride": 56,
+     "stride_pairs": {
+      "56->56": 45
+     },
+     "functions": 69,
+     "fields": [
+      {
+       "old": "0x1c",
+       "new": "0x1c",
+       "role": "read",
+       "size": 4,
+       "count": 15,
+       "example": [
+        "0x68ac37",
+        "0x694aa7",
+        "mov r8d, dword ptr [rcx + rax + 0x1c]",
+        "mov r8d, dword ptr [rcx + rax + 0x1c]"
+       ]
+      },
+      {
+       "old": "0x1c",
+       "new": "0x1c",
+       "role": "write",
+       "size": 4,
+       "count": 15,
+       "example": [
+        "0x4b5c87",
+        "0x4bc577",
+        "cmp dword ptr [rcx + rax + 0x1c], r15d",
+        "cmp dword ptr [rcx + rax + 0x1c], r15d"
+       ]
+      },
+      {
+       "old": "0x1c",
+       "new": "0x1c",
+       "role": "write",
+       "size": 8,
+       "count": 4,
+       "example": [
+        "0x52984b",
+        "0x53221b",
+        "mov qword ptr [rcx + rax + 0x1c], r9",
+        "mov qword ptr [rcx + rax + 0x1c], r9"
+       ]
+      }
+     ]
+    },
+    {
+     "old": "0x83409f",
+     "old_insn": "cmp eax, 2",
+     "new": "0x840eef",
+     "new_insn": "cmp eax, 2",
+     "old_function": "0x834019",
+     "new_function": "0x840e69",
+     "ok": true,
+     "witness": "stance.is_prone"
+    },
+    {
+     "old": "0x8340c0",
+     "old_insn": "cmp ebp, 1",
+     "new": "0x840f10",
+     "new_insn": "cmp ebp, 1",
+     "old_function": "0x834019",
+     "new_function": "0x840e69",
+     "ok": true,
+     "witness": "stance.is_crouch"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "value",
+   "live_check": "L5",
+   "notes": "The restore picks base+0.9/0.4/0 by this stance value."
+  },
+  {
+   "id": "dive.stance.limits",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": [
+    260,
+    262
+   ],
+   "symbol": "lookup limit 8192, si<4096",
+   "kind": "sanity bounds",
+   "old": "8192, 4096",
+   "new": "8192, 4096",
+   "changed": false,
+   "method": "unchanged plausibility bounds (refusal only)",
+   "witnesses": [],
+   "confidence": "medium",
+   "feeds_write": false,
+   "role": "gate",
+   "live_check": "L5",
+   "notes": ""
+  },
+  {
+   "id": "dive.movement.fields",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": [
+    273,
+    274,
+    278,
+    280,
+    281,
+    282
+   ],
+   "symbol": "mm+0x48a0 map, +0x48d8 positions; 44-byte records, root z +8, valid byte +32",
+   "kind": "movement manager layout",
+   "old": "+0x48a0, +0x48d8; stride 44; +8, +0x20",
+   "new": "+0x48a0, +0x48d8; stride 44; +8, +0x20",
+   "changed": false,
+   "method": "aligned field pairs (+0x48a0 x80, +0x48d8 x37) and displacement scans (x70, x77); 54 aligned imul-44 pairs equal, +8 / +0x20 unchanged",
+   "witnesses": [
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "MM+0x48a0",
+     "new": [
+      [
+       "MM",
+       "0x48a0",
+       80
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x57164a",
+       "new": "0x57a5fa",
+       "old_function": "0x571250",
+       "new_function": "0x57a1f0",
+       "old_insn": "mov r11, qword ptr [rbx + 0x48a0]",
+       "new_insn": "mov r11, qword ptr [r14 + 0x48a0]"
+      },
+      {
+       "old": "0x6ff1e8",
+       "new": "0x70a338",
+       "old_function": "0x6ff055",
+       "new_function": "0x70a1a5",
+       "old_insn": "mov r11, qword ptr [r13 + 0x48a0]",
+       "new_insn": "mov r11, qword ptr [r13 + 0x48a0]"
+      }
+     ]
+    },
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "MM+0x48a8",
+     "new": [
+      [
+       "MM",
+       "0x48a8",
+       86
+      ],
+      [
+       "MM",
+       "0x48b0",
+       1
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x57162d",
+       "new": "0x57a5dd",
+       "old_function": "0x571250",
+       "new_function": "0x57a1f0",
+       "old_insn": "mov r9d, dword ptr [rbx + 0x48a8]",
+       "new_insn": "mov r9d, dword ptr [r14 + 0x48a8]"
+      },
+      {
+       "old": "0x6ff1cd",
+       "new": "0x70a31d",
+       "old_function": "0x6ff055",
+       "new_function": "0x70a1a5",
+       "old_insn": "mov r9d, dword ptr [r13 + 0x48a8]",
+       "new_insn": "mov r9d, dword ptr [r13 + 0x48a8]"
+      }
+     ]
+    },
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "MM+0x48ac",
+     "new": [
+      [
+       "MM",
+       "0x48ac",
+       77
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x571651",
+       "new": "0x57a601",
+       "old_function": "0x571250",
+       "new_function": "0x57a1f0",
+       "old_insn": "mov r15d, dword ptr [rbx + 0x48ac]",
+       "new_insn": "mov r15d, dword ptr [r14 + 0x48ac]"
+      },
+      {
+       "old": "0x6ff1ef",
+       "new": "0x70a33f",
+       "old_function": "0x6ff055",
+       "new_function": "0x70a1a5",
+       "old_insn": "mov ebx, dword ptr [r13 + 0x48ac]",
+       "new_insn": "mov ebx, dword ptr [r13 + 0x48ac]"
+      }
+     ]
+    },
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "MM+0x48b0",
+     "new": [
+      [
+       "MM",
+       "0x48b0",
+       81
+      ],
+      [
+       "MM",
+       "0x48a8",
+       1
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x571636",
+       "new": "0x57a5e6",
+       "old_function": "0x571250",
+       "new_function": "0x57a1f0",
+       "old_insn": "mov r10d, dword ptr [rbx + 0x48b0]",
+       "new_insn": "mov r10d, dword ptr [r14 + 0x48b0]"
+      },
+      {
+       "old": "0x6ff1d4",
+       "new": "0x70a324",
+       "old_function": "0x6ff055",
+       "new_function": "0x70a1a5",
+       "old_insn": "mov r10d, dword ptr [r13 + 0x48b0]",
+       "new_insn": "mov r10d, dword ptr [r13 + 0x48b0]"
+      }
+     ]
+    },
+    {
+     "kind": "field pair (aligned functions, register taint from the global)",
+     "old": "MM+0x48d8",
+     "new": [
+      [
+       "MM",
+       "0x48d8",
+       37
+      ]
+     ],
+     "examples": [
+      {
+       "old": "0x59bd51",
+       "new": "0x5a4971",
+       "old_function": "0x59bc10",
+       "new_function": "0x5a482d",
+       "old_insn": "mov r12, qword ptr [r14 + 0x48d8]",
+       "new_insn": "mov r12, qword ptr [r14 + 0x48d8]"
+      },
+      {
+       "old": "0x59be8c",
+       "new": "0x5a4aac",
+       "old_function": "0x59bc10",
+       "new_function": "0x5a482d",
+       "old_insn": "mov rax, qword ptr [r14 + 0x48d8]",
+       "new_insn": "mov rax, qword ptr [r14 + 0x48d8]"
+      }
+     ]
+    },
+    {
+     "kind": "stride fields (index register from imul stride, aligned functions)",
+     "global": "0x3326558",
+     "stride": 44,
+     "stride_pairs": {
+      "44->44": 54
+     },
+     "functions": 317,
+     "fields": [
+      {
+       "old": "0x8",
+       "new": "0x8",
+       "role": "read",
+       "size": 4,
+       "count": 14,
+       "example": [
+        "0x571ba3",
+        "0x57ab63",
+        "movss xmm0, dword ptr [rbx + r14*4 + 8]",
+        "movss xmm0, dword ptr [rbx + r14*4 + 8]"
+       ]
+      },
+      {
+       "old": "0x8",
+       "new": "0x8",
+       "role": "write",
+       "size": 4,
+       "count": 4,
+       "example": [
+        "0x571bb8",
+        "0x57ab78",
+        "movss dword ptr [rbx + r14*4 + 8], xmm0",
+        "movss dword ptr [rbx + r14*4 + 8], xmm0"
+       ]
+      },
+      {
+       "old": "0x20",
+       "new": "0x20",
+       "role": "read",
+       "size": 1,
+       "count": 1,
+       "example": [
+        "0x5a5b8f",
+        "0x5ae6cf",
+        "movzx ecx, byte ptr [rax + rbp + 0x20]",
+        "movzx ecx, byte ptr [rax + rbp + 0x20]"
+       ]
+      },
+      {
+       "old": "0x20",
+       "new": "0x20",
+       "role": "read",
+       "size": 4,
+       "count": 2,
+       "example": [
+        "0x5fa174",
+        "0x6031e4",
+        "mov esi, dword ptr [rax + 0x20]",
+        "mov esi, dword ptr [rax + 0x20]"
+       ]
+      },
+      {
+       "old": "0x20",
+       "new": "0x20",
+       "role": "read",
+       "size": 8,
+       "count": 2,
+       "example": [
+        "0x5a7984",
+        "0x5b0564",
+        "movsd xmm0, qword ptr [rcx + r8 + 0x20]",
+        "movsd xmm0, qword ptr [rcx + r8 + 0x20]"
+       ]
+      },
+      {
+       "old": "0x20",
+       "new": "0x20",
+       "role": "write",
+       "size": 1,
+       "count": 6,
+       "example": [
+        "0x4b0f57",
+        "0x4b7817",
+        "cmp byte ptr [r10 + rdx + 0x20], r11b",
+        "cmp byte ptr [r10 + rdx + 0x20], r11b"
+       ]
+      },
+      {
+       "old": "0x20",
+       "new": "0x20",
+       "role": "write",
+       "size": 4,
+       "count": 1,
+       "example": [
+        "0x6d47dc",
+        "0x6defec",
+        "mov dword ptr [rcx + rsi + 0x20], eax",
+        "mov dword ptr [rcx + rdi + 0x20], eax"
+       ]
+      },
+      {
+       "old": "0x20",
+       "new": "0x20",
+       "role": "write",
+       "size": 8,
+       "count": 2,
+       "example": [
+        "0x5a79c1",
+        "0x5b05a1",
+        "movsd qword ptr [rax + r8 + 0x20], xmm0",
+        "movsd qword ptr [rax + r8 + 0x20], xmm0"
+       ]
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "gate",
+   "live_check": "L6",
+   "notes": "root_z decides depth (whether a dive qualifies)."
+  },
+  {
+   "id": "dive.movement.limits",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": [
+    275,
+    277
+   ],
+   "symbol": "lookup limit 16384, mi<8192",
+   "kind": "sanity bounds",
+   "old": "16384, 8192",
+   "new": "16384, 8192",
+   "changed": false,
+   "method": "unchanged plausibility bounds (refusal only)",
+   "witnesses": [],
+   "confidence": "medium",
+   "feeds_write": false,
+   "role": "gate",
+   "live_check": "L6",
+   "notes": ""
+  },
+  {
+   "id": "dive.settings.table_offset",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 284,
+   "symbol": "owner+0xf12e20",
+   "kind": "entities field: Drownable settings table pointer",
+   "old": "0xf12e20",
+   "new": "0xf148e8",
+   "changed": true,
+   "method": "the Drownable settings getter (old 0x512f90 / new 0x51b580, called by the stance offset writer for the base it adds to) is identical except this displacement; its neighbour getter's table moved the same way and its slot count changed (0x1c0 -> 0x1c4), so the count below was checked, not assumed",
+   "witnesses": [
+    {
+     "old": "0x512fa7",
+     "old_insn": "mov rax, qword ptr [rip + 0x2f58fea]->0x346bf98",
+     "new": "0x51b597",
+     "new_insn": "mov rax, qword ptr [rip + 0x27c8c1a]->0x2ce41b8",
+     "old_function": null,
+     "new_function": null,
+     "ok": true,
+     "witness": "settings.entities"
+    },
+    {
+     "old": "0x512fb1",
+     "old_insn": "mov r11, qword ptr [rax + 0xf12e20]",
+     "new": "0x51b5a1",
+     "new_insn": "mov r11, qword ptr [rax + 0xf148e8]",
+     "old_function": null,
+     "new_function": null,
+     "ok": true,
+     "witness": "settings.table"
+    },
+    {
+     "old": "0x83408c",
+     "old_insn": "call 0x512f90",
+     "new": "0x840edc",
+     "new_insn": "call 0x51b580",
+     "old_function": "0x834019",
+     "new_function": "0x840e69",
+     "ok": true,
+     "witness": "stance.settings_call"
+    },
+    {
+     "old": "0x51304f",
+     "old_insn": "mov r10, qword ptr [rax + 0xf12e28]",
+     "new": "0x51b63f",
+     "new_insn": "mov r10, qword ptr [rax + 0xf148f0]",
+     "old_function": null,
+     "new_function": null,
+     "ok": true,
+     "witness": "settings.neighbour_changed"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "value",
+   "live_check": "L7",
+   "notes": "feeds the written value (S.base); that value is also pinned: u32 0x4a182741 and float -1.3"
+  },
+  {
+   "id": "dive.settings.layout",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": [
+    287,
+    288,
+    290,
+    296,
+    297,
+    299
+   ],
+   "symbol": "122 slots x 16 bytes {hash, index}, 64-byte records at +122*16, base float at +4",
+   "kind": "Drownable settings table layout",
+   "old": "122; 16; 64; +0x7a0; +4",
+   "new": "122; 16; 64; +0x7a0; +4",
+   "changed": false,
+   "method": "the getter (old 0x512f90 / new 0x51b580): modulo/probe count 0x7a, wrap 0x79, slot shl 4, index at +8, records lea +0x7a0, record shl 6; base read at +4 by the stance offset writer",
+   "witnesses": [
+    {
+     "old": "0x512fd5",
+     "old_insn": "imul eax, eax, 0x7a",
+     "new": "0x51b5c5",
+     "new_insn": "imul eax, eax, 0x7a",
+     "old_function": null,
+     "new_function": null,
+     "ok": true,
+     "witness": "settings.slots"
+    },
+    {
+     "old": "0x512ff3",
+     "old_insn": "shl rax, 4",
+     "new": "0x51b5e3",
+     "new_insn": "shl rax, 4",
+     "old_function": null,
+     "new_function": null,
+     "ok": true,
+     "witness": "settings.slot_size"
+    },
+    {
+     "old": "0x513014",
+     "old_insn": "cmp eax, 0x79",
+     "new": "0x51b604",
+     "new_insn": "cmp eax, 0x79",
+     "old_function": null,
+     "new_function": null,
+     "ok": true,
+     "witness": "settings.wrap"
+    },
+    {
+     "old": "0x51301b",
+     "old_insn": "cmp r10d, 0x7a",
+     "new": "0x51b60b",
+     "new_insn": "cmp r10d, 0x7a",
+     "old_function": null,
+     "new_function": null,
+     "ok": true,
+     "witness": "settings.probes"
+    },
+    {
+     "old": "0x51302a",
+     "old_insn": "mov ecx, dword ptr [rax + 8]",
+     "new": "0x51b61a",
+     "new_insn": "mov ecx, dword ptr [rax + 8]",
+     "old_function": null,
+     "new_function": null,
+     "ok": true,
+     "witness": "settings.index"
+    },
+    {
+     "old": "0x51302d",
+     "old_insn": "lea r9, [r11 + 0x7a0]",
+     "new": "0x51b61d",
+     "new_insn": "lea r9, [r11 + 0x7a0]",
+     "old_function": null,
+     "new_function": null,
+     "ok": true,
+     "witness": "settings.records"
+    },
+    {
+     "old": "0x513034",
+     "old_insn": "shl rcx, 6",
+     "new": "0x51b624",
+     "new_insn": "shl rcx, 6",
+     "old_function": null,
+     "new_function": null,
+     "ok": true,
+     "witness": "settings.record_size"
+    },
+    {
+     "old": "0x834093",
+     "old_insn": "movss xmm0, dword ptr [rax + 4]",
+     "new": "0x840ee3",
+     "new_insn": "movss xmm0, dword ptr [rax + 4]",
+     "old_function": "0x834019",
+     "new_function": "0x840e69",
+     "ok": true,
+     "witness": "stance.base_load"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": true,
+   "role": "value",
+   "live_check": "L7",
+   "notes": ""
+  },
+  {
+   "id": "dive.settings.index_and_tag",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": [
+    295,
+    298
+   ],
+   "symbol": "index==5; u32 +0 == 0x4a182741; float +4 == -1.3",
+   "kind": "game data (resource table contents)",
+   "old": "5; 0x4a182741; -1.3",
+   "new": "5; 0x4a182741; -1.3",
+   "changed": false,
+   "method": "not code: the avatar resource's slot index in the Drownable table and the record's first word come from game data loaded at run time. Unchanged; asserted by the mod before any write (a mismatch raises, the mod refuses, nothing is written)",
+   "witnesses": [],
+   "confidence": "medium",
+   "feeds_write": true,
+   "role": "value",
+   "live_check": "L7",
+   "notes": "The written value is S.base, which must equal exactly -1.3 (float bits 0xBFA66666) or the mod refuses."
+  },
+  {
+   "id": "dive.rdata.timeout",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 51,
+   "symbol": "DIVE_TIMEOUT_RVAS[1]",
+   "kind": "game.dll .rdata float 2.0 (dive timeout gate)",
+   "old": "0x23c7110",
+   "new": "0x2246948",
+   "changed": true,
+   "method": "RIP-relative references migrated: 819 vote the new address (17 elsewhere, pooled 2.0 neighbours); the 4 bytes are 2.0 at both",
+   "witnesses": [
+    {
+     "kind": "rdata constant (RIP-relative references migrated)",
+     "old_sites": 1974,
+     "votes": {
+      "0x2246948": 819,
+      "0x2246064": 1,
+      "0x22472d0": 6,
+      "0x2246cec": 1,
+      "0x2246c58": 2,
+      "0x224710c": 1,
+      "0x2245d84": 1,
+      "0x2246704": 1,
+      "0x2247570": 1
+     },
+     "old_value": 2.0,
+     "new_value": 2.0,
+     "examples": [
+      {
+       "old": "0x4c45c",
+       "new": "0x4e63c",
+       "old_insn": "movss xmm1, dword ptr [rip + 0x237acac]",
+       "new_insn": "movss xmm1, dword ptr [rip + 0x21f8304]",
+       "masked": false,
+       "old_function": "0x4c3b0"
+      },
+      {
+       "old": "0x4d704",
+       "new": "0x4f8e4",
+       "old_insn": "movss xmm0, dword ptr [rip + 0x2379a04]",
+       "new_insn": "movss xmm0, dword ptr [rip + 0x21f705c]",
+       "masked": false,
+       "old_function": "0x4d630"
+      },
+      {
+       "old": "0x548f3",
+       "new": "0x56ad3",
+       "old_insn": "movss xmm1, dword ptr [rip + 0x2372815]",
+       "new_insn": "movss xmm1, dword ptr [rip + 0x21efe6d]",
+       "masked": false,
+       "old_function": "0x54850"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "gate",
+   "live_check": "L8",
+   "notes": ""
+  },
+  {
+   "id": "dive.rdata.timeout_fallback",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 51,
+   "symbol": "DIVE_TIMEOUT_RVAS[2]",
+   "kind": "game.dll .rdata (previous build's timeout address, kept as fallback)",
+   "old": "0x23c7100",
+   "new": "0x2246938",
+   "changed": true,
+   "method": "one migrated reference; the value there is not 2.0 in either build, so this entry never passes the gate (as in 25480438); kept for the same structure",
+   "witnesses": [
+    {
+     "kind": "rdata constant (RIP-relative references migrated)",
+     "old_sites": 1,
+     "votes": {
+      "0x2246938": 1
+     },
+     "old_value": -1.5881868392106856e-23,
+     "new_value": -1.5881868392106856e-23,
+     "examples": [
+      {
+       "old": "0xa71fcf",
+       "new": "0xa8d9bf",
+       "old_insn": "mulsd xmm0, qword ptr [rip + 0x1955129]",
+       "new_insn": "mulsd xmm0, qword ptr [rip + 0x17b8f71]",
+       "masked": false,
+       "old_function": "0xa71ecf"
+      }
+     ]
+    }
+   ],
+   "confidence": "medium",
+   "feeds_write": false,
+   "role": "gate",
+   "live_check": "L8",
+   "notes": ""
+  },
+  {
+   "id": "dive.rdata.window",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": [
+    313,
+    315
+   ],
+   "symbol": "error-message scan window base",
+   "kind": "game.dll .rdata (diagnostic only)",
+   "old": "0x23c7080",
+   "new": "0x22468b8",
+   "changed": true,
+   "method": "the same offset (-0x90) below the mapped timeout; only used to name nearby 2.0 values in the refusal message",
+   "witnesses": [],
+   "confidence": "medium",
+   "feeds_write": false,
+   "role": "diagnostic",
+   "live_check": "L8",
+   "notes": ""
+  },
+  {
+   "id": "dive.rdata.prone",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 319,
+   "symbol": "stance offset 0.9",
+   "kind": "game.dll .rdata float 0.9",
+   "old": "0x23c6ccc",
+   "new": "0x22464ec",
+   "changed": true,
+   "method": "the game's stance offset writer adds this constant for prone (aligned pair) and 80 migrated references agree",
+   "witnesses": [
+    {
+     "old": "0x8340da",
+     "old_insn": "addss xmm0, dword ptr [rip + 0x1b92bea]->0x23c6ccc",
+     "new": "0x840f2a",
+     "new_insn": "addss xmm0, dword ptr [rip + 0x1a055ba]->0x22464ec",
+     "old_function": "0x834019",
+     "new_function": "0x840e69",
+     "ok": true,
+     "witness": "stance.prone_const"
+    },
+    {
+     "kind": "rdata constant (RIP-relative references migrated)",
+     "old_sites": 383,
+     "votes": {
+      "0x22464ec": 80,
+      "0x22462e8": 2,
+      "0x2247040": 2,
+      "0x22463f4": 2,
+      "0x224645c": 1,
+      "0x22463d4": 1,
+      "0x224703c": 1
+     },
+     "old_value": 0.8999999761581421,
+     "new_value": 0.8999999761581421,
+     "examples": [
+      {
+       "old": "0xd0b5a",
+       "new": "0xd32ba",
+       "old_insn": "movss xmm8, dword ptr [rip + 0x22f6169]",
+       "new_insn": "movss xmm8, dword ptr [rip + 0x2173229]",
+       "masked": false,
+       "old_function": "0xcfd65"
+      },
+      {
+       "old": "0xdeba4",
+       "new": "0xe1364",
+       "old_insn": "movss xmm12, dword ptr [rip + 0x22e811e]",
+       "new_insn": "movss xmm12, dword ptr [rip + 0x216517e]",
+       "masked": false,
+       "old_function": "0xdde20"
+      },
+      {
+       "old": "0x107211",
+       "new": "0xdf821",
+       "old_insn": "movss xmm0, dword ptr [rip + 0x22bfab3]",
+       "new_insn": "movss xmm0, dword ptr [rip + 0x2166cc3]",
+       "masked": false,
+       "old_function": "0x106be2"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "gate",
+   "live_check": "L8",
+   "notes": ""
+  },
+  {
+   "id": "dive.rdata.crouch",
+   "file": "components/ShallowWaterDiving/src/dive_data.lua",
+   "line": 321,
+   "symbol": "stance offset 0.4",
+   "kind": "game.dll .rdata float 0.4",
+   "old": "0x23c69f8",
+   "new": "0x2246210",
+   "changed": true,
+   "method": "the game's stance offset writer adds this constant for crouch (aligned pair) and 153 migrated references agree",
+   "witnesses": [
+    {
+     "old": "0x8340c5",
+     "old_insn": "addss xmm0, dword ptr [rip + 0x1b9292b]->0x23c69f8",
+     "new": "0x840f15",
+     "new_insn": "addss xmm0, dword ptr [rip + 0x1a052f3]->0x2246210",
+     "old_function": "0x834019",
+     "new_function": "0x840e69",
+     "ok": true,
+     "witness": "stance.crouch_const"
+    },
+    {
+     "kind": "rdata constant (RIP-relative references migrated)",
+     "old_sites": 244,
+     "votes": {
+      "0x2246210": 153,
+      "0x2245f30": 2,
+      "0x2246338": 4,
+      "0x22462ac": 1
+     },
+     "old_value": 0.4000000059604645,
+     "new_value": 0.4000000059604645,
+     "examples": [
+      {
+       "old": "0x4aa46",
+       "new": "0x4c966",
+       "old_insn": "movss xmm0, dword ptr [rip + 0x237bfaa]",
+       "new_insn": "movss xmm0, dword ptr [rip + 0x21f98a2]",
+       "masked": false,
+       "old_function": "0x4a980"
+      },
+      {
+       "old": "0x13a399",
+       "new": "0xa81f5f",
+       "old_insn": "movss xmm0, dword ptr [rip + 0x228c657]",
+       "new_insn": "movss xmm0, dword ptr [rip + 0x17c3fc9]",
+       "masked": true,
+       "old_function": "0x13a2c0"
+      },
+      {
+       "old": "0x1c02f9",
+       "new": "0xa81f5f",
+       "old_insn": "movss xmm0, dword ptr [rip + 0x22066f7]",
+       "new_insn": "movss xmm0, dword ptr [rip + 0x17c3fc9]",
+       "masked": true,
+       "old_function": "0x1c0220"
+      }
+     ]
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "gate",
+   "live_check": "L8",
+   "notes": ""
+  },
+  {
+   "id": "bingus_text.GAME.settings",
+   "file": "components/ShallowWaterDiving/src/bingus_text.lua",
+   "line": 357,
+   "symbol": "M.GAME",
+   "kind": "game.dll global: settings object",
+   "old": "0x3326340",
+   "new": "0x2CE1508",
+   "changed": true,
+   "method": "global windows here, agreeing with myc-port/MAP.json bingus_text.GAME.settings",
+   "witnesses": [
+    {
+     "kind": "global windows",
+     "old_sites": 2624,
+     "sampled": 64,
+     "votes": {
+      "0x2ce1508": 34
+     },
+     "exact_window_votes": {
+      "0x2ce1508": 4
+     },
+     "agreeing": 34,
+     "disagreeing": 0,
+     "distinct_old_functions": 34,
+     "examples": [
+      {
+       "old": "0x5989c3",
+       "new": "0x5a1583",
+       "window_bytes": 48,
+       "field_displacements_masked": true,
+       "new_global": "0x2ce1508",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2d8d976]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x273ff7e]",
+       "old_function": "0x59890c"
+      },
+      {
+       "old": "0x5fe740",
+       "new": "0x607820",
+       "window_bytes": 96,
+       "field_displacements_masked": true,
+       "new_global": "0x2ce1508",
+       "instruction_old": "mov rcx, qword ptr [rip + 0x2d27bf9]",
+       "instruction_new": "mov rcx, qword ptr [rip + 0x26d9ce1]",
+       "old_function": "0x5fe3b9"
+      },
+      {
+       "old": "0x616936",
+       "new": "0x61fbe6",
+       "window_bytes": 128,
+       "field_displacements_masked": true,
+       "new_global": "0x2ce1508",
+       "instruction_old": "mov rax, qword ptr [rip + 0x2d0fa03]",
+       "instruction_new": "mov rax, qword ptr [rip + 0x26c191b]",
+       "old_function": "0x616910"
+      }
+     ]
+    },
+    {
+     "kind": "myc-port row",
+     "new": "0x2CE1508",
+     "confidence": "high"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "text",
+   "live_check": "L9",
+   "notes": "brief: live-verified game state object 0x3326340->0x2CE1508"
+  },
+  {
+   "id": "bingus_text.GAME.table",
+   "file": "components/ShallowWaterDiving/src/bingus_text.lua",
+   "line": 357,
+   "symbol": "M.GAME",
+   "kind": "game.dll global: language record table",
+   "old": "0x37C5650",
+   "new": "0x3180DE0",
+   "changed": true,
+   "method": "global windows here, agreeing with myc-port/MAP.json bingus_text.GAME.table",
+   "witnesses": [
+    {
+     "kind": "global windows",
+     "old_sites": 34,
+     "sampled": 34,
+     "votes": {
+      "0x3180de0": 23
+     },
+     "exact_window_votes": {
+      "0x3180de0": 19
+     },
+     "agreeing": 23,
+     "disagreeing": 0,
+     "distinct_old_functions": 21,
+     "examples": [
+      {
+       "old": "0xad7b61",
+       "new": "0xaf3c61",
+       "window_bytes": 160,
+       "field_displacements_masked": true,
+       "new_global": "0x3180de0",
+       "instruction_old": "lea rcx, [rip + 0x2cedae8]",
+       "instruction_new": "lea rcx, [rip + 0x268d178]",
+       "old_function": "0xad7b22"
+      },
+      {
+       "old": "0x11e754e",
+       "new": "0x1078cde",
+       "window_bytes": 48,
+       "field_displacements_masked": false,
+       "new_global": "0x3180de0",
+       "instruction_old": "lea rcx, [rip + 0x25de0fb]",
+       "instruction_new": "lea rcx, [rip + 0x21080fb]",
+       "old_function": "0x11e7530"
+      },
+      {
+       "old": "0x11e75c7",
+       "new": "0x1078d57",
+       "window_bytes": 64,
+       "field_displacements_masked": false,
+       "new_global": "0x3180de0",
+       "instruction_old": "lea rbx, [rip + 0x25de082]",
+       "instruction_new": "lea rbx, [rip + 0x2108082]",
+       "old_function": "0x11e75b0"
+      }
+     ]
+    },
+    {
+     "kind": "myc-port row",
+     "new": "0x3180DE0",
+     "confidence": "high"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "text",
+   "live_check": "L9",
+   "notes": ""
+  },
+  {
+   "id": "bingus_text.GAME.index",
+   "file": "components/ShallowWaterDiving/src/bingus_text.lua",
+   "line": 357,
+   "symbol": "M.GAME.index",
+   "kind": "settings block offset",
+   "old": "705500 + 212",
+   "new": "705628 + 212",
+   "changed": true,
+   "method": "displacement scans: +0xac3dc -> +0xac45c (17 mapped of 64), the language field +0xac4b0 -> +0xac530 (2; one unrelated +0xd4 pair); same as myc-port/mom-port",
+   "witnesses": [
+    {
+     "kind": "displacement scan",
+     "old": "0xac3dc",
+     "new": "0xac45c",
+     "votes": 17
+    },
+    {
+     "kind": "displacement scan",
+     "old": "0xac4b0",
+     "new": "0xac530",
+     "votes": 2,
+     "other": {
+      "0xd4": 1
+     }
+    },
+    {
+     "kind": "myc-port row",
+     "new": "705628 + 212"
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "text",
+   "live_check": "L9",
+   "notes": ""
+  },
+  {
+   "id": "bingus_text.GAME.count",
+   "file": "components/ShallowWaterDiving/src/bingus_text.lua",
+   "line": 357,
+   "symbol": "M.GAME.count",
+   "kind": "language record count",
+   "old": "15",
+   "new": "15",
+   "changed": false,
+   "method": "15 nonzero record pointers then 0 at both tables in the captures",
+   "witnesses": [
+    {
+     "kind": "measured",
+     "old": 15,
+     "new": 15
+    }
+   ],
+   "confidence": "high",
+   "feeds_write": false,
+   "role": "text",
+   "live_check": "L9",
+   "notes": ""
+  }
+ ]
+}
